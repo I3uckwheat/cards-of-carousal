@@ -12,9 +12,14 @@ module.exports = {
     ecmaVersion: 12,
     sourceType: 'module',
   },
-  plugins: ['react'],
+  plugins: ['react', 'jest'],
   rules: {
     'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
     'import/extensions': 'off',
+  },
+  settings: {
+    react: {
+      version: '^17.0.1',
+    },
   },
 };
