@@ -1,4 +1,5 @@
-import 'dotenv/config.js'; // See here: https://www.npmjs.com/package/dotenv#how-do-i-use-dotenv-with-import-
+import './env-setup.js';
+
 import app from './app/express.js';
 import './app/socket.js';
 
