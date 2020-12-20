@@ -3,9 +3,6 @@
 
 import WebSocket from "ws";
 
-console.log("open");
-console.log(process.env.SOCKET_PORT);
-
 const wss = new WebSocket.Server({
   verifyClient: (info, done) => {
     // CORS check
