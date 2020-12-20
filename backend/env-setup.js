@@ -5,8 +5,8 @@ dotenv.config();
 
 // Verify env vars are available.
 const envVars = ['EXPRESS_PORT', 'SOCKET_PORT'];
-let hasError = false;
 
+let hasError = false;
 envVars.forEach((envVar) => {
   if (!process.env[envVar]) {
     // eslint-disable-next-line no-console
