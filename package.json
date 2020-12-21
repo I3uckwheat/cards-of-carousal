@@ -5,8 +5,10 @@
   "main": "index.js",
   "scripts": {
     "install-all": "npm i && cd ./frontend && npm i && cd ../backend && npm i",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "npx eslint ."
+    "dev:frontend": "cd ./frontend && npm start",
+    "dev:backend": "cd ./backend && npm run dev",
+    "lint": "npx eslint .",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
@@ -27,7 +29,7 @@
     "eslint-plugin-react": "^7.21.5",
     "eslint-plugin-react-hooks": "^4.2.0",
     "husky": "^4.3.6",
-    "jest": "^26.6.3",
+    "jest": "26.6.0",
     "lint-staged": "^10.5.3"
   },
   "husky": {

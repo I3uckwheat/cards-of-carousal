@@ -5,7 +5,8 @@
   "main": "start.js",
   "type": "module",
   "scripts": {
-    "start": "nodemon start.js",
+    "start": "start.js",
+    "dev": "nodemon start.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
