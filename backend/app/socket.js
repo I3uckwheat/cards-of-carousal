@@ -1,7 +1,10 @@
 /* eslint-disable no-param-reassign */
-import WebSocket from 'ws';
+import { Server as WebSocketServer } from 'ws';
+import LobbyList from './lib/LobbyList.js';
 
-const wss = new WebSocket.Server({
+const lobbyList = new LobbyList();
+
+const wss = new WebSocketServer({
   // TODO: Enable when CORS is implemented
 
   // verifyClient: (info, done) => {
@@ -16,20 +19,20 @@ const wss = new WebSocket.Server({
   port: process.env.SOCKET_PORT,
 });
 
-wss.on('connection', (ws) => {
-  ws.isAlive = true;
-  ws.on('pong', () => {
-    ws.isAlive = true;
+wss.on('connection', (webSocket) => {
+  webSocket.isAlive = true;
+  webSocket.on('pong', () => {
+    webSocket.isAlive = true;
   });
 });
 
 setInterval(() => {
   // eslint-disable-next-line consistent-return
-  wss.clients.forEach((ws) => {
-    if (ws.isAlive === false) return ws.terminate();
+  wss.clients.forEach((webSocket) => {
+    if (webSocket.isAlive === false) return webSocket.terminate();
 
-    ws.isAlive = false;
-    ws.ping();
+    webSocket.isAlive = false;
+    webSocket.ping();
   });
 }, 3000);
 
