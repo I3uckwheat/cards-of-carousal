@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/I3uckwheat/cards-of-carousal#readme",
   "devDependencies": {
+    "babel-eslint": "^10.1.0",
     "eslint": "^7.15.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-plugin-import": "^2.22.1",
