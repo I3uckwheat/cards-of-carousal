@@ -1,9 +1,11 @@
 /* eslint-disable no-param-reassign */
-import { Server as WebSocketServer } from 'ws';
-import LobbyList from './lib/LobbyList.js';
+import WS from 'ws';
+import { nanoid } from 'nanoid';
 
-const lobbyList = new LobbyList();
+// import lobbyList from './lib/LobbyList.js';
+import SocketRouter from './lib/SocketRouter.js';
 
+const WebSocketServer = WS.Server;
 const wss = new WebSocketServer({
   // TODO: Enable when CORS is implemented
 
@@ -19,22 +21,32 @@ const wss = new WebSocketServer({
   port: process.env.SOCKET_PORT,
 });
 
-wss.on('connection', (webSocket) => {
-  webSocket.isAlive = true;
-  webSocket.on('pong', () => {
-    webSocket.isAlive = true;
-  });
+const socketRouter = new SocketRouter(console.log);
+// socketRouter.addRoute('GET /lobby', (req, webSocket) => lobbyList.createLobby(webSocket));
+socketRouter.addRoute('GET /lobby', (req, webSocket) => console.log(`create lobby with host: ${webSocket.id}`));
+socketRouter.addRoute('GET /lobby/:id', (req, webSocket) => console.log(`attach socketId: "${webSocket.id}" to lobbyId: "${req.params.id}"`));
+
+wss.on('connection', async (webSocket, request) => {
+  webSocket.id = await nanoid();
+  socketRouter.handleRequest(webSocket, request);
+
+  // TODO: Ping-pong to check for dead clients
+  // webSocket.isAlive = true;
+  // webSocket.on('pong', () => {
+  //   webSocket.isAlive = true;
+  // });
 });
 
-setInterval(() => {
-  // eslint-disable-next-line consistent-return
-  wss.clients.forEach((webSocket) => {
-    if (webSocket.isAlive === false) return webSocket.terminate();
+// TODO: Ping-pong to check for dead clients
+// setInterval(() => {
+//   // eslint-disable-next-line consistent-return
+//   wss.clients.forEach((webSocket) => {
+//     if (webSocket.isAlive === false) return webSocket.terminate();
 
-    webSocket.isAlive = false;
-    webSocket.ping();
-  });
-}, 3000);
+//     webSocket.isAlive = false;
+//     webSocket.ping();
+//   });
+// }, 3000);
 
 // eslint-disable-next-line no-console
 console.log(`Socket listening on ${process.env.SOCKET_PORT}`);
