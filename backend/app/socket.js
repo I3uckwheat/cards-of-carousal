@@ -1,28 +1,30 @@
-// remove this when ready
-/*eslint-disable*/
-
-import WebSocket from "ws";
+/* eslint-disable no-param-reassign */
+import WebSocket from 'ws';
 
 const wss = new WebSocket.Server({
-  verifyClient: (info, done) => {
-    // CORS check
-    const originRegex = new RegExp(`${process.env.CORS_ORIGIN_DOMAIN}$`);
-    const { origin } = info.req.headers;
-    if (!origin || !originRegex.test(info.req.headers.origin)) {
-      return done(false);
-    }
-  },
+  // TODO: Enable when CORS is implemented
+
+  // verifyClient: (info, done) => {
+  //   // CORS check
+  //   const originRegex = new RegExp(`${process.env.CORS_ORIGIN_DOMAIN}$`);
+  //   const { origin } = info.req.headers;
+  //   if (!origin || !originRegex.test(info.req.headers.origin)) {
+  //     return done(false);
+  //   }
+  //   return done(true);
+  // },
   port: process.env.SOCKET_PORT,
 });
 
-wss.on("connection", (ws) => {
+wss.on('connection', (ws) => {
   ws.isAlive = true;
-  ws.on("pong", () => {
+  ws.on('pong', () => {
     ws.isAlive = true;
   });
 });
 
-const interval = setInterval(() => {
+setInterval(() => {
+  // eslint-disable-next-line consistent-return
   wss.clients.forEach((ws) => {
     if (ws.isAlive === false) return ws.terminate();
 
@@ -31,4 +33,5 @@ const interval = setInterval(() => {
   });
 }, 3000);
 
+// eslint-disable-next-line no-console
 console.log(`Socket listening on ${process.env.SOCKET_PORT}`);
