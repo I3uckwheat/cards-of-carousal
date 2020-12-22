@@ -1,5 +1,7 @@
 // TODO: Implement query params
 // TODO: Add documentation
+// TODO: Handle duplicate routes
+// TODO: Handle `all` route
 
 export default class SocketRouter {
   #routes = {
