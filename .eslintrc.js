@@ -17,7 +17,7 @@ module.exports = {
   rules: {
     'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
     'import/extensions': 'off',
-    'lines-between-class-members': {"exceptAfterSingleLine": true}
+    'lines-between-class-members': ['error', 'always', { exceptAfterSingleLine: true }],
   },
   settings: {
     react: {

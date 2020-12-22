@@ -1,4 +1,3 @@
-/* eslint-disable no-param-reassign */
 import WS from 'ws';
 import { nanoid } from 'nanoid';
 
@@ -29,10 +28,15 @@ socketRouter.addRoute('GET /lobby', (_, webSocket) => {
 });
 
 socketRouter.addRoute('GET /lobby/:id', (req, webSocket) => {
-  lobbyList.joinLobby(req.params.id, webSocket);
+  const result = lobbyList.joinLobby(req.params.id, webSocket);
+  if (result === 'no-lobby') {
+    webSocket.send('no-lobby');
+    webSocket.close();
+  }
 });
 
 wss.on('connection', async (webSocket, request) => {
+  // eslint-disable-next-line no-param-reassign
   webSocket.id = await nanoid();
   socketRouter.handleRequest(webSocket, request);
 
