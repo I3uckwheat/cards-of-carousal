@@ -2,7 +2,7 @@
 import WS from 'ws';
 import { nanoid } from 'nanoid';
 
-// import lobbyList from './lib/LobbyList.js';
+import LobbyList from './lib/LobbyList.js';
 import SocketRouter from './lib/SocketRouter.js';
 
 const WebSocketServer = WS.Server;
@@ -21,10 +21,16 @@ const wss = new WebSocketServer({
   port: process.env.SOCKET_PORT,
 });
 
-const socketRouter = new SocketRouter(console.log);
-// socketRouter.addRoute('GET /lobby', (req, webSocket) => lobbyList.createLobby(webSocket));
-socketRouter.addRoute('GET /lobby', (req, webSocket) => console.log(`create lobby with host: ${webSocket.id}`));
-socketRouter.addRoute('GET /lobby/:id', (req, webSocket) => console.log(`attach socketId: "${webSocket.id}" to lobbyId: "${req.params.id}"`));
+const lobbyList = new LobbyList();
+
+const socketRouter = new SocketRouter(console.log); // TODO: Handle 404
+socketRouter.addRoute('GET /lobby', (_, webSocket) => {
+  lobbyList.createLobby(webSocket);
+});
+
+socketRouter.addRoute('GET /lobby/:id', (req, webSocket) => {
+  lobbyList.joinLobby(req.params.id, webSocket);
+});
 
 wss.on('connection', async (webSocket, request) => {
   webSocket.id = await nanoid();
