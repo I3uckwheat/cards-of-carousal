@@ -30,7 +30,7 @@ export default class Message {
   };
 
   fromJSON = (jsonMessage) => {
-    if (this.#messageConstructed) throw new Message('Message already constructed');
+    if (this.#messageConstructed) throw new Error('Message already constructed');
 
     const message = JSON.parse(jsonMessage);
     this.#validateMessage(message);
