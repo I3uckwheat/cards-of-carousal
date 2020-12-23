@@ -29,7 +29,5 @@ export default class Message {
     }
   };
 
-  stringify = () => JSON.stringify(this.data);
-
-  sendWith = (cb) => cb(this.stringify());
+  toJSON = () => JSON.stringify(this.data);
 }
