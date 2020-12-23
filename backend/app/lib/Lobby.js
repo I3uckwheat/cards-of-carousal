@@ -1,6 +1,5 @@
 import { customAlphabet } from 'nanoid';
 import Message from './Message.js';
-import ServerMessage from './ServerMessage.js';
 
 const customNanoid = customAlphabet('ABCDGHJKMNPRSTUVWXYZ', 4);
 
@@ -22,12 +21,12 @@ export default class Lobby {
     playerSocket.on('message', this.#handlePlayerSocketMessage(playerSocket));
     playerSocket.on('close', this.#handlePlayerDisconnect(playerSocket));
 
-    const message = new ServerMessage({
-      data: {
-        event: 'player-connect',
+    const message = new Message(JSON.stringify({
+      event: 'player-connect',
+      payload: {
         playerId: playerSocket.id,
       },
-    });
+    }));
 
     this.#sendMessageToHost(message);
 
@@ -37,12 +36,12 @@ export default class Lobby {
   #handlePlayerDisconnect = (playerSocket) => () => {
     delete this.#playerSockets[playerSocket.id];
 
-    const message = new ServerMessage({
-      data: {
-        event: 'player-disconnect',
+    const message = new Message(JSON.stringify({
+      event: 'player-disconnect',
+      payload: {
         playerId: playerSocket.id,
       },
-    });
+    }));
 
     this.#sendMessageToHost(message);
   }

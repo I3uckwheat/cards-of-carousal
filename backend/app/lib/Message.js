@@ -1,13 +1,13 @@
 export default class Message {
-  rawMessage;
-  data;
+  payload;
+  event;
   recipients;
   sender;
   isForBroadcast;
 
-  constructor(rawMessage, senderId = 'host') {
+  constructor(rawMessage, senderId) {
+    if (!senderId) throw new Error('`senderId` is missing from Message constructor');
     this.sender = senderId;
-    this.rawMessage = rawMessage;
 
     try {
       this.#parseMessage(rawMessage);
@@ -19,7 +19,8 @@ export default class Message {
   #parseMessage = (rawMessage) => {
     const message = JSON.parse(rawMessage);
 
-    this.data = message.data;
+    this.event = message.event;
+    this.payload = message.payload;
     this.recipients = message.recipients;
 
     if (!this.recipients || this.recipients.length === 0) {
@@ -29,5 +30,15 @@ export default class Message {
     }
   };
 
-  toJSON = () => JSON.stringify(this.data);
+  toJSON = () => JSON.stringify(this.payload);
 }
+
+/**
+ * {
+ *   recipients: ["id", "id"],
+ *   event: "stuff",
+ *   payload: {
+ *     data, for players
+ *   }
+ * }
+ */
