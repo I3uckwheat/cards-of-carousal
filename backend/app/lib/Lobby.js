@@ -10,7 +10,7 @@ export default class Lobby {
   constructor(hostSocket) {
     this.id = customNanoid();
 
-    hostSocket.on('message', this.#handleHostSocketMessage);
+    hostSocket.on('message', this.#handleHostMessage);
 
     this.#hostSocket = hostSocket;
     hostSocket.send(this.id);
@@ -18,7 +18,7 @@ export default class Lobby {
 
   addPlayer = (playerSocket) => {
     // the data from this message is passed into the callback returned from the method in this cb
-    playerSocket.on('message', this.#handlePlayerSocketMessage(playerSocket));
+    playerSocket.on('message', this.#handlePlayerMessage(playerSocket));
     playerSocket.on('close', this.#handlePlayerDisconnect(playerSocket));
     this.#playerSockets[playerSocket.id] = playerSocket;
 
@@ -51,7 +51,7 @@ export default class Lobby {
     this.#hostSocket.send(message.toJSON());
   }
 
-  #handleHostSocketMessage = (rawMessage) => {
+  #handleHostMessage = (rawMessage) => {
     try {
       const message = new Message('host');
       message.fromJSON(rawMessage);
@@ -79,7 +79,7 @@ export default class Lobby {
 
   // Closure over playerSocket, for callback sent to
   // This arrow function returns another arrow function
-  #handlePlayerSocketMessage = (playerSocket) => (rawMessage) => {
+  #handlePlayerMessage = (playerSocket) => (rawMessage) => {
     try {
       const message = new Message(playerSocket.id);
       message.fromJSON(rawMessage);
