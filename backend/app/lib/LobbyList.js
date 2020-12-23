@@ -1,11 +1,7 @@
 import Lobby from './Lobby.js';
 
 export default class LobbyList {
-  lobbies;
-
-  constructor() {
-    this.lobbies = {};
-  }
+  lobbies = {};
 
   createLobby = (hostSocket) => {
     const lobby = new Lobby(hostSocket);
