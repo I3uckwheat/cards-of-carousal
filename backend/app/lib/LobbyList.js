@@ -5,6 +5,8 @@ export default class LobbyList {
 
   createLobby = (hostSocket) => {
     const lobby = new Lobby(hostSocket);
+    lobby.onClose = this.#handleLobbyClose;
+
     this.lobbies[lobby.id] = lobby;
 
     return lobby.id;
@@ -19,8 +21,12 @@ export default class LobbyList {
     return 'no-lobby';
   }
 
+  #handleLobbyClose = (lobbyId) => {
+    delete this.lobbies[lobbyId];
+  }
+
   closeLobby = (lobbyId) => {
-    // TODO: close socket connections
+    this.lobbies[lobbyId].closeLobby();
     delete this.lobbies[lobbyId];
   }
 }
