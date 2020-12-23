@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import WebSocket from 'ws';
 import { nanoid } from 'nanoid';
 
@@ -36,27 +37,26 @@ const wss = new WebSocket.Server({
 });
 
 wss.on('connection', async (webSocket, request) => {
-  // eslint-disable-next-line no-param-reassign
   webSocket.id = await nanoid();
   socketRouter.handleRequest(webSocket, request);
 
   // TODO: Ping-pong to check for dead clients
-  // webSocket.isAlive = true;
-  // webSocket.on('pong', () => {
-  //   webSocket.isAlive = true;
-  // });
+  webSocket.isAlive = true;
+  webSocket.on('pong', () => {
+    webSocket.isAlive = true;
+  });
 });
 
 // TODO: Ping-pong to check for dead clients
-// setInterval(() => {
-//   // eslint-disable-next-line consistent-return
-//   wss.clients.forEach((webSocket) => {
-//     if (webSocket.isAlive === false) return webSocket.terminate();
+setInterval(() => {
+  // eslint-disable-next-line consistent-return
+  wss.clients.forEach((webSocket) => {
+    if (webSocket.isAlive === false) return webSocket.terminate();
 
-//     webSocket.isAlive = false;
-//     webSocket.ping();
-//   });
-// }, 3000);
+    webSocket.isAlive = false;
+    webSocket.ping();
+  });
+}, 3000);
 
 // eslint-disable-next-line no-console
 console.log(`Socket listening on ${process.env.SOCKET_PORT}`);
