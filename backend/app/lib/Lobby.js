@@ -11,6 +11,7 @@ export default class Lobby {
     this.id = customNanoid();
 
     hostSocket.on('message', this.#handleHostMessage);
+    hostSocket.on('close', this.#handleHostDisconnect);
 
     this.#hostSocket = hostSocket;
     hostSocket.send(this.id);
@@ -32,14 +33,30 @@ export default class Lobby {
     this.#hostSocket.send(message.toJSON());
   }
 
+  closeLobby = () => {
+    const closeMessage = new Message('server', {
+      event: 'lobby-closed',
+      payload: {},
+    });
+
+    Object.values(this.#playerSockets).forEach((socket) => {
+      socket.send(closeMessage.toJSON());
+      socket.close(1000, 'lobby-closed');
+    });
+
+    if (this.#hostSocket) this.#hostSocket.close(1000, closeMessage);
+  };
+
   #removePlayer = (playerId) => {
     const playerSocket = this.#playerSockets[playerId];
     delete this.#playerSockets[playerSocket.id];
     playerSocket.close(); // This fires the 'close' event, which calls #handlePlayerDisconnect
   }
 
-  #handlePlayerDisconnect = (playerSocket) => () => {
+  #handlePlayerDisconnect = (playerSocket) => (status) => {
     delete this.#playerSockets[playerSocket.id];
+
+    if (status === 1000) return;
 
     const message = new Message('server', {
       event: 'player-disconnected',
@@ -49,6 +66,10 @@ export default class Lobby {
     });
 
     this.#hostSocket.send(message.toJSON());
+  }
+
+  #handleHostDisconnect = () => {
+    this.closeLobby();
   }
 
   #handleHostMessage = (rawMessage) => {
