@@ -1,11 +1,26 @@
-import WS from 'ws';
+import WebSocket from 'ws';
 import { nanoid } from 'nanoid';
 
 import LobbyList from './lib/LobbyList.js';
 import SocketRouter from './lib/SocketRouter.js';
 
-const WebSocketServer = WS.Server;
-const wss = new WebSocketServer({
+const lobbyList = new LobbyList();
+
+const socketRouter = new SocketRouter(console.log); // TODO: Handle 404
+
+socketRouter.addRoute('GET /lobby', (_, webSocket) => {
+  lobbyList.createLobby(webSocket);
+});
+
+socketRouter.addRoute('GET /lobby/:id', (req, webSocket) => {
+  const result = lobbyList.joinLobby(req.params.id, webSocket);
+  if (result === 'no-lobby') {
+    webSocket.send('no-lobby');
+    webSocket.close();
+  }
+});
+
+const wss = new WebSocket.Server({
   // TODO: Enable when CORS is implemented
 
   // verifyClient: (info, done) => {
@@ -18,21 +33,6 @@ const wss = new WebSocketServer({
   //   return done(true);
   // },
   port: process.env.SOCKET_PORT,
-});
-
-const lobbyList = new LobbyList();
-
-const socketRouter = new SocketRouter(console.log); // TODO: Handle 404
-socketRouter.addRoute('GET /lobby', (_, webSocket) => {
-  lobbyList.createLobby(webSocket);
-});
-
-socketRouter.addRoute('GET /lobby/:id', (req, webSocket) => {
-  const result = lobbyList.joinLobby(req.params.id, webSocket);
-  if (result === 'no-lobby') {
-    webSocket.send('no-lobby');
-    webSocket.close();
-  }
 });
 
 wss.on('connection', async (webSocket, request) => {
