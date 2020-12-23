@@ -2,11 +2,18 @@ export default class Message {
   rawMessage;
   data;
   recipients;
+  sender;
   isForBroadcast;
 
-  constructor(rawMessage) {
+  constructor(rawMessage, senderId = 'host') {
+    this.sender = senderId;
     this.rawMessage = rawMessage;
-    this.#parseMessage(rawMessage);
+
+    try {
+      this.#parseMessage(rawMessage);
+    } catch {
+      throw new Error(`Invalid message from "${senderId}": "${rawMessage}"`);
+    }
   }
 
   #parseMessage = (rawMessage) => {
@@ -15,10 +22,14 @@ export default class Message {
     this.data = message.data;
     this.recipients = message.recipients;
 
-    if (this.recipients && this.recipients > 0) {
+    if (!this.recipients || this.recipients.length === 0) {
       this.isForBroadcast = true;
+    } else {
+      this.isForBroadcast = false;
     }
   };
 
   stringify = () => JSON.stringify(this.data);
+
+  sendWith = (cb) => cb(this.stringify());
 }

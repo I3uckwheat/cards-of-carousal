@@ -16,27 +16,44 @@ export default class Lobby {
     hostSocket.send(this.id);
   }
 
-  #handleHostSocketMessage = (data) => {
-    const message = new Message(data);
+  #handleHostSocketMessage = (rawMessage) => {
+    try {
+      const message = new Message(rawMessage);
 
-    if (message.isForBroadcast) {
-      Object.values(this.#playerSockets).forEach((socket) => {
-        socket.send(message.stringify());
-      });
-    } else {
-      message.recipients.forEach((recipient) => {
-        this.#playerSockets[recipient].send(message.stringify());
-      });
+      if (message.isForBroadcast) {
+        Object.values(this.#playerSockets).forEach((socket) => {
+          message.sendWith(socket.send);
+        });
+      } else {
+        message.recipients.forEach((recipient) => {
+          const socket = this.#playerSockets[recipient];
+          message.sendWith(socket.send);
+        });
+      }
+    } catch (error) {
+      // FIXME: eat message if process.env === prod, show if dev
+      // eslint-disable-next-line no-console
+      console.error(error);
     }
   }
 
-  #handlePlayerSocketMessage = (data) => {
-    console.log(data);
-    this.#hostSocket.send(data);
+  // Closure over playerSocket, for callback sent to
+  // This arrow function returns another arrow function
+  #handlePlayerSocketMessage = (playerSocket) => (rawMessage) => {
+    try {
+      const message = new Message(rawMessage, playerSocket.id);
+      this.#hostSocket.send(message.stringify());
+      message.sendWith(this.#hostSocket.send);
+    } catch (error) {
+      // FIXME: eat message if process.env === prod, show if dev
+      // eslint-disable-next-line no-console
+      console.error(error);
+    }
   }
 
   addPlayer = (playerSocket) => {
-    playerSocket.on('message', this.#handlePlayerSocketMessage);
+    // the data from this message is passed into the callback returned from the method in this cb
+    playerSocket.on('message', this.#handlePlayerSocketMessage(playerSocket));
 
     this.#playerSockets[playerSocket.id] = playerSocket;
   }
