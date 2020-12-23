@@ -29,9 +29,22 @@ export default class Lobby {
       },
     });
 
-    this.#sendHostMessage(message);
+    this.#sendMessageToHost(message);
 
     this.#playerSockets[playerSocket.id] = playerSocket;
+  }
+
+  #handlePlayerDisconnect = (playerSocket) => () => {
+    delete this.#playerSockets[playerSocket.id];
+
+    const message = new ServerMessage({
+      data: {
+        event: 'player-disconnect',
+        playerId: playerSocket.id,
+      },
+    });
+
+    this.#sendMessageToHost(message);
   }
 
   #handleHostSocketMessage = (rawMessage) => {
@@ -55,19 +68,6 @@ export default class Lobby {
     }
   }
 
-  #handlePlayerDisconnect = (playerSocket) => () => {
-    delete this.#playerSockets[playerSocket.id];
-
-    const message = new ServerMessage({
-      data: {
-        event: 'player-disconnect',
-        playerId: playerSocket.id,
-      },
-    });
-
-    this.#sendHostMessage(message);
-  }
-
   // Closure over playerSocket, for callback sent to
   // This arrow function returns another arrow function
   #handlePlayerSocketMessage = (playerSocket) => (rawMessage) => {
@@ -81,7 +81,7 @@ export default class Lobby {
     }
   }
 
-  #sendHostMessage = (message) => {
+  #sendMessageToHost = (message) => {
     this.#hostSocket.send(message.toJSON());
   }
 }
