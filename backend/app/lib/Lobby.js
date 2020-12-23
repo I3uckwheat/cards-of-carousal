@@ -20,35 +20,45 @@ export default class Lobby {
     // the data from this message is passed into the callback returned from the method in this cb
     playerSocket.on('message', this.#handlePlayerSocketMessage(playerSocket));
     playerSocket.on('close', this.#handlePlayerDisconnect(playerSocket));
+    this.#playerSockets[playerSocket.id] = playerSocket;
 
-    const message = new Message(JSON.stringify({
+    const message = new Message('server', {
       event: 'player-connect',
       payload: {
         playerId: playerSocket.id,
       },
-    }));
+    });
 
-    this.#sendMessageToHost(message);
+    this.#hostSocket.send(message.toJSON());
+  }
 
-    this.#playerSockets[playerSocket.id] = playerSocket;
+  #removePlayer = (playerId) => {
+    const playerSocket = this.#playerSockets[playerId];
+    delete this.#playerSockets[playerSocket.id];
+    playerSocket.close(); // This fires the 'close' event, which calls #handlePlayerDisconnect
   }
 
   #handlePlayerDisconnect = (playerSocket) => () => {
     delete this.#playerSockets[playerSocket.id];
 
-    const message = new Message(JSON.stringify({
-      event: 'player-disconnect',
+    const message = new Message('server', {
+      event: 'player-disconnected',
       payload: {
         playerId: playerSocket.id,
       },
-    }));
+    });
 
-    this.#sendMessageToHost(message);
+    this.#hostSocket.send(message.toJSON());
   }
 
   #handleHostSocketMessage = (rawMessage) => {
     try {
-      const message = new Message(rawMessage);
+      const message = new Message('host');
+      message.fromJSON(rawMessage);
+
+      if (message.event === 'kick-player') {
+        this.#removePlayer(message.payload.playerId);
+      }
 
       if (message.isForBroadcast) {
         Object.values(this.#playerSockets).forEach((socket) => {
@@ -71,16 +81,14 @@ export default class Lobby {
   // This arrow function returns another arrow function
   #handlePlayerSocketMessage = (playerSocket) => (rawMessage) => {
     try {
-      const message = new Message(rawMessage, playerSocket.id);
+      const message = new Message(playerSocket.id);
+      message.fromJSON(rawMessage);
+
       this.#hostSocket.send(message.toJSON());
     } catch (error) {
       // FIXME: eat message if process.env === prod, show if dev
       // eslint-disable-next-line no-console
       console.error(error);
     }
-  }
-
-  #sendMessageToHost = (message) => {
-    this.#hostSocket.send(message.toJSON());
   }
 }

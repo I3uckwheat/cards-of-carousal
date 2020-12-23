@@ -1,24 +1,49 @@
 export default class Message {
+  #messageConstructed = false;
+
   payload;
   event;
   recipients;
   sender;
   isForBroadcast;
 
-  constructor(rawMessage, senderId) {
-    if (!senderId) throw new Error('`senderId` is missing from Message constructor');
-    this.sender = senderId;
+  constructor(sender, message) {
+    if (!sender) throw new Error('`sender` is missing from Message constructor');
+    this.sender = sender;
 
-    try {
-      this.#parseMessage(rawMessage);
-    } catch {
-      throw new Error(`Invalid message from "${senderId}": "${rawMessage}"`);
+    if (message) {
+      this.#validateMessage(message);
+      this.#constructMessage(message);
     }
   }
 
-  #parseMessage = (rawMessage) => {
-    const message = JSON.parse(rawMessage);
+  toJSON = () => {
+    if (this.#messageConstructed) {
+      return JSON.stringify({
+        event: this.event,
+        payload: this.payload,
+        sender: this.sender,
+      });
+    }
 
+    throw new Error('Message not constructed');
+  };
+
+  fromJSON = (jsonMessage) => {
+    if (this.#messageConstructed) throw new Message('Message already constructed');
+
+    const message = JSON.parse(jsonMessage);
+    this.#validateMessage(message);
+    this.#constructMessage(message);
+  }
+
+  #validateMessage = (message) => {
+    if (message && (!message.event || !message.payload)) {
+      throw new Error(`Invalid message from "${this.sender}": "${JSON.stringify(message)}"`);
+    }
+  }
+
+  #constructMessage = (message) => {
     this.event = message.event;
     this.payload = message.payload;
     this.recipients = message.recipients;
@@ -28,9 +53,9 @@ export default class Message {
     } else {
       this.isForBroadcast = false;
     }
-  };
 
-  toJSON = () => JSON.stringify(this.payload);
+    this.#messageConstructed = true;
+  }
 }
 
 /**
