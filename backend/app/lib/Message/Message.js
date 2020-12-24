@@ -7,7 +7,7 @@ module.exports = class Message {
 
   constructor(sender, message) {
     if (!message) throw new Error('message is falsy, pass a string or object');
-    if (!sender) throw new Error('`sender` is missing from Message constructor');
+    if (!sender) throw new Error('"sender" is missing from Message constructor');
     this.sender = sender;
 
     if (typeof message === 'string') {
