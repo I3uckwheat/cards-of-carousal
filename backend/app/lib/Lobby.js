@@ -6,9 +6,9 @@ const customNanoid = customAlphabet('ABCDGHJKMNPRSTUVWXYZ', 4);
 export default class Lobby {
   #hostSocket;
   #playerSockets = {};
-  onClose = () => {};
+  #onClose = () => {};
 
-  constructor(hostSocket) {
+  constructor(hostSocket, onCloseCallback) {
     this.id = customNanoid();
 
     hostSocket.on('message', this.#handleHostMessage);
@@ -16,6 +16,8 @@ export default class Lobby {
 
     this.#hostSocket = hostSocket;
     hostSocket.send(this.id);
+
+    this.#onClose = onCloseCallback;
   }
 
   addPlayer = (playerSocket) => {

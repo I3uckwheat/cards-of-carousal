@@ -18,17 +18,13 @@ export default class Message {
     }
   }
 
-  toJSON = () => {
-    return JSON.stringify({
-      event: this.event,
-      payload: this.payload,
-      sender: this.sender,
-    });
-  };
+  toJSON = () => JSON.stringify({
+    event: this.event,
+    payload: this.payload,
+    sender: this.sender,
+  });
 
   #fromJSON = (jsonMessage) => {
-    if (this.#messageConstructed) throw new Error('Message already constructed');
-
     const message = JSON.parse(jsonMessage);
     this.#validateMessage(message);
     this.#constructMessage(message);
@@ -50,8 +46,6 @@ export default class Message {
     } else {
       this.isForBroadcast = false;
     }
-
-    this.#messageConstructed = true;
   }
 }
 

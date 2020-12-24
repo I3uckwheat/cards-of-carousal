@@ -4,8 +4,7 @@ export default class LobbyList {
   lobbies = {};
 
   createLobby = (hostSocket) => {
-    const lobby = new Lobby(hostSocket);
-    lobby.onClose = this.#handleLobbyClose;
+    const lobby = new Lobby(hostSocket, this.#handleLobbyClose);
 
     this.lobbies[lobby.id] = lobby;
 
