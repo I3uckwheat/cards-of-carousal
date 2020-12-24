@@ -1,8 +1,3 @@
-// See here: https://www.npmjs.com/package/dotenv#how-do-i-use-dotenv-with-import-
-import dotenv from 'dotenv';
-
-dotenv.config();
-
 // Verify env vars are available.
 const envVars = ['EXPRESS_PORT', 'SOCKET_PORT'];
 

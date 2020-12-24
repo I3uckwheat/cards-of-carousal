@@ -1,9 +1,9 @@
-import { customAlphabet } from 'nanoid';
-import Message from '../Message/Message.js';
+const { customAlphabet } = require('nanoid');
+const Message = require('../Message/Message.js');
 
 const customNanoid = customAlphabet('ABCDGHJKMNPRSTUVWXYZ', 4);
 
-export default class Lobby {
+module.exports = class Lobby {
   #hostSocket;
   #playerSockets = {};
   #onClose = () => {};
@@ -114,4 +114,4 @@ export default class Lobby {
       console.error(error);
     }
   }
-}
+};

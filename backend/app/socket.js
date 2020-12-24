@@ -1,9 +1,9 @@
 /* eslint-disable no-param-reassign */
-import WebSocket from 'ws';
-import { nanoid } from 'nanoid';
+const WebSocket = require('ws');
+const { nanoid } = require('nanoid');
 
-import LobbyList from './lib/LobbyList/LobbyList.js';
-import SocketRouter from './lib/SocketRouter/SocketRouter.js';
+const LobbyList = require('./lib/LobbyList/LobbyList.js');
+const SocketRouter = require('./lib/SocketRouter/SocketRouter.js');
 
 const lobbyList = new LobbyList();
 

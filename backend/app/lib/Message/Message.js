@@ -1,4 +1,4 @@
-export default class Message {
+module.exports = class Message {
   payload;
   event;
   recipients;
@@ -47,7 +47,7 @@ export default class Message {
       this.isForBroadcast = false;
     }
   }
-}
+};
 
 /**
  * {

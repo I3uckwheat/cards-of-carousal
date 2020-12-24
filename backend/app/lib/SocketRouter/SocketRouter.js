@@ -3,7 +3,7 @@
 // TODO: Handle duplicate routes
 // TODO: Handle `all` route
 
-export default class SocketRouter {
+module.exports = class SocketRouter {
   #routes = {
     GET: [],
     PUT: [],

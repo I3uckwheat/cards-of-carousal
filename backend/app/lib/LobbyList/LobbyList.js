@@ -1,6 +1,6 @@
-import Lobby from '../Lobby/Lobby.js';
+const Lobby = require('../Lobby/Lobby.js');
 
-export default class LobbyList {
+module.exports = class LobbyList {
   lobbies = {};
 
   createLobby = (hostSocket) => {
@@ -28,4 +28,4 @@ export default class LobbyList {
     this.lobbies[lobbyId].closeLobby();
     delete this.lobbies[lobbyId];
   }
-}
+};
