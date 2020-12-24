@@ -76,8 +76,7 @@ export default class Lobby {
 
   #handleHostMessage = (rawMessage) => {
     try {
-      const message = new Message('host');
-      message.fromJSON(rawMessage);
+      const message = new Message('host', rawMessage);
 
       if (message.event === 'kick-player') {
         this.#removePlayer(message.payload.playerId);
@@ -104,8 +103,7 @@ export default class Lobby {
   // This arrow function returns another arrow function
   #handlePlayerMessage = (playerSocket) => (rawMessage) => {
     try {
-      const message = new Message(playerSocket.id);
-      message.fromJSON(rawMessage);
+      const message = new Message(playerSocket.id, rawMessage);
 
       this.#hostSocket.send(message.toJSON());
     } catch (error) {

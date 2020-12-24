@@ -1,6 +1,4 @@
 export default class Message {
-  #messageConstructed = false;
-
   payload;
   event;
   recipients;
@@ -8,28 +6,27 @@ export default class Message {
   isForBroadcast;
 
   constructor(sender, message) {
+    if (!message) throw new Error('message is falsy, pass a string or object');
     if (!sender) throw new Error('`sender` is missing from Message constructor');
     this.sender = sender;
 
-    if (message) {
+    if (typeof message === 'string') {
+      this.#fromJSON(message);
+    } else {
       this.#validateMessage(message);
       this.#constructMessage(message);
     }
   }
 
   toJSON = () => {
-    if (this.#messageConstructed) {
-      return JSON.stringify({
-        event: this.event,
-        payload: this.payload,
-        sender: this.sender,
-      });
-    }
-
-    throw new Error('Message not constructed');
+    return JSON.stringify({
+      event: this.event,
+      payload: this.payload,
+      sender: this.sender,
+    });
   };
 
-  fromJSON = (jsonMessage) => {
+  #fromJSON = (jsonMessage) => {
     if (this.#messageConstructed) throw new Error('Message already constructed');
 
     const message = JSON.parse(jsonMessage);
