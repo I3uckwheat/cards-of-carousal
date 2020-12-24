@@ -2,8 +2,8 @@
 import WebSocket from 'ws';
 import { nanoid } from 'nanoid';
 
-import LobbyList from './lib/LobbyList.js';
-import SocketRouter from './lib/SocketRouter.js';
+import LobbyList from './lib/LobbyList/LobbyList.js';
+import SocketRouter from './lib/SocketRouter/SocketRouter.js';
 
 const lobbyList = new LobbyList();
 

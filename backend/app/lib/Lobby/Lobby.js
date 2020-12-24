@@ -1,5 +1,5 @@
 import { customAlphabet } from 'nanoid';
-import Message from './Message.js';
+import Message from '../Message/Message.js';
 
 const customNanoid = customAlphabet('ABCDGHJKMNPRSTUVWXYZ', 4);
 

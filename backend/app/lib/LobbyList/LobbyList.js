@@ -1,4 +1,4 @@
-import Lobby from './Lobby.js';
+import Lobby from '../Lobby/Lobby.js';
 
 export default class LobbyList {
   lobbies = {};
