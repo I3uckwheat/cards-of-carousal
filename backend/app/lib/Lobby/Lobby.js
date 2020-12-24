@@ -48,7 +48,7 @@ module.exports = class Lobby {
     });
 
     if (this.#hostSocket) this.#hostSocket.close(1000, closeMessage);
-    this.onClose(this.id);
+    this.#onClose(this.id);
   };
 
   #removePlayer = (playerId) => {
