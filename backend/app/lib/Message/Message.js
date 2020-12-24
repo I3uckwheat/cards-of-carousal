@@ -31,8 +31,8 @@ module.exports = class Message {
   }
 
   #validateMessage = (message) => {
-    if (message && (!message.event || !message.payload)) {
-      throw new Error(`Invalid message from "${this.sender}": "${JSON.stringify(message)}"`);
+    if (!message || !message.event || !message.payload) {
+		  throw new Error(`Invalid message from "${sender}": "${JSON.stringify(message)}"`);
     }
   }
 
