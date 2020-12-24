@@ -7,7 +7,10 @@ import SocketRouter from './lib/SocketRouter.js';
 
 const lobbyList = new LobbyList();
 
-const socketRouter = new SocketRouter(console.log); // TODO: Handle 404
+const socketRouter = new SocketRouter((req, webSocket) => {
+  webSocket.send('route-not-found');
+  webSocket.close(1000, 'route-not-found');
+});
 
 socketRouter.addRoute('GET /lobby', (_, webSocket) => {
   lobbyList.createLobby(webSocket);
@@ -17,7 +20,7 @@ socketRouter.addRoute('GET /lobby/:id', (req, webSocket) => {
   const result = lobbyList.joinLobby(req.params.id, webSocket);
   if (result === 'no-lobby') {
     webSocket.send('no-lobby');
-    webSocket.close();
+    webSocket.close(1000, 'no-lobby');
   }
 });
 
