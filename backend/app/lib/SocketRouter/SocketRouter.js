@@ -74,4 +74,4 @@ module.exports = class SocketRouter {
       params,
     };
   }
-}
+};
