@@ -40,14 +40,12 @@ wss.on('connection', async (webSocket, request) => {
   webSocket.id = await nanoid();
   socketRouter.handleRequest(webSocket, request);
 
-  // TODO: Ping-pong to check for dead clients
   webSocket.isAlive = true;
   webSocket.on('pong', () => {
     webSocket.isAlive = true;
   });
 });
 
-// TODO: Ping-pong to check for dead clients
 setInterval(() => {
   // eslint-disable-next-line consistent-return
   wss.clients.forEach((webSocket) => {
