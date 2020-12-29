@@ -1,4 +1,5 @@
 module.exports = {
+  parser: 'babel-eslint',
   env: {
     browser: true,
     es2021: true,
@@ -16,6 +17,7 @@ module.exports = {
   rules: {
     'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
     'import/extensions': 'off',
+    'lines-between-class-members': ['error', 'always', { exceptAfterSingleLine: true }],
   },
   settings: {
     react: {

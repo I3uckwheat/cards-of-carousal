@@ -7,7 +7,8 @@
     "install-all": "npm i && cd ./frontend && npm i && cd ../backend && npm i",
     "dev:frontend": "cd ./frontend && npm start",
     "dev:backend": "cd ./backend && npm run dev",
-    "lint": "npx eslint .",
+    "lint": "eslint .",
+    "test:backend": "cd ./backend && npm test",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -21,6 +22,7 @@
   },
   "homepage": "https://github.com/I3uckwheat/cards-of-carousal#readme",
   "devDependencies": {
+    "babel-eslint": "^10.1.0",
     "eslint": "^7.15.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-plugin-import": "^2.22.1",

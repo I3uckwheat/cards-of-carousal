@@ -1,9 +1,13 @@
-import './env-setup.js';
+const dotenv = require('dotenv');
 
-import app from './app/express.js';
+dotenv.config();
+
+require('./env-setup.js');
+
+const app = require('./app/express.js');
 
 /* ======= Start socket service ======= */
-import './app/socket.js';
+require('./app/socket.js');
 
 // eslint-disable-next-line
 app.listen(process.env.EXPRESS_PORT, () => console.log(`Express listening at http://localhost:${process.env.EXPRESS_PORT}`));
