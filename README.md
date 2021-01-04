@@ -4,6 +4,8 @@ Be sure to check the package.json on the top level to see all commands.
 
 ## **Getting Started**
 
+1. Be sure you are on Node version 14 LTS
+
 ### Installations
 
 1. Run `npm run install-all` on the top level (directory with both frontend and backend directories)
