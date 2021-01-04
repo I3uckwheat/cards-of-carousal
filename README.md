@@ -29,6 +29,20 @@ Be sure to check the package.json on the top level to see all commands.
 1. Run `npm run dev:backend` to start the websocket and express server
 2. Run `npm run dev:frontend` to start the React dev server.
 
+### Debugging
+
+#### Backend
+
+There is a debugger setup for VSCode, instead of starting the backend with `npm run dev:backend`:
+
+* Click the "debugger" icon on the left panel
+* Be sure the menu at the top says "Debug Backend"
+* Click the green arrow, or press `f5` to start the backend
+
+#### Frontend
+
+TODO: Setup debugger
+
 ## Testing
 
 ### Backend
