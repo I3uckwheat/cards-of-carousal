@@ -18,10 +18,10 @@ module.exports = class Lobby {
 
     const message = new Message('server', {
       event: 'create-lobby',
-      payload: this.id,
+      payload: { id: this.id },
     });
 
-    hostSocket.send(message);
+    hostSocket.send(message.toJSON());
 
     this.#onClose = onCloseCallback;
   }
