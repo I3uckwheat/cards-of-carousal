@@ -7,8 +7,8 @@ export default function initSocket(id) {
     : 'ws://localhost:4003/lobby';
   const socket = new WebSocket(url);
   socket.onmessage = (msg) => {
-    const { event, payload } = msg;
-    emitter.emit(event, payload);
+    const { event, payload } = JSON.parse(msg.data);
+    emitter.emit('message', { event, payload });
   };
 
   return socket;
