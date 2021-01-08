@@ -15,7 +15,13 @@ module.exports = class Lobby {
     hostSocket.on('close', this.#handleHostDisconnect);
 
     this.#hostSocket = hostSocket;
-    hostSocket.send(this.id);
+
+    const message = new Message('server', {
+      event: 'create-lobby',
+      payload: this.id,
+    });
+
+    hostSocket.send(message);
 
     this.#onClose = onCloseCallback;
   }
@@ -34,7 +40,7 @@ module.exports = class Lobby {
     });
 
     this.#hostSocket.send(message.toJSON());
-  }
+  };
 
   closeLobby = () => {
     const closeMessage = new Message('server', {
@@ -55,7 +61,7 @@ module.exports = class Lobby {
     const playerSocket = this.#playerSockets[playerId];
     delete this.#playerSockets[playerSocket.id];
     playerSocket.close(); // This fires the 'close' event, which calls #handlePlayerDisconnect
-  }
+  };
 
   #handlePlayerDisconnect = (playerSocket) => (status) => {
     delete this.#playerSockets[playerSocket.id];
@@ -70,11 +76,11 @@ module.exports = class Lobby {
     });
 
     this.#hostSocket.send(message.toJSON());
-  }
+  };
 
   #handleHostDisconnect = () => {
     this.closeLobby();
-  }
+  };
 
   #handleHostMessage = (rawMessage) => {
     try {
@@ -99,7 +105,7 @@ module.exports = class Lobby {
       // eslint-disable-next-line no-console
       console.error(error);
     }
-  }
+  };
 
   // Closure over playerSocket, for callback sent to
   // This arrow function returns another arrow function
@@ -113,5 +119,5 @@ module.exports = class Lobby {
       // eslint-disable-next-line no-console
       console.error(error);
     }
-  }
+  };
 };
