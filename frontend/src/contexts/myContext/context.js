@@ -7,7 +7,7 @@ const store = createContext();
 const { Provider } = store;
 
 const initialState = {
-  lobbyId: null,
+  lobbyId: '',
   socketIsActive: false,
   isHosting: false,
 };
