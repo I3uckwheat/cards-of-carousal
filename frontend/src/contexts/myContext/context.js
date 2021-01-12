@@ -18,11 +18,20 @@ export default function ContextProvider({ children }) {
 
   function handleMessage({ event, payload }) {
     // Development only: log messages to console
-    if (process.env.NODE_ENV !== 'PRODUCTION') {
+    if (process.env.NODE_ENV === 'development') {
       // eslint-disable-next-line no-console
-      console.log('DISPATCHING: ', { event, payload });
+      console.log('Handling message: ', { event, payload });
     }
-    dispatch({ event, payload });
+    switch (event) {
+      case 'create-lobby':
+        return dispatch({ type: 'CREATE_LOBBY', payload });
+      case 'socket-open':
+        return dispatch({ type: 'SOCKET_OPEN', payload });
+      case 'socket-close':
+        return dispatch({ type: 'SOCKET_CLOSE', payload });
+      default:
+        return undefined;
+    }
   }
 
   useEffect(() => {

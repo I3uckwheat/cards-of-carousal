@@ -1,22 +1,24 @@
 import React, { useState, useContext } from 'react';
-import { initSocket, sendMessage } from '../socket/socket';
+import { createLobby, joinLobby, sendMessage } from '../socket/socket';
 import { store } from '../contexts/myContext/context';
 
 // connect to socket, join as player, send messages
 
 function SocketTest() {
   const { state } = useContext(store);
-  const { isHosting, socketIsActive, lobbyId } = state;
+  const { socketIsActive, lobbyId } = state;
   const [lobbyInput, setLobbyInput] = useState('');
   const [socketMessageInput, setSocketMessageInput] = useState('');
+  const [isHosting, setIsHosting] = useState(false);
 
   const handleCreateLobby = () => {
-    initSocket();
+    createLobby();
+    setIsHosting(true);
   };
 
   const handleJoinLobby = (e) => {
     e.preventDefault();
-    initSocket(lobbyInput);
+    joinLobby(lobbyInput);
     setLobbyInput('');
   };
 
@@ -61,10 +63,12 @@ function SocketTest() {
             Client type:
             <b>{isHosting ? ' HOST' : ' PLAYER'}</b>
           </p>
-          <p>
-            {/* eslint-disable-next-line react/jsx-one-expression-per-line */}
-            Lobby: <b>{lobbyId}</b>
-          </p>
+          {isHosting && (
+            <p>
+              {/* eslint-disable-next-line react/jsx-one-expression-per-line */}
+              Lobby: <b>{lobbyId}</b>
+            </p>
+          )}
           <form onSubmit={handleSendMessage}>
             <input
               type="text"

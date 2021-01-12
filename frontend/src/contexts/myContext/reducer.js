@@ -1,15 +1,9 @@
 // TODO: refactor to use individual functions for each case
 
 function reducer(state, action) {
-  const { event, payload } = action;
-  switch (event) {
-    case 'create-lobby': {
-      return {
-        ...state,
-        lobbyId: payload.id,
-      };
-    }
-    case 'SET_LOBBY_ID': {
+  const { type, payload } = action;
+  switch (type) {
+    case 'CREATE_LOBBY': {
       return {
         ...state,
         lobbyId: payload.id,
@@ -25,12 +19,6 @@ function reducer(state, action) {
       return {
         ...state,
         socketIsActive: false,
-      };
-    }
-    case 'SET_IS_HOSTING': {
-      return {
-        ...state,
-        isHosting: payload.isHosting,
       };
     }
     default:

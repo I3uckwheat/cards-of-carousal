@@ -4,54 +4,32 @@ const emitter = new EventEmitter();
 
 let socket;
 
-// Passing a lobby id into the socket joins a lobby, passing nothing creates one
-function initSocket(id) {
-  let url;
+const url = process.env.REACT_APP_SOCKET_URL || 'ws://localhost:4003/lobby';
 
-  if (process.env.REACT_APP_SOCKET_URL) {
-    // TODO: Fix when environment variable set
-    url = id
-      ? `wss://SOCKET_URL_HERE/lobby/${id}`
-      : 'wss://SOCKET_URL_HERE/lobby';
-  } else {
-    url = id ? `ws://localhost:4003/lobby/${id}` : 'ws://localhost:4003/lobby';
-  }
-
-  socket = new WebSocket(url);
-
+function attachSocketListeners() {
   socket.onmessage = (msg) => {
     const { event, payload } = JSON.parse(msg.data);
     emitter.emit('message', { event, payload });
   };
 
   socket.onopen = () => {
-    emitter.emit('message', { event: 'SOCKET_OPEN', payload: {} });
-    if (!id) {
-      // client's isHosting is set to false by default
-      emitter.emit('message', {
-        event: 'SET_IS_HOSTING',
-        payload: { isHosting: true },
-      });
-    } else {
-      // this allows client to know what lobby they are connected to
-      // not needed for host as the context receives the create lobby event fron server
-      emitter.emit('message', {
-        event: 'SET_LOBBY_ID',
-        payload: { id },
-      });
-    }
+    emitter.emit('message', { event: 'socket-open', payload: {} });
   };
 
   socket.onclose = () => {
-    if (!id) {
-      emitter.emit('message', {
-        event: 'SET_IS_HOSTING',
-        payload: { isHosting: false },
-      });
-    }
-
-    emitter.emit('message', { event: 'SOCKET_CLOSE', payload: {} });
+    emitter.emit('message', { event: 'socket-close', payload: {} });
   };
+}
+
+function createLobby() {
+  socket = new WebSocket(url);
+  attachSocketListeners();
+}
+
+function joinLobby(id) {
+  const lobbyUrl = `${url}/${id}`;
+  socket = new WebSocket(lobbyUrl);
+  attachSocketListeners();
 }
 
 function sendMessage({ event, payload }) {
@@ -64,4 +42,4 @@ function closeSocket() {
 }
 
 // eslint-disable-next-line object-curly-newline
-export { initSocket, closeSocket, sendMessage, emitter };
+export { createLobby, joinLobby, closeSocket, sendMessage, emitter };
