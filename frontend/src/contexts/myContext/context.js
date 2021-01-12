@@ -24,11 +24,11 @@ export default function ContextProvider({ children }) {
     }
     switch (event) {
       case 'create-lobby':
-        return dispatch({ type: 'CREATE_LOBBY', payload });
+        return dispatch({ type: 'LOBBY_CREATED', payload });
       case 'socket-open':
-        return dispatch({ type: 'SOCKET_OPEN', payload });
+        return dispatch({ type: 'SOCKET_OPENED', payload });
       case 'socket-close':
-        return dispatch({ type: 'SOCKET_CLOSE', payload });
+        return dispatch({ type: 'SOCKET_CLOSED', payload });
       default:
         return undefined;
     }

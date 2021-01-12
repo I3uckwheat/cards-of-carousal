@@ -3,19 +3,19 @@
 function reducer(state, action) {
   const { type, payload } = action;
   switch (type) {
-    case 'CREATE_LOBBY': {
+    case 'LOBBY_CREATED': {
       return {
         ...state,
         lobbyId: payload.id,
       };
     }
-    case 'SOCKET_OPEN': {
+    case 'SOCKET_OPENED': {
       return {
         ...state,
         socketIsActive: true,
       };
     }
-    case 'SOCKET_CLOSE': {
+    case 'SOCKET_CLOSED': {
       return {
         ...state,
         socketIsActive: false,
