@@ -2,8 +2,6 @@ import React, { useState, useContext } from 'react';
 import { createLobby, joinLobby, sendMessage } from '../socket/socket';
 import { store } from '../contexts/myContext/context';
 
-// connect to socket, join as player, send messages
-
 function SocketTest() {
   const { state } = useContext(store);
   const { socketIsActive, lobbyId } = state;
