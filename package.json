@@ -9,6 +9,7 @@
     "dev:backend": "cd ./backend && npm run dev",
     "lint": "eslint .",
     "test:backend": "cd ./backend && npm test",
+    "test:frontend": "cd ./frontend && npm test",
     "test": "npm run test:backend"
   },
   "repository": {
