@@ -32,12 +32,6 @@ function joinLobby(id) {
   attachSocketListeners();
 }
 
-// function checkIfSocketConnected() {
-//   if (!socket) {
-//     throw new Error('Socket is not connected');
-//   }
-// }
-
 function sendMessage({ event, payload }) {
   try {
     socket.send(JSON.stringify({ event, payload }));
