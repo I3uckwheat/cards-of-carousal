@@ -6,12 +6,15 @@ import ContextProvider, { store } from './context';
 import { emitter } from '../../socket/socket';
 
 describe('context', () => {
+  // initialize variables used in tests to avoid scoping issues
   let TestComponent;
   let state;
   const dispatch = jest.fn();
 
   beforeEach(() => {
     jest.clearAllMocks();
+    // this is a reusable test component that bypasses the context provider used in the app
+    // so we can test the context with a dummy provider. This is just to test "state" and "dispatch"
     TestComponent = () => {
       state = useContext(store).state;
       return (
@@ -26,6 +29,7 @@ describe('context', () => {
   });
 
   it('renders children with our provider', () => {
+    // Our provider takes in a props.children argument. This tests that children are passed down.
     render(
       <ContextProvider>
         <p>Hello world</p>
@@ -35,6 +39,7 @@ describe('context', () => {
   });
 
   it('passes state to components', () => {
+    // Using a dummy provider with different state/dispatch to test their functionality
     render(
       <store.Provider value={{ state: { foo: 'bar' }, dispatch }}>
         <TestComponent />
@@ -44,6 +49,7 @@ describe('context', () => {
   });
 
   it('receives dispatch calls', () => {
+    // Using a dummy provider with different state/dispatch to test their functionality
     render(
       <store.Provider value={{ state: { foo: 'bar' }, dispatch }}>
         <TestComponent />
@@ -54,6 +60,7 @@ describe('context', () => {
   });
 
   it('handles emitter messages correctly', () => {
+    // creating a new functional component so we can access state directly from our actual provider
     function TestEmitterComponent() {
       state = useContext(store).state;
       return (
