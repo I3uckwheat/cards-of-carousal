@@ -4,7 +4,8 @@ const emitter = new EventEmitter();
 
 let socket;
 
-const url = process.env.REACT_APP_SOCKET_URL || 'ws://localhost:4003/lobby';
+const baseUrl = process.env.REACT_APP_SOCKET_URL || 'ws://localhost:4003';
+const url = `${baseUrl}/lobby`;
 
 function attachSocketListeners() {
   socket.onmessage = (msg) => {

@@ -22,7 +22,7 @@ describe('socket', () => {
   });
   it('sets the url', () => {
     socketFunctions.createLobby();
-    expect(spyUrl).toHaveBeenCalledWith(process.env.REACT_APP_SOCKET_URL);
+    expect(spyUrl).toHaveBeenCalledWith(`${process.env.REACT_APP_SOCKET_URL}/lobby`);
   });
   it('sends a message as host with correct arguments', () => {
     socketFunctions.createLobby();
