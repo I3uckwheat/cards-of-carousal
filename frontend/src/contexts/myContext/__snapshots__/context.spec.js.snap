@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`context emitter message handler does not respond to invalid message events 1`] = `
+<DocumentFragment>
+  <div>
+    <p
+      class="lobby-id"
+    />
+    <p
+      class="socket-active"
+    >
+      false
+    </p>
+  </div>
+</DocumentFragment>
+`;

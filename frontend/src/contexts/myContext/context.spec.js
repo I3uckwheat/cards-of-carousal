@@ -1,6 +1,10 @@
 import React, { useContext } from 'react';
 import {
-  render, screen, fireEvent, act,
+  render,
+  screen,
+  fireEvent,
+  act,
+  cleanup,
 } from '@testing-library/react';
 import ContextProvider, { store } from './context';
 import { emitter } from '../../socket/socket';
@@ -27,6 +31,8 @@ describe('context', () => {
       );
     };
   });
+
+  afterEach(cleanup);
 
   it('renders children with our provider', () => {
     // Our provider takes in a props.children argument. This tests that children are passed down.
@@ -59,48 +65,68 @@ describe('context', () => {
     expect(dispatch.mock.calls.length).toBe(1);
   });
 
-  it('handles emitter messages correctly', () => {
-    // creating a new functional component so we can access state directly from our actual provider
-    function TestEmitterComponent() {
-      state = useContext(store).state;
-      return (
-        <div>
-          <p className="lobby-id">{state.lobbyId}</p>
-          <p className="socket-active">{state.socketIsActive.toString()}</p>
-        </div>
+  describe('emitter message handler', () => {
+    let testRender;
+
+    beforeEach(() => {
+      // creates a new component so we can access state directly from our actual provider
+      function TestEmitterComponent() {
+        state = useContext(store).state;
+        return (
+          <div>
+            <p className="lobby-id">{state.lobbyId}</p>
+            <p className="socket-active">{state.socketIsActive.toString()}</p>
+          </div>
+        );
+      }
+
+      testRender = render(
+        <ContextProvider>
+          <TestEmitterComponent />
+        </ContextProvider>,
       );
-    }
-
-    render(
-      <ContextProvider>
-        <TestEmitterComponent />
-      </ContextProvider>,
-    );
-
-    expect(document.querySelector('.lobby-id').textContent).toBe('');
-    expect(document.querySelector('.socket-active').textContent).toBe('false');
-
-    act(() => {
-      emitter.emit('message', {
-        event: 'create-lobby',
-        payload: { id: 'TEST' },
-      });
-      emitter.emit('message', {
-        event: 'socket-open',
-        payload: {},
-      });
     });
 
-    expect(document.querySelector('.lobby-id').textContent).toBe('TEST');
-    expect(document.querySelector('.socket-active').textContent).toBe('true');
+    afterEach(cleanup);
 
-    act(() => {
-      emitter.emit('message', {
-        event: 'socket-close',
-        payload: {},
+    it('handles emitter messages correctly', () => {
+      expect(document.querySelector('.lobby-id').textContent).toBe('');
+      expect(document.querySelector('.socket-active').textContent).toBe(
+        'false',
+      );
+
+      act(() => {
+        emitter.emit('message', {
+          event: 'create-lobby',
+          payload: { id: 'TEST' },
+        });
+        emitter.emit('message', {
+          event: 'socket-open',
+          payload: {},
+        });
       });
+
+      expect(document.querySelector('.lobby-id').textContent).toBe('TEST');
+      expect(document.querySelector('.socket-active').textContent).toBe('true');
+
+      act(() => {
+        emitter.emit('message', {
+          event: 'socket-close',
+          payload: {},
+        });
+      });
+
+      expect(document.querySelector('.socket-active').textContent).toBe(
+        'false',
+      );
     });
 
-    expect(document.querySelector('.socket-active').textContent).toBe('false');
+    it('does not respond to invalid message events', () => {
+      act(() => {
+        emitter.emit('message', { event: 'foo', payload: { bar: 'baz' } });
+      });
+
+      expect(testRender.asFragment()).toMatchSnapshot();
+    });
   });
 });
