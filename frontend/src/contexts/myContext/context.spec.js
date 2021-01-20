@@ -10,26 +10,24 @@ import ContextProvider, { store } from './context';
 import { emitter } from '../../socket/socket';
 
 describe('context', () => {
-  // initialize variables used in tests to avoid scoping issues
-  let TestComponent;
-  let state;
   const dispatch = jest.fn();
+
+  // this is a reusable test component that bypasses the context provider used in the app
+  // so we can test the context with a dummy provider. This is just to test "state" and "dispatch"
+  function TestComponent() {
+    const { state } = useContext(store);
+    return (
+      <div>
+        <p>{state.foo}</p>
+        <button type="button" onClick={dispatch}>
+          Test
+        </button>
+      </div>
+    );
+  }
 
   beforeEach(() => {
     jest.clearAllMocks();
-    // this is a reusable test component that bypasses the context provider used in the app
-    // so we can test the context with a dummy provider. This is just to test "state" and "dispatch"
-    TestComponent = () => {
-      state = useContext(store).state;
-      return (
-        <div>
-          <p>{state.foo}</p>
-          <button type="button" onClick={dispatch}>
-            Test
-          </button>
-        </div>
-      );
-    };
   });
 
   afterEach(cleanup);
@@ -71,7 +69,7 @@ describe('context', () => {
     beforeEach(() => {
       // creates a new component so we can access state directly from our actual provider
       function TestEmitterComponent() {
-        state = useContext(store).state;
+        const { state } = useContext(store);
         return (
           <div>
             <p className="lobby-id">{state.lobbyId}</p>
