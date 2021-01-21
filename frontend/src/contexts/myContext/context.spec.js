@@ -7,7 +7,7 @@ import {
   cleanup,
 } from '@testing-library/react';
 import ContextProvider, { store } from './context';
-import { emitter } from '../../socket/socket';
+import socketInstance from '../../socket/socket';
 
 describe('context', () => {
   const dispatch = jest.fn();
@@ -94,11 +94,11 @@ describe('context', () => {
       );
 
       act(() => {
-        emitter.emit('message', {
+        socketInstance.emitter.emit('message', {
           event: 'create-lobby',
           payload: { id: 'TEST' },
         });
-        emitter.emit('message', {
+        socketInstance.emitter.emit('message', {
           event: 'socket-open',
           payload: {},
         });
@@ -108,7 +108,7 @@ describe('context', () => {
       expect(document.querySelector('.socket-active').textContent).toBe('true');
 
       act(() => {
-        emitter.emit('message', {
+        socketInstance.emitter.emit('message', {
           event: 'socket-close',
           payload: {},
         });
@@ -121,7 +121,7 @@ describe('context', () => {
 
     it('does not respond to invalid message events', () => {
       act(() => {
-        emitter.emit('message', { event: 'foo', payload: { bar: 'baz' } });
+        socketInstance.emitter.emit('message', { event: 'foo', payload: { bar: 'baz' } });
       });
 
       expect(testRender.asFragment()).toMatchSnapshot();

@@ -1,10 +1,11 @@
 import React, { createContext, useReducer, useEffect } from 'react';
 import reducer from './reducer';
-import { emitter } from '../../socket/socket';
+import socketInstance from '../../socket/socket';
 
 const store = createContext();
 
 const { Provider } = store;
+const { emitter } = socketInstance;
 
 const initialState = {
   lobbyId: '',

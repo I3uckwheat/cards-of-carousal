@@ -177,7 +177,7 @@ describe('socketInstance', () => {
     });
 
     describe('close', () => {
-      it.only('emits a message event with the proper payload', () => {
+      it('emits a message event with the proper payload', () => {
         const message = { event: 'socket-close', payload: {} };
         const { eventCallbacks } = setupMockSocket();
         const spy = jest.spyOn(socketInstance.emitter, 'emit');
