@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { createLobby, joinLobby, sendMessage } from '../socket/socket';
+import socketInstance from '../socket/socket';
 import { store } from '../contexts/myContext/context';
 
 function SocketTest() {
@@ -10,13 +10,13 @@ function SocketTest() {
   const [isHosting, setIsHosting] = useState(false);
 
   const handleCreateLobby = () => {
-    createLobby();
+    socketInstance.createLobby();
     setIsHosting(true);
   };
 
   const handleJoinLobby = (e) => {
     e.preventDefault();
-    joinLobby(lobbyInput);
+    socketInstance.joinLobby(lobbyInput);
     setLobbyInput('');
   };
 
@@ -30,7 +30,7 @@ function SocketTest() {
 
   const handleSendMessage = (e) => {
     e.preventDefault();
-    sendMessage({ event: 'message', payload: socketMessageInput });
+    socketInstance.sendMessage({ event: 'message', payload: socketMessageInput });
     setSocketMessageInput('');
   };
 
