@@ -40,8 +40,8 @@ class SocketSingleton {
   }
 
   #attachSocketListeners = (socketInstance) => {
-    socketInstance.addEventListener('message', (msg) => {
-      const { event, payload } = JSON.parse(msg.data);
+    socketInstance.addEventListener('message', (message) => {
+      const { event, payload } = JSON.parse(message.data);
       this.emitter.emit('message', { event, payload });
     });
 
