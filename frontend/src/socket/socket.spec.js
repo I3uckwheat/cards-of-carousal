@@ -4,13 +4,17 @@ function setupMockSocket() {
   const sendMock = jest.fn();
   const closeMock = jest.fn();
   const addEventListenerMock = jest.fn();
-  const eventListeners = [];
+  const eventCallbacks = {};
 
   const MockSocket = jest.fn(() => ({
     send: sendMock,
     close: closeMock,
     addEventListener: addEventListenerMock.mockImplementation((event, cb) => {
-      eventListeners.push({ event, cb });
+      if (eventCallbacks[event]) {
+        eventCallbacks[event].push(cb);
+      } else {
+        eventCallbacks[event] = [cb];
+      }
     }),
   }));
 
@@ -20,7 +24,8 @@ function setupMockSocket() {
     MockSocket,
     sendMock,
     closeMock,
-    eventListeners,
+    addEventListenerMock,
+    eventCallbacks,
   };
 }
 
@@ -139,6 +144,50 @@ describe('socketInstance', () => {
   describe('emitter', () => {
     it('exists', () => {
       expect(socketInstance.emitter).toBeTruthy();
+    });
+  });
+
+  describe('socketEvents', () => {
+    describe('message', () => {
+      it('emits a message event with the proper payload', () => {
+        const message = { event: 'test', payload: {} };
+        const { eventCallbacks } = setupMockSocket();
+        const spy = jest.spyOn(socketInstance.emitter, 'emit');
+
+        socketInstance.createLobby();
+
+        eventCallbacks.message.forEach((cb) => cb({ data: JSON.stringify(message) }));
+        expect(spy.mock.calls.length).toBe(eventCallbacks.message.length);
+        expect(spy).toBeCalledWith('message', message);
+      });
+    });
+
+    describe('open', () => {
+      it('emits a message event with the proper payload', () => {
+        const message = { event: 'socket-open', payload: {} };
+        const { eventCallbacks } = setupMockSocket();
+        const spy = jest.spyOn(socketInstance.emitter, 'emit');
+
+        socketInstance.createLobby();
+
+        eventCallbacks.open.forEach((cb) => cb());
+        expect(spy.mock.calls.length).toBe(eventCallbacks.message.length);
+        expect(spy).toBeCalledWith('message', message);
+      });
+    });
+
+    describe('close', () => {
+      it.only('emits a message event with the proper payload', () => {
+        const message = { event: 'socket-close', payload: {} };
+        const { eventCallbacks } = setupMockSocket();
+        const spy = jest.spyOn(socketInstance.emitter, 'emit');
+
+        socketInstance.createLobby();
+
+        eventCallbacks.close.forEach((cb) => cb());
+        expect(spy.mock.calls.length).toBe(eventCallbacks.message.length);
+        expect(spy).toBeCalledWith('message', message);
+      });
     });
   });
 });
