@@ -1,59 +1,60 @@
 import EventEmitter from 'events';
 
-const emitter = new EventEmitter();
+class SocketSingleton {
+  #socket;
+  #baseUrl = process.env.REACT_APP_SOCKET_URL;
+  #url = `${this.#baseUrl}/lobby`;
 
-let socket;
+  emitter = new EventEmitter();
 
-const baseUrl = process.env.REACT_APP_SOCKET_URL;
-const url = `${baseUrl}/lobby`;
-
-function attachSocketListeners(socketInstance) {
-  // eslint-disable-next-line no-param-reassign
-  socketInstance.onmessage = (msg) => {
-    const { event, payload } = JSON.parse(msg.data);
-    emitter.emit('message', { event, payload });
-  };
-
-  // eslint-disable-next-line no-param-reassign
-  socketInstance.onopen = () => {
-    emitter.emit('message', { event: 'socket-open', payload: {} });
-  };
-
-  // eslint-disable-next-line no-param-reassign
-  socketInstance.onclose = () => {
-    emitter.emit('message', { event: 'socket-close', payload: {} });
-  };
-}
-
-function createLobby() {
-  socket = new WebSocket(url);
-  attachSocketListeners(socket);
-}
-
-function joinLobby(lobbyId) {
-  if (!lobbyId) {
-    throw new Error('Missing lobbyId');
+  createLobby() {
+    const socket = new WebSocket(this.#url);
+    this.#attachSocketListeners(socket);
+    this.#socket = socket;
   }
 
-  const lobbyUrl = `${url}/${lobbyId}`;
-  socket = new WebSocket(lobbyUrl);
-  attachSocketListeners(socket);
-}
+  joinLobby(lobbyId) {
+    if (!lobbyId) {
+      throw new Error('Missing lobbyId');
+    }
 
-function sendMessage({ event, payload }) {
-  try {
-    socket.send(JSON.stringify({ event, payload }));
-  } catch {
-    throw new Error('Socket is not connected');
+    const lobbyUrl = `${this.#url}/${lobbyId}`;
+    const socket = new WebSocket(lobbyUrl);
+    this.#attachSocketListeners(socket);
+    this.#socket = socket;
+  }
+
+  sendMessage({event, payload}) {
+    try {
+      this.#socket.send(JSON.stringify({ event, payload }));
+    } catch {
+      throw new Error('Socket is not connected');
+    }
+  }
+
+  closeSocket() {
+    if (!this.#socket) return;
+
+    this.#socket.close();
+    this.#socket = undefined;
+  }
+
+  #attachSocketListeners = (socketInstance) => {
+    socketInstance.addEventListener('message', (msg) => {
+      const { event, payload } = JSON.parse(msg.data);
+      this.emitter.emit('message', { event, payload });
+    });
+
+    socketInstance.addEventListener('open', () => {
+      this.emitter.emit('message', { event: 'socket-open', payload: {} });
+    });
+
+    socketInstance.addEventListener('close', () => {
+      this.emitter.emit('message', { event: 'socket-close', payload: {} });
+    });
   }
 }
 
-function closeSocket() {
-  if (!socket) return;
+const instance = new SocketSingleton();
 
-  socket.close();
-  socket = undefined;
-}
-
-// eslint-disable-next-line object-curly-newline
-export { createLobby, joinLobby, closeSocket, sendMessage, emitter };
+export default instance;
