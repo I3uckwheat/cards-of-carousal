@@ -24,7 +24,7 @@ class SocketSingleton {
     this.#socket = socket;
   }
 
-  sendMessage({event, payload}) {
+  sendMessage({ event, payload }) {
     try {
       this.#socket.send(JSON.stringify({ event, payload }));
     } catch {
