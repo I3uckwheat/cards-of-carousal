@@ -1,36 +1,43 @@
-const EventEmitter = require('events');
+import EventEmitter from 'events';
 
 const emitter = new EventEmitter();
 
 let socket;
 
-const baseUrl = process.env.REACT_APP_SOCKET_URL || 'ws://localhost:4003';
+const baseUrl = process.env.REACT_APP_SOCKET_URL;
 const url = `${baseUrl}/lobby`;
 
-function attachSocketListeners() {
-  socket.onmessage = (msg) => {
+function attachSocketListeners(socketInstance) {
+  // eslint-disable-next-line no-param-reassign
+  socketInstance.onmessage = (msg) => {
     const { event, payload } = JSON.parse(msg.data);
     emitter.emit('message', { event, payload });
   };
 
-  socket.onopen = () => {
+  // eslint-disable-next-line no-param-reassign
+  socketInstance.onopen = () => {
     emitter.emit('message', { event: 'socket-open', payload: {} });
   };
 
-  socket.onclose = () => {
+  // eslint-disable-next-line no-param-reassign
+  socketInstance.onclose = () => {
     emitter.emit('message', { event: 'socket-close', payload: {} });
   };
 }
 
 function createLobby() {
   socket = new WebSocket(url);
-  attachSocketListeners();
+  attachSocketListeners(socket);
 }
 
-function joinLobby(id) {
-  const lobbyUrl = `${url}/${id}`;
+function joinLobby(lobbyId) {
+  if (!lobbyId) {
+    throw new Error('Missing lobbyId');
+  }
+
+  const lobbyUrl = `${url}/${lobbyId}`;
   socket = new WebSocket(lobbyUrl);
-  attachSocketListeners();
+  attachSocketListeners(socket);
 }
 
 function sendMessage({ event, payload }) {
@@ -42,6 +49,8 @@ function sendMessage({ event, payload }) {
 }
 
 function closeSocket() {
+  if (!socket) return;
+
   socket.close();
   socket = undefined;
 }
