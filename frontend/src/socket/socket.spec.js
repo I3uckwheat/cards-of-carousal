@@ -1,13 +1,17 @@
-const REAL_PROCESS_ENV = process.env;
-const realSocket = window.socket;
+const PROCESS_ENV = process.env;
 
 function setupMockSocket() {
   const sendMock = jest.fn();
   const closeMock = jest.fn();
+  const addEventListenerMock = jest.fn();
+  const eventListeners = [];
 
   const MockSocket = jest.fn(() => ({
     send: sendMock,
     close: closeMock,
+    addEventListener: addEventListenerMock.mockImplementation((event, cb) => {
+      eventListeners.push({ event, cb });
+    }),
   }));
 
   window.WebSocket = MockSocket;
@@ -16,37 +20,38 @@ function setupMockSocket() {
     MockSocket,
     sendMock,
     closeMock,
+    eventListeners,
   };
 }
 
-describe('socket', () => {
-  let socketFunctions;
+describe('socketInstance', () => {
+  let socketInstance;
+
+  beforeAll(() => {
+    process.env.REACT_APP_SOCKET_URL = 'ws://test.com';
+  });
 
   beforeEach(() => {
-    process.env = { ...REAL_PROCESS_ENV };
-    jest.resetModules();
-
     // This resets our module's internal state so we don't
     // have the socket instance polluting our tests
-    jest.isolateModules(() => {
-      // eslint-disable-next-line global-require
-      socketFunctions = require('./socket');
-    });
+    jest.resetModules();
+    // eslint-disable-next-line global-require
+    socketInstance = require('./socket').default;
   });
 
   afterEach(() => {
     jest.clearAllMocks();
+    process.env = { ...PROCESS_ENV };
   });
 
   afterAll(() => {
-    process.env = { ...REAL_PROCESS_ENV };
-    window.WebSocket = realSocket;
+    process.env = { ...PROCESS_ENV };
   });
 
   describe('createLobby', () => {
     it('opens the socket with the proper url', () => {
       const { MockSocket } = setupMockSocket();
-      socketFunctions.createLobby();
+      socketInstance.createLobby();
       expect(MockSocket).toHaveBeenCalledWith('ws://test.com/lobby');
     });
   });
@@ -56,12 +61,12 @@ describe('socket', () => {
 
     it('opens the socket with the proper url', () => {
       const { MockSocket } = setupMockSocket();
-      socketFunctions.joinLobby('myid');
+      socketInstance.joinLobby('myid');
       expect(MockSocket).toHaveBeenCalledWith('ws://test.com/lobby/myid');
     });
 
     it('throws an error when there is no id passed', () => {
-      expect(() => socketFunctions.joinLobby()).toThrow('Missing lobbyId');
+      expect(() => socketInstance.joinLobby()).toThrow('Missing lobbyId');
     });
   });
 
@@ -72,7 +77,7 @@ describe('socket', () => {
         payload: {},
       };
 
-      expect(() => socketFunctions.sendMessage(message)).toThrow('Socket is not connected');
+      expect(() => socketInstance.sendMessage(message)).toThrow('Socket is not connected');
     });
 
     it('sends the message when host', () => {
@@ -83,8 +88,8 @@ describe('socket', () => {
         payload: {},
       };
 
-      socketFunctions.createLobby();
-      socketFunctions.sendMessage(message);
+      socketInstance.createLobby();
+      socketInstance.sendMessage(message);
 
       expect(sendMock).toHaveBeenCalledWith(JSON.stringify(message));
       expect(true).toBeTruthy();
@@ -97,8 +102,8 @@ describe('socket', () => {
         payload: {},
       };
 
-      socketFunctions.joinLobby('myid');
-      socketFunctions.sendMessage(message);
+      socketInstance.joinLobby('myid');
+      socketInstance.sendMessage(message);
       expect(sendMock).toHaveBeenCalledWith(JSON.stringify(message));
     });
   });
@@ -106,34 +111,34 @@ describe('socket', () => {
   describe('closeSocket', () => {
     it('gracefully tears down the socket when lobby is created', () => {
       const { closeMock } = setupMockSocket();
-      socketFunctions.createLobby();
-      socketFunctions.closeSocket();
+      socketInstance.createLobby();
+      socketInstance.closeSocket();
       expect(closeMock).toHaveBeenCalledWith();
     });
 
     it('gracefully tears down the socket when lobby is joined', () => {
       const { closeMock } = setupMockSocket();
-      socketFunctions.joinLobby('myid');
-      socketFunctions.closeSocket();
+      socketInstance.joinLobby('myid');
+      socketInstance.closeSocket();
       expect(closeMock).toHaveBeenCalledWith();
     });
 
     it('does not throw an error when socket is never instantiated', () => {
-      expect(() => socketFunctions.closeSocket()).not.toThrow();
+      expect(() => socketInstance.closeSocket()).not.toThrow();
     });
 
     it('does not throw an error when socket is closed repeatedly', () => {
       setupMockSocket();
-      socketFunctions.createLobby();
-      expect(() => socketFunctions.closeSocket()).not.toThrow();
-      expect(() => socketFunctions.closeSocket()).not.toThrow();
-      expect(() => socketFunctions.closeSocket()).not.toThrow();
+      socketInstance.createLobby();
+      expect(() => socketInstance.closeSocket()).not.toThrow();
+      expect(() => socketInstance.closeSocket()).not.toThrow();
+      expect(() => socketInstance.closeSocket()).not.toThrow();
     });
   });
 
   describe('emitter', () => {
     it('exists', () => {
-      expect(socketFunctions.emitter).toBeTruthy();
+      expect(socketInstance.emitter).toBeTruthy();
     });
   });
 });
