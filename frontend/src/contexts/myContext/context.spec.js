@@ -13,12 +13,13 @@ import React, { useContext } from 'react';
 import {
   render,
   screen,
-  fireEvent,
   act,
 } from '@testing-library/react';
 
-import ContextProvider, { store } from './context';
+import { StoreContext, StoreProvider } from './context';
 
+// Need to do this to reset the implementation of each jest mock function, this needs to be 
+// called every time we expect to check the values of these, or call an eventHandler
 function setupEmitterMocks() {
   const eventHandlers = {};
 
@@ -26,8 +27,7 @@ function setupEmitterMocks() {
     eventHandlers[event] = cb;
   })
 
-
-  socketInstance.emitter.off.mockImplementation((event, cb) => {
+  socketInstance.emitter.off.mockImplementation((event) => {
     eventHandlers[event] = undefined
   })
 
@@ -41,124 +41,164 @@ function setupEmitterMocks() {
 }
 
 describe('context', () => {
-  const dispatch = jest.fn();
-
-  // this is a reusable test component that bypasses the context provider used in the app
-  // so we can test the context with a dummy provider. This is just to test "state" and "dispatch"
-  function TestComponent() {
-    const { state } = useContext(store);
-    return (
-      <div>
-        <p>{state.foo}</p>
-        <button type="button" onClick={dispatch}>
-          Test
-        </button>
-      </div>
-    );
-  }
-
-  beforeEach(() => {
-    jest.clearAllMocks();
-  });
-
   it('renders children with our provider', () => {
     // Our provider takes in a props.children argument. This tests that children are passed down.
     render(
-      <ContextProvider>
+      <StoreProvider>
         <p>Hello world</p>
-      </ContextProvider>,
+      </StoreProvider>,
     );
 
     expect(screen.getByText('Hello world')).toBeInTheDocument();
   });
 
-  it('passes state to components', () => {
-    // Using a dummy provider with different state/dispatch to test their functionality
-    render(
-      <store.Provider value={{ state: { foo: 'bar' }, dispatch }}>
-        <TestComponent />
-      </store.Provider>,
-    );
+  it('sets the default values', () => {
+    // this is a reusable test component that bypasses the context provider used in the app
+    // so we can test the context with a dummy provider. This is just to test "state" and "dispatch"
+    const TestComponent = () => {
+      const { state } = useContext(StoreContext);
 
-    expect(screen.getByText('bar')).toBeInTheDocument();
-  });
-
-  it('receives dispatch calls', () => {
-    // Using a dummy provider with different state/dispatch to test their functionality
-    render(
-      <store.Provider value={{ state: { foo: 'bar' }, dispatch }}>
-        <TestComponent />
-      </store.Provider>,
-    );
-
-    fireEvent.click(screen.getByRole('button'));
-    expect(dispatch.mock.calls.length).toBe(1);
-  });
-
-  describe('emitter message handler', () => {
-    // creates a new component so we can access state directly from our actual provider
-    function TestEmitterComponent() {
-      const { state } = useContext(store);
       return (
-        <div>
-          <p data-testid="lobby-id">{state.lobbyId}</p>
-          <p data-testid="socket-active">{state.socketIsActive.toString()}</p>
-        </div>
+        <>
+          <div data-testid='lobbyId'>{state.lobbyId.toString()}</div>
+          <div data-testid='socketIsActive'>{state.socketIsActive.toString()}</div>
+          <div data-testid='isHosting'>{state.isHosting.toString()}</div>
+        </>
       );
     }
 
-    it('handles emitter messages correctly', () => {
+    render(
+      <StoreProvider>
+        <TestComponent></TestComponent>
+      </StoreProvider>
+    );
+
+    expect(screen.getByTestId('lobbyId')).toHaveTextContent('');
+    expect(screen.getByTestId('socketIsActive')).toHaveTextContent('false');
+    expect(screen.getByTestId('isHosting')).toHaveTextContent('false');
+  });
+
+  describe('event handler', () => {
+    it('calls the "LOBBY_CREATED" reducer when "create-lobby" event is received', () => {
+      const TestComponent = () => {
+        const { state } = useContext(StoreContext);
+
+        return (
+          <>
+            <div data-testid='lobbyId'>{state.lobbyId.toString()}</div>
+            <div data-testid='socketIsActive'>{state.socketIsActive.toString()}</div>
+            <div data-testid='isHosting'>{state.isHosting.toString()}</div>
+          </>
+        );
+      }
+
       const { eventHandlers } = setupEmitterMocks();
 
       render(
-        <ContextProvider>
-          <TestEmitterComponent />
-        </ContextProvider>,
-      );
-
-      expect(screen.getByTestId('lobby-id')).toBeEmptyDOMElement();
-      expect(screen.getByTestId('socket-active')).toHaveTextContent(
-        'false',
+        <StoreProvider>
+          <TestComponent></TestComponent>
+        </StoreProvider>
       );
 
       act(() => {
-        eventHandlers.message({
-          event: 'create-lobby',
-          payload: { id: 'TEST' },
-        })
-
-        eventHandlers.message({
-          event: 'socket-open',
-          payload: {},
-        })
+        eventHandlers.message({event: 'create-lobby', payload: { id: '123' }});
       });
 
-
-      expect(screen.getByTestId('lobby-id')).toHaveTextContent('TEST');
-      expect(screen.getByTestId('socket-active')).toHaveTextContent('true');
-
-      act(() => {
-        eventHandlers.message({
-          event: 'socket-close',
-          payload: {},
-        })
-      });
-
-      expect(screen.getByTestId('socket-active')).toHaveTextContent('false');
+      expect(screen.getByTestId('lobbyId')).toHaveTextContent('123');
     });
 
-    xit('does not respond to invalid message events', () => {
+    it('calls the "SOCKET_OPENED" reducer when "socket-open" event is received', () => {
+      function TestComponent() {
+        const { state } = useContext(StoreContext);
+
+        return (
+          <>
+            <div data-testid='lobbyId'>{state.lobbyId.toString()}</div>
+            <div data-testid='socketIsActive'>{state.socketIsActive.toString()}</div>
+            <div data-testid='isHosting'>{state.isHosting.toString()}</div>
+          </>
+        );
+      }
+
+      const { eventHandlers } = setupEmitterMocks();
+
       render(
-        <ContextProvider>
-          <TestEmitterComponent />
-        </ContextProvider>,
+        <StoreProvider>
+          <TestComponent></TestComponent>
+        </StoreProvider>
       );
 
       act(() => {
-        socketInstance.emitter.emit('message', { event: 'foo', payload: { bar: 'baz' } });
+        eventHandlers.message({event: 'socket-open'});
       });
 
-      expect(testRender.asFragment()).toMatchSnapshot();
+      expect(screen.getByTestId('socketIsActive')).toHaveTextContent('true');
+    });
+
+    it('calls the "SOCKET_CLOSED" reducer when "socket-closed" event is received', async () => {
+      function TestComponent() {
+        const { state } = useContext(StoreContext);
+
+        return (
+          <>
+            <div data-testid='lobbyId'>{state.lobbyId.toString()}</div>
+            <div data-testid='socketIsActive'>{state.socketIsActive.toString()}</div>
+            <div data-testid='isHosting'>{state.isHosting.toString()}</div>
+          </>
+        );
+      }
+
+      const { eventHandlers } = setupEmitterMocks();
+
+      render(
+        <StoreProvider>
+          <TestComponent></TestComponent>
+        </StoreProvider>
+      );
+
+      act(() => {
+        eventHandlers.message({event: 'socket-open'});
+      });
+
+      // Just to make sure it's been changed to true before checking if it's changed to false
+      expect(screen.getByTestId('socketIsActive')).toHaveTextContent('true');
+
+      act(() => {
+        eventHandlers.message({event: 'socket-close'});
+      });
+
+      expect(screen.getByTestId('socketIsActive')).toHaveTextContent('false');
+    });
+
+    it('ignores unrecognized events', () => {
+      function TestComponent() {
+        const { state } = useContext(StoreContext);
+
+        return (
+          <>
+            <div data-testid='lobbyId'>{state.lobbyId.toString()}</div>
+            <div data-testid='socketIsActive'>{state.socketIsActive.toString()}</div>
+            <div data-testid='isHosting'>{state.isHosting.toString()}</div>
+          </>
+        );
+      }
+
+      const { eventHandlers } = setupEmitterMocks();
+
+      render(
+        <StoreProvider>
+          <TestComponent></TestComponent>
+        </StoreProvider>
+      );
+
+      act(() => {
+        eventHandlers.message({event: 'socket-wtf'});
+      });
+
+      // Initial state
+      expect(screen.getByTestId('lobbyId')).toHaveTextContent('');
+      expect(screen.getByTestId('socketIsActive')).toHaveTextContent('false');
+      expect(screen.getByTestId('isHosting')).toHaveTextContent('false');
     });
   });
 });

@@ -2,9 +2,6 @@ import React, { createContext, useReducer, useEffect } from 'react';
 import reducer from './reducer';
 import socketInstance from '../../socket/socket';
 
-const store = createContext();
-
-const { Provider } = store;
 const { emitter } = socketInstance;
 
 const initialState = {
@@ -13,8 +10,12 @@ const initialState = {
   isHosting: false,
 };
 
+export const StoreContext = createContext();
+
+// We may want to wrap this in a method so we can pass in the initial state instead of defining it here
+// in the future
 // eslint-disable-next-line react/prop-types
-export default function ContextProvider({ children }) {
+export function StoreProvider({ children }) {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   function handleMessage({ event, payload }) {
@@ -42,7 +43,5 @@ export default function ContextProvider({ children }) {
     };
   }, []);
 
-  return <Provider value={{ state, dispatch }}>{children}</Provider>;
+  return <StoreContext.Provider value={{ state, dispatch }}>{children}</StoreContext.Provider>;
 }
-
-export { store };
