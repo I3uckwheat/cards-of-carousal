@@ -1,43 +1,37 @@
-jest.mock('../../socket/socket', () => {
-  return {
-    emitter: {
-      on: jest.fn(),
-      off: jest.fn(),
-      emit: jest.fn(),
-    }
-  }
-});
-
-import socketInstance from '../../socket/socket';
 import React, { useContext } from 'react';
-import {
-  render,
-  screen,
-  act,
-} from '@testing-library/react';
+import { render, screen, act } from '@testing-library/react';
+import socketInstance from '../../socket/socket';
 
 import { StoreContext, StoreProvider } from './context';
 
-// Need to do this to reset the implementation of each jest mock function, this needs to be 
+jest.mock('../../socket/socket', () => ({
+  emitter: {
+    on: jest.fn(),
+    off: jest.fn(),
+    emit: jest.fn(),
+  },
+}));
+
+// Need to do this to reset the implementation of each jest mock function, this needs to be
 // called every time we expect to check the values of these, or call an eventHandler
 function setupEmitterMocks() {
   const eventHandlers = {};
 
   socketInstance.emitter.on.mockImplementation((event, cb) => {
     eventHandlers[event] = cb;
-  })
+  });
 
   socketInstance.emitter.off.mockImplementation((event) => {
-    eventHandlers[event] = undefined
-  })
+    eventHandlers[event] = undefined;
+  });
 
   socketInstance.emitter.emit.mockImplementation((event, payload) => {
     eventHandlers[event](payload);
-  })
+  });
 
   return {
     eventHandlers,
-  }
+  };
 }
 
 describe('context', () => {
@@ -60,17 +54,19 @@ describe('context', () => {
 
       return (
         <>
-          <div data-testid='lobbyId'>{state.lobbyId.toString()}</div>
-          <div data-testid='socketIsActive'>{state.socketIsActive.toString()}</div>
-          <div data-testid='isHosting'>{state.isHosting.toString()}</div>
+          <div data-testid="lobbyId">{state.lobbyId.toString()}</div>
+          <div data-testid="socketIsActive">
+            {state.socketIsActive.toString()}
+          </div>
+          <div data-testid="isHosting">{state.isHosting.toString()}</div>
         </>
       );
-    }
+    };
 
     render(
       <StoreProvider>
-        <TestComponent></TestComponent>
-      </StoreProvider>
+        <TestComponent />
+      </StoreProvider>,
     );
 
     expect(screen.getByTestId('lobbyId')).toHaveTextContent('');
@@ -85,23 +81,28 @@ describe('context', () => {
 
         return (
           <>
-            <div data-testid='lobbyId'>{state.lobbyId.toString()}</div>
-            <div data-testid='socketIsActive'>{state.socketIsActive.toString()}</div>
-            <div data-testid='isHosting'>{state.isHosting.toString()}</div>
+            <div data-testid="lobbyId">{state.lobbyId.toString()}</div>
+            <div data-testid="socketIsActive">
+              {state.socketIsActive.toString()}
+            </div>
+            <div data-testid="isHosting">{state.isHosting.toString()}</div>
           </>
         );
-      }
+      };
 
       const { eventHandlers } = setupEmitterMocks();
 
       render(
         <StoreProvider>
-          <TestComponent></TestComponent>
-        </StoreProvider>
+          <TestComponent />
+        </StoreProvider>,
       );
 
       act(() => {
-        eventHandlers.message({event: 'create-lobby', payload: { id: '123' }});
+        eventHandlers.message({
+          event: 'create-lobby',
+          payload: { id: '123' },
+        });
       });
 
       expect(screen.getByTestId('lobbyId')).toHaveTextContent('123');
@@ -113,9 +114,11 @@ describe('context', () => {
 
         return (
           <>
-            <div data-testid='lobbyId'>{state.lobbyId.toString()}</div>
-            <div data-testid='socketIsActive'>{state.socketIsActive.toString()}</div>
-            <div data-testid='isHosting'>{state.isHosting.toString()}</div>
+            <div data-testid="lobbyId">{state.lobbyId.toString()}</div>
+            <div data-testid="socketIsActive">
+              {state.socketIsActive.toString()}
+            </div>
+            <div data-testid="isHosting">{state.isHosting.toString()}</div>
           </>
         );
       }
@@ -124,12 +127,12 @@ describe('context', () => {
 
       render(
         <StoreProvider>
-          <TestComponent></TestComponent>
-        </StoreProvider>
+          <TestComponent />
+        </StoreProvider>,
       );
 
       act(() => {
-        eventHandlers.message({event: 'socket-open'});
+        eventHandlers.message({ event: 'socket-open' });
       });
 
       expect(screen.getByTestId('socketIsActive')).toHaveTextContent('true');
@@ -141,9 +144,11 @@ describe('context', () => {
 
         return (
           <>
-            <div data-testid='lobbyId'>{state.lobbyId.toString()}</div>
-            <div data-testid='socketIsActive'>{state.socketIsActive.toString()}</div>
-            <div data-testid='isHosting'>{state.isHosting.toString()}</div>
+            <div data-testid="lobbyId">{state.lobbyId.toString()}</div>
+            <div data-testid="socketIsActive">
+              {state.socketIsActive.toString()}
+            </div>
+            <div data-testid="isHosting">{state.isHosting.toString()}</div>
           </>
         );
       }
@@ -152,19 +157,19 @@ describe('context', () => {
 
       render(
         <StoreProvider>
-          <TestComponent></TestComponent>
-        </StoreProvider>
+          <TestComponent />
+        </StoreProvider>,
       );
 
       act(() => {
-        eventHandlers.message({event: 'socket-open'});
+        eventHandlers.message({ event: 'socket-open' });
       });
 
       // Just to make sure it's been changed to true before checking if it's changed to false
       expect(screen.getByTestId('socketIsActive')).toHaveTextContent('true');
 
       act(() => {
-        eventHandlers.message({event: 'socket-close'});
+        eventHandlers.message({ event: 'socket-close' });
       });
 
       expect(screen.getByTestId('socketIsActive')).toHaveTextContent('false');
@@ -176,9 +181,11 @@ describe('context', () => {
 
         return (
           <>
-            <div data-testid='lobbyId'>{state.lobbyId.toString()}</div>
-            <div data-testid='socketIsActive'>{state.socketIsActive.toString()}</div>
-            <div data-testid='isHosting'>{state.isHosting.toString()}</div>
+            <div data-testid="lobbyId">{state.lobbyId.toString()}</div>
+            <div data-testid="socketIsActive">
+              {state.socketIsActive.toString()}
+            </div>
+            <div data-testid="isHosting">{state.isHosting.toString()}</div>
           </>
         );
       }
@@ -187,12 +194,12 @@ describe('context', () => {
 
       render(
         <StoreProvider>
-          <TestComponent></TestComponent>
-        </StoreProvider>
+          <TestComponent />
+        </StoreProvider>,
       );
 
       act(() => {
-        eventHandlers.message({event: 'socket-wtf'});
+        eventHandlers.message({ event: 'socket-wtf' });
       });
 
       // Initial state
