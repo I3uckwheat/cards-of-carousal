@@ -1,9 +1,9 @@
 import React, { useState, useContext } from 'react';
 import socketInstance from '../socket/socket';
-import { store } from '../contexts/myContext/context';
+import { StoreContext } from '../contexts/myContext/context';
 
 function SocketTest() {
-  const { state } = useContext(store);
+  const { state } = useContext(StoreContext);
   const { socketIsActive, lobbyId } = state;
   const [lobbyInput, setLobbyInput] = useState('');
   const [socketMessageInput, setSocketMessageInput] = useState('');

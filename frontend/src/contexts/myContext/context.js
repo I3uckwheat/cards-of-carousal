@@ -11,9 +11,8 @@ const initialState = {
 };
 
 export const StoreContext = createContext();
-
-// We may want to wrap this in a method so we can pass in the initial state instead of defining it here
-// in the future
+// We may want to wrap this in a method so we can pass
+// in the initial state instead of defining it here in the future
 // eslint-disable-next-line react/prop-types
 export function StoreProvider({ children }) {
   const [state, dispatch] = useReducer(reducer, initialState);
