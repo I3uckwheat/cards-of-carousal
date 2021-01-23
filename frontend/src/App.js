@@ -1,4 +1,5 @@
 import React from 'react';
+import Button from './components/Buttons/Button';
 import logo from './logo.svg';
 import './App.css';
 
@@ -12,6 +13,10 @@ function App() {
           <code>src/App.js</code>
           and save to reload.
         </p>
+        <div style={{ fontSize: '40px' }}>
+          <Button isActive>Click me!</Button>
+        </div>
+        <Button>Do not click me!</Button>
         <a
           className="App-link"
           href="https://reactjs.org"
