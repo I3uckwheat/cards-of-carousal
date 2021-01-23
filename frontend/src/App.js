@@ -1,13 +1,12 @@
 import React from 'react';
 import Button from './components/Buttons/Button';
-import logo from './logo.svg';
 import './App.css';
+import SocketTest from './components/SocketTest';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit
           <code>src/App.js</code>
@@ -26,6 +25,7 @@ function App() {
           Learn React
         </a>
       </header>
+      <SocketTest />
     </div>
   );
 }
