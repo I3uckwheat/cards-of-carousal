@@ -5,11 +5,11 @@
 *,
 ::after,
 ::before {
-	box-sizing: border-box;
+  box-sizing: border-box;
 }
 ol[class],
 ul[class] {
-	padding: 0;
+  padding: 0;
 }
 blockquote,
 body,
@@ -25,49 +25,49 @@ li,
 ol[class],
 p,
 ul[class] {
-	margin: 0;
+  margin: 0;
 }
 body {
-	min-height: 100vh;
-	scroll-behavior: smooth;
-	text-rendering: optimizeSpeed;
-	line-height: 1.5;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+  scroll-behavior: smooth;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 ol[class],
 ul[class] {
-	list-style: none;
+  list-style: none;
 }
 a:not([class]) {
-	text-decoration-skip-ink: auto;
+  text-decoration-skip-ink: auto;
 }
 img {
-	max-width: 100%;
-	display: block;
+  max-width: 100%;
+  display: block;
 }
 article > * + * {
-	margin-top: 1em;
+  margin-top: 1em;
 }
 button,
 input,
 select,
 textarea {
-	font: inherit;
+  font: inherit;
 }
 @media (prefers-reduced-motion: reduce) {
-	* {
-		animation-duration: 0s !important;
-		animation-iteration-count: 1 !important;
-		transition-duration: 0s !important;
-		scroll-behavior: auto !important;
-	}
+  * {
+    animation-duration: 0s !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0s !important;
+    scroll-behavior: auto !important;
+  }
 }
 /*/ RESET */
 
 :root {
-	font-family: 'Roboto', 'sans-serif';
-	--primary-color: #ffffff;
-	--secondary-color: #000000;
-	--accent-color: #aaaaaa;
+  font-family: 'Roboto', 'sans-serif';
+  --primary-color: #ffffff;
+  --secondary-color: #000000;
+  --accent-color: #aaaaaa;
 }
