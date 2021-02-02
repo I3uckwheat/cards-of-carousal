@@ -22,6 +22,24 @@ function App() {
       czar: false,
       submittedCards: [5, 6],
     },
+    playerID4: {
+      name: 'Pedro',
+      score: 10,
+      czar: false,
+      submittedCards: [2, 5],
+    },
+    playerID5: {
+      name: 'Foo',
+      score: 9,
+      czar: false,
+      submittedCards: [2, 5],
+    },
+    playerID6: {
+      name: 'Bar',
+      score: 15,
+      czar: false,
+      submittedCards: [],
+    },
   };
 
   return (

@@ -9,16 +9,29 @@ function PlayerList({ players }) {
 
   return (
     <Container>
-      {playersArr.map((player) => (
-        <PlayerRow key={player.name} isCzar={player.czar}>
-          <IconMockup isCzar={player.czar} />
+      {playersArr.map((player) => {
+        const showTally = player.score < 11;
 
-          <div className="player-info">
-            <h1>{player.name}</h1>
-            <TallyMarker isCzar={player.czar} tallyCount={player.score % 6} />
-          </div>
-        </PlayerRow>
-      ))}
+        return (
+          <PlayerRow key={player.name} isCzar={player.czar}>
+            <IconMockup isCzar={player.czar} />
+
+            <div className="player-info">
+              <h1>{player.name}</h1>
+              {showTally ? (
+                <div>
+                  <TallyMarker
+                    isCzar={player.czar}
+                    tallyCount={player.score > 5 ? player.score - 5 : player.score % 6}
+                  />
+                  {player.score > 5 ? <TallyMarker isCzar={player.czar} tallyCount={5} /> : ''}
+                </div>
+              )
+                : <span>{player.score}</span>}
+            </div>
+          </PlayerRow>
+        );
+      })}
     </Container>
   );
 }
@@ -76,6 +89,8 @@ const PlayerRow = styled.div`
 
     span {
       color: ${(props) => (props.isCzar ? 'var(--primary-color)' : 'var(--secondary-color)')};
+      font-size: 24px;
+      font-weight: 900;
     }
   }
 `;
