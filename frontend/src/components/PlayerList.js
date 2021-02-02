@@ -2,6 +2,7 @@ import React from 'react';
 
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import TallyMarker from './TallyMarker';
 
 function PlayerList({ players }) {
   const playersArr = Object.values(players);
@@ -14,7 +15,7 @@ function PlayerList({ players }) {
 
           <div className="player-info">
             <h1>{player.name}</h1>
-            <span>{player.score}</span>
+            <TallyMarker isCzar={player.czar} tallyCount={player.score % 6} />
           </div>
         </PlayerRow>
       ))}
