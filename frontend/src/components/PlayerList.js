@@ -15,7 +15,7 @@ function PlayerList({ players }) {
 
         return (
           <PlayerRow key={player.name} isCzar={player.czar}>
-            <IconMockup isCzar={player.czar} showIcon={showIcon} />
+            <SmallCardsIcon isCzar={player.czar} showIcon={showIcon} />
 
             <div className="player-info">
               <h1>{player.name}</h1>
@@ -96,7 +96,7 @@ const PlayerRow = styled.div`
   }
 `;
 
-const IconMockup = styled.div`
+const SmallCardsIcon = styled.div`
   opacity: ${(props) => (props.showIcon || props.isCzar ? 1 : 0)};
 
   width: 32px;
