@@ -8,25 +8,16 @@ function PlayerList({ players }) {
 
   return (
     <Container>
-      {playersArr.map((player) => <h1>{player.name}</h1>)}
+      {playersArr.map((player) => (
+        <PlayerRow key={player.name} isCzar={player.czar}>
+          <IconMockup isCzar={player.czar} />
 
-      <PlayerRow isCzar>
-        <IconMockup isCzar />
-
-        <div className="player-info">
-          <h1>Foo</h1>
-          <span>10</span>
-        </div>
-      </PlayerRow>
-
-      <PlayerRow>
-        <IconMockup />
-
-        <div className="player-info">
-          <h1>bar</h1>
-          <span>5</span>
-        </div>
-      </PlayerRow>
+          <div className="player-info">
+            <h1>{player.name}</h1>
+            <span>{player.score}</span>
+          </div>
+        </PlayerRow>
+      ))}
     </Container>
   );
 }
@@ -50,7 +41,7 @@ const Container = styled.div`
 
   width: 486px;
   padding: 40px;
-  background-color: #e3e3e3;
+  background-color: var(--primary-color);
 
   & > div:not(:last-child) {
     margin-bottom: 24px;
