@@ -11,10 +11,11 @@ function PlayerList({ players }) {
     <Container>
       {playersArr.map((player) => {
         const showTally = player.score < 11;
+        const showIcon = player.submittedCards.length > 0;
 
         return (
           <PlayerRow key={player.name} isCzar={player.czar}>
-            <IconMockup isCzar={player.czar} />
+            <IconMockup isCzar={player.czar} showIcon={showIcon} />
 
             <div className="player-info">
               <h1>{player.name}</h1>
@@ -96,6 +97,8 @@ const PlayerRow = styled.div`
 `;
 
 const IconMockup = styled.div`
+  opacity: ${(props) => (props.showIcon || props.isCzar ? 1 : 0)};
+
   width: 32px;
   height: 43px;
   background-color: ${(props) => (props.isCzar ? 'var(--secondary-color)' : 'var(--primary-color)')};

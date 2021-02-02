@@ -26,7 +26,7 @@ function App() {
       name: 'Pedro',
       score: 10,
       czar: false,
-      submittedCards: [2, 5],
+      submittedCards: [],
     },
     playerID5: {
       name: 'Foo',
