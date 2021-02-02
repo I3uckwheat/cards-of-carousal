@@ -58,6 +58,9 @@ const Container = styled.div`
   padding: 40px;
   background-color: var(--primary-color);
 
+  position: relative;
+  z-index: 1;
+
   & > div:not(:last-child) {
     margin-bottom: 24px;
   }
@@ -65,6 +68,7 @@ const Container = styled.div`
 
 const PlayerRow = styled.div`
   display: flex;
+  align-items: center;
   width: 100%;
 
   .player-info {
@@ -73,11 +77,12 @@ const PlayerRow = styled.div`
     justify-content: space-between;
 
     flex: 1;
-    margin: 0 12px 0 20px;
-    padding: 0 12px;
+    margin: ${(props) => (props.isCzar ? '0 12px 0 26px' : '0 24px 0 32px')};
+    padding: ${(props) => (props.isCzar ? '7px 12px' : '7px 0')};
+    border-bottom: ${(props) => (props.isCzar ? 0 : '1px solid #ccc')};
+    border-radius: ${(props) => (props.isCzar ? '4px' : 0)};
 
     background-color: ${(props) => (props.isCzar ? 'var(--secondary-color)' : 'var(--primary-color)')};
-    border-radius: 4px;
 
     h1 {
       text-transform: uppercase;
@@ -101,7 +106,27 @@ const SmallCardsIcon = styled.div`
 
   width: 32px;
   height: 43px;
+  margin-left: ${(props) => (props.isCzar ? '0' : '6px')};
   background-color: ${(props) => (props.isCzar ? 'var(--secondary-color)' : 'var(--primary-color)')};
   border: 2px solid var(--secondary-color);
   border-radius: 3px;
+
+  display: block;
+  position: relative;
+
+  &::before {
+    display: ${(props) => (props.isCzar ? 'none' : 'block')};
+    content: '';
+
+    position: absolute;
+    z-index: -1;
+    top: 5px;
+    left: -12px;
+
+    width: 32px;
+    height: 43px;
+    background-color: var(--primary-color);
+    border: 2px solid var(--secondary-color);
+    border-radius: 3px;
+  }
 `;
