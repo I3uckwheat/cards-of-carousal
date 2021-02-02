@@ -68,6 +68,8 @@ const PlayerRow = styled.div`
       text-transform: uppercase;
       font-size: 24px;
       font-weight: 900;
+      letter-spacing: 1px;
+      line-height: 1.5em;
       color: ${(props) => (props.isCzar ? 'var(--primary-color)' : 'var(--secondary-color)')};
     }
 
