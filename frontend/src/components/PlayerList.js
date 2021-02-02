@@ -18,7 +18,7 @@ PlayerList.propTypes = {
       name: PropTypes.string.isRequired,
       score: PropTypes.number.isRequired,
       czar: PropTypes.bool.isRequired,
-      submittedCards: PropTypes.arrayOf(PropTypes.number),
+      submittedCards: PropTypes.arrayOf(PropTypes.number).isRequired,
     }),
   ).isRequired,
 };
