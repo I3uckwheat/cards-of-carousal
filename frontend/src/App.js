@@ -1,5 +1,5 @@
 import React from 'react';
-import SocketTest from './components/SocketTest';
+// import SocketTest from './components/SocketTest';
 import PlayerList from './components/PlayerList';
 
 function App() {
@@ -26,7 +26,7 @@ function App() {
 
   return (
     <div className="App">
-      <SocketTest />
+      {/* <SocketTest /> */}
 
       <PlayerList players={players} />
     </div>
