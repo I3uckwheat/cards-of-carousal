@@ -10,8 +10,10 @@ function PlayerList({ players }) {
   return (
     <Container>
       {playersArr.map((player) => {
-        const showTally = player.score < 11;
         const showIcon = player.submittedCards.length > 0;
+
+        const isAboveDisplayLimit = player.score > 10;
+        const showAdditionalTally = !isAboveDisplayLimit && player.score > 5;
 
         return (
           <PlayerRow key={player.name} isCzar={player.czar}>
@@ -19,16 +21,17 @@ function PlayerList({ players }) {
 
             <div className="player-info">
               <h1>{player.name}</h1>
-              {showTally ? (
-                <div>
-                  <TallyMarker
-                    color={player.czar ? 'white' : 'black'}
-                    tallyCount={player.score > 5 ? player.score - 5 : player.score % 6}
-                  />
-                  {player.score > 5 ? <TallyMarker color={player.czar ? 'white' : 'black'} tallyCount={5} /> : ''}
-                </div>
-              )
-                : <span>{player.score}</span>}
+              {isAboveDisplayLimit ? <span>{player.score}</span>
+                : (
+                  <div>
+                    <TallyMarker
+                      color={player.czar ? 'white' : 'black'}
+                      tallyCount={player.score > 5 ? player.score - 5 : player.score}
+                    />
+
+                    {showAdditionalTally && <TallyMarker color={player.czar ? 'white' : 'black'} tallyCount={5} />}
+                  </div>
+                )}
             </div>
           </PlayerRow>
         );
