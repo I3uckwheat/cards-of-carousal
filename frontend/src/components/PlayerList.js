@@ -77,7 +77,7 @@ const PlayerRow = styled.div`
     justify-content: space-between;
 
     flex: 1;
-    margin: ${(props) => (props.isCzar ? '0 12px 0 26px' : '0 24px 0 32px')};
+    margin: ${(props) => (props.isCzar ? '0 12px 0 26px' : '0 24px 0 26px')};
     padding: ${(props) => (props.isCzar ? '7px 12px' : '7px 0')};
     border-bottom: ${(props) => (props.isCzar ? 0 : '1px solid #ccc')};
     border-radius: ${(props) => (props.isCzar ? '4px' : 0)};
@@ -101,12 +101,13 @@ const PlayerRow = styled.div`
   }
 `;
 
+// TODO: Swap this for actual SVG files
 const SmallCardsIcon = styled.div`
   visibility: ${(props) => (props.showIcon || props.isCzar ? 'visible' : 'hidden')};
 
   width: 32px;
   height: 43px;
-  margin-left: ${(props) => (props.isCzar ? '0' : '6px')};
+  margin: ${(props) => (props.isCzar ? '0' : '0 6px')};
   background-color: ${(props) => (props.isCzar ? 'var(--secondary-color)' : 'var(--primary-color)')};
   border: 2px solid var(--secondary-color);
   border-radius: 3px;
