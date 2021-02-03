@@ -22,10 +22,10 @@ function PlayerList({ players }) {
               {showTally ? (
                 <div>
                   <TallyMarker
-                    isCzar={player.czar}
+                    color={player.czar ? 'white' : 'black'}
                     tallyCount={player.score > 5 ? player.score - 5 : player.score % 6}
                   />
-                  {player.score > 5 ? <TallyMarker isCzar={player.czar} tallyCount={5} /> : ''}
+                  {player.score > 5 ? <TallyMarker color={player.czar ? 'white' : 'black'} tallyCount={5} /> : ''}
                 </div>
               )
                 : <span>{player.score}</span>}
