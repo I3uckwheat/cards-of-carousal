@@ -15,7 +15,7 @@ function PlayerList({ players }) {
 
         return (
           <PlayerRow key={player.name} isCzar={player.czar}>
-            <SmallCardsIcon isCzar={player.czar} showIcon={showIcon} />
+            <SmallCardsIcon isCzar={player.czar} showIcon={showIcon} data-testid={`icon-${player.name}`} />
 
             <div className="player-info">
               <h1>{player.name}</h1>
@@ -102,7 +102,7 @@ const PlayerRow = styled.div`
 `;
 
 const SmallCardsIcon = styled.div`
-  opacity: ${(props) => (props.showIcon || props.isCzar ? 1 : 0)};
+  visibility: ${(props) => (props.showIcon || props.isCzar ? 'visible' : 'hidden')};
 
   width: 32px;
   height: 43px;
