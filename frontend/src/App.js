@@ -6,10 +6,17 @@ function App() {
   return (
     <div className="App">
       <SocketTest />
-      <BlackCard pickCount={2}>
-        &quot;_Prompt_ cards\nformatted with _.&quot;
-        &quot;I want a _ **and** _ sandwich! No corners!&quot;
-      </BlackCard>
+
+      <div
+        style={{
+          position: 'absolute',
+          left: '50%',
+          top: '50%',
+          transform: 'translate(-50%, -50%)',
+        }}
+      >
+        <BlackCard pickCount={2}>_Prompt_ cards\nformatted with _.</BlackCard>
+      </div>
     </div>
   );
 }
