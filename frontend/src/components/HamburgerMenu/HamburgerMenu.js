@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 function HamburgerMenu(props) {
-  const { isActive, onClick } = props;
+  const { isActive, onClick, onInactive } = props;
   const [activeStatus, setActiveStatus] = useState(isActive);
 
   return (
@@ -12,6 +12,7 @@ function HamburgerMenu(props) {
         onClick={() => {
           setActiveStatus(!activeStatus);
           onClick();
+          if (activeStatus) { onInactive(); }
         }}
       >
         {activeStatus ? 'X' : 'O'}
@@ -23,6 +24,7 @@ function HamburgerMenu(props) {
 HamburgerMenu.propTypes = {
   isActive: PropTypes.bool.isRequired,
   onClick: PropTypes.func.isRequired,
+  onInactive: PropTypes.func.isRequired,
 };
 
 export default HamburgerMenu;
