@@ -1,52 +1,20 @@
-import React from 'react';
-// import SocketTest from './components/SocketTest';
+import React, { useState } from 'react';
+import SocketTest from './components/SocketTest';
 import PlayerList from './components/PlayerList';
 
+import players from './temp/playerList';
+
 function App() {
-  const players = {
-    playerID1: {
-      name: 'Bender',
-      score: 3,
-      czar: false,
-      submittedCards: [1, 4],
-    },
-    playerID2: {
-      name: 'Bacon',
-      score: 5,
-      czar: true,
-      submittedCards: [],
-    },
-    playerID3: {
-      name: 'Briggs',
-      score: 0,
-      czar: false,
-      submittedCards: [5, 6],
-    },
-    playerID4: {
-      name: 'Pedro',
-      score: 10,
-      czar: false,
-      submittedCards: [],
-    },
-    playerID5: {
-      name: 'Foo',
-      score: 9,
-      czar: false,
-      submittedCards: [2, 5],
-    },
-    playerID6: {
-      name: 'Bar',
-      score: 15,
-      czar: false,
-      submittedCards: [],
-    },
-  };
+  const [showSocketTest, setShowSocketTest] = useState(false);
+  const [showPlayerList, setShowPlayerList] = useState(false);
 
   return (
     <div className="App">
-      {/* <SocketTest /> */}
+      <button type="button" onClick={() => { setShowSocketTest(!showSocketTest); }}>Show SocketTest</button>
+      <button type="button" onClick={() => { setShowPlayerList(!showPlayerList); }}>Show PlayerList</button>
 
-      <PlayerList players={players} />
+      {showSocketTest && <SocketTest />}
+      {showPlayerList && <PlayerList players={players} />}
     </div>
   );
 }
