@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import SocketTest from './components/SocketTest';
-import PlayerList from './components/PlayerList';
+import SocketTest from './components/SocketTest/SocketTest';
+import PlayerList from './components/PlayerList/PlayerList';
 
 import players from './temp/playerList';
 

@@ -2,7 +2,7 @@ import React from 'react';
 
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import TallyMarker from './TallyMarker';
+import TallyMarker from '../TallyMarker/TallyMarker';
 
 function PlayerList({ players }) {
   const playersArr = Object.values(players);

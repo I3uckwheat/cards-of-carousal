@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
-import socketInstance from '../socket/socket';
-import { StoreContext } from '../contexts/myContext/context';
+import socketInstance from '../../socket/socket';
+import { StoreContext } from '../../contexts/myContext/context';
 
 function SocketTest() {
   const { state } = useContext(StoreContext);
