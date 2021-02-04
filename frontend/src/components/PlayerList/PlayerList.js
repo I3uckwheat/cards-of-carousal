@@ -1,7 +1,6 @@
 import React from 'react';
 
 import PropTypes from 'prop-types';
-// import TallyMarker from '../TallyMarker/TallyMarker';
 
 import { PlayerTable, PlayerRow, SmallCardsIcon } from './styles';
 import TallyMarkers from '../TallyMarkers/TallyMarkers';
