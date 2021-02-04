@@ -21,7 +21,7 @@ const propTypes = {
   ).isRequired,
 };
 
-export const PlayerTable = styled.div`
+const PlayerTable = styled.div`
   display: flex;
   flex-direction: column;
 
@@ -37,7 +37,7 @@ export const PlayerTable = styled.div`
   }
 `;
 
-export const PlayerRow = styled.div`
+const PlayerRow = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
@@ -73,7 +73,7 @@ export const PlayerRow = styled.div`
 `;
 
 // TODO: Swap this for actual SVG files
-export const SmallCardsIcon = styled.div`
+const SmallCardsIcon = styled.div`
   visibility: ${(props) => (props.showIcon || props.isCzar ? 'visible' : 'hidden')};
 
   width: 32px;

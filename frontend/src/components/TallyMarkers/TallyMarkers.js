@@ -9,11 +9,11 @@ const propTypes = {
   color: PropTypes.oneOf(['primary', 'secondary']).isRequired,
 };
 
-export const Container = styled.div`
+const Container = styled.div`
   display: flex;
 `;
 
-export const Text = styled.span`
+const Text = styled.span`
   color: ${(props) => (props.color === 'primary' ? 'var(--primary-color)' : 'var(--secondary-color)')};
   font-size: 24px;
   font-weight: 900;
