@@ -11,19 +11,19 @@ const propTypes = {
   onInactive: PropTypes.func.isRequired,
 };
 
+const HamburgerMenuButton = styled.button`
+background-image: url(${(props) => props.hamburgerImage});
+background-size: cover;
+background-color: transparent;
+border: 0;
+width: 25.41px;
+height: 25.41px;
+`;
+
 function HamburgerMenu(props) {
   const { isActive, onClick, onInactive } = props;
 
   const [activeStatus, setActiveStatus] = useState(isActive);
-
-  const HamburgerMenuButton = styled.button`
-    background-image: url(${activeStatus ? activeHamburger : inactiveHamburger});
-    background-size: cover;
-    background-color: transparent;
-    border: 0;
-    width: 25.41px;
-    height: 25.41px;
-  `;
 
   return (
     <div className="HamburgerMenu">
@@ -33,6 +33,7 @@ function HamburgerMenu(props) {
           onClick();
           if (activeStatus) { onInactive(); }
         }}
+        hamburgerImage={activeStatus ? activeHamburger : inactiveHamburger}
       />
     </div>
   );
