@@ -1,22 +1,33 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
+
+import inactiveHamburger from './inactiveHamburger.svg';
+import activeHamburger from './activeHamburger.svg';
 
 function HamburgerMenu(props) {
   const { isActive, onClick, onInactive } = props;
+
   const [activeStatus, setActiveStatus] = useState(isActive);
+
+  const HamburgerMenuButton = styled.button`
+    background-image: url(${activeStatus ? activeHamburger : inactiveHamburger});
+    background-size: cover;
+    background-color: transparent;
+    border: 0;
+    width: 25.41px;
+    height: 25.41px;
+  `;
 
   return (
     <div className="HamburgerMenu">
-      <button
-        type="button"
+      <HamburgerMenuButton
         onClick={() => {
           setActiveStatus(!activeStatus);
           onClick();
           if (activeStatus) { onInactive(); }
         }}
-      >
-        {activeStatus ? 'X' : 'O'}
-      </button>
+      />
     </div>
   );
 }
