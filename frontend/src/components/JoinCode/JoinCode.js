@@ -1,5 +1,5 @@
 import React from 'react';
-
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
@@ -29,14 +29,17 @@ const JoinCode = styled.p`
   height: 70px; 
 `;
 
-// My test Stuff
-function DisplayJoinCode() {
+function DisplayJoinCode({ code }) {
   return (
     <Wrapper>
       <JoinCodeTitle>JOIN CODE:</JoinCodeTitle>
-      <JoinCode>XYA3Z</JoinCode>
+      <JoinCode>{ code }</JoinCode>
     </Wrapper>
   );
 }
+
+DisplayJoinCode.propTypes = {
+  code: PropTypes.string.isRequired,
+};
 
 export default DisplayJoinCode;

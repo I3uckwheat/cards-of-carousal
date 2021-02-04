@@ -4,7 +4,7 @@ import DisplayJoinCode from './components/JoinCode/JoinCode';
 function App() {
   return (
     <div className="App">
-      <DisplayJoinCode />
+      <DisplayJoinCode code="XYA3Z" />
     </div>
   );
 }
