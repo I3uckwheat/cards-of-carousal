@@ -1,12 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
-import StyledPath from './styles';
+import styled from 'styled-components';
 
 const propTypes = {
   color: PropTypes.oneOf(['primary', 'secondary']).isRequired,
   tallyCount: PropTypes.number.isRequired,
 };
+
+const StyledPath = styled.path`
+  stroke: ${(props) => (props.color === 'primary' ? 'var(--primary-color)' : 'var(--secondary-color)')};
+`;
 
 function TallyMarker({ color, tallyCount }) {
   return (

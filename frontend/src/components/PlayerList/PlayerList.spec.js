@@ -141,6 +141,7 @@ describe('PlayerList', () => {
     render(<PlayerList playerList={playerList} />);
 
     const player2 = screen.getByTestId('row-Bar');
+
     expect(screen.getByTestId('playerList-container').firstChild).toBe(player2);
   });
 

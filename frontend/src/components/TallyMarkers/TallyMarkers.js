@@ -1,13 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import TallyMarker from '../TallyMarker/TallyMarker';
+import styled from 'styled-components';
 
-import { Container, Text } from './styles';
+import TallyMarker from '../TallyMarker/TallyMarker';
 
 const propTypes = {
   score: PropTypes.number.isRequired,
   color: PropTypes.oneOf(['primary', 'secondary']).isRequired,
 };
+
+export const Container = styled.div`
+  display: flex;
+`;
+
+export const Text = styled.span`
+  color: ${(props) => (props.color === 'primary' ? 'var(--primary-color)' : 'var(--secondary-color)')};
+  font-size: 24px;
+  font-weight: 900;
+`;
 
 function TallyMarkers({ score, color }) {
   const displayAsText = score > 10;
