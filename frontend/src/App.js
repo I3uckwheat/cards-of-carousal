@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+
+import './App.css';
 import SocketTest from './components/SocketTest/SocketTest';
 import PlayerList from './components/PlayerList/PlayerList';
 
@@ -9,9 +11,11 @@ function App() {
   const [showPlayerList, setShowPlayerList] = useState(false);
 
   return (
-    <div className="App">
-      <button type="button" onClick={() => { setShowSocketTest(!showSocketTest); }}>Show SocketTest</button>
-      <button type="button" onClick={() => { setShowPlayerList(!showPlayerList); }}>Show PlayerList</button>
+    <div>
+      <div className="buttons-grid">
+        <button type="button" onClick={() => { setShowSocketTest(!showSocketTest); }}>Show SocketTest</button>
+        <button type="button" onClick={() => { setShowPlayerList(!showPlayerList); }}>Show PlayerList</button>
+      </div>
 
       {showSocketTest && <SocketTest />}
       {showPlayerList && <PlayerList players={players} />}
