@@ -4,7 +4,7 @@ import './App.css';
 import SocketTest from './components/SocketTest/SocketTest';
 import PlayerList from './components/PlayerList/PlayerList';
 
-import players from './temp/playerList';
+import playerList from './temp/playerList';
 
 function App() {
   const [showSocketTest, setShowSocketTest] = useState(false);
@@ -18,7 +18,7 @@ function App() {
       </div>
 
       {showSocketTest && <SocketTest />}
-      {showPlayerList && <PlayerList players={players} />}
+      {showPlayerList && <PlayerList playerList={playerList} />}
     </div>
   );
 }

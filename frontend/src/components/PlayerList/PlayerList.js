@@ -6,22 +6,28 @@ import TallyMarker from '../TallyMarker/TallyMarker';
 import { PlayerTable, PlayerRow, SmallCardsIcon } from './styles';
 
 const propTypes = {
-  players: PropTypes.objectOf(
-    PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      score: PropTypes.number.isRequired,
-      czar: PropTypes.bool.isRequired,
-      submittedCards: PropTypes.arrayOf(PropTypes.number).isRequired,
-    }),
+  playerList: PropTypes.objectOf(
+    {
+      players: PropTypes.objectOf(
+        PropTypes.shape({
+          name: PropTypes.string.isRequired,
+          score: PropTypes.number.isRequired,
+          czar: PropTypes.bool.isRequired,
+          submittedCards: PropTypes.arrayOf(PropTypes.number).isRequired,
+        }),
+      ),
+
+      playersIDs: PropTypes.arrayOf(PropTypes.string).isRequired,
+    },
   ).isRequired,
 };
 
-function PlayerList({ players }) {
-  const playersArr = Object.values(players);
+function PlayerList({ playerList }) {
+  const playersArray = playerList.playersIDs.map((id) => playerList.players[id]);
 
   return (
     <PlayerTable>
-      {playersArr.map((player) => {
+      {playersArray.map((player) => {
         const showIcon = player.submittedCards.length > 0;
 
         const isAboveDisplayLimit = player.score > 10;
