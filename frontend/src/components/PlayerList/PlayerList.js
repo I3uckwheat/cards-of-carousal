@@ -4,6 +4,17 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import TallyMarker from '../TallyMarker/TallyMarker';
 
+const propTypes = {
+  players: PropTypes.objectOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      score: PropTypes.number.isRequired,
+      czar: PropTypes.bool.isRequired,
+      submittedCards: PropTypes.arrayOf(PropTypes.number).isRequired,
+    }),
+  ).isRequired,
+};
+
 function PlayerList({ players }) {
   const playersArr = Object.values(players);
 
@@ -40,16 +51,7 @@ function PlayerList({ players }) {
   );
 }
 
-PlayerList.propTypes = {
-  players: PropTypes.objectOf(
-    PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      score: PropTypes.number.isRequired,
-      czar: PropTypes.bool.isRequired,
-      submittedCards: PropTypes.arrayOf(PropTypes.number).isRequired,
-    }),
-  ).isRequired,
-};
+PlayerList.propTypes = propTypes;
 
 export default PlayerList;
 

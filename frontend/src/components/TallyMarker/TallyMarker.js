@@ -1,6 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+const propTypes = {
+  color: PropTypes.oneOf(['white', 'black']).isRequired,
+  tallyCount: PropTypes.number.isRequired,
+};
+
 function TallyMarker({ color, tallyCount }) {
   return (
     <svg width="42" height="30" viewBox="0 0 42 30" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -15,9 +20,6 @@ function TallyMarker({ color, tallyCount }) {
   );
 }
 
-TallyMarker.propTypes = {
-  color: PropTypes.oneOf(['white', 'black']).isRequired,
-  tallyCount: PropTypes.number.isRequired,
-};
+TallyMarker.propTypes = propTypes;
 
 export default TallyMarker;
