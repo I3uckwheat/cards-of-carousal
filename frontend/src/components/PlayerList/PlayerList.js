@@ -26,7 +26,7 @@ function PlayerList({ playerList }) {
   const playersArray = playerList.playersIDs.map((id) => playerList.players[id]);
 
   return (
-    <PlayerTable>
+    <PlayerTable data-testid="playerList-container">
       {playersArray.map((player) => {
         const showIcon = player.submittedCards.length > 0;
 

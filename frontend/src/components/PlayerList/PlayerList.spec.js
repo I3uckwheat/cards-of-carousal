@@ -109,5 +109,16 @@ describe('PlayerList', () => {
     expect(screen.getAllByTestId('tally')).toHaveLength(playerList.players.playerID1.score);
   });
 
+  it('If playersIDs is empty, PlayerList still renders as an empty container', () => {
+    const playerList = {
+      players: {},
+      playersIDs: [],
+    };
+
+    render(<PlayerList playerList={playerList} />);
+
+    expect(screen.getByTestId('playerList-container')).toBeInTheDocument();
+  });
+
   // TODO: test('If player is czar, render the its row with the proper colors', () => {})
 });
