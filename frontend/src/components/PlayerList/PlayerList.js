@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import TallyMarker from '../TallyMarker/TallyMarker';
 
-import { Container, PlayerRow, SmallCardsIcon } from './styles';
+import { PlayerTable, PlayerRow, SmallCardsIcon } from './styles';
 
 const propTypes = {
   players: PropTypes.objectOf(
@@ -20,7 +20,7 @@ function PlayerList({ players }) {
   const playersArr = Object.values(players);
 
   return (
-    <Container>
+    <PlayerTable>
       {playersArr.map((player) => {
         const showIcon = player.submittedCards.length > 0;
 
@@ -48,7 +48,7 @@ function PlayerList({ players }) {
           </PlayerRow>
         );
       })}
-    </Container>
+    </PlayerTable>
   );
 }
 
