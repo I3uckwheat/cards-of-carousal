@@ -5,6 +5,7 @@ import styled from 'styled-components';
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
+  line-height : 29px;
 `;
 
 const JoinCodeTitle = styled.p`
@@ -16,12 +17,12 @@ const JoinCodeTitle = styled.p`
   height: 21px; 
 `;
 
-const Code = styled.p`
+const JoinCode = styled.p`
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 56px;
-  font-weight: 700;
+  font-weight: bold;
   color: var(--primary-color);
   background-color: var(--secondary-color);
   width: 305px;
@@ -29,13 +30,13 @@ const Code = styled.p`
 `;
 
 // My test Stuff
-function JoinCode() {
+function DisplayJoinCode() {
   return (
     <Wrapper>
       <JoinCodeTitle>JOIN CODE:</JoinCodeTitle>
-      <Code>XYA3Z</Code>
+      <JoinCode>XYA3Z</JoinCode>
     </Wrapper>
   );
 }
 
-export default JoinCode;
+export default DisplayJoinCode;
