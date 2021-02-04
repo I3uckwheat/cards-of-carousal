@@ -5,6 +5,12 @@ import styled from 'styled-components';
 import inactiveHamburger from './inactiveHamburger.svg';
 import activeHamburger from './activeHamburger.svg';
 
+const propTypes = {
+  isActive: PropTypes.bool.isRequired,
+  onClick: PropTypes.func.isRequired,
+  onInactive: PropTypes.func.isRequired,
+};
+
 function HamburgerMenu(props) {
   const { isActive, onClick, onInactive } = props;
 
@@ -32,10 +38,6 @@ function HamburgerMenu(props) {
   );
 }
 
-HamburgerMenu.propTypes = {
-  isActive: PropTypes.bool.isRequired,
-  onClick: PropTypes.func.isRequired,
-  onInactive: PropTypes.func.isRequired,
-};
+HamburgerMenu.propTypes = propTypes;
 
 export default HamburgerMenu;
