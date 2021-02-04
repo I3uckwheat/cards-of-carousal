@@ -4,26 +4,30 @@ import { render, screen } from '@testing-library/react';
 import PlayerList from './PlayerList';
 
 describe('PlayerList', () => {
-  it('renders PlayerList component given a simple players object', () => {
-    const players = {
-      playerID1: {
-        name: 'Bender',
-        score: 3,
-        czar: false,
-        submittedCards: [1, 4],
+  it('renders PlayerList component given a simple playerList object', () => {
+    const playerList = {
+      players: {
+        playerID1: {
+          name: 'Bender',
+          score: 3,
+          czar: false,
+          submittedCards: [1, 4],
+        },
+        playerID2: {
+          name: 'Bacon',
+          score: 5,
+          czar: true,
+          submittedCards: [3, 4],
+        },
       },
-      playerID2: {
-        name: 'Bacon',
-        score: 5,
-        czar: true,
-        submittedCards: [3, 4],
-      },
+      playersIDs: ['playerID1', 'playerID2'],
     };
 
-    render(<PlayerList players={players} />);
+    render(<PlayerList playerList={playerList} />);
 
-    expect(screen.getByText(players.playerID1.name)).toBeInTheDocument();
-    expect(screen.getByText(players.playerID2.name)).toBeInTheDocument();
+    playerList.playersIDs.map((playerID) => (
+      expect(screen.getByText(playerList.players[playerID].name)).toBeInTheDocument()
+    ));
   });
 
   it('If player has submitted his cards or player is czar, render the icon fully visible', () => {
