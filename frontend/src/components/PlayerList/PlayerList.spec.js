@@ -140,7 +140,6 @@ describe('PlayerList', () => {
 
     render(<PlayerList playerList={playerList} />);
 
-    screen.debug();
     const player2 = screen.getByTestId('row-Bar');
     expect(screen.getByTestId('playerList-container').firstChild).toBe(player2);
   });
