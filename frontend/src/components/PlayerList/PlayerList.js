@@ -43,11 +43,11 @@ function PlayerList({ playerList }) {
                 : (
                   <div>
                     <TallyMarker
-                      color={player.czar ? 'white' : 'black'}
+                      color={player.czar ? 'primary' : 'secondary'}
                       tallyCount={player.score > 5 ? player.score - 5 : player.score}
                     />
 
-                    {showAdditionalTally && <TallyMarker color={player.czar ? 'white' : 'black'} tallyCount={5} />}
+                    {showAdditionalTally && <TallyMarker color={player.czar ? 'primary' : 'secondary'} tallyCount={5} />}
                   </div>
                 )}
             </div>
