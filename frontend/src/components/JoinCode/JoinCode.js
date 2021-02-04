@@ -1,5 +1,5 @@
 import React from 'react';
-
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
@@ -14,14 +14,15 @@ const JoinCodeTitle = styled.p`
   font-weight: 700;
   width: 97px;
   height: 21px; 
+  line-height : 29px;
 `;
 
-const Code = styled.p`
+const JoinCode = styled.p`
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 56px;
-  font-weight: 700;
+  font-weight: bold;
   color: var(--primary-color);
   background-color: var(--secondary-color);
   width: 305px;
@@ -29,13 +30,17 @@ const Code = styled.p`
 `;
 
 // My test Stuff
-function JoinCode() {
+function DisplayJoinCode({ code }) {
   return (
     <Wrapper>
       <JoinCodeTitle>JOIN CODE:</JoinCodeTitle>
-      <Code>XYA3Z</Code>
+      <JoinCode>{ code }</JoinCode>
     </Wrapper>
   );
 }
 
-export default JoinCode;
+DisplayJoinCode.propTypes = {
+  code: PropTypes.string.isRequired,
+};
+
+export default DisplayJoinCode;

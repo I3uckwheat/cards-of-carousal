@@ -1,12 +1,10 @@
 import React from 'react';
-import SocketTest from './components/SocketTest';
-import JoinCode from './components/JoinCode';
+import DisplayJoinCode from './components/JoinCode/JoinCode';
 
 function App() {
   return (
     <div className="App">
-      <SocketTest />
-      <JoinCode />
+      <DisplayJoinCode code="XYA3Z" />
     </div>
   );
 }
