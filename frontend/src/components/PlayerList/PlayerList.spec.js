@@ -25,9 +25,8 @@ describe('PlayerList', () => {
 
     render(<PlayerList playerList={playerList} />);
 
-    playerList.playersIDs.map((playerID) => (
-      expect(screen.getByText(playerList.players[playerID].name)).toBeInTheDocument()
-    ));
+    expect(screen.getByText(playerList.players.playerID1.name)).toBeInTheDocument();
+    expect(screen.getByText(playerList.players.playerID2.name)).toBeInTheDocument();
   });
 
   it('If player has submitted his cards or player is czar, render the icon fully visible', () => {
@@ -118,6 +117,32 @@ describe('PlayerList', () => {
     render(<PlayerList playerList={playerList} />);
 
     expect(screen.getByTestId('playerList-container')).toBeInTheDocument();
+  });
+
+  it('If the player object goes in a different order than playersIDs, the component follow playersIDs order', () => {
+    const playerList = {
+      players: {
+        playerID1: {
+          name: 'Foo',
+          score: 3,
+          czar: false,
+          submittedCards: [1, 4],
+        },
+        playerID2: {
+          name: 'Bar',
+          score: 5,
+          czar: true,
+          submittedCards: [],
+        },
+      },
+      playersIDs: ['playerID2', 'playerID1'],
+    };
+
+    render(<PlayerList playerList={playerList} />);
+
+    screen.debug();
+    const player2 = screen.getByTestId('row-Bar');
+    expect(screen.getByTestId('playerList-container').firstChild).toBe(player2);
   });
 
   // TODO: test('If player is czar, render the its row with the proper colors', () => {})

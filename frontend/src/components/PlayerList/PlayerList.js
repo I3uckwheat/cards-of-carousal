@@ -32,7 +32,7 @@ function PlayerList({ playerList }) {
         const showIcon = player.submittedCards.length > 0;
 
         return (
-          <PlayerRow key={player.name} isCzar={player.czar}>
+          <PlayerRow key={player.name} isCzar={player.czar} data-testid={`row-${player.name}`}>
             <SmallCardsIcon isCzar={player.czar} showIcon={showIcon} data-testid={`icon-${player.name}`} />
 
             <div className="player-info">
