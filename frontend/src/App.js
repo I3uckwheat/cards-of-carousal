@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import HamburgerMenu from './components/HamburgerMenu/HamburgerMenu';
+import HamburgerMenu from './components/Buttons/HamburgerMenu/HamburgerMenu';
 import SocketTest from './components/SocketTest';
 
 import './App.css';
