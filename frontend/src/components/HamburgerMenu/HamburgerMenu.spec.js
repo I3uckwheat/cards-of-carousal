@@ -34,6 +34,14 @@ describe('HamburgerMenu', () => {
     expect(screen.getByRole('button')).toHaveStyle(`background-image: url(${inactiveHamburger})`);
   });
 
+  it('does not call the onClick callback when it has not been clicked', () => {
+    const onClick = jest.fn();
+
+    render(<HamburgerMenu isActive={false} onClick={onClick} onInactive={() => {}} />);
+
+    expect(onClick).not.toHaveBeenCalled();
+  });
+
   it('calls the onClick callback when clicked', () => {
     const onClick = jest.fn();
 
@@ -51,6 +59,14 @@ describe('HamburgerMenu', () => {
     userEvent.click(screen.getByRole('button'));
     userEvent.click(screen.getByRole('button'));
     expect(onClick).toHaveBeenCalledTimes(2);
+  });
+
+  it('does not call the onInactive callback when it has not been clicked', () => {
+    const onInactive = jest.fn();
+
+    render(<HamburgerMenu isActive={false} onClick={() => {}} onInactive={onInactive} />);
+
+    expect(onInactive).not.toHaveBeenCalled();
   });
 
   it('does not call the onInactive callback when toggled to active', () => {
