@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './App.css';
 
 import SocketTest from './components/SocketTest';
 import PlayerList from './components/PlayerList/PlayerList';
