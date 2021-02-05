@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
@@ -8,7 +8,6 @@ import activeHamburger from './activeHamburger.svg';
 const propTypes = {
   isActive: PropTypes.bool.isRequired,
   onClick: PropTypes.func.isRequired,
-  onInactive: PropTypes.func.isRequired,
 };
 
 const HamburgerMenuButton = styled.button`
@@ -20,18 +19,12 @@ const HamburgerMenuButton = styled.button`
   height: 25.41px;
 `;
 
-function HamburgerMenu({ isActive, onClick, onInactive }) {
-  const [activeStatus, setActiveStatus] = useState(isActive);
-
+function HamburgerMenu({ isActive, onClick }) {
   return (
     <div className="HamburgerMenu">
       <HamburgerMenuButton
-        onClick={() => {
-          setActiveStatus(!activeStatus);
-          onClick();
-          if (activeStatus) { onInactive(); }
-        }}
-        hamburgerImage={activeStatus ? activeHamburger : inactiveHamburger}
+        onClick={onClick}
+        hamburgerImage={isActive ? activeHamburger : inactiveHamburger}
       />
     </div>
   );

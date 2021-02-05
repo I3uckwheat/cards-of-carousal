@@ -20,20 +20,6 @@ describe('HamburgerMenu', () => {
     expect(screen.getByRole('button')).toHaveStyle(`background-image: url(${activeHamburger})`);
   });
 
-  it('displays activeHamburger when isActive is set to false and the button has been clicked', () => {
-    render(<HamburgerMenu isActive={false} onClick={() => {}} onInactive={() => {}} />);
-
-    userEvent.click(screen.getByRole('button'));
-    expect(screen.getByRole('button')).toHaveStyle(`background-image: url(${activeHamburger})`);
-  });
-
-  it('displays inactiveHamburger when isActive is set to true and the button has been clicked', () => {
-    render(<HamburgerMenu isActive onClick={() => {}} onInactive={() => {}} />);
-
-    userEvent.click(screen.getByRole('button'));
-    expect(screen.getByRole('button')).toHaveStyle(`background-image: url(${inactiveHamburger})`);
-  });
-
   it('does not call the onClick callback when it has not been clicked', () => {
     const onClick = jest.fn();
 
@@ -59,31 +45,5 @@ describe('HamburgerMenu', () => {
     userEvent.click(screen.getByRole('button'));
     userEvent.click(screen.getByRole('button'));
     expect(onClick).toHaveBeenCalledTimes(2);
-  });
-
-  it('does not call the onInactive callback when it has not been clicked', () => {
-    const onInactive = jest.fn();
-
-    render(<HamburgerMenu isActive={false} onClick={() => {}} onInactive={onInactive} />);
-
-    expect(onInactive).not.toHaveBeenCalled();
-  });
-
-  it('does not call the onInactive callback when toggled to active', () => {
-    const onInactive = jest.fn();
-
-    render(<HamburgerMenu isActive={false} onClick={() => {}} onInactive={onInactive} />);
-
-    userEvent.click(screen.getByRole('button'));
-    expect(onInactive).not.toHaveBeenCalled();
-  });
-
-  it('calls the onInactive callback when toggled to inactive', () => {
-    const onInactive = jest.fn();
-
-    render(<HamburgerMenu isActive onClick={() => {}} onInactive={onInactive} />);
-
-    userEvent.click(screen.getByRole('button'));
-    expect(onInactive).toHaveBeenCalledTimes(1);
   });
 });

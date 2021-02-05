@@ -9,7 +9,6 @@ function App() {
   const [showHamburgerMenu, setHamburgerMenu] = useState(false);
 
   const onClickTest = () => console.log('onClick was called!');
-  const onInactiveTest = () => console.log('onInactive was also called!');
 
   return (
     <div className="App">
@@ -23,8 +22,8 @@ function App() {
       </div>
 
       {showSocketTest && <SocketTest />}
-      {showHamburgerMenu
-      && <HamburgerMenu isActive={false} onClick={onClickTest} onInactive={onInactiveTest} />}
+      {showHamburgerMenu && <HamburgerMenu isActive={false} onClick={onClickTest} />}
+      {showHamburgerMenu && <HamburgerMenu isActive onClick={onClickTest} />}
     </div>
   );
 }
