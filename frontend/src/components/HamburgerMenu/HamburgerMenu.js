@@ -12,12 +12,12 @@ const propTypes = {
 };
 
 const HamburgerMenuButton = styled.button`
-background-image: url(${(props) => props.hamburgerImage});
-background-size: cover;
-background-color: transparent;
-border: 0;
-width: 25.41px;
-height: 25.41px;
+  background-image: url(${(props) => props.hamburgerImage});
+  background-size: cover;
+  background-color: transparent;
+  border: 0;
+  width: 25.41px;
+  height: 25.41px;
 `;
 
 function HamburgerMenu(props) {
