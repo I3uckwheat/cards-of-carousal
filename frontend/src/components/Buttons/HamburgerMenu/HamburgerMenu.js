@@ -21,12 +21,10 @@ const HamburgerMenuButton = styled.button`
 
 function HamburgerMenu({ isActive, onClick }) {
   return (
-    <div className="HamburgerMenu">
-      <HamburgerMenuButton
-        onClick={onClick}
-        hamburgerImage={isActive ? activeHamburger : inactiveHamburger}
-      />
-    </div>
+    <HamburgerMenuButton
+      onClick={onClick}
+      hamburgerImage={isActive ? activeHamburger : inactiveHamburger}
+    />
   );
 }
 

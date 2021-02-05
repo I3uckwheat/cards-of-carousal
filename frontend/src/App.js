@@ -23,7 +23,8 @@ function App() {
 
       {showSocketTest && <SocketTest />}
       {showHamburgerMenu && <HamburgerMenu isActive={false} onClick={onClickTest} />}
-      {showHamburgerMenu && <HamburgerMenu isActive onClick={onClickTest} />}
+      {showHamburgerMenu
+      && <div style={{ backgroundColor: 'grey' }}><HamburgerMenu isActive onClick={onClickTest} /></div>}
     </div>
   );
 }
