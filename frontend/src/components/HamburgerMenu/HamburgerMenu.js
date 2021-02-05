@@ -20,9 +20,7 @@ const HamburgerMenuButton = styled.button`
   height: 25.41px;
 `;
 
-function HamburgerMenu(props) {
-  const { isActive, onClick, onInactive } = props;
-
+function HamburgerMenu({ isActive, onClick, onInactive }) {
   const [activeStatus, setActiveStatus] = useState(isActive);
 
   return (
