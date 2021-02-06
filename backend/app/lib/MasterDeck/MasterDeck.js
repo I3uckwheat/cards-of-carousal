@@ -1,7 +1,11 @@
-// const packArry = [
-//   { title: 'hello', white: [], black: [] },
-//   { title: 'world', white: [], black: [] },
-//   { title: 'foo', white: [], black: [] },
-// ];
+module.exports = class MasterDeck {
+  #cards;
+  #packNames;
 
-// const packNames = packArry.map((pack) => pack.title);
+  constructor(cards) {
+    this.#cards = Object.values(cards);
+    this.#packNames = this.#cards.map((pack) => pack.name);
+  }
+
+  getPackNames = () => this.#packNames;
+};
