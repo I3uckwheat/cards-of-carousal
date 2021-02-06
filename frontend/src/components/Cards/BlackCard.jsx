@@ -67,7 +67,7 @@ BlackCard.defaultProps = {
 
 BlackCard.propTypes = {
   pickCount: PropTypes.number.isRequired,
-  children: PropTypes.node,
+  children: PropTypes.string,
 };
 
 export default BlackCard;
