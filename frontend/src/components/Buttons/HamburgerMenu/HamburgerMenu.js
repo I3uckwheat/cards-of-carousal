@@ -19,10 +19,10 @@ const HamburgerMenuButton = styled.button`
   height: 25.41px;
 `;
 
-function HamburgerMenu({ isActive, onClick }) {
+function HamburgerMenu({ isActive, onClick: handleClick }) {
   return (
     <HamburgerMenuButton
-      onClick={onClick}
+      onClick={handleClick}
       hamburgerImage={isActive ? activeHamburger : inactiveHamburger}
     />
   );
