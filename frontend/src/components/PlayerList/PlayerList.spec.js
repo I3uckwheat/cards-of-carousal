@@ -72,42 +72,6 @@ describe('PlayerList', () => {
     expect(screen.getByTestId(`icon-${playerList.players.playerID1.name}`)).not.toBeVisible();
   });
 
-  it('If player score is higher than 10, display his score by text', () => {
-    const playerList = {
-      players: {
-        playerID1: {
-          name: 'Foo',
-          score: 11,
-          czar: false,
-          submittedCards: [],
-        },
-      },
-      playersIDs: ['playerID1'],
-    };
-
-    render(<PlayerList playerList={playerList} />);
-
-    expect(screen.getByText(playerList.players.playerID1.score)).toBeInTheDocument();
-  });
-
-  it('If score is lower than 10, display the correct tally count', () => {
-    const playerList = {
-      players: {
-        playerID1: {
-          name: 'Foo',
-          score: 7,
-          czar: false,
-          submittedCards: [],
-        },
-      },
-      playersIDs: ['playerID1'],
-    };
-
-    render(<PlayerList playerList={playerList} />);
-
-    expect(screen.getAllByTestId('tally')).toHaveLength(playerList.players.playerID1.score);
-  });
-
   it('If playersIDs is empty, PlayerList still renders as an empty container', () => {
     const playerList = {
       players: {},
