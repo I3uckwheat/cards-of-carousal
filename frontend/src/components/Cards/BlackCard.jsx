@@ -32,6 +32,17 @@ const Circled = styled.div`
   font-size: 14px;
 `;
 
+const AbsolutePosition = styled.div`
+  position: absolute;
+  top: ${(props) => props.top || 'auto'};
+  right: ${(props) => props.right || 'auto'};
+  bottom: ${(props) => props.bottom || 'auto'};
+  left: ${(props) => props.left || 'auto'};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
 function BlackCard({ pickCount, children }) {
   // 1. Makes sure newlines are doubled for markdown
   // 2. Escapes and increases number of underscores displayed for each blank in the text
@@ -45,22 +56,16 @@ function BlackCard({ pickCount, children }) {
   return (
     <StyledBlackCard>
       <Markdown options={{ wrapper: 'div' }}>{parseForMarkdown(children)}</Markdown>
-      <div style={{ position: 'absolute', bottom: '18px', left: '18px' }}>
+      <AbsolutePosition bottom="18px" left="18px">
         <LayeredCards />
-      </div>
-      <div
-        style={{
-          position: 'absolute',
-          bottom: '7px',
-          right: '19px',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
+      </AbsolutePosition>
+      <AbsolutePosition
+        bottom="8px"
+        right="21px"
       >
         <span style={{ fontSize: '24px', marginRight: '7px' }}>PICK</span>
         <Circled>{pickCount}</Circled>
-      </div>
+      </AbsolutePosition>
     </StyledBlackCard>
   );
 }
