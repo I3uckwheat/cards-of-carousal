@@ -3,7 +3,7 @@ module.exports = class MasterDeck {
   #packNames;
 
   constructor(cards) {
-    if(!cards) throw new Error(`Card data is missing, got: ${cards}`);
+    if (!cards) throw new Error(`Card data is missing, got: ${cards}`);
 
     this.#cards = Object.values(cards);
     this.#packNames = this.#cards.map((pack) => pack.name);
