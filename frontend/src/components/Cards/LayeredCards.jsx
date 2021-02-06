@@ -10,9 +10,10 @@ function LayeredCards() {
         <img
           src={WhiteCardSVG}
           alt="white card"
+          data-testid="layerCard"
         />
       </AbsolutePosition>
-      <img src={BlackCardSVG} alt="black card" />
+      <img src={BlackCardSVG} alt="black card" data-testid="layerCard" />
     </div>
   );
 }
