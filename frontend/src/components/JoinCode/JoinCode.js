@@ -37,7 +37,7 @@ function DisplayJoinCode({ code }) {
   return (
     <JoinCodeComponent>
       <p className="joinCode-title">JOIN CODE:</p>
-      <p className="joinCode">{ code }</p>
+      <p className="joinCode" data-testid="joinCode">{ code }</p>
     </JoinCodeComponent>
   );
 }
