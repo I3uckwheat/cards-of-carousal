@@ -40,16 +40,16 @@ const Circled = styled.div`
 function BlackCard({ pickCount, children }) {
   // 1. Makes sure newlines are doubled for markdown
   // 2. Escapes and increases number of underscores displayed for each blank in the text
-  function parseForMarkdown(string) {
+  function parseForMarkdown(string, blankLength) {
     return string
       .replace(/\n/g, '\n\n')
-      .replace(/(^|(\s))_(\s)/g, `$1${'\\_'.repeat(BLANK_LENGTH)} `)
-      .replace(/(\s)_(([.,'?!:;()+-])|$)/g, ` ${'\\_'.repeat(BLANK_LENGTH)}$2`);
+      .replace(/(^|(\s))_(\s)/g, `$1${'\\_'.repeat(blankLength)} `)
+      .replace(/(\s)_(([.,'?!:;()+-])|$)/g, ` ${'\\_'.repeat(blankLength)}$2`);
   }
 
   return (
-    <StyledBlackCard>
-      <Markdown options={{ wrapper: 'div' }}>{parseForMarkdown(children)}</Markdown>
+    <StyledBlackCard data-testid="black-card">
+      <Markdown options={{ wrapper: 'div' }}>{parseForMarkdown(children, BLANK_LENGTH)}</Markdown>
       <AbsolutePosition bottom="18px" left="18px">
         <LayeredCards />
       </AbsolutePosition>
@@ -61,9 +61,13 @@ function BlackCard({ pickCount, children }) {
   );
 }
 
+BlackCard.defaultProps = {
+  children: '',
+};
+
 BlackCard.propTypes = {
   pickCount: PropTypes.number.isRequired,
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
 };
 
 export default BlackCard;
