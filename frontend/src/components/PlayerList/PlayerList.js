@@ -5,20 +5,18 @@ import PropTypes from 'prop-types';
 import TallyMarkers from '../TallyMarker/TallyMarker';
 
 const propTypes = {
-  playerList: PropTypes.objectOf(
-    {
-      players: PropTypes.objectOf(
-        PropTypes.shape({
-          name: PropTypes.string.isRequired,
-          score: PropTypes.number.isRequired,
-          czar: PropTypes.bool.isRequired,
-          submittedCards: PropTypes.arrayOf(PropTypes.number).isRequired,
-        }),
-      ),
+  playerList: PropTypes.shape({
+    players: PropTypes.objectOf(
+      PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        score: PropTypes.number.isRequired,
+        czar: PropTypes.bool.isRequired,
+        submittedCards: PropTypes.arrayOf(PropTypes.number).isRequired,
+      }),
+    ).isRequired,
 
-      playersIDs: PropTypes.arrayOf(PropTypes.string).isRequired,
-    },
-  ).isRequired,
+    playersIDs: PropTypes.arrayOf(PropTypes.string).isRequired,
+  }).isRequired,
 };
 
 const PlayerTable = styled.div`
