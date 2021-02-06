@@ -14,12 +14,12 @@ const StyledPath = styled.path`
 function TallyMarker({ color, tallyCount }) {
   return (
     <svg width="42" height="30" viewBox="0 0 42 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <g id="ScoreTally">
-        {tallyCount >= 1 && <StyledPath color={color} d="M32.4285 3.19775V29.5701" strokeWidth="2" data-testid="tally" />}
-        {tallyCount >= 2 && <StyledPath color={color} d="M25.4439 3.51099L23.2217 29.5966" strokeWidth="2" data-testid="tally" />}
-        {tallyCount >= 3 && <StyledPath color={color} d="M16.5548 3.51099L14.3326 29.5966" strokeWidth="2" data-testid="tally" />}
-        {tallyCount >= 4 && <StyledPath color={color} d="M7.66589 3.51099L5.44367 29.5966" strokeWidth="2" data-testid="tally" />}
-        {tallyCount >= 5 && <StyledPath color={color} d="M0.916168 0.599211L40.9161 29.1692" strokeWidth="2" data-testid="tally" />}
+      <g>
+        {tallyCount >= 1 && <StyledPath color={color} d="M32.4285 3.19775V29.5701" strokeWidth="2" data-testid="tally-1" />}
+        {tallyCount >= 2 && <StyledPath color={color} d="M25.4439 3.51099L23.2217 29.5966" strokeWidth="2" data-testid="tally-2" />}
+        {tallyCount >= 3 && <StyledPath color={color} d="M16.5548 3.51099L14.3326 29.5966" strokeWidth="2" data-testid="tally-3" />}
+        {tallyCount >= 4 && <StyledPath color={color} d="M7.66589 3.51099L5.44367 29.5966" strokeWidth="2" data-testid="tally-4" />}
+        {tallyCount >= 5 && <StyledPath color={color} d="M0.916168 0.599211L40.9161 29.1692" strokeWidth="2" data-testid="tally-5" />}
       </g>
     </svg>
   );
