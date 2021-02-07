@@ -1,7 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-
+import {
+  BlackCard,
+  OffsetWhiteCardStack,
+} from '../../assets/index.js';
 import TallyMarkers from '../TallyMarker/TallyMarker';
 
 const propTypes = {
@@ -69,49 +72,23 @@ const PlayerRow = styled.div`
     }
   }
 `;
-
-// TODO: Swap this for actual SVG files
-const SmallCardsIcon = styled.div`
-  visibility: ${(props) => (props.showIcon || props.isCzar ? 'visible' : 'hidden')};
-
-  width: 32px;
-  height: 43px;
-  margin: ${(props) => (props.isCzar ? '0' : '0 6px')};
-  background-color: ${(props) => (props.isCzar ? 'var(--secondary-color)' : 'var(--primary-color)')};
-  border: 2px solid var(--secondary-color);
-  border-radius: 3px;
-
-  display: block;
-  position: relative;
-
-  &::before {
-    display: ${(props) => (props.isCzar ? 'none' : 'block')};
-    content: '';
-
-    position: absolute;
-    z-index: -1;
-    top: 5px;
-    left: -12px;
-
-    width: 32px;
-    height: 43px;
-    background-color: var(--primary-color);
-    border: 2px solid var(--secondary-color);
-    border-radius: 3px;
-  }
-`;
-
 function PlayerList({ playerList }) {
   const playersArray = playerList.playersIDs.map((id) => playerList.players[id]);
 
   return (
     <PlayerTable data-testid="playerList-container">
       {playersArray.map((player) => {
-        const showIcon = player.submittedCards.length > 0;
+        const showIcon = player.submittedCards.length > 0 || player.czar;
+        const playerIcon = player.czar ? BlackCard : OffsetWhiteCardStack;
 
         return (
           <PlayerRow key={player.name} isCzar={player.czar} data-testid={`row-${player.name}`}>
-            <SmallCardsIcon isCzar={player.czar} showIcon={showIcon} data-testid={`icon-${player.name}`} />
+            <img
+              src={playerIcon}
+              alt="card icon"
+              style={{ visibility: showIcon ? 'visible' : 'hidden' }}
+              data-testid={`icon-${player.name}`}
+            />
 
             <div className="player-info">
               <h1>{player.name}</h1>
