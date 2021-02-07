@@ -10,7 +10,7 @@ describe('joinCode', () => {
   describe('rendering', () => {
     it('renders when "code" is an empty string', () => {
       render(<DisplayJoinCode code="" />);
-      expect(screen.getByTestId('joinCode')).toBeInTheDocument();
+      expect(screen.getByTestId('join-code')).toBeInTheDocument();
     });
 
     it('renders properly', () => {
