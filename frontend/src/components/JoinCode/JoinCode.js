@@ -11,7 +11,7 @@ const JoinCodeComponent = styled.div`
   flex-direction: column;
   line-height : 29px;
 
-  .joinCode-title {
+  .join-code-title {
     font-size: 18px;
     color: var(--secondary-color);
     background-color: var(--primary-color);
@@ -20,7 +20,7 @@ const JoinCodeComponent = styled.div`
     height: 21px; 
   }
 
-  .joinCode {
+  .join-code {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -36,8 +36,8 @@ const JoinCodeComponent = styled.div`
 function DisplayJoinCode({ code }) {
   return (
     <JoinCodeComponent>
-      <p className="joinCode-title">JOIN CODE:</p>
-      <p className="joinCode" data-testid="joinCode">{ code }</p>
+      <p className="join-code-title">JOIN CODE:</p>
+      <p className="join-code" data-testid="join-code">{ code }</p>
     </JoinCodeComponent>
   );
 }
