@@ -12,10 +12,10 @@ function App() {
           <code>src/App.js</code>
           and save to reload.
         </p>
-        <div style={{ fontSize: '40px' }}>
-          <Button isActive>Click me!</Button>
+        <div>
+          <Button className="test" isActive><p style={{ fontSize: '20px' }}>Click me!</p></Button>
         </div>
-        <Button>Do not click me!</Button>
+        <Button><p style={{ fontSize: '25px' }}>Do not click me!</p></Button>
         <a
           className="App-link"
           href="https://reactjs.org"
