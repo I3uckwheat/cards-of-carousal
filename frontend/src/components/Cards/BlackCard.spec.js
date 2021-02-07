@@ -14,7 +14,7 @@ describe('BlackCard', () => {
       expect(screen.getByText('0')).toBeInTheDocument();
 
       // Two SVGs in the bottom left of the card
-      expect(screen.queryAllByTestId('layerCard')).toHaveLength(2);
+      expect(screen.queryAllByTestId('layerCard')).toHaveLength(1);
     });
 
     it('renders a black card with no main text present', () => {
@@ -24,7 +24,7 @@ describe('BlackCard', () => {
       expect(screen.getByText('0')).toBeInTheDocument();
 
       // Two SVGs in the bottom left of the card
-      expect(screen.queryAllByTestId('layerCard')).toHaveLength(2);
+      expect(screen.queryAllByTestId('layerCard')).toHaveLength(1);
     });
   });
 
