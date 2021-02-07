@@ -9,7 +9,7 @@ module.exports = class LobbyList {
     this.lobbies[lobby.id] = lobby;
 
     return lobby.id;
-  }
+  };
 
   joinLobby = (lobbyId, webSocket) => {
     if (this.lobbies[lobbyId]) {
@@ -18,14 +18,18 @@ module.exports = class LobbyList {
     }
 
     return 'no-lobby';
-  }
+  };
 
   #handleLobbyClose = (lobbyId) => {
     delete this.lobbies[lobbyId];
-  }
+  };
 
   closeLobby = (lobbyId) => {
-    this.lobbies[lobbyId].closeLobby();
-    delete this.lobbies[lobbyId];
-  }
+    if (this.lobbies[lobbyId]) {
+      this.lobbies[lobbyId].closeLobby();
+      delete this.lobbies[lobbyId];
+    } else {
+      throw new Error(`Lobby ${lobbyId} does not exist`);
+    }
+  };
 };
