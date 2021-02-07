@@ -5,6 +5,7 @@ import HamburgerMenu from './components/Buttons/HamburgerMenu/HamburgerMenu';
 import SocketTest from './components/SocketTest';
 import PlayerList from './components/PlayerList/PlayerList';
 import DisplayJoinCode from './components/JoinCode/JoinCode';
+import BlackCardExample from './temp/BlackCardExample';
 
 import playerList from './temp/playerList';
 
@@ -14,6 +15,7 @@ function App() {
   const [showHamburgerMenu, setHamburgerMenu] = useState(false);
   const [hamburgerMenuActive, setHamburgerMenuActive] = useState(false);
   const [showJoinCode, setJoinCode] = useState(false);
+  const [showBlackCards, setShowBlackCards] = useState(false);
 
   return (
     <div className="App">
@@ -34,6 +36,10 @@ function App() {
         <button type="button" onClick={() => { setJoinCode(!showJoinCode); }}>
           Show JoinCode
         </button>
+
+        <Button type="button" onClick={() => { setShowBlackCards(!showBlackCards); }}>
+          Show Black Cards
+        </Button>
       </div>
 
       {showSocketTest && <SocketTest />}
@@ -55,6 +61,9 @@ function App() {
         />
       </div>
       )}
+
+      {showBlackCards
+      && <BlackCardExample />}
     </div>
   );
 }
