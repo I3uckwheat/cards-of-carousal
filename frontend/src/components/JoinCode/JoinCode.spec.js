@@ -8,9 +8,9 @@ describe('joinCode', () => {
   // ----------------------------------------------------------------------------
   // Rendering Tests
   describe('rendering', () => {
-    it('renders with an empty string', () => {
-      render(<DisplayJoinCode code={' '} />);
-      expect(screen.getByTestId('joinCode')).toHaveTextContent('');
+    it('renders when "code" is an empty string', () => {
+      render(<DisplayJoinCode code="" />);
+      expect(screen.getByTestId('joinCode')).toBeInTheDocument();
     });
 
     it('renders properly', () => {
