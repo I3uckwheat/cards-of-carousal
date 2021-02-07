@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import './App.css';
 
+import Button from './components/Buttons/Button';
+import './App.css';
 import HamburgerMenu from './components/Buttons/HamburgerMenu/HamburgerMenu';
 import SocketTest from './components/SocketTest';
 import PlayerList from './components/PlayerList/PlayerList';
@@ -27,6 +28,8 @@ function App() {
         <button type="button" onClick={() => { setHamburgerMenu(!showHamburgerMenu); }}>
           Show HamburgerMenu
         </button>
+        <Button isActive><p style={{ fontSize: '20px' }}>Click me!</p></Button>
+        <Button><p style={{ fontSize: '25px' }}>Do not click me!</p></Button>
       </div>
 
       {showSocketTest && <SocketTest />}
