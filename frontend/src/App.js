@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
+import './App.css';
+
 import HamburgerMenu from './components/Buttons/HamburgerMenu/HamburgerMenu';
 import SocketTest from './components/SocketTest';
+import PlayerList from './components/PlayerList/PlayerList';
 
-import './App.css';
+import playerList from './temp/playerList';
 
 function App() {
   const [showSocketTest, setShowSocketTest] = useState(false);
+  const [showPlayerList, setShowPlayerList] = useState(false);
   const [showHamburgerMenu, setHamburgerMenu] = useState(false);
-
-  const onClickTest = () => console.log('onClick was called!');
+  const [hamburgerMenuActive, setHamburgerMenuActive] = useState(false);
 
   return (
     <div className="App">
@@ -16,15 +19,33 @@ function App() {
         <button type="button" onClick={() => { setShowSocketTest(!showSocketTest); }}>
           Show SocketTest
         </button>
+
+        <button type="button" onClick={() => { setShowPlayerList(!showPlayerList); }}>
+          Show PlayerList
+        </button>
+
         <button type="button" onClick={() => { setHamburgerMenu(!showHamburgerMenu); }}>
           Show HamburgerMenu
         </button>
       </div>
 
       {showSocketTest && <SocketTest />}
-      {showHamburgerMenu && <HamburgerMenu isActive={false} onClick={onClickTest} />}
+
+      {showPlayerList && <PlayerList playerList={playerList} />}
+
       {showHamburgerMenu
-      && <div style={{ backgroundColor: 'grey' }}><HamburgerMenu isActive onClick={onClickTest} /></div>}
+      && (
+      <div style={{ backgroundColor: 'grey' }}>
+        <HamburgerMenu
+          isActive={hamburgerMenuActive}
+          onClick={() => {
+            setHamburgerMenuActive(!hamburgerMenuActive);
+            // eslint-disable-next-line no-console
+            console.log('hamburger menu clicked');
+          }}
+        />
+      </div>
+      )}
     </div>
   );
 }
