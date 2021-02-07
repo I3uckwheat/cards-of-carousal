@@ -7,6 +7,7 @@ import HamburgerMenu from './components/Buttons/HamburgerMenu/HamburgerMenu';
 import SocketTest from './components/SocketTest';
 import PlayerList from './components/PlayerList/PlayerList';
 import DisplayJoinCode from './components/JoinCode/JoinCode';
+import BlackCardExample from './temp/BlackCardExample';
 
 import playerList from './temp/playerList';
 
@@ -17,6 +18,7 @@ function App() {
   const [hamburgerMenuActive, setHamburgerMenuActive] = useState(false);
   const [showHeader, setShowHeader] = useState(false);
   const [showJoinCode, setJoinCode] = useState(false);
+  const [showBlackCards, setShowBlackCards] = useState(false);
 
   return (
     <div className="App">
@@ -40,6 +42,9 @@ function App() {
           Show JoinCode
         </button>
 
+        <Button type="button" onClick={() => { setShowBlackCards(!showBlackCards); }}>
+          Show Black Cards
+        </Button>
       </div>
       {showHeader && (
         <Header className="header">
@@ -67,18 +72,21 @@ function App() {
       {showJoinCode && <DisplayJoinCode code="XYA3Z" />}
 
       {showHamburgerMenu
-        && (
-          <div style={{ backgroundColor: 'grey' }}>
-            <HamburgerMenu
-              isActive={hamburgerMenuActive}
-              onClick={() => {
-                setHamburgerMenuActive(!hamburgerMenuActive);
-                // eslint-disable-next-line no-console
-                console.log('hamburger menu clicked');
-              }}
-            />
-          </div>
-        )}
+      && (
+      <div style={{ backgroundColor: 'grey' }}>
+        <HamburgerMenu
+          isActive={hamburgerMenuActive}
+          onClick={() => {
+            setHamburgerMenuActive(!hamburgerMenuActive);
+            // eslint-disable-next-line no-console
+            console.log('hamburger menu clicked');
+          }}
+        />
+      </div>
+      )}
+
+      {showBlackCards
+      && <BlackCardExample />}
     </div>
   );
 }

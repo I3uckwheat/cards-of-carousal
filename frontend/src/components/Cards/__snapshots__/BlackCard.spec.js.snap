@@ -1,0 +1,143 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BlackCard text parsing properly converts markdown to JSX 1`] = `
+.c1 {
+  position: absolute;
+  bottom: 4px;
+  left: 9px;
+  width: 32px;
+  height: 42px;
+}
+
+.c0 {
+  position: relative;
+  width: 390px;
+  height: 540px;
+  background-color: black;
+  color: white;
+  border-radius: 18px;
+  font-weight: 700;
+  font-size: 36px;
+  padding: 45px 21px 0 21px;
+  box-shadow: 4px 4px 24px rgba(0,0,0,0.3);
+}
+
+.c0 .pickText {
+  font-size: 24px;
+  margin-right: 7px;
+}
+
+.c0 .layeredCards {
+  position: absolute;
+  bottom: 18px;
+  left: 18px;
+}
+
+.c0 .pickCount {
+  position: absolute;
+  bottom: 8px;
+  right: 21px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  color: black;
+  background: white;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+<div
+  className="c0"
+  data-testid="black-card"
+>
+  <div>
+    <p>
+      This 
+      <em>
+        is
+      </em>
+       a 
+      <strong>
+        test
+      </strong>
+    </p>
+    <p>
+       Here is a 
+      <em>
+        new
+      </em>
+       
+      <strong>
+        line
+      </strong>
+    </p>
+  </div>
+  <div
+    className="layeredCards"
+  >
+    <div
+      style={
+        Object {
+          "position": "relative",
+        }
+      }
+    >
+      <div
+        className="c1"
+      >
+        <img
+          alt="white card"
+          data-testid="layerCard"
+          src="WhiteCard.svg"
+        />
+      </div>
+      <img
+        alt="black card"
+        data-testid="layerCard"
+        src="BlackCard.svg"
+      />
+    </div>
+  </div>
+  <div
+    className="pickCount"
+  >
+    <span
+      className="pickText"
+    >
+      PICK
+    </span>
+    <div
+      className="c2"
+    >
+      0
+    </div>
+  </div>
+</div>
+`;
