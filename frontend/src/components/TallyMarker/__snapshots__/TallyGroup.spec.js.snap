@@ -1,0 +1,65 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TallyGroup color sets the color of the tallies to the primary color 1`] = `
+.c0 {
+  stroke: var(--primary-color);
+}
+
+<svg
+  data-testid="tally-svg"
+  fill="none"
+  height="30"
+  viewBox="0 0 42 30"
+  width="42"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <g>
+    <path
+      class="c0"
+      color="primary"
+      d="M32.4285 3.19775V29.5701"
+      data-testid="tally"
+      stroke-width="2"
+    />
+    <path
+      class="c0"
+      color="primary"
+      d="M25.4439 3.51099L23.2217 29.5966"
+      data-testid="tally"
+      stroke-width="2"
+    />
+  </g>
+</svg>
+`;
+
+exports[`TallyGroup color sets the color of the tallies to the secondary color 1`] = `
+.c0 {
+  stroke: var(--secondary-color);
+}
+
+<svg
+  data-testid="tally-svg"
+  fill="none"
+  height="30"
+  viewBox="0 0 42 30"
+  width="42"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <g>
+    <path
+      class="c0"
+      color="secondary"
+      d="M32.4285 3.19775V29.5701"
+      data-testid="tally"
+      stroke-width="2"
+    />
+    <path
+      class="c0"
+      color="secondary"
+      d="M25.4439 3.51099L23.2217 29.5966"
+      data-testid="tally"
+      stroke-width="2"
+    />
+  </g>
+</svg>
+`;
