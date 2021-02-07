@@ -7,8 +7,8 @@ const propTypes = {
 
 const Header = styled.header`
   width: 100%;
-  background-color: black;
-  color: white;
+  background-color:var(--secondary-color);
+  color: var(--primary-color);
 `;
 
 Header.propTypes = propTypes;

@@ -35,9 +35,20 @@ function App() {
       </div>
       {showHeader && (
         <Header className="header">
-          <p>
-            HI!
-          </p>
+          <div style={{
+            display: 'flex', height: '100%', flexDirection: 'column', alignItems: 'flex-start', justifyContent: 'flex-end',
+          }}
+          >
+            <h1 style={{ lineHeight: '2rem', marginBottom: '-.9rem' }}>
+              WELCOME TO
+            </h1>
+            <h2 style={{
+              fontSize: '6rem', marginBottom: '-1rem', verticalAlign: 'bottom', lineHeight: '6rem',
+            }}
+            >
+              CARDS OF CAROUSAL
+            </h2>
+          </div>
         </Header>
       )}
 
