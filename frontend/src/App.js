@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+
+import Header from './components/Header/Header';
 import Button from './components/Buttons/Button';
 import './App.css';
 import HamburgerMenu from './components/Buttons/HamburgerMenu/HamburgerMenu';
@@ -14,6 +16,7 @@ function App() {
   const [showPlayerList, setShowPlayerList] = useState(false);
   const [showHamburgerMenu, setHamburgerMenu] = useState(false);
   const [hamburgerMenuActive, setHamburgerMenuActive] = useState(false);
+  const [showHeader, setShowHeader] = useState(false);
   const [showJoinCode, setJoinCode] = useState(false);
   const [showBlackCards, setShowBlackCards] = useState(false);
 
@@ -33,6 +36,8 @@ function App() {
         </button>
         <Button isActive><p style={{ fontSize: '20px' }}>Click me!</p></Button>
         <Button><p style={{ fontSize: '25px' }}>Do not click me!</p></Button>
+        <Button onClick={() => setShowHeader(!showHeader)}>Show Header</Button>
+
         <button type="button" onClick={() => { setJoinCode(!showJoinCode); }}>
           Show JoinCode
         </button>
@@ -41,6 +46,24 @@ function App() {
           Show Black Cards
         </Button>
       </div>
+      {showHeader && (
+        <Header className="header">
+          <div style={{
+            display: 'flex', height: '100%', flexDirection: 'column', alignItems: 'flex-start', justifyContent: 'flex-end',
+          }}
+          >
+            <h1 style={{ lineHeight: '2rem', marginBottom: '-.9rem' }}>
+              WELCOME TO
+            </h1>
+            <h2 style={{
+              fontSize: '6rem', marginBottom: '-1rem', verticalAlign: 'bottom', lineHeight: '6rem',
+            }}
+            >
+              CARDS OF CAROUSAL
+            </h2>
+          </div>
+        </Header>
+      )}
 
       {showSocketTest && <SocketTest />}
 
