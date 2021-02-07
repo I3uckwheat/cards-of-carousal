@@ -61,16 +61,16 @@ const Circled = styled.div`
   font-size: 14px;
 `;
 
-function BlackCard({ pickCount, children }) {
-  // 1. Makes sure newlines are doubled for markdown
-  // 2. Escapes and increases number of underscores displayed for each blank in the text
-  function parseForMarkdown(string, blankLength) {
-    return string
-      .replace(/\n/g, '\n\n')
-      .replace(/(^|(\s))_(\s)/g, `$1${'\\_'.repeat(blankLength)} `)
-      .replace(/(\s)_(([.,'?!:;()+-])|$)/g, ` ${'\\_'.repeat(blankLength)}$2`);
-  }
+// 1. Makes sure newlines are doubled for markdown
+// 2. Escapes and increases number of underscores displayed for each blank in the text
+function parseForMarkdown(string, blankLength) {
+  return string
+    .replace(/\n/g, '\n\n')
+    .replace(/(^|(\s))_(\s)/g, `$1${'\\_'.repeat(blankLength)} `)
+    .replace(/(\s)_(([.,'?!:;()+-])|$)/g, ` ${'\\_'.repeat(blankLength)}$2`);
+}
 
+function BlackCard({ pickCount, children }) {
   return (
     <StyledBlackCard data-testid="black-card">
       <Markdown options={{ wrapper: 'div' }}>{parseForMarkdown(children, BLANK_LENGTH)}</Markdown>
