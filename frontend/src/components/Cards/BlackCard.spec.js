@@ -17,18 +17,6 @@ describe('BlackCard', () => {
       expect(screen.queryAllByTestId('layerCard')).toHaveLength(2);
     });
 
-    it('does not render if prop is not passed', () => {
-      const consoleSpy = jest.spyOn(console, 'error');
-      render(<BlackCard>Howdy</BlackCard>);
-      expect(consoleSpy).toHaveBeenCalled();
-    });
-
-    it('does not render if the wrong prop type is passed', () => {
-      const consoleSpy = jest.spyOn(console, 'error');
-      render(<BlackCard pickCount="haha">Howdy</BlackCard>);
-      expect(consoleSpy).toHaveBeenCalled();
-    });
-
     it('renders a black card with no main text present', () => {
       render(<BlackCard pickCount={0} />);
       expect(screen.getByTestId('black-card')).toBeInTheDocument();
