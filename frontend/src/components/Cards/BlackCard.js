@@ -26,15 +26,18 @@ const StyledBlackCard = styled.div`
   font-size: 36px;
   padding: 45px 21px 0 21px;
   box-shadow: 4px 4px 24px rgba(0, 0, 0, 0.3);
+
   .pickText {
     font-size: 24px;
     margin-right: 7px;
   }
+
   .layeredCards {
     position: absolute;
     bottom: 18px;
     left: 18px;
   }
+  
   .pickCount {
     position: absolute;
     bottom: 8px;
