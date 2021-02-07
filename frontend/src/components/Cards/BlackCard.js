@@ -72,8 +72,8 @@ function parseForMarkdown(string, blankLength) {
     // Then it gets replaced with a long blank line (multiple escaped underscores)
     .replace(/(^|(\s))_(\s)/g, `$1${'\\_'.repeat(blankLength)} `)
     // https://regexr.com/5ltnm
-    // This regex either finds an underscore next to white space and punctuation, or
-    // an underscore next to whitespace and is the last character in the string (represented by $)
+    // This regex either finds an underscore next to white space and punctuation, or an underscore
+    // that is next to whitespace and is the last character in the string (represented by $)
     // Then it gets replaced with a long blank line (multiple escaped underscores)
     .replace(/(\s)_(([.,'?!:;()+-])|$)/g, ` ${'\\_'.repeat(blankLength)}$2`);
 }
