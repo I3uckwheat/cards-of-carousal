@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-
 import Button from './components/Buttons/Button';
 import './App.css';
 import HamburgerMenu from './components/Buttons/HamburgerMenu/HamburgerMenu';
 import SocketTest from './components/SocketTest';
 import PlayerList from './components/PlayerList/PlayerList';
+import DisplayJoinCode from './components/JoinCode/JoinCode';
 
 import playerList from './temp/playerList';
 
@@ -13,6 +13,7 @@ function App() {
   const [showPlayerList, setShowPlayerList] = useState(false);
   const [showHamburgerMenu, setHamburgerMenu] = useState(false);
   const [hamburgerMenuActive, setHamburgerMenuActive] = useState(false);
+  const [showJoinCode, setJoinCode] = useState(false);
 
   return (
     <div className="App">
@@ -30,11 +31,16 @@ function App() {
         </button>
         <Button isActive><p style={{ fontSize: '20px' }}>Click me!</p></Button>
         <Button><p style={{ fontSize: '25px' }}>Do not click me!</p></Button>
+        <button type="button" onClick={() => { setJoinCode(!showJoinCode); }}>
+          Show JoinCode
+        </button>
       </div>
 
       {showSocketTest && <SocketTest />}
 
       {showPlayerList && <PlayerList playerList={playerList} />}
+
+      {showJoinCode && <DisplayJoinCode code="XYA3Z" />}
 
       {showHamburgerMenu
       && (
