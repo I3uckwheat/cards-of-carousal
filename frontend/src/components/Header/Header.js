@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
@@ -6,16 +5,12 @@ const propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-const HeaderStyles = styled.header`
+const Header = styled.header`
   width: 100%;
+  background-color: black;
+  color: white;
 `;
 
-export default function Header({ children }) {
-  return (
-    <HeaderStyles>
-      {children}
-    </HeaderStyles>
-  );
-}
-
 Header.propTypes = propTypes;
+
+export default Header;

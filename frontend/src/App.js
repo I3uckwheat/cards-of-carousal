@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 
+import Header from './components/Header/Header';
 import Button from './components/Buttons/Button';
 import './App.css';
 import HamburgerMenu from './components/Buttons/HamburgerMenu/HamburgerMenu';
@@ -13,7 +14,7 @@ function App() {
   const [showPlayerList, setShowPlayerList] = useState(false);
   const [showHamburgerMenu, setHamburgerMenu] = useState(false);
   const [hamburgerMenuActive, setHamburgerMenuActive] = useState(false);
-
+  const [showHeader, setShowHeader] = useState(false);
   return (
     <div className="App">
       <div className="buttons-grid">
@@ -30,25 +31,33 @@ function App() {
         </button>
         <Button isActive><p style={{ fontSize: '20px' }}>Click me!</p></Button>
         <Button><p style={{ fontSize: '25px' }}>Do not click me!</p></Button>
+        <Button onClick={() => setShowHeader(!showHeader)}>Show Header</Button>
       </div>
+      {showHeader && (
+        <Header className="header">
+          <p>
+            HI!
+          </p>
+        </Header>
+      )}
 
       {showSocketTest && <SocketTest />}
 
       {showPlayerList && <PlayerList playerList={playerList} />}
 
       {showHamburgerMenu
-      && (
-      <div style={{ backgroundColor: 'grey' }}>
-        <HamburgerMenu
-          isActive={hamburgerMenuActive}
-          onClick={() => {
-            setHamburgerMenuActive(!hamburgerMenuActive);
-            // eslint-disable-next-line no-console
-            console.log('hamburger menu clicked');
-          }}
-        />
-      </div>
-      )}
+        && (
+          <div style={{ backgroundColor: 'grey' }}>
+            <HamburgerMenu
+              isActive={hamburgerMenuActive}
+              onClick={() => {
+                setHamburgerMenuActive(!hamburgerMenuActive);
+                // eslint-disable-next-line no-console
+                console.log('hamburger menu clicked');
+              }}
+            />
+          </div>
+        )}
     </div>
   );
 }
