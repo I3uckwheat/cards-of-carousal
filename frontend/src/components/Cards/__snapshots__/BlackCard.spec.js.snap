@@ -3,68 +3,10 @@
 exports[`BlackCard text parsing properly converts markdown to JSX 1`] = `
 .c1 {
   position: absolute;
-  top: auto;
-  right: auto;
-  bottom: 18px;
-  left: 18px;
-  width: auto;
-  height: auto;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
-.c2 {
-  position: absolute;
-  top: auto;
-  right: auto;
   bottom: 4px;
   left: 9px;
   width: 32px;
   height: 42px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
-.c3 {
-  position: absolute;
-  top: auto;
-  right: 21px;
-  bottom: 8px;
-  left: auto;
-  width: auto;
-  height: auto;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
 }
 
 .c0 {
@@ -85,7 +27,31 @@ exports[`BlackCard text parsing properly converts markdown to JSX 1`] = `
   margin-right: 7px;
 }
 
-.c4 {
+.c0 .layeredCards {
+  position: absolute;
+  bottom: 18px;
+  left: 18px;
+}
+
+.c0 .pickCount {
+  position: absolute;
+  bottom: 8px;
+  right: 21px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c2 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -134,9 +100,7 @@ exports[`BlackCard text parsing properly converts markdown to JSX 1`] = `
     </p>
   </div>
   <div
-    className="c1"
-    height="auto"
-    width="auto"
+    className="layeredCards"
   >
     <div
       style={
@@ -146,9 +110,7 @@ exports[`BlackCard text parsing properly converts markdown to JSX 1`] = `
       }
     >
       <div
-        className="c2"
-        height="42px"
-        width="32px"
+        className="c1"
       >
         <img
           alt="white card"
@@ -164,9 +126,7 @@ exports[`BlackCard text parsing properly converts markdown to JSX 1`] = `
     </div>
   </div>
   <div
-    className="c3"
-    height="auto"
-    width="auto"
+    className="pickCount"
   >
     <span
       className="pickText"
@@ -174,7 +134,7 @@ exports[`BlackCard text parsing properly converts markdown to JSX 1`] = `
       PICK
     </span>
     <div
-      className="c4"
+      className="c2"
     >
       0
     </div>
