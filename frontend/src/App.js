@@ -6,6 +6,7 @@ import './App.css';
 import HamburgerMenu from './components/Buttons/HamburgerMenu/HamburgerMenu';
 import SocketTest from './components/SocketTest';
 import PlayerList from './components/PlayerList/PlayerList';
+import DisplayJoinCode from './components/JoinCode/JoinCode';
 
 import playerList from './temp/playerList';
 
@@ -15,6 +16,8 @@ function App() {
   const [showHamburgerMenu, setHamburgerMenu] = useState(false);
   const [hamburgerMenuActive, setHamburgerMenuActive] = useState(false);
   const [showHeader, setShowHeader] = useState(false);
+  const [showJoinCode, setJoinCode] = useState(false);
+
   return (
     <div className="App">
       <div className="buttons-grid">
@@ -32,6 +35,11 @@ function App() {
         <Button isActive><p style={{ fontSize: '20px' }}>Click me!</p></Button>
         <Button><p style={{ fontSize: '25px' }}>Do not click me!</p></Button>
         <Button onClick={() => setShowHeader(!showHeader)}>Show Header</Button>
+
+        <button type="button" onClick={() => { setJoinCode(!showJoinCode); }}>
+          Show JoinCode
+        </button>
+
       </div>
       {showHeader && (
         <Header className="header">
@@ -55,6 +63,8 @@ function App() {
       {showSocketTest && <SocketTest />}
 
       {showPlayerList && <PlayerList playerList={playerList} />}
+
+      {showJoinCode && <DisplayJoinCode code="XYA3Z" />}
 
       {showHamburgerMenu
         && (
