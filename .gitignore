@@ -1,5 +1,4 @@
 node_modules
 **/.eslintcache
 backend/env.js
-**/.prettierrc
 .gitattributes
