@@ -21,7 +21,7 @@ function App() {
   const [showBlackCards, setShowBlackCards] = useState(false);
 
   return (
-    <div className="App">
+    <div className="App primary-background">
       <div className="buttons-grid">
         <button type="button" onClick={() => { setShowSocketTest(!showSocketTest); }}>
           Show SocketTest
@@ -72,21 +72,21 @@ function App() {
       {showJoinCode && <DisplayJoinCode code="XYA3Z" />}
 
       {showHamburgerMenu
-      && (
-      <div style={{ backgroundColor: 'grey' }}>
-        <HamburgerMenu
-          isActive={hamburgerMenuActive}
-          onClick={() => {
-            setHamburgerMenuActive(!hamburgerMenuActive);
-            // eslint-disable-next-line no-console
-            console.log('hamburger menu clicked');
-          }}
-        />
-      </div>
-      )}
+        && (
+          <div style={{ backgroundColor: 'grey' }}>
+            <HamburgerMenu
+              isActive={hamburgerMenuActive}
+              onClick={() => {
+                setHamburgerMenuActive(!hamburgerMenuActive);
+                // eslint-disable-next-line no-console
+                console.log('hamburger menu clicked');
+              }}
+            />
+          </div>
+        )}
 
       {showBlackCards
-      && <BlackCardExample />}
+        && <BlackCardExample />}
     </div>
   );
 }
