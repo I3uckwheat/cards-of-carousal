@@ -115,13 +115,17 @@ exports[`BlackCard text parsing properly converts markdown to JSX 1`] = `
         <img
           alt="white card"
           data-testid="layerCard"
+          height="41px"
           src="WhiteCard.svg"
+          width="31px"
         />
       </div>
       <img
         alt="black card"
         data-testid="layerCard"
+        height="41px"
         src="BlackCard.svg"
+        width="31px"
       />
     </div>
   </div>
