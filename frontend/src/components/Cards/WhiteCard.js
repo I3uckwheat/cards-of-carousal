@@ -28,6 +28,7 @@ const StyledWhiteCard = styled.div`
 
     .shadow {
         position: relative;
+        overflow: hidden;
     }
 
     .shadow:after {
@@ -37,12 +38,14 @@ const StyledWhiteCard = styled.div`
         position: absolute;
         top: 0;
         left: 0;
-        box-shadow: inset 0 -10px 10px -10px white;
+        box-shadow: inset 0 -20px 10px -10px white;
         pointer-events: none;
     }
 
     .whiteCardText {
-        max-height: 150px;
+        max-height: 145px;
+        padding-right: 17px;
+        width: 108%;
         overflow-y: auto;
     }
 
