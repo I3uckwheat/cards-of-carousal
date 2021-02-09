@@ -7,8 +7,8 @@
     "install-all": "npm i && cd ./frontend && npm i && cd ../backend && npm i",
     "dev:frontend": "cd ./frontend && npm start",
     "dev:backend": "cd ./backend && npm run dev",
-    "lint:frontend": "cd ./frontend && prettier .; eslint .",
-    "lint:backend": "cd ./backend && prettier .; eslint .",
+    "lint:frontend": "cd ./frontend && prettier -c .; eslint .",
+    "lint:backend": "cd ./backend && prettier -c .; eslint .",
     "lint": "prettier -c .; eslint .",
     "test:backend": "cd ./backend && npm test",
     "test:frontend": "cd ./frontend && npm test",
@@ -47,7 +47,7 @@
     }
   },
   "lint-staged": {
-    "*.js": "eslint --cache --fix",
+    "*.js": "eslint --cache",
     "*.{js,css,md}": "prettier -c"
   }
 }
