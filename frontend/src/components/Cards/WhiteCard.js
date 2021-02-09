@@ -37,7 +37,7 @@ const StyledWhiteCard = styled.div`
     width: 100%;
     height: 100%;
     position: absolute;
-    top: 0;
+    top: 1px;
     left: 0;
     box-shadow: inset 0 -20px 10px -10px white;
     pointer-events: none;
@@ -55,9 +55,8 @@ const StyledWhiteCard = styled.div`
 
   .layeredCards {
     position: absolute;
-    bottom: 0px;
+    bottom: 3px;
     left: 7px;
-    transform: scale(0.78);
   }
 
   .scrollbarThumb {
@@ -98,7 +97,7 @@ function WhiteCard({ children }) {
         </Scrollbars>
       </div>
       <div className="layeredCards">
-        <LayeredCards />
+        <LayeredCards small />
       </div>
     </StyledWhiteCard>
   );
