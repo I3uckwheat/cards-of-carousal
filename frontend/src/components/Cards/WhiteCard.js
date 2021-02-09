@@ -24,7 +24,7 @@ const StyledWhiteCard = styled.div`
   font-size: ${(props) => (props.shrinkFont ? '11px' : '18px')};
   overflow-wrap: break-word;
   line-height: 21px;
-  padding: 17px 10px 0 10px;
+  padding: 17px 5px 0 15px;
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.25);
 
   .shadow {
@@ -60,6 +60,10 @@ const StyledWhiteCard = styled.div`
     transform: scale(0.78);
   }
 
+  .scrollbarThumb {
+    width: 3px;
+  }
+
   @media (min-width: 1025px) {
     width: 267px;
     height: 363px;
@@ -79,11 +83,14 @@ function WhiteCard({ children }) {
       <div className="shadow">
         <Scrollbars
           renderThumbVertical={() => (
-            <div style={{
-              backgroundColor: 'black', zIndex: 1, position: 'relative', borderRadius: '15px',
-            }}
+            <div
+              className="scrollbarThumb"
+              style={{
+                backgroundColor: 'black', zIndex: 1, position: 'relative', borderRadius: '15px',
+              }}
             />
           )}
+          autoHide
           hideTracksWhenNotNeeded
           className="whiteCardText"
         >
