@@ -18,9 +18,9 @@ const Overlay = styled.div`
   background-color: rgba(0, 0, 0, 0.35);
 `;
 
-export default function Modal({ showModal, setShowModal, children }) {
+export default function Modal({ onClickOutside, children }) {
   return createPortal(
-    <Overlay onClick={() => setShowModal(!showModal)}>
+    <Overlay onClick={onClickOutside}>
       {children}
     </Overlay>,
     document.getElementById('root'),

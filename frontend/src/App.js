@@ -143,7 +143,7 @@ function App() {
       {showBlackCards
         && <BlackCardExample />}
 
-      {showModal && <Modal showModal={showModal} setShowModal={setShowModal} />}
+      {showModal && <Modal onClickOutside={() => setShowModal(!showModal)} />}
     </div>
   );
 }
