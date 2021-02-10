@@ -80,7 +80,6 @@ function parseForMarkdown(string, blankLength) {
 
 function BlackCard({ pickCount, children }) {
   return (
-    // TODO: replace with SVG
     <StyledBlackCard data-testid="black-card">
       <Markdown options={{ wrapper: 'div' }}>{parseForMarkdown(children, BLANK_LENGTH)}</Markdown>
       <div className="layeredCards">

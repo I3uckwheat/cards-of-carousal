@@ -1,14 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`BlackCard text parsing properly converts markdown to JSX 1`] = `
-.c1 {
-  position: absolute;
-  bottom: 4px;
-  left: 9px;
-  width: 32px;
-  height: 42px;
-}
-
 .c0 {
   position: relative;
   width: 390px;
@@ -51,7 +43,7 @@ exports[`BlackCard text parsing properly converts markdown to JSX 1`] = `
   align-items: center;
 }
 
-.c2 {
+.c1 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -109,19 +101,10 @@ exports[`BlackCard text parsing properly converts markdown to JSX 1`] = `
         }
       }
     >
-      <div
-        className="c1"
-      >
-        <img
-          alt="white card"
-          data-testid="layerCard"
-          src="WhiteCard.svg"
-        />
-      </div>
       <img
-        alt="black card"
+        alt="offset black and white card stack"
         data-testid="layerCard"
-        src="BlackCard.svg"
+        src="cards-stack-offset-dark-icon.svg"
       />
     </div>
   </div>
@@ -134,7 +117,7 @@ exports[`BlackCard text parsing properly converts markdown to JSX 1`] = `
       PICK
     </span>
     <div
-      className="c2"
+      className="c1"
     >
       0
     </div>
