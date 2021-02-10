@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import Scrollbars from 'react-custom-scrollbars';
@@ -41,16 +41,16 @@ const StyledWhiteCard = styled.div`
     left: 0;
     box-shadow: inset 0 -20px 10px -10px white;
     pointer-events: none;
+    opacity: ${(props) => (props.hideOverflowShadow ? '0' : '1')};
   }
 
   .whiteCardText {
     height: 145px !important;
     width: 108%;
-    z-index: 1;
   }
 
   .whiteCardText p {
-    padding-bottom: 50px;
+    margin-bottom: 50px;
     padding-right: 35px;
   }
 
@@ -78,16 +78,27 @@ const StyledWhiteCard = styled.div`
 `;
 
 function WhiteCard({ children }) {
+  const [hideOverflowShadow, setHideOverflowShadow] = useState(false);
+  function handleScroll(e) {
+    return e.target.scrollTop > e.target.scrollTopMax - 50
+      ? setHideOverflowShadow(true)
+      : setHideOverflowShadow(false);
+  }
+
   return (
-    <StyledWhiteCard data-testid="white-card" shrinkFont={children.length > 75}>
+    <StyledWhiteCard hideOverflowShadow={hideOverflowShadow} data-testid="white-card" shrinkFont={children.length > 75}>
       <div className="shadow">
         <Scrollbars
+          onScroll={handleScroll}
           data-testid="custom-scrollbar"
           renderThumbVertical={() => (
             <div
               className="scrollbarThumb"
               style={{
-                backgroundColor: 'black', position: 'relative', borderRadius: '15px',
+                backgroundColor: 'black',
+                position: 'relative',
+                borderRadius: '15px',
+                zIndex: 1,
               }}
             />
           )}
