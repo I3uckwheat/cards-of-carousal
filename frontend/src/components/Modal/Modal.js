@@ -3,6 +3,12 @@ import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
+const propTypes = {
+  children: PropTypes.node.isRequired,
+  setShowModal: PropTypes.func.isRequired,
+  showModal: PropTypes.bool.isRequired,
+};
+
 const Overlay = styled.div`
   position: absolute;
   top: 0;
@@ -24,8 +30,4 @@ export default function Modal({ showModal, setShowModal, children }) {
   );
 }
 
-Modal.propTypes = {
-  children: PropTypes.node.isRequired,
-  setShowModal: PropTypes.func.isRequired,
-  showModal: PropTypes.bool.isRequired,
-};
+Modal.propTypes = propTypes;
