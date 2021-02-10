@@ -16,6 +16,7 @@ const Overlay = styled.div`
   left: 0;
   right: 0;
   background-color: rgba(0, 0, 0, 0.35);
+  z-index: 9999;
 `;
 
 export default function Modal({ onClickOutside, children }) {
@@ -23,7 +24,7 @@ export default function Modal({ onClickOutside, children }) {
     <Overlay onClick={onClickOutside}>
       {children}
     </Overlay>,
-    document.getElementById('root'),
+    document.getElementById('modal-root'),
   );
 }
 
