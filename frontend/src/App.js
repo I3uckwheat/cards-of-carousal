@@ -143,7 +143,7 @@ function App() {
       {showBlackCards
         && <BlackCardExample />}
 
-      <Modal showModal={showModal} setShowModal={setShowModal} />
+      {showModal && <Modal showModal={showModal} setShowModal={setShowModal} />}
     </div>
   );
 }

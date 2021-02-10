@@ -19,14 +19,11 @@ const Overlay = styled.div`
 `;
 
 export default function Modal({ showModal, setShowModal, children }) {
-  return (
-    showModal
-    && createPortal(
-      <Overlay onClick={() => setShowModal(!showModal)}>
-        {children}
-      </Overlay>,
-      document.getElementById('root'),
-    )
+  return createPortal(
+    <Overlay onClick={() => setShowModal(!showModal)}>
+      {children}
+    </Overlay>,
+    document.getElementById('root'),
   );
 }
 
