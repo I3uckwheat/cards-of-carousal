@@ -1,10 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import {
-  BlackCard,
-  OffsetWhiteCardStack,
-} from '../../assets/index.js';
+import BlackCard from '../../assets/black-card-icon.svg';
+import OffsetWhiteCardStack from '../../assets/offset-white-card-stack-icon.svg';
 import TallyMarkers from '../TallyMarker/TallyMarker';
 
 const propTypes = {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { CardStackOffsetDark } from '../../assets/index.js';
+import CardStackOffsetDark from '../../assets/cards-stack-offset-dark-icon.svg';
 
 function LayeredCards() {
   return (
