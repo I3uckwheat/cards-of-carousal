@@ -29,7 +29,6 @@ const PlayerTable = styled.div`
   background-color: var(--primary-color);
 
   position: relative;
-  z-index: 1;
 
   & > div:not(:last-child) {
     margin-bottom: 24px;
@@ -52,7 +51,8 @@ const PlayerRow = styled.div`
     border-bottom: ${(props) => (props.isCzar ? 0 : '1px solid #ccc')};
     border-radius: ${(props) => (props.isCzar ? '4px' : 0)};
 
-    background-color: ${(props) => (props.isCzar ? 'var(--secondary-color)' : 'var(--primary-color)')};
+    background-color: ${(props) =>
+      props.isCzar ? 'var(--secondary-color)' : 'var(--primary-color)'};
 
     h1 {
       text-transform: uppercase;
@@ -60,18 +60,22 @@ const PlayerRow = styled.div`
       font-weight: 900;
       letter-spacing: 1px;
       line-height: 1.5em;
-      color: ${(props) => (props.isCzar ? 'var(--primary-color)' : 'var(--secondary-color)')};
+      color: ${(props) =>
+        props.isCzar ? 'var(--primary-color)' : 'var(--secondary-color)'};
     }
 
     span {
-      color: ${(props) => (props.isCzar ? 'var(--primary-color)' : 'var(--secondary-color)')};
+      color: ${(props) =>
+        props.isCzar ? 'var(--primary-color)' : 'var(--secondary-color)'};
       font-size: 24px;
       font-weight: 900;
     }
   }
 `;
 function PlayerList({ playerList }) {
-  const playersArray = playerList.playersIDs.map((id) => playerList.players[id]);
+  const playersArray = playerList.playersIDs.map(
+    (id) => playerList.players[id],
+  );
 
   return (
     <PlayerTable data-testid="playerList-container">
@@ -80,7 +84,11 @@ function PlayerList({ playerList }) {
         const playerIcon = player.czar ? BlackCard : OffsetWhiteCardStack;
 
         return (
-          <PlayerRow key={player.name} isCzar={player.czar} data-testid={`row-${player.name}`}>
+          <PlayerRow
+            key={player.name}
+            isCzar={player.czar}
+            data-testid={`row-${player.name}`}
+          >
             <img
               src={playerIcon}
               alt="card icon"
@@ -90,7 +98,11 @@ function PlayerList({ playerList }) {
 
             <div className="player-info">
               <h1>{player.name}</h1>
-              <TallyMarkers score={player.score} maxNumberOfMarkers={2} color={player.czar ? 'primary' : 'secondary'} />
+              <TallyMarkers
+                score={player.score}
+                maxNumberOfMarkers={2}
+                color={player.czar ? 'primary' : 'secondary'}
+              />
             </div>
           </PlayerRow>
         );
