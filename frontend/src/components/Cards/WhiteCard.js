@@ -46,11 +46,12 @@ const StyledWhiteCard = styled.div`
   .whiteCardText {
     height: 145px !important;
     width: 108%;
+    z-index: 1;
   }
 
   .whiteCardText p {
-    padding-bottom: 20px;
-    padding-right: 25px;
+    padding-bottom: 50px;
+    padding-right: 35px;
   }
 
   .layeredCards {
@@ -78,14 +79,15 @@ const StyledWhiteCard = styled.div`
 
 function WhiteCard({ children }) {
   return (
-    <StyledWhiteCard shrinkFont={children.length > 75}>
+    <StyledWhiteCard data-testid="white-card" shrinkFont={children.length > 75}>
       <div className="shadow">
         <Scrollbars
+          data-testid="custom-scrollbar"
           renderThumbVertical={() => (
             <div
               className="scrollbarThumb"
               style={{
-                backgroundColor: 'black', zIndex: 1, position: 'relative', borderRadius: '15px',
+                backgroundColor: 'black', position: 'relative', borderRadius: '15px',
               }}
             />
           )}
