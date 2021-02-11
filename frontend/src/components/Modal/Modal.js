@@ -5,8 +5,7 @@ import styled from 'styled-components';
 
 const propTypes = {
   children: PropTypes.node.isRequired,
-  setShowModal: PropTypes.func.isRequired,
-  showModal: PropTypes.bool.isRequired,
+  onClickOutside: PropTypes.func.isRequired,
 };
 
 const Overlay = styled.div`
