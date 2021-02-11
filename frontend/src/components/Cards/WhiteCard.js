@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import LayeredCards from '../../assets/cards-stack-offset-light-icon.svg';
+import StackedCards from '../../assets/cards-stack-offset-light-icon.svg';
 
 const propTypes = {
   children: PropTypes.string,
@@ -36,7 +36,7 @@ const StyledWhiteCard = styled.div`
         padding-bottom: 20px;
     }
 
-    .layeredCards {
+    .stackedCards {
         position: absolute;
         bottom: 7px;
         left: 11px;
@@ -55,7 +55,7 @@ const StyledWhiteCard = styled.div`
           padding-right: ${(props) => (props.shrinkFont ? '15px' : '0')};
         }
 
-        .layeredCards {
+        .stackedCards {
           width: auto;
         }
     }
@@ -63,13 +63,15 @@ const StyledWhiteCard = styled.div`
 
 function WhiteCard({ children }) {
   return (
-    <StyledWhiteCard shrinkFont={children.length > 75}>
+    <StyledWhiteCard shrinkFont={children.length > 75} data-testid="white-card">
       <div className="whiteCardText">
         <div>{children}</div>
       </div>
-      <div className="layeredCards">
-        {!(children.length > 75) && <img src={LayeredCards} alt="stacked cards" />}
+      {!(children.length > 75) && (
+      <div className="stackedCards" data-testid="stacked-cards">
+        <img src={StackedCards} alt="stacked cards" />
       </div>
+      )}
     </StyledWhiteCard>
   );
 }
