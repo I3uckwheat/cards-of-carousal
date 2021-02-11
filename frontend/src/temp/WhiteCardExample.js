@@ -13,15 +13,8 @@ function WhiteCardExample() {
     >
       <div style={{ padding: '10px' }}>
         <WhiteCard>
-          Overflow scrollbars on desktop will be black. Overflow scrollbars on mobile will be
-          regular mobile scrollbars. Extra text to make this overflow.
-          Extra text to make this overflow.
-          Extra text to make this overflow.
-        </WhiteCard>
-      </div>
-      <div style={{ padding: '10px' }}>
-        <WhiteCard>
-          {'break-word, is that what we want? ->'}
+          Stacked card SVG hidden when string too long. Extra text.
+          Extra text. Extra text. Extra text. Extra text. Extra text. Extra text.
         </WhiteCard>
       </div>
       <div style={{ padding: '10px' }}>
@@ -43,8 +36,7 @@ function WhiteCardExample() {
       </div>
       <div style={{ padding: '10px' }}>
         <WhiteCard>
-          {"Do we want these layered cards in the corner on large \
-            size WhiteCards? In the Figma they're hidden"}
+          A baby that smokes and plays the ukulele
         </WhiteCard>
       </div>
     </div>
