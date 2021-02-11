@@ -6,6 +6,7 @@ import SocketTest from './components/SocketTest';
 import PlayerList from './components/PlayerList/PlayerList';
 import DisplayJoinCode from './components/JoinCode/JoinCode';
 import BlackCardExample from './temp/BlackCardExample';
+import WhiteCardExample from './temp/WhiteCardExample';
 
 import playerList from './temp/playerList';
 
@@ -16,6 +17,7 @@ function App() {
   const [hamburgerMenuActive, setHamburgerMenuActive] = useState(false);
   const [showJoinCode, setJoinCode] = useState(false);
   const [showBlackCards, setShowBlackCards] = useState(false);
+  const [showWhiteCards, setShowWhiteCards] = useState(false);
 
   return (
     <div className="App">
@@ -39,6 +41,10 @@ function App() {
 
         <Button type="button" onClick={() => { setShowBlackCards(!showBlackCards); }}>
           Show Black Cards
+        </Button>
+
+        <Button isActive type="button" onClick={() => { setShowWhiteCards(!showWhiteCards); }}>
+          Show White Cards
         </Button>
       </div>
 
@@ -64,6 +70,9 @@ function App() {
 
       {showBlackCards
       && <BlackCardExample />}
+
+      {showWhiteCards
+      && <WhiteCardExample />}
     </div>
   );
 }
