@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
@@ -18,11 +18,27 @@ const Overlay = styled.div`
   z-index: 9999;
 `;
 
-export default function Modal({ onClickOutside, children }) {
+export default function Modal({ children, onClickOutside }) {
+  const overlayRef = useRef();
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (overlayRef.current && event.target === overlayRef.current) {
+        onClickOutside();
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('touchstart', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('touchstart', handleClickOutside);
+    };
+  }, []);
+
   return createPortal(
-    <Overlay onClick={onClickOutside}>
-      {children}
-    </Overlay>,
+    <Overlay ref={overlayRef}>{children}</Overlay>,
     document.getElementById('modal-root'),
   );
 }
