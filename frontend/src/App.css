@@ -1,5 +1,6 @@
 .App {
-  /* text-align: center; */
+  height: 100vh;
+  width: 100vw;
 }
 
 .buttons-grid {
@@ -8,4 +9,12 @@
   grid-template-columns: repeat(auto-fill, 200px);
 
   margin: 20px;
+}
+
+.header {
+  height: 300px;
+}
+
+.primary-background {
+  background-image: url('./assets/primary-background.svg');
 }
