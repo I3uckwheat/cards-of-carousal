@@ -11,7 +11,7 @@
     "lint:backend": "cd ./backend && prettier -c .; eslint .",
     "lint": "prettier -c .; eslint .",
     "test:backend": "cd ./backend && npm test",
-    "test:frontend": "cd ./frontend && npm test",
+    "test:frontend": "cd ./frontend && npm test -- --watchAll=false",
     "test": "npm run test:backend && npm run test:frontend"
   },
   "repository": {
@@ -43,11 +43,10 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "lint-staged && npm run test"
     }
   },
   "lint-staged": {
-    "*.js": "eslint --cache",
     "*.{js,css,md}": "prettier -c"
   }
 }
