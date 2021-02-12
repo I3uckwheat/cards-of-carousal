@@ -14,16 +14,19 @@ module.exports = class MasterDeck {
   #singleDeckReducer = (acc, pack) => ({
     black: [...acc.black, ...pack.black],
     white: [...acc.white, ...pack.white],
-  })
+  });
 
   getDeck = (packIndexes) => {
-    if (!packIndexes || !Array.isArray(packIndexes)) throw new Error(`Expected an array of pack indexes, got: ${packIndexes}`);
+    if (!packIndexes || !Array.isArray(packIndexes))
+      throw new Error(`Expected an array of pack indexes, got: ${packIndexes}`);
 
-    const selectedPacks = this.#cards.filter((pack, index) => packIndexes.includes(index));
+    const selectedPacks = this.#cards.filter((pack, index) =>
+      packIndexes.includes(index),
+    );
 
     return selectedPacks.reduce(this.#singleDeckReducer, {
       black: [],
       white: [],
     });
-  }
+  };
 };

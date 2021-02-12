@@ -18,12 +18,11 @@ const app = express();
 // app.use(routes);
 
 // Error handling
-app.use((err, req, res) => {
-  // res.status(500).send('Something went wrong with the server!');
-  // // remove comment if necessary
-  // // eslint-disable-next-line
-  // console.error(err);:w
-
-});
+// app.use((err, req, res) => {
+// res.status(500).send('Something went wrong with the server!');
+// // remove comment if necessary
+// // eslint-disable-next-line
+// console.error(err);:w
+// });
 
 module.exports = app;

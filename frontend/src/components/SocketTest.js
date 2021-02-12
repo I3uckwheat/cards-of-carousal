@@ -30,7 +30,10 @@ function SocketTest() {
 
   const handleSendMessage = (e) => {
     e.preventDefault();
-    socketInstance.sendMessage({ event: 'message', payload: socketMessageInput });
+    socketInstance.sendMessage({
+      event: 'message',
+      payload: socketMessageInput,
+    });
     setSocketMessageInput('');
   };
 

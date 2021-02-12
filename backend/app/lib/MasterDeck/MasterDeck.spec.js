@@ -4,23 +4,43 @@ function makeMockCards() {
   return {
     1: {
       name: 'Video Games',
-      white: [{ text: 'Peter Molyneux' }, { text: 'Half an A Press' }, { text: 'Superman 64' }],
-      black: [{ text: 'New from Aperture Science: The _____ Gun!' }, { text: 'What\'s inside the G-Man\'s briefcase?' }],
+      white: [
+        { text: 'Peter Molyneux' },
+        { text: 'Half an A Press' },
+        { text: 'Superman 64' },
+      ],
+      black: [
+        { text: 'New from Aperture Science: The _____ Gun!' },
+        { text: "What's inside the G-Man's briefcase?" },
+      ],
     },
     2: {
       name: 'Goosebumps',
-      white: [{ text: 'Slappy the evil talking Dummy' }, { text: 'Monster Blood from Monster Blood' }],
-      black: [{ text: 'Say Cheese and _____  - Again!' }, { text: 'Stay out of the _____.' }],
+      white: [
+        { text: 'Slappy the evil talking Dummy' },
+        { text: 'Monster Blood from Monster Blood' },
+      ],
+      black: [
+        { text: 'Say Cheese and _____  - Again!' },
+        { text: 'Stay out of the _____.' },
+      ],
     },
     3: {
-      name: 'Wendy\'s Breakfast Items',
-      white: [{ text: 'Breakfast Baconator' }, { text: 'Maple Bacon Chicken Croissant' }, { text: 'Sausage, Egg & Swiss Croissant' }],
+      name: "Wendy's Breakfast Items",
+      white: [
+        { text: 'Breakfast Baconator' },
+        { text: 'Maple Bacon Chicken Croissant' },
+        { text: 'Sausage, Egg & Swiss Croissant' },
+      ],
       black: [],
     },
     4: {
       name: 'WebMD',
       white: [],
-      black: [{ text: 'The leg bone\'s connected to the _____ bone.' }, { text: 'Add _____ to your water to enhance your gains.' }],
+      black: [
+        { text: "The leg bone's connected to the _____ bone." },
+        { text: 'Add _____ to your water to enhance your gains.' },
+      ],
     },
   };
 }
@@ -31,7 +51,9 @@ describe('MasterDeck', () => {
   });
 
   it('throws an error when no data is passed', () => {
-    expect(() => new MasterDeck()).toThrowError('Card data is missing, got: undefined');
+    expect(() => new MasterDeck()).toThrowError(
+      'Card data is missing, got: undefined',
+    );
   });
 
   describe('getPackNames', () => {
@@ -39,7 +61,12 @@ describe('MasterDeck', () => {
       const mockCards = makeMockCards();
 
       const masterDeck = new MasterDeck(mockCards);
-      expect(masterDeck.getPackNames()).toEqual(['Video Games', 'Goosebumps', 'Wendy\'s Breakfast Items', 'WebMD']);
+      expect(masterDeck.getPackNames()).toEqual([
+        'Video Games',
+        'Goosebumps',
+        "Wendy's Breakfast Items",
+        'WebMD',
+      ]);
     });
   });
 
@@ -50,7 +77,11 @@ describe('MasterDeck', () => {
       const masterDeck = new MasterDeck(mockCards);
       const packs = masterDeck.getDeck([2]);
       expect(packs).toMatchObject({
-        white: [{ text: 'Breakfast Baconator' }, { text: 'Maple Bacon Chicken Croissant' }, { text: 'Sausage, Egg & Swiss Croissant' }],
+        white: [
+          { text: 'Breakfast Baconator' },
+          { text: 'Maple Bacon Chicken Croissant' },
+          { text: 'Sausage, Egg & Swiss Croissant' },
+        ],
       });
     });
 
@@ -60,7 +91,10 @@ describe('MasterDeck', () => {
       const masterDeck = new MasterDeck(mockCards);
       const packs = masterDeck.getDeck([3]);
       expect(packs).toMatchObject({
-        black: [{ text: 'The leg bone\'s connected to the _____ bone.' }, { text: 'Add _____ to your water to enhance your gains.' }],
+        black: [
+          { text: "The leg bone's connected to the _____ bone." },
+          { text: 'Add _____ to your water to enhance your gains.' },
+        ],
       });
     });
 
@@ -71,8 +105,24 @@ describe('MasterDeck', () => {
       const packs = masterDeck.getDeck([0, 1, 2, 3]);
 
       expect(packs).toMatchObject({
-        white: [{ text: 'Peter Molyneux' }, { text: 'Half an A Press' }, { text: 'Superman 64' }, { text: 'Slappy the evil talking Dummy' }, { text: 'Monster Blood from Monster Blood' }, { text: 'Breakfast Baconator' }, { text: 'Maple Bacon Chicken Croissant' }, { text: 'Sausage, Egg & Swiss Croissant' }],
-        black: [{ text: 'New from Aperture Science: The _____ Gun!' }, { text: 'What\'s inside the G-Man\'s briefcase?' }, { text: 'Say Cheese and _____  - Again!' }, { text: 'Stay out of the _____.' }, { text: 'The leg bone\'s connected to the _____ bone.' }, { text: 'Add _____ to your water to enhance your gains.' }],
+        white: [
+          { text: 'Peter Molyneux' },
+          { text: 'Half an A Press' },
+          { text: 'Superman 64' },
+          { text: 'Slappy the evil talking Dummy' },
+          { text: 'Monster Blood from Monster Blood' },
+          { text: 'Breakfast Baconator' },
+          { text: 'Maple Bacon Chicken Croissant' },
+          { text: 'Sausage, Egg & Swiss Croissant' },
+        ],
+        black: [
+          { text: 'New from Aperture Science: The _____ Gun!' },
+          { text: "What's inside the G-Man's briefcase?" },
+          { text: 'Say Cheese and _____  - Again!' },
+          { text: 'Stay out of the _____.' },
+          { text: "The leg bone's connected to the _____ bone." },
+          { text: 'Add _____ to your water to enhance your gains.' },
+        ],
       });
     });
 
@@ -83,8 +133,19 @@ describe('MasterDeck', () => {
       const packs = masterDeck.getDeck([0, 1]);
 
       expect(packs).toMatchObject({
-        white: [{ text: 'Peter Molyneux' }, { text: 'Half an A Press' }, { text: 'Superman 64' }, { text: 'Slappy the evil talking Dummy' }, { text: 'Monster Blood from Monster Blood' }],
-        black: [{ text: 'New from Aperture Science: The _____ Gun!' }, { text: 'What\'s inside the G-Man\'s briefcase?' }, { text: 'Say Cheese and _____  - Again!' }, { text: 'Stay out of the _____.' }],
+        white: [
+          { text: 'Peter Molyneux' },
+          { text: 'Half an A Press' },
+          { text: 'Superman 64' },
+          { text: 'Slappy the evil talking Dummy' },
+          { text: 'Monster Blood from Monster Blood' },
+        ],
+        black: [
+          { text: 'New from Aperture Science: The _____ Gun!' },
+          { text: "What's inside the G-Man's briefcase?" },
+          { text: 'Say Cheese and _____  - Again!' },
+          { text: 'Stay out of the _____.' },
+        ],
       });
     });
 
@@ -104,14 +165,18 @@ describe('MasterDeck', () => {
       const mockCards = makeMockCards();
 
       const masterDeck = new MasterDeck(mockCards);
-      expect(() => masterDeck.getDeck()).toThrowError('Expected an array of pack indexes, got: undefined');
+      expect(() => masterDeck.getDeck()).toThrowError(
+        'Expected an array of pack indexes, got: undefined',
+      );
     });
 
     it('throws an error when a non-array is passed as a parameter', () => {
       const mockCards = makeMockCards();
 
       const masterDeck = new MasterDeck(mockCards);
-      expect(() => masterDeck.getDeck(42)).toThrowError('Expected an array of pack indexes, got: 42');
+      expect(() => masterDeck.getDeck(42)).toThrowError(
+        'Expected an array of pack indexes, got: 42',
+      );
     });
   });
 });

@@ -37,7 +37,14 @@ const playerList = {
       submittedCards: [],
     },
   },
-  playersIDs: ['playerID1', 'playerID2', 'playerID3', 'playerID4', 'playerID5', 'playerID6'],
+  playersIDs: [
+    'playerID1',
+    'playerID2',
+    'playerID3',
+    'playerID4',
+    'playerID5',
+    'playerID6',
+  ],
 };
 
 export default playerList;

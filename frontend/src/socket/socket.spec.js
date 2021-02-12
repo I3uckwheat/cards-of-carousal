@@ -82,7 +82,9 @@ describe('socketInstance', () => {
         payload: {},
       };
 
-      expect(() => socketInstance.sendMessage(message)).toThrow('Socket is not connected');
+      expect(() => socketInstance.sendMessage(message)).toThrow(
+        'Socket is not connected',
+      );
     });
 
     it('sends the message when host', () => {
@@ -156,7 +158,9 @@ describe('socketInstance', () => {
 
         socketInstance.createLobby();
 
-        eventCallbacks.message.forEach((cb) => cb({ data: JSON.stringify(message) }));
+        eventCallbacks.message.forEach((cb) =>
+          cb({ data: JSON.stringify(message) }),
+        );
         expect(spy.mock.calls.length).toBe(eventCallbacks.message.length);
         expect(spy).toBeCalledWith('message', message);
       });

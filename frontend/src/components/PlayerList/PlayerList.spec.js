@@ -25,8 +25,12 @@ describe('PlayerList', () => {
 
     render(<PlayerList playerList={playerList} />);
 
-    expect(screen.getByText(playerList.players.playerID1.name)).toBeInTheDocument();
-    expect(screen.getByText(playerList.players.playerID2.name)).toBeInTheDocument();
+    expect(
+      screen.getByText(playerList.players.playerID1.name),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(playerList.players.playerID2.name),
+    ).toBeInTheDocument();
   });
 
   it('If player has submitted his cards or player is czar, render the icon fully visible', () => {
@@ -50,8 +54,12 @@ describe('PlayerList', () => {
 
     render(<PlayerList playerList={playerList} />);
 
-    expect(screen.getByTestId(`icon-${playerList.players.playerID1.name}`)).toBeVisible();
-    expect(screen.getByTestId(`icon-${playerList.players.playerID2.name}`)).toBeVisible();
+    expect(
+      screen.getByTestId(`icon-${playerList.players.playerID1.name}`),
+    ).toBeVisible();
+    expect(
+      screen.getByTestId(`icon-${playerList.players.playerID2.name}`),
+    ).toBeVisible();
   });
 
   it('If player has NOT submitted his cards, render the icon with visibility hidden', () => {
@@ -69,7 +77,9 @@ describe('PlayerList', () => {
 
     render(<PlayerList playerList={playerList} />);
 
-    expect(screen.getByTestId(`icon-${playerList.players.playerID1.name}`)).not.toBeVisible();
+    expect(
+      screen.getByTestId(`icon-${playerList.players.playerID1.name}`),
+    ).not.toBeVisible();
   });
 
   it('If playersIDs is empty, PlayerList still renders as an empty container', () => {

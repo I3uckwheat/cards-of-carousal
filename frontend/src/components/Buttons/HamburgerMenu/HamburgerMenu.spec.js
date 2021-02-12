@@ -9,21 +9,37 @@ import activeHamburger from './activeHamburger.svg';
 
 describe('HamburgerMenu', () => {
   it('displays inactiveHamburger when isActive is set to false', () => {
-    render(<HamburgerMenu isActive={false} onClick={() => {}} onInactive={() => {}} />);
+    render(
+      <HamburgerMenu
+        isActive={false}
+        onClick={() => {}}
+        onInactive={() => {}}
+      />,
+    );
 
-    expect(screen.getByRole('button')).toHaveStyle(`background-image: url(${inactiveHamburger})`);
+    expect(screen.getByRole('button')).toHaveStyle(
+      `background-image: url(${inactiveHamburger})`,
+    );
   });
 
   it('displays activeHamburger when isActive is set to true', () => {
     render(<HamburgerMenu isActive onClick={() => {}} onInactive={() => {}} />);
 
-    expect(screen.getByRole('button')).toHaveStyle(`background-image: url(${activeHamburger})`);
+    expect(screen.getByRole('button')).toHaveStyle(
+      `background-image: url(${activeHamburger})`,
+    );
   });
 
   it('does not call the onClick callback when it has not been clicked', () => {
     const onClick = jest.fn();
 
-    render(<HamburgerMenu isActive={false} onClick={onClick} onInactive={() => {}} />);
+    render(
+      <HamburgerMenu
+        isActive={false}
+        onClick={onClick}
+        onInactive={() => {}}
+      />,
+    );
 
     expect(onClick).not.toHaveBeenCalled();
   });
@@ -31,7 +47,13 @@ describe('HamburgerMenu', () => {
   it('calls the onClick callback when clicked', () => {
     const onClick = jest.fn();
 
-    render(<HamburgerMenu isActive={false} onClick={onClick} onInactive={() => {}} />);
+    render(
+      <HamburgerMenu
+        isActive={false}
+        onClick={onClick}
+        onInactive={() => {}}
+      />,
+    );
 
     userEvent.click(screen.getByRole('button'));
     expect(onClick).toHaveBeenCalledTimes(1);
@@ -40,7 +62,13 @@ describe('HamburgerMenu', () => {
   it('calls the onClick callback twice when clicked twice', () => {
     const onClick = jest.fn();
 
-    render(<HamburgerMenu isActive={false} onClick={onClick} onInactive={() => {}} />);
+    render(
+      <HamburgerMenu
+        isActive={false}
+        onClick={onClick}
+        onInactive={() => {}}
+      />,
+    );
 
     userEvent.click(screen.getByRole('button'));
     userEvent.click(screen.getByRole('button'));

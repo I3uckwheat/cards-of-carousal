@@ -145,13 +145,11 @@ describe('Message', () => {
 
       // We parse the result to make sure that JS doesn't change the order while converting
       // because objects are unordered
-      expect(JSON.parse(message.toJSON())).toMatchObject(
-        {
-          event: objectMessage.event,
-          payload: objectMessage.payload,
-          sender,
-        },
-      );
+      expect(JSON.parse(message.toJSON())).toMatchObject({
+        event: objectMessage.event,
+        payload: objectMessage.payload,
+        sender,
+      });
     });
 
     it('returns the proper message format when constructed with a recipients array', () => {
@@ -166,13 +164,11 @@ describe('Message', () => {
 
       // We parse the result to make sure that JS doesn't change the order while converting
       // because objects are unordered
-      expect(JSON.parse(message.toJSON())).toMatchObject(
-        {
-          event: objectMessage.event,
-          payload: objectMessage.payload,
-          sender,
-        },
-      );
+      expect(JSON.parse(message.toJSON())).toMatchObject({
+        event: objectMessage.event,
+        payload: objectMessage.payload,
+        sender,
+      });
     });
   });
 });

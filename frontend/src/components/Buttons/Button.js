@@ -17,12 +17,14 @@ const Button = styled.button`
   border: 2px solid #000;
   font-size: 12px;
   font-weight: bold;
-  padding: .7em;
+  padding: 0.7em;
   background: ${(props) => (props.isActive ? '#fff' : '#333')};
   color: ${(props) => (props.isActive ? '#000' : '#fff')};
 
-  :hover, :active, :focus {
-    background: #8C8C8C;    
+  :hover,
+  :active,
+  :focus {
+    background: #8c8c8c;
     cursor: pointer;
   }
 `;

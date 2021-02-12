@@ -37,7 +37,7 @@ const StyledBlackCard = styled.div`
     bottom: 18px;
     left: 18px;
   }
-  
+
   .pickCount {
     position: absolute;
     bottom: 8px;
@@ -62,26 +62,30 @@ const Circled = styled.div`
 `;
 
 function parseForMarkdown(string, blankLength) {
-  return string
-    // https://regexr.com/5ltnd
-    // This regex finds all instances of the newline character \n
-    // Then it gets replaced with the markdown equivalent \n\n
-    .replace(/\n/g, '\n\n')
-    // https://regexr.com/5ltng
-    // This regex finds all instances of underscores surrounded by white space
-    // Then it gets replaced with a long blank line (multiple escaped underscores)
-    .replace(/(^|(\s))_(\s)/g, `$1${'\\_'.repeat(blankLength)} `)
-    // https://regexr.com/5ltnm
-    // This regex either finds an underscore next to white space and punctuation, or an underscore
-    // that is next to whitespace and is the last character in the string (represented by $)
-    // Then it gets replaced with a long blank line (multiple escaped underscores)
-    .replace(/(\s)_(([.,'?!:;()+-])|$)/g, ` ${'\\_'.repeat(blankLength)}$2`);
+  return (
+    string
+      // https://regexr.com/5ltnd
+      // This regex finds all instances of the newline character \n
+      // Then it gets replaced with the markdown equivalent \n\n
+      .replace(/\n/g, '\n\n')
+      // https://regexr.com/5ltng
+      // This regex finds all instances of underscores surrounded by white space
+      // Then it gets replaced with a long blank line (multiple escaped underscores)
+      .replace(/(^|(\s))_(\s)/g, `$1${'\\_'.repeat(blankLength)} `)
+      // https://regexr.com/5ltnm
+      // This regex either finds an underscore next to white space and punctuation, or an underscore
+      // that is next to whitespace and is the last character in the string (represented by $)
+      // Then it gets replaced with a long blank line (multiple escaped underscores)
+      .replace(/(\s)_(([.,'?!:;()+-])|$)/g, ` ${'\\_'.repeat(blankLength)}$2`)
+  );
 }
 
 function BlackCard({ pickCount, children }) {
   return (
     <StyledBlackCard data-testid="black-card">
-      <Markdown options={{ wrapper: 'div' }}>{parseForMarkdown(children, BLANK_LENGTH)}</Markdown>
+      <Markdown options={{ wrapper: 'div' }}>
+        {parseForMarkdown(children, BLANK_LENGTH)}
+      </Markdown>
       <div className="layeredCards">
         <LayeredCards />
       </div>

@@ -1,13 +1,15 @@
 const LobbyList = require('./LobbyList');
 const Lobby = require('../Lobby/Lobby');
 
-jest.mock('../Lobby/Lobby', () => jest.fn().mockImplementation(() => ({
-  id: 'test',
-  players: [],
-  addPlayer: jest.fn(function addPlayer(player) {
-    this.players.push(player);
-  }),
-})));
+jest.mock('../Lobby/Lobby', () =>
+  jest.fn().mockImplementation(() => ({
+    id: 'test',
+    players: [],
+    addPlayer: jest.fn(function addPlayer(player) {
+      this.players.push(player);
+    }),
+  })),
+);
 
 describe('LobbyList', () => {
   let testPlayer;
