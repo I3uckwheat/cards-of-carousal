@@ -9,7 +9,7 @@ const propType = {
 const JoinCodeComponent = styled.div`
   display: flex;
   flex-direction: column;
-  line-height : 29px;
+  line-height: 29px;
 
   .join-code-title {
     font-size: 18px;
@@ -17,7 +17,7 @@ const JoinCodeComponent = styled.div`
     background-color: var(--primary-color);
     font-weight: 700;
     width: 97px;
-    height: 21px; 
+    height: 21px;
   }
 
   .join-code {
@@ -29,7 +29,7 @@ const JoinCodeComponent = styled.div`
     color: var(--primary-color);
     background-color: var(--secondary-color);
     width: 305px;
-    height: 70px; 
+    height: 70px;
   }
 `;
 
@@ -37,7 +37,9 @@ function DisplayJoinCode({ code }) {
   return (
     <JoinCodeComponent>
       <p className="join-code-title">JOIN CODE:</p>
-      <p className="join-code" data-testid="join-code">{ code }</p>
+      <p className="join-code" data-testid="join-code">
+        {code}
+      </p>
     </JoinCodeComponent>
   );
 }

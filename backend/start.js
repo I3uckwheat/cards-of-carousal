@@ -9,5 +9,9 @@ const app = require('./app/express.js');
 /* ======= Start socket service ======= */
 require('./app/socket.js');
 
-// eslint-disable-next-line
-app.listen(process.env.EXPRESS_PORT, () => console.log(`Express listening at http://localhost:${process.env.EXPRESS_PORT}`));
+app.listen(process.env.EXPRESS_PORT, () =>
+  // eslint-disable-next-line no-console
+  console.log(
+    `Express listening at http://localhost:${process.env.EXPRESS_PORT}`,
+  ),
+);

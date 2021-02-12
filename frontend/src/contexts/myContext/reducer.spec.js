@@ -8,7 +8,10 @@ describe('reducer', () => {
         lobbyId: undefined,
       };
 
-      const result = reducer(state, { type: 'SOME_RANDOM', payload: { id: '1234' } });
+      const result = reducer(state, {
+        type: 'SOME_RANDOM',
+        payload: { id: '1234' },
+      });
       expect(result).not.toBe(state);
       expect(result).toMatchObject(state);
     });
@@ -21,7 +24,10 @@ describe('reducer', () => {
         lobbyId: undefined,
       };
 
-      const result = reducer(state, { type: 'LOBBY_CREATED', payload: { id: '1234' } });
+      const result = reducer(state, {
+        type: 'LOBBY_CREATED',
+        payload: { id: '1234' },
+      });
       expect(result).not.toBe(state);
       expect(result.lobbyId).toBe('1234');
     });

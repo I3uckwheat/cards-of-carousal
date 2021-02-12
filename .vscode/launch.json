@@ -19,9 +19,7 @@
       "type": "node",
       "request": "launch",
       "name": "Debug Backend",
-      "skipFiles": [
-        "<node_internals>/**"
-      ],
+      "skipFiles": ["<node_internals>/**"],
       "program": "${workspaceFolder}/backend/start.js",
       "envFile": "${workspaceFolder}/backend/.env"
     }

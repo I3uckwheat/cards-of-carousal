@@ -52,7 +52,7 @@ class SocketSingleton {
     socketInstance.addEventListener('close', () => {
       this.emitter.emit('message', { event: 'socket-close', payload: {} });
     });
-  }
+  };
 }
 
 const instance = new SocketSingleton();

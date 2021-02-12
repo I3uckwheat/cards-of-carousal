@@ -19,42 +19,50 @@ module.exports = class SocketRouter {
   }
 
   addRoute = (routeDeclaration, handler) => {
-    if (!handler) throw new Error(`Missing routeDeclaration "${routeDeclaration}" handler`);
+    if (!handler)
+      throw new Error(`Missing routeDeclaration "${routeDeclaration}" handler`);
     const { method, route } = this.#parseRouteDeclaration(routeDeclaration);
     this.#routes[method].push({ route, handler });
-  }
+  };
 
   handleRequest = (webSocket, request) => {
     const method = request.method.toUpperCase();
     const { url } = request;
-    const match = this.#routes[method].find(({ route }) => this.#isRouteMatch(route, url));
+    const match = this.#routes[method].find(({ route }) =>
+      this.#isRouteMatch(route, url),
+    );
     if (!match) this.#notFoundHandler({ url, params: {} }, request);
 
     const req = this.#parseUrl(match.route, url);
 
     match.handler(req, webSocket);
-  }
+  };
 
   #parseRouteDeclaration = (routeDeclaration) => {
     const splitRoute = routeDeclaration.split(' ');
-    if (splitRoute.length !== 2) throw new Error('Invalid route declaration, check syntax');
+    if (splitRoute.length !== 2)
+      throw new Error('Invalid route declaration, check syntax');
 
     const method = splitRoute[0].toUpperCase();
-    if (!/GET|PUT|POST|DELETE/.test(method)) throw new Error('Route method must be "GET", "PUT", "POST", "DELETE"');
+    if (!/GET|PUT|POST|DELETE/.test(method))
+      throw new Error('Route method must be "GET", "PUT", "POST", "DELETE"');
 
     const route = splitRoute[1];
     if (route[0] !== '/') throw new Error('Route must start from root');
 
     return { method, route };
-  }
+  };
 
   #isRouteMatch = (route, url) => {
     const splitRoute = route.split('/');
     const splitUrl = url.split('/');
     if (splitRoute.length !== splitUrl.length) return false;
 
-    return splitRoute.every((routePiece, index) => routePiece[0] === ':' || routePiece === splitUrl[index]);
-  }
+    return splitRoute.every(
+      (routePiece, index) =>
+        routePiece[0] === ':' || routePiece === splitUrl[index],
+    );
+  };
 
   #parseUrl = (route, url) => {
     const splitRoute = route.split('/');
@@ -73,5 +81,5 @@ module.exports = class SocketRouter {
       url,
       params,
     };
-  }
+  };
 };

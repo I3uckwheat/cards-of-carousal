@@ -35,19 +35,19 @@ Be sure to check the package.json on the top level to see all commands.
 
 There is a debugger setup for VSCode, instead of starting the backend with `npm run dev:backend`:
 
-* Click the "debugger" icon on the left panel
-* Be sure the menu at the top says "Debug Backend"
-* Click the green arrow, or press `f5` to start the backend
+- Click the "debugger" icon on the left panel
+- Be sure the menu at the top says "Debug Backend"
+- Click the green arrow, or press `f5` to start the backend
 
 #### Frontend
 
 There is a debugger setup for VSCode, to use it:
 
-* Start the frontend application like normal
-* Close the react tab that automatically opens
-* Click the "debugger" icon on the left panel
-* Be sure the menu at the top says "Debug Frontend"
-* Click the green arrow, or press `f5` to launch a debugging window for chrome
+- Start the frontend application like normal
+- Close the react tab that automatically opens
+- Click the "debugger" icon on the left panel
+- Be sure the menu at the top says "Debug Frontend"
+- Click the green arrow, or press `f5` to launch a debugging window for chrome
 
 ## Testing
 

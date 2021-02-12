@@ -14,7 +14,10 @@ const Container = styled.div`
 `;
 
 const Text = styled.span`
-  color: ${(props) => (props.color === 'primary' ? 'var(--primary-color)' : 'var(--secondary-color)')};
+  color: ${(props) =>
+    props.color === 'primary'
+      ? 'var(--primary-color)'
+      : 'var(--secondary-color)'};
   font-size: 24px;
   font-weight: 900;
 `;
@@ -26,15 +29,16 @@ function TallyMarkers({ score, color }) {
     <Container>
       {displayAsText && <Text>{score}</Text>}
 
-      {!displayAsText && score <= 5 && <TallyMarker tallyCount={score} color={color} />}
+      {!displayAsText && score <= 5 && (
+        <TallyMarker tallyCount={score} color={color} />
+      )}
 
-      {!displayAsText && score > 5
-        && (
+      {!displayAsText && score > 5 && (
         <>
           <TallyMarker tallyCount={score - 5} color={color} />
           <TallyMarker tallyCount={5} color={color} />
         </>
-        )}
+      )}
     </Container>
   );
 }

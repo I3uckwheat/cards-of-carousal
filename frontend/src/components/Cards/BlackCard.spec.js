@@ -32,7 +32,8 @@ describe('BlackCard', () => {
     it('properly converts markdown to JSX', () => {
       const string = 'This _is_ a **test**\n\n Here is a *new* __line__';
       const tree = renderer
-        .create(<BlackCard pickCount={0}>{string}</BlackCard>).toJSON();
+        .create(<BlackCard pickCount={0}>{string}</BlackCard>)
+        .toJSON();
 
       expect(screen.queryAllByText('\n')).toHaveLength(0);
       expect(tree).toMatchSnapshot();
