@@ -12,6 +12,7 @@ import WhiteCardExample from './temp/WhiteCardExample';
 
 import Modal from './components/Modal/Modal';
 import playerList from './temp/playerList';
+import ModalExample from './temp/ModalExample';
 
 function App() {
   const [showSocketTest, setShowSocketTest] = useState(false);
@@ -88,7 +89,9 @@ function App() {
         >
           Show White Cards
         </Button>
-        <Button type="button" onClick={() => setShowModal(!showModal)}>Show Modal</Button>
+        <Button type="button" onClick={() => setShowModal(!showModal)}>
+          Show Modal
+        </Button>
       </div>
       {showHeader && (
         <Header className="header">
@@ -140,10 +143,13 @@ function App() {
       {showBlackCards && <BlackCardExample />}
 
       {showWhiteCards && <WhiteCardExample />}
-      {showBlackCards
-        && <BlackCardExample />}
+      {showBlackCards && <BlackCardExample />}
 
-      {showModal && <Modal onClickOutside={() => setShowModal(!showModal)} />}
+      {showModal && (
+        <Modal onClickOutside={() => setShowModal(!showModal)}>
+          <ModalExample toggleModal={() => setShowModal(!showModal)} />
+        </Modal>
+      )}
     </div>
   );
 }
