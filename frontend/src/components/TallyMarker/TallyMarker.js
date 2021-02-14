@@ -35,8 +35,8 @@ function TallyMarkers({ score, color }) {
 
       {!displayAsText && score > 5 && (
         <>
-          <TallyMarker tallyCount={score - 5} color={color} />
           <TallyMarker tallyCount={5} color={color} />
+          <TallyMarker tallyCount={score - 5} color={color} />
         </>
       )}
     </Container>
