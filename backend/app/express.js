@@ -11,11 +11,11 @@ const app = express();
 //   credentials: true,
 // }));
 
-// app.use(express.json());
+app.use(express.json());
 // app.use(cookieParser());
 
-// const routes = require('./routes');
-// app.use(routes);
+const routes = require('./routes');
+app.use(routes);
 
 // Error handling
 // app.use((err, req, res) => {
