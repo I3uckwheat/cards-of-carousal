@@ -38,7 +38,9 @@ export default function Modal({ children, onClickOutside }) {
   }, []);
 
   return createPortal(
-    <Overlay ref={overlayRef}>{children}</Overlay>,
+    <Overlay ref={overlayRef} data-testid="overlay">
+      {children}
+    </Overlay>,
     document.getElementById('modal-root'),
   );
 }
