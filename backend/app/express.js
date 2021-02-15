@@ -1,4 +1,6 @@
 const express = require('express');
+const { getDeck, getCards } = require('./controllers/deckController');
+
 // import cookieParser from 'cookie-parser';
 // const passport = require('passport');
 // const cors = require('cors');
@@ -14,8 +16,11 @@ const app = express();
 app.use(express.json());
 // app.use(cookieParser());
 
-const routes = require('./routes');
-app.use(routes);
+app.get('/deck', getDeck);
+app.get('/deck/cards', getCards);
+
+// const routes = require('./routes');
+// app.use(route);
 
 // Error handling
 // app.use((err, req, res) => {
