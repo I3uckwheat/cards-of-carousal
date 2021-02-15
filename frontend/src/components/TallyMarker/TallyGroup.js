@@ -35,6 +35,7 @@ function TallyGroup({ color, tallyCount }) {
       <g>
         {tallyPaths.slice(0, tallyCount).map((tallyPath) => (
           <StyledPath
+            key={tallyPath}
             color={color}
             d={tallyPath}
             strokeWidth="2"
