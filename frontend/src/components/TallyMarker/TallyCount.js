@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import TallyMarker from './TallyGroup';
+import TallyGroup from './TallyGroup';
 
 const propTypes = {
   score: PropTypes.number.isRequired,
@@ -22,7 +22,7 @@ const Text = styled.span`
   font-weight: 900;
 `;
 
-function TallyMarkers({ score, color }) {
+function TallyCount({ score, color }) {
   const displayAsText = score > 10;
 
   return (
@@ -30,19 +30,19 @@ function TallyMarkers({ score, color }) {
       {displayAsText && <Text>{score}</Text>}
 
       {!displayAsText && score <= 5 && (
-        <TallyMarker tallyCount={score} color={color} />
+        <TallyGroup tallyCount={score} color={color} />
       )}
 
       {!displayAsText && score > 5 && (
         <>
-          <TallyMarker tallyCount={5} color={color} />
-          <TallyMarker tallyCount={score - 5} color={color} />
+          <TallyGroup tallyCount={5} color={color} />
+          <TallyGroup tallyCount={score - 5} color={color} />
         </>
       )}
     </Container>
   );
 }
 
-TallyMarkers.propTypes = propTypes;
+TallyCount.propTypes = propTypes;
 
-export default TallyMarkers;
+export default TallyCount;

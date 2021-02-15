@@ -22,7 +22,7 @@ const tallyPaths = [
   'M0.916168 0.599211L40.9161 29.1692',
 ];
 
-function TallyMarker({ color, tallyCount }) {
+function TallyGroup({ color, tallyCount }) {
   return (
     <svg
       data-testid="tally-svg"
@@ -46,6 +46,6 @@ function TallyMarker({ color, tallyCount }) {
   );
 }
 
-TallyMarker.propTypes = propTypes;
+TallyGroup.propTypes = propTypes;
 
-export default TallyMarker;
+export default TallyGroup;
