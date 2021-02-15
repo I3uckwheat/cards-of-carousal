@@ -5,8 +5,8 @@ import { render, screen } from '@testing-library/react';
 import TallyCount from './TallyCount';
 
 // https://jestjs.io/docs/en/tutorial-react#snapshot-testing-with-mocks-enzyme-and-react-16
-jest.mock('./TallyGroup', () => ({ tallyCount }) => 
-  <tally-group-mock data-testid='tally-group' data-value={ tallyCount } />
+jest.mock('./TallyGroup', () => ({ tallyCount, color }) => 
+  <tally-group-mock data-testid='tally-group' data-tallycount={ tallyCount } data-color={ color }/>
 );
 
 describe('TallyCount', () => {
@@ -40,9 +40,9 @@ describe('TallyCount', () => {
 
       // Because we're querying ALL, we can expect the order of the array to match what is 
       // rendered in the view. QueryAllByTestId reads the DOM tree from top to bottom.
-      const tallyGroup = screen.queryAllByTestId('tally-group');
-      expect(tallyGroup[0].dataset.value).toBe('5');
-      expect(tallyGroup[1].dataset.value).toBe('3');
+      const tallyGroups = screen.queryAllByTestId('tally-group');
+      expect(tallyGroups[0].dataset.tallycount).toBe('5');
+      expect(tallyGroups[1].dataset.tallycount).toBe('3');
     });
 
     it('doesn\'t render two tallygroups in the incorrect order when score is 8', () => {
@@ -50,14 +50,35 @@ describe('TallyCount', () => {
 
       // Because we're querying ALL, we can expect the order of the array to match what is 
       // rendered in the view. QueryAllByTestId reads the DOM tree from top to bottom.
-      const tallyGroup = screen.queryAllByTestId('tally-group');
-      expect(tallyGroup[0].dataset.value).not.toBe('3');
-      expect(tallyGroup[1].dataset.value).not.toBe('5');
+      const tallyGroups = screen.queryAllByTestId('tally-group');
+      expect(tallyGroups[0].dataset.tallycount).not.toBe('3');
+      expect(tallyGroups[1].dataset.tallycount).not.toBe('5');
     });
 
     it('renders the score as a number when greater than 10', () => {
       render(<TallyCount color="primary" score={11} />);
       expect(screen.getByText('11')).toBeInTheDocument();
+    });
+  });
+
+  describe('color', () => {
+    it('passes proper color to tallyGroup when color is primary', () => {
+      render(<TallyCount color="primary" score={5} />);
+      const tallyGroup = screen.queryByTestId('tally-group');
+      expect(tallyGroup.dataset.color).toBe('primary');
+    });
+
+    it('passes proper color to tallyGroup when color is secondary', () => {
+      render(<TallyCount color="secondary" score={5} />);
+      const tallyGroup = screen.queryByTestId('tally-group');
+      expect(tallyGroup.dataset.color).toBe('secondary');
+    });
+
+    it('passes proper color to all tallyGroups', () => {
+      render(<TallyCount color="secondary" score={10} />);
+      const tallyGroups = screen.queryAllByTestId('tally-group');
+      expect(tallyGroups[0].dataset.color).toBe('secondary');
+      expect(tallyGroups[1].dataset.color).toBe('secondary');
     });
   });
 });
