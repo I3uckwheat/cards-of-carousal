@@ -14,6 +14,14 @@ const StyledPath = styled.path`
       : 'var(--secondary-color)'};
 `;
 
+const tallyPaths = [
+  'M32.4285 3.19775V29.5701',
+  'M25.4439 3.51099L23.2217 29.5966',
+  'M16.5548 3.51099L14.3326 29.5966',
+  'M7.66589 3.51099L5.44367 29.5966',
+  'M0.916168 0.599211L40.9161 29.1692',
+];
+
 function TallyMarker({ color, tallyCount }) {
   return (
     <svg
@@ -25,46 +33,14 @@ function TallyMarker({ color, tallyCount }) {
       xmlns="http://www.w3.org/2000/svg"
     >
       <g>
-        {tallyCount >= 1 && (
+        {tallyPaths.slice(0, tallyCount).map((tallyPath) => (
           <StyledPath
             color={color}
-            d="M32.4285 3.19775V29.5701"
+            d={tallyPath}
             strokeWidth="2"
             data-testid="tally"
           />
-        )}
-        {tallyCount >= 2 && (
-          <StyledPath
-            color={color}
-            d="M25.4439 3.51099L23.2217 29.5966"
-            strokeWidth="2"
-            data-testid="tally"
-          />
-        )}
-        {tallyCount >= 3 && (
-          <StyledPath
-            color={color}
-            d="M16.5548 3.51099L14.3326 29.5966"
-            strokeWidth="2"
-            data-testid="tally"
-          />
-        )}
-        {tallyCount >= 4 && (
-          <StyledPath
-            color={color}
-            d="M7.66589 3.51099L5.44367 29.5966"
-            strokeWidth="2"
-            data-testid="tally"
-          />
-        )}
-        {tallyCount >= 5 && (
-          <StyledPath
-            color={color}
-            d="M0.916168 0.599211L40.9161 29.1692"
-            strokeWidth="2"
-            data-testid="tally"
-          />
-        )}
+        ))}
       </g>
     </svg>
   );
