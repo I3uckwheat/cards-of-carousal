@@ -17,8 +17,26 @@ handleRequest()
 - expect socketRouter.handleRequest(webSocket, request) with valid request to call the appropriate addRoute handler
 */
 
+const SocketRouter = require('./SocketRouter');
+
 describe('SocketRouter', () => {
-  it('Proof of concept', () => {
-    expect(true).toBe(true);
+  // ----------------------------------------------------------------
+  // Constructor
+  describe('constructor', () => {
+    it('new SocketRouter() without handler throws "Error Missing 404 handler"', () => {
+      expect(() => new SocketRouter()).toThrow(/Missing 404 handler/);
+    });
+  });
+
+  // ----------------------------------------------------------------
+  // Public Methods
+  describe('Public Methods', () => {
+    it('socketRouter.addRoute(routeDeclaration) without handler throws Error "Missing routeDeclaration {routeDeclaration} handler"', () => {
+      const socketRouter = new SocketRouter(() => {});
+
+      expect(() => socketRouter.addRoute('GET /test')).toThrow(
+        /Missing routeDeclaration/,
+      );
+    });
   });
 });
