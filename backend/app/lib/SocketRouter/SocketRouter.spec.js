@@ -55,5 +55,39 @@ describe('SocketRouter', () => {
         /Invalid route declaration, check syntax/,
       );
     });
+
+    it(`socketRouter.addRoute(routeDeclaration, handler) with wrong HTTP method to throw Error 'Route method must be "GET", "PUT", "POST", "DELETE"'`, () => {
+      const socketRouter = new SocketRouter(() => {});
+      const handler = () => {};
+
+      expect(() => socketRouter.addRoute('GTE /test', handler)).toThrow(
+        /Route method must be "GET", "PUT", "POST", "DELETE"/,
+      );
+
+      expect(() => socketRouter.addRoute('COPY /test', handler)).toThrow(
+        /Route method must be "GET", "PUT", "POST", "DELETE"/,
+      );
+
+      expect(() => socketRouter.addRoute('BIND /test', handler)).toThrow(
+        /Route method must be "GET", "PUT", "POST", "DELETE"/,
+      );
+    });
+
+    it(`socketRouter.addRoute('routeDeclaration', handler) with wrong route syntax to throw Error 'Route must start from root'`, () => {
+      const socketRouter = new SocketRouter(() => {});
+      const handler = () => {};
+
+      expect(() => socketRouter.addRoute('GET test', handler)).toThrow(
+        /Route must start from root/,
+      );
+
+      expect(() => socketRouter.addRoute('GET .test', handler)).toThrow(
+        /Route must start from root/,
+      );
+
+      expect(() =>
+        socketRouter.addRoute('GET testgroup/test', handler),
+      ).toThrow(/Route must start from root/);
+    });
   });
 });
