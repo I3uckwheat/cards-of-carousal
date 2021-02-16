@@ -98,11 +98,27 @@ describe('SocketRouter', () => {
         {},
         {
           method: 'GET',
-          url: 'test',
+          url: '/test',
         },
       );
 
       expect(notFoundHandler).toHaveBeenCalled();
+    });
+
+    it(`socketRouter.handleRequest(webSocket, request) with valid request to call the appropriate addRoute handler`, () => {
+      const routeHandler = jest.fn();
+      const socketRouter = new SocketRouter(() => {});
+      socketRouter.addRoute('GET /test', routeHandler);
+
+      socketRouter.handleRequest(
+        {},
+        {
+          method: 'GET',
+          url: '/test',
+        },
+      );
+
+      expect(routeHandler).toHaveBeenCalled();
     });
   });
 });
