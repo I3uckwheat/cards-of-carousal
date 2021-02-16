@@ -89,5 +89,20 @@ describe('SocketRouter', () => {
         socketRouter.addRoute('GET testgroup/test', handler),
       ).toThrow(/Route must start from root/);
     });
+
+    it(`socketRouter.handleRequest(webSocket, request) with request to undefined route to call the original handler passed as a param to socketRouter constructor`, () => {
+      const notFoundHandler = jest.fn();
+      const socketRouter = new SocketRouter(notFoundHandler);
+
+      socketRouter.handleRequest(
+        {},
+        {
+          method: 'GET',
+          url: 'test',
+        },
+      );
+
+      expect(notFoundHandler).toHaveBeenCalled();
+    });
   });
 });
