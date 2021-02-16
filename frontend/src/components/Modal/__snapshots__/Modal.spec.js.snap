@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Modal snapshot matches 1`] = `
+.c0 {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0,0,0,0.35);
+  z-index: 9999;
+}
+
+<div
+  className="c0"
+  data-testid="overlay"
+>
+  <div>
+    <h1>
+      hello world
+    </h1>
+    <button
+      type="button"
+    >
+      click me
+    </button>
+  </div>
+</div>
+`;

@@ -10,7 +10,9 @@ import DisplayJoinCode from './components/JoinCode/JoinCode';
 import BlackCardExample from './temp/BlackCardExample';
 import WhiteCardExample from './temp/WhiteCardExample';
 
+import Modal from './components/Modal/Modal';
 import playerList from './temp/playerList';
+import ModalExample from './temp/ModalExample';
 
 function App() {
   const [showSocketTest, setShowSocketTest] = useState(false);
@@ -21,6 +23,7 @@ function App() {
   const [showJoinCode, setJoinCode] = useState(false);
   const [showBlackCards, setShowBlackCards] = useState(false);
   const [showWhiteCards, setShowWhiteCards] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   return (
     <div className="App primary-background">
@@ -86,6 +89,9 @@ function App() {
         >
           Show White Cards
         </Button>
+        <Button type="button" onClick={() => setShowModal(!showModal)}>
+          Show Modal
+        </Button>
       </div>
       {showHeader && (
         <Header className="header">
@@ -137,6 +143,13 @@ function App() {
       {showBlackCards && <BlackCardExample />}
 
       {showWhiteCards && <WhiteCardExample />}
+      {showBlackCards && <BlackCardExample />}
+
+      {showModal && (
+        <Modal onClickOutside={() => setShowModal(!showModal)}>
+          <ModalExample toggleModal={() => setShowModal(!showModal)} />
+        </Modal>
+      )}
     </div>
   );
 }
