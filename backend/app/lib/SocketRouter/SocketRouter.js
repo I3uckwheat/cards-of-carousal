@@ -35,7 +35,7 @@ module.exports = class SocketRouter {
 
     const req = this.#parseUrl(match.route, url);
 
-    match.handler(req, webSocket);
+    return match.handler(req, webSocket);
   };
 
   #parseRouteDeclaration = (routeDeclaration) => {
