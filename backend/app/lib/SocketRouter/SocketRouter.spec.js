@@ -7,7 +7,7 @@ constructor()
 
 addRoute()
 - expect socketRouter.addRoute('routeDeclaration') without handler to throw Error 'Missing routeDeclaration "${routeDeclaration}" handler'
-- expect socketRouter.addRoute('routeDeclaration', handler) with wrong syntax to throw Error 'Invalid route declaration, check syntax' 
+- expect socketRouter.addRoute('routeDeclaration', handler) with wrong syntax to throw Error "Invalid route declaration, check syntax"
 - expect socketRouter.addRoute('routeDeclaration', handler) with wrong HTTP method to throw Error 'Route method must be "GET", "PUT", "POST", "DELETE"' 
 - expect socketRouter.addRoute('routeDeclaration', handler) with wrong route syntax to throw Error 'Route must start from root' 
 - verify socketRouter.addRoute('routeDeclaration', handler) with correct syntax to properly add given route
@@ -36,6 +36,23 @@ describe('SocketRouter', () => {
 
       expect(() => socketRouter.addRoute('GET /test')).toThrow(
         /Missing routeDeclaration/,
+      );
+    });
+
+    it('socketRouter.addRoute(routeDeclaration, handler) with wrong route syntax to throw Error "Invalid route declaration, check syntax"', () => {
+      const socketRouter = new SocketRouter(() => {});
+      const handler = () => {};
+
+      expect(() => socketRouter.addRoute('GET', handler)).toThrow(
+        /Invalid route declaration, check syntax/,
+      );
+
+      expect(() => socketRouter.addRoute('GET/test', handler)).toThrow(
+        /Invalid route declaration, check syntax/,
+      );
+
+      expect(() => socketRouter.addRoute('GET /test group', handler)).toThrow(
+        /Invalid route declaration, check syntax/,
       );
     });
   });
