@@ -145,5 +145,23 @@ describe('SocketRouter', () => {
       expect(postRouteHandler).toHaveBeenCalled();
       expect(getRouteHandler).not.toHaveBeenCalled();
     });
+
+    it(`correctly parses incoming parameters from socketRouter.handleRequest(webSocket, request)`, () => {
+      const fooRouteHandler = jest.fn((req) => req.params);
+      const socketRouter = new SocketRouter(() => {});
+      const parameterName = 'param';
+
+      socketRouter.addRoute(`GET /foo/:${parameterName}`, fooRouteHandler);
+
+      socketRouter.handleRequest(
+        {},
+        {
+          method: 'GET',
+          url: '/foo/bar',
+        },
+      );
+
+      expect(fooRouteHandler).toHaveReturnedWith({ [parameterName]: 'bar' });
+    });
   });
 });
