@@ -106,6 +106,26 @@ describe('SocketRouter', () => {
       expect(routeHandler).toHaveBeenCalled();
     });
 
+    it(`calls the appropriate addRoute handler for socketRouter.handleRequest(webSocket, request) with valid request even if there are multiple defined routes for that method`, () => {
+      const fooRouteHandler = jest.fn();
+      const barRouteHandler = jest.fn();
+      const socketRouter = new SocketRouter(() => {});
+
+      socketRouter.addRoute('GET /foo', fooRouteHandler);
+      socketRouter.addRoute('GET /bar', barRouteHandler);
+
+      socketRouter.handleRequest(
+        {},
+        {
+          method: 'GET',
+          url: '/bar',
+        },
+      );
+
+      expect(barRouteHandler).toHaveBeenCalled();
+      expect(fooRouteHandler).not.toHaveBeenCalled();
+    });
+
     it(`calls the appropriate addRoute handler for socketRouter.handleRequest(webSocket, request) with valid request even if there are multiple defined methods for that route`, () => {
       const getRouteHandler = jest.fn();
       const postRouteHandler = jest.fn();
