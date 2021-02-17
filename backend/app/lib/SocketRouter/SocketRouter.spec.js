@@ -12,7 +12,7 @@ describe('SocketRouter', () => {
   // ----------------------------------------------------------------
   // Public method - addRoute
   describe('addRoute', () => {
-    it('throws an error for socketRouter.addRoute(routeDeclaration) without a handler', () => {
+    it('throws an error without a handler', () => {
       const socketRouter = new SocketRouter(() => {});
 
       expect(() => socketRouter.addRoute('GET /test')).toThrow(
@@ -20,7 +20,7 @@ describe('SocketRouter', () => {
       );
     });
 
-    it('throws an error for socketRouter.addRoute(routeDeclaration, handler) with wrong route syntax', () => {
+    it('throws an error for wrong route syntax', () => {
       const socketRouter = new SocketRouter(() => {});
       const handler = () => {};
 
@@ -37,7 +37,7 @@ describe('SocketRouter', () => {
       );
     });
 
-    it(`throws an error for socketRouter.addRoute(routeDeclaration, handler) with wrong HTTP method'`, () => {
+    it(`throws an error for wrong HTTP method'`, () => {
       const socketRouter = new SocketRouter(() => {});
       const handler = () => {};
 
@@ -54,7 +54,7 @@ describe('SocketRouter', () => {
       );
     });
 
-    it(`throws an error for socketRouter.addRoute('routeDeclaration', handler) with wrong route syntax`, () => {
+    it(`throws an error for wrong route format`, () => {
       const socketRouter = new SocketRouter(() => {});
       const handler = () => {};
 
@@ -75,7 +75,7 @@ describe('SocketRouter', () => {
   // ----------------------------------------------------------------
   // Public method - handleRequest
   describe('handleRequest', () => {
-    it(`calls the notFoundHandler passed in the constructor for socketRouter.handleRequest(webSocket, request) with request to undefined route`, () => {
+    it(`calls the notFoundHandler passed in the constructor for a request to undefined route`, () => {
       const notFoundHandler = jest.fn();
       const socketRouter = new SocketRouter(notFoundHandler);
 
@@ -90,7 +90,7 @@ describe('SocketRouter', () => {
       expect(notFoundHandler).toHaveBeenCalled();
     });
 
-    it(`calls the addRoute handler for socketRouter.handleRequest(webSocket, request) with valid request`, () => {
+    it(`calls the addRoute handler for a valid request`, () => {
       const routeHandler = jest.fn();
       const socketRouter = new SocketRouter(() => {});
       socketRouter.addRoute('GET /test', routeHandler);
@@ -106,7 +106,7 @@ describe('SocketRouter', () => {
       expect(routeHandler).toHaveBeenCalled();
     });
 
-    it(`calls the appropriate addRoute handler for socketRouter.handleRequest(webSocket, request) with valid request even if there are multiple defined routes for that method`, () => {
+    it(`calls the appropriate addRoute handler for a valid request even if there are multiple defined routes for that method`, () => {
       const fooRouteHandler = jest.fn();
       const barRouteHandler = jest.fn();
       const socketRouter = new SocketRouter(() => {});
@@ -126,7 +126,7 @@ describe('SocketRouter', () => {
       expect(fooRouteHandler).not.toHaveBeenCalled();
     });
 
-    it(`calls the appropriate addRoute handler for socketRouter.handleRequest(webSocket, request) with valid request even if there are multiple defined methods for that route`, () => {
+    it(`calls the appropriate addRoute handler for a valid request even if there are multiple defined methods for that route`, () => {
       const getRouteHandler = jest.fn();
       const postRouteHandler = jest.fn();
       const socketRouter = new SocketRouter(() => {});
@@ -146,7 +146,7 @@ describe('SocketRouter', () => {
       expect(getRouteHandler).not.toHaveBeenCalled();
     });
 
-    it(`correctly parses incoming parameters from socketRouter.handleRequest(webSocket, request)`, () => {
+    it(`correctly parses incoming parameters`, () => {
       const fooRouteHandler = jest.fn((req) => req.params);
       const socketRouter = new SocketRouter(() => {});
       const parameterName = 'param';
