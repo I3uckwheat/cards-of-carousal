@@ -163,5 +163,30 @@ describe('SocketRouter', () => {
 
       expect(fooRouteHandler).toHaveReturnedWith({ [parameterName]: 'bar' });
     });
+
+    it(`calls the same appropriate routeHandler for URLs with different params`, () => {
+      const fooRouteHandler = jest.fn();
+      const socketRouter = new SocketRouter(() => {});
+
+      socketRouter.addRoute(`GET /foo/:param`, fooRouteHandler);
+
+      socketRouter.handleRequest(
+        {},
+        {
+          method: 'GET',
+          url: '/foo/bar',
+        },
+      );
+
+      socketRouter.handleRequest(
+        {},
+        {
+          method: 'GET',
+          url: '/foo/qux',
+        },
+      );
+
+      expect(fooRouteHandler).toHaveBeenCalledTimes(2);
+    });
   });
 });
