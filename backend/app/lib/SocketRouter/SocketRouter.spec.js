@@ -149,9 +149,8 @@ describe('SocketRouter', () => {
     it(`correctly parses incoming parameters`, () => {
       const fooRouteHandler = jest.fn((req) => req.params);
       const socketRouter = new SocketRouter(() => {});
-      const parameterName = 'param';
 
-      socketRouter.addRoute(`GET /foo/:${parameterName}`, fooRouteHandler);
+      socketRouter.addRoute(`GET /foo/:param`, fooRouteHandler);
 
       socketRouter.handleRequest(
         {},
@@ -161,7 +160,7 @@ describe('SocketRouter', () => {
         },
       );
 
-      expect(fooRouteHandler).toHaveReturnedWith({ [parameterName]: 'bar' });
+      expect(fooRouteHandler).toHaveReturnedWith({ param: 'bar' });
     });
 
     it(`calls the same appropriate routeHandler for URLs with different params`, () => {
