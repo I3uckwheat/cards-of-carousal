@@ -90,7 +90,7 @@ describe('SocketRouter', () => {
       expect(notFoundHandler).toHaveBeenCalled();
     });
 
-    it(`calls the appropriate addRoute handler for socketRouter.handleRequest(webSocket, request) with valid request`, () => {
+    it(`calls the addRoute handler for socketRouter.handleRequest(webSocket, request) with valid request`, () => {
       const routeHandler = jest.fn();
       const socketRouter = new SocketRouter(() => {});
       socketRouter.addRoute('GET /test', routeHandler);
@@ -104,6 +104,26 @@ describe('SocketRouter', () => {
       );
 
       expect(routeHandler).toHaveBeenCalled();
+    });
+
+    it(`calls the appropriate addRoute handler for socketRouter.handleRequest(webSocket, request) with valid request even if there are multiple defined methods for that route`, () => {
+      const getRouteHandler = jest.fn();
+      const postRouteHandler = jest.fn();
+      const socketRouter = new SocketRouter(() => {});
+
+      socketRouter.addRoute('GET /test', getRouteHandler);
+      socketRouter.addRoute('POST /test', postRouteHandler);
+
+      socketRouter.handleRequest(
+        {},
+        {
+          method: 'POST',
+          url: '/test',
+        },
+      );
+
+      expect(postRouteHandler).toHaveBeenCalled();
+      expect(getRouteHandler).not.toHaveBeenCalled();
     });
   });
 });
