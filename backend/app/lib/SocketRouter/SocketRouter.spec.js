@@ -4,8 +4,8 @@ describe('SocketRouter', () => {
   // ----------------------------------------------------------------
   // Constructor
   describe('constructor', () => {
-    it('throws an error for new SocketRouter() without handler', () => {
-      expect(() => new SocketRouter()).toThrow(/Missing 404 handler/);
+    it('throws an error without a handler', () => {
+      expect(() => new SocketRouter()).toThrow('Missing 404 handler');
     });
   });
 
