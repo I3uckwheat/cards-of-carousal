@@ -100,7 +100,6 @@ function PlayerList({ playerList }) {
               <h1>{player.name}</h1>
               <TallyCount
                 score={player.score}
-                maxNumberOfMarkers={2}
                 color={player.czar ? 'primary' : 'secondary'}
               />
             </div>

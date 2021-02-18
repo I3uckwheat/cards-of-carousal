@@ -6,7 +6,7 @@ import TallyCount from './TallyCount';
 
 // https://jestjs.io/docs/en/tutorial-react#snapshot-testing-with-mocks-enzyme-and-react-16
 jest.mock('./TallyGroup', () => ({ tallyCount, color }) => 
-  <tally-group-mock data-testid='tally-group' data-tallycount={ tallyCount } data-color={ color }/>
+  <tally-group-mock data-testid='tally-group' data-tallycount={ tallyCount } data-color={ color } />
 );
 
 describe('TallyCount', () => {
