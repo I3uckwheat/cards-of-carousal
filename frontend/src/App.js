@@ -27,10 +27,6 @@ function App() {
   const [showModal, setShowModal] = useState(false);
   const [showPlayerMessageScreen, setShowPlayerMessageScreen] = useState(false);
 
-  const toggleAppBackground = () => {
-    document.querySelector('.App').classList.toggle('primary-background');
-  };
-
   return (
     <div className="App primary-background">
       <div className="buttons-grid">
@@ -97,9 +93,6 @@ function App() {
         </Button>
         <Button type="button" onClick={() => setShowModal(!showModal)}>
           Show Modal
-        </Button>
-        <Button type="button" onClick={toggleAppBackground}>
-          Toggle Background
         </Button>
         <Button
           type="button"
