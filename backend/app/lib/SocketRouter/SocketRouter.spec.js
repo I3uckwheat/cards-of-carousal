@@ -12,18 +12,20 @@ describe('SocketRouter', () => {
   // ----------------------------------------------------------------
   // Public method - addRoute
   describe('addRoute', () => {
-    it('throws an error without a handler', () => {
-      const socketRouter = new SocketRouter(() => {});
+    let socketRouter;
+    const handler = () => {};
 
+    beforeEach(() => {
+      socketRouter = new SocketRouter(() => {});
+    });
+
+    it('throws an error without a handler', () => {
       expect(() => socketRouter.addRoute('GET /test')).toThrow(
         'Missing routeDeclaration',
       );
     });
 
     it('throws an error for wrong route syntax', () => {
-      const socketRouter = new SocketRouter(() => {});
-      const handler = () => {};
-
       expect(() => socketRouter.addRoute('GET', handler)).toThrow(
         'Invalid route declaration, check syntax',
       );
@@ -38,9 +40,6 @@ describe('SocketRouter', () => {
     });
 
     it(`throws an error for wrong HTTP method'`, () => {
-      const socketRouter = new SocketRouter(() => {});
-      const handler = () => {};
-
       expect(() => socketRouter.addRoute('GTE /test', handler)).toThrow(
         'Route method must be "GET", "PUT", "POST", "DELETE"',
       );
@@ -55,9 +54,6 @@ describe('SocketRouter', () => {
     });
 
     it(`throws an error for wrong route format`, () => {
-      const socketRouter = new SocketRouter(() => {});
-      const handler = () => {};
-
       expect(() => socketRouter.addRoute('GET test', handler)).toThrow(
         'Route must start from root',
       );
@@ -72,8 +68,7 @@ describe('SocketRouter', () => {
     });
 
     it(`throws an error for duplicate route`, () => {
-      const socketRouter = new SocketRouter(() => {});
-      socketRouter.addRoute('GET /test', () => {});
+      socketRouter.addRoute('GET /test', handler);
 
       expect(() => socketRouter.addRoute('GET /test', () => {})).toThrow(
         'Route /test is already covered by an existing route',
@@ -81,8 +76,7 @@ describe('SocketRouter', () => {
     });
 
     it(`throws an error if the new static route is already covered by a dynamic one`, () => {
-      const socketRouter = new SocketRouter(() => {});
-      socketRouter.addRoute('GET /:param', () => {});
+      socketRouter.addRoute('GET /:param', handler);
 
       expect(() => socketRouter.addRoute('GET /test', () => {})).toThrow(
         'Route /test is already covered by an existing route',
