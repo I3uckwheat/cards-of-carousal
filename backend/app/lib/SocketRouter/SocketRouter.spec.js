@@ -76,7 +76,16 @@ describe('SocketRouter', () => {
       socketRouter.addRoute('GET /test', () => {});
 
       expect(() => socketRouter.addRoute('GET /test', () => {})).toThrow(
-        'Route /test has already been declared',
+        'Route /test is already covered by an existing route',
+      );
+    });
+
+    it(`throws an error if the new static route is already covered by a dynamic one`, () => {
+      const socketRouter = new SocketRouter(() => {});
+      socketRouter.addRoute('GET /:param', () => {});
+
+      expect(() => socketRouter.addRoute('GET /test', () => {})).toThrow(
+        'Route /test is already covered by an existing route',
       );
     });
   });
