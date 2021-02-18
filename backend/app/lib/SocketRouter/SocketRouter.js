@@ -29,7 +29,7 @@ module.exports = class SocketRouter {
         this.#isRouteMatch(existingRoute.route, route),
       )
     )
-      throw new Error(`Route ${route} has already been declared`);
+      throw new Error(`Route ${route} is already covered by an existing route`);
 
     this.#routes[method].push({ route, handler });
   };
