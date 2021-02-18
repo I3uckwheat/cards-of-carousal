@@ -13,48 +13,50 @@ const Background = styled.div`
   position: relative;
   height: 100vh;
   width: 100vw;
+  overflow: hidden;
+  background-color: var(--primary-color);
   background-size: 120% auto;
   background-repeat: no-repeat;
   background-position: -100px 77%;
-`;
 
-const TextContainer = styled.div`
-  display: flex;
-  position: relative;
-  text-align: center;
-  flex-direction: column;
-  top: 26.6%;
-`;
+  .text-container {
+    display: flex;
+    position: relative;
+    text-align: center;
+    flex-direction: column;
+    top: 26.6%;
+  }
 
-const BigText = styled.h1`
-  font-weight: 900;
-  /* Responsive font size */
-  font-size: calc(20px + 3.5vw);
-`;
+  .big-text {
+    font-weight: 900;
+    /* Responsive font size */
+    font-size: calc(20px + 3.5vw);
+  }
 
-const SmallText = styled.p`
-  /* Responsive font size */
-  font-size: calc(7px + 2vw);
-`;
+  .small-text {
+    /* Responsive font size */
+    font-size: calc(7px + 2vw);
+  }
 
-const FooterContainer = styled.div`
-  display: flex;
-  position: absolute;
-  width: 100%;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  .footer {
+    display: flex;
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
 `;
 
 function PlayerMessageScreen({ bigText, smallText }) {
   return (
     <Background className="primary-background">
-      <TextContainer>
-        <BigText>{bigText && bigText.toUpperCase()}</BigText>
-        <SmallText>{smallText}</SmallText>
-      </TextContainer>
+      <div className="text-container">
+        <h1 className="big-text">{bigText && bigText.toUpperCase()}</h1>
+        <p className="small-text">{smallText}</p>
+      </div>
 
-      <FooterContainer>
+      <div className="footer">
         <img
           style={{ height: '10vw' }}
           src={cardTrioDiagonal}
@@ -65,7 +67,7 @@ function PlayerMessageScreen({ bigText, smallText }) {
           src={blackCardDiagonal}
           alt="one black card icon"
         />
-      </FooterContainer>
+      </div>
     </Background>
   );
 }
