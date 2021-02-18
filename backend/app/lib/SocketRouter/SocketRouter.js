@@ -21,7 +21,16 @@ module.exports = class SocketRouter {
   addRoute = (routeDeclaration, handler) => {
     if (!handler)
       throw new Error(`Missing routeDeclaration "${routeDeclaration}" handler`);
+
     const { method, route } = this.#parseRouteDeclaration(routeDeclaration);
+
+    if (
+      this.#routes[method].find((existingRoute) =>
+        this.#isRouteMatch(existingRoute.route, route),
+      )
+    )
+      throw new Error(`Route ${route} has already been declared`);
+
     this.#routes[method].push({ route, handler });
   };
 

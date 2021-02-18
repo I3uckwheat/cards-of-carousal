@@ -70,6 +70,15 @@ describe('SocketRouter', () => {
         socketRouter.addRoute('GET testgroup/test', handler),
       ).toThrow('Route must start from root');
     });
+
+    it(`throws an error for duplicate route`, () => {
+      const socketRouter = new SocketRouter(() => {});
+      socketRouter.addRoute('GET /test', () => {});
+
+      expect(() => socketRouter.addRoute('GET /test', () => {})).toThrow(
+        'Route /test has already been declared',
+      );
+    });
   });
 
   // ----------------------------------------------------------------
