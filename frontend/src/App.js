@@ -16,6 +16,7 @@ import Modal from './components/Modal/Modal';
 import playerList from './temp/playerList';
 import ModalExample from './temp/ModalExample';
 import PlayerMessageScreen from './components/screens/PlayerMessageScreen/PlayerMessageScreen';
+import HostLayout from './components/layouts/HostLayout';
 
 function App() {
   const [showSocketTest, setShowSocketTest] = useState(false);
@@ -28,10 +29,11 @@ function App() {
   const [showWhiteCards, setShowWhiteCards] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [showPlayerMessageScreen, setShowPlayerMessageScreen] = useState(false);
+  const [showHostLayout, setShowHostLayout] = useState(false);
 
   return (
     <div className="App primary-background">
-      <div className="buttons-grid">
+      {!showHostLayout && (<div className="buttons-grid">
         <button
           type="button"
           onClick={() => {
@@ -102,7 +104,18 @@ function App() {
         >
           Show Player Message Screen
         </Button>
+
+        <button
+            type="button"
+            onClick={() => {
+              setShowHostLayout(!showHostLayout);
+            }}
+          >
+            show host layout
+          </button>
       </div>
+      )}
+
       {showHeader && (
         <Header className="header">
           <div
@@ -165,6 +178,52 @@ function App() {
         <PlayerMessageScreen
           bigText="you've joined the lobby"
           smallText="Please wait for the host to start the game."
+        />
+      )}
+      
+      {showHostLayout && (
+        <HostLayout
+          left={
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-around',
+                alignItems: 'center',
+                height: '100%',
+              }}
+            >
+              {showHostLayout && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    setShowHostLayout(!showHostLayout);
+                  }}
+                >
+                  hide host layout
+                </button>
+              )}
+              <button type="button">I am a left component button</button>
+            </div>
+          }
+          right={
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-evenly',
+                alignItems: 'center',
+                height: '100%',
+              }}
+            >
+              <button type="button">I am a right component button</button>
+            </div>
+          }
+          modal={
+            showModal && (
+              <ModalExample toggleModal={() => setShowModal(!showModal)} />
+            )
+          }
         />
       )}
     </div>
