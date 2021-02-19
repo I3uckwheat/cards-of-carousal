@@ -13,7 +13,7 @@ import WhiteCardExample from './temp/WhiteCardExample';
 import Modal from './components/Modal/Modal';
 import playerList from './temp/playerList';
 import ModalExample from './temp/ModalExample';
-import PlayerMessageScreen from './components/PlayerMessageScreen/PlayerMessageScreen';
+import PlayerMessageScreen from './components/screens/PlayerMessageScreen/PlayerMessageScreen';
 
 function App() {
   const [showSocketTest, setShowSocketTest] = useState(false);

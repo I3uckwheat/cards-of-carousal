@@ -1,19 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import cardTrioDiagonal from '../../assets/card-trio-diagonal.svg';
-import blackCardDiagonal from '../../assets/black-card-diagonal.svg';
+import cardTrioDiagonal from '../../../assets/card-trio-diagonal.svg';
+import blackCardDiagonal from '../../../assets/black-card-diagonal.svg';
 
 const propTypes = {
   bigText: PropTypes.string.isRequired,
   smallText: PropTypes.string.isRequired,
 };
 
-const Background = styled.div`
-  position: relative;
-  height: 100vh;
-  width: 100vw;
-  overflow: hidden;
+const PlayerMessageScreenWrapper = styled.div`
+  position: fixed;
+  display: flex;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
   background-color: var(--primary-color);
   background-size: 120% auto;
   background-repeat: no-repeat;
@@ -24,33 +26,49 @@ const Background = styled.div`
     position: relative;
     text-align: center;
     flex-direction: column;
-    top: 26.6%;
+    margin: auto;
   }
 
   .big-text {
     font-weight: 900;
-    /* Responsive font size */
-    font-size: calc(20px + 3.5vw);
+    font-size: 4.5rem;
+    @media (max-width: 1150px) {
+      font-size: 3.5rem;
+    }
+    @media (max-width: 800px) {
+      font-size: 2.5rem;
+    }
   }
 
   .small-text {
-    /* Responsive font size */
-    font-size: calc(7px + 2vw);
+    font-size: 2rem;
+    @media (max-width: 1150px) {
+      font-size: 1.5rem;
+    }
+    @media (max-width: 800px) {
+      font-size: 1rem;
+    }
   }
 
   .footer {
     display: flex;
     position: absolute;
-    width: 100%;
     bottom: 0;
     left: 0;
     right: 0;
+  }
+
+  .card-img {
+    height: 10vw;
+    &.right {
+      margin-left: auto;
+    }
   }
 `;
 
 function PlayerMessageScreen({ bigText, smallText }) {
   return (
-    <Background className="primary-background">
+    <PlayerMessageScreenWrapper className="primary-background">
       <div className="text-container">
         <h1 className="big-text">{bigText && bigText.toUpperCase()}</h1>
         <p className="small-text">{smallText}</p>
@@ -58,17 +76,17 @@ function PlayerMessageScreen({ bigText, smallText }) {
 
       <div className="footer">
         <img
-          style={{ height: '10vw' }}
+          className="card-img"
           src={cardTrioDiagonal}
           alt="three stacked card icons"
         />
         <img
-          style={{ marginLeft: 'auto', height: '10vw' }}
+          className="card-img right"
           src={blackCardDiagonal}
           alt="one black card icon"
         />
       </div>
-    </Background>
+    </PlayerMessageScreenWrapper>
   );
 }
 
