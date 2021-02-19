@@ -16,5 +16,17 @@
 }
 
 .primary-background {
+  position: relative;
+  overflow: hidden;
+}
+
+.primary-background::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
   background-image: url('./assets/primary-background.svg');
+  transform: rotate(11deg);
+  background-repeat: repeat-x;
 }
