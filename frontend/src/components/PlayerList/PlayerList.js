@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import BlackCard from '../../assets/black-card-icon.svg';
 import OffsetWhiteCardStack from '../../assets/offset-white-card-stack-icon.svg';
-import TallyMarkers from '../TallyMarker/TallyMarker';
+import TallyCount from '../TallyMarker/TallyCount';
 
 const propTypes = {
   playerList: PropTypes.shape({
@@ -98,9 +98,8 @@ function PlayerList({ playerList }) {
 
             <div className="player-info">
               <h1>{player.name}</h1>
-              <TallyMarkers
+              <TallyCount
                 score={player.score}
-                maxNumberOfMarkers={2}
                 color={player.czar ? 'primary' : 'secondary'}
               />
             </div>
