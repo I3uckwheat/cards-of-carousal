@@ -13,6 +13,7 @@ import BlackCardExample from './temp/BlackCardExample';
 import WhiteCardExample from './temp/WhiteCardExample';
 import CardWrapperExample from './temp/CardWrapperExample';
 
+import PlayerJoin from './components/PlayerJoin/PlayerJoin';
 import Modal from './components/Modal/Modal';
 import playerList from './temp/playerList';
 import ModalExample from './temp/ModalExample';
@@ -30,6 +31,7 @@ function App() {
   const [showModal, setShowModal] = useState(false);
   const [showPlayerMessageScreen, setShowPlayerMessageScreen] = useState(false);
   const [showCardWrapper, setShowCardWrapper] = useState(false);
+  const [showPlayerJoin, setShowPlayerJoin] = useState(true);
 
   return (
     <div className="App primary-background">
@@ -110,6 +112,12 @@ function App() {
         >
           Show Card Wrapper
         </Button>
+        <Button
+          type="button"
+          onClick={() => setShowPlayerJoin(!showPlayerJoin)}
+        >
+          Show Player Join screen
+        </Button>
       </div>
       {showHeader && (
         <Header className="header">
@@ -176,6 +184,7 @@ function App() {
         />
       )}
       {showCardWrapper && <CardWrapperExample />}
+      {showPlayerJoin && <PlayerJoin />}
     </div>
   );
 }
