@@ -25,8 +25,14 @@
   position: absolute;
   z-index: -1;
   background-image: url('./assets/halftone-effect.svg');
-  transform: rotate(11deg) translate(-931px, -291px);
+  transform: rotate(11deg) translate(-450px, calc(-1250px + (2vh * 30)));
   background-repeat: repeat-x;
-  width: 300vw;
-  height: 300vh;
+  height: 5000px;
+  width: 5000px;
+}
+
+@media (min-width: 2470px) {
+  .primary-background::before {
+    transform: rotate(11deg) translate(-450px, calc(-1600px + (2vh * 30)));
+  }
 }
