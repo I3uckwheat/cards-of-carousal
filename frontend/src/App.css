@@ -23,8 +23,6 @@
 .primary-background::before {
   content: '';
   position: absolute;
-  width: 100%;
-  height: 100%;
   z-index: -1;
   background-image: url('./assets/halftone-effect.svg');
   transform: rotate(11deg) translate(-931px, -291px);
