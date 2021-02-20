@@ -13,6 +13,7 @@ import WhiteCardExample from './temp/WhiteCardExample';
 import Modal from './components/Modal/Modal';
 import playerList from './temp/playerList';
 import ModalExample from './temp/ModalExample';
+import PlayerMessageScreen from './components/screens/PlayerMessageScreen/PlayerMessageScreen';
 
 function App() {
   const [showSocketTest, setShowSocketTest] = useState(false);
@@ -24,6 +25,7 @@ function App() {
   const [showBlackCards, setShowBlackCards] = useState(false);
   const [showWhiteCards, setShowWhiteCards] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [showPlayerMessageScreen, setShowPlayerMessageScreen] = useState(false);
 
   return (
     <div className="App primary-background">
@@ -92,6 +94,12 @@ function App() {
         <Button type="button" onClick={() => setShowModal(!showModal)}>
           Show Modal
         </Button>
+        <Button
+          type="button"
+          onClick={() => setShowPlayerMessageScreen(!showPlayerMessageScreen)}
+        >
+          Show Player Message Screen
+        </Button>
       </div>
       {showHeader && (
         <Header className="header">
@@ -149,6 +157,13 @@ function App() {
         <Modal onClickOutside={() => setShowModal(!showModal)}>
           <ModalExample toggleModal={() => setShowModal(!showModal)} />
         </Modal>
+      )}
+
+      {showPlayerMessageScreen && (
+        <PlayerMessageScreen
+          bigText="you've joined the lobby"
+          smallText="Please wait for the host to start the game."
+        />
       )}
     </div>
   );
