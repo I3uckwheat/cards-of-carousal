@@ -21,7 +21,16 @@ module.exports = class SocketRouter {
   addRoute = (routeDeclaration, handler) => {
     if (!handler)
       throw new Error(`Missing routeDeclaration "${routeDeclaration}" handler`);
+
     const { method, route } = this.#parseRouteDeclaration(routeDeclaration);
+
+    if (
+      this.#routes[method].find((existingRoute) =>
+        this.#isRouteMatch(existingRoute.route, route),
+      )
+    )
+      throw new Error(`Route ${route} is already covered by an existing route`);
+
     this.#routes[method].push({ route, handler });
   };
 
@@ -31,11 +40,11 @@ module.exports = class SocketRouter {
     const match = this.#routes[method].find(({ route }) =>
       this.#isRouteMatch(route, url),
     );
-    if (!match) this.#notFoundHandler({ url, params: {} }, request);
+    if (!match) return this.#notFoundHandler({ url, params: {} }, request);
 
     const req = this.#parseUrl(match.route, url);
 
-    match.handler(req, webSocket);
+    return match.handler(req, webSocket);
   };
 
   #parseRouteDeclaration = (routeDeclaration) => {
