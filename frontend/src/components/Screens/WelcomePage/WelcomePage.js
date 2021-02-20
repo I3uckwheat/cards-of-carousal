@@ -115,11 +115,12 @@ const WelcomeScreen = styled.div`
     margin-right: 1rem;
   }
 
-  /* Mobil Breakpoint */
-  @media (max-width: 500px) {
+  /****** Mobile Breakpoint ******/
+  /*most newer mobile phone */
+  @media (max-width: 420px) {
     /*Header*/
     .header-container {
-      height: 130px;
+      height: 180px;
     }
 
     .welcome-to {
@@ -127,10 +128,10 @@ const WelcomeScreen = styled.div`
     }
 
     .CoC {
-      font-size: 3rem;
-      margin-bottom: -0.75rem;
+      font-size: 4rem;
+      margin-bottom: -0.95rem;
       vertical-align: bottom;
-      line-height: 3.5rem;
+      line-height: 4.5rem;
     }
 
     .definition-container {
@@ -165,6 +166,23 @@ const WelcomeScreen = styled.div`
     .credit {
       line-height: 1rem;
       margin: 0.5rem;
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+  }
+
+  /*iphone 5  */
+  @media (max-width: 320px) {
+    /*Header*/
+    .header-container {
+      height: 130px;
+    }
+
+    .CoC {
+      font-size: 3rem;
+      margin-bottom: -0.75rem;
+      vertical-align: bottom;
+      line-height: 3.5rem;
     }
   }
 `;
