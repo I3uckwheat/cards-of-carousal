@@ -3,22 +3,27 @@ import styled from 'styled-components';
 import Header from '../../Header/Header';
 
 const WelcomeScreen = styled.div`
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
   display: flex;
   flex-direction: column;
-  width: 100vw;
-  height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
 
   /*Header*/
   .header-container {
     display: flex;
-    height: 25.5vh;
+    height: 190px;
     flex-direction: column;
-    align-items: flex-start;
     justify-content: flex-end;
   }
 
   .welcome-to {
-    lineheight: 2rem;
+    margin-top: 0px;
+    line-height: 2rem;
     margin-bottom: -0.9rem;
   }
 
@@ -33,9 +38,7 @@ const WelcomeScreen = styled.div`
   .main-body-container {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 62.5vh;
+    margin: auto;
   }
 
   .main-content {
@@ -45,37 +48,36 @@ const WelcomeScreen = styled.div`
     align-items: center;
   }
 
-  /*Definition*/
   .definition-container {
     display: flex;
     flex-direction: column;
-  }
-
-  .noun {
-    font-style: italic;
+    font-size: 3.2rem;
+    font-weight: 700;
+    transform: rotate(-5deg);
+    margin-bottom: 9rem;
+    line-height: 3.3rem;
   }
 
   .definition {
+    font-size: 2.75rem;
+    font-weight: 400;
   }
 
-  /*buttons*/
   .button-container {
     display: flex;
     flex-direction: row;
-    justify-content: center;
+
     align-items: center;
+    font-size: 2.5rem;
+    font-weight: 900;
   }
 
-  .join-host-btn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  .join-btn {
     border: solid 2px var(--secondary-color);
     background-color: var(--primary-color);
     color: var(--secondary-color);
-    border-radius: 2px; /*edit after*/
-    height: 8vh;
-    width: 22vw;
+    border-radius: 3px; /*edit after*/
+    width: 16rem;
   }
 
   .OR {
@@ -85,10 +87,13 @@ const WelcomeScreen = styled.div`
     background-color: var(--secondary-color);
     color: var(--primary-color);
     border-radius: 50%;
-    height: 8vh;
-    width: 8vh;
-    margin-left: 6.4vw;
-    margin-right: 6.4vw;
+    padding: 1rem;
+    width: 4.5rem;
+    height: 4.5rem;
+    margin-left: 5.8rem;
+    margin-right: 5.8rem;
+    font-size: 2.25rem;
+    font-weight: 700;
   }
 
   /*Footer*/
@@ -97,13 +102,70 @@ const WelcomeScreen = styled.div`
     flex-direction: column;
     align-items: flex-end;
     justify-content: flex-end;
-    position: relative;
-    height: 12vh;
+    margin-top: auto;
+    height: 140px;
     background-color: var(--secondary-color);
     color: var(--primary-color);
+    font-size: 2rem;
+    font-weight: 400;
   }
 
   .credit {
+    margin-top: 0.5rem;
+    margin-right: 1rem;
+  }
+
+  /* Mobil Breakpoint */
+  @media (max-width: 500px) {
+    /*Header*/
+    .header-container {
+      height: 130px;
+    }
+
+    .welcome-to {
+      display: none;
+    }
+
+    .CoC {
+      font-size: 3rem;
+      margin-bottom: -0.75rem;
+      vertical-align: bottom;
+      line-height: 3.5rem;
+    }
+
+    .definition-container {
+      display: none;
+      margin-bottom: 3rem;
+    }
+
+    .join-btn {
+      width: 14rem;
+    }
+
+    .host-btn {
+      display: none;
+    }
+
+    .OR {
+      display: none;
+    }
+
+    /*Footer*/
+    .footer-container {
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 120px;
+      background-color: white; /*transparent after background fix and tilt*/
+      color: var(--accent-color);
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    .credit {
+      line-height: 1rem;
+      margin: 0.5rem;
+    }
   }
 `;
 
@@ -118,18 +180,18 @@ function WelcomePage() {
         <div className="main-content">
           <div className="definition-container">
             <div className="word">
-              CAROUSAL<span className="noun">(n)</span>
+              CAROUSAL <span className="definition">(n)</span>
             </div>
             <div className="definition">
               a wild, drunken party or celebration : a drunken revel
             </div>
           </div>
           <div className="button-container">
-            <button type="button" className="join-host-btn">
+            <button type="button" className="join-btn">
               JOIN
             </button>
             <div className="OR">OR</div>
-            <button type="button" className="join-host-btn">
+            <button type="button" className="join-btn host-btn">
               HOST
             </button>
           </div>
@@ -137,10 +199,10 @@ function WelcomePage() {
       </main>
       <footer className="footer-container">
         <div className="credit">
-          Card content from: https://cardsagainsthumanity.com
+          Card content thanks to: https://cardsagainsthumanity.com
         </div>
         <div className="credit">
-          Made by Odin students: https://www.theodinproject.com
+          Made by Odin students, with love: https://www.theodinproject.com
         </div>
       </footer>
     </WelcomeScreen>
