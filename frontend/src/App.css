@@ -16,5 +16,17 @@
 }
 
 .primary-background {
-  background-image: url('./assets/primary-background.svg');
+  position: relative;
+  overflow: hidden;
+}
+
+.primary-background::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  background-image: url('./assets/halftone-effect.svg');
+  transform: rotate(11deg) translate(-931px, -291px);
+  background-repeat: repeat-x;
+  width: 300vw;
+  height: 300vh;
 }
