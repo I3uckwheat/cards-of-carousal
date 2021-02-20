@@ -26,7 +26,9 @@
   width: 100%;
   height: 100%;
   z-index: -1;
-  background-image: url('./assets/primary-background.svg');
-  transform: rotate(11deg);
+  background-image: url('./assets/halftone-effect.svg');
+  transform: rotate(11deg) translate(-931px, -291px);
   background-repeat: repeat-x;
+  width: 300vw;
+  height: 300vh;
 }
