@@ -1,17 +1,17 @@
 /* eslint-disable guard-for-in */
-// const MasterDeck = require('../lib/MasterDeck/MasterDeck');
 const path = require('path');
 const fs = require('fs');
+const MasterDeck = require('../lib/MasterDeck/MasterDeck');
 
 const packsJSON = fs.readFileSync(
   path.join(__dirname, '../assets/cah-cards-full.json'),
 );
 
 const packs = JSON.parse(packsJSON);
+const masterDeck = new MasterDeck(packs);
 
 exports.getDeck = function (req, res) {
-  const packKeys = Object.keys(packs);
-  const packNames = packKeys.map((key) => packs[key].name);
+  const packNames = masterDeck.getPackNames();
 
   res.send(packNames);
 };
