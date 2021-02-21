@@ -38,8 +38,12 @@ const Circle = styled.div`
 export default function CardWrapper({ children, select }) {
   return (
     <Wrapper data-testid="card-wrapper" select={select}>
-      <Circle data-test-id="star">
-        {typeof select === 'number' ? select : <img src={star} alt="Star" />}
+      <Circle>
+        {typeof select === 'number' ? (
+          select
+        ) : (
+          <img src={star} alt="Star" data-testid="star" />
+        )}
       </Circle>
       {children}
     </Wrapper>

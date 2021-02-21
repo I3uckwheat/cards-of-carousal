@@ -17,5 +17,38 @@ describe('CardWrapper', () => {
         'border-bottom: 5px solid black',
       );
     });
+    it('renders with a bottom border and the star icon if the string "winner" is passed in', () => {
+      render(
+        <CardWrapper data-testid="card-wrapper" select="winner">
+          <WhiteCard />
+        </CardWrapper>,
+      );
+
+      expect(screen.getByTestId('card-wrapper')).toHaveStyle(
+        'border-bottom: 5px solid black',
+      );
+      expect(screen.getByTestId('star')).toBeInTheDocument();
+    });
+  });
+  describe('invalid prop types', () => {
+    const consoleSpy = jest
+      .spyOn(console, 'error')
+      .mockImplementation(() => {});
+    it('logs an error to the console when a non-positive number is passed in', () => {
+      render(
+        <CardWrapper data-testid="card-wrapper" select={0}>
+          <WhiteCard />
+        </CardWrapper>,
+      );
+      expect(consoleSpy).toHaveBeenCalled();
+    });
+    it('logs an error to the console when a non-"winner" string is passed in', () => {
+      render(
+        <CardWrapper data-testid="card-wrapper" select="loser">
+          <WhiteCard />
+        </CardWrapper>,
+      );
+      expect(consoleSpy).toHaveBeenCalled();
+    });
   });
 });
