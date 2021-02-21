@@ -12,7 +12,7 @@ const masterDeck = new MasterDeck(packs);
 exports.getDeck = function (req, res) {
   const packNames = masterDeck.getPackNames();
 
-  res.send(packNames);
+  return res.send(packNames);
 };
 
 exports.getCards = function (req, res) {
@@ -24,10 +24,9 @@ exports.getCards = function (req, res) {
 
     const packIds = req.query.packs.split`,`.map((id) => id !== '' && +id);
     const cardsByPackIds = masterDeck.getDeck(packIds);
-    res.send(cardsByPackIds);
-  } else {
-    const allPackIds = Object.keys(packs).map((id) => +id);
-    const allCards = masterDeck.getDeck(allPackIds);
-    res.send(allCards);
+    return res.send(cardsByPackIds);
   }
+  const allPackIds = Object.keys(packs).map((id) => +id);
+  const allCards = masterDeck.getDeck(allPackIds);
+  return res.send(allCards);
 };
