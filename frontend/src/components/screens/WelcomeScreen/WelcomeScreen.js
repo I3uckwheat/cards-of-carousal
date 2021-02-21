@@ -112,33 +112,36 @@ const WelcomeScreenWrapper = styled.div`
   }
 
   .credit {
-    margin-top: 0.5rem;
-    margin-right: 1rem;
+    margin-top: 0.5rem 1rem;
   }
 
-  /*smallest size hosting screen */
-  @media (max-width: 960px) {
+  /*small size hosting screen */
+  @media (max-width: 970px) {
     .footer-container {
       text-align: center;
       font-size: 1.5rem;
+    }
+
+    .definition-container {
+      margin-bottom: 5rem;
+    }
+
+    .CoC {
+      font-size: 4rem;
+      margin-bottom: -1.3rem;
+      line-height: 5rem;
     }
   }
 
   /*largest desktop player mode */
   @media (max-width: 785px) {
-    /*Header*/
     .header-container {
       height: 180px;
-    }
-
-    .welcome-to {
-      display: none;
     }
 
     .CoC {
       font-size: 4rem;
       margin-bottom: -0.95rem;
-      vertical-align: bottom;
       line-height: 4.5rem;
     }
 
@@ -159,9 +162,7 @@ const WelcomeScreenWrapper = styled.div`
       display: none;
     }
 
-    /*Footer*/
     .footer-container {
-      flex-direction: column;
       align-items: center;
       justify-content: center;
       height: 120px;
@@ -180,16 +181,21 @@ const WelcomeScreenWrapper = styled.div`
     }
   }
 
-  /*smallest desktop player mode */
-  @media (max-width: 582px) {
+  /* Keeps footer content formatted correctly as player only screen shrinks on desktop*/
+  @media (max-width: 645px) {
+    .welcome-to {
+      display: none;
+    }
+
     .credit {
       line-height: 1.5rem;
       margin: 0.5rem;
-      padding-left: 60px;
-      padding-right: 60px;
+      padding-left: 70px;
+      padding-right: 70px;
     }
   }
 
+  /* modern larger mobile devices */
   @media (max-width: 500px) {
     .credit {
       padding-left: 20px;
@@ -197,9 +203,8 @@ const WelcomeScreenWrapper = styled.div`
     }
   }
 
-  /*iphone 5  */
+  /*iphone 5*/
   @media (max-width: 320px) {
-    /*Header*/
     .header-container {
       height: 130px;
     }
@@ -209,6 +214,10 @@ const WelcomeScreenWrapper = styled.div`
       margin-bottom: -0.75rem;
       vertical-align: bottom;
       line-height: 3.5rem;
+    }
+
+    .footer-container {
+      font-size: 1rem;
     }
   }
 `;
