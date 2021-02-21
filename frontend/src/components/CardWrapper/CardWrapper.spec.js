@@ -8,7 +8,7 @@ describe('CardWrapper', () => {
   describe('rendering', () => {
     it('renders with a bottom border if a non-zero number is passed into the select prop', () => {
       render(
-        <CardWrapper data-testid="card-wrapper" select={1}>
+        <CardWrapper select={1}>
           <WhiteCard />
         </CardWrapper>,
       );
@@ -19,7 +19,7 @@ describe('CardWrapper', () => {
     });
     it('renders with a bottom border and the star icon if the string "winner" is passed in', () => {
       render(
-        <CardWrapper data-testid="card-wrapper" select="winner">
+        <CardWrapper select="winner">
           <WhiteCard />
         </CardWrapper>,
       );
@@ -36,7 +36,7 @@ describe('CardWrapper', () => {
       .mockImplementation(() => {});
     it('logs an error to the console when a non-positive number is passed in', () => {
       render(
-        <CardWrapper data-testid="card-wrapper" select={0}>
+        <CardWrapper select={0}>
           <WhiteCard />
         </CardWrapper>,
       );
@@ -44,7 +44,7 @@ describe('CardWrapper', () => {
     });
     it('logs an error to the console when a non-"winner" string is passed in', () => {
       render(
-        <CardWrapper data-testid="card-wrapper" select="loser">
+        <CardWrapper select="loser">
           <WhiteCard />
         </CardWrapper>,
       );
