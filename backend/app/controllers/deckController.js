@@ -17,7 +17,18 @@ exports.getDeck = function (req, res) {
 };
 
 exports.getCards = function (req, res) {
-  return req.query.packs
-    ? res.send('NOT IMPLEMENTED: Return cards based on the packIds')
-    : res.send('NOT IMPLEMENTED: Return all cards');
+  if (req.query.packs) {
+    // Converts id from string to number using unary plus operator (+)
+
+    // Filters out empty string query parameters since they would evaluate to 0. This would cause the master deck
+    // to return pack 0, which could be unwanted.
+
+    const packIds = req.query.packs.split`,`.map((id) => id !== '' && +id);
+    const cardsByPackIds = masterDeck.getDeck(packIds);
+    res.send(cardsByPackIds);
+  } else {
+    const allPackIds = Object.keys(packs).map((id) => +id);
+    const allCards = masterDeck.getDeck(allPackIds);
+    res.send(allCards);
+  }
 };
