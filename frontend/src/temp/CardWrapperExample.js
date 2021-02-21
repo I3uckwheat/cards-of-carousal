@@ -7,25 +7,34 @@ function CardWrapperExample() {
     <div
       style={{
         display: 'flex',
-        flexDirection: 'row',
+        width: '100%',
+        height: '100vh',
         justifyContent: 'space-evenly',
+        alignItems: 'center',
+        flexWrap: 'wrap',
       }}
     >
       <div>
-        <p>Wrapper With Truthy Select Prop</p>
+        <div>
+          <CardWrapper select="winner">
+            <WhiteCard>I want to do it by myseeeeeeeelf!</WhiteCard>
+          </CardWrapper>
+        </div>
+        <div>
+          <CardWrapper select={0}>
+            <WhiteCard>I want to do it by myseeeeeeeelf!</WhiteCard>
+          </CardWrapper>
+        </div>
+        <div>
+          <CardWrapper select={1}>
+            <WhiteCard>I want to do it by myseeeeeeeelf!</WhiteCard>
+          </CardWrapper>
+        </div>
+      </div>
+      <div>
         <CardWrapper select="winner">
           <WhiteCard>I want to do it by myseeeeeeeelf!</WhiteCard>
-        </CardWrapper>
-      </div>
-      <div>
-        <p>Wrapper With Falsy Select Prop</p>
-        <CardWrapper select={0}>
           <WhiteCard>I want to do it by myseeeeeeeelf!</WhiteCard>
-        </CardWrapper>
-      </div>
-      <div>
-        <p>Wrapper With Winner Select Prop</p>
-        <CardWrapper select={0}>
           <WhiteCard>I want to do it by myseeeeeeeelf!</WhiteCard>
         </CardWrapper>
       </div>
