@@ -30,13 +30,50 @@ const HostLayoutContainer = styled.div`
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-end;
+    min-width: 167px;
   }
 
   .host-layout-header-text {
-    font-size: 40px;
-    margin-bottom: -10px;
     vertical-align: bottom;
-    line-height: 44px;
+    font-size: 7rem;
+    margin-bottom: -1.3rem;
+    line-height: 7rem;
+
+    @media (max-width: 3400px) {
+      font-size: 6rem;
+      margin-bottom: -1.1rem;
+      line-height: 6rem;
+    }
+
+    @media (max-width: 3000px) {
+      font-size: 5rem;
+      margin-bottom: -1rem;
+      line-height: 5rem;
+    }
+
+    @media (max-width: 2500px) {
+      font-size: 4rem;
+      margin-bottom: -1rem;
+      line-height: 4rem;
+    }
+
+    @media (max-width: 2000px) {
+      font-size: 3rem;
+      margin-bottom: -0.7rem;
+      line-height: 3rem;
+    }
+
+    @media (max-width: 1500px) {
+      font-size: 2rem;
+      margin-bottom: -0.35rem;
+      line-height: 2rem;
+    }
+
+    @media (max-width: 600px) {
+      font-size: 1.5rem;
+      margin-bottom: -5px;
+      line-height: 1.5rem;
+    }
   }
 
   .hamburger-container {
@@ -66,6 +103,7 @@ const HostLayoutContainer = styled.div`
   .left {
     flex: 1;
     background-color: white;
+    min-width: 167px;
   }
 
   .right {
