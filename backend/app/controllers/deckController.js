@@ -9,13 +9,13 @@ const packsJSON = fs.readFileSync(
 const packs = JSON.parse(packsJSON);
 const masterDeck = new MasterDeck(packs);
 
-exports.getDeck = function (req, res) {
+exports.getPackNames = function (req, res) {
   const packNames = masterDeck.getPackNames();
 
   return res.send(packNames);
 };
 
-exports.getCards = function (req, res) {
+exports.getDeck = function (req, res) {
   if (req.query.packs) {
     // Converts id from string to number using unary plus operator (+)
 
