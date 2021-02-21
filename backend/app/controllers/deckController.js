@@ -1,4 +1,3 @@
-/* eslint-disable guard-for-in */
 const path = require('path');
 const fs = require('fs');
 const MasterDeck = require('../lib/MasterDeck/MasterDeck');
