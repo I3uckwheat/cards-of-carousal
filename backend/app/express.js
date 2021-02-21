@@ -1,5 +1,5 @@
 const express = require('express');
-const { getDeck, getCards } = require('./controllers/deckController');
+const { getPackNames, getDeck } = require('./controllers/deckController');
 
 // import cookieParser from 'cookie-parser';
 // const passport = require('passport');
@@ -16,8 +16,8 @@ const app = express();
 app.use(express.json());
 // app.use(cookieParser());
 
-app.get('/deck', getDeck);
-app.get('/deck/cards', getCards);
+app.get('/deck', getPackNames);
+app.get('/deck/cards', getDeck);
 
 // const routes = require('./routes');
 // app.use(route);
