@@ -4,8 +4,12 @@ import styled from 'styled-components';
 import star from '../../assets/star-1.svg';
 
 const propTypes = {
-  select: PropTypes.oneOf([1, 2, 3, 'winner']).isRequired,
+  select: PropTypes.oneOf([1, 2, 3, 'winner', null]),
   children: PropTypes.node.isRequired,
+};
+
+const defaultProps = {
+  select: null,
 };
 
 const Wrapper = styled.div`
@@ -38,16 +42,19 @@ const Circle = styled.div`
 export default function CardWrapper({ children, select }) {
   return (
     <Wrapper data-testid="card-wrapper" select={select}>
-      <Circle>
-        {typeof select === 'number' ? (
-          select
-        ) : (
-          <img src={star} alt="Star" data-testid="star" />
-        )}
-      </Circle>
+      {select && (
+        <Circle>
+          {typeof select === 'number' ? (
+            select
+          ) : (
+            <img src={star} alt="Star" data-testid="star" />
+          )}
+        </Circle>
+      )}
       {children}
     </Wrapper>
   );
 }
 
 CardWrapper.propTypes = propTypes;
+CardWrapper.defaultProps = defaultProps;

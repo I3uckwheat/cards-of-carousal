@@ -15,27 +15,25 @@ function CardWrapperExample() {
       }}
     >
       <div>
-        <div>
-          <CardWrapper select="winner">
-            <WhiteCard>I want to do it by myseeeeeeeelf!</WhiteCard>
-          </CardWrapper>
-        </div>
-        <div>
-          <CardWrapper select={0}>
-            <WhiteCard>I want to do it by myseeeeeeeelf!</WhiteCard>
-          </CardWrapper>
-        </div>
-        <div>
-          <CardWrapper select={1}>
-            <WhiteCard>I want to do it by myseeeeeeeelf!</WhiteCard>
-          </CardWrapper>
-        </div>
+        <CardWrapper>
+          <WhiteCard>No value passed into select prop</WhiteCard>
+        </CardWrapper>
       </div>
       <div>
         <CardWrapper select="winner">
-          <WhiteCard>I want to do it by myseeeeeeeelf!</WhiteCard>
-          <WhiteCard>I want to do it by myseeeeeeeelf!</WhiteCard>
-          <WhiteCard>I want to do it by myseeeeeeeelf!</WhiteCard>
+          <WhiteCard>Winner string passed into select prop</WhiteCard>
+        </CardWrapper>
+      </div>
+      <div>
+        <CardWrapper select={1}>
+          <WhiteCard>Positive number passed into select prop</WhiteCard>
+        </CardWrapper>
+      </div>
+      <div>
+        <CardWrapper select="winner">
+          <WhiteCard>Group of winning cards</WhiteCard>
+          <WhiteCard>Group of winning cards</WhiteCard>
+          <WhiteCard>Group of winning cards</WhiteCard>
         </CardWrapper>
       </div>
     </div>

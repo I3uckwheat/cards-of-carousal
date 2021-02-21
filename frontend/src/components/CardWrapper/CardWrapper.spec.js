@@ -6,6 +6,17 @@ import WhiteCard from '../Cards/WhiteCard';
 
 describe('CardWrapper', () => {
   describe('rendering', () => {
+    it('renders without a bottom border if null is passed in', () => {
+      render(
+        <CardWrapper>
+          <WhiteCard />
+        </CardWrapper>,
+      );
+
+      expect(screen.getByTestId('card-wrapper')).toHaveStyle(
+        'border-bottom: none',
+      );
+    });
     it('renders with a bottom border if a non-zero number is passed into the select prop', () => {
       render(
         <CardWrapper select={1}>
