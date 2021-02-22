@@ -214,7 +214,36 @@ function App() {
             </div>
           }
           right={<SingleBlackCardExample />}
-          modal={<ModalExample toggleModal={() => setShowModal(!showModal)} />}
+          modal={
+            <div
+              style={{
+                position: 'absolute',
+                top: '0',
+                right: '0',
+                bottom: '0',
+                height: '100%',
+                width: '25%',
+                backgroundColor: 'black',
+                display: 'flex',
+                flexDirection: 'column',
+              }}
+            >
+              <h3
+                style={{
+                  fontSize: '3rem',
+                  lineHeight: '3rem',
+                  marginBottom: '-0.6rem',
+                  color: 'white',
+                  display: 'flex',
+                  flexDirection: 'column-reverse',
+                  flex: '1',
+                }}
+              >
+                SETTINGS
+              </h3>
+              <div style={{ backgroundColor: 'white', flex: '7' }} />
+            </div>
+          }
         />
       )}
     </div>
