@@ -82,6 +82,7 @@ const HostLayoutContainer = styled.div`
     flex-direction: row-reverse;
     flex: 2;
     margin: 30px 30px -30px -30px;
+    z-index: 10100;
   }
 
   .components {
