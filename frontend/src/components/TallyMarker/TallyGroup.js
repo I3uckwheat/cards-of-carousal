@@ -10,8 +10,8 @@ const propTypes = {
 const StyledPath = styled.path`
   stroke: ${(props) =>
     props.color === 'primary'
-      ? 'var(--primary-color)'
-      : 'var(--secondary-color)'};
+      ? 'var(--primary-text-color)'
+      : 'var(--secondary-text-color)'};
 `;
 
 const tallyPaths = [

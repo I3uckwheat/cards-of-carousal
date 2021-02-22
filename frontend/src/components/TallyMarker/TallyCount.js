@@ -16,8 +16,8 @@ const Container = styled.div`
 const Text = styled.span`
   color: ${(props) =>
     props.color === 'primary'
-      ? 'var(--primary-color)'
-      : 'var(--secondary-color)'};
+      ? 'var(--primary-text-color)'
+      : 'var(--secondary-text-color)'};
   font-size: 24px;
   font-weight: 900;
 `;
