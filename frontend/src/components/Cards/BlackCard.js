@@ -19,8 +19,8 @@ const StyledBlackCard = styled.div`
   position: relative;
   width: 390px;
   height: 540px;
-  background-color: black;
-  color: white;
+  background-color: var(--secondary-background-color);
+  color: var(--secondary-text-color);
   border-radius: 18px;
   font-weight: 700;
   font-size: 36px;
@@ -52,8 +52,8 @@ const Circled = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  color: black;
-  background: white;
+  color: var(--primary-text-color);
+  background: var(--primary-background-color);
   width: 20px;
   height: 20px;
   border-radius: 50%;
