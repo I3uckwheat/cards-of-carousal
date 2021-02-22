@@ -122,9 +122,7 @@ function HostLayout({ left, right, modal }) {
 
   return (
     <HostLayoutContainer className="primary-background">
-      {showModal && (
-        <Modal onClickOutside={() => setShowModal(!showModal)}>{modal}</Modal>
-      )}
+      {showModal && <Modal onClickOutside={handleModalClick}>{modal}</Modal>}
       <div className="header-and-hamburger">
         <Header className="host-layout-header">
           <h2 className="host-layout-header-text">CARDS OF CAROUSAL</h2>

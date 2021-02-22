@@ -214,11 +214,7 @@ function App() {
             </div>
           }
           right={<SingleBlackCardExample />}
-          modal={
-            showModal && (
-              <ModalExample toggleModal={() => setShowModal(!showModal)} />
-            )
-          }
+          modal={<ModalExample toggleModal={() => setShowModal(!showModal)} />}
         />
       )}
     </div>
