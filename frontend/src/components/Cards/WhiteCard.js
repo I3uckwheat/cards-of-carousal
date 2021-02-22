@@ -13,11 +13,11 @@ const defaultProps = {
 
 const StyledWhiteCard = styled.div`
   position: relative;
-  border: 1px solid black;
+  border: 1px solid var(--primary-text-color);
   width: 148px;
   height: 206px;
-  background-color: white;
-  color: black;
+  background-color: var(--primary-background-color);
+  color: var(--primary-text-color);
   border-radius: 7px;
   font-weight: 500;
   font-size: ${(props) => (props.shrinkFont ? '11px' : '18px')};

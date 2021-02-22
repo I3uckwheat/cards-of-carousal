@@ -38,12 +38,16 @@ describe('button', () => {
   describe('styling', () => {
     it('background is white if button is active', () => {
       render(<Button isActive>+</Button>);
-      expect(screen.getByText('+')).toHaveStyle('background: #fff');
+      expect(screen.getByText('+')).toHaveStyle(
+        'background: var(--primary-background-color)',
+      );
     });
 
     it('background is black if isActive is false', () => {
       render(<Button isActive={false}>+</Button>);
-      expect(screen.getByText('+')).toHaveStyle('background: #333');
+      expect(screen.getByText('+')).toHaveStyle(
+        'background: var(--secondary-background-color)',
+      );
     });
   });
   // ----------------------------------------------------------------------------

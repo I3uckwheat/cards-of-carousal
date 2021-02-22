@@ -26,7 +26,7 @@ const PlayerTable = styled.div`
 
   width: 486px;
   padding: 40px;
-  background-color: var(--primary-color);
+  background-color: var(--primary-background-color);
 
   position: relative;
 
@@ -52,7 +52,9 @@ const PlayerRow = styled.div`
     border-radius: ${(props) => (props.isCzar ? '4px' : 0)};
 
     background-color: ${(props) =>
-      props.isCzar ? 'var(--secondary-color)' : 'var(--primary-color)'};
+      props.isCzar
+        ? 'var(--secondary-background-color);'
+        : 'var(--primary-background-color)'};
 
     h1 {
       text-transform: uppercase;
@@ -61,12 +63,16 @@ const PlayerRow = styled.div`
       letter-spacing: 1px;
       line-height: 1.5em;
       color: ${(props) =>
-        props.isCzar ? 'var(--primary-color)' : 'var(--secondary-color)'};
+        props.isCzar
+          ? 'var(--secondary-text-color)'
+          : 'var(--primary-text-color)'};
     }
 
     span {
       color: ${(props) =>
-        props.isCzar ? 'var(--primary-color)' : 'var(--secondary-color)'};
+        props.isCzar
+          ? 'var(--secondary-text-color)'
+          : 'var(--primary-text-color)'};
       font-size: 24px;
       font-weight: 900;
     }
@@ -100,7 +106,7 @@ function PlayerList({ playerList }) {
               <h1>{player.name}</h1>
               <TallyCount
                 score={player.score}
-                color={player.czar ? 'primary' : 'secondary'}
+                color={player.czar ? 'secondary' : 'primary'}
               />
             </div>
           </PlayerRow>

@@ -13,8 +13,8 @@ const JoinCodeComponent = styled.div`
 
   .join-code-title {
     font-size: 18px;
-    color: var(--secondary-color);
-    background-color: var(--primary-color);
+    color: var(--primary-text-color);
+    background-color: var(--primary-background-color);
     font-weight: 700;
     width: 97px;
     height: 21px;
@@ -26,8 +26,8 @@ const JoinCodeComponent = styled.div`
     justify-content: center;
     font-size: 56px;
     font-weight: bold;
-    color: var(--primary-color);
-    background-color: var(--secondary-color);
+    color: var(--secondary-text-color);
+    background-color: var(--secondary-background-color);
     width: 305px;
     height: 70px;
   }
