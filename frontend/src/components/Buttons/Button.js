@@ -14,7 +14,7 @@ const defaultProps = {
  * To set the width and height of the button, create a CSS class and use it. */
 const Button = styled.button`
   display: block;
-  border: 2px solid #000;
+  border: 2px solid var(--primary-text-color);
   font-size: 12px;
   font-weight: bold;
   padding: 0.7em;
@@ -24,7 +24,7 @@ const Button = styled.button`
       : 'var(--secondary-background-color)'};
   color: ${(props) =>
     props.isActive
-      ? '#var(--primary-text-color)'
+      ? 'var(--primary-text-color)'
       : 'var(--secondary-text-color)'};
 
   :hover,
