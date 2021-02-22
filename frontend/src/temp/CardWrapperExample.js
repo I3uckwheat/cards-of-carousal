@@ -7,30 +7,30 @@ function CardWrapperExample() {
     <div
       style={{
         display: 'flex',
-        width: '100%',
+        width: '90%',
         height: '100vh',
-        justifyContent: 'space-evenly',
+        justifyContent: 'space-between',
         alignItems: 'center',
         flexWrap: 'wrap',
       }}
     >
       <div>
         <CardWrapper>
-          <WhiteCard>No value passed into select prop</WhiteCard>
+          <WhiteCard>No value passed into selection prop</WhiteCard>
         </CardWrapper>
       </div>
       <div>
-        <CardWrapper select="winner">
-          <WhiteCard>Winner string passed into select prop</WhiteCard>
+        <CardWrapper selection="winner">
+          <WhiteCard>Winner string passed into selection prop</WhiteCard>
         </CardWrapper>
       </div>
       <div>
-        <CardWrapper select={1}>
-          <WhiteCard>Positive number passed into select prop</WhiteCard>
+        <CardWrapper selection={1}>
+          <WhiteCard>Positive number passed into selection prop</WhiteCard>
         </CardWrapper>
       </div>
       <div>
-        <CardWrapper select="winner">
+        <CardWrapper selection="winner">
           <WhiteCard>Group of winning cards</WhiteCard>
           <WhiteCard>Group of winning cards</WhiteCard>
           <WhiteCard>Group of winning cards</WhiteCard>
