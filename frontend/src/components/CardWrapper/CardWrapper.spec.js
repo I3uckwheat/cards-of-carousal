@@ -6,9 +6,20 @@ import WhiteCard from '../Cards/WhiteCard';
 
 describe('CardWrapper', () => {
   describe('rendering', () => {
-    it('renders without a bottom border if null is passed in', () => {
+    it('renders without a bottom border if undefined is passed in', () => {
       render(
         <CardWrapper>
+          <WhiteCard />
+        </CardWrapper>,
+      );
+
+      expect(screen.getByTestId('card-wrapper')).toHaveStyle(
+        'border-bottom: none',
+      );
+    });
+    it('renders without a bottom border if null is passed in', () => {
+      render(
+        <CardWrapper select={null}>
           <WhiteCard />
         </CardWrapper>,
       );
@@ -41,6 +52,7 @@ describe('CardWrapper', () => {
       expect(screen.getByTestId('star')).toBeInTheDocument();
     });
   });
+
   describe('invalid prop types', () => {
     const consoleSpy = jest
       .spyOn(console, 'error')
