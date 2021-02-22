@@ -15,6 +15,7 @@ import WhiteCardExample from './temp/WhiteCardExample';
 import Modal from './components/Modal/Modal';
 import playerList from './temp/playerList';
 import ModalExample from './temp/ModalExample';
+import SingleBlackCardExample from './temp/SingleBlackCardExample.js';
 import PlayerMessageScreen from './components/screens/PlayerMessageScreen/PlayerMessageScreen';
 import HostLayout from './components/layouts/HostLayout';
 
@@ -33,79 +34,82 @@ function App() {
 
   return (
     <div className="App primary-background">
-      {!showHostLayout && (<div className="buttons-grid">
-        <button
-          type="button"
-          onClick={() => {
-            setShowSocketTest(!showSocketTest);
-          }}
-        >
-          Show SocketTest
-        </button>
+      {!showHostLayout && (
+        <div className="buttons-grid">
+          <button
+            type="button"
+            onClick={() => {
+              setShowSocketTest(!showSocketTest);
+            }}
+          >
+            Show SocketTest
+          </button>
 
-        <button
-          type="button"
-          onClick={() => {
-            setShowPlayerList(!showPlayerList);
-          }}
-        >
-          Show PlayerList
-        </button>
+          <button
+            type="button"
+            onClick={() => {
+              setShowPlayerList(!showPlayerList);
+            }}
+          >
+            Show PlayerList
+          </button>
 
-        <button
-          type="button"
-          onClick={() => {
-            setHamburgerMenu(!showHamburgerMenu);
-          }}
-        >
-          Show HamburgerMenu
-        </button>
-        <Button isActive>
-          <p style={{ fontSize: '20px' }}>Click me!</p>
-        </Button>
-        <Button>
-          <p style={{ fontSize: '25px' }}>Do not click me!</p>
-        </Button>
-        <Button onClick={() => setShowHeader(!showHeader)}>Show Header</Button>
+          <button
+            type="button"
+            onClick={() => {
+              setHamburgerMenu(!showHamburgerMenu);
+            }}
+          >
+            Show HamburgerMenu
+          </button>
+          <Button isActive>
+            <p style={{ fontSize: '20px' }}>Click me!</p>
+          </Button>
+          <Button>
+            <p style={{ fontSize: '25px' }}>Do not click me!</p>
+          </Button>
+          <Button onClick={() => setShowHeader(!showHeader)}>
+            Show Header
+          </Button>
 
-        <button
-          type="button"
-          onClick={() => {
-            setJoinCode(!showJoinCode);
-          }}
-        >
-          Show JoinCode
-        </button>
+          <button
+            type="button"
+            onClick={() => {
+              setJoinCode(!showJoinCode);
+            }}
+          >
+            Show JoinCode
+          </button>
 
-        <Button
-          type="button"
-          onClick={() => {
-            setShowBlackCards(!showBlackCards);
-          }}
-        >
-          Show Black Cards
-        </Button>
+          <Button
+            type="button"
+            onClick={() => {
+              setShowBlackCards(!showBlackCards);
+            }}
+          >
+            Show Black Cards
+          </Button>
 
-        <Button
-          isActive
-          type="button"
-          onClick={() => {
-            setShowWhiteCards(!showWhiteCards);
-          }}
-        >
-          Show White Cards
-        </Button>
-        <Button type="button" onClick={() => setShowModal(!showModal)}>
-          Show Modal
-        </Button>
-        <Button
-          type="button"
-          onClick={() => setShowPlayerMessageScreen(!showPlayerMessageScreen)}
-        >
-          Show Player Message Screen
-        </Button>
+          <Button
+            isActive
+            type="button"
+            onClick={() => {
+              setShowWhiteCards(!showWhiteCards);
+            }}
+          >
+            Show White Cards
+          </Button>
+          <Button type="button" onClick={() => setShowModal(!showModal)}>
+            Show Modal
+          </Button>
+          <Button
+            type="button"
+            onClick={() => setShowPlayerMessageScreen(!showPlayerMessageScreen)}
+          >
+            Show Player Message Screen
+          </Button>
 
-        <button
+          <button
             type="button"
             onClick={() => {
               setShowHostLayout(!showHostLayout);
@@ -113,7 +117,7 @@ function App() {
           >
             show host layout
           </button>
-      </div>
+        </div>
       )}
 
       {showHeader && (
@@ -180,7 +184,7 @@ function App() {
           smallText="Please wait for the host to start the game."
         />
       )}
-      
+
       {showHostLayout && (
         <HostLayout
           left={
@@ -193,32 +197,23 @@ function App() {
                 height: '100%',
               }}
             >
-              {showHostLayout && (
-                <button
-                  type="button"
-                  onClick={() => {
-                    setShowHostLayout(!showHostLayout);
-                  }}
-                >
-                  hide host layout
-                </button>
-              )}
-              <button type="button">I am a left component button</button>
+              <PlayerList playerList={playerList} />
+              <button
+                style={{
+                  width: '60%',
+                  height: '10%',
+                }}
+                type="button"
+                onClick={() => {
+                  setShowHostLayout(!showHostLayout);
+                }}
+              >
+                hide host layout
+              </button>
+              <DisplayJoinCode code="XYA3Z" />
             </div>
           }
-          right={
-            <div
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'space-evenly',
-                alignItems: 'center',
-                height: '100%',
-              }}
-            >
-              <button type="button">I am a right component button</button>
-            </div>
-          }
+          right={<SingleBlackCardExample />}
           modal={
             showModal && (
               <ModalExample toggleModal={() => setShowModal(!showModal)} />
