@@ -16,7 +16,7 @@ const PlayerMessageScreenWrapper = styled.div`
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: var(--primary-color);
+  background-color: var(--primary-background-color);
   background-size: 120% auto;
   background-repeat: no-repeat;
   background-position: -100px 77%;
