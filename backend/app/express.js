@@ -28,7 +28,7 @@ app.get('/deck', deckController.getPackNames);
 app.get('/deck/cards', deckController.getDeck);
 
 // const routes = require('./routes');
-// app.use(routes);
+// app.use(route);
 
 // Error handling
 // app.use((err, req, res) => {
