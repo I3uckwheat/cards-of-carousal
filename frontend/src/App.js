@@ -18,6 +18,7 @@ import ModalExample from './temp/ModalExample';
 import SingleBlackCardExample from './temp/SingleBlackCardExample.js';
 import PlayerMessageScreen from './components/screens/PlayerMessageScreen/PlayerMessageScreen';
 import HostLayout from './components/layouts/HostLayout';
+import SettingsMenuExample from './temp/SettingsMenuExample';
 
 function App() {
   const [showSocketTest, setShowSocketTest] = useState(false);
@@ -214,36 +215,7 @@ function App() {
             </div>
           }
           right={<SingleBlackCardExample />}
-          modal={
-            <div
-              style={{
-                position: 'absolute',
-                top: '0',
-                right: '0',
-                bottom: '0',
-                height: '100%',
-                width: '25%',
-                backgroundColor: 'black',
-                display: 'flex',
-                flexDirection: 'column',
-              }}
-            >
-              <h3
-                style={{
-                  fontSize: '3rem',
-                  lineHeight: '3rem',
-                  marginBottom: '-0.6rem',
-                  color: 'white',
-                  display: 'flex',
-                  flexDirection: 'column-reverse',
-                  flex: '1',
-                }}
-              >
-                SETTINGS
-              </h3>
-              <div style={{ backgroundColor: 'white', flex: '7' }} />
-            </div>
-          }
+          modal={<SettingsMenuExample />}
         />
       )}
     </div>
