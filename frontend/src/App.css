@@ -15,7 +15,7 @@
 
 .App {
   width: 100vw;
-  height: auto;
+  min-height: 100vh;
 }
 
 .buttons-grid {
