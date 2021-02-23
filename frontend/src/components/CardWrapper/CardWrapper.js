@@ -30,7 +30,7 @@ const CardWrapperStyles = styled.div`
     top: 0;
     transform: translate(50%);
     background-color: var(--secondary-background-color);
-    color: var(--primary-text-color);
+    color: var(--accent-text-color);
     display: flex;
     align-items: center;
     justify-content: center;
