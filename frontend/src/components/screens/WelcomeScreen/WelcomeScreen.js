@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Header from '../../Header/Header';
+import Button from '../../Buttons/Button';
 
 const WelcomeScreenWrapper = styled.div`
   position: fixed;
@@ -10,7 +11,7 @@ const WelcomeScreenWrapper = styled.div`
   right: 0;
   display: flex;
   flex-direction: column;
-  background-color: var(--primary-color);
+  background-color: var(--primary-background-color);
 
   /*Header*/
   .header-container {
@@ -60,26 +61,25 @@ const WelcomeScreenWrapper = styled.div`
   .button-container {
     display: flex;
     flex-direction: row;
-
     align-items: center;
-    font-size: 2.5rem;
-    font-weight: 900;
   }
 
   .join-btn {
-    border: solid 2px var(--secondary-color);
-    background-color: var(--primary-color);
-    color: var(--secondary-color);
-    border-radius: 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 16rem;
+    height: 3rem;
+    font-size: 2.5rem;
+    font-weight: 900;
   }
 
   .OR {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: var(--secondary-color);
-    color: var(--primary-color);
+    background-color: var(--secondary-background-color);
+    color: var(--secondary-text-color);
     border-radius: 50%;
     padding: 1rem;
     width: 4.5rem;
@@ -98,14 +98,15 @@ const WelcomeScreenWrapper = styled.div`
     justify-content: flex-end;
     margin-top: auto;
     height: 140px;
-    background-color: var(--secondary-color);
-    color: var(--primary-color);
+    background-color: var(--secondary-background-color);
+    color: var(--secondary-text-color);
     font-size: 2rem;
     font-weight: 400;
+    padding-right: 20px;
   }
 
   .credit {
-    margin-top: 0.5rem 1rem;
+    margin-top: 5rem 3rem;
   }
 
   /*small size hosting screen */
@@ -160,7 +161,7 @@ const WelcomeScreenWrapper = styled.div`
       justify-content: center;
       height: 120px;
       background-color: transparent;
-      color: var(--accent-color);
+      color: var(--accent-text-color);
       text-align: center;
       font-size: 1.2rem;
       padding-bottom: 2rem;
@@ -232,13 +233,13 @@ function WelcomeScreen() {
           </div>
         </div>
         <div className="button-container">
-          <button type="button" className="join-btn">
-            JOIN
-          </button>
+          <Button type="button" isActive className="join-btn">
+            <p> JOIN</p>
+          </Button>
           <div className="OR">OR</div>
-          <button type="button" className="join-btn host-btn">
-            HOST
-          </button>
+          <Button type="button" isActive className=" join-btn host-btn">
+            <p>HOST</p>
+          </Button>
         </div>
       </main>
       <footer className="footer-container">
