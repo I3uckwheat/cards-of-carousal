@@ -25,7 +25,7 @@ describe('CardWrapper', () => {
       );
 
       expect(screen.getByTestId('card-wrapper')).toHaveStyle(
-        'border-bottom: 5px solid black',
+        'border-bottom: 5px solid var(--primary-background-color)',
       );
     });
     it('renders with a bottom border and the star icon if the string "winner" is passed in', () => {
@@ -36,7 +36,7 @@ describe('CardWrapper', () => {
       );
 
       expect(screen.getByTestId('card-wrapper')).toHaveStyle(
-        'border-bottom: 5px solid black',
+        'border-bottom: 5px solid var(--primary-background-color)',
       );
       expect(screen.getByTestId('star')).toBeInTheDocument();
     });
