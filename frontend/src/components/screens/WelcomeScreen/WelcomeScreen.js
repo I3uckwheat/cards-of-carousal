@@ -11,8 +11,6 @@ const WelcomeScreenWrapper = styled.div`
   display: flex;
   flex-direction: column;
   background-color: var(--primary-color);
-  background-size: 1200% 400%; /*testing*/
-  background-position: -1000px 800px; /*testing*/
 
   /*Header*/
   .header-container {
@@ -39,14 +37,9 @@ const WelcomeScreenWrapper = styled.div`
   .main-body-container {
     display: flex;
     flex-direction: column;
-    margin: auto;
-  }
-
-  .main-content {
-    display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin: auto;
   }
 
   .definition-container {
@@ -230,24 +223,22 @@ function WelcomeScreen() {
         <h2 className="CoC">CARDS OF CAROUSAL</h2>
       </Header>
       <main className="main-body-container">
-        <div className="main-content">
-          <div className="definition-container">
-            <div className="word">
-              CAROUSAL <span className="definition">(n)</span>
-            </div>
-            <div className="definition">
-              a wild, drunken party or celebration : a drunken revel
-            </div>
+        <div className="definition-container">
+          <div className="word">
+            CAROUSAL <span className="definition">(n)</span>
           </div>
-          <div className="button-container">
-            <button type="button" className="join-btn">
-              JOIN
-            </button>
-            <div className="OR">OR</div>
-            <button type="button" className="join-btn host-btn">
-              HOST
-            </button>
+          <div className="definition">
+            a wild, drunken party or celebration : a drunken revel
           </div>
+        </div>
+        <div className="button-container">
+          <button type="button" className="join-btn">
+            JOIN
+          </button>
+          <div className="OR">OR</div>
+          <button type="button" className="join-btn host-btn">
+            HOST
+          </button>
         </div>
       </main>
       <footer className="footer-container">
