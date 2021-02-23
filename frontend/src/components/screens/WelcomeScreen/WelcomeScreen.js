@@ -105,10 +105,6 @@ const WelcomeScreenWrapper = styled.div`
     padding-right: 20px;
   }
 
-  .credit {
-    margin-top: 5rem 3rem;
-  }
-
   /*small size hosting screen */
   @media (max-width: 970px) {
     .footer-container {
