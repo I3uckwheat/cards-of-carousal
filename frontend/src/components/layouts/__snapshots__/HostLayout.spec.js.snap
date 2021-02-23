@@ -1,0 +1,236 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HostLayout matches the snapshot when rendered 1`] = `
+.c2 {
+  background-image: url(inactiveHamburger.svg);
+  background-size: cover;
+  background-color: transparent;
+  border: 0;
+  width: 25px;
+  height: 25px;
+}
+
+.c1 {
+  width: 100%;
+  background-color: var(--secondary-background-color);
+  color: var(--secondary-text-color);
+}
+
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  height: 100%;
+}
+
+.c0 .header-and-hamburger {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+}
+
+.c0 .host-layout-header {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  height: 100%;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: flex-start;
+  -webkit-box-align: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+  min-width: 167px;
+  box-shadow: 0px 4px 12px rgba(0,0,0,0.25);
+}
+
+.c0 .host-layout-header-text {
+  vertical-align: bottom;
+  font-size: 7rem;
+  margin-bottom: -1.3rem;
+  line-height: 7rem;
+}
+
+.c0 .hamburger-container {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row-reverse;
+  -ms-flex-direction: row-reverse;
+  flex-direction: row-reverse;
+  -webkit-flex: 2;
+  -ms-flex: 2;
+  flex: 2;
+  margin: 30px 30px -30px -30px;
+  z-index: 10100;
+}
+
+.c0 .components {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-flex: 9;
+  -ms-flex: 9;
+  flex: 9;
+  -webkit-box-pack: space-around;
+  -webkit-justify-content: space-around;
+  -ms-flex-pack: space-around;
+  justify-content: space-around;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c0 .component-container {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: space-around;
+  -webkit-justify-content: space-around;
+  -ms-flex-pack: space-around;
+  justify-content: space-around;
+  -webkit-align-items: space-around;
+  -webkit-box-align: space-around;
+  -ms-flex-align: space-around;
+  align-items: space-around;
+  height: 100%;
+  width: 100%;
+}
+
+.c0 .left {
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  background-color: white;
+  min-width: 167px;
+  box-shadow: 0px 4px 12px rgba(0,0,0,0.25);
+}
+
+.c0 .right {
+  -webkit-flex: 2;
+  -ms-flex: 2;
+  flex: 2;
+}
+
+@media (max-width:3400px) {
+  .c0 .host-layout-header-text {
+    font-size: 6rem;
+    margin-bottom: -1.1rem;
+    line-height: 6rem;
+  }
+}
+
+@media (max-width:3000px) {
+  .c0 .host-layout-header-text {
+    font-size: 5rem;
+    margin-bottom: -1rem;
+    line-height: 5rem;
+  }
+}
+
+@media (max-width:2500px) {
+  .c0 .host-layout-header-text {
+    font-size: 4rem;
+    margin-bottom: -1rem;
+    line-height: 4rem;
+  }
+}
+
+@media (max-width:2000px) {
+  .c0 .host-layout-header-text {
+    font-size: 3rem;
+    margin-bottom: -0.7rem;
+    line-height: 3rem;
+  }
+}
+
+@media (max-width:1500px) {
+  .c0 .host-layout-header-text {
+    font-size: 2rem;
+    margin-bottom: -0.35rem;
+    line-height: 2rem;
+  }
+}
+
+@media (max-width:600px) {
+  .c0 .host-layout-header-text {
+    font-size: 1.5rem;
+    margin-bottom: -5px;
+    line-height: 1.5rem;
+  }
+}
+
+<div
+  className="c0 primary-background"
+>
+  <div
+    className="header-and-hamburger"
+  >
+    <header
+      className="c1 host-layout-header"
+    >
+      <h2
+        className="host-layout-header-text"
+      >
+        CARDS OF CAROUSAL
+      </h2>
+    </header>
+    <div
+      className="hamburger-container"
+    >
+      <button
+        className="c2"
+        onClick={[Function]}
+      />
+    </div>
+  </div>
+  <div
+    className="components"
+  >
+    <div
+      className="component-container left"
+    >
+      <p>
+        Im a left component
+      </p>
+    </div>
+    <div
+      className="component-container right"
+    >
+      <p>
+        Im a right component
+      </p>
+    </div>
+  </div>
+</div>
+`;

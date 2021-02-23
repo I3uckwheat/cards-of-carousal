@@ -1,6 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import renderer from 'react-test-renderer';
 
 import HostLayout from './HostLayout';
 
@@ -198,5 +199,21 @@ describe('HostLayout', () => {
     );
 
     expect(consoleSpy).not.toHaveBeenCalled();
+  });
+
+  // --------------------------------------------------------------------------
+  // Snapshot Test
+
+  it('matches the snapshot when rendered', () => {
+    const tree = renderer
+      .create(
+        <HostLayout
+          left={leftComponent}
+          right={rightComponent}
+          modal={modalComponent}
+        />,
+      )
+      .toJSON();
+    expect(tree).toMatchSnapshot();
   });
 });
