@@ -104,7 +104,7 @@ const HostLayoutContainer = styled.div`
 
   .left {
     flex: 1;
-    background-color: white;
+    background-color: var(--primary-background-color);
     min-width: 167px;
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.25);
   }

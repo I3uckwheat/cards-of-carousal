@@ -8,7 +8,7 @@ const SettingsModal = styled.div`
   bottom: 0;
   height: 100%;
   width: 25%;
-  background-color: black;
+  background-color: var(--secondary-background-color);
   display: flex;
   flex-direction: column;
 
@@ -16,14 +16,14 @@ const SettingsModal = styled.div`
     font-size: 3rem;
     line-height: 3rem;
     margin-bottom: -0.6rem;
-    color: white;
+    color: var(--secondary-text-color);
     display: flex;
     flex-direction: column-reverse;
     flex: 1;
   }
 
   .white-box {
-    background-color: white;
+    background-color: var(--primary-background-color);
     flex: 7;
   }
 `;
