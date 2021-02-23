@@ -2,7 +2,7 @@
 
 exports[`TallyGroup color sets the color of the tallies to the primary color 1`] = `
 .c0 {
-  stroke: var(--primary-color);
+  stroke: var(--primary-text-color);
 }
 
 <svg
@@ -34,7 +34,7 @@ exports[`TallyGroup color sets the color of the tallies to the primary color 1`]
 
 exports[`TallyGroup color sets the color of the tallies to the secondary color 1`] = `
 .c0 {
-  stroke: var(--secondary-color);
+  stroke: var(--secondary-text-color);
 }
 
 <svg

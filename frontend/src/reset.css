@@ -1,16 +1,14 @@
-/* imports Roboto with bold and italic options from google globally */
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400&display=swap');
-
-/* RESET */
 *,
 ::after,
 ::before {
   box-sizing: border-box;
 }
+
 ol[class],
 ul[class] {
   padding: 0;
 }
+
 blockquote,
 body,
 dd,
@@ -27,6 +25,7 @@ p,
 ul[class] {
   margin: 0;
 }
+
 body {
   min-height: 100vh;
   scroll-behavior: smooth;
@@ -35,26 +34,32 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
 ol[class],
 ul[class] {
   list-style: none;
 }
+
 a:not([class]) {
   text-decoration-skip-ink: auto;
 }
+
 img {
   max-width: 100%;
   display: block;
 }
+
 article > * + * {
   margin-top: 1em;
 }
+
 button,
 input,
 select,
 textarea {
   font: inherit;
 }
+
 @media (prefers-reduced-motion: reduce) {
   * {
     animation-duration: 0s !important;
@@ -62,12 +67,4 @@ textarea {
     transition-duration: 0s !important;
     scroll-behavior: auto !important;
   }
-}
-/*/ RESET */
-
-:root {
-  font-family: 'Roboto', 'sans-serif';
-  --primary-color: #ffffff;
-  --secondary-color: #000000;
-  --accent-color: #aaaaaa;
 }

@@ -15,8 +15,8 @@ const HamburgerMenuButton = styled.button`
   background-size: cover;
   background-color: transparent;
   border: 0;
-  width: 25.41px;
-  height: 25.41px;
+  width: 25px;
+  height: 25px;
 `;
 
 function HamburgerMenu({ isActive, onClick: handleClick }) {

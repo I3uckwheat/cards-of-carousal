@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 
+import './reset.css';
+import './App.css';
+
 import Header from './components/Header/Header';
 import Button from './components/Buttons/Button';
-import './App.css';
 import HamburgerMenu from './components/Buttons/HamburgerMenu/HamburgerMenu';
 import SocketTest from './components/SocketTest';
 import PlayerList from './components/PlayerList/PlayerList';
