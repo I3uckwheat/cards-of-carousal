@@ -46,10 +46,10 @@ const FooterWrapper = styled.footer`
     }
 
     .credit-2 {
-      line-height: 24px;
+      line-height: 1.5rem;
       width: 320px;
       margin: 0 auto;
-      padding-bottom: 28px;
+      padding-bottom: 1.75rem;
     }
   }
 
