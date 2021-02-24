@@ -11,6 +11,7 @@ import PlayerList from './components/PlayerList/PlayerList';
 import DisplayJoinCode from './components/JoinCode/JoinCode';
 import BlackCardExample from './temp/BlackCardExample';
 import WhiteCardExample from './temp/WhiteCardExample';
+import CardWrapperExample from './temp/CardWrapperExample';
 
 import Modal from './components/Modal/Modal';
 import playerList from './temp/playerList';
@@ -28,6 +29,7 @@ function App() {
   const [showWhiteCards, setShowWhiteCards] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [showPlayerMessageScreen, setShowPlayerMessageScreen] = useState(false);
+  const [showCardWrapper, setShowCardWrapper] = useState(false);
 
   return (
     <div className="App primary-background">
@@ -102,6 +104,12 @@ function App() {
         >
           Show Player Message Screen
         </Button>
+        <Button
+          type="button"
+          onClick={() => setShowCardWrapper(!showCardWrapper)}
+        >
+          Show Card Wrapper
+        </Button>
       </div>
       {showHeader && (
         <Header className="header">
@@ -167,6 +175,7 @@ function App() {
           smallText="Please wait for the host to start the game."
         />
       )}
+      {showCardWrapper && <CardWrapperExample />}
     </div>
   );
 }
