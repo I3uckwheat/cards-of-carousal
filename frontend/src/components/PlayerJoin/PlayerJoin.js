@@ -32,8 +32,18 @@ const Container = styled.div`
     justify-content: center;
 
     .player-join-form-container {
+      width: 100%;
+      max-width: 80vw;
+      background: green;
       margin: 0 auto;
       text-align: center;
+      margin-top: -8rem;
+
+      form {
+        display: grid;
+        grid-template-columns: 55% 45%;
+        grid-template-rows: 1fr 30px 1fr;
+      }
     }
 
     input {
@@ -41,21 +51,20 @@ const Container = styled.div`
       border: none;
       border-bottom: 2px solid var(--primary-text-color);
       background: transparent;
-      padding: 15px;
-      margin-left: 5px;
-      margin-right: 5px;
       ::placeholder {
         color: var(--primary-text-color);
+        font-weight: 500;
       }
     }
 
     // name input
     input:nth-of-type(1) {
+      margin-right: 0.5rem;
     }
 
     // join code input
     input:nth-of-type(2) {
-      /* background: blue; */
+      margin-left: 0.5rem;
     }
   }
 
@@ -66,29 +75,32 @@ const Container = styled.div`
     flex-direction: column;
     align-items: flex-end;
     justify-content: flex-end;
+    font-weight: 500;
 
     // credits
     div:nth-of-type(1) {
-      padding: 0 0.5rem 0 0.5rem;
+      padding: 0 1rem 0 1rem;
     }
 
     div:nth-of-type(2) {
-      padding: 0 0.5rem 0.5rem 0.5rem;
+      padding: 0 1rem 1rem 1rem;
     }
 
-    @media screen and (max-width: 486px) {
+    @media screen and (max-width: 506px) {
       background: none;
       color: var(--accent-color);
       text-align: center;
 
       // reducing the width of the first credit container so both credits wrap at the same breakpoint
       div:nth-of-type(1) {
+        line-height: 1.5rem;
         width: 320px;
         margin: 0 auto;
         padding-bottom: 1.75rem;
       }
 
       div:nth-of-type(2) {
+        line-height: 1.5rem;
         padding-bottom: 1rem;
       }
     }
@@ -134,6 +146,8 @@ const PlayerJoinButton = styled(Button)`
   font-size: 24px;
   background-color: var(--secondary-background-color);
   border-radius: 2px;
+  grid-column: 1 / 3;
+  grid-row: 3;
 `;
 
 export default function PlayerJoin() {
