@@ -1,3 +1,8 @@
+const MasterDeck = require('../lib/MasterDeck/MasterDeck');
+
+jest.mock('../lib/MasterDeck/MasterDeck');
+MasterDeck.prototype.getPackNames = jest.fn();
+MasterDeck.prototype.getDeck = jest.fn();
 const mockCards = {
   0: {
     name: 'Video Games',
@@ -41,92 +46,68 @@ const mockCards = {
   },
 };
 
+beforeEach(() => {
+  // Clear all instances and calls to constructor and all methods:
+  MasterDeck.mockClear();
+});
+
 const deckController = require('./deckController')(mockCards);
 
 const mockReq = { query: {} };
 const mockRes = { data: null };
-mockRes.send = (val) => {
+mockRes.json = jest.fn((val) => {
   mockRes.data = val;
-};
+});
 
 describe('/deck route functions', () => {
   describe('getting all pack names', () => {
-    it('returns an array of all pack names', async () => {
-      await deckController.getPackNames(mockReq, mockRes);
-      expect(mockRes.data).toEqual([
-        'Video Games',
-        'Goosebumps',
-        "Wendy's Breakfast Items",
-        'WebMD',
-      ]);
+    it('calls getPackNames from MasterDeck', () => {
+      const masterDeck = new MasterDeck(mockCards);
+      deckController.getPackNames(mockReq, mockRes);
+      expect(masterDeck.getPackNames).toHaveBeenCalled();
+      expect(mockRes.json).toHaveBeenCalled();
     });
   });
   describe('getting cards', () => {
-    it('returns all cards if no packs query is given', async () => {
-      await deckController.getDeck(mockReq, mockRes);
-      expect(mockRes.data).toMatchObject({
-        white: [
-          { text: 'Peter Molyneux' },
-          { text: 'Half an A Press' },
-          { text: 'Superman 64' },
-          { text: 'Slappy the evil talking Dummy' },
-          { text: 'Monster Blood from Monster Blood' },
-          { text: 'Breakfast Baconator' },
-          { text: 'Maple Bacon Chicken Croissant' },
-          { text: 'Sausage, Egg & Swiss Croissant' },
-        ],
-        black: [
-          { text: 'New from Aperture Science: The _____ Gun!' },
-          { text: "What's inside the G-Man's briefcase?" },
-          { text: 'Say Cheese and _____  - Again!' },
-          { text: 'Stay out of the _____.' },
-          { text: "The leg bone's connected to the _____ bone." },
-          { text: 'Add _____ to your water to enhance your gains.' },
-        ],
-      });
+    it('calls getDeck with all pack ids if no packs query is given', () => {
+      const masterDeck = new MasterDeck(mockCards);
+      deckController.getDeck(mockReq, mockRes);
+      expect(masterDeck.getDeck).toHaveBeenCalledWith([0, 1, 2, 3]);
+      expect(mockRes.json).toHaveBeenCalled();
     });
-    it('returns cards specified by pack ids', async () => {
+    it('calls getDeck with the specified pack ids inside the pack query', () => {
       const mockReqWithPacks = mockReq;
       mockReqWithPacks.query.packs = '1,3';
-      await deckController.getDeck(mockReqWithPacks, mockRes);
-      expect(mockRes.data).toMatchObject({
-        white: [
-          { text: 'Slappy the evil talking Dummy' },
-          { text: 'Monster Blood from Monster Blood' },
-        ],
-        black: [
-          { text: 'Say Cheese and _____  - Again!' },
-          { text: 'Stay out of the _____.' },
-          { text: "The leg bone's connected to the _____ bone." },
-          { text: 'Add _____ to your water to enhance your gains.' },
-        ],
-      });
+      const masterDeck = new MasterDeck(mockCards);
+      deckController.getDeck(mockReqWithPacks, mockRes);
+      expect(masterDeck.getDeck).toHaveBeenCalledWith([1, 3]);
+      expect(mockRes.json).toHaveBeenCalled();
     });
-    it('returns the correct cards if both correct and incorrect values are in pack query', async () => {
-      const mockReqWithPacks = mockReq;
-      mockReqWithPacks.query.packs = '1,3,,/^&,3oz';
-      await deckController.getDeck(mockReqWithPacks, mockRes);
-      expect(mockRes.data).toMatchObject({
-        white: [
-          { text: 'Slappy the evil talking Dummy' },
-          { text: 'Monster Blood from Monster Blood' },
-        ],
-        black: [
-          { text: 'Say Cheese and _____  - Again!' },
-          { text: 'Stay out of the _____.' },
-          { text: "The leg bone's connected to the _____ bone." },
-          { text: 'Add _____ to your water to enhance your gains.' },
-        ],
-      });
-    });
-    it('returns empty card arrays if pack query is a comma', async () => {
-      const mockReqWithPacks = mockReq;
-      mockReqWithPacks.query.packs = ',';
-      await deckController.getDeck(mockReqWithPacks, mockRes);
-      expect(mockRes.data).toMatchObject({
-        white: [],
-        black: [],
-      });
-    });
+    //   it('returns the correct cards if both correct and incorrect values are in pack query',  () => {
+    //     const mockReqWithPacks = mockReq;
+    //     mockReqWithPacks.query.packs = '1,3,,/^&,3oz';
+    //      deckController.getDeck(mockReqWithPacks, mockRes);
+    //     expect(mockRes.data).toMatchObject({
+    //       white: [
+    //         { text: 'Slappy the evil talking Dummy' },
+    //         { text: 'Monster Blood from Monster Blood' },
+    //       ],
+    //       black: [
+    //         { text: 'Say Cheese and _____  - Again!' },
+    //         { text: 'Stay out of the _____.' },
+    //         { text: "The leg bone's connected to the _____ bone." },
+    //         { text: 'Add _____ to your water to enhance your gains.' },
+    //       ],
+    //     });
+    //   });
+    //   it('returns empty card arrays if pack query is a comma',  () => {
+    //     const mockReqWithPacks = mockReq;
+    //     mockReqWithPacks.query.packs = ',';
+    //      deckController.getDeck(mockReqWithPacks, mockRes);
+    //     expect(mockRes.data).toMatchObject({
+    //       white: [],
+    //       black: [],
+    //     });
+    //   });
   });
 });
