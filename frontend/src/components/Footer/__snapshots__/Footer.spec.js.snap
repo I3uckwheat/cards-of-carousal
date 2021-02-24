@@ -33,6 +33,11 @@ exports[`Footer renders correctly 1`] = `
   text-decoration: none;
 }
 
+.c0 a:hover {
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+}
+
 @media (max-width:970px) {
   .c0 {
     text-align: center;

@@ -25,6 +25,10 @@ const FooterWrapper = styled.footer`
     text-decoration: none;
   }
 
+  a:hover {
+    text-decoration: underline;
+  }
+
   /*small size hosting screen */
   @media (max-width: 970px) {
     text-align: center;
