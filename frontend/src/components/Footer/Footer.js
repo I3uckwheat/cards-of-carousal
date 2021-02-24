@@ -49,7 +49,7 @@ const FooterWrapper = styled.footer`
       line-height: 1.5rem;
       width: 320px;
       margin: 0 auto;
-      padding-bottom: 1.75rem;
+      padding-bottom: 28px;
     }
   }
 
