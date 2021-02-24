@@ -6,7 +6,7 @@ module.exports = (packs) => {
   function getPackNames(req, res) {
     const packNames = masterDeck.getPackNames();
 
-    return res.send(packNames);
+    return res.json(packNames);
   }
 
   function getDeck(req, res) {
@@ -15,11 +15,11 @@ module.exports = (packs) => {
         .split(',')
         .map((id) => id !== '' && Number(id));
       const cardsByPackIds = masterDeck.getDeck(packIds);
-      return res.send(cardsByPackIds);
+      return res.json(cardsByPackIds);
     }
     const allPackIds = Object.keys(packs).map((id) => Number(id));
     const allCards = masterDeck.getDeck(allPackIds);
-    return res.send(allCards);
+    return res.json(allCards);
   }
 
   return { getPackNames, getDeck };
