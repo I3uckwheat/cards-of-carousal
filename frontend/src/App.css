@@ -10,12 +10,12 @@
   --secondary-background-color: var(--secondary-color);
   --secondary-text-color: var(--primary-color);
   --accent-background-color: var(--accent-color);
-  --accent-text-color: var(--primary-color);
+  --accent-text-color: var(--accent-color);
 }
 
 .App {
-  height: 100vh;
   width: 100vw;
+  min-height: 100vh;
 }
 
 .buttons-grid {
