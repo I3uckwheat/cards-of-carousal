@@ -38,7 +38,7 @@ describe('CardWrapper', () => {
       expect(screen.getByTestId('card-wrapper')).toHaveStyle(
         'border-bottom: 5px solid var(--primary-background-color)',
       );
-      expect(screen.getByTestId('star')).toBeInTheDocument();
+      expect(screen.getByText('★')).toBeInTheDocument();
     });
   });
   describe('invalid prop types', () => {
