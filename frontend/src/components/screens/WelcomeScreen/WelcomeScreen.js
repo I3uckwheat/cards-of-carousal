@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Header from '../../Header/Header';
 import Button from '../../Buttons/Button';
+import Footer from '../../Footer/Footer';
 
 const WelcomeScreenWrapper = styled.div`
   position: fixed;
@@ -24,12 +25,12 @@ const WelcomeScreenWrapper = styled.div`
   .welcome-to {
     margin-top: 0px;
     line-height: 2rem;
-    margin-bottom: -0.9rem;
+    margin-bottom: -0.14px;
   }
 
   .CoC {
     font-size: 6rem;
-    margin-bottom: -1rem;
+    margin-bottom: -16px;
     vertical-align: bottom;
     line-height: 6rem;
   }
@@ -49,7 +50,7 @@ const WelcomeScreenWrapper = styled.div`
     font-size: 3.2rem;
     font-weight: 700;
     transform: rotate(-5deg);
-    margin-bottom: 9rem;
+    margin-bottom: 144px;
     line-height: 3.3rem;
   }
 
@@ -68,8 +69,8 @@ const WelcomeScreenWrapper = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 16rem;
-    height: 3rem;
+    width: 256px;
+    height: 48px;
     font-size: 2.5rem;
     font-weight: 900;
   }
@@ -81,11 +82,11 @@ const WelcomeScreenWrapper = styled.div`
     background-color: var(--secondary-background-color);
     color: var(--secondary-text-color);
     border-radius: 50%;
-    padding: 1rem;
-    width: 4.5rem;
-    height: 4.5rem;
-    margin-left: 5.8rem;
-    margin-right: 5.8rem;
+    padding: 16px;
+    width: 72px;
+    height: 72px;
+    margin-left: 93px;
+    margin-right: 93px;
     font-size: 2.25rem;
     font-weight: 700;
   }
@@ -107,18 +108,13 @@ const WelcomeScreenWrapper = styled.div`
 
   /*small size hosting screen */
   @media (max-width: 970px) {
-    .footer-container {
-      text-align: center;
-      font-size: 1.5rem;
-    }
-
     .definition-container {
-      margin-bottom: 5rem;
+      margin-bottom: 80px;
     }
 
     .CoC {
       font-size: 4rem;
-      margin-bottom: -1.3rem;
+      margin-bottom: -21px;
       line-height: 5rem;
     }
   }
@@ -131,17 +127,17 @@ const WelcomeScreenWrapper = styled.div`
 
     .CoC {
       font-size: 4rem;
-      margin-bottom: -0.95rem;
+      margin-bottom: -15px;
       line-height: 4.5rem;
     }
 
     .definition-container {
       display: none;
-      margin-bottom: 3rem;
+      margin-bottom: 48px;
     }
 
     .join-btn {
-      width: 14rem;
+      width: 224px;
     }
 
     .host-btn {
@@ -151,45 +147,12 @@ const WelcomeScreenWrapper = styled.div`
     .OR {
       display: none;
     }
-
-    .footer-container {
-      align-items: center;
-      justify-content: center;
-      height: 120px;
-      background-color: transparent;
-      color: var(--accent-text-color);
-      text-align: center;
-      font-size: 1.2rem;
-      padding-bottom: 2rem;
-    }
-
-    .credit {
-      line-height: 1.5rem;
-      margin: 0.5rem;
-      padding-left: 140px;
-      padding-right: 140px;
-    }
   }
 
   /* Keeps footer content formatted correctly as player only screen shrinks on desktop*/
   @media (max-width: 645px) {
     .welcome-to {
       display: none;
-    }
-
-    .credit {
-      line-height: 1.5rem;
-      margin: 0.5rem;
-      padding-left: 70px;
-      padding-right: 70px;
-    }
-  }
-
-  /* modern larger mobile devices */
-  @media (max-width: 500px) {
-    .credit {
-      padding-left: 20px;
-      padding-right: 20px;
     }
   }
 
@@ -201,13 +164,9 @@ const WelcomeScreenWrapper = styled.div`
 
     .CoC {
       font-size: 3rem;
-      margin-bottom: -0.75rem;
+      margin-bottom: 12px;
       vertical-align: bottom;
       line-height: 3.5rem;
-    }
-
-    .footer-container {
-      font-size: 1rem;
     }
   }
 `;
@@ -238,14 +197,7 @@ function WelcomeScreen() {
           </Button>
         </div>
       </main>
-      <footer className="footer-container">
-        <div className="credit">
-          Card content thanks to: https://cardsagainsthumanity.com
-        </div>
-        <div className="credit">
-          Made by Odin students, with love: https://www.theodinproject.com
-        </div>
-      </footer>
+      <Footer />
     </WelcomeScreenWrapper>
   );
 }
