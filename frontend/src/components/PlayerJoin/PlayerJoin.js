@@ -34,7 +34,6 @@ const Container = styled.div`
     .player-join-form-container {
       width: 100%;
       max-width: 80vw;
-      background: green;
       margin: 0 auto;
       text-align: center;
       margin-top: -8rem;
