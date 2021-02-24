@@ -11,12 +11,9 @@ module.exports = (packs) => {
 
   function getDeck(req, res) {
     if (req.query.packs) {
-      // Converts id from string to number using unary plus operator (+)
-
-      // Filters out empty string query parameters since they would evaluate to 0. This would cause the master deck
-      // to return pack 0, which could be unwanted.
-
-      const packIds = req.query.packs.split`,`.map((id) => id !== '' && +id);
+      const packIds = req.query.packs
+        .split(',')
+        .map((id) => id !== '' && Number(id));
       const cardsByPackIds = masterDeck.getDeck(packIds);
       return res.send(cardsByPackIds);
     }
