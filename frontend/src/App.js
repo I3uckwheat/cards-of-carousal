@@ -35,91 +35,90 @@ function App() {
 
   return (
     <div className="App primary-background">
-      {!showHostLayout && (
-        <div className="buttons-grid">
-          <button
-            type="button"
-            onClick={() => {
-              setShowSocketTest(!showSocketTest);
-            }}
-          >
-            Show SocketTest
-          </button>
+      <div
+        className="buttons-grid"
+        style={{ display: showHostLayout ? 'none' : 'grid' }}
+      >
+        <button
+          type="button"
+          onClick={() => {
+            setShowSocketTest(!showSocketTest);
+          }}
+        >
+          Show SocketTest
+        </button>
 
-          <button
-            type="button"
-            onClick={() => {
-              setShowPlayerList(!showPlayerList);
-            }}
-          >
-            Show PlayerList
-          </button>
+        <button
+          type="button"
+          onClick={() => {
+            setShowPlayerList(!showPlayerList);
+          }}
+        >
+          Show PlayerList
+        </button>
 
-          <button
-            type="button"
-            onClick={() => {
-              setHamburgerMenu(!showHamburgerMenu);
-            }}
-          >
-            Show HamburgerMenu
-          </button>
-          <Button isActive>
-            <p style={{ fontSize: '20px' }}>Click me!</p>
-          </Button>
-          <Button>
-            <p style={{ fontSize: '25px' }}>Do not click me!</p>
-          </Button>
-          <Button onClick={() => setShowHeader(!showHeader)}>
-            Show Header
-          </Button>
+        <button
+          type="button"
+          onClick={() => {
+            setHamburgerMenu(!showHamburgerMenu);
+          }}
+        >
+          Show HamburgerMenu
+        </button>
+        <Button isActive>
+          <p style={{ fontSize: '20px' }}>Click me!</p>
+        </Button>
+        <Button>
+          <p style={{ fontSize: '25px' }}>Do not click me!</p>
+        </Button>
+        <Button onClick={() => setShowHeader(!showHeader)}>Show Header</Button>
 
-          <button
-            type="button"
-            onClick={() => {
-              setJoinCode(!showJoinCode);
-            }}
-          >
-            Show JoinCode
-          </button>
+        <button
+          type="button"
+          onClick={() => {
+            setJoinCode(!showJoinCode);
+          }}
+        >
+          Show JoinCode
+        </button>
 
-          <Button
-            type="button"
-            onClick={() => {
-              setShowBlackCards(!showBlackCards);
-            }}
-          >
-            Show Black Cards
-          </Button>
+        <Button
+          type="button"
+          onClick={() => {
+            setShowBlackCards(!showBlackCards);
+          }}
+        >
+          Show Black Cards
+        </Button>
 
-          <Button
-            isActive
-            type="button"
-            onClick={() => {
-              setShowWhiteCards(!showWhiteCards);
-            }}
-          >
-            Show White Cards
-          </Button>
-          <Button type="button" onClick={() => setShowModal(!showModal)}>
-            Show Modal
-          </Button>
-          <Button
-            type="button"
-            onClick={() => setShowPlayerMessageScreen(!showPlayerMessageScreen)}
-          >
-            Show Player Message Screen
-          </Button>
+        <Button
+          isActive
+          type="button"
+          onClick={() => {
+            setShowWhiteCards(!showWhiteCards);
+          }}
+        >
+          Show White Cards
+        </Button>
+        <Button type="button" onClick={() => setShowModal(!showModal)}>
+          Show Modal
+        </Button>
+        <Button
+          type="button"
+          onClick={() => setShowPlayerMessageScreen(!showPlayerMessageScreen)}
+        >
+          Show Player Message Screen
+        </Button>
 
-          <button
-            type="button"
-            onClick={() => {
-              setShowHostLayout(!showHostLayout);
-            }}
-          >
-            show host layout
-          </button>
-        </div>
-      )}
+        <button
+          type="button"
+          onClick={() => {
+            setShowHostLayout(!showHostLayout);
+          }}
+        >
+          show host layout
+        </button>
+      </div>
 
       {showHeader && (
         <Header className="header">
