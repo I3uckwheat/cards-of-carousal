@@ -6,7 +6,7 @@ const FooterWrapper = styled.footer`
   height: 140px;
   font-size: 2rem;
   font-weight: 400;
-  padding-right: 1rem;
+  padding-right: 16px;
   background-color: var(--secondary-background-color);
   color: var(--secondary-text-color);
   display: flex;
@@ -16,11 +16,11 @@ const FooterWrapper = styled.footer`
   font-weight: 400;
 
   .credit-1 {
-    padding: 0 1rem 0 1rem;
+    padding: 0 16px 0 16px;
   }
 
   .credit-2 {
-    padding: 0 1rem 1rem 1rem;
+    padding: 0 16px 16px 16px;
   }
 
   /*small size hosting screen */
@@ -38,18 +38,18 @@ const FooterWrapper = styled.footer`
     color: var(--accent-text-color);
     text-align: center;
     font-size: 1.2rem;
-    padding-bottom: 2rem;
+    padding-bottom: 32px;
 
     .credit-1 {
       line-height: 1.5rem;
-      padding: 0 20rem 1rem 20rem;
+      padding: 0 320px 16px 320px;
     }
 
     .credit-2 {
-      line-height: 1.5rem;
+      line-height: 24px;
       width: 320px;
       margin: 0 auto;
-      padding-bottom: 1.75rem;
+      padding-bottom: 28px;
     }
   }
 
@@ -62,12 +62,12 @@ const FooterWrapper = styled.footer`
 function Footer() {
   return (
     <FooterWrapper>
-      <div className="credit-1">
+      <p className="credit-1">
         Card content thanks to: https://cardsagainsthumanity.com
-      </div>
-      <div className="credit-2">
+      </p>
+      <p className="credit-2">
         Made by Odin students, with love: https://www.theodinproject.com
-      </div>
+      </p>
     </FooterWrapper>
   );
 }
