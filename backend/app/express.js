@@ -1,12 +1,6 @@
 const express = require('express');
-const path = require('path');
-const fs = require('fs');
 
-const packsJSON = fs.readFileSync(
-  path.join(__dirname, './assets/cah-cards-full.json'),
-);
-
-const packs = JSON.parse(packsJSON);
+const packs = require('./assets/cah-cards-full.json');
 const deckController = require('./controllers/deckController')(packs);
 
 // import cookieParser from 'cookie-parser';
