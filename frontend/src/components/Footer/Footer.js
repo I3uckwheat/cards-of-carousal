@@ -43,18 +43,16 @@ const FooterWrapper = styled.footer`
       padding-bottom: 32px;
     }
 
-    p span {
-      display: block;
-    }
-
     a {
       color: var(--accent-text-color);
+      display: block;
     }
   }
 
   /*iphone 5*/
   @media (max-width: 320px) {
     font-size: 1rem;
+    padding-right: 0px;
   }
 `;
 
@@ -63,19 +61,15 @@ function Footer() {
     <FooterWrapper>
       <p>
         Card content thanks to:{' '}
-        <span>
-          <a href="https://cardsagainsthumanity.com">
-            https://cardsagainsthumanity.com
-          </a>
-        </span>
+        <a href="https://cardsagainsthumanity.com">
+          https://cardsagainsthumanity.com
+        </a>
       </p>
       <p>
         Made by Odin students, with love:{' '}
-        <span>
-          <a href="https://www.theodinproject.com">
-            https://www.theodinproject.com
-          </a>
-        </span>
+        <a href="https://www.theodinproject.com">
+          https://www.theodinproject.com
+        </a>
       </p>
     </FooterWrapper>
   );
