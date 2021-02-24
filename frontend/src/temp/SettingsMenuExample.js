@@ -15,7 +15,7 @@ const SettingsModal = styled.div`
   .settings-text {
     font-size: 3rem;
     line-height: 3rem;
-    margin-bottom: -0.6rem;
+    margin-bottom: -11px;
     color: var(--secondary-text-color);
     display: flex;
     flex-direction: column-reverse;

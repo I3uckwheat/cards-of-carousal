@@ -37,7 +37,7 @@ const HostLayoutContainer = styled.div`
   .host-layout-header-text {
     vertical-align: bottom;
     font-size: 7rem;
-    margin-bottom: -1.3rem;
+    margin-bottom: -25px;
     line-height: 7rem;
   }
 
@@ -80,7 +80,7 @@ const HostLayoutContainer = styled.div`
   @media (max-width: 3400px) {
     .host-layout-header-text {
       font-size: 6rem;
-      margin-bottom: -1.1rem;
+      margin-bottom: -20px;
       line-height: 6rem;
     }
   }
@@ -88,7 +88,7 @@ const HostLayoutContainer = styled.div`
   @media (max-width: 3000px) {
     .host-layout-header-text {
       font-size: 5rem;
-      margin-bottom: -1rem;
+      margin-bottom: -17px;
       line-height: 5rem;
     }
   }
@@ -96,7 +96,7 @@ const HostLayoutContainer = styled.div`
   @media (max-width: 2500px) {
     .host-layout-header-text {
       font-size: 4rem;
-      margin-bottom: -1rem;
+      margin-bottom: -14px;
       line-height: 4rem;
     }
   }
@@ -104,7 +104,7 @@ const HostLayoutContainer = styled.div`
   @media (max-width: 2000px) {
     .host-layout-header-text {
       font-size: 3rem;
-      margin-bottom: -0.7rem;
+      margin-bottom: -11px;
       line-height: 3rem;
     }
   }
@@ -112,7 +112,7 @@ const HostLayoutContainer = styled.div`
   @media (max-width: 1500px) {
     .host-layout-header-text {
       font-size: 2rem;
-      margin-bottom: -0.35rem;
+      margin-bottom: -7px;
       line-height: 2rem;
     }
   }
