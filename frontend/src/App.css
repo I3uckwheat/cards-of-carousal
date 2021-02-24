@@ -10,7 +10,7 @@
   --secondary-background-color: var(--secondary-color);
   --secondary-text-color: var(--primary-color);
   --accent-background-color: var(--accent-color);
-  --accent-text-color: var(--primary-color);
+  --accent-text-color: var(--accent-color);
 }
 
 .App {
