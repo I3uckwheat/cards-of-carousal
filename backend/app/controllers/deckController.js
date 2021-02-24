@@ -17,7 +17,7 @@ module.exports = (packs) => {
       const cardsByPackIds = masterDeck.getDeck(packIds);
       return res.send(cardsByPackIds);
     }
-    const allPackIds = Object.keys(packs).map((id) => +id);
+    const allPackIds = Object.keys(packs).map((id) => Number(id));
     const allCards = masterDeck.getDeck(allPackIds);
     return res.send(allCards);
   }
