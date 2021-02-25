@@ -2,15 +2,16 @@ import styled from 'styled-components';
 import React from 'react';
 
 const FooterWrapper = styled.footer`
-  height: 200px;
-  font-size: 3.5rem;
-  font-weight: 400;
-  padding-right: 16px;
-  padding-bottom: 10px;
-
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+
+  height: 200px;
+  font-size: 3.5rem;
+  font-weight: 400;
+
+  padding-right: 16px;
+  padding-bottom: 10px;
 
   background-color: var(--secondary-background-color);
   color: var(--secondary-text-color);
@@ -43,10 +44,11 @@ const FooterWrapper = styled.footer`
     background-color: transparent;
 
     p {
-      color: var(--accent-text-color);
       text-align: center;
       font-size: 1.2rem;
+
       padding-bottom: 32px;
+      color: var(--accent-text-color);
     }
 
     a {

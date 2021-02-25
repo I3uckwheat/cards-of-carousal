@@ -25,11 +25,6 @@ exports[`WelcomeScreen renders correctly 1`] = `
 }
 
 .c3 {
-  height: 200px;
-  font-size: 3.5rem;
-  font-weight: 400;
-  padding-right: 16px;
-  padding-bottom: 10px;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -41,6 +36,11 @@ exports[`WelcomeScreen renders correctly 1`] = `
   -webkit-justify-content: flex-end;
   -ms-flex-pack: end;
   justify-content: flex-end;
+  height: 200px;
+  font-size: 3.5rem;
+  font-weight: 400;
+  padding-right: 16px;
+  padding-bottom: 10px;
   background-color: var(--secondary-background-color);
   color: var(--secondary-text-color);
 }
@@ -57,11 +57,6 @@ exports[`WelcomeScreen renders correctly 1`] = `
 }
 
 .c0 {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -69,6 +64,11 @@ exports[`WelcomeScreen renders correctly 1`] = `
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
   background-color: var(--primary-background-color);
 }
 
@@ -77,7 +77,6 @@ exports[`WelcomeScreen renders correctly 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  height: 400px;
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
@@ -85,23 +84,24 @@ exports[`WelcomeScreen renders correctly 1`] = `
   -webkit-justify-content: flex-end;
   -ms-flex-pack: end;
   justify-content: flex-end;
+  height: 400px;
 }
 
 .c0 .welcome-to {
   font-size: 3.5rem;
-  margin-top: 0px;
   line-height: 5rem;
+  margin-top: 0px;
   margin-bottom: -14px;
 }
 
 .c0 .CoC {
   font-size: 9rem;
+  line-height: 6.5rem;
   margin-bottom: -5px;
   vertical-align: bottom;
-  line-height: 6.5rem;
 }
 
-.c0 .main-body-container {
+.c0 main {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -130,11 +130,11 @@ exports[`WelcomeScreen renders correctly 1`] = `
   flex-direction: column;
   font-size: 9rem;
   font-weight: 700;
+  line-height: 6rem;
   -webkit-transform: rotate(-5deg);
   -ms-transform: rotate(-5deg);
   transform: rotate(-5deg);
   margin-bottom: 280px;
-  line-height: 6rem;
 }
 
 .c0 .definition {
@@ -156,7 +156,7 @@ exports[`WelcomeScreen renders correctly 1`] = `
   align-items: center;
 }
 
-.c0 .join-btn {
+.c0 .btn {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -196,7 +196,7 @@ exports[`WelcomeScreen renders correctly 1`] = `
   height: 180px;
   margin-left: 93px;
   margin-right: 93px;
-  font-size: 2.25rem;
+  font-size: 4rem;
   font-weight: 700;
 }
 
@@ -221,10 +221,10 @@ exports[`WelcomeScreen renders correctly 1`] = `
   }
 
   .c3 p {
-    color: var(--accent-text-color);
     text-align: center;
     font-size: 1.2rem;
     padding-bottom: 32px;
+    color: var(--accent-text-color);
   }
 
   .c3 a {
@@ -242,90 +242,44 @@ exports[`WelcomeScreen renders correctly 1`] = `
 
 @media (max-width:2000px) {
   .c0 .header-container {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
     height: 190px;
-    -webkit-flex-direction: column;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    -webkit-box-pack: end;
-    -webkit-justify-content: flex-end;
-    -ms-flex-pack: end;
-    justify-content: flex-end;
   }
 
   .c0 .welcome-to {
     font-size: 2rem;
-    margin-top: 0px;
     line-height: 2rem;
     margin-bottom: -16px;
   }
 
   .c0 .CoC {
     font-size: 6rem;
-    margin-bottom: -16px;
     line-height: 6rem;
+    margin-bottom: -16px;
   }
 
   .c0 .definition-container {
     font-size: 3.2rem;
     font-weight: 700;
-    -webkit-transform: rotate(-5deg);
-    -ms-transform: rotate(-5deg);
-    transform: rotate(-5deg);
-    margin-bottom: 144px;
     line-height: 3.3rem;
+    margin-bottom: 144px;
   }
 
   .c0 .definition {
     font-size: 2.75rem;
-    font-weight: 400;
   }
 
-  .c0 .join-btn {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-pack: center;
-    -webkit-justify-content: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-    -webkit-align-items: center;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
+  .c0 .btn {
     width: 256px;
     height: 48px;
     font-size: 2.5rem;
-    font-weight: 900;
   }
 
   .c0 .OR {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-align-items: center;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    -webkit-box-pack: center;
-    -webkit-justify-content: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-    background-color: var(--secondary-background-color);
-    color: var(--secondary-text-color);
-    border-radius: 50%;
-    padding: 16px;
     width: 72px;
     height: 72px;
     margin-left: 93px;
     margin-right: 93px;
     font-size: 2.25rem;
-    font-weight: 700;
   }
 }
 
@@ -336,8 +290,8 @@ exports[`WelcomeScreen renders correctly 1`] = `
 
   .c0 .CoC {
     font-size: 4rem;
-    margin-bottom: -21px;
     line-height: 5rem;
+    margin-bottom: -21px;
   }
 }
 
@@ -348,8 +302,8 @@ exports[`WelcomeScreen renders correctly 1`] = `
 
   .c0 .CoC {
     font-size: 4rem;
-    margin-bottom: -15px;
     line-height: 4.5rem;
+    margin-bottom: -15px;
   }
 
   .c0 .definition-container {
@@ -357,7 +311,7 @@ exports[`WelcomeScreen renders correctly 1`] = `
     margin-bottom: 48px;
   }
 
-  .c0 .join-btn {
+  .c0 .btn {
     width: 224px;
   }
 
@@ -383,9 +337,9 @@ exports[`WelcomeScreen renders correctly 1`] = `
 
   .c0 .CoC {
     font-size: 3rem;
+    line-height: 3.5rem;
     margin-bottom: 12px;
     vertical-align: bottom;
-    line-height: 3.5rem;
   }
 }
 
@@ -406,9 +360,7 @@ exports[`WelcomeScreen renders correctly 1`] = `
       CARDS OF CAROUSAL
     </h2>
   </header>
-  <main
-    className="main-body-container"
-  >
+  <main>
     <div
       className="definition-container"
     >
@@ -432,7 +384,7 @@ exports[`WelcomeScreen renders correctly 1`] = `
       className="button-container"
     >
       <button
-        className="c2 join-btn"
+        className="c2 btn"
         type="button"
       >
         <p>
@@ -445,7 +397,7 @@ exports[`WelcomeScreen renders correctly 1`] = `
         OR
       </div>
       <button
-        className="c2  join-btn host-btn"
+        className="c2 btn host-btn"
         type="button"
       >
         <p>
