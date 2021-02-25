@@ -4,56 +4,19 @@ jest.mock('../lib/MasterDeck/MasterDeck');
 MasterDeck.prototype.getPackNames = jest.fn(() => ['a', 'b', 'c', 'd']);
 MasterDeck.prototype.getDeck = jest.fn(() => 'deck');
 
-const mockCards = {
-  0: {
-    name: 'a',
-    white: [
-      { text: 'Peter Molyneux' },
-      { text: 'Half an A Press' },
-      { text: 'Superman 64' },
-    ],
-    black: [
-      { text: 'New from Aperture Science: The _____ Gun!' },
-      { text: "What's inside the G-Man's briefcase?" },
-    ],
-  },
-  1: {
-    name: 'b',
-    white: [
-      { text: 'Slappy the evil talking Dummy' },
-      { text: 'Monster Blood from Monster Blood' },
-    ],
-    black: [
-      { text: 'Say Cheese and _____  - Again!' },
-      { text: 'Stay out of the _____.' },
-    ],
-  },
-  2: {
-    name: 'c',
-    white: [
-      { text: 'Breakfast Baconator' },
-      { text: 'Maple Bacon Chicken Croissant' },
-      { text: 'Sausage, Egg & Swiss Croissant' },
-    ],
-    black: [],
-  },
-  3: {
-    name: 'd',
-    white: [],
-    black: [
-      { text: "The leg bone's connected to the _____ bone." },
-      { text: 'Add _____ to your water to enhance your gains.' },
-    ],
-  },
-};
-
-const deckController = require('./deckController')(mockCards);
+const deckController = require('./deckController')('test file');
 
 const mockReq = { query: {} };
 const mockRes = { data: null };
 mockRes.json = (val) => {
   mockRes.data = val;
 };
+
+describe('constructor', () => {
+  it('passes the file to the master deck', () => {
+    expect(MasterDeck).toHaveBeenCalledWith('test file');
+  });
+});
 
 describe('/deck route functions', () => {
   beforeEach(() => {
