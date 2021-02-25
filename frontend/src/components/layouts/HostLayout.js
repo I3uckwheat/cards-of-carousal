@@ -41,9 +41,9 @@ const HostLayoutContainer = styled.div`
 
   .host-layout-header-text {
     vertical-align: bottom;
-    font-size: 7rem;
-    margin-bottom: -25px;
-    line-height: 7rem;
+    font-size: 1.5rem;
+    margin-bottom: -5px;
+    line-height: 1.5rem;
   }
 
   .hamburger-container {
@@ -82,39 +82,7 @@ const HostLayoutContainer = styled.div`
     flex: 2;
   }
 
-  @media (max-width: 3400px) {
-    .host-layout-header-text {
-      font-size: 6rem;
-      margin-bottom: -20px;
-      line-height: 6rem;
-    }
-  }
-
-  @media (max-width: 3000px) {
-    .host-layout-header-text {
-      font-size: 5rem;
-      margin-bottom: -17px;
-      line-height: 5rem;
-    }
-  }
-
-  @media (max-width: 2500px) {
-    .host-layout-header-text {
-      font-size: 4rem;
-      margin-bottom: -14px;
-      line-height: 4rem;
-    }
-  }
-
-  @media (max-width: 2000px) {
-    .host-layout-header-text {
-      font-size: 3rem;
-      margin-bottom: -11px;
-      line-height: 3rem;
-    }
-  }
-
-  @media (max-width: 1500px) {
+  @media (min-width: 600px) {
     .host-layout-header-text {
       font-size: 2rem;
       margin-bottom: -7px;
@@ -122,11 +90,43 @@ const HostLayoutContainer = styled.div`
     }
   }
 
-  @media (max-width: 600px) {
+  @media (min-width: 1500px) {
     .host-layout-header-text {
-      font-size: 1.5rem;
-      margin-bottom: -5px;
-      line-height: 1.5rem;
+      font-size: 3rem;
+      margin-bottom: -11px;
+      line-height: 3rem;
+    }
+  }
+
+  @media (min-width: 2000px) {
+    .host-layout-header-text {
+      font-size: 4rem;
+      margin-bottom: -14px;
+      line-height: 4rem;
+    }
+  }
+
+  @media (min-width: 2500px) {
+    .host-layout-header-text {
+      font-size: 5rem;
+      margin-bottom: -17px;
+      line-height: 5rem;
+    }
+  }
+
+  @media (min-width: 3000px) {
+    .host-layout-header-text {
+      font-size: 6rem;
+      margin-bottom: -20px;
+      line-height: 6rem;
+    }
+  }
+
+  @media (min-width: 3500px) {
+    .host-layout-header-text {
+      font-size: 7rem;
+      margin-bottom: -25px;
+      line-height: 7rem;
     }
   }
 `;
