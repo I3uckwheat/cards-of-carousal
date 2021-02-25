@@ -13,7 +13,8 @@ module.exports = (packs) => {
     if (req.query.packs) {
       const packIds = req.query.packs
         .split(',')
-        .map((id) => id !== '' && Number(id));
+        .map((id) => id !== '' && Number(id))
+        .filter((id) => typeof id === 'number' && !Number.isNaN(id));
       const cardsByPackIds = masterDeck.getDeck(packIds);
       return res.json(cardsByPackIds);
     }
