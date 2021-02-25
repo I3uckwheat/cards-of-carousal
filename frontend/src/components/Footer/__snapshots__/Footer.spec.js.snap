@@ -2,8 +2,8 @@
 
 exports[`Footer renders correctly 1`] = `
 .c0 {
-  height: 140px;
-  font-size: 2rem;
+  height: 200px;
+  font-size: 3.5rem;
   font-weight: 400;
   padding-right: 16px;
   padding-bottom: 10px;
@@ -31,6 +31,13 @@ exports[`Footer renders correctly 1`] = `
   color: var(--secondary-text-color);
   -webkit-text-decoration: none;
   text-decoration: none;
+}
+
+@media (max-width:2000px) {
+  .c0 {
+    height: 140px;
+    font-size: 2rem;
+  }
 }
 
 @media (max-width:970px) {
