@@ -12,19 +12,19 @@ mockRes.json = (val) => {
   mockRes.data = val;
 };
 
-describe('constructor', () => {
-  it('passes the file to the master deck', () => {
-    expect(MasterDeck).toHaveBeenCalledWith('test file');
-  });
-});
-
-describe('/deck route functions', () => {
-  beforeEach(() => {
-    // Clear all instances and calls to constructor and all methods:
-    MasterDeck.mockClear();
+describe('deckController', () => {
+  describe('constructor', () => {
+    it('passes the file to the master deck', () => {
+      expect(MasterDeck).toHaveBeenCalledWith('test file');
+    });
   });
 
-  describe('getting all pack names', () => {
+  describe('getPackNames method', () => {
+    beforeEach(() => {
+      // Clear all instances and calls to constructor and all methods:
+      MasterDeck.mockClear();
+    });
+
     it('returns an array of all pack names', () => {
       deckController.getPackNames(mockReq, mockRes);
       expect(mockRes.data).toEqual(['a', 'b', 'c', 'd']);
@@ -35,15 +35,12 @@ describe('/deck route functions', () => {
       expect(mockRes.data).not.toEqual('deck');
     });
   });
-});
 
-describe('/deck/cards route functions', () => {
-  beforeEach(() => {
-    // Clear all instances and calls to constructor and all methods:
-    MasterDeck.mockClear();
-  });
-
-  describe('getting cards', () => {
+  describe('getDeck method', () => {
+    beforeEach(() => {
+      // Clear all instances and calls to constructor and all methods:
+      MasterDeck.mockClear();
+    });
     it('returns all cards when no query is given', () => {
       deckController.getDeck(mockReq, mockRes);
       expect(MasterDeck.prototype.getDeck).toHaveBeenCalledWith([0, 1, 2, 3]);
