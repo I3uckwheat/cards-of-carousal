@@ -1,4 +1,8 @@
 const express = require('express');
+
+const packs = require('./assets/cah-cards-full.json');
+const deckController = require('./controllers/deckController')(packs);
+
 // import cookieParser from 'cookie-parser';
 // const passport = require('passport');
 // const cors = require('cors');
@@ -11,8 +15,11 @@ const app = express();
 //   credentials: true,
 // }));
 
-// app.use(express.json());
+app.use(express.json());
 // app.use(cookieParser());
+
+app.get('/deck', deckController.getPackNames);
+app.get('/deck/cards', deckController.getDeck);
 
 // const routes = require('./routes');
 // app.use(routes);
