@@ -36,7 +36,7 @@ const HostLayoutContainer = styled.div`
     align-items: flex-start;
     justify-content: flex-end;
     min-width: 167px;
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.25);
+    box-shadow: 12px 4px 12px -12px rgba(0, 0, 0, 0.25);
   }
 
   .host-layout-header-text {
