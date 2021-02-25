@@ -2,8 +2,8 @@ import styled from 'styled-components';
 import React from 'react';
 
 const FooterWrapper = styled.footer`
-  height: 140px;
-  font-size: 2rem;
+  height: 200px;
+  font-size: 3.5rem;
   font-weight: 400;
   padding-right: 16px;
   padding-bottom: 10px;
@@ -23,6 +23,12 @@ const FooterWrapper = styled.footer`
   a {
     color: var(--secondary-text-color);
     text-decoration: none;
+  }
+
+  /*average size hosting screen*/
+  @media (max-width: 2000px) {
+    height: 140px;
+    font-size: 2rem;
   }
 
   /*small size hosting screen */
