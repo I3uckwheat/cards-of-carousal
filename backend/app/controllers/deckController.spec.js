@@ -75,6 +75,11 @@ describe('/deck route functions', () => {
 });
 
 describe('/deck/cards route functions', () => {
+  beforeEach(() => {
+    // Clear all instances and calls to constructor and all methods:
+    MasterDeck.mockClear();
+  });
+
   describe('getting cards', () => {
     it('returns all cards when no query is given', () => {
       deckController.getDeck(mockReq, mockRes);
