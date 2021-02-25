@@ -1,12 +1,12 @@
 const MasterDeck = require('../lib/MasterDeck/MasterDeck');
 
 jest.mock('../lib/MasterDeck/MasterDeck');
-MasterDeck.prototype.getPackNames = jest.fn(() => 'packNames');
+MasterDeck.prototype.getPackNames = jest.fn(() => ['a', 'b', 'c', 'd']);
 MasterDeck.prototype.getDeck = jest.fn(() => 'deck');
 
 const mockCards = {
   0: {
-    name: 'Video Games',
+    name: 'a',
     white: [
       { text: 'Peter Molyneux' },
       { text: 'Half an A Press' },
@@ -18,7 +18,7 @@ const mockCards = {
     ],
   },
   1: {
-    name: 'Goosebumps',
+    name: 'b',
     white: [
       { text: 'Slappy the evil talking Dummy' },
       { text: 'Monster Blood from Monster Blood' },
@@ -29,7 +29,7 @@ const mockCards = {
     ],
   },
   2: {
-    name: "Wendy's Breakfast Items",
+    name: 'c',
     white: [
       { text: 'Breakfast Baconator' },
       { text: 'Maple Bacon Chicken Croissant' },
@@ -38,7 +38,7 @@ const mockCards = {
     black: [],
   },
   3: {
-    name: 'WebMD',
+    name: 'd',
     white: [],
     black: [
       { text: "The leg bone's connected to the _____ bone." },
@@ -64,7 +64,7 @@ describe('/deck route functions', () => {
   describe('getting all pack names', () => {
     it('returns an array of all pack names', () => {
       deckController.getPackNames(mockReq, mockRes);
-      expect(mockRes.data).toEqual('packNames');
+      expect(mockRes.data).toEqual(['a', 'b', 'c', 'd']);
     });
 
     it('does not return a deck', () => {
@@ -113,7 +113,7 @@ describe('/deck/cards route functions', () => {
 
     it('does not return all pack names', () => {
       deckController.getDeck(mockReq, mockRes);
-      expect(mockRes.data).not.toEqual('packNames');
+      expect(mockRes.data).not.toEqual(['a', 'b', 'c', 'd']);
     });
   });
 });
