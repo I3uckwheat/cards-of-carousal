@@ -3,6 +3,7 @@ import styled from 'styled-components';
 // import PropTypes from 'prop-types';
 import Button from '../Buttons/Button';
 import Header from '../Header/Header';
+import Footer from '../Footer/Footer';
 
 const propTypes = {};
 
@@ -36,7 +37,7 @@ const Container = styled.div`
       max-width: 80vw;
       margin: 0 auto;
       text-align: center;
-      margin-top: -8rem;
+      margin-top: -128px;
 
       form {
         display: grid;
@@ -58,50 +59,12 @@ const Container = styled.div`
 
     // name input
     input:nth-of-type(1) {
-      margin-right: 0.5rem;
+      margin-right: 8px;
     }
 
     // join code input
     input:nth-of-type(2) {
-      margin-left: 0.5rem;
-    }
-  }
-
-  footer {
-    background-color: var(--secondary-background-color);
-    color: var(--secondary-text-color);
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    justify-content: flex-end;
-    font-weight: 500;
-
-    // credits
-    div:nth-of-type(1) {
-      padding: 0 1rem 0 1rem;
-    }
-
-    div:nth-of-type(2) {
-      padding: 0 1rem 1rem 1rem;
-    }
-
-    @media screen and (max-width: 506px) {
-      background: none;
-      color: var(--accent-color);
-      text-align: center;
-
-      // reducing the width of the first credit container so both credits wrap at the same breakpoint
-      div:nth-of-type(1) {
-        line-height: 1.5rem;
-        width: 320px;
-        margin: 0 auto;
-        padding-bottom: 1.75rem;
-      }
-
-      div:nth-of-type(2) {
-        line-height: 1.5rem;
-        padding-bottom: 1rem;
-      }
+      margin-left: 8px;
     }
   }
 `;
@@ -115,25 +78,25 @@ const PlayerJoinHeader = styled(Header)`
   h1 {
     text-transform: uppercase;
     font-size: 6rem;
-    margin-bottom: -1rem;
+    margin-bottom: -16px;
     line-height: 6rem;
     vertical-align: bottom;
 
     @media screen and (max-width: 970px) {
       font-size: 4rem;
-      margin-bottom: -1.3rem;
+      margin-bottom: 20.8px;
       line-height: 5rem;
     }
 
     @media screen and (max-width: 785px) {
       font-size: 4rem;
-      margin-bottom: -0.95rem;
+      margin-bottom: -15.2px;
       line-height: 4.5rem;
     }
 
     @media screen and (max-width: 320px) {
       font-size: 3rem;
-      margin-bottom: -0.75rem;
+      margin-bottom: -12px;
       line-height: 3.5rem;
     }
   }
@@ -187,12 +150,7 @@ export default function PlayerJoin() {
           </form>
         </div>
       </main>
-      <footer>
-        <div>Card content thanks to: https://cardsagainsthumanity.com</div>
-        <div>
-          Made by Odin students, with love: https://www.theodinproject.com
-        </div>
-      </footer>
+      <Footer />
     </Container>
   );
 }
