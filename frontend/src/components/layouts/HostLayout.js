@@ -33,14 +33,14 @@ const HostLayoutContainer = styled.div`
   .host-layout-header {
     display: flex;
     align-items: flex-end;
-    height: 130px;
+    height: 50px;
   }
 
   .host-layout-header h2 {
     position: relative;
-    bottom: -4px;
-    font-size: 2.5rem;
-    line-height: 2rem;
+    bottom: -1px;
+    font-size: 1rem;
+    line-height: 0.8rem;
   }
 
   .components {
@@ -51,6 +51,7 @@ const HostLayoutContainer = styled.div`
   .components .left {
     display: flex;
     flex-direction: column;
+    min-width: 200px;
     background-color: var(--primary-background-color);
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.25);
   }
@@ -59,14 +60,46 @@ const HostLayoutContainer = styled.div`
     flex-grow: 1;
   }
 
+  @media (min-width: 800px) {
+    .host-layout-header {
+      height: 130px;
+    }
+
+    .components .left {
+      min-width: 450px;
+    }
+
+    .components .host-layout-header h2 {
+      font-size: 2.5rem;
+      margin-bottom: -4px;
+      line-height: 2rem;
+    }
+  }
+
   @media (min-width: 2000px) {
     .components .left {
-      min-width: 500px;
+      min-width: 700px;
     }
 
     .components .host-layout-header h2 {
       font-size: 3.5rem;
       margin-bottom: -35px;
+      line-height: 7rem;
+    }
+  }
+
+  @media (min-width: 3500px) {
+    .host-layout-header {
+      height: 200px;
+    }
+
+    .components .left {
+      min-width: 1100px;
+    }
+
+    .components .host-layout-header h2 {
+      font-size: 6rem;
+      margin-bottom: -25px;
       line-height: 7rem;
     }
   }
