@@ -20,112 +20,51 @@ const HostLayoutContainer = styled.div`
   left: 0;
   display: flex;
   flex-direction: column;
-  height: 100%;
 
-  .header-and-hamburger {
-    display: flex;
-    flex-direction: row;
-    flex: 1;
+  .hamburger-container {
+    position: absolute;
+    right: 17px;
+    top: 11px;
+    z-index: 10100;
   }
 
   .host-layout-header {
     display: flex;
-    flex: 1;
-    height: 100%;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-end;
-    min-width: 167px;
-    box-shadow: 12px 4px 12px -12px rgba(0, 0, 0, 0.25);
+    align-items: flex-end;
+    height: 130px;
   }
 
-  .host-layout-header-text {
-    vertical-align: bottom;
-    font-size: 1.5rem;
-    margin-bottom: -5px;
-    line-height: 1.5rem;
-  }
-
-  .hamburger-container {
-    display: flex;
-    flex-direction: row-reverse;
-    flex: 2;
-    margin: 30px 30px -30px -30px;
-    z-index: 10100;
+  .host-layout-header h2 {
+    position: relative;
+    bottom: -4px;
+    font-size: 2.5rem;
+    line-height: 2rem;
   }
 
   .components {
     display: flex;
-    flex-direction: row;
-    flex: 9;
-    justify-content: space-around;
-    align-items: center;
+    height: 100%;
   }
 
-  .component-container {
+  .components .left {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
-    align-items: space-around;
-    height: 100%;
-    width: 100%;
-  }
-
-  .left {
-    flex: 1;
     background-color: var(--primary-background-color);
-    min-width: 167px;
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.25);
   }
 
-  .right {
-    flex: 2;
-  }
-
-  @media (min-width: 600px) {
-    .host-layout-header-text {
-      font-size: 2rem;
-      margin-bottom: -7px;
-      line-height: 2rem;
-    }
-  }
-
-  @media (min-width: 1500px) {
-    .host-layout-header-text {
-      font-size: 3rem;
-      margin-bottom: -11px;
-      line-height: 3rem;
-    }
+  .components .right {
+    flex-grow: 1;
   }
 
   @media (min-width: 2000px) {
-    .host-layout-header-text {
-      font-size: 4rem;
-      margin-bottom: -14px;
-      line-height: 4rem;
+    .components .left {
+      min-width: 500px;
     }
-  }
 
-  @media (min-width: 2500px) {
-    .host-layout-header-text {
-      font-size: 5rem;
-      margin-bottom: -17px;
-      line-height: 5rem;
-    }
-  }
-
-  @media (min-width: 3000px) {
-    .host-layout-header-text {
-      font-size: 6rem;
-      margin-bottom: -20px;
-      line-height: 6rem;
-    }
-  }
-
-  @media (min-width: 3500px) {
-    .host-layout-header-text {
-      font-size: 7rem;
-      margin-bottom: -25px;
+    .components .host-layout-header h2 {
+      font-size: 3.5rem;
+      margin-bottom: -35px;
       line-height: 7rem;
     }
   }
@@ -143,20 +82,23 @@ function HostLayout({ left, right, modal }) {
   return (
     <HostLayoutContainer className="primary-background">
       {showModal && <Modal onClickOutside={handleModalClick}>{modal}</Modal>}
-      <div className="header-and-hamburger">
-        <Header className="host-layout-header">
-          <h2 className="host-layout-header-text">CARDS OF CAROUSAL</h2>
-        </Header>
-        <div className="hamburger-container">
-          <HamburgerMenu
-            isActive={hamburgerMenuActive}
-            onClick={handleModalClick}
-          />
-        </div>
+
+      <div className="hamburger-container">
+        <HamburgerMenu
+          isActive={hamburgerMenuActive}
+          onClick={handleModalClick}
+        />
       </div>
+
       <div className="components">
-        <div className="component-container left">{left}</div>
-        <div className="component-container right">{right}</div>
+        <div className="left">
+          <Header className="host-layout-header">
+            <h2>CARDS OF CAROUSAL</h2>
+          </Header>
+          {left}
+        </div>
+
+        <div className="right">{right}</div>
       </div>
     </HostLayoutContainer>
   );

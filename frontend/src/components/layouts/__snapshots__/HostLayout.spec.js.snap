@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`HostLayout matches the snapshot when rendered 1`] = `
-.c2 {
+.c1 {
   background-image: url(inactiveHamburger.svg);
   background-size: cover;
   background-color: transparent;
@@ -10,7 +10,7 @@ exports[`HostLayout matches the snapshot when rendered 1`] = `
   height: 25px;
 }
 
-.c1 {
+.c2 {
   width: 100%;
   background-color: var(--secondary-background-color);
   color: var(--secondary-text-color);
@@ -29,20 +29,13 @@ exports[`HostLayout matches the snapshot when rendered 1`] = `
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
-  height: 100%;
 }
 
-.c0 .header-and-hamburger {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  -webkit-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
+.c0 .hamburger-container {
+  position: absolute;
+  right: 17px;
+  top: 11px;
+  z-index: 10100;
 }
 
 .c0 .host-layout-header {
@@ -50,45 +43,18 @@ exports[`HostLayout matches the snapshot when rendered 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
-  height: 100%;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  -webkit-align-items: flex-start;
-  -webkit-box-align: flex-start;
-  -ms-flex-align: flex-start;
-  align-items: flex-start;
-  -webkit-box-pack: end;
-  -webkit-justify-content: flex-end;
-  -ms-flex-pack: end;
-  justify-content: flex-end;
-  min-width: 167px;
-  box-shadow: 12px 4px 12px -12px rgba(0,0,0,0.25);
+  -webkit-align-items: flex-end;
+  -webkit-box-align: flex-end;
+  -ms-flex-align: flex-end;
+  align-items: flex-end;
+  height: 130px;
 }
 
-.c0 .host-layout-header-text {
-  vertical-align: bottom;
-  font-size: 1.5rem;
-  margin-bottom: -5px;
-  line-height: 1.5rem;
-}
-
-.c0 .hamburger-container {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: row-reverse;
-  -ms-flex-direction: row-reverse;
-  flex-direction: row-reverse;
-  -webkit-flex: 2;
-  -ms-flex: 2;
-  flex: 2;
-  margin: 30px 30px -30px -30px;
-  z-index: 10100;
+.c0 .host-layout-header h2 {
+  position: relative;
+  bottom: -4px;
+  font-size: 2.5rem;
+  line-height: 2rem;
 }
 
 .c0 .components {
@@ -96,23 +62,10 @@ exports[`HostLayout matches the snapshot when rendered 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  -webkit-flex: 9;
-  -ms-flex: 9;
-  flex: 9;
-  -webkit-box-pack: space-around;
-  -webkit-justify-content: space-around;
-  -ms-flex-pack: space-around;
-  justify-content: space-around;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
+  height: 100%;
 }
 
-.c0 .component-container {
+.c0 .components .left {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -120,77 +73,25 @@ exports[`HostLayout matches the snapshot when rendered 1`] = `
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
-  -webkit-box-pack: space-around;
-  -webkit-justify-content: space-around;
-  -ms-flex-pack: space-around;
-  justify-content: space-around;
-  -webkit-align-items: space-around;
-  -webkit-box-align: space-around;
-  -ms-flex-align: space-around;
-  align-items: space-around;
-  height: 100%;
-  width: 100%;
-}
-
-.c0 .left {
-  -webkit-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
   background-color: var(--primary-background-color);
-  min-width: 167px;
   box-shadow: 0px 4px 12px rgba(0,0,0,0.25);
 }
 
-.c0 .right {
-  -webkit-flex: 2;
-  -ms-flex: 2;
-  flex: 2;
-}
-
-@media (min-width:600px) {
-  .c0 .host-layout-header-text {
-    font-size: 2rem;
-    margin-bottom: -7px;
-    line-height: 2rem;
-  }
-}
-
-@media (min-width:1500px) {
-  .c0 .host-layout-header-text {
-    font-size: 3rem;
-    margin-bottom: -11px;
-    line-height: 3rem;
-  }
+.c0 .components .right {
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
 }
 
 @media (min-width:2000px) {
-  .c0 .host-layout-header-text {
-    font-size: 4rem;
-    margin-bottom: -14px;
-    line-height: 4rem;
+  .c0 .components .left {
+    min-width: 500px;
   }
-}
 
-@media (min-width:2500px) {
-  .c0 .host-layout-header-text {
-    font-size: 5rem;
-    margin-bottom: -17px;
-    line-height: 5rem;
-  }
-}
-
-@media (min-width:3000px) {
-  .c0 .host-layout-header-text {
-    font-size: 6rem;
-    margin-bottom: -20px;
-    line-height: 6rem;
-  }
-}
-
-@media (min-width:3500px) {
-  .c0 .host-layout-header-text {
-    font-size: 7rem;
-    margin-bottom: -25px;
+  .c0 .components .host-layout-header h2 {
+    font-size: 3.5rem;
+    margin-bottom: -35px;
     line-height: 7rem;
   }
 }
@@ -199,38 +100,32 @@ exports[`HostLayout matches the snapshot when rendered 1`] = `
   className="c0 primary-background"
 >
   <div
-    className="header-and-hamburger"
+    className="hamburger-container"
   >
-    <header
-      className="c1 host-layout-header"
-    >
-      <h2
-        className="host-layout-header-text"
-      >
-        CARDS OF CAROUSAL
-      </h2>
-    </header>
-    <div
-      className="hamburger-container"
-    >
-      <button
-        className="c2"
-        onClick={[Function]}
-      />
-    </div>
+    <button
+      className="c1"
+      onClick={[Function]}
+    />
   </div>
   <div
     className="components"
   >
     <div
-      className="component-container left"
+      className="left"
     >
+      <header
+        className="c2 host-layout-header"
+      >
+        <h2>
+          CARDS OF CAROUSAL
+        </h2>
+      </header>
       <p>
         Im a left component
       </p>
     </div>
     <div
-      className="component-container right"
+      className="right"
     >
       <p>
         Im a right component
