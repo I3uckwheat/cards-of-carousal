@@ -194,13 +194,12 @@ exports[`WelcomeScreen renders correctly 1`] = `
   color: var(--secondary-text-color);
   border-radius: 50%;
   padding: 16px;
-  font-size: 4rem;
+  font-size: 2.25rem;
   font-weight: 700;
   width: 72px;
   height: 72px;
   margin-left: 93px;
   margin-right: 93px;
-  font-size: 2.25rem;
 }
 
 @media (max-width:2000px) {
@@ -250,7 +249,6 @@ exports[`WelcomeScreen renders correctly 1`] = `
 
   .c0 .welcome-to {
     font-size: 1.5rem;
-    line-height: 0.2rem;
   }
 
   .c0 .CoC {
@@ -261,9 +259,6 @@ exports[`WelcomeScreen renders correctly 1`] = `
   .c0 .definition-container {
     font-size: 2.2rem;
     line-height: 1.8rem;
-    -webkit-transform: rotate(-5deg);
-    -ms-transform: rotate(-5deg);
-    transform: rotate(-5deg);
     margin-bottom: 90px;
   }
 
@@ -272,17 +267,12 @@ exports[`WelcomeScreen renders correctly 1`] = `
   }
 
   .c0 .btn {
-    font-size: 6rem;
-    font-weight: 900;
     width: 200px;
     height: 48px;
     font-size: 2.5rem;
   }
 
   .c0 .OR {
-    border-radius: 50%;
-    padding: 16px;
-    font-size: 4rem;
     width: 60px;
     height: 60px;
     margin-left: 70px;
@@ -291,35 +281,13 @@ exports[`WelcomeScreen renders correctly 1`] = `
   }
 }
 
-@media (max-width:700px) {
-  .c0 .header {
-    height: 190px;
-  }
-
+@media (max-width:645px) {
   .c0 .header-text {
-    bottom: -133px;
-  }
-
-  .c0 .welcome-to {
-    font-size: 1.5rem;
-    line-height: 0.2rem;
-    margin-top: 0px;
-    margin-bottom: -14px;
-  }
-
-  .c0 .CoC {
-    font-size: 4rem;
-    line-height: 6rem;
-    margin-bottom: -15px;
+    bottom: -85px;
   }
 
   .c0 .definition-container {
     display: none;
-    margin-bottom: 48px;
-  }
-
-  .c0 .btn {
-    width: 224px;
   }
 
   .c0 .host-btn {
@@ -328,12 +296,6 @@ exports[`WelcomeScreen renders correctly 1`] = `
 
   .c0 .OR {
     display: none;
-  }
-}
-
-@media (max-width:655px) {
-  .c0 .header-text {
-    bottom: -86px;
   }
 
   .c0 .welcome-to {
@@ -356,8 +318,52 @@ exports[`WelcomeScreen renders correctly 1`] = `
 
   .c0 .CoC {
     font-size: 3rem;
-    line-height: 3.5rem;
     margin-bottom: 12px;
+  }
+}
+
+@media (min-width:2000px),(min-height:1500px) {
+  .c0 .header {
+    height: 400px;
+  }
+
+  .c0 .header-text {
+    bottom: -260px;
+  }
+
+  .c0 .welcome-to {
+    font-size: 3rem;
+    line-height: 3.8rem;
+  }
+
+  .c0 .CoC {
+    font-size: 8rem;
+    line-height: 6.5rem;
+  }
+
+  .c0 .definition-container {
+    font-size: 4.5rem;
+    line-height: 3.5rem;
+    margin-bottom: 250px;
+  }
+
+  .c0 .definition {
+    font-size: 3.5rem;
+  }
+
+  .c0 .OR {
+    font-size: 2.5rem;
+    width: 100px;
+    height: 100px;
+    margin-left: 100px;
+    margin-right: 100px;
+  }
+
+  .c0 .btn {
+    width: 500px;
+    height: 100px;
+    border: solid black 4px;
+    font-size: 3rem;
   }
 }
 

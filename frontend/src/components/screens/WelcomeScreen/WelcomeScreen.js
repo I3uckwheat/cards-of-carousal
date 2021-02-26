@@ -103,15 +103,13 @@ const WelcomeScreenWrapper = styled.div`
     border-radius: 50%;
     padding: 16px;
 
-    font-size: 4rem;
+    font-size: 2.25rem;
     font-weight: 700;
 
     width: 72px;
     height: 72px;
     margin-left: 93px;
-    margin-right: 93px;
-
-    font-size: 2.25rem;
+    margin-right: 93px;    
   }
 
   /*if less than 890px do this.... */
@@ -122,7 +120,6 @@ const WelcomeScreenWrapper = styled.div`
 
     .welcome-to {
       font-size: 1.5rem;
-      line-height: 0.2rem;
     }
 
     .CoC {
@@ -134,7 +131,6 @@ const WelcomeScreenWrapper = styled.div`
       font-size: 2.2rem;
       line-height: 1.8rem;
 
-      transform: rotate(-5deg);
       margin-bottom: 90px;
     }
 
@@ -143,9 +139,6 @@ const WelcomeScreenWrapper = styled.div`
     }
 
     .btn {
-      font-size: 6rem;
-      font-weight: 900;
-
       width: 200px;
       height: 48px;
 
@@ -153,11 +146,6 @@ const WelcomeScreenWrapper = styled.div`
     }
 
     .OR {
-      border-radius: 50%;
-      padding: 16px;
-
-      font-size: 4rem;
-
       width: 60px;
       height: 60px;
       margin-left: 70px;
@@ -168,35 +156,13 @@ const WelcomeScreenWrapper = styled.div`
   }
 
   /*if less than 700px do this.... */
-  @media (max-width: 700px) {
-    .header {
-      height: 190px;
-    }
-
-    .header-text {
-      bottom: -133px;
-    }
-    .welcome-to {
-      font-size: 1.5rem;
-      line-height: 0.2rem;
-
-      margin-top: 0px;
-      margin-bottom: -14px;
-    }
-
-    .CoC {
-      font-size: 4rem;
-      line-height: 6rem;
-      margin-bottom: -15px;
+  @media (max-width: 645px) {
+     .header-text {
+      bottom: -85px;
     }
 
     .definition-container {
       display: none;
-      margin-bottom: 48px;
-    }
-
-    .btn {
-      width: 224px;
     }
 
     .host-btn {
@@ -205,27 +171,20 @@ const WelcomeScreenWrapper = styled.div`
 
     .OR {
       display: none;
-    }
-  }
-
-  /*if less than 655px do this.... */
-  @media (max-width: 655px) {
-    .header-text {
-      bottom: -86px;
-    }
+    } 
 
     .welcome-to {
       display: none;
     }
 
-    .CoC {
+      .CoC {
       line-height: 3.5rem;
     }
   }
 
   /*if less than 320px do this.... */
   @media (max-width: 320px) {
-    .header {
+   .header {
       height: 130px;
     }
 
@@ -235,11 +194,56 @@ const WelcomeScreenWrapper = styled.div`
 
     .CoC {
       font-size: 3rem;
-      line-height: 3.5rem;
-
       margin-bottom: 12px;
+    } 
+  }
+
+  /*If greater than 2000px wide OR greater than 1500px tall */
+  @media (min-width: 2000px), (min-height: 1500px) {
+    .header {
+      height: 400px;
+    }
+    .header-text {
+      bottom: -260px;
+    }
+
+    .welcome-to {
+      font-size: 3rem;
+      line-height: 3.8rem;
+    }
+
+    .CoC {
+      font-size: 8rem;
+      line-height: 6.5rem;
+    }
+
+    .definition-container {
+      font-size: 4.5rem;
+      line-height: 3.5rem;
+      margin-bottom: 250px;
+    }
+
+    .definition {
+      font-size: 3.5rem;
+    }
+
+    .OR {
+      font-size: 2.5rem;
+
+      width: 100px;
+      height: 100px;
+      margin-left: 100px;
+      margin-right: 100px;
+    }
+
+    .btn {
+      width: 500px;
+      height: 100px;
+      border: solid black 4px;
+      font-size: 3rem;
     }
   }
+  
 
   /*if greater than 2450px do this.... */
   @media (min-width: 2450px) {
@@ -260,6 +264,7 @@ const WelcomeScreenWrapper = styled.div`
       font-size: 8rem;
       line-height: 6.5rem;
     }
+
 
     .definition-container {
       font-size: 6.5rem;
@@ -286,199 +291,8 @@ const WelcomeScreenWrapper = styled.div`
       border: solid black 4px;
       font-size: 5rem;
     }
-  }
-
-  /* .header-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    height: 400px;
-  }
-
-  .welcome-to {
-    font-size: 3.5rem;
-    line-height: 5rem;
-
-    margin-top: 0px;
-    margin-bottom: -14px;
-  }
-
-  .CoC {
-    font-size: 9rem;
-    line-height: 6.5rem;
-
-    margin-bottom: -5px;
-    vertical-align: bottom;
-  }
-
-  main {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin: auto;
-  }
-
-  .definition-container {
-    display: flex;
-    flex-direction: column;
-
-    font-size: 9rem;
-    font-weight: 700;
-    line-height: 6rem;
-
-    transform: rotate(-5deg);
-    margin-bottom: 280px;
-  }
-
-  .definition {
-    font-size: 7rem;
-    font-weight: 400;
-  }
-
-  .button-container {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-  }
-
-  .btn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    width: 700px;
-    height: 180px;
-
-    font-size: 6rem;
-    font-weight: 900;
-  }
-
-  .OR {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    background-color: var(--secondary-background-color);
-    color: var(--secondary-text-color);
-
-    border-radius: 50%;
-    padding: 16px;
-    width: 180px;
-    height: 180px;
-    margin-left: 93px;
-    margin-right: 93px;
-
-    font-size: 4rem;
-    font-weight: 700;
-  }
-
-  @media (max-width: 2000px) {
-    .header-container {
-      height: 190px;
-    }
-
-    .welcome-to {
-      font-size: 2rem;
-      line-height: 2rem;
-      margin-bottom: -16px;
-    }
-
-    .CoC {
-      font-size: 6rem;
-      line-height: 6rem;
-      margin-bottom: -16px;
-    }
-
-    .definition-container {
-      font-size: 3.2rem;
-      font-weight: 700;
-      line-height: 3.3rem;
-      margin-bottom: 144px;
-    }
-
-    .definition {
-      font-size: 2.75rem;
-    }
-
-    .btn {
-      width: 256px;
-      height: 48px;
-
-      font-size: 2.5rem;
-    }
-
-    .OR {
-      width: 72px;
-      height: 72px;
-      margin-left: 93px;
-      margin-right: 93px;
-
-      font-size: 2.25rem;
-    }
-  }
-
-  @media (max-width: 970px) {
-    .definition-container {
-      margin-bottom: 80px;
-    }
-
-    .CoC {
-      font-size: 4rem;
-      line-height: 5rem;
-      margin-bottom: -21px;
-    }
-  }
-
-  @media (max-width: 785px) {
-    .header-container {
-      height: 180px;
-    }
-
-    .CoC {
-      font-size: 4rem;
-      line-height: 4.5rem;
-      margin-bottom: -15px;
-    }
-
-    .definition-container {
-      display: none;
-      margin-bottom: 48px;
-    }
-
-    .btn {
-      width: 224px;
-    }
-
-    .host-btn {
-      display: none;
-    }
-
-    .OR {
-      display: none;
-    }
-  }
-
-  @media (max-width: 645px) {
-    .welcome-to {
-      display: none;
-    }
-  }
-
-  @media (max-width: 320px) {
-    .header-container {
-      height: 130px;
-    }
-
-    .CoC {
-      font-size: 3rem;
-      line-height: 3.5rem;
-
-      margin-bottom: 12px;
-      vertical-align: bottom;
-    }
-  } */
-`;
+  } 
+}`;
 
 function WelcomeScreen() {
   return (
