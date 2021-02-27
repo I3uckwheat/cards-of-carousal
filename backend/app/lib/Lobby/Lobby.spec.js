@@ -67,5 +67,6 @@ describe('Lobby', () => {
     expect(playerSocket.close).toBeCalledWith(1000, messageObject.event);
     expect(playerSocketTwo.send).toBeCalledWith(JSON.stringify(messageObject));
     expect(playerSocketTwo.close).toBeCalledWith(1000, messageObject.event);
+    expect(onCloseCallBack).toBeCalledWith(lobby.id);
   });
 });
