@@ -14,7 +14,6 @@ describe('Lobby', () => {
       send: jest.fn(),
       close: jest.fn(),
     };
-    hostSocket;
     onCloseCallBack = jest.fn();
     lobby = new Lobby(hostSocket, onCloseCallBack);
     playerSocket = {
@@ -25,7 +24,7 @@ describe('Lobby', () => {
     };
   });
 
-  it('gives lobby a unique ID and sends message through the socket', () => {
+  it('gives the lobby a unique ID and sends message through the socket', () => {
     let messageObject = {
       event: 'create-lobby',
       payload: { id: lobby.id },
@@ -37,7 +36,7 @@ describe('Lobby', () => {
     expect(hostSocket.send).toBeCalledWith(JSON.stringify(messageObject));
   });
 
-  it('can add a player and sends message through socket', () => {
+  it('can add a player and sends message through the socket', () => {
     let messageObject = {
       event: 'player-connect',
       payload: { playerId: playerSocket.id },
@@ -49,7 +48,7 @@ describe('Lobby', () => {
     expect(hostSocket.send).toBeCalledWith(JSON.stringify(messageObject));
   });
 
-  it('can close a lobby and send message through socket for each player', () => {
+  it('can close a lobby and send message through the socket for each player', () => {
     let messageObject = {
       event: 'lobby-closed',
       payload: {},
