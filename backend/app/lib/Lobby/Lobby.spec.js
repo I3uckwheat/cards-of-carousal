@@ -1,10 +1,8 @@
 const Lobby = require('./Lobby');
-const { customAlphabet } = require('nanoid');
-const customNanoid = customAlphabet('ABCDGHJKMNPRSTUVWXYZ', 4);
 
-let createSocket = () => {
+let createSocket = (id) => {
   return {
-    id: customNanoid(),
+    id,
     on: jest.fn(),
     send: jest.fn(),
     close: jest.fn(),
@@ -12,18 +10,15 @@ let createSocket = () => {
 };
 
 describe('Lobby', () => {
-  let lobby;
-  let hostSocket;
-  let onCloseCallBack;
   beforeEach(() => {
     jest.clearAllMocks();
-    hostSocket = createSocket();
-    onCloseCallBack = jest.fn();
-    lobby = new Lobby(hostSocket, onCloseCallBack);
   });
-
+  
   describe('constructor', () => {
     it('gives the lobby a unique ID and sends message through the socket', () => {
+      let hostSocket = createSocket("socketId");
+      let onCloseCallBack = jest.fn();
+      let lobby = new Lobby(hostSocket, onCloseCallBack);
       let messageObject = {
         event: 'create-lobby',
         payload: { id: lobby.id },
@@ -35,16 +30,18 @@ describe('Lobby', () => {
       expect(hostSocket.send).toBeCalledWith(JSON.stringify(messageObject));
     });
   });
-
+  
   describe('has multiple players', () => {
-    let playerSocket = createSocket();
-    let playerSocketTwo = createSocket();
+    let hostSocket = createSocket("socketId");
+    let onCloseCallBack = jest.fn();
+    let lobby = new Lobby(hostSocket, onCloseCallBack);
+    let playerSocket = createSocket('player1Id');
     let messageObject = {
       event: '',
       payload: {},
       sender: 'server',
     };
-
+    
     describe('addPlayer', () => {
       it('can add a player and sends message through the socket', () => {
         messageObject.event = 'player-connect';
@@ -55,15 +52,17 @@ describe('Lobby', () => {
         expect(hostSocket.send).toBeCalledWith(JSON.stringify(messageObject));
       });
     });
-
+    
     describe('closeLobby', () => {
       it('can close a lobby and send message through the socket for each player', () => {
+        let playerSocketTwo = createSocket('player2Id');
         messageObject.event = 'lobby-closed';
         messageObject.payload = {};
 
         lobby.addPlayer(playerSocket);
         lobby.addPlayer(playerSocketTwo);
         lobby.closeLobby();
+
         expect(playerSocket.send).toBeCalledWith(JSON.stringify(messageObject));
         expect(playerSocket.close).toBeCalledWith(1000, messageObject.event);
         expect(playerSocketTwo.send).toBeCalledWith(
