@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import Button from '../Buttons/Button';
-import Header from '../Header/Header';
-import Footer from '../Footer/Footer';
+import Button from '../../Buttons/Button';
+import Header from '../../Header/Header';
+import Footer from '../../Footer/Footer';
 
 const propTypes = {};
 
