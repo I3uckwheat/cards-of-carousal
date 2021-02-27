@@ -23,7 +23,7 @@ describe('Lobby', () => {
     };
   });
 
-  it('gives lobby a unique ID', () => {
+  it('gives lobby a unique ID and sends message through the socket', () => {
     let messageObject = {
       event: 'create-lobby',
       payload: { id: lobby.id },
@@ -35,7 +35,7 @@ describe('Lobby', () => {
     expect(hostSocket.send).toBeCalledWith(JSON.stringify(messageObject));
   });
 
-  it('can add a player', () => {
+  it('can add a player and sends message through socket', () => {
     let messageObject = {
       event: 'player-connect',
       payload: { playerId: playerSocket.id },
@@ -47,7 +47,7 @@ describe('Lobby', () => {
     expect(hostSocket.send).toBeCalledWith(JSON.stringify(messageObject));
   });
 
-  it('can close a lobby', () => {
+  it('can close a lobby and send message through socket for each player', () => {
     let messageObject = {
       event: 'lobby-closed',
       payload: {},
