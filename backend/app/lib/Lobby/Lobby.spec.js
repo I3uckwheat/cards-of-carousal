@@ -9,10 +9,12 @@ describe('Lobby', () => {
   let playerSocket;
   beforeEach(() => {
     jest.clearAllMocks();
-    hostSocket = jest.fn();
-    hostSocket.on = jest.fn();
-    hostSocket.send = jest.fn();
-    hostSocket.close = jest.fn();
+    hostSocket = {
+      on: jest.fn(),
+      send: jest.fn(),
+      close: jest.fn(),
+    };
+    hostSocket;
     onCloseCallBack = jest.fn();
     lobby = new Lobby(hostSocket, onCloseCallBack);
     playerSocket = {
