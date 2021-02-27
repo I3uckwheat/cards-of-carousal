@@ -16,7 +16,10 @@ import CardWrapperExample from './temp/CardWrapperExample';
 import Modal from './components/Modal/Modal';
 import playerList from './temp/playerList';
 import ModalExample from './temp/ModalExample';
+import SingleBlackCardExample from './temp/SingleBlackCardExample.js';
 import PlayerMessageScreen from './components/screens/PlayerMessageScreen/PlayerMessageScreen';
+import HostLayout from './components/layouts/HostLayout';
+import SettingsMenuExample from './temp/SettingsMenuExample';
 
 function App() {
   const [showSocketTest, setShowSocketTest] = useState(false);
@@ -29,11 +32,15 @@ function App() {
   const [showWhiteCards, setShowWhiteCards] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [showPlayerMessageScreen, setShowPlayerMessageScreen] = useState(false);
+  const [showHostLayout, setShowHostLayout] = useState(false);
   const [showCardWrapper, setShowCardWrapper] = useState(false);
 
   return (
     <div className="App primary-background">
-      <div className="buttons-grid">
+      <div
+        className="buttons-grid"
+        style={{ display: showHostLayout ? 'none' : 'grid' }}
+      >
         <button
           type="button"
           onClick={() => {
@@ -104,6 +111,15 @@ function App() {
         >
           Show Player Message Screen
         </Button>
+
+        <button
+          type="button"
+          onClick={() => {
+            setShowHostLayout(!showHostLayout);
+          }}
+        >
+          show host layout
+        </button>
         <Button
           type="button"
           onClick={() => setShowCardWrapper(!showCardWrapper)}
@@ -111,6 +127,7 @@ function App() {
           Show Card Wrapper
         </Button>
       </div>
+
       {showHeader && (
         <Header className="header">
           <div
@@ -173,6 +190,39 @@ function App() {
         <PlayerMessageScreen
           bigText="you've joined the lobby"
           smallText="Please wait for the host to start the game."
+        />
+      )}
+
+      {showHostLayout && (
+        <HostLayout
+          left={
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-around',
+                alignItems: 'center',
+                height: '100%',
+              }}
+            >
+              <PlayerList playerList={playerList} />
+              <button
+                style={{
+                  width: '60%',
+                  height: '10%',
+                }}
+                type="button"
+                onClick={() => {
+                  setShowHostLayout(!showHostLayout);
+                }}
+              >
+                hide host layout
+              </button>
+              <DisplayJoinCode code="XYA3Z" />
+            </div>
+          }
+          right={<SingleBlackCardExample />}
+          modal={<SettingsMenuExample />}
         />
       )}
       {showCardWrapper && <CardWrapperExample />}
