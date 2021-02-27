@@ -1,19 +1,19 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-// import PropTypes from 'prop-types';
 import Button from '../Buttons/Button';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 
 const propTypes = {};
 
-const Container = styled.div`
+const PlayerJoinContainer = styled.div`
   position: fixed;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
   display: grid;
+  height: 100%;
   background-color: var(--primary-background-color);
   grid-template-rows: 190px 1fr 140px;
   grid-template-columns: 1fr;
@@ -30,7 +30,7 @@ const Container = styled.div`
     max-width: 1650px;
     margin: 0 auto;
     text-align: center;
-    padding: 20px;
+    padding: 20px 80px 20px 80px;
   }
 
   .player-join-form {
@@ -48,12 +48,13 @@ const Container = styled.div`
     border-bottom: 4px solid var(--primary-text-color);
     padding-top: 24px;
     background: transparent;
+    padding-left: 0;
+  }
 
-    ::placeholder {
-      color: var(--primary-text-color);
-      font-weight: 500;
-      font-size: 4.4rem;
-    }
+  input::placeholder {
+    color: var(--primary-text-color);
+    font-weight: 500;
+    font-size: 4.4rem;
   }
 
   .player-join-name-input {
@@ -71,17 +72,17 @@ const Container = styled.div`
     }
 
     .player-join-form {
-      grid-template-rows: 60px 100px 1fr;
+      grid-template-rows: 60px 88px 1fr;
     }
 
     input {
       font-size: 1.6rem;
       border-bottom: 2px solid var(--primary-text-color);
       padding-top: 36px;
+    }
 
-      ::placeholder {
-        font-size: 1.6rem;
-      }
+    input::placeholder {
+      font-size: 1.6rem;
     }
 
     .player-join-name-input {
@@ -96,6 +97,7 @@ const Container = styled.div`
   @media screen and (max-width: 1024px) {
     .player-join-form-container {
       max-width: 800px;
+      /* padding: 32px; */
     }
 
     .player-join-form {
@@ -103,11 +105,66 @@ const Container = styled.div`
     }
   }
 
-  @media screen and (max-width: 785px) {
-    grid-template-rows: 180px 1fr 120px;
+  @media screen and (max-width: 970px) {
+    .player-join-form {
+      grid-template-rows: 60px 60px 1fr;
+    }
+
+    input {
+      font-size: 1.2rem;
+      border-bottom: 2px solid var(--primary-text-color);
+      padding-top: 40px;
+    }
+
+    input::placeholder {
+      font-size: 1.2rem;
+    }
   }
 
-  @media screen and (max-width: 320px) {
+  @media screen and (max-width: 785px) {
+    // header, main, footer
+    grid-template-rows: 180px 1fr 120px;
+
+    .player-join-form-container {
+      margin-top: -88px;
+    }
+  }
+
+  @media screen and (max-width: 646px) {
+    .player-join-form-container {
+      padding-left: 40px;
+      padding-right: 40px;
+    }
+
+    .player-join-form {
+      grid-template-columns: 1fr;
+      grid-template-rows: 60px 60px 40px 1fr;
+    }
+
+    .player-join-name-input {
+      grid-row: 1;
+      grid-column: 1;
+    }
+
+    .player-join-code-input {
+      grid-row: 2;
+      grid-column: 1;
+    }
+
+    .player-join-name-input,
+    .player-join-code-input {
+      margin: 0 16px;
+    }
+  }
+
+  @media screen and (max-width: 375px) {
+    .player-join-form-container {
+      padding: 20px;
+    }
+  }
+
+  @media screen and (max-width: 365px) {
+    // header, main, footer
     grid-template-rows: 130px 1fr 140px;
   }
 `;
@@ -125,22 +182,28 @@ const PlayerJoinHeader = styled(Header)`
 
     margin-bottom: -16px;
     vertical-align: bottom;
+  }
 
-    @media screen and (max-width: 970px) {
+  @media screen and (max-width: 970px) {
+    h1 {
       font-size: 4rem;
       line-height: 5rem;
 
-      margin-bottom: 20.8px;
+      margin-bottom: -20px;
     }
+  }
 
-    @media screen and (max-width: 785px) {
+  @media screen and (max-width: 785px) {
+    h1 {
       font-size: 4rem;
       line-height: 4.5rem;
 
-      margin-bottom: -15.2px;
+      margin-bottom: -15px;
     }
+  }
 
-    @media screen and (max-width: 320px) {
+  @media screen and (max-width: 365px) {
+    h1 {
       font-size: 3rem;
       line-height: 3.5rem;
 
@@ -168,6 +231,21 @@ const PlayerJoinButton = styled(Button)`
     width: 360px;
     height: 100px;
   }
+
+  @media screen and (max-width: 970px) {
+    font-size: 1.2rem;
+    width: 288px;
+    height: 80px;
+  }
+
+  @media screen and (max-width: 785px) {
+    grid-row: 4;
+  }
+
+  @media screen and (max-width: 450px) {
+    width: 260px;
+    height: 72px;
+  }
 `;
 
 export default function PlayerJoin() {
@@ -180,7 +258,7 @@ export default function PlayerJoin() {
   }
 
   return (
-    <Container
+    <PlayerJoinContainer
       data-testid="player-join-container"
       className="primary-background"
     >
@@ -211,7 +289,7 @@ export default function PlayerJoin() {
         </div>
       </main>
       <Footer />
-    </Container>
+    </PlayerJoinContainer>
   );
 }
 
