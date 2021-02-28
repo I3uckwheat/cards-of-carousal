@@ -1,7 +1,10 @@
 import React, { createContext, useReducer, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import reducer from './reducer';
 import socketInstance from '../../socket/socket';
 
+// when the socket receives messaged from the server, it will fire off an event from this EventEmitter
+// importing it allows us to "subscribe" to those events and update our state as needed
 const { emitter } = socketInstance;
 
 const initialState = {
@@ -13,20 +16,19 @@ const initialState = {
   },
 };
 
+const propTypes = {
+  children: PropTypes.node.isRequired,
+};
+
+// subscribe to the player context
 export const PlayerContext = createContext();
-// We may want to wrap this in a method so we can pass
-// in the initial state instead of defining it here in the future
-// eslint-disable-next-line react/prop-types
+
 export function PlayerProvider({ children }) {
-  window.emitter = emitter;
   const [state, dispatch] = useReducer(reducer, initialState);
 
+  // this function allows us to parse any incoming messages from the event emitter
+  // to make sure we know how to handle them.
   function handleMessage({ event, payload }) {
-    // Development only: log messages to console
-    if (process.env.NODE_ENV === 'development') {
-      // eslint-disable-next-line no-console
-      console.log('Handling message: ', { event, payload });
-    }
     switch (event) {
       case 'join-lobby':
         return dispatch({ type: 'JOIN_LOBBY', payload });
@@ -34,13 +36,16 @@ export function PlayerProvider({ children }) {
         return dispatch({ type: 'UPDATE', payload });
       case 'error-disconnect':
         return dispatch({ type: 'ERROR_DISCONNECT', payload });
-      default:
-        return new Error('Invalid event type');
+      default: {
+        throw new Error('Invalid message event: ', event);
+      }
     }
   }
 
   useEffect(() => {
+    // subscribe to the event emitter
     emitter.on('message', handleMessage);
+    // cleanup the listener when dismounting
     return () => {
       emitter.off('message', handleMessage);
     };
@@ -52,3 +57,5 @@ export function PlayerProvider({ children }) {
     </PlayerContext.Provider>
   );
 }
+
+PlayerProvider.propTypes = propTypes;
