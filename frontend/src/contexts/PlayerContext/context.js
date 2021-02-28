@@ -24,6 +24,7 @@ const propTypes = {
 export const PlayerContext = createContext();
 
 export function PlayerProvider({ children }) {
+  window.socket = socketInstance;
   const [state, dispatch] = useReducer(reducer, initialState);
 
   // this function allows us to parse any incoming messages from the event emitter
@@ -36,9 +37,8 @@ export function PlayerProvider({ children }) {
         return dispatch({ type: 'UPDATE', payload });
       case 'error-disconnect':
         return dispatch({ type: 'ERROR_DISCONNECT', payload });
-      default: {
-        throw new Error('Invalid message event: ', event);
-      }
+      default:
+        return undefined;
     }
   }
 
