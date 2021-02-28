@@ -10,6 +10,7 @@ jest.mock('../../socket/socket', () => ({
     off: jest.fn(),
     emit: jest.fn(),
   },
+  joinLobby: jest.fn(),
 }));
 
 // Need to do this to reset the implementation of each jest mock function, this needs to be
@@ -46,6 +47,13 @@ describe('context', () => {
     expect(screen.getByText('Hello world')).toBeInTheDocument();
   });
 
+  it('warns when not given children', () => {
+    const spy = jest.spyOn(console, 'error').mockImplementation();
+    render(<PlayerProvider />);
+
+    expect(spy).toHaveBeenCalledTimes(1);
+  });
+
   it('sets the default values', () => {
     // this is a reusable test component that bypasses the context provider used in the app
     // so we can test the context with a dummy provider. This is just to test "state" and "dispatch"
@@ -79,106 +87,213 @@ describe('context', () => {
     expect(screen.getByTestId('message-small')).toHaveTextContent('');
   });
 
-  // describe('event handler', () => {
+  describe('event handler', () => {
+    it('changes game state to pending-connection when join-lobby is called', () => {
+      // ensure function is not fired early
+      expect(socketInstance.joinLobby).not.toHaveBeenCalled();
 
-  //   it('calls the "SOCKET_OPENED" reducer when "socket-open" event is received', () => {
-  //     function TestComponent() {
-  //       const { state } = useContext(PlayerContext);
+      const TestComponent = () => {
+        const { state } = useContext(PlayerContext);
 
-  //       return (
-  //         <>
-  //           <div data-testid="lobbyId">{state.lobbyId.toString()}</div>
-  //           <div data-testid="socketIsActive">
-  //             {state.socketIsActive.toString()}
-  //           </div>
-  //           <div data-testid="isHosting">{state.isHosting.toString()}</div>
-  //         </>
-  //       );
-  //     }
+        return (
+          <>
+            <div data-testid="game-state">{state.gameState}</div>
+            <div data-testid="cards">
+              {/* No card state implementation currently */}
+              {state.cards.length}
+            </div>
+            <div>
+              <h1 data-testid="message-big">{state.message.big}</h1>
+              <p data-testid="message-small">{state.message.small}</p>
+            </div>
+          </>
+        );
+      };
 
-  //     const { eventHandlers } = setupEmitterMocks();
+      const { eventHandlers } = setupEmitterMocks();
 
-  //     render(
-  //       <PlayerProvider>
-  //         <TestComponent />
-  //       </PlayerProvider>,
-  //     );
+      render(
+        <PlayerProvider>
+          <TestComponent />
+        </PlayerProvider>,
+      );
 
-  //     act(() => {
-  //       eventHandlers.message({ event: 'socket-open' });
-  //     });
+      act(() => {
+        eventHandlers.message({ event: 'join-lobby', payload: { id: 'TEST' } });
+      });
 
-  //     expect(screen.getByTestId('socketIsActive')).toHaveTextContent('true');
-  //   });
+      expect(screen.getByTestId('game-state')).toHaveTextContent(
+        'pending-connection',
+      );
+      expect(socketInstance.joinLobby).toHaveBeenCalled();
+    });
 
-  //   it('calls the "SOCKET_CLOSED" reducer when "socket-closed" event is received', async () => {
-  //     function TestComponent() {
-  //       const { state } = useContext(PlayerContext);
+    it('changes game state to the payload when update event is called', () => {
+      const TestComponent = () => {
+        const { state } = useContext(PlayerContext);
 
-  //       return (
-  //         <>
-  //           <div data-testid="lobbyId">{state.lobbyId.toString()}</div>
-  //           <div data-testid="socketIsActive">
-  //             {state.socketIsActive.toString()}
-  //           </div>
-  //           <div data-testid="isHosting">{state.isHosting.toString()}</div>
-  //         </>
-  //       );
-  //     }
+        return (
+          <>
+            <div data-testid="game-state">{state.gameState}</div>
+            <div data-testid="cards">
+              {/* No card state implementation currently */}
+              {state.cards.length}
+            </div>
+            <div>
+              <h1 data-testid="message-big">{state.message.big}</h1>
+              <p data-testid="message-small">{state.message.small}</p>
+            </div>
+          </>
+        );
+      };
 
-  //     const { eventHandlers } = setupEmitterMocks();
+      const { eventHandlers } = setupEmitterMocks();
 
-  //     render(
-  //       <PlayerProvider>
-  //         <TestComponent />
-  //       </PlayerProvider>,
-  //     );
+      render(
+        <PlayerProvider>
+          <TestComponent />
+        </PlayerProvider>,
+      );
 
-  //     act(() => {
-  //       eventHandlers.message({ event: 'socket-open' });
-  //     });
+      act(() => {
+        eventHandlers.message({
+          event: 'update',
+          payload: { gameState: 'test' },
+        });
+      });
 
-  //     // Just to make sure it's been changed to true before checking if it's changed to false
-  //     expect(screen.getByTestId('socketIsActive')).toHaveTextContent('true');
+      expect(screen.getByTestId('game-state')).toHaveTextContent('test');
+      expect(socketInstance.joinLobby).not.toHaveBeenCalled();
+    });
 
-  //     act(() => {
-  //       eventHandlers.message({ event: 'socket-close' });
-  //     });
+    it('changes game state multiple times', () => {
+      const TestComponent = () => {
+        const { state } = useContext(PlayerContext);
 
-  //     expect(screen.getByTestId('socketIsActive')).toHaveTextContent('false');
-  //   });
+        return (
+          <>
+            <div data-testid="game-state">{state.gameState}</div>
+            <div data-testid="cards">
+              {/* No card state implementation currently */}
+              {state.cards.length}
+            </div>
+            <div>
+              <h1 data-testid="message-big">{state.message.big}</h1>
+              <p data-testid="message-small">{state.message.small}</p>
+            </div>
+          </>
+        );
+      };
 
-  //   it('ignores unrecognized events', () => {
-  //     function TestComponent() {
-  //       const { state } = useContext(PlayerContext);
+      const { eventHandlers } = setupEmitterMocks();
 
-  //       return (
-  //         <>
-  //           <div data-testid="lobbyId">{state.lobbyId.toString()}</div>
-  //           <div data-testid="socketIsActive">
-  //             {state.socketIsActive.toString()}
-  //           </div>
-  //           <div data-testid="isHosting">{state.isHosting.toString()}</div>
-  //         </>
-  //       );
-  //     }
+      render(
+        <PlayerProvider>
+          <TestComponent />
+        </PlayerProvider>,
+      );
 
-  //     const { eventHandlers } = setupEmitterMocks();
+      act(() => {
+        eventHandlers.message({ event: 'join-lobby', payload: { id: 'TEST' } });
+      });
 
-  //     render(
-  //       <PlayerProvider>
-  //         <TestComponent />
-  //       </PlayerProvider>,
-  //     );
+      expect(socketInstance.joinLobby).toHaveBeenCalled();
+      expect(screen.getByTestId('game-state')).toHaveTextContent(
+        'pending-connection',
+      );
 
-  //     act(() => {
-  //       eventHandlers.message({ event: 'socket-wtf' });
-  //     });
+      act(() => {
+        eventHandlers.message({
+          event: 'update',
+          payload: { gameState: 'new-game-state' },
+        });
+      });
 
-  //     // Initial state
-  //     expect(screen.getByTestId('lobbyId')).toHaveTextContent('');
-  //     expect(screen.getByTestId('socketIsActive')).toHaveTextContent('false');
-  //     expect(screen.getByTestId('isHosting')).toHaveTextContent('false');
-  //   });
-  // });
+      expect(screen.getByTestId('game-state')).toHaveTextContent(
+        'new-game-state',
+      );
+    });
+
+    it('handles the disconnected event', () => {
+      const TestComponent = () => {
+        const { state } = useContext(PlayerContext);
+
+        return (
+          <>
+            <div data-testid="game-state">{state.gameState}</div>
+            <div data-testid="cards">
+              {/* No card state implementation currently */}
+              {state.cards.length}
+            </div>
+            <div>
+              <h1 data-testid="message-big">{state.message.big}</h1>
+              <p data-testid="message-small">{state.message.small}</p>
+            </div>
+          </>
+        );
+      };
+
+      const { eventHandlers } = setupEmitterMocks();
+
+      render(
+        <PlayerProvider>
+          <TestComponent />
+        </PlayerProvider>,
+      );
+
+      act(() => {
+        eventHandlers.message({ event: 'error-disconnect', payload: {} });
+      });
+
+      expect(screen.getByTestId('game-state')).toHaveTextContent(
+        'disconnected-error',
+      );
+      expect(screen.getByTestId('message-big')).toHaveTextContent(
+        'AN ERROR OCCURED',
+      );
+      expect(screen.getByTestId('message-small')).toHaveTextContent(
+        'Refresh to try again',
+      );
+    });
+
+    it('ignores events that do not have a handler', () => {
+      const TestComponent = () => {
+        const { state } = useContext(PlayerContext);
+
+        return (
+          <>
+            <div data-testid="game-state">{state.gameState}</div>
+            <div data-testid="cards">
+              {/* No card state implementation currently */}
+              {state.cards.length}
+            </div>
+            <div>
+              <h1 data-testid="message-big">{state.message.big}</h1>
+              <p data-testid="message-small">{state.message.small}</p>
+            </div>
+          </>
+        );
+      };
+
+      const { eventHandlers } = setupEmitterMocks();
+
+      render(
+        <PlayerProvider>
+          <TestComponent />
+        </PlayerProvider>,
+      );
+
+      act(() => {
+        eventHandlers.message({
+          event: 'fake-event',
+          payload: { bender: 'is great' },
+        });
+      });
+
+      expect(screen.getByTestId('game-state')).toHaveTextContent('enter-code');
+      expect(screen.getByTestId('cards')).toHaveTextContent('0');
+      expect(screen.getByTestId('message-big')).toHaveTextContent('');
+      expect(screen.getByTestId('message-small')).toHaveTextContent('');
+    });
+  });
 });
