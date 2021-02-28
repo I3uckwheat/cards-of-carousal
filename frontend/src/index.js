@@ -3,15 +3,12 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import { StoreProvider } from './contexts/myContext/context';
-import { PlayerProvider } from './contexts/PlayerContext/context';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
     <StoreProvider>
-      <PlayerProvider>
-        <App />
-      </PlayerProvider>
+      <App />
     </StoreProvider>
   </React.StrictMode>,
   document.getElementById('root'),
