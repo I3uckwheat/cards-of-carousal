@@ -13,7 +13,7 @@ import BlackCardExample from './temp/BlackCardExample';
 import WhiteCardExample from './temp/WhiteCardExample';
 import CardWrapperExample from './temp/CardWrapperExample';
 
-import PlayerJoin from './components/PlayerJoin/PlayerJoin';
+import PlayerJoinScreen from './components/screens/PlayerJoinScreen/PlayerJoinScreen';
 import Modal from './components/Modal/Modal';
 import playerList from './temp/playerList';
 import ModalExample from './temp/ModalExample';
@@ -184,7 +184,7 @@ function App() {
         />
       )}
       {showCardWrapper && <CardWrapperExample />}
-      {showPlayerJoin && <PlayerJoin />}
+      {showPlayerJoin && <PlayerJoinScreen />}
     </div>
   );
 }

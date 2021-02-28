@@ -97,7 +97,6 @@ const PlayerJoinContainer = styled.div`
   @media screen and (max-width: 1024px) {
     .player-join-form-container {
       max-width: 800px;
-      /* padding: 32px; */
     }
 
     .player-join-form {
@@ -248,7 +247,7 @@ const PlayerJoinButton = styled(Button)`
   }
 `;
 
-export default function PlayerJoin() {
+export default function PlayerJoinScreen() {
   const [name, setName] = useState('');
   const [joinCode, setJoinCode] = useState('');
 
@@ -293,4 +292,4 @@ export default function PlayerJoin() {
   );
 }
 
-PlayerJoin.propTypes = propTypes;
+PlayerJoinScreen.propTypes = propTypes;

@@ -1,12 +1,12 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import renderer from 'react-test-renderer';
-import PlayerJoin from './PlayerJoin';
+import PlayerJoinScreen from './PlayerJoinScreen';
 
 describe('PlayerJoin', () => {
   describe('render', () => {
     it('should render', () => {
-      render(<PlayerJoin />);
+      render(<PlayerJoinScreen />);
 
       expect(screen.getByTestId('player-join-container')).toBeInTheDocument();
     });
@@ -14,7 +14,7 @@ describe('PlayerJoin', () => {
 
   describe('snapshot', () => {
     it('matches', () => {
-      const tree = renderer.create(<PlayerJoin />).toJSON();
+      const tree = renderer.create(<PlayerJoinScreen />).toJSON();
 
       expect(tree).toMatchSnapshot();
     });
