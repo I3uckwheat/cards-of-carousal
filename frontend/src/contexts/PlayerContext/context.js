@@ -24,7 +24,6 @@ const propTypes = {
 export const PlayerContext = createContext();
 
 export function PlayerProvider({ children }) {
-  window.socket = socketInstance;
   const [state, dispatch] = useReducer(reducer, initialState);
 
   // this function allows us to parse any incoming messages from the event emitter
