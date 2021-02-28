@@ -11,6 +11,7 @@ import PlayerList from './components/PlayerList/PlayerList';
 import DisplayJoinCode from './components/JoinCode/JoinCode';
 import BlackCardExample from './temp/BlackCardExample';
 import WhiteCardExample from './temp/WhiteCardExample';
+import WelcomeScreen from './components/screens/WelcomeScreen/WelcomeScreen';
 import CardWrapperExample from './temp/CardWrapperExample';
 
 import Modal from './components/Modal/Modal';
@@ -32,6 +33,7 @@ function App() {
   const [showWhiteCards, setShowWhiteCards] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [showPlayerMessageScreen, setShowPlayerMessageScreen] = useState(false);
+  const [showWelcomeScreen, setShowWelcomeScreen] = useState(false);
   const [showHostLayout, setShowHostLayout] = useState(false);
   const [showCardWrapper, setShowCardWrapper] = useState(false);
 
@@ -112,6 +114,12 @@ function App() {
           Show Player Message Screen
         </Button>
 
+        <Button
+          type="button"
+          onClick={() => setShowWelcomeScreen(!showWelcomeScreen)}
+        >
+          Show WelcomeScreen
+        </Button>
         <button
           type="button"
           onClick={() => {
@@ -193,6 +201,7 @@ function App() {
         />
       )}
 
+      {showWelcomeScreen && <WelcomeScreen />}
       {showHostLayout && (
         <HostLayout
           left={
