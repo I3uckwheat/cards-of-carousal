@@ -25,11 +25,6 @@ exports[`PlayerJoin snapshot matches 1`] = `
 }
 
 .c5 {
-  height: 140px;
-  font-size: 2rem;
-  font-weight: 400;
-  padding-right: 16px;
-  padding-bottom: 10px;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -41,6 +36,11 @@ exports[`PlayerJoin snapshot matches 1`] = `
   -webkit-justify-content: flex-end;
   -ms-flex-pack: end;
   justify-content: flex-end;
+  height: 200px;
+  font-size: 3.5rem;
+  font-weight: 400;
+  padding-right: 16px;
+  padding-bottom: 10px;
   background-color: var(--secondary-background-color);
   color: var(--secondary-text-color);
 }
@@ -54,11 +54,6 @@ exports[`PlayerJoin snapshot matches 1`] = `
   color: var(--secondary-text-color);
   -webkit-text-decoration: none;
   text-decoration: none;
-}
-
-.c5 a:hover {
-  -webkit-text-decoration: underline;
-  text-decoration: underline;
 }
 
 .c0 {
@@ -183,6 +178,13 @@ exports[`PlayerJoin snapshot matches 1`] = `
   font-size: 4rem;
 }
 
+@media (max-width:2000px) {
+  .c5 {
+    height: 140px;
+    font-size: 2rem;
+  }
+}
+
 @media (max-width:970px) {
   .c5 {
     text-align: center;
@@ -197,10 +199,10 @@ exports[`PlayerJoin snapshot matches 1`] = `
   }
 
   .c5 p {
-    color: var(--accent-text-color);
     text-align: center;
     font-size: 1.2rem;
     padding-bottom: 32px;
+    color: var(--accent-text-color);
   }
 
   .c5 a {
