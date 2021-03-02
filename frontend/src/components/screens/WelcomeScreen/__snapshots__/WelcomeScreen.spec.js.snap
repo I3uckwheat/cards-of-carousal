@@ -458,6 +458,7 @@ exports[`WelcomeScreen renders correctly 1`] = `
     >
       <button
         className="c2 btn"
+        onClick={[Function]}
         type="button"
       >
         <p>
@@ -471,6 +472,7 @@ exports[`WelcomeScreen renders correctly 1`] = `
       </div>
       <button
         className="c2 btn host-btn"
+        onClick={[Function]}
         type="button"
       >
         <p>

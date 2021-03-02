@@ -4,7 +4,11 @@ import WelcomeScreen from './WelcomeScreen';
 
 describe('WelcomeScreen', () => {
   it('renders correctly', () => {
-    const tree = renderer.create(<WelcomeScreen />).toJSON();
+    const tree = renderer
+      .create(
+        <WelcomeScreen handleJoinClick={() => ''} handleHostClick={() => ''} />,
+      )
+      .toJSON();
 
     expect(tree).toMatchSnapshot();
   });

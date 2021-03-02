@@ -6,7 +6,9 @@ import './App.css';
 import WelcomeScreen from './components/screens/WelcomeScreen/WelcomeScreen';
 
 function App() {
-  return <WelcomeScreen />;
+  return (
+    <WelcomeScreen handleJoinClick={() => ''} handleHostClick={() => ''} />
+  );
 }
 
 export default App;

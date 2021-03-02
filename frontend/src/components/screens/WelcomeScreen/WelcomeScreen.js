@@ -1,8 +1,15 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
+
 import Header from '../../Header/Header';
 import Button from '../../Buttons/Button';
 import Footer from '../../Footer/Footer';
+
+const propTypes = {
+  handleJoinClick: PropTypes.func.isRequired,
+  handleHostClick: PropTypes.func.isRequired,
+};
 
 const WelcomeScreenWrapper = styled.div`
   display: flex;
@@ -294,7 +301,7 @@ const WelcomeScreenWrapper = styled.div`
   } 
 }`;
 
-function WelcomeScreen() {
+function WelcomeScreen({ handleJoinClick, handleHostClick }) {
   return (
     <WelcomeScreenWrapper className="primary-background">
       <Header className="header">
@@ -314,13 +321,23 @@ function WelcomeScreen() {
         </div>
 
         <div className="button-container">
-          <Button type="button" isActive className="btn">
+          <Button
+            type="button"
+            isActive
+            className="btn"
+            onClick={handleJoinClick}
+          >
             <p>JOIN</p>
           </Button>
 
           <div className="OR">OR</div>
 
-          <Button type="button" isActive className="btn host-btn">
+          <Button
+            type="button"
+            isActive
+            className="btn host-btn"
+            onClick={handleHostClick}
+          >
             <p>HOST</p>
           </Button>
         </div>
@@ -331,3 +348,5 @@ function WelcomeScreen() {
 }
 
 export default WelcomeScreen;
+
+WelcomeScreen.propTypes = propTypes;

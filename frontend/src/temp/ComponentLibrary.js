@@ -206,7 +206,9 @@ export default function ComponentLibrary() {
         />
       )}
 
-      {showWelcomeScreen && <WelcomeScreen />}
+      {showWelcomeScreen && (
+        <WelcomeScreen handleJoinClick={() => ''} handleHostClick={() => ''} />
+      )}
       {showHostLayout && (
         <HostLayout
           left={
