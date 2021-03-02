@@ -8,10 +8,10 @@ function joinLobby(state, { id }) {
   };
 }
 
-function update(state, { gameState }) {
+function update(state, payload) {
   return {
     ...state,
-    gameState,
+    ...payload,
   };
 }
 

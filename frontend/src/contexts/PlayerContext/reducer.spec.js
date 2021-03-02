@@ -36,17 +36,59 @@ describe('reducer', () => {
   });
 
   describe('UPDATE', () => {
-    it('returns a copy of state with "socketIsActive" to true', () => {
+    it('updates the state according to the payload', () => {
       const state = {
         gameState: 'foo',
+        cards: ['card 1', 'card 2', 'card 3'],
+        message: {
+          big: 'big message',
+          small: 'small message',
+        },
       };
-
       const result = reducer(state, {
         type: 'UPDATE',
-        payload: { gameState: 'bar' },
+        payload: state,
       });
-      expect(result).not.toBe(state);
-      expect(result.gameState).toBe('bar');
+
+      expect(result).toEqual(state);
+    });
+
+    it('updates partial states', () => {
+      const initialState = {
+        gameState: 'foo',
+        cards: ['card 1', 'card 2', 'card 3'],
+        message: {
+          big: 'big message',
+          small: 'small message',
+        },
+      };
+      const updatedState = {
+        gameState: 'bar',
+        cards: ['card 4', 'card 5', 'card 6'],
+      };
+      const result = reducer(initialState, {
+        type: 'UPDATE',
+        payload: updatedState,
+      });
+
+      expect(result).not.toEqual(initialState);
+      expect(result.message).toEqual(initialState.message);
+      expect(result.gameState).toEqual(updatedState.gameState);
+      expect(result.cards).toEqual(updatedState.cards);
+    });
+
+    it('returns initial state with an empty payload', () => {
+      const state = {
+        gameState: 'foo',
+        cards: ['card 1', 'card 2', 'card 3'],
+        message: {
+          big: 'big message',
+          small: 'small message',
+        },
+      };
+      const result = reducer(state, {});
+
+      expect(result).toEqual(state);
     });
   });
 
