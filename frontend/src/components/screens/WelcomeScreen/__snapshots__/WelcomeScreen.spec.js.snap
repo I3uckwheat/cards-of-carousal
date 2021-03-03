@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`WelcomeScreen renders correctly 1`] = `
+exports[`WelcomeScreen render renders correctly 1`] = `
 .c1 {
   width: 100%;
   background-color: var(--secondary-background-color);
