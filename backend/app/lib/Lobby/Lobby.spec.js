@@ -42,7 +42,7 @@ describe('Lobby', () => {
 
     describe('addPlayer', () => {
       it('can add a player and sends message through the socket', () => {
-        messageObject.event = 'player-connect';
+        messageObject.event = 'player-connected';
         messageObject.payload = { playerId: playerSocket.id };
         lobby.addPlayer(playerSocket);
         expect(playerSocket.on).toBeCalledWith('message', expect.any(Function));

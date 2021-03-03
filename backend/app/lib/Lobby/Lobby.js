@@ -33,7 +33,7 @@ module.exports = class Lobby {
     this.#playerSockets[playerSocket.id] = playerSocket;
 
     const message = new Message('server', {
-      event: 'player-connect',
+      event: 'player-connected',
       payload: {
         playerId: playerSocket.id,
       },
