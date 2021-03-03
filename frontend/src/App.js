@@ -11,12 +11,17 @@ import PlayerList from './components/PlayerList/PlayerList';
 import DisplayJoinCode from './components/JoinCode/JoinCode';
 import BlackCardExample from './temp/BlackCardExample';
 import WhiteCardExample from './temp/WhiteCardExample';
+import WelcomeScreen from './components/screens/WelcomeScreen/WelcomeScreen';
 import CardWrapperExample from './temp/CardWrapperExample';
 
+import PlayerJoinScreen from './components/screens/PlayerJoinScreen/PlayerJoinScreen';
 import Modal from './components/Modal/Modal';
 import playerList from './temp/playerList';
 import ModalExample from './temp/ModalExample';
+import SingleBlackCardExample from './temp/SingleBlackCardExample.js';
 import PlayerMessageScreen from './components/screens/PlayerMessageScreen/PlayerMessageScreen';
+import HostLayout from './components/layouts/HostLayout';
+import SettingsMenuExample from './temp/SettingsMenuExample';
 
 function App() {
   const [showSocketTest, setShowSocketTest] = useState(false);
@@ -29,11 +34,17 @@ function App() {
   const [showWhiteCards, setShowWhiteCards] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [showPlayerMessageScreen, setShowPlayerMessageScreen] = useState(false);
+  const [showWelcomeScreen, setShowWelcomeScreen] = useState(false);
+  const [showHostLayout, setShowHostLayout] = useState(false);
   const [showCardWrapper, setShowCardWrapper] = useState(false);
+  const [showPlayerJoin, setShowPlayerJoin] = useState(true);
 
   return (
     <div className="App primary-background">
-      <div className="buttons-grid">
+      <div
+        className="buttons-grid"
+        style={{ display: showHostLayout ? 'none' : 'grid' }}
+      >
         <button
           type="button"
           onClick={() => {
@@ -104,13 +115,35 @@ function App() {
         >
           Show Player Message Screen
         </Button>
+
+        <Button
+          type="button"
+          onClick={() => setShowWelcomeScreen(!showWelcomeScreen)}
+        >
+          Show WelcomeScreen
+        </Button>
+        <button
+          type="button"
+          onClick={() => {
+            setShowHostLayout(!showHostLayout);
+          }}
+        >
+          show host layout
+        </button>
         <Button
           type="button"
           onClick={() => setShowCardWrapper(!showCardWrapper)}
         >
           Show Card Wrapper
         </Button>
+        <Button
+          type="button"
+          onClick={() => setShowPlayerJoin(!showPlayerJoin)}
+        >
+          Show Player Join screen
+        </Button>
       </div>
+
       {showHeader && (
         <Header className="header">
           <div
@@ -175,7 +208,42 @@ function App() {
           smallText="Please wait for the host to start the game."
         />
       )}
+
+      {showWelcomeScreen && <WelcomeScreen />}
+      {showHostLayout && (
+        <HostLayout
+          left={
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-around',
+                alignItems: 'center',
+                height: '100%',
+              }}
+            >
+              <PlayerList playerList={playerList} />
+              <button
+                style={{
+                  width: '60%',
+                  height: '10%',
+                }}
+                type="button"
+                onClick={() => {
+                  setShowHostLayout(!showHostLayout);
+                }}
+              >
+                hide host layout
+              </button>
+              <DisplayJoinCode code="XYA3Z" />
+            </div>
+          }
+          right={<SingleBlackCardExample />}
+          modal={<SettingsMenuExample />}
+        />
+      )}
       {showCardWrapper && <CardWrapperExample />}
+      {showPlayerJoin && <PlayerJoinScreen />}
     </div>
   );
 }
