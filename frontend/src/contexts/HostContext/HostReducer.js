@@ -1,13 +1,39 @@
 function createLobby(state, { id }) {
-  console.log('CREATE_LOBBY', id);
+  // TODO: Connect to the socket
+
+  return {
+    ...state,
+    lobbyID: id,
+    gameState: 'waiting-for-players',
+  };
 }
 
-function playerJoin(state, { id }) {
-  console.log('PLAYER_JOIN', id);
+function playerJoin(state, { player }) {
+  // TODO: Send a message to the player confirming that he/she has joined the lobby
+
+  return {
+    ...state,
+    players: {
+      ...state.players,
+      player,
+    },
+    playersIDs: [...state.playersIDs, player.id],
+  };
 }
 
-function playerDisconnect(state, { id }) {
-  console.log('PLAYER_DISCONNECT', id);
+function playerDisconnect(state, { player }) {
+  const newPlayersIdsArray = state.playersIDs.filter(
+    (playerID) => playerID !== player.id,
+  );
+
+  const newPlayersObject = { ...state.players };
+  delete newPlayersObject[player.id];
+
+  return {
+    ...state,
+    players: newPlayersObject,
+    playersIDs: newPlayersIdsArray,
+  };
 }
 
 function reducer(state, action) {
