@@ -42,9 +42,9 @@ function reducer(state, action) {
   switch (type) {
     case 'CREATE_LOBBY':
       return createLobby(state, payload);
-    case 'PLAYER_JOIN':
+    case 'PLAYER_CONNECT':
       return playerJoin(state, payload);
-    case 'PLAYER_DISCONNECT':
+    case 'PLAYER_DISCONNECTED':
       return playerDisconnect(state, payload);
     default:
       return { ...state };

@@ -32,10 +32,10 @@ function HostProvider({ children }) {
     switch (event) {
       case 'create-lobby':
         return dispatch({ type: 'CREATE_LOBBY', payload });
-      case 'player-join':
-        return dispatch({ type: 'PLAYER_JOIN', payload });
-      case 'player-disconnect':
-        return dispatch({ type: 'PLAYER_DISCONNECT', payload });
+      case 'player-connect':
+        return dispatch({ type: 'PLAYER_CONNECT', payload });
+      case 'player-disconnected':
+        return dispatch({ type: 'PLAYER_DISCONNECTED', payload });
       default:
         return undefined;
     }
