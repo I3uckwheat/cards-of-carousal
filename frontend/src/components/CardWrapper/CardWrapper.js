@@ -3,8 +3,13 @@ import { PropTypes } from 'prop-types';
 import styled from 'styled-components';
 
 const propTypes = {
-  selection: PropTypes.oneOf([1, 2, 3, 'winner', null, undefined]).isRequired,
+  selection: PropTypes.oneOf([1, 2, 3, 'winner', null, undefined]),
   children: PropTypes.node.isRequired,
+  onClick: PropTypes.func.isRequired,
+};
+
+const defaultProps = {
+  selection: null,
 };
 
 const CardWrapperStyles = styled.div`
@@ -15,7 +20,7 @@ const CardWrapperStyles = styled.div`
   justify-content: start;
   align-items: start;
 
-  padding: 16px 0;
+  padding: 16px 10px;
 
   border-bottom: ${(props) =>
     props.underline ? '5px solid var(--secondary-background-color)' : 'none'};
@@ -52,14 +57,22 @@ const CardWrapperStyles = styled.div`
   }
 `;
 
-export default function CardWrapper({ children, selection }) {
+export default function CardWrapper({
+  children,
+  selection,
+  onClick: handleClick, // look at this too
+}) {
   const shouldDisplayStar = selection === 'winner';
   const badge = (
     <div className="badge">{shouldDisplayStar ? '★' : selection}</div>
   );
 
   return (
-    <CardWrapperStyles data-testid="card-wrapper" underline={selection}>
+    <CardWrapperStyles
+      onClick={handleClick}
+      data-testid="card-wrapper"
+      underline={selection}
+    >
       {selection && badge}
       {children}
     </CardWrapperStyles>
@@ -67,3 +80,4 @@ export default function CardWrapper({ children, selection }) {
 }
 
 CardWrapper.propTypes = propTypes;
+CardWrapper.defaultProps = defaultProps;
