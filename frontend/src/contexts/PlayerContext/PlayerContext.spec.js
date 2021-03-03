@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { render, screen, act } from '@testing-library/react';
 import socketInstance from '../../socket/socket';
 
-import { PlayerContext, PlayerProvider } from './context';
+import { PlayerContext, PlayerProvider } from './PlayerContext';
 
 jest.mock('../../socket/socket', () => ({
   emitter: {
@@ -249,7 +249,7 @@ describe('context', () => {
         'disconnected-error',
       );
       expect(screen.getByTestId('message-big')).toHaveTextContent(
-        'AN ERROR OCCURED',
+        'AN ERROR OCCURRED',
       );
       expect(screen.getByTestId('message-small')).toHaveTextContent(
         'Refresh to try again',

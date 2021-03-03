@@ -1,6 +1,6 @@
 import React, { createContext, useReducer, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import reducer from './reducer';
+import reducer from './playerReducer';
 import socketInstance from '../../socket/socket';
 
 // when the socket receives messaged from the server, it will fire off an event from this EventEmitter

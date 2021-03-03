@@ -1,4 +1,4 @@
-import reducer from './reducer';
+import reducer from './playerReducer';
 
 describe('reducer', () => {
   describe('default', () => {
@@ -105,7 +105,7 @@ describe('reducer', () => {
       const result = reducer(state, { type: 'ERROR_DISCONNECT', payload: {} });
       expect(result).not.toBe(state);
       expect(result.gameState).toBe('disconnected-error');
-      expect(result.message.big).toBe('AN ERROR OCCURED');
+      expect(result.message.big).toBe('AN ERROR OCCURRED');
       expect(result.message.small).toBe('Refresh to try again');
     });
   });

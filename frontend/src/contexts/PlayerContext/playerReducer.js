@@ -20,7 +20,7 @@ function errorDisconnect(state) {
     ...state,
     gameState: 'disconnected-error',
     message: {
-      big: 'AN ERROR OCCURED',
+      big: 'AN ERROR OCCURRED',
       small: 'Refresh to try again',
     },
   };
