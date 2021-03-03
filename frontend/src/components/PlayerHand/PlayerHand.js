@@ -1,4 +1,3 @@
-/* eslint-disable react/no-array-index-key */
 /* eslint-disable arrow-body-style */
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -8,12 +7,16 @@ import CardWrapper from '../CardWrapper/CardWrapper';
 const propType = {
   cards: PropTypes.arrayOf(PropTypes.string).isRequired,
   selected: PropTypes.arrayOf(PropTypes.number).isRequired,
-  //   onSelect: PropTypes.func.isRequired,
+  onSelect: PropTypes.func.isRequired,
 };
 
-export default function PlayerHand({ cards, selected }) {
+export default function PlayerHand({ cards, selected, onSelect }) {
+  const handleClick = (index) => {
+    onSelect([...selected, index]); // spreading makes a copy
+  };
+
   return (
-    <div // temporary horizontal styling
+    <div // temporary horizontal styling   Need to add styling that allows for horizontal scrolling
       style={{
         display: 'flex',
         width: '90%',
@@ -24,13 +27,12 @@ export default function PlayerHand({ cards, selected }) {
       }}
     >
       {cards.map((card, index) => {
-        const selectedCardIndex = cards.indexOf(card);
-        const badge = selected.includes(selectedCardIndex)
-          ? selected.indexOf(selectedCardIndex) + 1
+        const badge = selected.includes(index)
+          ? selected.indexOf(index) + 1
           : null;
         return (
-          <CardWrapper selection={badge}>
-            <WhiteCard key={index}>{card}</WhiteCard>
+          <CardWrapper onClick={() => handleClick(index)} selection={badge}>
+            <WhiteCard key={card}>{card}</WhiteCard>
           </CardWrapper>
         );
       })}
@@ -40,36 +42,19 @@ export default function PlayerHand({ cards, selected }) {
 
 PlayerHand.propTypes = propType;
 
-/* GOALS
+/* ON SELECT CALLBACK
 
--select/deselect white cards
--receive a list of cards 
--notify wrapper of any changes in card selection
--display white cards selected by using wrapper
-- cards bump down, if 2 are selected and 1 is unselected, 2 becomes 1 
+- Fires the onSelect callback when a card is touched, with the indexes of the selected cards
 
-<PlayerHand cards={[Cards]} selected={[Indexes]} onSelect={Function} />
+- I would like the onSelect callback to be passed an array of selected card indexes
 
-[Cards] = ["Card One", "Card Two", "Card Three"]
+- I would like to be able to select, and deselect cards before submitting, so I can change my mind before committing to a decision
 
-SelectedCards = [2, 4] // Where 2, and 4 are indexes of selected cards
-----------
 
-nd then, if it is selected, updated that wrapper selection value
+-A function that checks if that number is in the selected[] and if it is in the selected[] array remove it.
 
--------PLAN------
-
-function PlayerHand({ cards, selected, onSelect }){  //do I need other props here?
-
-    //Array.map to apply <CardWrapper selection={null}/> to all white cards    
-
-    //function for onSelect, adds or removes picked card from SelectedCards[] and updates that cards cardWrapper selection value
-        - If clicked push to SelectedCards[], <CardWrapper selection={index+1} />  
-        - if card is already in selectedCards[] and it is selected, remove from array <CardWrapper selection={null} />  
-
-    return(
-            //cards with their appropriate wrappers
-    )
+function updateSelection ([...]) {
+    checks if that number is in the selected[] and if it is in the selected[] array remove it else add it
 }
 
 */
