@@ -22,6 +22,7 @@ import SingleBlackCardExample from './temp/SingleBlackCardExample.js';
 import PlayerMessageScreen from './components/screens/PlayerMessageScreen/PlayerMessageScreen';
 import HostLayout from './components/layouts/HostLayout';
 import SettingsMenuExample from './temp/SettingsMenuExample';
+import GameSettings from './components/GameSettings/GameSettings';
 
 function App() {
   const [showSocketTest, setShowSocketTest] = useState(false);
@@ -37,7 +38,8 @@ function App() {
   const [showWelcomeScreen, setShowWelcomeScreen] = useState(false);
   const [showHostLayout, setShowHostLayout] = useState(false);
   const [showCardWrapper, setShowCardWrapper] = useState(false);
-  const [showPlayerJoin, setShowPlayerJoin] = useState(true);
+  const [showPlayerJoin, setShowPlayerJoin] = useState(false);
+  const [showGameSettings, setShowGameSettings] = useState(false);
 
   return (
     <div className="App primary-background">
@@ -142,6 +144,12 @@ function App() {
         >
           Show Player Join screen
         </Button>
+        <Button
+          type="button"
+          onClick={() => setShowGameSettings(!showGameSettings)}
+        >
+          Show Game Settings
+        </Button>
       </div>
 
       {showHeader && (
@@ -244,6 +252,7 @@ function App() {
       )}
       {showCardWrapper && <CardWrapperExample />}
       {showPlayerJoin && <PlayerJoinScreen />}
+      {showGameSettings && <GameSettings />}
     </div>
   );
 }

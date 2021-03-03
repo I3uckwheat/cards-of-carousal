@@ -46,6 +46,11 @@
   width: 5000px;
 }
 
+input {
+  font-weight: bold;
+  text-align: center;
+}
+
 @media (min-width: 2470px) {
   .primary-background::before {
     transform: rotate(11deg) translate(-450px, calc(-1600px + (2vh * 30)));
