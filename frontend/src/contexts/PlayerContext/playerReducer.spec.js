@@ -1,4 +1,9 @@
 import reducer from './playerReducer';
+import socketInstance from '../../socket/socket';
+
+jest.mock('../../socket/socket', () => ({
+  joinLobby: jest.fn(),
+}));
 
 describe('reducer', () => {
   describe('default', () => {
@@ -32,6 +37,20 @@ describe('reducer', () => {
       });
       expect(result).not.toBe(state);
       expect(result.gameState).toBe('pending-connection');
+    });
+
+    it('calls the joinLobby method with the correct id', () => {
+      const state = {
+        gameState: 'TEST',
+      };
+      const id = '1234';
+
+      reducer(state, {
+        type: 'JOIN_LOBBY',
+        payload: { id },
+      });
+
+      expect(socketInstance.joinLobby).toHaveBeenCalledWith(id);
     });
   });
 
