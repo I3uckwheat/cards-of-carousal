@@ -22,13 +22,14 @@ function App() {
         />
       );
     case 'welcome':
-    default:
       return (
         <WelcomeScreen
           handleJoinClick={() => setScreenControllerType('player')}
           handleHostClick={() => setScreenControllerType('host')}
         />
       );
+    default:
+      throw new Error('Unhandled screenControllerType state');
   }
 }
 
