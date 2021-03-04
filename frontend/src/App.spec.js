@@ -6,7 +6,7 @@ import App from './App';
 
 describe('App', () => {
   describe('snapshots', () => {
-    it('should match - initially shows welcome screen', () => {
+    it('should initially show the welcome screen', () => {
       const tree = renderer.create(<App />).toJSON();
 
       expect(tree).toMatchSnapshot();
@@ -22,6 +22,16 @@ describe('App', () => {
     it('should match after user has clicked the "host" button', () => {
       const { getByText, asFragment } = render(<App />);
       fireEvent.click(getByText('HOST'));
+
+      expect(asFragment()).toMatchSnapshot();
+    });
+
+    it('should match after user has clicked elements other than the "host" or "join" buttons', () => {
+      const { getByText, asFragment } = render(<App />);
+
+      fireEvent.click(getByText('CAROUSAL'));
+      fireEvent.click(getByText('OR'));
+      fireEvent.click(getByText('Card content thanks to:'));
 
       expect(asFragment()).toMatchSnapshot();
     });

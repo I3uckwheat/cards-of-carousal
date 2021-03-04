@@ -46,5 +46,24 @@ describe('WelcomeScreen', () => {
       fireEvent.click(getByText('HOST'));
       expect(mockHostBtnCallback).toHaveBeenCalledTimes(1);
     });
+
+    it('does NOT fire callbacks when non-button elements have been clicked', () => {
+      const mockHostBtnCallback = jest.fn();
+      const mockJoinBtnCallback = jest.fn();
+
+      const { getByText } = render(
+        <WelcomeScreen
+          handleJoinClick={mockJoinBtnCallback}
+          handleHostClick={mockHostBtnCallback}
+        />,
+      );
+
+      fireEvent.click(getByText('CAROUSAL'));
+      fireEvent.click(getByText('OR'));
+      fireEvent.click(getByText('Card content thanks to:'));
+
+      expect(mockHostBtnCallback).not.toHaveBeenCalled();
+      expect(mockJoinBtnCallback).not.toHaveBeenCalled();
+    });
   });
 });
