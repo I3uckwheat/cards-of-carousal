@@ -1,7 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 
-import Host from './Host';
+import HostScreenController from './HostScreenController';
 
 describe('Host screen controller', () => {
   describe('snapshot', () => {
@@ -11,7 +11,9 @@ describe('Host screen controller', () => {
       const modal = <p>modal</p>;
 
       const tree = renderer
-        .create(<Host left={left} right={right} modal={modal} />)
+        .create(
+          <HostScreenController left={left} right={right} modal={modal} />,
+        )
         .toJSON();
 
       expect(tree).toMatchSnapshot();

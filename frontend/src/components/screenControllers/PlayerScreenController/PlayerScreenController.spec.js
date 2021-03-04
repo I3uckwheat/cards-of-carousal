@@ -1,12 +1,12 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 
-import Player from './Player';
+import PlayerScreenController from './PlayerScreenController';
 
 describe('Player screen controller', () => {
   describe('snapshot', () => {
     it('should match', () => {
-      const tree = renderer.create(<Player />).toJSON();
+      const tree = renderer.create(<PlayerScreenController />).toJSON();
 
       expect(tree).toMatchSnapshot();
     });

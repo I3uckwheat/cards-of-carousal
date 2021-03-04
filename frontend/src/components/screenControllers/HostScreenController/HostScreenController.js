@@ -8,8 +8,8 @@ const propTypes = {
   modal: PropTypes.node.isRequired,
 };
 
-export default function Host({ left, right, modal }) {
+export default function HostScreenController({ left, right, modal }) {
   return <HostLayout left={left} right={right} modal={modal} />;
 }
 
-Host.propTypes = propTypes;
+HostScreenController.propTypes = propTypes;

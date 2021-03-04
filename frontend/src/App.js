@@ -4,18 +4,22 @@ import './reset.css';
 import './App.css';
 
 import WelcomeScreen from './components/screens/WelcomeScreen/WelcomeScreen';
-import Host from './components/screenControllers/Host/Host';
-import Player from './components/screenControllers/Player/Player';
+import HostScreenController from './components/screenControllers/HostScreenController/HostScreenController';
+import PlayerScreenController from './components/screenControllers/PlayerScreenController/PlayerScreenController';
 
 function App() {
   const [screenControllerType, setScreenControllerType] = useState('welcome');
 
   switch (screenControllerType) {
     case 'player':
-      return <Player />;
+      return <PlayerScreenController />;
     case 'host':
       return (
-        <Host left={<p>left</p>} right={<p>right</p>} modal={<p>modal</p>} />
+        <HostScreenController
+          left={<p>left</p>}
+          right={<p>right</p>}
+          modal={<p>modal</p>}
+        />
       );
     case 'welcome':
     default:

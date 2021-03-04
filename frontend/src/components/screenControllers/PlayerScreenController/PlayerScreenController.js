@@ -3,8 +3,8 @@ import PlayerJoinScreen from '../../screens/PlayerJoinScreen/PlayerJoinScreen';
 
 const propTypes = {};
 
-export default function Player() {
+export default function PlayerScreenController() {
   return <PlayerJoinScreen />;
 }
 
-Player.propTypes = propTypes;
+PlayerScreenController.propTypes = propTypes;
