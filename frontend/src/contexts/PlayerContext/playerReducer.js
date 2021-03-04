@@ -29,10 +29,9 @@ function reducer(state, action) {
   const { type, payload } = action;
 
   switch (type) {
-    case 'JOIN_LOBBY': {
+    case 'JOIN_LOBBY':
       socketInstance.joinLobby(payload.id);
       return joinLobby(state);
-    }
     case 'UPDATE':
       return update(state, payload);
     case 'ERROR_DISCONNECT':
