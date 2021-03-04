@@ -8,29 +8,24 @@ import Host from './components/screenControllers/Host/Host';
 import Player from './components/screenControllers/Player/Player';
 
 function App() {
-  const [showHostScreenController, setShowHostScreenController] = useState(
-    false,
-  );
-  const [showPlayerScreenController, setShowPlayerScreenController] = useState(
-    false,
-  );
+  const [screenControllerType, setScreenControllerType] = useState('welcome');
 
-  if (showHostScreenController) {
-    return (
-      <Host left={<p>left</p>} right={<p>right</p>} modal={<p>modal</p>} />
-    );
+  switch (screenControllerType) {
+    case 'player':
+      return <Player />;
+    case 'host':
+      return (
+        <Host left={<p>left</p>} right={<p>right</p>} modal={<p>modal</p>} />
+      );
+    case 'welcome':
+    default:
+      return (
+        <WelcomeScreen
+          handleJoinClick={() => setScreenControllerType('player')}
+          handleHostClick={() => setScreenControllerType('host')}
+        />
+      );
   }
-
-  if (showPlayerScreenController) {
-    return <Player />;
-  }
-
-  return (
-    <WelcomeScreen
-      handleJoinClick={() => setShowPlayerScreenController(true)}
-      handleHostClick={() => setShowHostScreenController(true)}
-    />
-  );
 }
 
 export default App;
