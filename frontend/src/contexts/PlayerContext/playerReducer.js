@@ -1,7 +1,6 @@
 import socketInstance from '../../socket/socket';
 
-function joinLobby(state, { id }) {
-  socketInstance.joinLobby(id);
+function joinLobby(state) {
   return {
     ...state,
     gameState: 'pending-connection',
@@ -28,20 +27,18 @@ function errorDisconnect(state) {
 
 function reducer(state, action) {
   const { type, payload } = action;
+
   switch (type) {
     case 'JOIN_LOBBY': {
-      return joinLobby(state, payload);
+      socketInstance.joinLobby(payload.id);
+      return joinLobby(state);
     }
-    case 'UPDATE': {
+    case 'UPDATE':
       return update(state, payload);
-    }
-    case 'ERROR_DISCONNECT': {
+    case 'ERROR_DISCONNECT':
       return errorDisconnect(state);
-    }
     default:
-      return {
-        ...state,
-      };
+      return { ...state };
   }
 }
 
