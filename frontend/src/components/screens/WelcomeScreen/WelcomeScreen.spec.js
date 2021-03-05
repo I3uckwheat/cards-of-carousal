@@ -20,7 +20,7 @@ describe('WelcomeScreen', () => {
     });
   });
 
-  describe('events', () => {
+  describe('handleJoinClick', () => {
     it('fires callback when "join" button is clicked', () => {
       const mockJoinBtnCallback = jest.fn();
       const { getByText } = render(
@@ -33,7 +33,9 @@ describe('WelcomeScreen', () => {
       fireEvent.click(getByText('JOIN'));
       expect(mockJoinBtnCallback).toHaveBeenCalledTimes(1);
     });
+  });
 
+  describe('handleHostClick', () => {
     it('fires callback when "host" button is clicked', () => {
       const mockHostBtnCallback = jest.fn();
       const { getByText } = render(
@@ -46,7 +48,9 @@ describe('WelcomeScreen', () => {
       fireEvent.click(getByText('HOST'));
       expect(mockHostBtnCallback).toHaveBeenCalledTimes(1);
     });
+  });
 
+  describe('handleJoinClick & handleHostClick', () => {
     it('does NOT fire callbacks when non-button elements have been clicked', () => {
       const mockHostBtnCallback = jest.fn();
       const mockJoinBtnCallback = jest.fn();
