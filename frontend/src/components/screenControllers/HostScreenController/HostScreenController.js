@@ -1,15 +1,10 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import HostLayout from '../../layouts/HostLayout';
+import HostScreenExample from '../../../temp/HostScreenExample';
 
-const propTypes = {
-  left: PropTypes.node.isRequired,
-  right: PropTypes.node.isRequired,
-  modal: PropTypes.node.isRequired,
-};
+const propTypes = {};
 
-export default function HostScreenController({ left, right, modal }) {
-  return <HostLayout left={left} right={right} modal={modal} />;
+export default function HostScreenController() {
+  return <HostScreenExample />;
 }
 
 HostScreenController.propTypes = propTypes;

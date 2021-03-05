@@ -14,13 +14,7 @@ function App() {
     case 'player':
       return <PlayerScreenController />;
     case 'host':
-      return (
-        <HostScreenController
-          left={<p>left</p>}
-          right={<p>right</p>}
-          modal={<p>modal</p>}
-        />
-      );
+      return <HostScreenController />;
     case 'welcome':
       return (
         <WelcomeScreen
