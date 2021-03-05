@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 import Header from '../Header/Header';
+import OptionList from './OptionList';
 
 const SettingsMenu = styled.div`
   position: absolute;
@@ -25,37 +26,51 @@ const SettingsMenu = styled.div`
     color: var(--secondary-text-color);
   }
 
-  .settings-item {
+  .settings-button {
     color: var(--primary-text-color);
     background-color: transparent;
     border: none;
+    padding: 30px 0 20px 25px;
 
     text-align: left;
     font-size: 1.5rem;
     font-weight: bold;
   }
-
-  .option-button {
-    padding: 30px 0 20px 25px;
-  }
-
-  .option-list {
-    padding: 20px 25px;
-  }
 `;
 
-export default function HostSettingsMenu() {
+function HostSettingsMenu() {
+  const [accordionIsActive, setAccordionIsActive] = useState(false);
+
+  // playerList temporarily hard coded until the contexts are in place
+  const playerList = ['BENDER', 'BRIGGS', 'BRANDON', 'BRENDA', 'BACON'];
+
+  // placeholder function
+  function kickPlayer(player) {
+    // eslint-disable-next-line
+    console.log(`Kick ${player}`);
+  }
+
   return (
     <SettingsMenu>
       <Header className="host-settings-header">
         <h3>SETTINGS</h3>
       </Header>
-      <button type="button" className="settings-item option-button">
+
+      {/* temporary placeholder button for OptionButton */}
+      <button type="button" className="settings-button">
         SKIP UNUSED SELECTIONS
       </button>
-      <button type="button" className="settings-item option-list">
-        KICK PLAYER
-      </button>
+
+      <OptionList
+        listContent={playerList}
+        isActive={accordionIsActive}
+        isActiveCallback={() => setAccordionIsActive(!accordionIsActive)}
+        onListItemClick={kickPlayer}
+        activeText="KICK WHO?"
+        inactiveText="KICK PLAYER"
+      />
     </SettingsMenu>
   );
 }
+
+export default HostSettingsMenu;
