@@ -40,10 +40,11 @@
   position: absolute;
   z-index: -1;
   background-image: url('./assets/halftone-effect.svg');
+  background-size: contain;
   transform: rotate(11deg) translate(-450px, calc(-1250px + (2vh * 30)));
   background-repeat: repeat-x;
   height: 5000px;
-  width: 5000px;
+  width: 3890px;
 }
 
 @media (min-width: 2470px) {
