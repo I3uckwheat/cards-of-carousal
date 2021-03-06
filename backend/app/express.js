@@ -1,19 +1,23 @@
 const express = require('express');
+const cors = require('cors');
 
 const packs = require('./assets/cah-cards-full.json');
 const deckController = require('./controllers/deckController')(packs);
 
 // import cookieParser from 'cookie-parser';
 // const passport = require('passport');
-// const cors = require('cors');
 
 const app = express();
 
 /* Application setup */
-// app.use(cors({
-//   origin: new RegExp(`${process.env.CORS_ORIGIN_DOMAIN}$`),
-//   credentials: true,
-// }));
+// TODO: Secure with proper cors config
+app.use(
+  cors({
+    origin: '*',
+    // origin: new RegExp(`${process.env.CORS_ORIGIN_DOMAIN}$`),
+    credentials: true,
+  }),
+);
 
 app.use(express.json());
 // app.use(cookieParser());
