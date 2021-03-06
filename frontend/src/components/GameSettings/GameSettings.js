@@ -1,6 +1,15 @@
 import React, { useState, useEffect } from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
+
+const propTypes = {
+  onChange: PropTypes.func.isRequired,
+  options: PropTypes.shape({
+    maxPlayers: PropTypes.number.isRequired,
+    winningScore: PropTypes.number.isRequired,
+    selectedPacks: PropTypes.arrayOf(PropTypes.number).isRequired,
+  }).isRequired,
+};
 
 const StyledGameSettings = styled.div`
   position: relative;
@@ -75,7 +84,7 @@ async function getPackNames() {
   return data;
 }
 
-function GameSettings() {
+function GameSettings({ options, onChange }) {
   const [cardPacks, setCardPacks] = useState([]);
 
   useEffect(async () => {
@@ -83,31 +92,62 @@ function GameSettings() {
     setCardPacks(packNames);
   }, []);
 
+  function numberOptionHandler(event) {
+    const { name, value: newValue } = event.target;
+    onChange({
+      ...options,
+      [name]: Number(newValue),
+    });
+  }
+
+  function cardPackOptionHandler(event) {
+    const cardPackItem = event.target;
+
+    if (cardPackItem.checked) {
+      onChange({
+        ...options,
+        selectedPacks: [
+          ...options.selectedPacks,
+          Number(cardPackItem.dataset.index),
+        ],
+      });
+    } else {
+      onChange({
+        ...options,
+        selectedPacks: options.selectedPacks.filter(
+          (index) => index !== Number(cardPackItem.dataset.index),
+        ),
+      });
+    }
+  }
+
   return (
     <StyledGameSettings>
       <h1>GAME SETTINGS</h1>
 
       <StyledForm>
         <div className="number-input-wrapper">
-          <label htmlFor="mplayers">
+          <label htmlFor="maxPlayers">
             MAX PLAYERS
             <input
+              onChange={numberOptionHandler}
               type="number"
-              id="mplayers"
-              name="mplayers"
-              // value="5"
+              id="maxPlayers"
+              name="maxPlayers"
+              value={options.maxPlayers}
               min="2"
               max="12"
             />
           </label>
 
-          <label htmlFor="wscore">
+          <label htmlFor="winningScore">
             WINNING SCORE
             <input
+              onChange={numberOptionHandler}
               type="number"
-              id="wscore"
-              name="wscore"
-              // value="5"
+              id="winningScore"
+              name="winningScore"
+              value={options.winningScore}
               min="1"
               max="15"
             />
@@ -117,18 +157,26 @@ function GameSettings() {
         <div className="select-wrapper">
           <h2>SELECT CARD PACKS</h2>
 
-          <div className="card-packs">
-            {cardPacks.map((name) => (
-              <label htmlFor={name}>
-                <input value={name} id={name} type="checkbox" name="pack" />
+          <fieldset className="card-packs">
+            {cardPacks.map((name, index) => (
+              <label htmlFor={name} key={name}>
+                <input
+                  onChange={cardPackOptionHandler}
+                  id={name}
+                  type="checkbox"
+                  name={name}
+                  checked={options.selectedPacks.includes(index)}
+                  data-index={index}
+                />
                 {name}
               </label>
             ))}
-          </div>
+          </fieldset>
         </div>
       </StyledForm>
     </StyledGameSettings>
   );
 }
 
+GameSettings.propTypes = propTypes;
 export default GameSettings;
