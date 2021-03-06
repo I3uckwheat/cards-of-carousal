@@ -9,6 +9,7 @@ const StyledGameSettings = styled.div`
   height: 100%;
   background-color: var(--secondary-background-color);
   color: var(--secondary-text-color);
+  overflow-y: auto;
 
   h1 {
     margin-left: auto;
@@ -28,7 +29,7 @@ const StyledForm = styled.form`
   justify-content: center;
   margin: 24px auto 24px 60px;
 
-  label {
+  .number-input-wrapper label {
     display: flex;
     width: 400px;
     justify-content: space-between;
@@ -42,7 +43,8 @@ const StyledForm = styled.form`
   }
 
   input[type='checkbox'] {
-    margin-left: 8px;
+    margin-right: 12px;
+    margin-left: 0;
   }
 
   .select-wrapper {
@@ -54,13 +56,16 @@ const StyledForm = styled.form`
     font-weight: bold;
   }
 
+  // TODO Make breakpoints down to one column for the grid, and up-to however many on large screens
   .card-packs {
     display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto;
   }
 
   .card-packs label {
-    display: block;
-    margin: 8px 0;
+    margin-right: 12px;
   }
 `;
 
@@ -69,14 +74,6 @@ async function getPackNames() {
   const data = await response.json();
   return data;
 }
-
-// function createDummyPacks() {
-//   const packs = {};
-//   for (let i = 0; i < 30; i += 1) {
-//     packs[i] = { name: `Card Pack ${i}` };
-//   }
-//   return packs;
-// }
 
 function GameSettings() {
   const [cardPacks, setCardPacks] = useState([]);
@@ -91,15 +88,31 @@ function GameSettings() {
       <h1>GAME SETTINGS</h1>
 
       <StyledForm>
-        <label htmlFor="mplayers">
-          MAX PLAYERS
-          <input type="number" id="mplayers" name="mplayers" value="5" />
-        </label>
+        <div className="number-input-wrapper">
+          <label htmlFor="mplayers">
+            MAX PLAYERS
+            <input
+              type="number"
+              id="mplayers"
+              name="mplayers"
+              // value="5"
+              min="2"
+              max="12"
+            />
+          </label>
 
-        <label htmlFor="wscore">
-          WINNING SCORE
-          <input type="number" id="wscore" name="wscore" value="5" />
-        </label>
+          <label htmlFor="wscore">
+            WINNING SCORE
+            <input
+              type="number"
+              id="wscore"
+              name="wscore"
+              // value="5"
+              min="1"
+              max="15"
+            />
+          </label>
+        </div>
 
         <div className="select-wrapper">
           <h2>SELECT CARD PACKS</h2>
@@ -107,8 +120,8 @@ function GameSettings() {
           <div className="card-packs">
             {cardPacks.map((name) => (
               <label htmlFor={name}>
-                {name}
                 <input value={name} id={name} type="checkbox" name="pack" />
+                {name}
               </label>
             ))}
           </div>
