@@ -28,45 +28,39 @@ const StyledForm = styled.form`
   justify-content: center;
   margin: 24px auto 24px 60px;
 
-  .label {
+  label {
     display: flex;
     width: 400px;
     justify-content: space-between;
     font-weight: bold;
   }
 
-  .input {
+  input[type='number'] {
     font-weight: bold;
     text-align: center;
     width: 80px;
   }
 
-  .f {
-    display: flex;
-  }
-  .select-card {
-    font-weight: bold;
-  }
-
-  .input-wrapper {
-    justify-content: space-between;
-    width: 300px;
-    align-items: center;
+  input[type='checkbox'] {
+    margin-left: 8px;
   }
 
   .select-wrapper {
     flex-direction: column;
   }
 
-  .card-packs {
-    flex-wrap: wrap;
+  .select-wrapper h2 {
+    font-size: 1rem;
+    font-weight: bold;
   }
 
-  .pack {
-    flex-direction: row;
-    flex-basis: 150px;
-    justify-content: space-between;
-    margin: 3px 16px;
+  .card-packs {
+    display: grid;
+  }
+
+  .card-packs label {
+    display: block;
+    margin: 8px 0;
   }
 `;
 
@@ -95,45 +89,29 @@ function GameSettings() {
   return (
     <StyledGameSettings>
       <h1>GAME SETTINGS</h1>
+
       <StyledForm>
-        <div className="f input-wrapper">
-          <label htmlFor="mplayers" id="mplayers" className="label">
-            MAX PLAYERS
-            <input
-              type="number"
-              id="mplayers"
-              name="mplayers"
-              value="5"
-              className="input"
-            />
-          </label>
-        </div>
+        <label htmlFor="mplayers">
+          MAX PLAYERS
+          <input type="number" id="mplayers" name="mplayers" value="5" />
+        </label>
 
-        <div className="f input-wrapper">
-          <label htmlFor="wscore" id="wscore" className="label">
-            WINNING SCORE
-            <input
-              type="number"
-              id="wscore"
-              name="wscore"
-              value="5"
-              className="input"
-            />
-          </label>
-        </div>
+        <label htmlFor="wscore">
+          WINNING SCORE
+          <input type="number" id="wscore" name="wscore" value="5" />
+        </label>
 
-        <div className="select-wrapper f">
-          <label htmlFor="packs" className="select-card">
-            SELECT CARD PACKS
-            <div className="card-packs f">
-              {cardPacks.map((name) => (
-                <div className="f pack">
-                  <label htmlFor={name}>{name}</label>
-                  <input value={name} id={name} type="checkbox" name="pack" />
-                </div>
-              ))}
-            </div>
-          </label>
+        <div className="select-wrapper">
+          <h2>SELECT CARD PACKS</h2>
+
+          <div className="card-packs">
+            {cardPacks.map((name) => (
+              <label htmlFor={name}>
+                {name}
+                <input value={name} id={name} type="checkbox" name="pack" />
+              </label>
+            ))}
+          </div>
         </div>
       </StyledForm>
     </StyledGameSettings>
