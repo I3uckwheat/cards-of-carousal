@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const propTypes = {
   listContent: PropTypes.arrayOf(PropTypes.string).isRequired,
@@ -12,13 +12,18 @@ const propTypes = {
 };
 
 const OptionListButton = styled.button`
+  color: var(--primary-text-color);
+  background-color: var(--primary-background-color);
+
+  ${(props) =>
+    props.isActive &&
+    css`
+      color: var(--secondary-text-color);
+      background-color: var(--secondary-background-color);
+    `}
+
   display: flex;
   flex-direction: column;
-
-  color: ${({ isActive }) =>
-    isActive ? 'var(--secondary-text-color)' : 'var(--primary-text-color)'};
-  background-color: ${({ isActive }) =>
-    isActive ? 'var(--secondary-background-color)' : 'transparent'};
   border: none;
   padding: 20px 25px;
   width: 100%;
