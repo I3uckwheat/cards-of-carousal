@@ -83,7 +83,6 @@ const StyledForm = styled.form`
     margin-bottom: auto;
     margin-top: 4px;
   }
-
 `;
 
 async function getPackNames() {
