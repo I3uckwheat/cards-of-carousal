@@ -71,11 +71,25 @@ const StyledForm = styled.form`
     gap: 20px;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: auto;
+    border: none;
+    margin: 0;
+    padding: 0 0 16px 0;
+  }
   }
 
   .card-packs label {
     margin-right: 12px;
+    align-items: center;
+    display: flex;
+    margin-bottom: auto;
   }
+
+  input[type='checkbox'] {
+    margin-right: 11px;
+    margin-bottom: auto;
+    margin-top: 4px;
+  }
+
 `;
 
 async function getPackNames() {
