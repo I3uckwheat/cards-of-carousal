@@ -51,11 +51,6 @@ const StyledForm = styled.form`
     width: 80px;
   }
 
-  input[type='checkbox'] {
-    margin-right: 12px;
-    margin-left: 0;
-  }
-
   .select-wrapper {
     flex-direction: column;
   }
@@ -75,7 +70,6 @@ const StyledForm = styled.form`
     margin: 0;
     padding: 0 0 16px 0;
   }
-  }
 
   .card-packs label {
     margin-right: 12px;
@@ -93,6 +87,7 @@ const StyledForm = styled.form`
 `;
 
 async function getPackNames() {
+  // TODO: Make env variable
   const response = await fetch('http://localhost:4000/deck');
   const data = await response.json();
   return data;
