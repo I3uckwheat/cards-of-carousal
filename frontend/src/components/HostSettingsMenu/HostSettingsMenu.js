@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 import Header from '../Header/Header';
 import OptionList from './OptionList';
+import OptionButton from './OptionButton';
 
 const SettingsMenu = styled.div`
   position: absolute;
@@ -25,17 +26,6 @@ const SettingsMenu = styled.div`
     line-height: 2.1rem;
     color: var(--secondary-text-color);
   }
-
-  .settings-button {
-    color: var(--primary-text-color);
-    background-color: transparent;
-    border: none;
-    padding: 30px 0 20px 25px;
-
-    text-align: left;
-    font-size: 1.5rem;
-    font-weight: bold;
-  }
 `;
 
 function HostSettingsMenu() {
@@ -43,6 +33,12 @@ function HostSettingsMenu() {
 
   // playerList temporarily hard coded until the contexts are in place
   const playerList = ['BENDER', 'BRIGGS', 'BRANDON', 'BRENDA', 'BACON'];
+
+  // placeholder function
+  function skipUnusedSelections() {
+    // eslint-disable-next-line
+    console.log('skipping unused selections');
+  }
 
   // placeholder function
   function kickPlayer(player) {
@@ -56,10 +52,12 @@ function HostSettingsMenu() {
         <h3>SETTINGS</h3>
       </Header>
 
-      {/* temporary placeholder button for OptionButton */}
-      <button type="button" className="settings-button">
+      <OptionButton
+        isActive={!accordionIsActive}
+        onClick={skipUnusedSelections}
+      >
         SKIP UNUSED SELECTIONS
-      </button>
+      </OptionButton>
 
       <OptionList
         listContent={playerList}
