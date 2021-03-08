@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Player screen controller snapshot should match 1`] = `
+exports[`Player screen controller render renders correctly 1`] = `
 .c3 {
   display: block;
   border: 2px solid var(--primary-text-color);

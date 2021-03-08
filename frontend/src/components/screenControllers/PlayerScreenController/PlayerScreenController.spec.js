@@ -4,8 +4,8 @@ import renderer from 'react-test-renderer';
 import PlayerScreenController from './PlayerScreenController';
 
 describe('Player screen controller', () => {
-  describe('snapshot', () => {
-    it('should match', () => {
+  describe('render', () => {
+    it('renders correctly', () => {
       const tree = renderer.create(<PlayerScreenController />).toJSON();
 
       expect(tree).toMatchSnapshot();

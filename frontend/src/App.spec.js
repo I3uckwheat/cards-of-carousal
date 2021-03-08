@@ -12,21 +12,21 @@ describe('App', () => {
       expect(tree).toMatchSnapshot();
     });
 
-    it('should match after user has clicked the "join" button', () => {
+    it('should show the player screen after user has clicked the "join" button', () => {
       const { getByText, asFragment } = render(<App />);
       fireEvent.click(getByText('JOIN'));
 
       expect(asFragment()).toMatchSnapshot();
     });
 
-    it('should match after user has clicked the "host" button', () => {
+    it('should show the host screen after user has clicked the "host" button', () => {
       const { getByText, asFragment } = render(<App />);
       fireEvent.click(getByText('HOST'));
 
       expect(asFragment()).toMatchSnapshot();
     });
 
-    it('should match after user has clicked elements other than the "host" or "join" buttons', () => {
+    it('should show the welcome screen after user has clicked elements other than the "host" or "join" buttons', () => {
       const { getByText, asFragment } = render(<App />);
 
       fireEvent.click(getByText('CAROUSAL'));

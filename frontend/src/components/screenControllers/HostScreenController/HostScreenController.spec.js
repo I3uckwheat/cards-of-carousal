@@ -4,8 +4,8 @@ import renderer from 'react-test-renderer';
 import HostScreenController from './HostScreenController';
 
 describe('Host screen controller', () => {
-  describe('snapshot', () => {
-    it('should match', () => {
+  describe('render', () => {
+    it('renders correctly', () => {
       const left = <p>left</p>;
       const right = <p>right</p>;
       const modal = <p>modal</p>;

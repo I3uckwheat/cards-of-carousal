@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Host screen controller snapshot should match 1`] = `
+exports[`Host screen controller render renders correctly 1`] = `
 .c1 {
   background-image: url(inactiveHamburger.svg);
   background-size: cover;
