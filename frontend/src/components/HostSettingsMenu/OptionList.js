@@ -30,11 +30,10 @@ const OptionListButton = styled.button`
 
   text-align: left;
   font-size: 1.5rem;
-  font-weight: bold;
+  font-weight: 700;
 `;
 
 const OptionListItemButton = styled(OptionListButton)`
-  background-color: transparent;
   font-size: 1.3rem;
   padding: 10px 50px;
 `;

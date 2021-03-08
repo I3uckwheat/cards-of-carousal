@@ -25,7 +25,7 @@ const StyledOptionButton = styled.button`
 
   text-align: left;
   font-size: 1.5rem;
-  font-weight: bold;
+  font-weight: 700;
 `;
 
 function OptionButton({
