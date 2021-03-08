@@ -30,14 +30,14 @@ export default function PlayerHand({ cards, selected, onSelect }) {
   return (
     // temporary styling for testing
     <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-      {cards.map((card, index) => {
-        const badge = selected.includes(index)
-          ? selected.indexOf(index) + 1
+      {cards.map((card, cardsIndex) => {
+        const badge = selected.includes(cardsIndex)
+          ? selected.indexOf(cardsIndex) + 1
           : null;
         return (
           <CardWrapper
             key={card}
-            onClick={() => handleClick(index)}
+            onClick={() => handleClick(cardsIndex)}
             selection={badge}
           >
             <WhiteCard>{card}</WhiteCard>

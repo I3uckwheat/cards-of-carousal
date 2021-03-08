@@ -5,7 +5,7 @@ import PlayerHand from '../components/PlayerHand/PlayerHand';
 const whiteCards = ['Briggs', 'Bender', 'Grace', 'hi', 'bye'];
 
 function PlayerHandExample() {
-  const [selectedCards, setSelectedCards] = useState([0, 1]);
+  const [selectedCards, setSelectedCards] = useState([1, 4]);
   return (
     <div
       style={{
