@@ -28,12 +28,20 @@ export default function Modal({ children, onClickOutside }) {
       }
     };
 
+    const handleKeyPress = (event) => {
+      if (event.key === 'Escape') {
+        onClickOutside();
+      }
+    };
+
     document.addEventListener('mousedown', handleClickOutside);
     document.addEventListener('touchstart', handleClickOutside);
+    document.addEventListener('keydown', handleKeyPress);
 
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
       document.removeEventListener('touchstart', handleClickOutside);
+      document.removeEventListener('keydown', handleKeyPress);
     };
   }, []);
 
