@@ -62,7 +62,7 @@ function HostSettingsMenu() {
       <OptionList
         listContent={playerList}
         isActive={accordionIsActive}
-        isActiveCallback={() => setAccordionIsActive(!accordionIsActive)}
+        onAccordionClick={() => setAccordionIsActive(!accordionIsActive)}
         onListItemClick={kickPlayer}
         activeText="KICK WHO?"
         inactiveText="KICK PLAYER"

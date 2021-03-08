@@ -28,11 +28,15 @@ const StyledOptionButton = styled.button`
   font-weight: bold;
 `;
 
-function OptionButton({ isActive, onClick: optionClick, children }) {
+function OptionButton({
+  isActive: optionButtonIsActive,
+  onClick: optionClick,
+  children,
+}) {
   return (
     <StyledOptionButton
-      isActive={isActive}
-      onClick={isActive ? optionClick : undefined}
+      isActive={optionButtonIsActive}
+      onClick={optionButtonIsActive ? optionClick : undefined}
     >
       {children}
     </StyledOptionButton>

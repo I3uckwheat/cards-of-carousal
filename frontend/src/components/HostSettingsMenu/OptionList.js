@@ -5,7 +5,7 @@ import styled, { css } from 'styled-components';
 const propTypes = {
   listContent: PropTypes.arrayOf(PropTypes.string).isRequired,
   isActive: PropTypes.bool.isRequired,
-  isActiveCallback: PropTypes.func.isRequired,
+  onAccordionClick: PropTypes.func.isRequired,
   onListItemClick: PropTypes.func.isRequired,
   activeText: PropTypes.string.isRequired,
   inactiveText: PropTypes.string.isRequired,
@@ -41,8 +41,8 @@ const OptionListItemButton = styled(OptionListButton)`
 
 function OptionList({
   listContent,
-  isActive,
-  isActiveCallback,
+  isActive: optionListIsActive,
+  onAccordionClick: onOptionListClick,
   onListItemClick,
   activeText,
   inactiveText,
@@ -51,12 +51,12 @@ function OptionList({
     <div>
       <OptionListButton
         type="button"
-        onClick={isActiveCallback}
-        isActive={isActive}
+        onClick={onOptionListClick}
+        isActive={optionListIsActive}
       >
-        {isActive ? activeText : inactiveText}
+        {optionListIsActive ? activeText : inactiveText}
       </OptionListButton>
-      {isActive &&
+      {optionListIsActive &&
         listContent.map((listItem) => (
           <OptionListItemButton
             type="button"
