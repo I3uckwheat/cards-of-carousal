@@ -10,14 +10,14 @@ const propTypes = {
 
 const { emitter } = socketInstance;
 
-export const HostContext = createContext();
-
 const initialState = {
   gameState: 'waiting-for-lobby',
   lobbyID: '',
   players: {},
   playerIDs: [],
 };
+
+export const HostContext = createContext();
 
 function HostProvider({ children }) {
   const [state, dispatch] = useReducer(reducer, initialState);
