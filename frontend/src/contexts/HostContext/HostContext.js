@@ -26,13 +26,13 @@ function HostProvider({ children }) {
     // Development only: log messages to console
     if (process.env.NODE_ENV === 'development') {
       // eslint-disable-next-line no-console
-      console.log('Handling message: ', { event, payload });
+      console.log('FRONTEND Handling message: ', { event, payload });
     }
 
     switch (event) {
       case 'create-lobby':
         return dispatch({ type: 'CREATE_LOBBY', payload });
-      case 'player-connect':
+      case 'player-connected':
         return dispatch({ type: 'PLAYER_CONNECT', payload });
       case 'player-disconnected':
         return dispatch({ type: 'PLAYER_DISCONNECTED', payload });
