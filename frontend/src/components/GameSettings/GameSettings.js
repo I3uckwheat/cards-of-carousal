@@ -30,6 +30,12 @@ const StyledGameSettings = styled.div`
     right: 0;
     top: 0;
   }
+
+  @media only screen and (max-width: 980px) {
+    h1 {
+      position: static;
+    }
+  }
 `;
 
 const StyledForm = styled.form`
