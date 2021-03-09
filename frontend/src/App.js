@@ -22,7 +22,7 @@ import SingleBlackCardExample from './temp/SingleBlackCardExample.js';
 import PlayerMessageScreen from './components/screens/PlayerMessageScreen/PlayerMessageScreen';
 import HostLayout from './components/layouts/HostLayout';
 import SettingsMenuExample from './temp/SettingsMenuExample';
-import GameSettings from './components/GameSettings/GameSettings';
+import GameSettingsExample from './temp/GameSettingsExample';
 
 function App() {
   const [showSocketTest, setShowSocketTest] = useState(false);
@@ -252,7 +252,7 @@ function App() {
       )}
       {showCardWrapper && <CardWrapperExample />}
       {showPlayerJoin && <PlayerJoinScreen />}
-      {showGameSettings && <GameSettings />}
+      {showGameSettings && <GameSettingsExample />}
     </div>
   );
 }
