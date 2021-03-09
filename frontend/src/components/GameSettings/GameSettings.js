@@ -86,9 +86,7 @@ const StyledForm = styled.form`
   }
 
   input[type='checkbox'] {
-    margin-right: 11px;
-    margin-bottom: auto;
-    margin-top: 4px;
+    margin: 4px 11px auto 0;
   }
 `;
 
