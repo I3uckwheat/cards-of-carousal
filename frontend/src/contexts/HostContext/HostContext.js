@@ -23,12 +23,6 @@ function HostProvider({ children }) {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   function handleMessage({ event, payload }) {
-    // Development only: log messages to console
-    if (process.env.NODE_ENV === 'development') {
-      // eslint-disable-next-line no-console
-      console.log('FRONTEND Handling message: ', { event, payload });
-    }
-
     switch (event) {
       case 'create-lobby':
         return dispatch({ type: 'CREATE_LOBBY', payload });
