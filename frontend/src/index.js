@@ -1,14 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
+import HostProvider from './contexts/HostContext/HostContext';
 import { StoreProvider } from './contexts/myContext/context';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <StoreProvider>
-      <App />
-    </StoreProvider>
+    <HostProvider>
+      <StoreProvider>
+        <App />
+      </StoreProvider>
+    </HostProvider>
   </React.StrictMode>,
   document.getElementById('root'),
 );
