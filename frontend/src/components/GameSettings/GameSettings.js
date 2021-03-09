@@ -37,6 +37,7 @@ const StyledForm = styled.form`
   flex-direction: column;
   justify-content: center;
   margin: 24px auto 24px 60px;
+  width: 100%;
 
   .number-input-wrapper label {
     display: flex;
@@ -60,11 +61,10 @@ const StyledForm = styled.form`
     font-weight: bold;
   }
 
-  // TODO Make breakpoints down to one column for the grid, and up-to however many on large screens
   .card-packs {
     display: grid;
     gap: 20px;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
     grid-template-rows: auto;
     border: none;
     margin: 0;
