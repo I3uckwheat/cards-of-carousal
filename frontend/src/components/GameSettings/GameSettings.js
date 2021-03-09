@@ -65,6 +65,7 @@ const StyledForm = styled.form`
   .select-wrapper h2 {
     font-size: 1rem;
     font-weight: bold;
+    height: 30px;
   }
 
   .card-packs {
