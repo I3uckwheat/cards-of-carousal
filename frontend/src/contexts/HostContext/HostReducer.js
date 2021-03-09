@@ -1,11 +1,6 @@
 import socketInstance from '../../socket/socket';
 
 function createLobby(state, { id }) {
-  // TODO: Connect to the socket (?)
-  // socketInstance.createLobby();
-
-  // TODO: It seems that creating a lobby doesn't actually adds the host as a player. I feel like this is not intended and the host's id should be present in state.playerIDs as well as in state.players.
-
   return {
     ...state,
     lobbyID: id,
@@ -13,8 +8,7 @@ function createLobby(state, { id }) {
   };
 }
 
-function playerConnected(state, { playerId }) {
-  // TODO: Send a message to the player confirming that he/she has joined the lobby
+function playerConnected(state, payload) {
   socketInstance.sendMessage({
     event: 'update',
     payload: {
@@ -25,11 +19,18 @@ function playerConnected(state, { playerId }) {
     },
   });
 
-  // TODO: Shouldn't this component also update the 'players' state variable alongside 'playersIDs'?
-
   return {
     ...state,
-    playerIDs: [...state.playerIDs, playerId],
+    players: {
+      ...state.players,
+      [payload.id]: {
+        name: payload.id,
+        score: '0',
+        isCzar: false,
+        cards: [],
+      },
+    },
+    playerIDs: [...state.playerIDs, payload.id],
   };
 }
 
@@ -53,8 +54,9 @@ function reducer(state, action) {
 
   switch (type) {
     case 'CREATE_LOBBY':
+      socketInstance.createLobby();
       return createLobby(state, payload);
-    case 'PLAYER_CONNECT':
+    case 'PLAYER_CONNECTED':
       return playerConnected(state, payload);
     case 'PLAYER_DISCONNECTED':
       return playerDisconnected(state, payload);

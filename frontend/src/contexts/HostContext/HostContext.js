@@ -33,7 +33,7 @@ function HostProvider({ children }) {
       case 'create-lobby':
         return dispatch({ type: 'CREATE_LOBBY', payload });
       case 'player-connected':
-        return dispatch({ type: 'PLAYER_CONNECT', payload });
+        return dispatch({ type: 'PLAYER_CONNECTED', payload });
       case 'player-disconnected':
         return dispatch({ type: 'PLAYER_DISCONNECTED', payload });
       default:
