@@ -41,13 +41,19 @@ function HostSettingsMenu() {
   }
 
   // placeholder function
-  function kickPlayer(player) {
+  function kickPlayer(event, player) {
     // eslint-disable-next-line
     console.log(`Kick ${player}`);
+    event.stopPropagation();
+  }
+
+  function toggleAccordion(event) {
+    setAccordionIsActive(!accordionIsActive);
+    event.stopPropagation();
   }
 
   return (
-    <SettingsMenu>
+    <SettingsMenu onClick={() => setAccordionIsActive(false)}>
       <Header className="host-settings-header">
         <h3>SETTINGS</h3>
       </Header>
@@ -62,7 +68,7 @@ function HostSettingsMenu() {
       <OptionList
         listContent={playerList}
         isActive={accordionIsActive}
-        onAccordionClick={() => setAccordionIsActive(!accordionIsActive)}
+        onAccordionClick={toggleAccordion}
         onListItemClick={kickPlayer}
         activeText="KICK WHO?"
         inactiveText="KICK PLAYER"

@@ -60,7 +60,7 @@ function OptionList({
           <OptionListItemButton
             type="button"
             key={listItem}
-            onClick={() => onListItemClick(listItem)}
+            onClick={(event) => onListItemClick(event, listItem)}
           >
             {listItem}
           </OptionListItemButton>
