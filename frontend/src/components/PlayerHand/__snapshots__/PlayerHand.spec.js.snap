@@ -51,7 +51,7 @@ exports[`PlayerHand renders correctly 1`] = `
   -webkit-box-align: start;
   -ms-flex-align: start;
   align-items: start;
-  padding: 16px 10px;
+  padding: 16px 0px;
   border-bottom: 5px solid var(--secondary-background-color);
 }
 
@@ -98,7 +98,7 @@ exports[`PlayerHand renders correctly 1`] = `
   -webkit-box-align: start;
   -ms-flex-align: start;
   align-items: start;
-  padding: 16px 10px;
+  padding: 16px 0px;
   border-bottom: none;
 }
 

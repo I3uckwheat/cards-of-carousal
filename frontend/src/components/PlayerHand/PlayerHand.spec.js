@@ -16,17 +16,16 @@ describe('PlayerHand', () => {
     expect(onClick).toHaveBeenCalledTimes(1);
   });
 
-  // make sure the index of clicked card is being used in onSelect
   it('fires the onSelect callback with the index of the clicked card', () => {
     const whiteCards = ['Briggs', 'Bender', 'Grace', 'hi', 'bye'];
-    const onSelectMock = jest.fn(); // onSelect={([selected indexes]) => setSelectedCards([selected indexes])}  mocking the callback (not really setting state here)
-    // selected array is being used in mock  // onClick with a paramter
+    const onSelectMock = jest.fn();
+
     render(
       <PlayerHand cards={whiteCards} selected={[]} onSelect={onSelectMock} />,
     );
 
-    userEvent.click(screen.getByText('Bender')); // looks for bender, and then clicks it which fires mock (handle click which calls onSelect)
-    expect(onSelectMock).toHaveBeenCalledWith([1]); // mock is being called with my [selected] as the paramter
+    userEvent.click(screen.getByText('Bender'));
+    expect(onSelectMock).toHaveBeenCalledWith([1]);
   });
 
   it('fires onSelect callback with the indexes of multiple clicked cards', () => {
@@ -44,7 +43,38 @@ describe('PlayerHand', () => {
     expect(onSelectMock).toHaveBeenCalledWith([1]);
   });
 
-  // test with selected value in selected , test adding and removing
+  it('works when there is a value in selected', () => {
+    const whiteCards = ['Briggs', 'Bender', 'Grace', 'hi', 'bye'];
+    const selectedCards = [1];
+    const onSelectMock = jest.fn();
+
+    render(
+      <PlayerHand
+        cards={whiteCards}
+        selected={selectedCards}
+        onSelect={onSelectMock}
+      />,
+    );
+
+    expect(selectedCards[0]).toEqual(1);
+  });
+
+  it('removes the value from "selected" if "selected" already includes it', () => {
+    const whiteCards = ['Briggs', 'Bender', 'Grace', 'hi', 'bye'];
+    const selectedCards = [1];
+    const onSelectMock = jest.fn();
+
+    render(
+      <PlayerHand
+        cards={whiteCards}
+        selected={selectedCards}
+        onSelect={onSelectMock}
+      />,
+    );
+
+    userEvent.click(screen.getByText('Bender'));
+    expect(onSelectMock).toHaveBeenCalledWith([]);
+  });
 
   // --------------------------------------------------------------------------
   // PropType Testing
