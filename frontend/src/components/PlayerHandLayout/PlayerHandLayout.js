@@ -52,11 +52,33 @@ const LayoutContainer = styled.div`
 
   /*This will need to be edited to look right horizontally, it scrolls, but idk if flex is best */
   .card-container {
-    display: flex;
-    flex-direction: row;
-
+    /* display: flex;
+    flex-direction: row; */
     margin-top: 20px;
     overflow: auto;
+  }
+  /*When it is above this size */
+  @media (min-width: 640px) {
+    .header-container {
+      height: 100px;
+    }
+    .header-txt {
+      margin: 26px 70px 0px -2px;
+      line-height: 2.5rem;
+      font-size: 1.3rem;
+    }
+
+    @media (min-width: 700px) {
+      .header-txt {
+        margin: 26px 120px 0px -2px;
+      }
+    }
+
+    @media (min-width: 800px) {
+      .header-txt {
+        margin: 26px 210px 0px -2px;
+      }
+    }
   }
 `;
 
