@@ -6,15 +6,7 @@ import HostScreenController from './HostScreenController';
 describe('Host screen controller', () => {
   describe('render', () => {
     it('renders correctly', () => {
-      const left = <p>left</p>;
-      const right = <p>right</p>;
-      const modal = <p>modal</p>;
-
-      const tree = renderer
-        .create(
-          <HostScreenController left={left} right={right} modal={modal} />,
-        )
-        .toJSON();
+      const tree = renderer.create(<HostScreenController />).toJSON();
 
       expect(tree).toMatchSnapshot();
     });
