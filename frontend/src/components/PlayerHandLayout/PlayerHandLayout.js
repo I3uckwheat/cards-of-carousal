@@ -1,13 +1,14 @@
 // test by importing PlayerHandLayoutExample from temp into App.js
 import React from 'react';
-import PropTypes from 'prop-types';
+import PropTypes, { string } from 'prop-types';
 import styled from 'styled-components';
 
 import Button from '../Buttons/Button';
 import Header from '../Header/Header';
 
 const propTypes = {
-  title: PropTypes.string.isRequired,
+  title: PropTypes.objectOf(string).isRequired,
+  children: PropTypes.node.isRequired,
 };
 
 const LayoutContainer = styled.div`
@@ -25,31 +26,64 @@ const LayoutContainer = styled.div`
     display: flex;
     flex-direction: row;
   }
+  .header-txt {
+    margin: 10px 70px -10px -2px;
+    line-height: 2.5rem;
+  }
 
   h1 span {
     display: block;
   }
 
+  .button-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .btn {
+    text-align: center;
+    padding: 0 10px 0 10px;
+    height: 30px;
+    width: 90px;
+    margin-right: 15px;
+    border: none;
+  }
+
+  /*This will need to be edited to look right horizontally, it scrolls, but idk if flex is best */
   .card-container {
     display: flex;
     flex-direction: row;
+
+    margin-top: 20px;
+    overflow: auto;
   }
 `;
 
-export default function PlayerHandLayout({ title }) {
+export default function PlayerHandLayout({ title, children }) {
   // will need to add more props later just using this for lazy setup
 
   return (
     <LayoutContainer>
       <Header className="header-container">
-        <h1>
-          {title.top}
-          <span>{title.bottom}</span>
-        </h1>
-        <Button isActive>SUBMIT</Button>
-        <Button isActive>CLEAR</Button>
+        <div className="header-txt">
+          <h1>
+            {title.top}
+            <span>{title.bottom}</span>
+          </h1>
+        </div>
+
+        <div className="button-container">
+          <Button className="btn" isActive>
+            SUBMIT
+          </Button>
+          <Button className="btn" isActive>
+            CLEAR
+          </Button>
+        </div>
       </Header>
-      <div className="card-container" />
+
+      <div className="card-container">{children}</div>
     </LayoutContainer>
   );
 }
