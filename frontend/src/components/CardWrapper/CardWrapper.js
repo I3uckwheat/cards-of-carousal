@@ -20,7 +20,7 @@ const CardWrapperStyles = styled.div`
   justify-content: start;
   align-items: start;
 
-  padding: 16px 10px;
+  padding: 16px 0px;
 
   border-bottom: ${(props) =>
     props.underline ? '5px solid var(--secondary-background-color)' : 'none'};
@@ -60,7 +60,7 @@ const CardWrapperStyles = styled.div`
 export default function CardWrapper({
   children,
   selection,
-  onClick: handleClick, // look at this too
+  onClick: handleClick,
 }) {
   const shouldDisplayStar = selection === 'winner';
   const badge = (
