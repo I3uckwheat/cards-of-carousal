@@ -9,16 +9,6 @@ function createLobby(state, { id }) {
 }
 
 function playerConnected(state, payload) {
-  socketInstance.sendMessage({
-    event: 'update',
-    payload: {
-      message: {
-        big: "You've joined the lobby",
-        small: 'Please wait for the host to start the game',
-      },
-    },
-  });
-
   return {
     ...state,
     players: {
@@ -56,10 +46,22 @@ function reducer(state, action) {
     case 'CREATE_LOBBY':
       socketInstance.createLobby();
       return createLobby(state, payload);
+
     case 'PLAYER_CONNECTED':
+      socketInstance.sendMessage({
+        event: 'update',
+        payload: {
+          message: {
+            big: "You've joined the lobby",
+            small: 'Please wait for the host to start the game',
+          },
+        },
+      });
       return playerConnected(state, payload);
+
     case 'PLAYER_DISCONNECTED':
       return playerDisconnected(state, payload);
+
     default:
       return { ...state };
   }
