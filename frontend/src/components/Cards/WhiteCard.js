@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
@@ -63,16 +65,23 @@ const StyledWhiteCard = styled.div`
   }
 `;
 
-function WhiteCard({ children }) {
+function WhiteCard({ children, flipped }) {
   return (
     <StyledWhiteCard shrinkFont={children.length > 75} data-testid="white-card">
-      <div className="whiteCardText">
-        <div>{children}</div>
-      </div>
-      {!(children.length > 75) && (
-        <div className="stackedCards" data-testid="stacked-cards">
-          <img src={StackedCards} alt="stacked cards" />
-        </div>
+      {flipped && <p>Back of Card</p>}
+
+      {!flipped && (
+        <>
+          <div className="whiteCardText">
+            <div>{children}</div>
+          </div>
+
+          {!(children.length > 75) && (
+            <div className="stackedCards" data-testid="stacked-cards">
+              <img src={StackedCards} alt="stacked cards" />
+            </div>
+          )}
+        </>
       )}
     </StyledWhiteCard>
   );
