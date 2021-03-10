@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { render, cleanup, screen } from '@testing-library/react';
+import { render, cleanup, screen, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import renderer from 'react-test-renderer';
 import Modal from './Modal';
@@ -95,6 +95,23 @@ describe('Modal', () => {
       userEvent.click(screen.getByTestId('modal-child'));
       expect(handleChildClick).toHaveBeenCalled();
       expect(handleClick).not.toHaveBeenCalled();
+    });
+
+    it('fires onClickOutside when the escape key is press', () => {
+      expect(handleClick).not.toHaveBeenCalled();
+
+      render(
+        <Modal onClickOutside={handleClick}>
+          <div>Test</div>
+        </Modal>,
+      );
+
+      fireEvent.keyDown(screen.getByText('Test'), {
+        key: 'Escape',
+        code: 'Escape',
+      });
+
+      expect(handleClick).toHaveBeenCalledTimes(1);
     });
   });
   // ----------------------------------------------------------------------------
