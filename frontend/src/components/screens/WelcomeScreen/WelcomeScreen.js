@@ -85,7 +85,7 @@ const WelcomeScreenWrapper = styled.div`
     align-items: center;
   }
 
-  .btn {
+  .button {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -145,7 +145,7 @@ const WelcomeScreenWrapper = styled.div`
       font-size: 1.7rem;
     }
 
-    .btn {
+    .button {
       width: 200px;
       height: 48px;
 
@@ -172,7 +172,7 @@ const WelcomeScreenWrapper = styled.div`
       display: none;
     }
 
-    .host-btn {
+    .host-button {
       display: none;
     }
 
@@ -243,7 +243,7 @@ const WelcomeScreenWrapper = styled.div`
       margin-right: 100px;
     }
 
-    .btn {
+    .button {
       width: 500px;
       height: 100px;
       border: solid black 4px;
@@ -292,7 +292,7 @@ const WelcomeScreenWrapper = styled.div`
       margin-right: 120px;
     }
 
-    .btn {
+    .button {
       width: 600px;
       height: 150px;
       border: solid black 4px;
@@ -324,7 +324,7 @@ function WelcomeScreen({ handleJoinClick, handleHostClick }) {
           <Button
             type="button"
             isActive
-            className="btn"
+            className="button"
             onClick={handleJoinClick}
           >
             <p>JOIN</p>
@@ -335,7 +335,7 @@ function WelcomeScreen({ handleJoinClick, handleHostClick }) {
           <Button
             type="button"
             isActive
-            className="btn host-btn"
+            className="button host-button"
             onClick={handleHostClick}
           >
             <p>HOST</p>
