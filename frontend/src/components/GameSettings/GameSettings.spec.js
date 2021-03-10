@@ -174,7 +174,6 @@ describe('GameSettings', () => {
       userEvent.type(screen.getByLabelText('WINNING SCORE'), '3');
       expect(onChange).toHaveBeenCalledTimes(1);
 
-      // These expectations are not "630" because this is a controlled component, and the 'options' object never updates
       expect(onChange).toHaveBeenCalledWith({
         maxPlayers: 5,
         winningScore: 13,

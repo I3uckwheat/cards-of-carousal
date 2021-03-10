@@ -10,7 +10,6 @@ const deckController = require('./controllers/deckController')(packs);
 const app = express();
 
 /* Application setup */
-// TODO: Secure with proper cors config
 app.use(
   cors({
     origin: '*',

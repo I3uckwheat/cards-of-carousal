@@ -94,7 +94,6 @@ function GameSettings({ options, onChange }) {
   const [cardPacks, setCardPacks] = useState([]);
 
   async function getPackNames() {
-    // TODO: Make env variable
     const response = await fetch('http://localhost:4000/deck');
     const data = await response.json();
     return data;
