@@ -50,18 +50,20 @@ const LayoutContainer = styled.div`
     border: none;
   }
 
+  /*This will need to be edited to look right horizontally, it scrolls, but idk if flex is best */
   .card-container {
     display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
     justify-content: center;
+    margin: auto 0 auto 0;
     overflow: auto;
     padding-left: 20px;
-    margin: auto 0 auto 0;
   }
   .card-container > div {
     margin-right: 20px;
     flex-shrink: 0;
   }
-
   /*When it is above this size */
   @media (min-width: 640px) {
     .header-container {
