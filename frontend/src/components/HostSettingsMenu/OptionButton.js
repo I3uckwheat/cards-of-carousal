@@ -15,6 +15,9 @@ const StyledOptionButton = styled.button`
     props.isActive &&
     css`
       color: var(--primary-text-color);
+      :hover {
+        background-color: var(--accent-background-color);
+      }
     `}
 
   background-color: var(--primary-background-color);

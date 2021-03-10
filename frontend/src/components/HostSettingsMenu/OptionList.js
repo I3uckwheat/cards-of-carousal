@@ -31,6 +31,10 @@ const OptionListButton = styled.button`
   text-align: left;
   font-size: 1.5rem;
   font-weight: 700;
+
+  :hover {
+    background-color: var(--accent-background-color);
+  }
 `;
 
 const OptionListItemButton = styled(OptionListButton)`
