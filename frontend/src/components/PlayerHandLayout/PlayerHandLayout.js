@@ -50,7 +50,6 @@ const LayoutContainer = styled.div`
     border: none;
   }
 
-  /*This will need to be edited to look right horizontally, it scrolls, but idk if flex is best */
   .card-container {
     display: flex;
     flex-wrap: wrap;
@@ -84,6 +83,37 @@ const LayoutContainer = styled.div`
     @media (min-width: 800px) {
       .header-txt {
         margin: 26px 210px 0px -2px;
+      }
+    }
+
+    @media (min-height: 600px) {
+      .card-container {
+        flex-direction: row;
+        margin: 40px auto auto auto;
+      }
+
+      .card-container > div {
+        margin-bottom: 40px;
+      }
+    }
+
+    /*this looks find on 800w 950h but looks bad on ipads */
+    @media (min-height: 950px) {
+      .header-container {
+        height: 200px;
+      }
+
+      .header-txt {
+        margin: 88px 100px -10px -2px;
+        line-height: 4rem;
+        font-size: 1.5rem;
+      }
+
+      .btn {
+        height: 40px;
+        width: 110px;
+        margin: 50px 25px 0 0;
+        font-size: 1rem;
       }
     }
   }
