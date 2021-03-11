@@ -27,6 +27,9 @@ describe('CzarHand', () => {
       expect(screen.queryAllByTestId('card-wrapper')[1].dataset.selection).toBe(
         undefined,
       );
+      expect(screen.queryAllByTestId('card-wrapper')[2].dataset.selection).toBe(
+        undefined,
+      );
     });
     describe('invalid prop types', () => {
       const consoleSpy = jest
