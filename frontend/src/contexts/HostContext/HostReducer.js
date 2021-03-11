@@ -8,19 +8,19 @@ function createLobby(state, { id }) {
   };
 }
 
-function playerConnected(state, payload) {
+function playerConnected(state, { playerId }) {
   return {
     ...state,
     players: {
       ...state.players,
-      [payload.id]: {
-        name: payload.id,
+      [playerId]: {
+        name: playerId,
         score: '0',
         isCzar: false,
         cards: [],
       },
     },
-    playerIDs: [...state.playerIDs, payload.id],
+    playerIDs: [...state.playerIDs, playerId],
   };
 }
 
