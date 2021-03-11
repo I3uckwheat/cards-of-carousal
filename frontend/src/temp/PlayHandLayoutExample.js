@@ -14,7 +14,7 @@ const myTitle = {
 
 export default function LayoutExample() {
   return (
-    <PlayerHandLayout title={myTitle}>
+    <PlayerHandLayout title={myTitle} onClear={() => {}} onSubmit={() => {}}>
       <WhiteCard>Grace</WhiteCard>
       <WhiteCard>Sully</WhiteCard>
       <WhiteCard>Briggs</WhiteCard>

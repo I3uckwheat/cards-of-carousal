@@ -1,14 +1,16 @@
 // test by importing PlayerHandLayoutExample from temp into App.js
 import React from 'react';
-import PropTypes, { string } from 'prop-types';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 import Button from '../Buttons/Button';
 import Header from '../Header/Header';
 
 const propTypes = {
-  title: PropTypes.objectOf(string).isRequired,
+  title: PropTypes.objectOf(String).isRequired,
   children: PropTypes.node.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+  onClear: PropTypes.func.isRequired,
 };
 
 const LayoutContainer = styled.div`
@@ -41,7 +43,7 @@ const LayoutContainer = styled.div`
     align-items: center;
   }
 
-  .btn {
+  .button {
     text-align: center;
     padding: 0 10px 0 10px;
     height: 30px;
@@ -59,10 +61,11 @@ const LayoutContainer = styled.div`
     overflow: auto;
     padding-left: 20px;
   }
-  .card-container > div {
+  .card-container > * {
     margin-right: 20px;
     flex-shrink: 0;
   }
+
   /*When it is above this size */
   @media (min-width: 640px) {
     .header-container {
@@ -97,7 +100,7 @@ const LayoutContainer = styled.div`
       }
     }
 
-    /*this looks find on 800w 950h but looks bad on ipads */
+    /*this looks find on 800w 950h but looks bad on i-pads */
     @media (min-height: 950px) {
       .header-container {
         height: 200px;
@@ -108,18 +111,23 @@ const LayoutContainer = styled.div`
         line-height: 4rem;
         font-size: 1.5rem;
       }
-
-      .btn {
+      /* 
+      .button {
         height: 40px;
         width: 110px;
         margin: 50px 25px 0 0;
         font-size: 1rem;
-      }
+      } */
     }
   }
 `;
 
-export default function PlayerHandLayout({ title, children }) {
+export default function PlayerHandLayout({
+  title,
+  children,
+  onSubmit,
+  onClear,
+}) {
   // will need to add more props later just using this for lazy setup
 
   return (
@@ -133,10 +141,10 @@ export default function PlayerHandLayout({ title, children }) {
         </div>
 
         <div className="button-container">
-          <Button className="btn" isActive>
+          <Button onClick={onSubmit} className="button" isActive>
             SUBMIT
           </Button>
-          <Button className="btn" isActive>
+          <Button onClick={onClear} className="button" isActive>
             CLEAR
           </Button>
         </div>
