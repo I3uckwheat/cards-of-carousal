@@ -1,0 +1,115 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HostSettingsMenu rendering matches the expected snapshot 1`] = `
+.c1 {
+  width: 100%;
+  background-color: var(--secondary-background-color);
+  color: var(--secondary-text-color);
+}
+
+.c3 {
+  color: var(--primary-text-color);
+  background-color: var(--primary-background-color);
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  border: none;
+  padding: 20px 25px;
+  width: 100%;
+  text-align: left;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.c3:hover {
+  background-color: var(--accent-background-color);
+}
+
+.c2 {
+  color: #dddddd;
+  color: var(--primary-text-color);
+  background-color: var(--primary-background-color);
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  border: none;
+  padding: 30px 0 20px 25px;
+  text-align: left;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.c2:hover {
+  background-color: var(--accent-background-color);
+}
+
+.c0 {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 30%;
+  background-color: var(--primary-background-color);
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.c0 .host-settings-header {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: flex-end;
+  -webkit-box-align: flex-end;
+  -ms-flex-align: flex-end;
+  align-items: flex-end;
+  height: 130px;
+}
+
+.c0 .host-settings-header h3 {
+  font-size: 3.5rem;
+  line-height: 2.1rem;
+  color: var(--secondary-text-color);
+}
+
+<div
+  className="c0"
+  onClick={[Function]}
+>
+  <header
+    className="c1 host-settings-header"
+  >
+    <h3>
+      SETTINGS
+    </h3>
+  </header>
+  <button
+    className="c2"
+    onClick={[Function]}
+  >
+    SKIP UNUSED SELECTIONS
+  </button>
+  <div>
+    <button
+      className="c3"
+      onClick={[Function]}
+      type="button"
+    >
+      KICK PLAYER
+    </button>
+  </div>
+</div>
+`;
