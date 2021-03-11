@@ -11,15 +11,20 @@ const CzarHandStyles = styled.div`
   align-items: center;
 
   overflow-x: scroll;
+
+  .card-group {
+    background-color: black;
+  }
 `;
 
 const propTypes = {
   cards: PropTypes.arrayOf(PropTypes.array).isRequired,
-  // selectedGroup: PropTypes.number.isRequired,
+  selectedGroup: PropTypes.number.isRequired,
   onSelect: PropTypes.func.isRequired,
 };
 
-function CzarHand({ cards, onSelect }) {
+function CzarHand({ cards, selectedGroup, onSelect }) {
+  // cards MUST stay flipped until new set of cards are passed in
   const [unFlippedGroups, setUnflippedGroups] = useState([]);
 
   const handleClick = (e) => {
@@ -30,7 +35,11 @@ function CzarHand({ cards, onSelect }) {
   return (
     <CzarHandStyles>
       {cards.map((group, index) => (
-        <CardWrapper onClick={() => onSelect(index)}>
+        <CardWrapper
+          selection={index === selectedGroup ? 'winner' : undefined}
+          className="card-group"
+          onClick={() => onSelect(index)}
+        >
           {group.map((card) => (
             <WhiteCard flipped={unFlippedGroups.includes(index)}>
               {card}
