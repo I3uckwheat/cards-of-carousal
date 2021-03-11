@@ -10,7 +10,7 @@ const SettingsMenu = styled.div`
   top: 0;
   right: 0;
   bottom: 0;
-  width: 30%;
+  width: 250px;
   background-color: var(--primary-background-color);
   display: flex;
   flex-direction: column;
@@ -18,13 +18,48 @@ const SettingsMenu = styled.div`
   .host-settings-header {
     display: flex;
     align-items: flex-end;
-    height: 130px;
+    height: 50px;
   }
 
   .host-settings-header h3 {
-    font-size: 3.5rem;
-    line-height: 2.1rem;
+    font-size: 1.5rem;
+    line-height: 0.9rem;
     color: var(--secondary-text-color);
+  }
+
+  @media (min-width: 800px) {
+    width: 400px;
+
+    .host-settings-header {
+      height: 130px;
+    }
+
+    .host-settings-header h3 {
+      font-size: 3.5rem;
+      line-height: 2.2rem;
+    }
+  }
+
+  @media (min-width: 2000px) {
+    width: 600px;
+
+    .host-settings-header h3 {
+      font-size: 5rem;
+      line-height: 3rem;
+    }
+  }
+
+  @media (min-width: 3500px) {
+    width: 1100px;
+
+    .host-settings-header {
+      height: 200px;
+    }
+
+    .host-settings-header h3 {
+      font-size: 8rem;
+      line-height: 5rem;
+    }
   }
 `;
 

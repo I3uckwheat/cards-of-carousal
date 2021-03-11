@@ -27,8 +27,20 @@ const StyledOptionButton = styled.button`
   padding: 30px 0 20px 25px;
 
   text-align: left;
-  font-size: 1.5rem;
+  font-size: 1rem;
   font-weight: 700;
+
+  @media (min-width: 800px) {
+    font-size: 1.5rem;
+  }
+
+  @media (min-width: 2000px) {
+    font-size: 2.5rem;
+  }
+
+  @media (min-width: 3500px) {
+    font-size: 4.5rem;
+  }
 `;
 
 function OptionButton({

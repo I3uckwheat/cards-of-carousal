@@ -29,17 +29,41 @@ const OptionListButton = styled.button`
   width: 100%;
 
   text-align: left;
-  font-size: 1.5rem;
+  font-size: 1rem;
   font-weight: 700;
 
   :hover {
     background-color: var(--accent-background-color);
   }
+
+  @media (min-width: 800px) {
+    font-size: 1.5rem;
+  }
+
+  @media (min-width: 2000px) {
+    font-size: 2.5rem;
+  }
+
+  @media (min-width: 3500px) {
+    font-size: 4.5rem;
+  }
 `;
 
 const OptionListItemButton = styled(OptionListButton)`
-  font-size: 1.3rem;
+  font-size: 0.8rem;
   padding: 10px 50px;
+
+  @media (min-width: 800px) {
+    font-size: 1.3rem;
+  }
+
+  @media (min-width: 2000px) {
+    font-size: 2.1rem;
+  }
+
+  @media (min-width: 3500px) {
+    font-size: 4rem;
+  }
 `;
 
 function OptionList({
