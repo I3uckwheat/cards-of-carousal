@@ -101,4 +101,41 @@ describe('reducer', () => {
       });
     });
   });
+
+  describe('PLAYER_DISCONNECTED', () => {
+    it('removes given player from both state.playerIDs and state.players', () => {
+      const state = {
+        players: { foo: { id: 'foo' }, bar: { id: 'bar' }, baz: { id: 'baz' } },
+        playerIDs: ['foo', 'bar', 'baz'],
+      };
+
+      const result = HostReducer(state, {
+        type: 'PLAYER_DISCONNECTED',
+        payload: { playerId: 'bar' },
+      });
+
+      expect(result).toMatchObject({
+        players: {
+          foo: { id: 'foo' },
+          baz: { id: 'baz' },
+        },
+
+        playerIDs: ['foo', 'baz'],
+      });
+    });
+
+    it('removes unaltered state if given player ID is invalid', () => {
+      const state = {
+        players: { foo: { id: 'foo' }, bar: { id: 'bar' }, baz: { id: 'baz' } },
+        playerIDs: ['foo', 'bar', 'baz'],
+      };
+
+      const result = HostReducer(state, {
+        type: 'PLAYER_DISCONNECTED',
+        payload: { playerId: 'test' },
+      });
+
+      expect(result).toMatchObject(state);
+    });
+  });
 });
