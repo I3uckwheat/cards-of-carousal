@@ -167,14 +167,7 @@ exports[`PlayerHand renders correctly 1`] = `
   }
 }
 
-<div
-  style={
-    Object {
-      "display": "flex",
-      "flexWrap": "wrap",
-    }
-  }
->
+<div>
   <div
     className="c0"
     data-testid="card-wrapper"

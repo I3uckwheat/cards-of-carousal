@@ -25,8 +25,7 @@ export default function PlayerHand({ cards, selected, onSelect }) {
   };
 
   return (
-    // temporary styling for testing
-    <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+    <div>
       {cards.map((card, cardsIndex) => {
         const badge = selected.includes(cardsIndex)
           ? selected.indexOf(cardsIndex) + 1
