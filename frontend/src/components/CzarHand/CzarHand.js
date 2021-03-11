@@ -27,16 +27,13 @@ function CzarHand({ cards, selectedGroup, onSelect }) {
   // cards MUST stay flipped until new set of cards are passed in
   const [unFlippedGroups, setUnflippedGroups] = useState([]);
 
-  const handleClick = (e) => {
-    // flips card to the front
-    // onSelect( ** index ** )
-  };
+  const handleClick = (e) => {};
 
   return (
     <CzarHandStyles>
       {cards.map((group, index) => (
         <CardWrapper
-          selection={index === selectedGroup ? 'winner' : undefined}
+          selection={index === selectedGroup ? 'winner' : null}
           className="card-group"
           onClick={() => onSelect(index)}
         >
