@@ -57,10 +57,8 @@ describe('reducer', () => {
   });
 
   describe('PLAYER_CONNECTED', () => {
-    it('update state.playerIDs with the passed id and add a default player entry in state.players', () => {
+    it('updates state.playerIDs with given id and add a default player entry in state.players', () => {
       const state = {
-        gameState: 'foo',
-        lobbyID: '',
         players: {},
         playerIDs: [],
       };
@@ -77,6 +75,28 @@ describe('reducer', () => {
           score: '0',
           isCzar: false,
           cards: [],
+        },
+      });
+    });
+
+    it("calls socketInstance's sendMessage with a default welcome message object", () => {
+      const state = {
+        players: {},
+        playerIDs: [],
+      };
+
+      HostReducer(state, {
+        type: 'PLAYER_CONNECTED',
+        payload: { playerId: 'example-player-id' },
+      });
+
+      expect(socketInstance.sendMessage).toHaveBeenCalledWith({
+        event: 'update',
+        payload: {
+          message: {
+            big: "You've joined the lobby",
+            small: 'Please wait for the host to start the game',
+          },
         },
       });
     });
