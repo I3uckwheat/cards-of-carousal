@@ -1,8 +1,7 @@
 import React, { useContext, useEffect } from 'react';
-import { render, screen } from '@testing-library/react';
-// import socketInstance from '../../socket/socket';
+import { act, render, screen } from '@testing-library/react';
+import socketInstance from '../../socket/socket';
 import HostProvider, { HostContext } from './HostContext';
-// import { act } from 'react-dom/test-utils';
 
 jest.mock('../../socket/socket', () => ({
   emitter: {
@@ -11,7 +10,30 @@ jest.mock('../../socket/socket', () => ({
     emit: jest.fn(),
   },
   createLobby: jest.fn(),
+  sendMessage: jest.fn(),
 }));
+
+// Need to do this to reset the implementation of each jest mock function, this needs to be
+// called every time we expect to check the values of these, or call an eventHandler
+function setupEmitterMocks() {
+  const eventHandlers = {};
+
+  socketInstance.emitter.on.mockImplementation((event, cb) => {
+    eventHandlers[event] = cb;
+  });
+
+  socketInstance.emitter.off.mockImplementation((event) => {
+    eventHandlers[event] = undefined;
+  });
+
+  socketInstance.emitter.emit.mockImplementation((event, payload) => {
+    eventHandlers[event](payload);
+  });
+
+  return {
+    eventHandlers,
+  };
+}
 
 describe('Context', () => {
   it('renders children passed to the provider', () => {
@@ -87,7 +109,7 @@ describe('Context', () => {
 
             <div>
               {Object.keys(state.players).map((player) => (
-                <span data-testid="player">{player}</span>
+                <span data-testid="player">{player.name}</span>
               ))}
             </div>
 
@@ -110,6 +132,105 @@ describe('Context', () => {
         'waiting-for-players',
       );
       expect(screen.getByTestId('lobby-id')).toHaveTextContent('foo');
+    });
+
+    it('catches player-connected events and dispatches its respective action', () => {
+      const TestComponent = () => {
+        const { state } = useContext(HostContext);
+
+        return (
+          <>
+            <div data-testid="game-state">{state.gameState}</div>
+            <div data-testid="lobby-id">{state.lobbyID}</div>
+
+            <div>
+              {Object.keys(state.players).map(() => (
+                <span data-testid="player" />
+              ))}
+            </div>
+
+            <div>
+              {state.playerIDs.map(() => (
+                <span data-testid="playerID" />
+              ))}
+            </div>
+          </>
+        );
+      };
+
+      const { eventHandlers } = setupEmitterMocks();
+
+      render(
+        <HostProvider>
+          <TestComponent />
+        </HostProvider>,
+      );
+
+      expect(screen.queryAllByTestId('player').length).toBe(0);
+      expect(screen.queryAllByTestId('playerID').length).toBe(0);
+
+      act(() => {
+        eventHandlers.message({
+          event: 'player-connected',
+          payload: { id: 'TEST' },
+        });
+      });
+
+      expect(screen.queryAllByTestId('player').length).toBe(1);
+      expect(screen.queryAllByTestId('playerID').length).toBe(1);
+    });
+
+    it('catches player-disconnected events and dispatches its respective action', () => {
+      const TestComponent = () => {
+        const { state } = useContext(HostContext);
+
+        return (
+          <>
+            <div data-testid="game-state">{state.gameState}</div>
+            <div data-testid="lobby-id">{state.lobbyID}</div>
+
+            <div>
+              {Object.keys(state.players).map(() => (
+                <span data-testid="player" />
+              ))}
+            </div>
+
+            <div>
+              {state.playerIDs.map(() => (
+                <span data-testid="playerID" />
+              ))}
+            </div>
+          </>
+        );
+      };
+
+      const { eventHandlers } = setupEmitterMocks();
+
+      render(
+        <HostProvider>
+          <TestComponent />
+        </HostProvider>,
+      );
+
+      act(() => {
+        eventHandlers.message({
+          event: 'player-connected',
+          payload: { id: 'TEST' },
+        });
+      });
+
+      expect(screen.queryAllByTestId('player').length).toBe(1);
+      expect(screen.queryAllByTestId('playerID').length).toBe(1);
+
+      act(() => {
+        eventHandlers.message({
+          event: 'player-disconnected',
+          payload: { id: 'TEST' },
+        });
+      });
+
+      expect(screen.queryAllByTestId('player').length).toBe(0);
+      expect(screen.queryAllByTestId('playerID').length).toBe(0);
     });
   });
 });
