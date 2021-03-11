@@ -1,5 +1,5 @@
 import React from 'react';
-import PlayerHandLayout from '../components/PlayerHandLayout/PlayerHandLayout';
+import CardHandLayout from '../components/CardHandLayout/CardHandLayout';
 import WhiteCard from '../components/Cards/WhiteCard';
 
 const myTitle = {
@@ -7,14 +7,16 @@ const myTitle = {
   bottom: 'PICK A WINNER',
 };
 
+// Other title example
+
 // const myTitle = {
-//   top: "PLAYER,",
+//   top: 'PLAYER,',
 //   bottom: 'PICK 2 CARDS',
 // };
 
-export default function LayoutExample() {
+export default function CardLayoutExample() {
   return (
-    <PlayerHandLayout title={myTitle} onClear={() => {}} onSubmit={() => {}}>
+    <CardHandLayout title={myTitle} onClear={() => {}} onSubmit={() => {}}>
       <WhiteCard>Grace</WhiteCard>
       <WhiteCard>Sully</WhiteCard>
       <WhiteCard>Briggs</WhiteCard>
@@ -25,6 +27,6 @@ export default function LayoutExample() {
       <WhiteCard>Pkepler</WhiteCard>
       <WhiteCard>James</WhiteCard>
       <WhiteCard>Oreo</WhiteCard>
-    </PlayerHandLayout>
+    </CardHandLayout>
   );
 }
