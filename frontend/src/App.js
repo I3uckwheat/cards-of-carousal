@@ -37,7 +37,7 @@ function App() {
   const [showWelcomeScreen, setShowWelcomeScreen] = useState(false);
   const [showHostLayout, setShowHostLayout] = useState(false);
   const [showCardWrapper, setShowCardWrapper] = useState(false);
-  const [showPlayerJoin, setShowPlayerJoin] = useState(false);
+  const [showPlayerJoin, setShowPlayerJoin] = useState(true);
 
   return (
     <div className="App primary-background">
