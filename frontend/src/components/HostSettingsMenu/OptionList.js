@@ -4,11 +4,11 @@ import styled, { css } from 'styled-components';
 
 const propTypes = {
   listContent: PropTypes.arrayOf(PropTypes.string).isRequired,
-  isActive: PropTypes.bool.isRequired,
-  onAccordionClick: PropTypes.func.isRequired,
+  isOpen: PropTypes.bool.isRequired,
+  onOptionListClick: PropTypes.func.isRequired,
   onListItemClick: PropTypes.func.isRequired,
-  activeText: PropTypes.string.isRequired,
-  inactiveText: PropTypes.string.isRequired,
+  openText: PropTypes.string.isRequired,
+  closedText: PropTypes.string.isRequired,
 };
 
 const OptionListButton = styled.button`
@@ -16,7 +16,7 @@ const OptionListButton = styled.button`
   background-color: var(--primary-background-color);
 
   ${(props) =>
-    props.isActive &&
+    props.isOpen &&
     css`
       color: var(--secondary-text-color);
       background-color: var(--secondary-background-color);
@@ -68,22 +68,22 @@ const OptionListItemButton = styled(OptionListButton)`
 
 function OptionList({
   listContent,
-  isActive: optionListIsActive,
-  onAccordionClick: onOptionListClick,
+  isOpen,
+  onOptionListClick,
   onListItemClick,
-  activeText,
-  inactiveText,
+  openText,
+  closedText,
 }) {
   return (
     <div>
       <OptionListButton
         type="button"
         onClick={onOptionListClick}
-        isActive={optionListIsActive}
+        isOpen={isOpen}
       >
-        {optionListIsActive ? activeText : inactiveText}
+        {isOpen ? openText : closedText}
       </OptionListButton>
-      {optionListIsActive &&
+      {isOpen &&
         listContent.map((listItem) => (
           <OptionListItemButton
             type="button"

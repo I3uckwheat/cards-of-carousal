@@ -7,49 +7,49 @@ import OptionList from './OptionList';
 
 describe('OptionButton', () => {
   describe('rendering', () => {
-    it('renders a button with the given active text when active', () => {
+    it('renders a button with the given open text when open', () => {
       render(
         <OptionList
           listContent={['foo', 'bar', 'bash']}
-          isActive
-          onAccordionClick={() => {}}
+          isOpen
+          onOptionListClick={() => {}}
           onListItemClick={() => {}}
-          activeText="LIST IS ACTIVE"
-          inactiveText="LIST IS INACTIVE"
+          openText="LIST IS OPEN"
+          closedText="LIST IS CLOSED"
         />,
       );
 
       expect(
-        screen.getByRole('button', { name: 'LIST IS ACTIVE' }),
+        screen.getByRole('button', { name: 'LIST IS OPEN' }),
       ).toBeInTheDocument();
     });
 
-    it('renders a button with the given inactive text when inactive', () => {
+    it('renders a button with the given closed text when closed', () => {
       render(
         <OptionList
           listContent={['foo', 'bar', 'bash']}
-          isActive={false}
-          onAccordionClick={() => {}}
+          isOpen={false}
+          onOptionListClick={() => {}}
           onListItemClick={() => {}}
-          activeText="LIST IS ACTIVE"
-          inactiveText="LIST IS INACTIVE"
+          openText="LIST IS OPEN"
+          closedText="LIST IS CLOSED"
         />,
       );
 
       expect(
-        screen.getByRole('button', { name: 'LIST IS INACTIVE' }),
+        screen.getByRole('button', { name: 'LIST IS CLOSED' }),
       ).toBeInTheDocument();
     });
 
-    it('does not render the contents of the list when inactive', () => {
+    it('does not render the contents of the list when closed', () => {
       render(
         <OptionList
           listContent={['foo', 'bar', 'bash']}
-          isActive={false}
-          onAccordionClick={() => {}}
+          isOpen={false}
+          onOptionListClick={() => {}}
           onListItemClick={() => {}}
-          activeText="LIST IS ACTIVE"
-          inactiveText="LIST IS INACTIVE"
+          openText="LIST IS OPEN"
+          closedText="LIST IS CLOSED"
         />,
       );
 
@@ -64,15 +64,15 @@ describe('OptionButton', () => {
       ).not.toBeInTheDocument();
     });
 
-    it('renders the content of the list when active', () => {
+    it('renders the content of the list when open', () => {
       render(
         <OptionList
           listContent={['foo', 'bar', 'bash']}
-          isActive
-          onAccordionClick={() => {}}
+          isOpen
+          onOptionListClick={() => {}}
           onListItemClick={() => {}}
-          activeText="LIST IS ACTIVE"
-          inactiveText="LIST IS INACTIVE"
+          openText="LIST IS OPEN"
+          closedText="LIST IS CLOSED"
         />,
       );
 
@@ -81,32 +81,32 @@ describe('OptionButton', () => {
       expect(screen.getByRole('button', { name: 'bash' })).toBeInTheDocument();
     });
 
-    it('matches the expected snapshot when active', () => {
+    it('matches the expected snapshot when open', () => {
       const tree = renderer
         .create(
           <OptionList
             listContent={['foo', 'bar', 'bash']}
-            isActive
-            onAccordionClick={() => {}}
+            isOpen
+            onOptionListClick={() => {}}
             onListItemClick={() => {}}
-            activeText="LIST IS ACTIVE"
-            inactiveText="LIST IS INACTIVE"
+            openText="LIST IS OPEN"
+            closedText="LIST IS CLOSED"
           />,
         )
         .toJSON();
       expect(tree).toMatchSnapshot();
     });
 
-    it('matches the expected snapshot when not active', () => {
+    it('matches the expected snapshot when not open', () => {
       const tree = renderer
         .create(
           <OptionList
             listContent={['foo', 'bar', 'bash']}
-            isActive={false}
-            onAccordionClick={() => {}}
+            isOpen={false}
+            onOptionListClick={() => {}}
             onListItemClick={() => {}}
-            activeText="LIST IS ACTIVE"
-            inactiveText="LIST IS INACTIVE"
+            openText="LIST IS OPEN"
+            closedText="LIST IS CLOSED"
           />,
         )
         .toJSON();
@@ -115,7 +115,7 @@ describe('OptionButton', () => {
   });
 
   describe('functionality', () => {
-    it('does not call the onAccordionClick callback when the OptionList main button is not clicked', () => {
+    it('does not call the onOptionListClick callback when the OptionList main button is not clicked', () => {
       const consoleSpy = jest
         .spyOn(console, 'error')
         .mockImplementation(() => {});
@@ -123,18 +123,18 @@ describe('OptionButton', () => {
       render(
         <OptionList
           listContent={['foo', 'bar', 'bash']}
-          isActive
-          onAccordionClick={consoleSpy}
+          isOpen
+          onOptionListClick={consoleSpy}
           onListItemClick={() => {}}
-          activeText="LIST IS ACTIVE"
-          inactiveText="LIST IS INACTIVE"
+          openText="LIST IS OPEN"
+          closedText="LIST IS CLOSED"
         />,
       );
 
       expect(consoleSpy).not.toHaveBeenCalled();
     });
 
-    it('calls the onAccordionClick callback when the OptionList main button is active and is clicked', () => {
+    it('calls the onOptionListClick callback when the OptionList main button is open and is clicked', () => {
       const consoleSpy = jest
         .spyOn(console, 'error')
         .mockImplementation(() => {});
@@ -142,19 +142,19 @@ describe('OptionButton', () => {
       render(
         <OptionList
           listContent={['foo', 'bar', 'bash']}
-          isActive
-          onAccordionClick={consoleSpy}
+          isOpen
+          onOptionListClick={consoleSpy}
           onListItemClick={() => {}}
-          activeText="LIST IS ACTIVE"
-          inactiveText="LIST IS INACTIVE"
+          openText="LIST IS OPEN"
+          closedText="LIST IS CLOSED"
         />,
       );
 
-      userEvent.click(screen.getByRole('button', { name: 'LIST IS ACTIVE' }));
+      userEvent.click(screen.getByRole('button', { name: 'LIST IS OPEN' }));
       expect(consoleSpy).toHaveBeenCalled();
     });
 
-    it('calls the onAccordionClick callback when the OptionList main button is inactive and is clicked', () => {
+    it('calls the onOptionListClick callback when the OptionList main button is closed and is clicked', () => {
       const consoleSpy = jest
         .spyOn(console, 'error')
         .mockImplementation(() => {});
@@ -162,15 +162,15 @@ describe('OptionButton', () => {
       render(
         <OptionList
           listContent={['foo', 'bar', 'bash']}
-          isActive={false}
-          onAccordionClick={consoleSpy}
+          isOpen={false}
+          onOptionListClick={consoleSpy}
           onListItemClick={() => {}}
-          activeText="LIST IS ACTIVE"
-          inactiveText="LIST IS INACTIVE"
+          openText="LIST IS OPEN"
+          closedText="LIST IS CLOSED"
         />,
       );
 
-      userEvent.click(screen.getByRole('button', { name: 'LIST IS INACTIVE' }));
+      userEvent.click(screen.getByRole('button', { name: 'LIST IS CLOSED' }));
       expect(consoleSpy).toHaveBeenCalled();
     });
 
@@ -182,11 +182,11 @@ describe('OptionButton', () => {
       render(
         <OptionList
           listContent={['foo', 'bar', 'bash']}
-          isActive
-          onAccordionClick={() => {}}
+          isOpen
+          onOptionListClick={() => {}}
           onListItemClick={consoleSpy}
-          activeText="LIST IS ACTIVE"
-          inactiveText="LIST IS INACTIVE"
+          openText="LIST IS OPEN"
+          closedText="LIST IS CLOSED"
         />,
       );
 
@@ -201,15 +201,15 @@ describe('OptionButton', () => {
       render(
         <OptionList
           listContent={['foo', 'bar', 'bash']}
-          isActive
-          onAccordionClick={() => {}}
+          isOpen
+          onOptionListClick={() => {}}
           onListItemClick={consoleSpy}
-          activeText="LIST IS ACTIVE"
-          inactiveText="LIST IS INACTIVE"
+          openText="LIST IS OPEN"
+          closedText="LIST IS CLOSED"
         />,
       );
 
-      userEvent.click(screen.getByRole('button', { name: 'LIST IS ACTIVE' }));
+      userEvent.click(screen.getByRole('button', { name: 'LIST IS OPEN' }));
       expect(consoleSpy).not.toHaveBeenCalled();
     });
 
@@ -221,11 +221,11 @@ describe('OptionButton', () => {
       render(
         <OptionList
           listContent={['foo', 'bar', 'bash']}
-          isActive
-          onAccordionClick={() => {}}
+          isOpen
+          onOptionListClick={() => {}}
           onListItemClick={consoleSpy}
-          activeText="LIST IS ACTIVE"
-          inactiveText="LIST IS INACTIVE"
+          openText="LIST IS OPEN"
+          closedText="LIST IS CLOSED"
         />,
       );
 
@@ -242,11 +242,11 @@ describe('OptionButton', () => {
       render(
         <OptionList
           listContent={['foo', 'bar', 'bash']}
-          isActive
-          onAccordionClick={() => {}}
+          isOpen
+          onOptionListClick={() => {}}
           onListItemClick={consoleSpy}
-          activeText="LIST IS ACTIVE"
-          inactiveText="LIST IS INACTIVE"
+          openText="LIST IS OPEN"
+          closedText="LIST IS CLOSED"
         />,
       );
 
@@ -266,11 +266,11 @@ describe('OptionButton', () => {
       expect(() => {
         render(
           <OptionList
-            isActive
-            onAccordionClick={() => {}}
+            isOpen
+            onOptionListClick={() => {}}
             onListItemClick={() => {}}
-            activeText="LIST IS ACTIVE"
-            inactiveText="LIST IS INACTIVE"
+            openText="LIST IS OPEN"
+            closedText="LIST IS CLOSED"
           />,
         );
       }).toThrow();
@@ -286,11 +286,11 @@ describe('OptionButton', () => {
         render(
           <OptionList
             listContent="foo"
-            isActive
-            onAccordionClick={() => {}}
+            isOpen
+            onOptionListClick={() => {}}
             onListItemClick={() => {}}
-            activeText="LIST IS ACTIVE"
-            inactiveText="LIST IS INACTIVE"
+            openText="LIST IS OPEN"
+            closedText="LIST IS CLOSED"
           />,
         );
       }).toThrow();
@@ -305,18 +305,18 @@ describe('OptionButton', () => {
       render(
         <OptionList
           listContent={[true, false, true]}
-          isActive
-          onAccordionClick={() => {}}
+          isOpen
+          onOptionListClick={() => {}}
           onListItemClick={() => {}}
-          activeText="LIST IS ACTIVE"
-          inactiveText="LIST IS INACTIVE"
+          openText="LIST IS OPEN"
+          closedText="LIST IS CLOSED"
         />,
       );
 
       expect(consoleSpy).toHaveBeenCalled();
     });
 
-    it('logs an error when attempting to render without the isActive prop', () => {
+    it('logs an error when attempting to render without the isOpen prop', () => {
       const consoleSpy = jest
         .spyOn(console, 'error')
         .mockImplementation(() => {});
@@ -324,17 +324,17 @@ describe('OptionButton', () => {
       render(
         <OptionList
           listContent={['foo', 'bar', 'bash']}
-          onAccordionClick={() => {}}
+          onOptionListClick={() => {}}
           onListItemClick={() => {}}
-          activeText="LIST IS ACTIVE"
-          inactiveText="LIST IS INACTIVE"
+          openText="LIST IS OPEN"
+          closedText="LIST IS CLOSED"
         />,
       );
 
       expect(consoleSpy).toHaveBeenCalled();
     });
 
-    it('logs an error when attempting to render the isActive prop as a non bool', () => {
+    it('logs an error when attempting to render the isOpen prop as a non bool', () => {
       const consoleSpy = jest
         .spyOn(console, 'error')
         .mockImplementation(() => {});
@@ -342,18 +342,18 @@ describe('OptionButton', () => {
       render(
         <OptionList
           listContent={['foo', 'bar', 'bash']}
-          isActive="baz"
-          onAccordionClick={() => {}}
+          isOpen="baz"
+          onOptionListClick={() => {}}
           onListItemClick={() => {}}
-          activeText="LIST IS ACTIVE"
-          inactiveText="LIST IS INACTIVE"
+          openText="LIST IS OPEN"
+          closedText="LIST IS CLOSED"
         />,
       );
 
       expect(consoleSpy).toHaveBeenCalled();
     });
 
-    it('logs an error when attempting to render without the onAccordionClick prop', () => {
+    it('logs an error when attempting to render without the onOptionListClick prop', () => {
       const consoleSpy = jest
         .spyOn(console, 'error')
         .mockImplementation(() => {});
@@ -361,17 +361,17 @@ describe('OptionButton', () => {
       render(
         <OptionList
           listContent={['foo', 'bar', 'bash']}
-          isActive
+          isOpen
           onListItemClick={() => {}}
-          activeText="LIST IS ACTIVE"
-          inactiveText="LIST IS INACTIVE"
+          openText="LIST IS OPEN"
+          closedText="LIST IS CLOSED"
         />,
       );
 
       expect(consoleSpy).toHaveBeenCalled();
     });
 
-    it('logs an error when attempting to render the onAccordionClick prop as a non function', () => {
+    it('logs an error when attempting to render the onOptionListClick prop as a non function', () => {
       const consoleSpy = jest
         .spyOn(console, 'error')
         .mockImplementation(() => {});
@@ -379,11 +379,11 @@ describe('OptionButton', () => {
       render(
         <OptionList
           listContent={['foo', 'bar', 'bash']}
-          isActive
-          onAccordionClick={false}
+          isOpen
+          onOptionListClick={false}
           onListItemClick={() => {}}
-          activeText="LIST IS ACTIVE"
-          inactiveText="LIST IS INACTIVE"
+          openText="LIST IS OPEN"
+          closedText="LIST IS CLOSED"
         />,
       );
 
@@ -398,10 +398,10 @@ describe('OptionButton', () => {
       render(
         <OptionList
           listContent={['foo', 'bar', 'bash']}
-          isActive
-          onAccordionClick={() => {}}
-          activeText="LIST IS ACTIVE"
-          inactiveText="LIST IS INACTIVE"
+          isOpen
+          onOptionListClick={() => {}}
+          openText="LIST IS OPEN"
+          closedText="LIST IS CLOSED"
         />,
       );
 
@@ -416,18 +416,18 @@ describe('OptionButton', () => {
       render(
         <OptionList
           listContent={['foo', 'bar', 'bash']}
-          isActive
-          onAccordionClick={() => {}}
+          isOpen
+          onOptionListClick={() => {}}
           onListItemClick={false}
-          activeText="LIST IS ACTIVE"
-          inactiveText="LIST IS INACTIVE"
+          openText="LIST IS OPEN"
+          closedText="LIST IS CLOSED"
         />,
       );
 
       expect(consoleSpy).toHaveBeenCalled();
     });
 
-    it('logs an error when attempting to render without the activeText prop', () => {
+    it('logs an error when attempting to render without the openText prop', () => {
       const consoleSpy = jest
         .spyOn(console, 'error')
         .mockImplementation(() => {});
@@ -435,17 +435,17 @@ describe('OptionButton', () => {
       render(
         <OptionList
           listContent={['foo', 'bar', 'bash']}
-          isActive
+          isOpen
           onListItemClick={() => {}}
-          onAccordionClick={() => {}}
-          inactiveText="LIST IS INACTIVE"
+          onOptionListClick={() => {}}
+          closedText="LIST IS CLOSED"
         />,
       );
 
       expect(consoleSpy).toHaveBeenCalled();
     });
 
-    it('logs an error when attempting to render the activeText prop as a non string', () => {
+    it('logs an error when attempting to render the openText prop as a non string', () => {
       const consoleSpy = jest
         .spyOn(console, 'error')
         .mockImplementation(() => {});
@@ -453,18 +453,18 @@ describe('OptionButton', () => {
       render(
         <OptionList
           listContent={['foo', 'bar', 'bash']}
-          isActive
-          onAccordionClick={() => {}}
+          isOpen
+          onOptionListClick={() => {}}
           onListItemClick={() => {}}
-          activeText={false}
-          inactiveText="LIST IS INACTIVE"
+          openText={false}
+          closedText="LIST IS CLOSED"
         />,
       );
 
       expect(consoleSpy).toHaveBeenCalled();
     });
 
-    it('logs an error when attempting to render without the inactiveText prop', () => {
+    it('logs an error when attempting to render without the closedText prop', () => {
       const consoleSpy = jest
         .spyOn(console, 'error')
         .mockImplementation(() => {});
@@ -472,17 +472,17 @@ describe('OptionButton', () => {
       render(
         <OptionList
           listContent={['foo', 'bar', 'bash']}
-          isActive
+          isOpen
           onListItemClick={() => {}}
-          onAccordionClick={() => {}}
-          activeText="LIST IS ACTIVE"
+          onOptionListClick={() => {}}
+          openText="LIST IS OPEN"
         />,
       );
 
       expect(consoleSpy).toHaveBeenCalled();
     });
 
-    it('logs an error when attempting to render the inactiveText prop as a non string', () => {
+    it('logs an error when attempting to render the closedText prop as a non string', () => {
       const consoleSpy = jest
         .spyOn(console, 'error')
         .mockImplementation(() => {});
@@ -490,11 +490,11 @@ describe('OptionButton', () => {
       render(
         <OptionList
           listContent={['foo', 'bar', 'bash']}
-          isActive
-          onAccordionClick={() => {}}
+          isOpen
+          onOptionListClick={() => {}}
           onListItemClick={() => {}}
-          activeText="LIST IS ACTIVE"
-          inactiveText={false}
+          openText="LIST IS OPEN"
+          closedText={false}
         />,
       );
 
@@ -509,11 +509,11 @@ describe('OptionButton', () => {
       render(
         <OptionList
           listContent={['foo', 'bar', 'bash']}
-          isActive
-          onAccordionClick={() => {}}
+          isOpen
+          onOptionListClick={() => {}}
           onListItemClick={() => {}}
-          activeText="LIST IS ACTIVE"
-          inactiveText="LIST IS INACTIVE"
+          openText="LIST IS OPEN"
+          closedText="LIST IS CLOSED"
         />,
       );
 

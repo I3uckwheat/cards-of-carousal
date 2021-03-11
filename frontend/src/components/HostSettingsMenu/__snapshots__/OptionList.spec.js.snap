@@ -1,6 +1,58 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`OptionButton rendering matches the expected snapshot when active 1`] = `
+exports[`OptionButton rendering matches the expected snapshot when not open 1`] = `
+.c0 {
+  color: var(--primary-text-color);
+  background-color: var(--primary-background-color);
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  border: none;
+  padding: 20px 25px;
+  width: 100%;
+  text-align: left;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.c0:hover {
+  background-color: var(--accent-background-color);
+}
+
+@media (min-width:800px) {
+  .c0 {
+    font-size: 1.5rem;
+  }
+}
+
+@media (min-width:2000px) {
+  .c0 {
+    font-size: 2.5rem;
+  }
+}
+
+@media (min-width:3500px) {
+  .c0 {
+    font-size: 4.5rem;
+  }
+}
+
+<div>
+  <button
+    className="c0"
+    onClick={[Function]}
+    type="button"
+  >
+    LIST IS CLOSED
+  </button>
+</div>
+`;
+
+exports[`OptionButton rendering matches the expected snapshot when open 1`] = `
 .c0 {
   color: var(--primary-text-color);
   background-color: var(--primary-background-color);
@@ -112,7 +164,7 @@ exports[`OptionButton rendering matches the expected snapshot when active 1`] = 
     onClick={[Function]}
     type="button"
   >
-    LIST IS ACTIVE
+    LIST IS OPEN
   </button>
   <button
     className="c1 c2"
@@ -134,58 +186,6 @@ exports[`OptionButton rendering matches the expected snapshot when active 1`] = 
     type="button"
   >
     bash
-  </button>
-</div>
-`;
-
-exports[`OptionButton rendering matches the expected snapshot when not active 1`] = `
-.c0 {
-  color: var(--primary-text-color);
-  background-color: var(--primary-background-color);
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  border: none;
-  padding: 20px 25px;
-  width: 100%;
-  text-align: left;
-  font-size: 1rem;
-  font-weight: 700;
-}
-
-.c0:hover {
-  background-color: var(--accent-background-color);
-}
-
-@media (min-width:800px) {
-  .c0 {
-    font-size: 1.5rem;
-  }
-}
-
-@media (min-width:2000px) {
-  .c0 {
-    font-size: 2.5rem;
-  }
-}
-
-@media (min-width:3500px) {
-  .c0 {
-    font-size: 4.5rem;
-  }
-}
-
-<div>
-  <button
-    className="c0"
-    onClick={[Function]}
-    type="button"
-  >
-    LIST IS INACTIVE
   </button>
 </div>
 `;

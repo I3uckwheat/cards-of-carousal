@@ -41,17 +41,17 @@ describe('HostSettingsMenu', () => {
     it('Closes the OptionList when a click is outside of OptionList', () => {
       render(<HostSettingsMenu />);
 
-      // open the accordion and verify that it contains the expected test
+      // open the option list and verify that it contains the expected test
       userEvent.click(screen.getByRole('button', { name: 'KICK PLAYER' }));
       expect(screen.queryByText('BENDER')).toBeInTheDocument();
 
-      // click on the settings header and verify that the accordion is now closed
+      // click on the settings header and verify that the option list is now closed
       userEvent.click(screen.getByText('SETTINGS'));
       expect(screen.queryByText('BENDER')).not.toBeInTheDocument();
     });
 
     // temporary test pending overhall in next sprint
-    it('makes clicking another button not work when the accordion is open', () => {
+    it('makes clicking another button not work when the option list is open', () => {
       const consoleSpy = jest
         .spyOn(console, 'log')
         .mockImplementation(() => {});

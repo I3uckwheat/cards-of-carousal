@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`OptionButton rendering matches the expected snapshot when active 1`] = `
+exports[`OptionButton rendering matches the expected snapshot when enabled 1`] = `
 .c0 {
   color: #dddddd;
   color: var(--primary-text-color);
@@ -49,7 +49,7 @@ exports[`OptionButton rendering matches the expected snapshot when active 1`] = 
 </button>
 `;
 
-exports[`OptionButton rendering matches the expected snapshot when not active 1`] = `
+exports[`OptionButton rendering matches the expected snapshot when not enabled 1`] = `
 .c0 {
   color: #dddddd;
   background-color: var(--primary-background-color);

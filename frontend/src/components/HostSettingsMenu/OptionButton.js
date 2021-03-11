@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 
 const propTypes = {
-  isActive: PropTypes.bool.isRequired,
+  isEnabled: PropTypes.bool.isRequired,
   onClick: PropTypes.func.isRequired,
   children: PropTypes.string.isRequired,
 };
@@ -12,7 +12,7 @@ const StyledOptionButton = styled.button`
   color: #dddddd;
 
   ${(props) =>
-    props.isActive &&
+    props.isEnabled &&
     css`
       color: var(--primary-text-color);
       :hover {
@@ -44,14 +44,14 @@ const StyledOptionButton = styled.button`
 `;
 
 function OptionButton({
-  isActive: optionButtonIsActive,
+  isEnabled: optionButtonisEnabled,
   onClick: optionClick,
   children,
 }) {
   return (
     <StyledOptionButton
-      isActive={optionButtonIsActive}
-      onClick={optionButtonIsActive ? optionClick : undefined}
+      isEnabled={optionButtonisEnabled}
+      onClick={optionButtonisEnabled ? optionClick : undefined}
     >
       {children}
     </StyledOptionButton>

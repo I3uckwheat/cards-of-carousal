@@ -64,7 +64,7 @@ const SettingsMenu = styled.div`
 `;
 
 function HostSettingsMenu() {
-  const [accordionIsActive, setAccordionIsActive] = useState(false);
+  const [accordionIsOpen, setAccordionIsOpen] = useState(false);
 
   // playerList temporarily hard coded until the contexts are in place
   const playerList = ['BENDER', 'BRIGGS', 'BRANDON', 'BRENDA', 'BACON'];
@@ -83,30 +83,27 @@ function HostSettingsMenu() {
   }
 
   function toggleAccordion(event) {
-    setAccordionIsActive(!accordionIsActive);
+    setAccordionIsOpen(!accordionIsOpen);
     event.stopPropagation();
   }
 
   return (
-    <SettingsMenu onClick={() => setAccordionIsActive(false)}>
+    <SettingsMenu onClick={() => setAccordionIsOpen(false)}>
       <Header className="host-settings-header">
         <h3>SETTINGS</h3>
       </Header>
 
-      <OptionButton
-        isActive={!accordionIsActive}
-        onClick={skipUnusedSelections}
-      >
+      <OptionButton isEnabled={!accordionIsOpen} onClick={skipUnusedSelections}>
         SKIP UNUSED SELECTIONS
       </OptionButton>
 
       <OptionList
         listContent={playerList}
-        isActive={accordionIsActive}
-        onAccordionClick={toggleAccordion}
+        isOpen={accordionIsOpen}
+        onOptionListClick={toggleAccordion}
         onListItemClick={kickPlayer}
-        activeText="KICK WHO?"
-        inactiveText="KICK PLAYER"
+        openText="KICK WHO?"
+        closedText="KICK PLAYER"
       />
     </SettingsMenu>
   );
