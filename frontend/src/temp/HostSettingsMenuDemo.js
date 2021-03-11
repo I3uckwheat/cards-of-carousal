@@ -1,16 +1,15 @@
-// replace App.js with the contents of this file to demo the Host Settings Menu Component
-
+/* eslint-disable */
 import React from 'react';
 
-import '../reset.css';
-import '../App.css';
+import './reset.css';
+import './App.css';
 
-import PlayerList from '../components/PlayerList/PlayerList';
-import DisplayJoinCode from '../components/JoinCode/JoinCode';
-import playerList from './playerList';
-import SingleBlackCardExample from './SingleBlackCardExample.js';
-import HostLayout from '../components/layouts/HostLayout';
-import HostSettingsMenu from '../components/HostSettingsMenu/HostSettingsMenu';
+import PlayerList from './components/PlayerList/PlayerList';
+import DisplayJoinCode from './components/JoinCode/JoinCode';
+import playerList from './temp/playerList';
+import SingleBlackCardExample from './temp/SingleBlackCardExample.js';
+import HostLayout from './components/layouts/HostLayout';
+import HostSettingsMenu from './components/HostSettingsMenu/HostSettingsMenu';
 
 function App() {
   return (
@@ -30,10 +29,7 @@ function App() {
         </div>
       }
       right={<SingleBlackCardExample />}
-      modal={
-        // eslint-disable-next-line
-        <HostSettingsMenu />
-      }
+      modal={<HostSettingsMenu />}
     />
   );
 }
