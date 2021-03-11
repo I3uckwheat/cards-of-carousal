@@ -1,7 +1,7 @@
 import React, { createContext, useEffect, useReducer } from 'react';
 import PropTypes from 'prop-types';
 
-import reducer from './HostReducer';
+import HostReducer from './HostReducer';
 import socketInstance from '../../socket/socket';
 
 const propTypes = {
@@ -20,12 +20,10 @@ const initialState = {
 export const HostContext = createContext();
 
 function HostProvider({ children }) {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [state, dispatch] = useReducer(HostReducer, initialState);
 
   function handleMessage({ event, payload }) {
     switch (event) {
-      case 'create-lobby':
-        return dispatch({ type: 'CREATE_LOBBY', payload });
       case 'player-connected':
         return dispatch({ type: 'PLAYER_CONNECTED', payload });
       case 'player-disconnected':

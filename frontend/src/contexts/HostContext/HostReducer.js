@@ -26,7 +26,7 @@ function playerConnected(state, payload) {
 
 function playerDisconnected(state, { playerId }) {
   const newPlayerIdsArray = state.playerIDs.filter(
-    (playerID) => playerID === playerId,
+    (playerID) => playerID !== playerId,
   );
 
   const newPlayersObject = { ...state.players };
@@ -39,7 +39,7 @@ function playerDisconnected(state, { playerId }) {
   };
 }
 
-function reducer(state, action) {
+function HostReducer(state, action) {
   const { type, payload } = action;
 
   switch (type) {
@@ -67,4 +67,4 @@ function reducer(state, action) {
   }
 }
 
-export default reducer;
+export default HostReducer;
