@@ -16,7 +16,6 @@ function PlayerHandExample() {
         alignItems: 'center',
         flexWrap: 'wrap',
       }}
-      className="App primary-background"
     >
       <PlayerHand
         cards={whiteCards}

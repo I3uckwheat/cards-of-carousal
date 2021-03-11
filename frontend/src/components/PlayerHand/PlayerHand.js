@@ -1,5 +1,3 @@
-/* to test this component, import the 'PlayerHandExample' in 'Temp' into your App.js */
-
 import React from 'react';
 import PropTypes from 'prop-types';
 import WhiteCard from '../Cards/WhiteCard';
@@ -25,7 +23,7 @@ export default function PlayerHand({ cards, selected, onSelect }) {
   };
 
   return (
-    <div>
+    <>
       {cards.map((card, cardsIndex) => {
         const badge = selected.includes(cardsIndex)
           ? selected.indexOf(cardsIndex) + 1
@@ -40,7 +38,7 @@ export default function PlayerHand({ cards, selected, onSelect }) {
           </CardWrapper>
         );
       })}
-    </div>
+    </>
   );
 }
 
