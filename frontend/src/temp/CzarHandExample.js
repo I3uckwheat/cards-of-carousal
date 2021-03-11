@@ -1,4 +1,5 @@
-import React from 'react';
+/* eslint-disable */
+import React, { useState } from 'react';
 import CzarHand from '../components/CzarHand/CzarHand';
 
 const cards = [
@@ -10,10 +11,17 @@ const cards = [
   ['Card Four', 'Card Five', 'Card Six'],
   ['Card Seven', 'Card Eight', 'Card Nine'],
 ];
+
 export default function CzarHandExample() {
+  const [selectedCard, setSelectedCard] = useState(null);
+
   return (
     <div>
-      <CzarHand selectedGroup={1} cards={cards} />
+      <CzarHand
+        selectedGroup={selectedCard}
+        cards={cards}
+        onSelect={(selected) => setSelectedCard(selected)}
+      />
     </div>
   );
 }
