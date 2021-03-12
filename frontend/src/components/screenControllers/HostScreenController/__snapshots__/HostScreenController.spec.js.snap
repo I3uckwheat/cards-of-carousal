@@ -1,0 +1,170 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Host screen controller render renders correctly 1`] = `
+.c1 {
+  background-image: url(inactiveHamburger.svg);
+  background-size: cover;
+  background-color: transparent;
+  border: 0;
+  width: 25px;
+  height: 25px;
+}
+
+.c2 {
+  width: 100%;
+  background-color: var(--secondary-background-color);
+  color: var(--secondary-text-color);
+}
+
+.c0 {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.c0 .hamburger-container {
+  position: absolute;
+  right: 17px;
+  top: 11px;
+  z-index: 10100;
+}
+
+.c0 .host-layout-header {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: flex-end;
+  -webkit-box-align: flex-end;
+  -ms-flex-align: flex-end;
+  align-items: flex-end;
+  height: 50px;
+}
+
+.c0 .host-layout-header h2 {
+  position: relative;
+  bottom: -1px;
+  font-size: 1rem;
+  line-height: 0.8rem;
+}
+
+.c0 .components {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  height: 100%;
+}
+
+.c0 .components .left {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  min-width: 200px;
+  background-color: var(--primary-background-color);
+  box-shadow: 0px 4px 12px rgba(0,0,0,0.25);
+}
+
+.c0 .components .right {
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+}
+
+@media (min-width:800px) {
+  .c0 .host-layout-header {
+    height: 130px;
+  }
+
+  .c0 .components .left {
+    min-width: 450px;
+  }
+
+  .c0 .components .host-layout-header h2 {
+    font-size: 2.5rem;
+    margin-bottom: -4px;
+    line-height: 2rem;
+  }
+}
+
+@media (min-width:2000px) {
+  .c0 .components .left {
+    min-width: 700px;
+  }
+
+  .c0 .components .host-layout-header h2 {
+    font-size: 3.5rem;
+    margin-bottom: -35px;
+    line-height: 7rem;
+  }
+}
+
+@media (min-width:3500px) {
+  .c0 .host-layout-header {
+    height: 200px;
+  }
+
+  .c0 .components .left {
+    min-width: 1100px;
+  }
+
+  .c0 .components .host-layout-header h2 {
+    font-size: 6rem;
+    margin-bottom: -25px;
+    line-height: 7rem;
+  }
+}
+
+<div
+  className="c0 primary-background"
+>
+  <div
+    className="hamburger-container"
+  >
+    <button
+      className="c1"
+      onClick={[Function]}
+    />
+  </div>
+  <div
+    className="components"
+  >
+    <div
+      className="left"
+    >
+      <header
+        className="c2 host-layout-header"
+      >
+        <h2>
+          CARDS OF CAROUSAL
+        </h2>
+      </header>
+      <p>
+        left
+      </p>
+    </div>
+    <div
+      className="right"
+    >
+      <p>
+        right
+      </p>
+    </div>
+  </div>
+</div>
+`;
