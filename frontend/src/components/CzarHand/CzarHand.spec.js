@@ -1,5 +1,7 @@
 import React from 'react';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+
 import CzarHand from './CzarHand';
 
 // eslint-disable-next-line react/prop-types
@@ -30,20 +32,23 @@ describe('CzarHand', () => {
       expect(cardWrappers[1].dataset.selection).toBe(undefined);
       expect(cardWrappers[2].dataset.selection).toBe(undefined);
     });
+
     describe('onSelect', () => {
       it('expects onselect to be called with the proper index of the selected card group', () => {
         render(
           <CzarHand cards={cards} selectedGroup={0} onSelect={mockSelect} />,
         );
         const cardWrappers = screen.queryAllByTestId('card-wrapper');
-        fireEvent.click(cardWrappers[0]);
+        userEvent.click(cardWrappers[0]);
         expect(mockSelect).toHaveBeenCalledWith(0);
       });
     });
+
     describe('invalid prop types', () => {
       const consoleSpy = jest
         .spyOn(console, 'error')
         .mockImplementation(() => {});
+
       it('logs an error to the console when no cards have been passed in', () => {
         expect(() => {
           render(
@@ -55,6 +60,7 @@ describe('CzarHand', () => {
           );
         }).toThrow();
       });
+
       it('logs an error to the console when no selected group has been passed in', () => {
         render(
           <CzarHand
@@ -65,6 +71,7 @@ describe('CzarHand', () => {
         );
         expect(consoleSpy).toHaveBeenCalled();
       });
+
       it('logs an error to the console when no onSelect function has been passed in', () => {
         render(
           <CzarHand cards={cards} selectedGroup={0} onSelect={undefined} />,

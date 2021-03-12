@@ -28,10 +28,7 @@ function CzarHand({ cards, selectedGroup, onSelect }) {
           onClick={() => handleClick(index)}
         >
           {group.map((card) => (
-            <WhiteCard
-              key={`${card}`}
-              flipped={!unFlippedGroups.includes(index)}
-            >
+            <WhiteCard key={card} flipped={!unFlippedGroups.includes(index)}>
               {card}
             </WhiteCard>
           ))}
