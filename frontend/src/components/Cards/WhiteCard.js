@@ -5,10 +5,12 @@ import StackedCards from '../../assets/cards-stack-offset-light-icon.svg';
 
 const propTypes = {
   children: PropTypes.string,
+  flipped: PropTypes.bool,
 };
 
 const defaultProps = {
   children: '',
+  flipped: false,
 };
 
 const StyledWhiteCard = styled.div`
@@ -44,6 +46,10 @@ const StyledWhiteCard = styled.div`
     width: 32px;
   }
 
+  .backOfCard {
+    font-weight: 600;
+  }
+
   @media (min-width: 1025px) {
     width: 267px;
     height: 363px;
@@ -63,16 +69,30 @@ const StyledWhiteCard = styled.div`
   }
 `;
 
-function WhiteCard({ children }) {
+function WhiteCard({ children, flipped }) {
   return (
-    <StyledWhiteCard shrinkFont={children.length > 75} data-testid="white-card">
-      <div className="whiteCardText">
-        <div>{children}</div>
-      </div>
-      {!(children.length > 75) && (
-        <div className="stackedCards" data-testid="stacked-cards">
-          <img src={StackedCards} alt="stacked cards" />
-        </div>
+    <StyledWhiteCard
+      shrinkFont={children.length > 75 && !flipped}
+      data-testid="white-card"
+    >
+      {flipped && (
+        <p className="backOfCard">
+          Cards <br /> of <br /> Carousal
+        </p>
+      )}
+
+      {!flipped && (
+        <>
+          <div className="whiteCardText">
+            <div>{children}</div>
+          </div>
+
+          {!(children.length > 75) && (
+            <div className="stackedCards" data-testid="stacked-cards">
+              <img src={StackedCards} alt="stacked cards" />
+            </div>
+          )}
+        </>
       )}
     </StyledWhiteCard>
   );
