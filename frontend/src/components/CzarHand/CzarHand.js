@@ -1,6 +1,4 @@
-/* eslint-disable */
 import React, { useState } from 'react';
-import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import CardWrapper from '../CardWrapper/CardWrapper';
 import WhiteCard from '../Cards/WhiteCard';
