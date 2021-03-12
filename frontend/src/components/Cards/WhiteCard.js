@@ -74,7 +74,6 @@ function WhiteCard({ children, flipped }) {
       shrinkFont={children.length > 75 && !flipped}
       data-testid="white-card"
     >
-      {/* TODO: Refactor to prevent small text for the back of the card */}
       {flipped && (
         <p className="backOfCard">
           Cards <br /> of <br /> Carousal
