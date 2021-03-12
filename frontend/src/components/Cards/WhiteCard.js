@@ -45,6 +45,10 @@ const StyledWhiteCard = styled.div`
     width: 32px;
   }
 
+  .backOfCard {
+    font-weight: 600;
+  }
+
   @media (min-width: 1025px) {
     width: 267px;
     height: 363px;
@@ -69,7 +73,7 @@ function WhiteCard({ children, flipped }) {
     <StyledWhiteCard shrinkFont={children.length > 75} data-testid="white-card">
       {/* TODO: Refactor to prevent small text for the back of the card */}
       {flipped && (
-        <p style={{ fontWeight: 600 }}>
+        <p className="backOfCard">
           Cards <br /> of <br /> Carousal
         </p>
       )}
