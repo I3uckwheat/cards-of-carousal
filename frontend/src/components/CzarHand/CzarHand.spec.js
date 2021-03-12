@@ -1,10 +1,14 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import CzarHand from './CzarHand';
 
-jest.mock('../CardWrapper/CardWrapper', () => ({ selection }) => (
-  <card-wrapper data-testid="card-wrapper" data-selection={selection} />
+// eslint-disable-next-line react/prop-types
+jest.mock('../CardWrapper/CardWrapper', () => ({ selection, onClick }) => (
+  <card-wrapper
+    data-testid="card-wrapper"
+    data-selection={selection}
+    onClick={onClick}
+  />
 ));
 
 describe('CzarHand', () => {
@@ -21,15 +25,20 @@ describe('CzarHand', () => {
       render(
         <CzarHand cards={cards} selectedGroup={0} onSelect={mockSelect} />,
       );
-      expect(screen.queryAllByTestId('card-wrapper')[0].dataset.selection).toBe(
-        'winner',
-      );
-      expect(screen.queryAllByTestId('card-wrapper')[1].dataset.selection).toBe(
-        undefined,
-      );
-      expect(screen.queryAllByTestId('card-wrapper')[2].dataset.selection).toBe(
-        undefined,
-      );
+      const cardWrappers = screen.queryAllByTestId('card-wrapper');
+      expect(cardWrappers[0].dataset.selection).toBe('winner');
+      expect(cardWrappers[1].dataset.selection).toBe(undefined);
+      expect(cardWrappers[2].dataset.selection).toBe(undefined);
+    });
+    describe('onSelect', () => {
+      it('expects onselect to be called with the proper index of the selected card group', () => {
+        render(
+          <CzarHand cards={cards} selectedGroup={0} onSelect={mockSelect} />,
+        );
+        const cardWrappers = screen.queryAllByTestId('card-wrapper');
+        fireEvent.click(cardWrappers[0]);
+        expect(mockSelect).toHaveBeenCalledWith(0);
+      });
     });
     describe('invalid prop types', () => {
       const consoleSpy = jest

@@ -25,7 +25,7 @@ function CzarHand({ cards, selectedGroup, onSelect }) {
     <>
       {cards.map((group, index) => (
         <CardWrapper
-          key={`${(group.toString(), index)}`}
+          key={group.toString()}
           selection={index === selectedGroup ? 'winner' : null}
           onClick={() => handleClick(index)}
         >

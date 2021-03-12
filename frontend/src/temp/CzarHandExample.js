@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import CzarHand from '../components/CzarHand/CzarHand';
