@@ -1,8 +1,15 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
+
 import Header from '../../Header/Header';
 import Button from '../../Buttons/Button';
 import Footer from '../../Footer/Footer';
+
+const propTypes = {
+  handleJoinClick: PropTypes.func.isRequired,
+  handleHostClick: PropTypes.func.isRequired,
+};
 
 const WelcomeScreenWrapper = styled.div`
   display: flex;
@@ -78,7 +85,7 @@ const WelcomeScreenWrapper = styled.div`
     align-items: center;
   }
 
-  .btn {
+  .button {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -138,7 +145,7 @@ const WelcomeScreenWrapper = styled.div`
       font-size: 1.7rem;
     }
 
-    .btn {
+    .button {
       width: 200px;
       height: 48px;
 
@@ -165,7 +172,7 @@ const WelcomeScreenWrapper = styled.div`
       display: none;
     }
 
-    .host-btn {
+    .host-button {
       display: none;
     }
 
@@ -236,7 +243,7 @@ const WelcomeScreenWrapper = styled.div`
       margin-right: 100px;
     }
 
-    .btn {
+    .button {
       width: 500px;
       height: 100px;
       border: solid black 4px;
@@ -285,7 +292,7 @@ const WelcomeScreenWrapper = styled.div`
       margin-right: 120px;
     }
 
-    .btn {
+    .button {
       width: 600px;
       height: 150px;
       border: solid black 4px;
@@ -294,7 +301,7 @@ const WelcomeScreenWrapper = styled.div`
   } 
 }`;
 
-function WelcomeScreen() {
+function WelcomeScreen({ handleJoinClick, handleHostClick }) {
   return (
     <WelcomeScreenWrapper className="primary-background">
       <Header className="header">
@@ -314,13 +321,23 @@ function WelcomeScreen() {
         </div>
 
         <div className="button-container">
-          <Button type="button" isActive className="btn">
+          <Button
+            type="button"
+            isActive
+            className="button"
+            onClick={handleJoinClick}
+          >
             <p>JOIN</p>
           </Button>
 
           <div className="OR">OR</div>
 
-          <Button type="button" isActive className="btn host-btn">
+          <Button
+            type="button"
+            isActive
+            className="button host-button"
+            onClick={handleHostClick}
+          >
             <p>HOST</p>
           </Button>
         </div>
@@ -331,3 +348,5 @@ function WelcomeScreen() {
 }
 
 export default WelcomeScreen;
+
+WelcomeScreen.propTypes = propTypes;
