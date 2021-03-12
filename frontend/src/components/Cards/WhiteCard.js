@@ -70,7 +70,10 @@ const StyledWhiteCard = styled.div`
 
 function WhiteCard({ children, flipped }) {
   return (
-    <StyledWhiteCard shrinkFont={children.length > 75} data-testid="white-card">
+    <StyledWhiteCard
+      shrinkFont={children.length > 75 && !flipped}
+      data-testid="white-card"
+    >
       {/* TODO: Refactor to prevent small text for the back of the card */}
       {flipped && (
         <p className="backOfCard">
