@@ -5,11 +5,12 @@ import StackedCards from '../../assets/cards-stack-offset-light-icon.svg';
 
 const propTypes = {
   children: PropTypes.string,
-  flipped: PropTypes.bool.isRequired,
+  flipped: PropTypes.bool,
 };
 
 const defaultProps = {
   children: '',
+  flipped: false,
 };
 
 const StyledWhiteCard = styled.div`
