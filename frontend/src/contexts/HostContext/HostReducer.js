@@ -25,17 +25,20 @@ function playerConnected(state, { playerId }) {
 }
 
 function playerDisconnected(state, { playerId }) {
-  const newPlayerIdsArray = state.playerIDs.filter(
+  // Removes the value playerId from the original playerIDs array
+  const newPlayerIds = state.playerIDs.filter(
     (playerID) => playerID !== playerId,
   );
 
-  const newPlayersObject = { ...state.players };
-  delete newPlayersObject[playerId];
+  // Removes the property [playerId] from the original players object
+  const { [playerId]: disconnectedPlayer, ...newPlayers } = {
+    ...state.players,
+  };
 
   return {
     ...state,
-    players: newPlayersObject,
-    playerIDs: newPlayerIdsArray,
+    players: newPlayers,
+    playerIDs: newPlayerIds,
   };
 }
 
