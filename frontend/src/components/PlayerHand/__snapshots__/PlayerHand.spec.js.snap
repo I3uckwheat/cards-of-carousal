@@ -1,0 +1,716 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PlayerHand renders correctly 1`] = `
+Array [
+  .c1 {
+  position: relative;
+  border: 1px solid var(--primary-text-color);
+  width: 148px;
+  height: 206px;
+  background-color: var(--primary-background-color);
+  color: var(--primary-text-color);
+  border-radius: 7px;
+  font-weight: 500;
+  font-size: 18px;
+  overflow-wrap: break-word;
+  line-height: 21px;
+  padding: 17px 15px 0 15px;
+  box-shadow: 0px 4px 12px rgba(0,0,0,0.25);
+}
+
+.c1 .whiteCardText {
+  max-height: 150px;
+  padding-right: 0;
+  overflow-y: auto;
+}
+
+.c1 .whiteCardText div {
+  padding-bottom: 20px;
+}
+
+.c1 .stackedCards {
+  position: absolute;
+  bottom: 7px;
+  left: 11px;
+  width: 32px;
+}
+
+.c0 {
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: start;
+  -webkit-justify-content: start;
+  -ms-flex-pack: start;
+  justify-content: start;
+  -webkit-align-items: start;
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  align-items: start;
+  padding: 16px 0px;
+  border-bottom: 5px solid var(--secondary-background-color);
+}
+
+.c0 .badge {
+  z-index: 10;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  position: absolute;
+  height: 27px;
+  width: 27px;
+  right: -10px;
+  top: 5px;
+  border-radius: 50%;
+  font-size: 16px;
+  background-color: var(--secondary-background-color);
+  color: var(--secondary-text-color);
+  font-weight: 600;
+}
+
+@media (min-width:1025px) {
+  .c1 {
+    width: 267px;
+    height: 363px;
+    font-size: 36px;
+    line-height: 42px;
+    padding: 30px 27px 0 27px;
+  }
+
+  .c1 .whiteCardText {
+    max-height: 280px;
+    padding-right: 0;
+  }
+
+  .c1 .stackedCards {
+    width: auto;
+  }
+}
+
+@media (min-width:1025px) {
+  .c0 .badge {
+    top: 0;
+    right: -15px;
+    height: 40px;
+    width: 40px;
+    font-size: 30px;
+  }
+}
+
+@media (min-width:1025px) {
+
+}
+
+<div
+    className="c0"
+    data-testid="card-wrapper"
+    onClick={[Function]}
+  >
+    <div
+      className="badge"
+    >
+      1
+    </div>
+    <div
+      className="c1"
+      data-testid="white-card"
+    >
+      <div
+        className="whiteCardText"
+      >
+        <div>
+          Briggs
+        </div>
+      </div>
+      <div
+        className="stackedCards"
+        data-testid="stacked-cards"
+      >
+        <img
+          alt="stacked cards"
+          src="cards-stack-offset-light-icon.svg"
+        />
+      </div>
+    </div>
+  </div>,
+  .c1 {
+  position: relative;
+  border: 1px solid var(--primary-text-color);
+  width: 148px;
+  height: 206px;
+  background-color: var(--primary-background-color);
+  color: var(--primary-text-color);
+  border-radius: 7px;
+  font-weight: 500;
+  font-size: 18px;
+  overflow-wrap: break-word;
+  line-height: 21px;
+  padding: 17px 15px 0 15px;
+  box-shadow: 0px 4px 12px rgba(0,0,0,0.25);
+}
+
+.c1 .whiteCardText {
+  max-height: 150px;
+  padding-right: 0;
+  overflow-y: auto;
+}
+
+.c1 .whiteCardText div {
+  padding-bottom: 20px;
+}
+
+.c1 .stackedCards {
+  position: absolute;
+  bottom: 7px;
+  left: 11px;
+  width: 32px;
+}
+
+.c0 {
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: start;
+  -webkit-justify-content: start;
+  -ms-flex-pack: start;
+  justify-content: start;
+  -webkit-align-items: start;
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  align-items: start;
+  padding: 16px 0px;
+  border-bottom: 5px solid var(--secondary-background-color);
+}
+
+.c0 .badge {
+  z-index: 10;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  position: absolute;
+  height: 27px;
+  width: 27px;
+  right: -10px;
+  top: 5px;
+  border-radius: 50%;
+  font-size: 16px;
+  background-color: var(--secondary-background-color);
+  color: var(--secondary-text-color);
+  font-weight: 600;
+}
+
+@media (min-width:1025px) {
+  .c1 {
+    width: 267px;
+    height: 363px;
+    font-size: 36px;
+    line-height: 42px;
+    padding: 30px 27px 0 27px;
+  }
+
+  .c1 .whiteCardText {
+    max-height: 280px;
+    padding-right: 0;
+  }
+
+  .c1 .stackedCards {
+    width: auto;
+  }
+}
+
+@media (min-width:1025px) {
+  .c0 .badge {
+    top: 0;
+    right: -15px;
+    height: 40px;
+    width: 40px;
+    font-size: 30px;
+  }
+}
+
+@media (min-width:1025px) {
+
+}
+
+<div
+    className="c0"
+    data-testid="card-wrapper"
+    onClick={[Function]}
+  >
+    <div
+      className="badge"
+    >
+      2
+    </div>
+    <div
+      className="c1"
+      data-testid="white-card"
+    >
+      <div
+        className="whiteCardText"
+      >
+        <div>
+          Bender
+        </div>
+      </div>
+      <div
+        className="stackedCards"
+        data-testid="stacked-cards"
+      >
+        <img
+          alt="stacked cards"
+          src="cards-stack-offset-light-icon.svg"
+        />
+      </div>
+    </div>
+  </div>,
+  .c1 {
+  position: relative;
+  border: 1px solid var(--primary-text-color);
+  width: 148px;
+  height: 206px;
+  background-color: var(--primary-background-color);
+  color: var(--primary-text-color);
+  border-radius: 7px;
+  font-weight: 500;
+  font-size: 18px;
+  overflow-wrap: break-word;
+  line-height: 21px;
+  padding: 17px 15px 0 15px;
+  box-shadow: 0px 4px 12px rgba(0,0,0,0.25);
+}
+
+.c1 .whiteCardText {
+  max-height: 150px;
+  padding-right: 0;
+  overflow-y: auto;
+}
+
+.c1 .whiteCardText div {
+  padding-bottom: 20px;
+}
+
+.c1 .stackedCards {
+  position: absolute;
+  bottom: 7px;
+  left: 11px;
+  width: 32px;
+}
+
+.c0 {
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: start;
+  -webkit-justify-content: start;
+  -ms-flex-pack: start;
+  justify-content: start;
+  -webkit-align-items: start;
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  align-items: start;
+  padding: 16px 0px;
+  border-bottom: none;
+}
+
+.c0 .badge {
+  z-index: 10;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  position: absolute;
+  height: 27px;
+  width: 27px;
+  right: -10px;
+  top: 5px;
+  border-radius: 50%;
+  font-size: 16px;
+  background-color: var(--secondary-background-color);
+  color: var(--secondary-text-color);
+  font-weight: 600;
+}
+
+@media (min-width:1025px) {
+  .c1 {
+    width: 267px;
+    height: 363px;
+    font-size: 36px;
+    line-height: 42px;
+    padding: 30px 27px 0 27px;
+  }
+
+  .c1 .whiteCardText {
+    max-height: 280px;
+    padding-right: 0;
+  }
+
+  .c1 .stackedCards {
+    width: auto;
+  }
+}
+
+@media (min-width:1025px) {
+
+}
+
+@media (min-width:1025px) {
+  .c0 .badge {
+    top: 0;
+    right: -15px;
+    height: 40px;
+    width: 40px;
+    font-size: 30px;
+  }
+}
+
+<div
+    className="c0"
+    data-testid="card-wrapper"
+    onClick={[Function]}
+  >
+    <div
+      className="c1"
+      data-testid="white-card"
+    >
+      <div
+        className="whiteCardText"
+      >
+        <div>
+          Grace
+        </div>
+      </div>
+      <div
+        className="stackedCards"
+        data-testid="stacked-cards"
+      >
+        <img
+          alt="stacked cards"
+          src="cards-stack-offset-light-icon.svg"
+        />
+      </div>
+    </div>
+  </div>,
+  .c1 {
+  position: relative;
+  border: 1px solid var(--primary-text-color);
+  width: 148px;
+  height: 206px;
+  background-color: var(--primary-background-color);
+  color: var(--primary-text-color);
+  border-radius: 7px;
+  font-weight: 500;
+  font-size: 18px;
+  overflow-wrap: break-word;
+  line-height: 21px;
+  padding: 17px 15px 0 15px;
+  box-shadow: 0px 4px 12px rgba(0,0,0,0.25);
+}
+
+.c1 .whiteCardText {
+  max-height: 150px;
+  padding-right: 0;
+  overflow-y: auto;
+}
+
+.c1 .whiteCardText div {
+  padding-bottom: 20px;
+}
+
+.c1 .stackedCards {
+  position: absolute;
+  bottom: 7px;
+  left: 11px;
+  width: 32px;
+}
+
+.c0 {
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: start;
+  -webkit-justify-content: start;
+  -ms-flex-pack: start;
+  justify-content: start;
+  -webkit-align-items: start;
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  align-items: start;
+  padding: 16px 0px;
+  border-bottom: none;
+}
+
+.c0 .badge {
+  z-index: 10;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  position: absolute;
+  height: 27px;
+  width: 27px;
+  right: -10px;
+  top: 5px;
+  border-radius: 50%;
+  font-size: 16px;
+  background-color: var(--secondary-background-color);
+  color: var(--secondary-text-color);
+  font-weight: 600;
+}
+
+@media (min-width:1025px) {
+  .c1 {
+    width: 267px;
+    height: 363px;
+    font-size: 36px;
+    line-height: 42px;
+    padding: 30px 27px 0 27px;
+  }
+
+  .c1 .whiteCardText {
+    max-height: 280px;
+    padding-right: 0;
+  }
+
+  .c1 .stackedCards {
+    width: auto;
+  }
+}
+
+@media (min-width:1025px) {
+
+}
+
+@media (min-width:1025px) {
+  .c0 .badge {
+    top: 0;
+    right: -15px;
+    height: 40px;
+    width: 40px;
+    font-size: 30px;
+  }
+}
+
+<div
+    className="c0"
+    data-testid="card-wrapper"
+    onClick={[Function]}
+  >
+    <div
+      className="c1"
+      data-testid="white-card"
+    >
+      <div
+        className="whiteCardText"
+      >
+        <div>
+          hi
+        </div>
+      </div>
+      <div
+        className="stackedCards"
+        data-testid="stacked-cards"
+      >
+        <img
+          alt="stacked cards"
+          src="cards-stack-offset-light-icon.svg"
+        />
+      </div>
+    </div>
+  </div>,
+  .c1 {
+  position: relative;
+  border: 1px solid var(--primary-text-color);
+  width: 148px;
+  height: 206px;
+  background-color: var(--primary-background-color);
+  color: var(--primary-text-color);
+  border-radius: 7px;
+  font-weight: 500;
+  font-size: 18px;
+  overflow-wrap: break-word;
+  line-height: 21px;
+  padding: 17px 15px 0 15px;
+  box-shadow: 0px 4px 12px rgba(0,0,0,0.25);
+}
+
+.c1 .whiteCardText {
+  max-height: 150px;
+  padding-right: 0;
+  overflow-y: auto;
+}
+
+.c1 .whiteCardText div {
+  padding-bottom: 20px;
+}
+
+.c1 .stackedCards {
+  position: absolute;
+  bottom: 7px;
+  left: 11px;
+  width: 32px;
+}
+
+.c0 {
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: start;
+  -webkit-justify-content: start;
+  -ms-flex-pack: start;
+  justify-content: start;
+  -webkit-align-items: start;
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  align-items: start;
+  padding: 16px 0px;
+  border-bottom: none;
+}
+
+.c0 .badge {
+  z-index: 10;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  position: absolute;
+  height: 27px;
+  width: 27px;
+  right: -10px;
+  top: 5px;
+  border-radius: 50%;
+  font-size: 16px;
+  background-color: var(--secondary-background-color);
+  color: var(--secondary-text-color);
+  font-weight: 600;
+}
+
+@media (min-width:1025px) {
+  .c1 {
+    width: 267px;
+    height: 363px;
+    font-size: 36px;
+    line-height: 42px;
+    padding: 30px 27px 0 27px;
+  }
+
+  .c1 .whiteCardText {
+    max-height: 280px;
+    padding-right: 0;
+  }
+
+  .c1 .stackedCards {
+    width: auto;
+  }
+}
+
+@media (min-width:1025px) {
+
+}
+
+@media (min-width:1025px) {
+  .c0 .badge {
+    top: 0;
+    right: -15px;
+    height: 40px;
+    width: 40px;
+    font-size: 30px;
+  }
+}
+
+<div
+    className="c0"
+    data-testid="card-wrapper"
+    onClick={[Function]}
+  >
+    <div
+      className="c1"
+      data-testid="white-card"
+    >
+      <div
+        className="whiteCardText"
+      >
+        <div>
+          bye
+        </div>
+      </div>
+      <div
+        className="stackedCards"
+        data-testid="stacked-cards"
+      >
+        <img
+          alt="stacked cards"
+          src="cards-stack-offset-light-icon.svg"
+        />
+      </div>
+    </div>
+  </div>,
+]
+`;

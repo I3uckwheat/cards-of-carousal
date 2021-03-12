@@ -3,14 +3,28 @@ import React from 'react';
 import './reset.css';
 import './App.css';
 
-import LayoutExample from './temp/PlayHandLayoutExample';
+import WelcomeScreen from './components/screens/WelcomeScreen/WelcomeScreen';
+import HostScreenController from './components/screenControllers/HostScreenController/HostScreenController';
+import PlayerScreenController from './components/screenControllers/PlayerScreenController/PlayerScreenController';
 
 function App() {
-  return (
-    <div className="App primary-background">
-      <LayoutExample />
-    </div>
-  );
+  const [screenControllerType, setScreenControllerType] = useState('welcome');
+
+  switch (screenControllerType) {
+    case 'player':
+      return <PlayerScreenController />;
+    case 'host':
+      return <HostScreenController />;
+    case 'welcome':
+      return (
+        <WelcomeScreen
+          handleJoinClick={() => setScreenControllerType('player')}
+          handleHostClick={() => setScreenControllerType('host')}
+        />
+      );
+    default:
+      throw new Error('Unhandled screenControllerType state');
+  }
 }
 
 export default App;

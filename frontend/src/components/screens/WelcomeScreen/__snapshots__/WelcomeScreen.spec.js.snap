@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`WelcomeScreen renders correctly 1`] = `
+exports[`WelcomeScreen render renders correctly 1`] = `
 .c1 {
   width: 100%;
   background-color: var(--secondary-background-color);
@@ -157,7 +157,7 @@ exports[`WelcomeScreen renders correctly 1`] = `
   align-items: center;
 }
 
-.c0 .btn {
+.c0 .button {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -266,7 +266,7 @@ exports[`WelcomeScreen renders correctly 1`] = `
     font-size: 1.7rem;
   }
 
-  .c0 .btn {
+  .c0 .button {
     width: 200px;
     height: 48px;
     font-size: 2.5rem;
@@ -290,7 +290,7 @@ exports[`WelcomeScreen renders correctly 1`] = `
     display: none;
   }
 
-  .c0 .host-btn {
+  .c0 .host-button {
     display: none;
   }
 
@@ -359,7 +359,7 @@ exports[`WelcomeScreen renders correctly 1`] = `
     margin-right: 100px;
   }
 
-  .c0 .btn {
+  .c0 .button {
     width: 500px;
     height: 100px;
     border: solid black 4px;
@@ -404,7 +404,7 @@ exports[`WelcomeScreen renders correctly 1`] = `
     margin-right: 120px;
   }
 
-  .c0 .btn {
+  .c0 .button {
     width: 600px;
     height: 150px;
     border: solid black 4px;
@@ -457,7 +457,8 @@ exports[`WelcomeScreen renders correctly 1`] = `
       className="button-container"
     >
       <button
-        className="c2 btn"
+        className="c2 button"
+        onClick={[Function]}
         type="button"
       >
         <p>
@@ -470,7 +471,8 @@ exports[`WelcomeScreen renders correctly 1`] = `
         OR
       </div>
       <button
-        className="c2 btn host-btn"
+        className="c2 button host-button"
+        onClick={[Function]}
         type="button"
       >
         <p>
