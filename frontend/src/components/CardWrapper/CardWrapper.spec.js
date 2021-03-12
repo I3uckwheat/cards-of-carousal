@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-
+import userEvent from '@testing-library/user-event';
 import CardWrapper from './CardWrapper';
 import WhiteCard from '../Cards/WhiteCard';
 
@@ -41,6 +41,31 @@ describe('CardWrapper', () => {
       expect(screen.getByText('★')).toBeInTheDocument();
     });
   });
+  describe('onClick', () => {
+    it('does not call the onClick callback when it has not been clicked', () => {
+      const onClick = jest.fn();
+
+      render(
+        <CardWrapper selection={1} onClick={onClick}>
+          <WhiteCard />
+        </CardWrapper>,
+      );
+
+      expect(onClick).not.toHaveBeenCalled();
+    });
+    it('calls the onClick callback when clicked', () => {
+      const onClick = jest.fn();
+
+      render(
+        <CardWrapper selection={1} onClick={onClick}>
+          <WhiteCard />
+        </CardWrapper>,
+      );
+      userEvent.click(screen.getByTestId('card-wrapper'));
+      expect(onClick).toHaveBeenCalledTimes(1);
+    });
+  });
+
   describe('invalid prop types', () => {
     const consoleSpy = jest
       .spyOn(console, 'error')
