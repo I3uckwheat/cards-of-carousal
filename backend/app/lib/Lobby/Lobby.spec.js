@@ -1,25 +1,23 @@
 const Lobby = require('./Lobby');
 
-let createSocket = (id) => {
-  return {
-    id,
-    on: jest.fn(),
-    send: jest.fn(),
-    close: jest.fn(),
-  };
-};
+const createSocket = (id) => ({
+  id,
+  on: jest.fn(),
+  send: jest.fn(),
+  close: jest.fn(),
+});
 
 describe('Lobby', () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });
-  
+
   describe('constructor', () => {
     it('gives the lobby a unique ID and sends message through the socket', () => {
-      let hostSocket = createSocket("socketId");
-      let onCloseCallBack = jest.fn();
-      let lobby = new Lobby(hostSocket, onCloseCallBack);
-      let messageObject = {
+      const hostSocket = createSocket('socketId');
+      const onCloseCallBack = jest.fn();
+      const lobby = new Lobby(hostSocket, onCloseCallBack);
+      const messageObject = {
         event: 'create-lobby',
         payload: { id: lobby.id },
         sender: 'server',
@@ -30,21 +28,21 @@ describe('Lobby', () => {
       expect(hostSocket.send).toBeCalledWith(JSON.stringify(messageObject));
     });
   });
-  
+
   describe('has multiple players', () => {
-    let hostSocket = createSocket("socketId");
-    let onCloseCallBack = jest.fn();
-    let lobby = new Lobby(hostSocket, onCloseCallBack);
-    let playerSocket = createSocket('player1Id');
-    let messageObject = {
+    const hostSocket = createSocket('socketId');
+    const onCloseCallBack = jest.fn();
+    const lobby = new Lobby(hostSocket, onCloseCallBack);
+    const playerSocket = createSocket('player1Id');
+    const messageObject = {
       event: '',
       payload: {},
       sender: 'server',
     };
-    
+
     describe('addPlayer', () => {
       it('can add a player and sends message through the socket', () => {
-        messageObject.event = 'player-connect';
+        messageObject.event = 'player-connected';
         messageObject.payload = { playerId: playerSocket.id };
         lobby.addPlayer(playerSocket);
         expect(playerSocket.on).toBeCalledWith('message', expect.any(Function));
@@ -52,10 +50,10 @@ describe('Lobby', () => {
         expect(hostSocket.send).toBeCalledWith(JSON.stringify(messageObject));
       });
     });
-    
+
     describe('closeLobby', () => {
       it('can close a lobby and send message through the socket for each player', () => {
-        let playerSocketTwo = createSocket('player2Id');
+        const playerSocketTwo = createSocket('player2Id');
         messageObject.event = 'lobby-closed';
         messageObject.payload = {};
 
