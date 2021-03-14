@@ -42,8 +42,7 @@ const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin: 24px auto 24px 60px;
-  width: 100%;
+  padding: 24px 0 24px 60px;
 
   .number-input-wrapper label {
     display: flex;
@@ -168,7 +167,7 @@ function GameSettings({ options, onChange }) {
         <div className="select-wrapper">
           <h2>SELECT CARD PACKS</h2>
 
-          <fieldset className="card-packs">
+          <div className="card-packs">
             {cardPacks.map((name, index) => (
               <label htmlFor={name} key={name}>
                 <input
@@ -182,7 +181,7 @@ function GameSettings({ options, onChange }) {
                 {name}
               </label>
             ))}
-          </fieldset>
+          </div>
         </div>
       </StyledForm>
     </StyledGameSettings>
