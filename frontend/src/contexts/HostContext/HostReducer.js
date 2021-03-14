@@ -1,9 +1,8 @@
 import socketInstance from '../../socket/socket';
 
-function createLobby(state, { id }) {
+function createLobby(state) {
   return {
     ...state,
-    lobbyID: id,
     gameState: 'waiting-for-players',
   };
 }
@@ -42,13 +41,20 @@ function playerDisconnected(state, { playerId }) {
   };
 }
 
+function setLobbyId(state, { id }) {
+  return {
+    ...state,
+    lobbyID: id,
+  };
+}
+
 function HostReducer(state, action) {
   const { type, payload } = action;
 
   switch (type) {
     case 'CREATE_LOBBY':
       socketInstance.createLobby();
-      return createLobby(state, payload);
+      return createLobby(state);
 
     case 'PLAYER_CONNECTED':
       socketInstance.sendMessage({
@@ -64,6 +70,9 @@ function HostReducer(state, action) {
 
     case 'PLAYER_DISCONNECTED':
       return playerDisconnected(state, payload);
+
+    case 'SET_LOBBY_ID':
+      return setLobbyId(state, payload);
 
     default:
       return { ...state };

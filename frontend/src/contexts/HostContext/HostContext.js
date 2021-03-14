@@ -28,6 +28,8 @@ function HostProvider({ children }) {
         return dispatch({ type: 'PLAYER_CONNECTED', payload });
       case 'player-disconnected':
         return dispatch({ type: 'PLAYER_DISCONNECTED', payload });
+      case 'create-lobby':
+        return dispatch({ type: 'SET_LOBBY_ID', payload });
       default:
         return undefined;
     }
