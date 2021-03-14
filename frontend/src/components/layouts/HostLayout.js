@@ -49,6 +49,7 @@ const HostLayoutContainer = styled.div`
   }
 
   .components .left {
+    position: relative;
     display: flex;
     flex-direction: column;
     min-width: 200px;
@@ -58,6 +59,7 @@ const HostLayoutContainer = styled.div`
 
   .components .right {
     flex-grow: 1;
+    position: relative;
   }
 
   @media (min-width: 800px) {
