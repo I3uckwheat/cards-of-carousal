@@ -1,10 +1,15 @@
 import React from 'react';
-import HostScreenExample from '../../../temp/HostScreenExample';
+import HostProvider from '../../../contexts/HostContext/HostContext';
+import HostScreen from './HostScreen';
 
 const propTypes = {};
 
 export default function HostScreenController() {
-  return <HostScreenExample />;
+  return (
+    <HostProvider>
+      <HostScreen />
+    </HostProvider>
+  );
 }
 
 HostScreenController.propTypes = propTypes;
