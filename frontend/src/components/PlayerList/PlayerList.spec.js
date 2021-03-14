@@ -20,7 +20,7 @@ describe('PlayerList', () => {
           submittedCards: [],
         },
       },
-      playersIDs: ['playerID1', 'playerID2'],
+      playerIDs: ['playerID1', 'playerID2'],
     };
 
     render(<PlayerList playerList={playerList} />);
@@ -49,7 +49,7 @@ describe('PlayerList', () => {
           submittedCards: [],
         },
       },
-      playersIDs: ['playerID1', 'playerID2'],
+      playerIDs: ['playerID1', 'playerID2'],
     };
 
     render(<PlayerList playerList={playerList} />);
@@ -72,7 +72,7 @@ describe('PlayerList', () => {
           submittedCards: [],
         },
       },
-      playersIDs: ['playerID1'],
+      playerIDs: ['playerID1'],
     };
 
     render(<PlayerList playerList={playerList} />);
@@ -82,10 +82,10 @@ describe('PlayerList', () => {
     ).not.toBeVisible();
   });
 
-  it('If playersIDs is empty, PlayerList still renders as an empty container', () => {
+  it('If playerIDs is empty, PlayerList still renders as an empty container', () => {
     const playerList = {
       players: {},
-      playersIDs: [],
+      playerIDs: [],
     };
 
     render(<PlayerList playerList={playerList} />);
@@ -93,7 +93,7 @@ describe('PlayerList', () => {
     expect(screen.getByTestId('playerList-container')).toBeInTheDocument();
   });
 
-  it('If the player object goes in a different order than playersIDs, the component follow playersIDs order', () => {
+  it('If the player object goes in a different order than playerIDs, the component follow playerIDs order', () => {
     const playerList = {
       players: {
         playerID1: {
@@ -109,7 +109,7 @@ describe('PlayerList', () => {
           submittedCards: [],
         },
       },
-      playersIDs: ['playerID2', 'playerID1'],
+      playerIDs: ['playerID2', 'playerID1'],
     };
 
     render(<PlayerList playerList={playerList} />);

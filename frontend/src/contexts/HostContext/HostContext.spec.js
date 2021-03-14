@@ -99,7 +99,8 @@ describe('Context', () => {
         const { state, dispatch } = useContext(HostContext);
 
         useEffect(() => {
-          dispatch({ type: 'CREATE_LOBBY', payload: { id: 'foo' } });
+          dispatch({ type: 'CREATE_LOBBY', payload: {} });
+          dispatch({ type: 'SET_LOBBY_ID', payload: { id: 'foo' } });
         }, []);
 
         return (

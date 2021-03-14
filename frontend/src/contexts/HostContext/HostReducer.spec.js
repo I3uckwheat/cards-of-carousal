@@ -26,7 +26,7 @@ describe('reducer', () => {
   });
 
   describe('CREATE_LOBBY', () => {
-    it('updates gameState to waiting-for-players and lobbyID to whatever value is passed in', () => {
+    it('updates gameState to waiting-for-players', () => {
       const state = {
         gameState: 'foo',
         lobbyID: 'bar',
@@ -34,25 +34,39 @@ describe('reducer', () => {
 
       const result = HostReducer(state, {
         type: 'CREATE_LOBBY',
-        payload: { id: '1234' },
+        payload: {},
       });
       expect(result).not.toBe(state);
       expect(result.gameState).toBe('waiting-for-players');
-      expect(result.lobbyID).toBe('1234');
     });
 
     it("calls socket's createLobby() function", () => {
       const state = {
         gameState: 'foo',
-        lobbyID: 'bar',
       };
 
       HostReducer(state, {
         type: 'CREATE_LOBBY',
-        payload: { id: '1234' },
+        payload: {},
       });
 
       expect(socketInstance.createLobby).toHaveBeenCalled();
+    });
+  });
+
+  describe('SET_LOBBY_ID', () => {
+    it('sets the lobby ID given by the socket emitter', () => {
+      const state = {
+        gameState: 'foo',
+        lobbyID: 'bar',
+      };
+
+      const result = HostReducer(state, {
+        type: 'SET_LOBBY_ID',
+        payload: { id: 'baz' },
+      });
+
+      expect(result.lobbyID).toBe('baz');
     });
   });
 
@@ -72,9 +86,9 @@ describe('reducer', () => {
       expect(result.players).toMatchObject({
         'example-player-id': {
           name: 'example-player-id',
-          score: '0',
-          isCzar: false,
-          cards: [],
+          score: 0,
+          czar: false,
+          submittedCards: [],
         },
       });
     });

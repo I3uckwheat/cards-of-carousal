@@ -16,7 +16,7 @@ const propTypes = {
       }),
     ).isRequired,
 
-    playersIDs: PropTypes.arrayOf(PropTypes.string).isRequired,
+    playerIDs: PropTypes.arrayOf(PropTypes.string).isRequired,
   }).isRequired,
 };
 
@@ -79,9 +79,7 @@ const PlayerRow = styled.div`
   }
 `;
 function PlayerList({ playerList }) {
-  const playersArray = playerList.playersIDs.map(
-    (id) => playerList.players[id],
-  );
+  const playersArray = playerList.playerIDs.map((id) => playerList.players[id]);
 
   return (
     <PlayerTable data-testid="playerList-container">
