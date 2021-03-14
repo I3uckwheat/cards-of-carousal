@@ -14,9 +14,9 @@ function playerConnected(state, { playerId }) {
       ...state.players,
       [playerId]: {
         name: playerId,
-        score: '0',
-        isCzar: false,
-        cards: [],
+        score: 0,
+        czar: false,
+        submittedCards: [],
       },
     },
     playerIDs: [...state.playerIDs, playerId],
