@@ -10,7 +10,9 @@ export default function HostScreen() {
     case 'waiting-for-lobby':
       return <HostScreenExample />;
     default:
-      return null;
+      throw new Error(
+        `Unrecognized game state: ${hostContext.state.gameState}`,
+      );
   }
 }
 
