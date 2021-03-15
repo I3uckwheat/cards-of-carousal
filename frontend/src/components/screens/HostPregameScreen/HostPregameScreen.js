@@ -1,44 +1,144 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import styled from 'styled-components';
+import { HostContext } from '../../../contexts/HostContext/HostContext';
 import HostLayout from '../../layouts/HostLayout';
 import PlayerList from '../../PlayerList/PlayerList';
 import GameSettings from '../../GameSettings/GameSettings';
 import HostSettingsMenu from '../../HostSettingsMenu/HostSettingsMenu.js';
-import playerListExample from '../../../temp/playerList';
+import JoinCode from '../../JoinCode/JoinCode';
+import Button from '../../Buttons/Button';
+import socketInstance from '../../../socket/socket';
 
-const RightPanelWrapper = styled.div`
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  left: 0;
+const PanelWrapper = styled.div`
   display: flex;
   flex-direction: column;
 
+  &.right-panel {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+  }
+
+  &.left-panel {
+    height: 100%;
+  }
+
+  .player-list-wrapper {
+    overflow-x: auto;
+    border-bottom: 1px solid var(--primary-text-color);
+    flex-grow: 1;
+  }
+
+  .buttons-wrapper {
+    display: block;
+    margin-bottom: 20px;
+  }
+
   .top {
+    display: flex;
     height: 60%;
   }
 
   .bottom {
     height: 40%;
   }
+
+  .bottom-left-wrapper {
+    margin: 20px auto 32px;
+    position: relative;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+
+  .join-code-wrapper {
+    display: flex;
+    justify-content: center;
+  }
+
+  .host-pregame-button {
+    padding: 0;
+    background-color: var(--primary-background-color);
+    color: var(--primary-text-color);
+    margin: auto auto 12px;
+  }
+
+  .start-carousing {
+    font-size: 0.875rem;
+    padding: 16px 34px;
+  }
+
+  .close-game {
+    font-size: 0.625rem;
+    padding: 8px 20px;
+  }
+
+  .game-description {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: var(--primary-background-color);
+    align-self: center;
+    margin: 24px;
+    padding: 8px;
+    border-radius: 5px;
+    font-size: 1.8rem;
+    font-weight: 700;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.25);
+    p {
+      margin: 16px 0;
+    }
+  }
 `;
 
 function HostPregameScreen() {
-  const [playerList, setPlayerList] = useState(playerListExample);
+  const { state, dispatch } = useContext(HostContext);
 
-  // eslint-disable-next-line no-unused-vars
-  const onChangePlayerList = (newList) => {
-    setPlayerList(newList);
-  };
+  useEffect(() => {
+    window.dispatch = dispatch;
+    window.state = state;
+    window.socket = socketInstance;
+  }, []);
+
+  useEffect(() => {
+    dispatch({ type: 'CREATE_LOBBY', payload: {} });
+  }, []);
 
   return (
     <HostLayout
       className="primary-background"
-      left={<PlayerList playerList={playerList} />}
+      left={<LeftPanel />}
       right={<RightPanel />}
       modal={<HostSettingsMenu />}
     />
+  );
+}
+
+function LeftPanel() {
+  const { state } = useContext(HostContext);
+  const { players, playerIDs, lobbyID } = state;
+
+  return (
+    <PanelWrapper className="left-panel">
+      <div className="player-list-wrapper">
+        <PlayerList playerList={{ players, playerIDs }} />
+      </div>
+      <div className="bottom-left-wrapper">
+        <div className="buttons-wrapper">
+          <Button className="host-pregame-button">
+            <div className="start-carousing">START CAROUSING</div>
+          </Button>
+          <Button className="host-pregame-button">
+            <div className="close-game">CLOSE GAME</div>
+          </Button>
+        </div>
+        <div className="join-code-wrapper">
+          <JoinCode code={lobbyID} />
+        </div>
+      </div>
+    </PanelWrapper>
   );
 }
 
@@ -52,12 +152,24 @@ function RightPanel() {
     setOptions(settings);
   };
   return (
-    <RightPanelWrapper>
-      <div className="top">Test top</div>
+    <PanelWrapper className="right-panel">
+      <div className="top">
+        <div className="game-description">
+          <p>Cards of Carousal is a game for lorem ipsum dolor.</p>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse,
+            doloribus quaerat incidunt excepturi odit eos!
+          </p>
+          <p>
+            Qui delectus laboriosam aperiam maxime optio, architecto asperiores,
+            at ullam.
+          </p>
+        </div>
+      </div>
       <div className="bottom">
         <GameSettings options={options} onChange={onChangeSettings} />
       </div>
-    </RightPanelWrapper>
+    </PanelWrapper>
   );
 }
 
