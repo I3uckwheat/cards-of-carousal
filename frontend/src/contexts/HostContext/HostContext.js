@@ -15,6 +15,7 @@ const initialState = {
   lobbyID: '',
   players: {},
   playerIDs: [],
+  gameSettings: { maxPlayers: 8, winningScore: 7, selectedPacks: [] },
 };
 
 export const HostContext = createContext();

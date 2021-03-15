@@ -48,6 +48,68 @@ function setLobbyId(state, { id }) {
   };
 }
 
+function setGameState(state, { gameState }) {
+  return {
+    ...state,
+    gameState,
+  };
+}
+
+function setGameSettings(state, { gameSettings }) {
+  return {
+    ...state,
+    gameSettings,
+  };
+}
+
+function setNewCzar(state) {
+  // if there is currently a czar, set the czar to the next player in the array
+  // else, pick a random czar
+  const { players, playerIDs } = state;
+
+  // find the current czar
+  const currentCzar = playerIDs.find((player) => players[player].czar);
+
+  // set the new czar to the old one + 1 in the array, or choose one at random
+  const nextIndex =
+    playerIDs.indexOf(currentCzar) < playerIDs.length - 1
+      ? playerIDs.indexOf(currentCzar) + 1
+      : 0;
+
+  const newCzar = currentCzar
+    ? playerIDs[nextIndex]
+    : playerIDs[Math.floor(Math.random() * playerIDs.length)];
+
+  // set the new czar in the players object.
+  if (currentCzar) {
+    return {
+      ...state,
+      players: {
+        ...players,
+        [newCzar]: {
+          ...players[newCzar],
+          czar: true,
+        },
+        [currentCzar]: {
+          ...players[currentCzar],
+          czar: false,
+        },
+      },
+    };
+  }
+
+  return {
+    ...state,
+    players: {
+      ...players,
+      [newCzar]: {
+        ...players[newCzar],
+        czar: true,
+      },
+    },
+  };
+}
+
 function HostReducer(state, action) {
   const { type, payload } = action;
 
@@ -73,6 +135,15 @@ function HostReducer(state, action) {
 
     case 'SET_LOBBY_ID':
       return setLobbyId(state, payload);
+
+    case 'SET_GAME_STATE':
+      return setGameState(state, payload);
+
+    case 'SET_GAME_SETTINGS':
+      return setGameSettings(state, payload);
+
+    case 'SET_NEW_CZAR':
+      return setNewCzar(state);
 
     default:
       return { ...state };

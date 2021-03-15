@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import styled from 'styled-components';
 import { HostContext } from '../../../contexts/HostContext/HostContext';
 import HostLayout from '../../layouts/HostLayout';
@@ -100,7 +100,7 @@ function HostPregameScreen() {
     window.dispatch = dispatch;
     window.state = state;
     window.socket = socketInstance;
-  }, []);
+  }, [state, socketInstance, dispatch]);
 
   useEffect(() => {
     dispatch({ type: 'CREATE_LOBBY', payload: {} });
@@ -109,16 +109,27 @@ function HostPregameScreen() {
   return (
     <HostLayout
       className="primary-background"
-      left={<LeftPanel />}
-      right={<RightPanel />}
+      left={<LeftPanel state={state} dispatch={dispatch} />}
+      right={<RightPanel state={state} dispatch={dispatch} />}
       modal={<HostSettingsMenu />}
     />
   );
 }
 
 function LeftPanel() {
-  const { state } = useContext(HostContext);
+  const { state, dispatch } = useContext(HostContext);
   const { players, playerIDs, lobbyID } = state;
+
+  const handleClickStart = () => {
+    dispatch({
+      type: 'SET_GAME_STATE',
+      payload: { gameState: 'waiting-for-deck' },
+    });
+    dispatch({
+      type: 'SET_NEW_CZAR',
+      payload: {},
+    });
+  };
 
   return (
     <PanelWrapper className="left-panel">
@@ -127,7 +138,7 @@ function LeftPanel() {
       </div>
       <div className="bottom-left-wrapper">
         <div className="buttons-wrapper">
-          <Button className="host-pregame-button">
+          <Button className="host-pregame-button" onClick={handleClickStart}>
             <div className="start-carousing">START CAROUSING</div>
           </Button>
           <Button className="host-pregame-button">
@@ -143,14 +154,16 @@ function LeftPanel() {
 }
 
 function RightPanel() {
-  const [options, setOptions] = useState({
-    maxPlayers: 8,
-    winningScore: 7,
-    selectedPacks: [],
-  });
+  const { state, dispatch } = useContext(HostContext);
+  const { gameSettings } = state;
+
   const onChangeSettings = (settings) => {
-    setOptions(settings);
+    dispatch({
+      type: 'SET_GAME_SETTINGS',
+      payload: { gameSettings: settings },
+    });
   };
+
   return (
     <PanelWrapper className="right-panel">
       <div className="top">
@@ -167,7 +180,7 @@ function RightPanel() {
         </div>
       </div>
       <div className="bottom">
-        <GameSettings options={options} onChange={onChangeSettings} />
+        <GameSettings options={gameSettings} onChange={onChangeSettings} />
       </div>
     </PanelWrapper>
   );
