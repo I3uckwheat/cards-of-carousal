@@ -1,6 +1,6 @@
 import React from 'react';
 import { PlayerProvider } from '../../../contexts/PlayerContext/PlayerContext';
-import PlayerScreen from '../PlayerScreen';
+import PlayerScreen from './PlayerScreen';
 
 const propTypes = {};
 
