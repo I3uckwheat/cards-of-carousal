@@ -66,6 +66,7 @@ describe('reducer', () => {
         payload: { id: 'baz' },
       });
 
+      expect(result).not.toBe(state);
       expect(result.lobbyID).toBe('baz');
     });
   });
