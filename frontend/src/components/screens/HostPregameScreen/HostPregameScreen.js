@@ -103,14 +103,18 @@ function LeftPanel() {
   const { players, playerIDs, lobbyID } = state;
 
   const handleClickStart = () => {
-    dispatch({
-      type: 'SET_GAME_STATE',
-      payload: { gameState: 'waiting-for-deck' },
-    });
-    dispatch({
-      type: 'SET_NEW_CZAR',
-      payload: {},
-    });
+    // check if there are any players
+    if (Object.keys(state.players).length) {
+      dispatch({
+        type: 'SET_GAME_STATE',
+        payload: { gameState: 'waiting-for-deck' },
+      });
+      dispatch({
+        type: 'SET_NEW_CZAR',
+        payload: {},
+      });
+    }
+    // TODO: add else statement to warn that you cannot play a game with no players
   };
 
   const handleClickClose = () => {
