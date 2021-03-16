@@ -7,7 +7,6 @@ import GameSettings from '../../GameSettings/GameSettings';
 import HostSettingsMenu from '../../HostSettingsMenu/HostSettingsMenu.js';
 import JoinCode from '../../JoinCode/JoinCode';
 import Button from '../../Buttons/Button';
-import socketInstance from '../../../socket/socket';
 
 const LeftPanelWrapper = styled.div`
   display: flex;
@@ -115,7 +114,7 @@ function LeftPanel() {
   };
 
   const handleClickClose = () => {
-    socketInstance.closeSocket();
+    dispatch({ type: 'CLOSE_GAME' });
     window.location.reload();
   };
 
@@ -176,12 +175,6 @@ function RightPanel() {
 
 function HostPregameScreen() {
   const { state, dispatch } = useContext(HostContext);
-
-  useEffect(() => {
-    window.dispatch = dispatch;
-    window.state = state;
-    window.socket = socketInstance;
-  }, [state, socketInstance, dispatch]);
 
   useEffect(() => {
     dispatch({ type: 'CREATE_LOBBY', payload: {} });

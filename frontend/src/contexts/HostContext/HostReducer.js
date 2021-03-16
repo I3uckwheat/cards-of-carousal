@@ -111,6 +111,13 @@ function setNewCzar(state) {
   };
 }
 
+function closeGame(state) {
+  socketInstance.closeSocket();
+  return {
+    ...state,
+  };
+}
+
 function HostReducer(state, action) {
   const { type, payload } = action;
 
@@ -145,6 +152,8 @@ function HostReducer(state, action) {
 
     case 'SET_NEW_CZAR':
       return setNewCzar(state);
+    case 'CLOSE_GAME':
+      return closeGame(state);
 
     default:
       return { ...state };
