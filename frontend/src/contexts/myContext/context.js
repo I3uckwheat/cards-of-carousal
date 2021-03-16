@@ -24,7 +24,7 @@ export function StoreProvider({ children }) {
       console.log('Handling message: ', { event, payload });
     }
     switch (event) {
-      case 'create-lobby':
+      case 'lobby-created':
         return dispatch({ type: 'LOBBY_CREATED', payload });
       case 'socket-open':
         return dispatch({ type: 'SOCKET_OPENED', payload });
