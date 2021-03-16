@@ -35,6 +35,10 @@ Array [
   width: 32px;
 }
 
+.c1 .backOfCard {
+  font-weight: 600;
+}
+
 .c0 {
   position: relative;
   display: -webkit-box;
@@ -178,6 +182,10 @@ Array [
   bottom: 7px;
   left: 11px;
   width: 32px;
+}
+
+.c1 .backOfCard {
+  font-weight: 600;
 }
 
 .c0 {
@@ -325,6 +333,10 @@ Array [
   width: 32px;
 }
 
+.c1 .backOfCard {
+  font-weight: 600;
+}
+
 .c0 {
   position: relative;
   display: -webkit-box;
@@ -465,6 +477,10 @@ Array [
   width: 32px;
 }
 
+.c1 .backOfCard {
+  font-weight: 600;
+}
+
 .c0 {
   position: relative;
   display: -webkit-box;
@@ -603,6 +619,10 @@ Array [
   bottom: 7px;
   left: 11px;
   width: 32px;
+}
+
+.c1 .backOfCard {
+  font-weight: 600;
 }
 
 .c0 {

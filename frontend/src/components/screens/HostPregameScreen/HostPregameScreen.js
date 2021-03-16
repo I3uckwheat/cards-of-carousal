@@ -9,20 +9,15 @@ import JoinCode from '../../JoinCode/JoinCode';
 import Button from '../../Buttons/Button';
 import socketInstance from '../../../socket/socket';
 
-const PanelWrapper = styled.div`
+const LeftPanelWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  height: 100%;
 
   &.right-panel {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
   }
 
   &.left-panel {
-    height: 100%;
   }
 
   .player-list-wrapper {
@@ -34,15 +29,6 @@ const PanelWrapper = styled.div`
   .buttons-wrapper {
     display: block;
     margin-bottom: 20px;
-  }
-
-  .top {
-    display: flex;
-    height: 60%;
-  }
-
-  .bottom {
-    height: 40%;
   }
 
   .bottom-left-wrapper {
@@ -74,6 +60,16 @@ const PanelWrapper = styled.div`
     font-size: 0.625rem;
     padding: 8px 20px;
   }
+`;
+
+const RightPanelWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
 
   .game-description {
     display: flex;
@@ -87,11 +83,96 @@ const PanelWrapper = styled.div`
     font-size: 1.8rem;
     font-weight: 700;
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.25);
-    p {
-      margin: 16px 0;
-    }
+  }
+
+  .game-description p {
+    margin: 16px 0;
+  }
+
+  .top {
+    display: flex;
+    height: 60%;
+  }
+
+  .bottom {
+    height: 40%;
   }
 `;
+
+function LeftPanel() {
+  const { state, dispatch } = useContext(HostContext);
+  const { players, playerIDs, lobbyID } = state;
+
+  const handleClickStart = () => {
+    dispatch({
+      type: 'SET_GAME_STATE',
+      payload: { gameState: 'waiting-for-deck' },
+    });
+    dispatch({
+      type: 'SET_NEW_CZAR',
+      payload: {},
+    });
+  };
+
+  const handleClickClose = () => {
+    socketInstance.closeSocket();
+    window.location.reload();
+  };
+
+  return (
+    <LeftPanelWrapper>
+      <div className="player-list-wrapper">
+        <PlayerList playerList={{ players, playerIDs }} />
+      </div>
+      <div className="bottom-left-wrapper">
+        <div className="buttons-wrapper">
+          <Button className="host-pregame-button" onClick={handleClickStart}>
+            <div className="start-carousing">START CAROUSING</div>
+          </Button>
+          <Button className="host-pregame-button" onClick={handleClickClose}>
+            <div className="close-game">CLOSE GAME</div>
+          </Button>
+        </div>
+        <div className="join-code-wrapper">
+          <JoinCode code={lobbyID} />
+        </div>
+      </div>
+    </LeftPanelWrapper>
+  );
+}
+
+function RightPanel() {
+  const { state, dispatch } = useContext(HostContext);
+  const { gameSettings } = state;
+
+  const onChangeSettings = (settings) => {
+    dispatch({
+      type: 'SET_GAME_SETTINGS',
+      payload: { gameSettings: settings },
+    });
+  };
+
+  return (
+    <RightPanelWrapper>
+      <div className="top">
+        <div className="game-description">
+          <p>Cards of Carousal is a game for lorem ipsum dolor.</p>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse,
+            doloribus quaerat incidunt excepturi odit eos!
+          </p>
+          <p>
+            Qui delectus laboriosam aperiam maxime optio, architecto asperiores,
+            at ullam.
+          </p>
+        </div>
+      </div>
+      <div className="bottom">
+        <GameSettings options={gameSettings} onChange={onChangeSettings} />
+      </div>
+    </RightPanelWrapper>
+  );
+}
 
 function HostPregameScreen() {
   const { state, dispatch } = useContext(HostContext);
@@ -113,76 +194,6 @@ function HostPregameScreen() {
       right={<RightPanel state={state} dispatch={dispatch} />}
       modal={<HostSettingsMenu />}
     />
-  );
-}
-
-function LeftPanel() {
-  const { state, dispatch } = useContext(HostContext);
-  const { players, playerIDs, lobbyID } = state;
-
-  const handleClickStart = () => {
-    dispatch({
-      type: 'SET_GAME_STATE',
-      payload: { gameState: 'waiting-for-deck' },
-    });
-    dispatch({
-      type: 'SET_NEW_CZAR',
-      payload: {},
-    });
-  };
-
-  return (
-    <PanelWrapper className="left-panel">
-      <div className="player-list-wrapper">
-        <PlayerList playerList={{ players, playerIDs }} />
-      </div>
-      <div className="bottom-left-wrapper">
-        <div className="buttons-wrapper">
-          <Button className="host-pregame-button" onClick={handleClickStart}>
-            <div className="start-carousing">START CAROUSING</div>
-          </Button>
-          <Button className="host-pregame-button">
-            <div className="close-game">CLOSE GAME</div>
-          </Button>
-        </div>
-        <div className="join-code-wrapper">
-          <JoinCode code={lobbyID} />
-        </div>
-      </div>
-    </PanelWrapper>
-  );
-}
-
-function RightPanel() {
-  const { state, dispatch } = useContext(HostContext);
-  const { gameSettings } = state;
-
-  const onChangeSettings = (settings) => {
-    dispatch({
-      type: 'SET_GAME_SETTINGS',
-      payload: { gameSettings: settings },
-    });
-  };
-
-  return (
-    <PanelWrapper className="right-panel">
-      <div className="top">
-        <div className="game-description">
-          <p>Cards of Carousal is a game for lorem ipsum dolor.</p>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse,
-            doloribus quaerat incidunt excepturi odit eos!
-          </p>
-          <p>
-            Qui delectus laboriosam aperiam maxime optio, architecto asperiores,
-            at ullam.
-          </p>
-        </div>
-      </div>
-      <div className="bottom">
-        <GameSettings options={gameSettings} onChange={onChangeSettings} />
-      </div>
-    </PanelWrapper>
   );
 }
 
