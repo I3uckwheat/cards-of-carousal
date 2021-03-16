@@ -17,7 +17,7 @@ module.exports = class Lobby {
     this.#hostSocket = hostSocket;
 
     const message = new Message('server', {
-      event: 'create-lobby',
+      event: 'lobby-created',
       payload: { id: this.id },
     });
 

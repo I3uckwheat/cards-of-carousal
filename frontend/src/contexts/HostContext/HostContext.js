@@ -15,6 +15,7 @@ const initialState = {
   lobbyID: '',
   players: {},
   playerIDs: [],
+  gameSettings: { maxPlayers: 8, winningScore: 7, selectedPacks: [] },
 };
 
 export const HostContext = createContext();
@@ -28,6 +29,8 @@ function HostProvider({ children }) {
         return dispatch({ type: 'PLAYER_CONNECTED', payload });
       case 'player-disconnected':
         return dispatch({ type: 'PLAYER_DISCONNECTED', payload });
+      case 'lobby-created':
+        return dispatch({ type: 'SET_LOBBY_ID', payload });
       default:
         return undefined;
     }

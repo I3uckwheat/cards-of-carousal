@@ -75,7 +75,7 @@ describe('context', () => {
   });
 
   describe('event handler', () => {
-    it('calls the "LOBBY_CREATED" reducer when "create-lobby" event is received', () => {
+    it('calls the "LOBBY_CREATED" reducer when "lobby-created" event is received', () => {
       const TestComponent = () => {
         const { state } = useContext(StoreContext);
 
@@ -100,7 +100,7 @@ describe('context', () => {
 
       act(() => {
         eventHandlers.message({
-          event: 'create-lobby',
+          event: 'lobby-created',
           payload: { id: '123' },
         });
       });
