@@ -11,8 +11,9 @@ const propTypes = {
       PropTypes.shape({
         name: PropTypes.string.isRequired,
         score: PropTypes.number.isRequired,
-        czar: PropTypes.bool.isRequired,
+        isCzar: PropTypes.bool.isRequired,
         submittedCards: PropTypes.arrayOf(PropTypes.number).isRequired,
+        cards: PropTypes.arrayOf(PropTypes.number).isRequired,
       }),
     ).isRequired,
 
@@ -84,13 +85,13 @@ function PlayerList({ playerList }) {
   return (
     <PlayerTable data-testid="playerList-container">
       {playersArray.map((player) => {
-        const showIcon = player.submittedCards.length > 0 || player.czar;
-        const playerIcon = player.czar ? BlackCard : OffsetWhiteCardStack;
+        const showIcon = player.submittedCards.length > 0 || player.isCzar;
+        const playerIcon = player.isCzar ? BlackCard : OffsetWhiteCardStack;
 
         return (
           <PlayerRow
             key={player.name}
-            isCzar={player.czar}
+            isCzar={player.isCzar}
             data-testid={`row-${player.name}`}
           >
             <img
@@ -104,7 +105,7 @@ function PlayerList({ playerList }) {
               <h1>{player.name}</h1>
               <TallyCount
                 score={player.score}
-                color={player.czar ? 'secondary' : 'primary'}
+                color={player.isCzar ? 'secondary' : 'primary'}
               />
             </div>
           </PlayerRow>

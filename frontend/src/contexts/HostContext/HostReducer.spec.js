@@ -88,8 +88,9 @@ describe('reducer', () => {
         'example-player-id': {
           name: 'example-player-id',
           score: 0,
-          czar: false,
+          isCzar: false,
           submittedCards: [],
+          cards: [],
         },
       });
     });

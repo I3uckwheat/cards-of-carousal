@@ -15,8 +15,9 @@ function playerConnected(state, { playerId }) {
       [playerId]: {
         name: playerId,
         score: 0,
-        czar: false,
+        isCzar: false,
         submittedCards: [],
+        cards: [],
       },
     },
     playerIDs: [...state.playerIDs, playerId],
@@ -68,7 +69,7 @@ function setNewCzar(state) {
   const { players, playerIDs } = state;
 
   // find the current czar
-  const currentCzar = playerIDs.find((player) => players[player].czar);
+  const currentCzar = playerIDs.find((player) => players[player].isCzar);
 
   // set the new czar to the old one + 1 in the array, or choose one at random
   const nextIndex =
@@ -88,11 +89,11 @@ function setNewCzar(state) {
         ...players,
         [newCzar]: {
           ...players[newCzar],
-          czar: true,
+          isCzar: true,
         },
         [currentCzar]: {
           ...players[currentCzar],
-          czar: false,
+          isCzar: false,
         },
       },
     };
@@ -104,7 +105,7 @@ function setNewCzar(state) {
       ...players,
       [newCzar]: {
         ...players[newCzar],
-        czar: true,
+        isCzar: true,
       },
     },
   };
