@@ -1,15 +1,19 @@
-import React from 'react';
-import HostProvider from '../../../contexts/HostContext/HostContext';
-import HostScreen from './HostScreen';
+import React, { useContext } from 'react';
+import { HostContext } from '../../../contexts/HostContext/HostContext';
+import HostScreenExample from '../../../temp/HostScreenExample';
 
 const propTypes = {};
 
 export default function HostScreenController() {
-  return (
-    <HostProvider>
-      <HostScreen />
-    </HostProvider>
-  );
+  const hostContext = useContext(HostContext);
+  switch (hostContext.state.gameState) {
+    case 'waiting-for-lobby':
+      return <HostScreenExample />;
+    default:
+      throw new Error(
+        `Unrecognized game state: ${hostContext.state.gameState}`,
+      );
+  }
 }
 
 HostScreenController.propTypes = propTypes;
