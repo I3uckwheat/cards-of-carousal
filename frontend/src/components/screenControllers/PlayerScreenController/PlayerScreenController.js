@@ -5,14 +5,14 @@ import PlayerJoinScreen from '../../screens/PlayerJoinScreen/PlayerJoinScreen';
 const propTypes = {};
 
 export default function PlayerScreenController() {
-  const playerContext = useContext(PlayerContext);
-  switch (playerContext.state.gameState) {
+  const {
+    state: { gameState },
+  } = useContext(PlayerContext);
+  switch (gameState) {
     case 'enter-code':
       return <PlayerJoinScreen />;
     default:
-      throw new Error(
-        `Unrecognized game state: ${playerContext.state.gameState}`,
-      );
+      throw new Error(`Unrecognized game state: ${gameState}`);
   }
 }
 
