@@ -84,34 +84,25 @@ function setNewCzar(state) {
       : playerIDs[Math.floor(Math.random() * playerIDs.length)];
 
     // set the new czar in the players object.
-    if (currentCzar) {
-      return {
-        ...state,
-        players: {
-          ...players,
-          [newCzar]: {
-            ...players[newCzar],
-            isCzar: true,
-          },
-          [currentCzar]: {
-            ...players[currentCzar],
-            isCzar: false,
-          },
-        },
-      };
-    }
+    const newPlayers = Object.keys(players).reduce((obj, key) => {
+      const newObj = { ...obj };
+      newObj[key] = { ...players[key] };
+      newObj[key].isCzar = false;
+      return newObj;
+    }, {});
 
     return {
       ...state,
       players: {
-        ...players,
+        ...newPlayers,
         [newCzar]: {
-          ...players[newCzar],
+          ...newPlayers[newCzar],
           isCzar: true,
         },
       },
     };
   }
+
   // If there are no players, return unaltered state
   return { ...state };
 }
