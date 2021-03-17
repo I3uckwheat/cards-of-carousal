@@ -172,7 +172,7 @@ function RightPanel() {
 }
 
 function HostPregameScreen() {
-  const { state, dispatch } = useContext(HostContext);
+  const { dispatch } = useContext(HostContext);
 
   useEffect(() => {
     dispatch({ type: 'CREATE_LOBBY', payload: {} });
@@ -181,8 +181,8 @@ function HostPregameScreen() {
   return (
     <HostLayout
       className="primary-background"
-      left={<LeftPanel state={state} dispatch={dispatch} />}
-      right={<RightPanel state={state} dispatch={dispatch} />}
+      left={<LeftPanel />}
+      right={<RightPanel />}
       modal={<HostSettingsMenu />}
     />
   );

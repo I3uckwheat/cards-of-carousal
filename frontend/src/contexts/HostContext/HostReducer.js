@@ -72,12 +72,13 @@ function setNewCzar(state) {
     // find the current czar
     const currentCzar = playerIDs.find((player) => players[player].isCzar);
 
-    // set the new czar to the old one + 1 in the array, or choose one at random
+    // set the new czar to the old one + 1 in the array, or zero if at the end
     const nextIndex =
       playerIDs.indexOf(currentCzar) < playerIDs.length - 1
         ? playerIDs.indexOf(currentCzar) + 1
         : 0;
 
+    // set the czar to the next one in order, or pick at random
     const newCzar = currentCzar
       ? playerIDs[nextIndex]
       : playerIDs[Math.floor(Math.random() * playerIDs.length)];
