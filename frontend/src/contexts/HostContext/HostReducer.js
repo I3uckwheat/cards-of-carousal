@@ -42,6 +42,19 @@ function playerDisconnected(state, { playerId }) {
   };
 }
 
+function setPlayerName(state, { playerId, playerName }) {
+  return {
+    ...state,
+    players: {
+      ...state.players,
+      [playerId]: {
+        ...state.players[playerId],
+        name: playerName,
+      },
+    },
+  };
+}
+
 function setLobbyId(state, { id }) {
   return {
     ...state,
@@ -128,8 +141,15 @@ function HostReducer(state, action) {
 
     case 'PLAYER_CONNECTED':
       socketInstance.sendMessage({
+        event: 'joined-lobby',
+        payload: {
+          playerId: payload.playerId,
+        },
+      });
+      socketInstance.sendMessage({
         event: 'update',
         payload: {
+          gameState: 'connected',
           message: {
             big: "You've joined the lobby",
             small: 'Please wait for the host to start the game',
@@ -140,6 +160,9 @@ function HostReducer(state, action) {
 
     case 'PLAYER_DISCONNECTED':
       return playerDisconnected(state, payload);
+
+    case 'SET_PLAYER_NAME':
+      return setPlayerName(state, payload);
 
     case 'SET_LOBBY_ID':
       return setLobbyId(state, payload);
@@ -152,6 +175,7 @@ function HostReducer(state, action) {
 
     case 'SET_NEW_CZAR':
       return setNewCzar(state);
+
     case 'CLOSE_GAME':
       return closeGame(state);
 

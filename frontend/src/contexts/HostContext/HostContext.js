@@ -25,6 +25,8 @@ function HostProvider({ children }) {
 
   function handleMessage({ event, payload }) {
     switch (event) {
+      case 'set-player-name':
+        return dispatch({ type: 'SET_PLAYER_NAME', payload });
       case 'player-connected':
         return dispatch({ type: 'PLAYER_CONNECTED', payload });
       case 'player-disconnected':

@@ -1,6 +1,6 @@
 import React, { createContext, useReducer, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import reducer from './playerReducer';
+import PlayerReducer from './playerReducer';
 import socketInstance from '../../socket/socket';
 
 // when the socket receives messaged from the server, it will fire off an event from this EventEmitter
@@ -24,7 +24,7 @@ const propTypes = {
 export const PlayerContext = createContext();
 
 export function PlayerProvider({ children }) {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [state, dispatch] = useReducer(PlayerReducer, initialState);
 
   // this function allows us to parse any incoming messages from the event emitter
   // to make sure we know how to handle them.
@@ -32,6 +32,8 @@ export function PlayerProvider({ children }) {
     switch (event) {
       case 'join-lobby':
         return dispatch({ type: 'JOIN_LOBBY', payload });
+      case 'joined-lobby':
+        return dispatch({ type: 'JOINED_LOBBY', payload });
       case 'update':
         return dispatch({ type: 'UPDATE', payload });
       case 'error-disconnect':

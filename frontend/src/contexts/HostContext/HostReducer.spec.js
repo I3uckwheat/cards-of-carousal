@@ -109,6 +109,7 @@ describe('reducer', () => {
       expect(socketInstance.sendMessage).toHaveBeenCalledWith({
         event: 'update',
         payload: {
+          gameState: 'connected',
           message: {
             big: "You've joined the lobby",
             small: 'Please wait for the host to start the game',

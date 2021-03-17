@@ -25,20 +25,33 @@ function errorDisconnect(state) {
   };
 }
 
-function reducer(state, action) {
+function PlayerReducer(state, action) {
   const { type, payload } = action;
 
   switch (type) {
     case 'JOIN_LOBBY':
       socketInstance.joinLobby(payload.id);
       return joinLobby(state);
+
+    case 'JOINED_LOBBY':
+      socketInstance.sendMessage({
+        event: 'set-player-name',
+        payload: {
+          playerId: payload.playerId,
+          playerName: state.name || 'FOO',
+        },
+      });
+      return { ...state };
+
     case 'UPDATE':
       return update(state, payload);
+
     case 'ERROR_DISCONNECT':
       return errorDisconnect(state);
+
     default:
       return { ...state };
   }
 }
 
-export default reducer;
+export default PlayerReducer;
