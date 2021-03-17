@@ -13,12 +13,6 @@ const LeftPanelWrapper = styled.div`
   flex-direction: column;
   height: 100%;
 
-  &.right-panel {
-  }
-
-  &.left-panel {
-  }
-
   .player-list-wrapper {
     overflow-x: auto;
     border-bottom: 1px solid var(--primary-text-color);

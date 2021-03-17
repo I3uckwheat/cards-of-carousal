@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Host Pregame Screen rendering does not change when clicking random elements 1`] = `
+exports[`Host Pregame Screen rendering does not change when clicking non-responsive elements 1`] = `
 Object {
   "asFragment": [Function],
   "baseElement": <body>
@@ -624,7 +624,7 @@ Object {
             </h2>
           </header>
           <div
-            class="sc-hBEYos ceYhTg"
+            class="sc-hBEYos fvtdYP"
           >
             <div
               class="player-list-wrapper"
@@ -1440,7 +1440,7 @@ Object {
             </h2>
           </header>
           <div
-            class="sc-hBEYos ceYhTg"
+            class="sc-hBEYos fvtdYP"
           >
             <div
               class="player-list-wrapper"
