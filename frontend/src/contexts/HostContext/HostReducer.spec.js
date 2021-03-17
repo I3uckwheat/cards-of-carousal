@@ -4,6 +4,7 @@ import socketInstance from '../../socket/socket';
 jest.mock('../../socket/socket', () => ({
   createLobby: jest.fn(),
   sendMessage: jest.fn(),
+  closeSocket: jest.fn(),
 }));
 
 describe('reducer', () => {
@@ -152,6 +153,157 @@ describe('reducer', () => {
       });
 
       expect(result).toMatchObject(state);
+    });
+  });
+
+  describe('SET_GAME_STATE', () => {
+    it('sets the game state to the value', () => {
+      const state = {
+        gameState: 'foo',
+      };
+
+      const result = HostReducer(state, {
+        type: 'SET_GAME_STATE',
+        payload: { gameState: 'bar' },
+      });
+
+      expect(result).not.toBe(state);
+      expect(result.gameState).toBe('bar');
+    });
+  });
+
+  describe('SET_GAME_SETTINGS', () => {
+    it('sets the game settings to the payload', () => {
+      const state = {
+        gameSettings: {
+          foo: 'foo',
+          bar: 'bar',
+          baz: 'baz',
+        },
+      };
+      const newSettings = {
+        foo: 1,
+        bar: 2,
+        baz: 3,
+      };
+
+      const result = HostReducer(state, {
+        type: 'SET_GAME_SETTINGS',
+        payload: { gameSettings: newSettings },
+      });
+
+      expect(result).not.toBe(state);
+      expect(result.gameSettings).toBe(newSettings);
+    });
+  });
+
+  describe('SET_NEW_CZAR', () => {
+    it('sets the czar to a random player if none are currently the czar', () => {
+      const state = {
+        players: {
+          foo: {
+            name: 'player-name-1',
+            score: 0,
+            isCzar: false,
+            submittedCards: [],
+            cards: [],
+          },
+          bar: {
+            name: 'player-name-2',
+            score: 0,
+            isCzar: false,
+            submittedCards: [],
+            cards: [],
+          },
+          baz: {
+            name: 'player-name-3',
+            score: 0,
+            isCzar: false,
+            submittedCards: [],
+            cards: [],
+          },
+        },
+        playerIDs: ['foo', 'bar', 'baz'],
+      };
+
+      const result = HostReducer(state, { type: 'SET_NEW_CZAR', payload: {} });
+
+      expect(result).not.toEqual(state);
+      expect(
+        result.playerIDs.filter((player) => result.players[player].isCzar)
+          .length,
+      ).toBe(1);
+    });
+
+    it('sets the czar to the next ID after the current czar', () => {
+      const state = {
+        players: {
+          foo: {
+            name: 'player-name-1',
+            score: 0,
+            isCzar: true,
+            submittedCards: [],
+            cards: [],
+          },
+          bar: {
+            name: 'player-name-2',
+            score: 0,
+            isCzar: false,
+            submittedCards: [],
+            cards: [],
+          },
+          baz: {
+            name: 'player-name-3',
+            score: 0,
+            isCzar: false,
+            submittedCards: [],
+            cards: [],
+          },
+        },
+        playerIDs: ['foo', 'bar', 'baz'],
+      };
+
+      const result = HostReducer(state, { type: 'SET_NEW_CZAR', payload: {} });
+
+      expect(result).not.toEqual(state);
+      expect(
+        result.playerIDs.filter((player) => result.players[player].isCzar)
+          .length,
+      ).toBe(1);
+      expect(
+        result.playerIDs.filter((player) => result.players[player].isCzar)[0],
+      ).toBe('bar');
+    });
+
+    it('returns unaltered state if there are no players in the lobby', () => {
+      const state = {
+        players: {},
+        playerIDs: [],
+      };
+
+      const result = HostReducer(state, { type: 'SET_NEW_CZAR', payload: {} });
+
+      expect(result).toEqual(state);
+    });
+  });
+
+  describe('CLOSE_GAME', () => {
+    it('closes the socket and returns unaltered state', () => {
+      const state = {
+        gameState: 'foo',
+        gameSettings: {
+          foo: 'foo',
+          bar: 'bar',
+          baz: 'baz',
+        },
+      };
+
+      expect(socketInstance.closeSocket).not.toHaveBeenCalled();
+
+      const result = HostReducer(state, { type: 'CLOSE_GAME', payload: {} });
+
+      expect(socketInstance.closeSocket).toHaveBeenCalledTimes(1);
+      expect(result).toEqual(state);
     });
   });
 });

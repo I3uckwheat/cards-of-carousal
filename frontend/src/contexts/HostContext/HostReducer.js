@@ -68,21 +68,38 @@ function setNewCzar(state) {
   // else, pick a random czar
   const { players, playerIDs } = state;
 
-  // find the current czar
-  const currentCzar = playerIDs.find((player) => players[player].isCzar);
+  if (playerIDs.length) {
+    // find the current czar
+    const currentCzar = playerIDs.find((player) => players[player].isCzar);
 
-  // set the new czar to the old one + 1 in the array, or choose one at random
-  const nextIndex =
-    playerIDs.indexOf(currentCzar) < playerIDs.length - 1
-      ? playerIDs.indexOf(currentCzar) + 1
-      : 0;
+    // set the new czar to the old one + 1 in the array, or choose one at random
+    const nextIndex =
+      playerIDs.indexOf(currentCzar) < playerIDs.length - 1
+        ? playerIDs.indexOf(currentCzar) + 1
+        : 0;
 
-  const newCzar = currentCzar
-    ? playerIDs[nextIndex]
-    : playerIDs[Math.floor(Math.random() * playerIDs.length)];
+    const newCzar = currentCzar
+      ? playerIDs[nextIndex]
+      : playerIDs[Math.floor(Math.random() * playerIDs.length)];
 
-  // set the new czar in the players object.
-  if (currentCzar) {
+    // set the new czar in the players object.
+    if (currentCzar) {
+      return {
+        ...state,
+        players: {
+          ...players,
+          [newCzar]: {
+            ...players[newCzar],
+            isCzar: true,
+          },
+          [currentCzar]: {
+            ...players[currentCzar],
+            isCzar: false,
+          },
+        },
+      };
+    }
+
     return {
       ...state,
       players: {
@@ -91,24 +108,11 @@ function setNewCzar(state) {
           ...players[newCzar],
           isCzar: true,
         },
-        [currentCzar]: {
-          ...players[currentCzar],
-          isCzar: false,
-        },
       },
     };
   }
-
-  return {
-    ...state,
-    players: {
-      ...players,
-      [newCzar]: {
-        ...players[newCzar],
-        isCzar: true,
-      },
-    },
-  };
+  // If there are no players, return unaltered state
+  return { ...state };
 }
 
 function closeGame(state) {
@@ -152,6 +156,7 @@ function HostReducer(state, action) {
 
     case 'SET_NEW_CZAR':
       return setNewCzar(state);
+
     case 'CLOSE_GAME':
       return closeGame(state);
 
