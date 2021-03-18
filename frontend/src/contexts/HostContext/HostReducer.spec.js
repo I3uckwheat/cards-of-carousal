@@ -90,7 +90,7 @@ describe('reducer', () => {
           name: 'example-player-id',
           score: 0,
           isCzar: false,
-          submittedCards: [],
+          submittedCards: [0],
           cards: [],
         },
       });
@@ -116,6 +116,21 @@ describe('reducer', () => {
           },
         },
       });
+    });
+
+    it('gives the player a dummy submittedCard to show the icon in PlayerList', () => {
+      const state = {
+        players: {},
+        playerIDs: [],
+      };
+
+      const result = HostReducer(state, {
+        type: 'PLAYER_CONNECTED',
+        payload: { playerId: 'example-player-id' },
+      });
+
+      expect(result.players['example-player-id'].submittedCards.length).toBe(1);
+      expect(result.players['example-player-id'].submittedCards[0]).toBe(0);
     });
   });
 
@@ -156,19 +171,32 @@ describe('reducer', () => {
     });
   });
 
-  describe('SET_GAME_STATE', () => {
+  describe('START_GAME', () => {
     it('sets the game state to the value', () => {
       const state = {
         gameState: 'foo',
+        players: {
+          foo: {
+            submittedCards: [0],
+          },
+          bar: {
+            submittedCards: [0],
+          },
+          baz: {
+            submittedCards: [0],
+          },
+        },
       };
 
       const result = HostReducer(state, {
-        type: 'SET_GAME_STATE',
-        payload: { gameState: 'bar' },
+        type: 'START_GAME',
+        payload: {},
       });
 
-      expect(result).not.toBe(state);
-      expect(result.gameState).toBe('bar');
+      expect(result.gameState).toBe('waiting-for-deck');
+      expect(result.players.foo.submittedCards).toEqual([]);
+      expect(result.players.bar.submittedCards).toEqual([]);
+      expect(result.players.baz.submittedCards).toEqual([]);
     });
   });
 
@@ -197,7 +225,7 @@ describe('reducer', () => {
     });
   });
 
-  describe('SET_NEW_CZAR', () => {
+  describe('SET_NEXT_CZAR', () => {
     it('sets the czar to a random player if none are currently the czar', () => {
       const state = {
         players: {
@@ -226,7 +254,7 @@ describe('reducer', () => {
         playerIDs: ['foo', 'bar', 'baz'],
       };
 
-      const result = HostReducer(state, { type: 'SET_NEW_CZAR', payload: {} });
+      const result = HostReducer(state, { type: 'SET_NEXT_CZAR', payload: {} });
 
       expect(result).not.toEqual(state);
       expect(
@@ -263,7 +291,7 @@ describe('reducer', () => {
         playerIDs: ['foo', 'bar', 'baz'],
       };
 
-      const result = HostReducer(state, { type: 'SET_NEW_CZAR', payload: {} });
+      const result = HostReducer(state, { type: 'SET_NEXT_CZAR', payload: {} });
 
       expect(result).not.toEqual(state);
       expect(
@@ -281,7 +309,7 @@ describe('reducer', () => {
         playerIDs: [],
       };
 
-      const result = HostReducer(state, { type: 'SET_NEW_CZAR', payload: {} });
+      const result = HostReducer(state, { type: 'SET_NEXT_CZAR', payload: {} });
 
       expect(result).toEqual(state);
     });

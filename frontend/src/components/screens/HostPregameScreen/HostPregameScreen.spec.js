@@ -1,54 +1,47 @@
 import React from 'react';
-import { fireEvent, render } from '@testing-library/react';
-import HostProvider, {
-  HostContext,
-} from '../../../contexts/HostContext/HostContext';
+import { fireEvent, render, screen } from '@testing-library/react';
+import renderer from 'react-test-renderer';
+import { HostContext } from '../../../contexts/HostContext/HostContext';
 import HostPregameScreen from './HostPregameScreen';
 
 describe('Host Pregame Screen', () => {
+  // This is the default state value provided by our context
+  let state = {
+    gameState: 'waiting-for-lobby',
+    lobbyID: '',
+    players: {},
+    playerIDs: [],
+    gameSettings: { maxPlayers: 8, winningScore: 7, selectedPacks: [] },
+  };
+  const dispatch = jest.fn();
+
+  afterEach(() => {
+    // sometimes we need to change the state for test cases, this resets to initial value
+    state = {
+      gameState: 'waiting-for-lobby',
+      lobbyID: '',
+      players: {},
+      playerIDs: [],
+      gameSettings: { maxPlayers: 8, winningScore: 7, selectedPacks: [] },
+    };
+  });
+
   describe('rendering', () => {
     it('renders', () => {
-      const testRender = render(
-        <HostProvider>
-          <HostPregameScreen />
-        </HostProvider>,
-      );
+      const tree = renderer
+        .create(
+          <HostContext.Provider value={{ state, dispatch }}>
+            <HostPregameScreen />
+          </HostContext.Provider>,
+        )
+        .toJSON();
 
-      expect(testRender).toMatchSnapshot();
-    });
-
-    it('does not change when clicking non-responsive elements', () => {
-      const testRender = render(
-        <HostProvider>
-          <HostPregameScreen />
-        </HostProvider>,
-      );
-
-      fireEvent.click(testRender.getByText('CARDS OF CAROUSAL'));
-      fireEvent.click(testRender.getByText('GAME SETTINGS'));
-      fireEvent.click(testRender.getByText('JOIN CODE:'));
-      fireEvent.click(testRender.getByText('SELECT CARD PACKS'));
-      fireEvent.click(
-        testRender.getByText(
-          'Cards of Carousal is a game for lorem ipsum dolor.',
-        ),
-      );
-
-      expect(testRender).toMatchSnapshot();
+      expect(tree).toMatchSnapshot();
     });
   });
 
   describe('lobby', () => {
     it('creates the lobby', () => {
-      const state = {
-        gameState: 'waiting-for-lobby',
-        lobbyID: '',
-        players: {},
-        playerIDs: [],
-        gameSettings: { maxPlayers: 8, winningScore: 7, selectedPacks: [] },
-      };
-      const dispatch = jest.fn();
-
       expect(dispatch).not.toHaveBeenCalled();
 
       render(
@@ -58,6 +51,10 @@ describe('Host Pregame Screen', () => {
       );
 
       expect(dispatch).toHaveBeenCalledTimes(1);
+      expect(dispatch.mock.calls[0][0]).toEqual({
+        type: 'CREATE_LOBBY',
+        payload: {},
+      });
     });
   });
 
@@ -67,19 +64,25 @@ describe('Host Pregame Screen', () => {
       Object.defineProperty(window, 'location', {
         value: { reload: jest.fn() },
       });
-      const testRender = render(
-        <HostProvider>
+      render(
+        <HostContext.Provider value={{ state, dispatch }}>
           <HostPregameScreen />
-        </HostProvider>,
+        </HostContext.Provider>,
       );
 
-      fireEvent.click(testRender.getByText('CLOSE GAME'));
+      fireEvent.click(screen.getByText('CLOSE GAME'));
 
       expect(window.location.reload).toHaveBeenCalledTimes(1);
+      // create lobby, close game
+      expect(dispatch).toHaveBeenCalledTimes(2);
+      expect(dispatch.mock.calls[1][0]).toEqual({
+        type: 'CLOSE_GAME',
+        payload: {},
+      });
     });
 
     it('calls a dispatch when the start button is pressed', () => {
-      const state = {
+      state = {
         gameState: 'waiting-for-lobby',
         lobbyID: '',
         players: {
@@ -109,48 +112,36 @@ describe('Host Pregame Screen', () => {
         gameSettings: { maxPlayers: 8, winningScore: 7, selectedPacks: [] },
       };
 
-      const dispatch = jest.fn();
-
-      expect(dispatch).not.toHaveBeenCalled();
-
-      const testRender = render(
+      render(
         <HostContext.Provider value={{ state, dispatch }}>
           <HostPregameScreen />
         </HostContext.Provider>,
       );
 
-      // create lobby
-      expect(dispatch).toHaveBeenCalledTimes(1);
+      fireEvent.click(screen.getByText('START CAROUSING'));
 
-      fireEvent.click(testRender.getByText('START CAROUSING'));
-
-      // set game state, set new czar
+      // create lobby, set game state, set new czar
       expect(dispatch).toHaveBeenCalledTimes(3);
+      expect(dispatch.mock.calls[1][0]).toEqual({
+        type: 'START_GAME',
+        payload: {},
+      });
+      expect(dispatch.mock.calls[2][0]).toEqual({
+        type: 'SET_NEXT_CZAR',
+        payload: {},
+      });
     });
 
     it('does not call dispatch if no players are in the lobby when the start button is clicked', () => {
-      const state = {
-        gameState: 'waiting-for-lobby',
-        lobbyID: '',
-        players: {},
-        playerIDs: [],
-        gameSettings: { maxPlayers: 8, winningScore: 7, selectedPacks: [] },
-      };
-      const dispatch = jest.fn();
-
-      expect(dispatch).not.toHaveBeenCalled();
-
-      const testRender = render(
+      render(
         <HostContext.Provider value={{ state, dispatch }}>
           <HostPregameScreen />
         </HostContext.Provider>,
       );
 
-      // create lobby
-      expect(dispatch).toHaveBeenCalledTimes(1);
+      fireEvent.click(screen.getByText('START CAROUSING'));
 
-      fireEvent.click(testRender.getByText('START CAROUSING'));
-
+      // only create lobby called
       expect(dispatch).toHaveBeenCalledTimes(1);
     });
   });

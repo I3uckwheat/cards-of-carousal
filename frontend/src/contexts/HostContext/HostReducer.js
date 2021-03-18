@@ -16,7 +16,7 @@ function playerConnected(state, { playerId }) {
         name: playerId,
         score: 0,
         isCzar: false,
-        submittedCards: [],
+        submittedCards: [0],
         cards: [],
       },
     },
@@ -49,10 +49,17 @@ function setLobbyId(state, { id }) {
   };
 }
 
-function setGameState(state, { gameState }) {
+function startGame(state) {
+  // remove dummy submitted cards
+  const newPlayers = Object.entries(state.players).reduce((acc, [key, val]) => {
+    acc[key] = { ...val };
+    acc[key].submittedCards = [];
+    return acc;
+  }, {});
   return {
     ...state,
-    gameState,
+    gameState: 'waiting-for-deck',
+    players: newPlayers,
   };
 }
 
@@ -63,7 +70,7 @@ function setGameSettings(state, { gameSettings }) {
   };
 }
 
-function setNewCzar(state) {
+function setNextCzar(state) {
   // if there is currently a czar, set the czar to the next player in the array
   // else, pick a random czar
   const { players, playerIDs } = state;
@@ -84,11 +91,10 @@ function setNewCzar(state) {
       : playerIDs[Math.floor(Math.random() * playerIDs.length)];
 
     // set the new czar in the players object.
-    const newPlayers = Object.keys(players).reduce((obj, key) => {
-      const newObj = { ...obj };
-      newObj[key] = { ...players[key] };
-      newObj[key].isCzar = false;
-      return newObj;
+    const newPlayers = Object.entries(players).reduce((acc, [key, val]) => {
+      acc[key] = { ...val };
+      acc[key].isCzar = false;
+      return acc;
     }, {});
 
     return {
@@ -140,14 +146,14 @@ function HostReducer(state, action) {
     case 'SET_LOBBY_ID':
       return setLobbyId(state, payload);
 
-    case 'SET_GAME_STATE':
-      return setGameState(state, payload);
+    case 'START_GAME':
+      return startGame(state);
 
     case 'SET_GAME_SETTINGS':
       return setGameSettings(state, payload);
 
-    case 'SET_NEW_CZAR':
-      return setNewCzar(state);
+    case 'SET_NEXT_CZAR':
+      return setNextCzar(state);
 
     case 'CLOSE_GAME':
       return closeGame(state);

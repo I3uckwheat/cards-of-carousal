@@ -100,11 +100,11 @@ function LeftPanel() {
     // check if there are any players
     if (Object.keys(state.players).length) {
       dispatch({
-        type: 'SET_GAME_STATE',
-        payload: { gameState: 'waiting-for-deck' },
+        type: 'START_GAME',
+        payload: {},
       });
       dispatch({
-        type: 'SET_NEW_CZAR',
+        type: 'SET_NEXT_CZAR',
         payload: {},
       });
     }
@@ -112,7 +112,7 @@ function LeftPanel() {
   };
 
   const handleClickClose = () => {
-    dispatch({ type: 'CLOSE_GAME' });
+    dispatch({ type: 'CLOSE_GAME', payload: {} });
     window.location.reload();
   };
 
