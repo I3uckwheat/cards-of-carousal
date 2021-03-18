@@ -25,6 +25,16 @@ function errorDisconnect(state) {
   };
 }
 
+function submit(state, payload) {
+  return {
+    ...state,
+    message: {
+      event: 'select-winner',
+      payload: payload.id,
+    },
+  };
+}
+
 function reducer(state, action) {
   const { type, payload } = action;
 
@@ -36,6 +46,8 @@ function reducer(state, action) {
       return update(state, payload);
     case 'ERROR_DISCONNECT':
       return errorDisconnect(state);
+    case 'SUBMIT_WINNER':
+      return submit(state, payload.id);
     default:
       return { ...state };
   }
