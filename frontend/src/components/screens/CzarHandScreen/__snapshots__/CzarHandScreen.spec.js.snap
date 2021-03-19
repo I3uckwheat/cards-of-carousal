@@ -1,0 +1,172 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CzarHandScreen snapshot matches 1`] = `
+.c2 {
+  display: block;
+  border: 2px solid var(--primary-text-color);
+  font-size: 12px;
+  font-weight: bold;
+  padding: 0.7em;
+  background: var(--primary-background-color);
+  color: var(--primary-text-color);
+}
+
+.c2:hover,
+.c2:active,
+.c2:focus {
+  background: var(--accent-background-color);
+  cursor: pointer;
+}
+
+.c1 {
+  width: 100%;
+  background-color: var(--secondary-background-color);
+  color: var(--secondary-text-color);
+}
+
+.c0 {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.c0 .header-container {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+
+.c0 .header-txt {
+  margin: 10px 70px -10px -2px;
+  line-height: 2.5rem;
+}
+
+.c0 h1 span {
+  display: block;
+}
+
+.c0 .button-container {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c0 .button {
+  text-align: center;
+  padding: 0 10px 0 10px;
+  height: 30px;
+  width: 90px;
+  margin-right: 15px;
+  border: none;
+}
+
+.c0 .card-container {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  max-width: 100%;
+  margin: auto 0 auto 0;
+  overflow: auto;
+  padding-left: 20px;
+}
+
+.c0 .card-container > * {
+  margin-right: 20px;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+}
+
+@media (min-height:640px) {
+  .c0 .header-container {
+    height: 100px;
+  }
+
+  .c0 .header-txt {
+    margin: 26px 70px 0px -2px;
+    line-height: 2.5rem;
+    font-size: 1.3rem;
+  }
+
+  .c0 .card-container {
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    padding-top: 40px;
+  }
+
+  .c0 .card-container > * {
+    margin-bottom: 40px;
+  }
+
+  .c0 .button-container {
+    margin-right: 40px;
+  }
+}
+
+<div
+  className="c0"
+>
+  <header
+    className="c1 header-container"
+  >
+    <div
+      className="header-txt"
+    >
+      <h1>
+        YOU'RE THE CZAR
+        <span>
+          PICK A WINNER
+        </span>
+      </h1>
+    </div>
+    <section
+      className="button-container"
+    >
+      <button
+        className="c2 button"
+        onClick={[Function]}
+      >
+        SUBMIT
+      </button>
+      <button
+        className="c2 button"
+        onClick={[Function]}
+      >
+        CLEAR
+      </button>
+    </section>
+  </header>
+  <div
+    className="card-container"
+  />
+</div>
+`;
