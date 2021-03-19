@@ -28,6 +28,8 @@ function HostProvider({ children }) {
         return dispatch({ type: 'PLAYER_CONNECTED', payload });
       case 'player-disconnected':
         return dispatch({ type: 'PLAYER_DISCONNECTED', payload });
+      case 'select-winner':
+        return dispatch({ type: 'SELECT_WINNER', payload });
       default:
         return undefined;
     }

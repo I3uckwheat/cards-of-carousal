@@ -42,6 +42,11 @@ function playerDisconnected(state, { playerId }) {
   };
 }
 
+function selectWinner(state, payload) {
+  // TODO: HANDLE MESSAGE
+  console.log(state, payload);
+}
+
 function HostReducer(state, action) {
   const { type, payload } = action;
 
@@ -65,6 +70,9 @@ function HostReducer(state, action) {
     case 'PLAYER_DISCONNECTED':
       return playerDisconnected(state, payload);
 
+    case 'SELECT_WINNER':
+      // TODO: HANDLE PAYLOAD AND TEST
+      return selectWinner(state, payload);
     default:
       return { ...state };
   }

@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { PlayerContext } from '../../../contexts/PlayerContext/PlayerContext';
 import PlayerJoinScreen from '../../screens/PlayerJoinScreen/PlayerJoinScreen';
+import CzarHandScreen from '../../screens/CzarHandScreen/CzarHandScreen';
 
 const propTypes = {};
 
@@ -11,6 +12,8 @@ export default function PlayerScreenController() {
   switch (gameState) {
     case 'enter-code':
       return <PlayerJoinScreen />;
+    case 'select-winner':
+      return <CzarHandScreen />;
     default:
       throw new Error(`Unrecognized game state: ${gameState}`);
   }

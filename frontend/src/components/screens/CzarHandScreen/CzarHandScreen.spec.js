@@ -28,53 +28,23 @@ describe('CzarHandScreen', () => {
     });
   });
 
-  it('clears the selection when clear is clicked', () => {
-    render(
-      <PlayerContext.Provider value={{ state, dispatch }}>
-        <CzarHandScreen />
-      </PlayerContext.Provider>,
-    );
+  describe('dispatch', () => {
+    it('calls dispatch when the submit button is clicked', () => {
+      render(
+        <PlayerContext.Provider value={{ state, dispatch }}>
+          <CzarHandScreen />
+        </PlayerContext.Provider>,
+      );
 
-    const cardWrappers = screen.queryAllByTestId('card-wrapper');
+      const cardWrappers = screen.queryAllByTestId('card-wrapper');
+      userEvent.click(cardWrappers[0]);
+      userEvent.click(screen.getByText('SUBMIT'));
 
-    userEvent.click(cardWrappers[0]);
-    expect(cardWrappers[0]).toHaveStyle(
-      'border-bottom: 5px solid var(--secondary-background-color)',
-    );
-
-    userEvent.click(screen.getByText('CLEAR'));
-    expect(cardWrappers[0]).toHaveStyle('border-bottom: none');
-  });
-
-  it('updates the selection in state when a card group is clicked', () => {
-    render(
-      <PlayerContext.Provider value={{ state, dispatch }}>
-        <CzarHandScreen />
-      </PlayerContext.Provider>,
-    );
-
-    const cardWrappers = screen.queryAllByTestId('card-wrapper');
-    userEvent.click(cardWrappers[0]);
-    expect(cardWrappers[0]).toHaveStyle(
-      'border-bottom: 5px solid var(--secondary-background-color)',
-    );
-  });
-
-  it('calls dispatch when the submit button is clicked', () => {
-    render(
-      <PlayerContext.Provider value={{ state, dispatch }}>
-        <CzarHandScreen />
-      </PlayerContext.Provider>,
-    );
-
-    const cardWrappers = screen.queryAllByTestId('card-wrapper');
-    userEvent.click(cardWrappers[0]);
-    userEvent.click(screen.getByText('SUBMIT'));
-
-    expect(dispatch).toHaveBeenCalledTimes(1);
-    expect(dispatch).toHaveBeenCalledWith({
-      type: 'SUBMIT_WINNER',
-      payload: { id: 0 },
+      expect(dispatch).toHaveBeenCalledTimes(1);
+      expect(dispatch).toHaveBeenCalledWith({
+        type: 'SUBMIT_WINNER',
+        payload: { id: 0 },
+      });
     });
   });
 
