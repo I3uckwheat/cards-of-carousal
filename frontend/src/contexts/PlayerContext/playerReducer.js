@@ -25,8 +25,7 @@ function errorDisconnect(state) {
   };
 }
 
-function submitWinner(state, payload) {
-  const { id } = payload;
+function submitWinner(state, { id }) {
   socketInstance.sendMessage({
     event: 'select-winner',
     id,
@@ -34,7 +33,6 @@ function submitWinner(state, payload) {
 
   return {
     ...state,
-    ...payload,
   };
 }
 
