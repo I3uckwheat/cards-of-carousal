@@ -34,6 +34,16 @@ describe('CzarHandScreen', () => {
         <CzarHandScreen />
       </PlayerContext.Provider>,
     );
+
+    const cardWrappers = screen.queryAllByTestId('card-wrapper');
+
+    userEvent.click(cardWrappers[0]);
+    expect(cardWrappers[0]).toHaveStyle(
+      'border-bottom: 5px solid var(--secondary-background-color)',
+    );
+
+    userEvent.click(screen.getByText('CLEAR'));
+    expect(cardWrappers[0]).toHaveStyle('border-bottom: none');
   });
 
   it('updates the selection in state when a card group is clicked', () => {
