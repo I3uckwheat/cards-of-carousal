@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { HostContext } from '../../../contexts/HostContext/HostContext';
-import HostScreenExample from '../../../temp/HostScreenExample';
+import HostPregameScreen from '../../screens/HostPregameScreen/HostPregameScreen';
 
 const propTypes = {};
 
@@ -10,7 +10,8 @@ export default function HostScreenController() {
   } = useContext(HostContext);
   switch (gameState) {
     case 'waiting-for-lobby':
-      return <HostScreenExample />;
+    case 'waiting-for-players':
+      return <HostPregameScreen />;
     default:
       throw new Error(`Unrecognized game state: ${gameState}`);
   }
