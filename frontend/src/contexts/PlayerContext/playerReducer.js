@@ -26,12 +26,14 @@ function errorDisconnect(state) {
 }
 
 function submit(state, payload) {
+  socketInstance.sendMessage({
+    event: 'select-winner',
+    payload,
+  });
+
   return {
     ...state,
-    message: {
-      event: 'select-winner',
-      payload: payload.id,
-    },
+    ...payload,
   };
 }
 
