@@ -9,13 +9,13 @@ export default function CzarHandScreen() {
   const [selection, setSelection] = useState(null);
 
   const submit = () => {
-    dispatch({ type: 'SUBMIT_WINNER', payload: selection });
+    dispatch({ type: 'SUBMIT_WINNER', payload: { id: selection } });
   };
 
   return (
     <CardHandLayout
       onClear={() => setSelection(null)}
-      onSubmit={() => submit(selection)}
+      onSubmit={submit}
       title={{
         top: "YOU'RE THE CZAR",
         bottom: 'PICK A WINNER',

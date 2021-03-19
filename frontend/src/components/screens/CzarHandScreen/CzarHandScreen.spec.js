@@ -67,8 +67,15 @@ describe('CzarHandScreen', () => {
       </PlayerContext.Provider>,
     );
 
+    const cardWrappers = screen.queryAllByTestId('card-wrapper');
+    userEvent.click(cardWrappers[0]);
     userEvent.click(screen.getByText('SUBMIT'));
-    expect(dispatch).toHaveBeenCalled();
+
+    expect(dispatch).toHaveBeenCalledTimes(1);
+    expect(dispatch).toHaveBeenCalledWith({
+      type: 'SUBMIT_WINNER',
+      payload: { id: 0 },
+    });
   });
 
   describe('snapshot', () => {

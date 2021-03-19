@@ -142,7 +142,7 @@ describe('reducer', () => {
 
       expect(socketInstance.sendMessage).toHaveBeenCalledWith({
         event: 'select-winner',
-        payload: 2,
+        id: 2,
       });
     });
   });

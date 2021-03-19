@@ -25,10 +25,11 @@ function errorDisconnect(state) {
   };
 }
 
-function submit(state, payload) {
+function submitWinner(state, payload) {
+  const { id } = payload;
   socketInstance.sendMessage({
     event: 'select-winner',
-    payload,
+    id,
   });
 
   return {
@@ -39,7 +40,6 @@ function submit(state, payload) {
 
 function reducer(state, action) {
   const { type, payload } = action;
-
   switch (type) {
     case 'JOIN_LOBBY':
       socketInstance.joinLobby(payload.id);
@@ -49,7 +49,7 @@ function reducer(state, action) {
     case 'ERROR_DISCONNECT':
       return errorDisconnect(state);
     case 'SUBMIT_WINNER':
-      return submit(state, payload.id);
+      return submitWinner(state, payload);
     default:
       return { ...state };
   }
