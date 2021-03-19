@@ -3,6 +3,7 @@ import socketInstance from '../../socket/socket';
 
 jest.mock('../../socket/socket', () => ({
   joinLobby: jest.fn(),
+  sendMessage: jest.fn(),
 }));
 
 describe('reducer', () => {
@@ -126,6 +127,23 @@ describe('reducer', () => {
       expect(result.gameState).toBe('disconnected-error');
       expect(result.message.big).toBe('AN ERROR OCCURRED');
       expect(result.message.small).toBe('Refresh to try again');
+    });
+  });
+
+  describe('SUBMIT_WINNER', () => {
+    it('sends a message to the host with the correct event and payload', () => {
+      const state = {};
+
+      const result = reducer(state, {
+        type: 'SUBMIT_WINNER',
+        payload: { id: 2 },
+      });
+      expect(result).not.toBe(state);
+
+      expect(socketInstance.sendMessage).toHaveBeenCalledWith({
+        event: 'select-winner',
+        payload: 2,
+      });
     });
   });
 });
