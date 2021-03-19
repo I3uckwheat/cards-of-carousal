@@ -36,14 +36,6 @@ describe('CzarHandScreen', () => {
     );
   });
 
-  it('updates the selection when a card group is clicked', () => {
-    render(
-      <PlayerContext.Provider value={{ state, dispatch }}>
-        <CzarHandScreen />
-      </PlayerContext.Provider>,
-    );
-  });
-
   it('updates the selection in state when a card group is clicked', () => {
     render(
       <PlayerContext.Provider value={{ state, dispatch }}>
