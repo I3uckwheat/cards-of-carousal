@@ -53,7 +53,6 @@ const wss = new WebSocket.Server({
 
 wss.on('connection', async (webSocket, request) => {
   webSocket.id = await nanoid();
-  console.log('HANDLE REQUEST', request.url);
   socketRouter.handleRequest(webSocket, request);
 
   webSocket.isAlive = true;
