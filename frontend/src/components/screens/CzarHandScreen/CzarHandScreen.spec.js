@@ -5,18 +5,18 @@ import userEvent from '@testing-library/user-event';
 import CzarHandScreen from './CzarHandScreen';
 import { PlayerContext } from '../../../contexts/PlayerContext/PlayerContext';
 
-const state = {
-  cards: [
-    ['Card One', 'Card Two', 'Card Three'],
-    ['Card Four', 'Card Five', 'Card Six'],
-    ['Card Seven', 'Card Eight', 'Card Nine'],
-  ],
-};
-
-const dispatch = jest.fn();
-
 describe('CzarHandScreen', () => {
   describe('render', () => {
+    const state = {
+      cards: [
+        ['Card One', 'Card Two', 'Card Three'],
+        ['Card Four', 'Card Five', 'Card Six'],
+        ['Card Seven', 'Card Eight', 'Card Nine'],
+      ],
+    };
+
+    const dispatch = jest.fn();
+
     it('should render', () => {
       render(
         <PlayerContext.Provider value={{ state, dispatch }}>
@@ -24,11 +24,21 @@ describe('CzarHandScreen', () => {
         </PlayerContext.Provider>,
       );
 
-      expect(screen.getByText("YOU'RE THE CZAR")).toBeInTheDocument();
+      expect(screen.getByText("YOU'RE THE CZAR,")).toBeInTheDocument();
     });
   });
 
   describe('dispatch', () => {
+    const state = {
+      cards: [
+        ['Card One', 'Card Two', 'Card Three'],
+        ['Card Four', 'Card Five', 'Card Six'],
+        ['Card Seven', 'Card Eight', 'Card Nine'],
+      ],
+    };
+
+    const dispatch = jest.fn();
+
     it('calls dispatch when the submit button is clicked', () => {
       render(
         <PlayerContext.Provider value={{ state, dispatch }}>
@@ -49,6 +59,16 @@ describe('CzarHandScreen', () => {
   });
 
   describe('snapshot', () => {
+    const state = {
+      cards: [
+        ['Card One', 'Card Two', 'Card Three'],
+        ['Card Four', 'Card Five', 'Card Six'],
+        ['Card Seven', 'Card Eight', 'Card Nine'],
+      ],
+    };
+
+    const dispatch = jest.fn();
+
     it('matches', () => {
       const tree = renderer
         .create(

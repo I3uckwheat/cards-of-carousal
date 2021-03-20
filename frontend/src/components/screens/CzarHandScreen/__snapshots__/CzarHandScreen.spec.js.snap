@@ -255,7 +255,7 @@ exports[`CzarHandScreen snapshot matches 1`] = `
       className="header-txt"
     >
       <h1>
-        YOU'RE THE CZAR
+        YOU'RE THE CZAR,
         <span>
           PICK A WINNER
         </span>

@@ -17,7 +17,7 @@ export default function CzarHandScreen() {
       onClear={() => setSelection(null)}
       onSubmit={submit}
       title={{
-        top: "YOU'RE THE CZAR",
+        top: "YOU'RE THE CZAR,",
         bottom: 'PICK A WINNER',
       }}
     >
