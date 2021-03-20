@@ -76,16 +76,12 @@ function HostSettingsMenu() {
   }
 
   function handleAccordionClick(settingIndex) {
-    if (anyAreOpen) {
-      resetAccordions();
-    } else {
-      const newSettings = accordionSettings.map((setting, index) => {
-        const state = index === settingIndex ? 'open' : 'disabled';
-        return { state };
-      });
+    const newSettings = accordionSettings.map((setting, index) => {
+      const state = index === settingIndex ? 'open' : 'disabled';
+      return { state };
+    });
 
-      setAccordionSettings(newSettings);
-    }
+    setAccordionSettings(newSettings);
   }
 
   function onOutsideClick(event) {
@@ -117,7 +113,8 @@ function HostSettingsMenu() {
       <OptionList
         listContent={['BENDER', 'BRIGGS', 'BRANDON', 'BRENDA', 'BACON']}
         state={accordionSettings[0].state}
-        onOptionListClick={() => handleAccordionClick(0)}
+        onEnabledOptionListClick={() => handleAccordionClick(0)}
+        onNotEnabledOptionListClick={resetAccordions}
         // eslint-disable-next-line
         onListItemClick={(event, item) => console.log(item)}
         openText="KICK WHO?"
@@ -127,7 +124,8 @@ function HostSettingsMenu() {
       <OptionList
         listContent={['FOO', 'BAR', 'BASH']}
         state={accordionSettings[1].state}
-        onOptionListClick={() => handleAccordionClick(1)}
+        onEnabledOptionListClick={() => handleAccordionClick(1)}
+        onNotEnabledOptionListClick={resetAccordions}
         // eslint-disable-next-line
         onListItemClick={(event, item) => console.log(item)}
         openText="BAZ"
