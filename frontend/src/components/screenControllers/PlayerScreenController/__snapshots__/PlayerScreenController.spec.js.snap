@@ -421,6 +421,7 @@ exports[`Player screen controller render renders correctly 1`] = `
           className="player-join-name-input"
           onChange={[Function]}
           placeholder="name"
+          required={true}
           type="text"
           value=""
         />
@@ -428,6 +429,7 @@ exports[`Player screen controller render renders correctly 1`] = `
           className="player-join-code-input"
           onChange={[Function]}
           placeholder="join code"
+          required={true}
           type="text"
           value=""
         />

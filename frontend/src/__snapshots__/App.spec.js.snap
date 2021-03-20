@@ -1579,12 +1579,14 @@ exports[`App snapshots should show the player screen after user has clicked the 
           <input
             class="player-join-name-input"
             placeholder="name"
+            required=""
             type="text"
             value=""
           />
           <input
             class="player-join-code-input"
             placeholder="join code"
+            required=""
             type="text"
             value=""
           />

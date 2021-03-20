@@ -271,6 +271,7 @@ export default function PlayerJoinScreen() {
         <div className="player-join-form-container">
           <form onSubmit={(e) => handleSubmit(e)} className="player-join-form">
             <input
+              required
               type="text"
               placeholder="name"
               value={name}
@@ -278,6 +279,7 @@ export default function PlayerJoinScreen() {
               className="player-join-name-input"
             />
             <input
+              required
               type="text"
               placeholder="join code"
               value={joinCode}
