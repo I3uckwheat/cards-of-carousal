@@ -13,12 +13,12 @@ class SocketSingleton {
     this.#socket = socket;
   }
 
-  joinLobby(lobbyId) {
+  joinLobby(lobbyId, playerName) {
     if (!lobbyId) {
       throw new Error('Missing lobbyId');
     }
 
-    const lobbyUrl = `${this.#url}/${lobbyId}`;
+    const lobbyUrl = `${this.#url}/${lobbyId}/${playerName}`;
     const socket = new WebSocket(lobbyUrl);
     this.#attachSocketListeners(socket);
     this.#socket = socket;

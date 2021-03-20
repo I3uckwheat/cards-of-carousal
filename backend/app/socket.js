@@ -24,6 +24,18 @@ socketRouter.addRoute('GET /lobby/:id', (req, webSocket) => {
   }
 });
 
+socketRouter.addRoute('GET /lobby/:id/:name', (req, webSocket) => {
+  const result = lobbyList.joinLobbyAs(
+    req.params.id,
+    req.params.name,
+    webSocket,
+  );
+  if (result === 'no-lobby') {
+    webSocket.send('no-lobby');
+    webSocket.close(1000, 'no-lobby');
+  }
+});
+
 const wss = new WebSocket.Server({
   // TODO: Enable when CORS is implemented
 
@@ -41,6 +53,7 @@ const wss = new WebSocket.Server({
 
 wss.on('connection', async (webSocket, request) => {
   webSocket.id = await nanoid();
+  console.log('HANDLE REQUEST', request.url);
   socketRouter.handleRequest(webSocket, request);
 
   webSocket.isAlive = true;

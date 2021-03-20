@@ -7,13 +7,13 @@ function createLobby(state) {
   };
 }
 
-function playerConnected(state, { playerId }) {
+function playerConnected(state, { playerId, playerName }) {
   return {
     ...state,
     players: {
       ...state.players,
       [playerId]: {
-        name: playerId,
+        name: playerName,
         score: 0,
         isCzar: false,
         submittedCards: [0],

@@ -20,6 +20,15 @@ module.exports = class LobbyList {
     return 'no-lobby';
   };
 
+  joinLobbyAs = (lobbyId, playerName, webSocket) => {
+    if (this.lobbies[lobbyId]) {
+      this.lobbies[lobbyId].addPlayerAs(webSocket, playerName);
+      return 'connected';
+    }
+
+    return 'no-lobby';
+  };
+
   #handleLobbyClose = (lobbyId) => {
     delete this.lobbies[lobbyId];
   };

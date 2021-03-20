@@ -44,13 +44,14 @@ describe('reducer', () => {
         gameState: 'TEST',
       };
       const id = '1234';
+      const name = 'FOO';
 
       reducer(state, {
         type: 'JOIN_LOBBY',
-        payload: { id },
+        payload: { id, name },
       });
 
-      expect(socketInstance.joinLobby).toHaveBeenCalledWith(id);
+      expect(socketInstance.joinLobby).toHaveBeenCalledWith(id, name);
     });
   });
 

@@ -42,6 +42,23 @@ module.exports = class Lobby {
     this.#hostSocket.send(message.toJSON());
   };
 
+  addPlayerAs = (playerSocket, playerName) => {
+    // the data from this message is passed into the callback returned from the method in this cb
+    playerSocket.on('message', this.#handlePlayerMessage(playerSocket));
+    playerSocket.on('close', this.#handlePlayerDisconnect(playerSocket));
+    this.#playerSockets[playerSocket.id] = playerSocket;
+
+    const message = new Message('server', {
+      event: 'player-connected',
+      payload: {
+        playerName,
+        playerId: playerSocket.id,
+      },
+    });
+
+    this.#hostSocket.send(message.toJSON());
+  };
+
   closeLobby = () => {
     const closeMessage = new Message('server', {
       event: 'lobby-closed',
