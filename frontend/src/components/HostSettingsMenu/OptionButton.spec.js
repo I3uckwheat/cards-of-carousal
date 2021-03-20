@@ -9,7 +9,11 @@ describe('OptionButton', () => {
   describe('rendering', () => {
     it('renders a button with the given text', () => {
       render(
-        <OptionButton isEnabled onClick={() => {}}>
+        <OptionButton
+          isEnabled
+          onEnabledClick={() => {}}
+          onDisabledClick={() => {}}
+        >
           TEST
         </OptionButton>,
       );
@@ -20,7 +24,11 @@ describe('OptionButton', () => {
     it('matches the expected snapshot when enabled', () => {
       const tree = renderer
         .create(
-          <OptionButton isEnabled onClick={() => {}}>
+          <OptionButton
+            isEnabled
+            onEnabledClick={() => {}}
+            onDisabledClick={() => {}}
+          >
             TEST
           </OptionButton>,
         )
@@ -31,7 +39,11 @@ describe('OptionButton', () => {
     it('matches the expected snapshot when not enabled', () => {
       const tree = renderer
         .create(
-          <OptionButton isEnabled={false} onClick={() => {}}>
+          <OptionButton
+            isEnabled={false}
+            onEnabledClick={() => {}}
+            onDisabledClick={() => {}}
+          >
             TEST
           </OptionButton>,
         )
@@ -41,56 +53,140 @@ describe('OptionButton', () => {
   });
 
   describe('functionality', () => {
-    it('does not call the onClick callback when it is enabled but has not been clicked', () => {
-      const onClick = jest.fn();
+    it('does not call the onEnabledClick callback when it is enabled but has not been clicked', () => {
+      const onEnabledClick = jest.fn();
 
       render(
-        <OptionButton isEnabled onClick={onClick}>
+        <OptionButton
+          isEnabled
+          onEnabledClick={onEnabledClick}
+          onDisabledClick={() => {}}
+        >
           TEST
         </OptionButton>,
       );
 
-      expect(onClick).not.toHaveBeenCalled();
+      expect(onEnabledClick).not.toHaveBeenCalled();
     });
 
-    it('calls the onClick callback when it is enabled and clicked', () => {
-      const onClick = jest.fn();
+    it('calls the onEnabledClick callback when it is enabled and clicked', () => {
+      const onEnabledClick = jest.fn();
 
       render(
-        <OptionButton isEnabled onClick={onClick}>
+        <OptionButton
+          isEnabled
+          onEnabledClick={onEnabledClick}
+          onDisabledClick={() => {}}
+        >
           TEST
         </OptionButton>,
       );
 
       userEvent.click(screen.getByRole('button'));
-      expect(onClick).toHaveBeenCalledTimes(1);
+      expect(onEnabledClick).toHaveBeenCalledTimes(1);
     });
 
-    it('calls the onClick callback twice when it is enabled and clicked twice', () => {
-      const onClick = jest.fn();
+    it('calls the onEnabledClick callback twice when it is enabled and clicked twice', () => {
+      const onEnabledClick = jest.fn();
 
       render(
-        <OptionButton isEnabled onClick={onClick}>
+        <OptionButton
+          isEnabled
+          onEnabledClick={onEnabledClick}
+          onDisabledClick={() => {}}
+        >
           TEST
         </OptionButton>,
       );
 
       userEvent.click(screen.getByRole('button'));
       userEvent.click(screen.getByRole('button'));
-      expect(onClick).toHaveBeenCalledTimes(2);
+      expect(onEnabledClick).toHaveBeenCalledTimes(2);
     });
 
-    it('does not call the onClick callback when it is not enabled and clicked', () => {
-      const onClick = jest.fn();
+    it('does not call the onEnabledClick callback when it is not enabled and clicked', () => {
+      const onEnabledClick = jest.fn();
 
       render(
-        <OptionButton isEnabled={false} onClick={onClick}>
+        <OptionButton
+          isEnabled={false}
+          onEnabledClick={onEnabledClick}
+          onDisabledClick={() => {}}
+        >
           TEST
         </OptionButton>,
       );
 
       userEvent.click(screen.getByRole('button'));
-      expect(onClick).not.toHaveBeenCalled();
+      expect(onEnabledClick).not.toHaveBeenCalled();
+    });
+
+    it('does not call the onDisabledClick callback when it is not enabled but has not been clicked', () => {
+      const onDisabledClickMock = jest.fn();
+
+      render(
+        <OptionButton
+          isEnabled={false}
+          onEnabledClick={() => {}}
+          onDisabledClick={onDisabledClickMock}
+        >
+          TEST
+        </OptionButton>,
+      );
+
+      expect(onDisabledClickMock).not.toHaveBeenCalled();
+    });
+
+    it('calls the onDisabledClick callback when it is not enabled and clicked', () => {
+      const onDisabledClickMock = jest.fn();
+
+      render(
+        <OptionButton
+          isEnabled={false}
+          onEnabledClick={() => {}}
+          onDisabledClick={onDisabledClickMock}
+        >
+          TEST
+        </OptionButton>,
+      );
+
+      userEvent.click(screen.getByRole('button'));
+      expect(onDisabledClickMock).toHaveBeenCalledTimes(1);
+    });
+
+    it('calls the onDisabledClick callback twice when it is not enabled and clicked twice', () => {
+      const onDisabledClickMock = jest.fn();
+
+      render(
+        <OptionButton
+          isEnabled={false}
+          onEnabledClick={() => {}}
+          onDisabledClick={onDisabledClickMock}
+        >
+          TEST
+        </OptionButton>,
+      );
+
+      userEvent.click(screen.getByRole('button'));
+      userEvent.click(screen.getByRole('button'));
+      expect(onDisabledClickMock).toHaveBeenCalledTimes(2);
+    });
+
+    it('does not call the onDisabledClick callback when it is  enabled and clicked', () => {
+      const onDisabledClickMock = jest.fn();
+
+      render(
+        <OptionButton
+          isEnabled
+          onEnabledClick={() => {}}
+          onDisabledClick={onDisabledClickMock}
+        >
+          TEST
+        </OptionButton>,
+      );
+
+      userEvent.click(screen.getByRole('button'));
+      expect(onDisabledClickMock).not.toHaveBeenCalled();
     });
   });
 
@@ -100,7 +196,11 @@ describe('OptionButton', () => {
         .spyOn(console, 'error')
         .mockImplementation(() => {});
 
-      render(<OptionButton onClick={() => {}}>text</OptionButton>);
+      render(
+        <OptionButton onEnabledClick={() => {}} onDisabledClick={() => {}}>
+          text
+        </OptionButton>,
+      );
 
       expect(consoleSpy).toHaveBeenCalled();
     });
@@ -111,7 +211,11 @@ describe('OptionButton', () => {
         .mockImplementation(() => {});
 
       render(
-        <OptionButton isEnabled={() => {}} onClick={() => {}}>
+        <OptionButton
+          isEnabled={() => {}}
+          onEnabledClick={() => {}}
+          onDisabledClick={() => {}}
+        >
           text
         </OptionButton>,
       );
@@ -119,23 +223,59 @@ describe('OptionButton', () => {
       expect(consoleSpy).toHaveBeenCalled();
     });
 
-    it('logs an error when attempting to render without the onClick prop', () => {
-      const consoleSpy = jest
-        .spyOn(console, 'error')
-        .mockImplementation(() => {});
-
-      render(<OptionButton isEnabled>text</OptionButton>);
-
-      expect(consoleSpy).toHaveBeenCalled();
-    });
-
-    it('logs an error when attempting to render the onClick prop as a non function', () => {
+    it('logs an error when attempting to render without the onEnabledClick prop', () => {
       const consoleSpy = jest
         .spyOn(console, 'error')
         .mockImplementation(() => {});
 
       render(
-        <OptionButton isEnabled onClick={false}>
+        <OptionButton isEnabled onDisabledClick={() => {}}>
+          text
+        </OptionButton>,
+      );
+
+      expect(consoleSpy).toHaveBeenCalled();
+    });
+
+    it('logs an error when attempting to render the onEnabledClick prop as a non function', () => {
+      const consoleSpy = jest
+        .spyOn(console, 'error')
+        .mockImplementation(() => {});
+
+      render(
+        <OptionButton
+          isEnabled
+          onEnabledClick={false}
+          onDisabledClick={() => {}}
+        >
+          text
+        </OptionButton>,
+      );
+
+      expect(consoleSpy).toHaveBeenCalled();
+    });
+
+    it('logs an error when attempting to render without the onDisabledClick prop', () => {
+      const consoleSpy = jest
+        .spyOn(console, 'error')
+        .mockImplementation(() => {});
+
+      render(
+        <OptionButton isEnabled onEnabledClick={() => {}}>
+          text
+        </OptionButton>,
+      );
+
+      expect(consoleSpy).toHaveBeenCalled();
+    });
+
+    it('logs an error when attempting to render the onDisabledClick prop as a non function', () => {
+      const consoleSpy = jest
+        .spyOn(console, 'error')
+        .mockImplementation(() => {});
+
+      render(
+        <OptionButton isEnabled onEnabledClick={false} onDisabledClick={false}>
           text
         </OptionButton>,
       );
@@ -148,7 +288,13 @@ describe('OptionButton', () => {
         .spyOn(console, 'error')
         .mockImplementation(() => {});
 
-      render(<OptionButton isEnabled onClick={() => {}} />);
+      render(
+        <OptionButton
+          isEnabled
+          onEnabledClick={() => {}}
+          onDisabledClick={() => {}}
+        />,
+      );
 
       expect(consoleSpy).toHaveBeenCalled();
     });
@@ -159,7 +305,11 @@ describe('OptionButton', () => {
         .mockImplementation(() => {});
 
       render(
-        <OptionButton isEnabled onClick={() => {}}>
+        <OptionButton
+          isEnabled
+          onEnabledClick={() => {}}
+          onDisabledClick={() => {}}
+        >
           {true}
         </OptionButton>,
       );
@@ -173,7 +323,11 @@ describe('OptionButton', () => {
         .mockImplementation(() => {});
 
       render(
-        <OptionButton isEnabled onClick={() => {}}>
+        <OptionButton
+          isEnabled
+          onEnabledClick={() => {}}
+          onDisabledClick={() => {}}
+        >
           text
         </OptionButton>,
       );
