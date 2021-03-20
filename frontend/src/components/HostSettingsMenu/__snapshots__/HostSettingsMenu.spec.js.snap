@@ -168,6 +168,7 @@ exports[`HostSettingsMenu rendering matches the expected snapshot 1`] = `
 >
   <header
     className="c1 host-settings-header"
+    onClick={[Function]}
   >
     <h3>
       SETTINGS
@@ -186,6 +187,15 @@ exports[`HostSettingsMenu rendering matches the expected snapshot 1`] = `
       type="button"
     >
       KICK PLAYER
+    </button>
+  </div>
+  <div>
+    <button
+      className="c3"
+      onClick={[Function]}
+      type="button"
+    >
+      BAM
     </button>
   </div>
 </div>

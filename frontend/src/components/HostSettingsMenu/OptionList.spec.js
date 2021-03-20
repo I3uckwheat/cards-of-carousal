@@ -5,13 +5,13 @@ import renderer from 'react-test-renderer';
 
 import OptionList from './OptionList';
 
-describe('OptionButton', () => {
+describe('OptionList', () => {
   describe('rendering', () => {
     it('renders a button with the given open text when open', () => {
       render(
         <OptionList
           listContent={['foo', 'bar', 'bash']}
-          isOpen
+          state="open"
           onOptionListClick={() => {}}
           onListItemClick={() => {}}
           openText="LIST IS OPEN"
@@ -24,11 +24,11 @@ describe('OptionButton', () => {
       ).toBeInTheDocument();
     });
 
-    it('renders a button with the given closed text when closed', () => {
+    it('renders a button with the given closed text when enabled', () => {
       render(
         <OptionList
           listContent={['foo', 'bar', 'bash']}
-          isOpen={false}
+          state="enabled"
           onOptionListClick={() => {}}
           onListItemClick={() => {}}
           openText="LIST IS OPEN"
@@ -41,11 +41,51 @@ describe('OptionButton', () => {
       ).toBeInTheDocument();
     });
 
-    it('does not render the contents of the list when closed', () => {
+    it('does not render the contents of the list when enabled', () => {
       render(
         <OptionList
           listContent={['foo', 'bar', 'bash']}
-          isOpen={false}
+          state="enabled"
+          onOptionListClick={() => {}}
+          onListItemClick={() => {}}
+          openText="LIST IS OPEN"
+          closedText="LIST IS CLOSED"
+        />,
+      );
+
+      expect(
+        screen.queryByRole('button', { name: 'foo' }),
+      ).not.toBeInTheDocument();
+      expect(
+        screen.queryByRole('button', { name: 'bar' }),
+      ).not.toBeInTheDocument();
+      expect(
+        screen.queryByRole('button', { name: 'bash' }),
+      ).not.toBeInTheDocument();
+    });
+
+    it('renders a button with the given closed text when disabled', () => {
+      render(
+        <OptionList
+          listContent={['foo', 'bar', 'bash']}
+          state="disabled"
+          onOptionListClick={() => {}}
+          onListItemClick={() => {}}
+          openText="LIST IS OPEN"
+          closedText="LIST IS CLOSED"
+        />,
+      );
+
+      expect(
+        screen.getByRole('button', { name: 'LIST IS CLOSED' }),
+      ).toBeInTheDocument();
+    });
+
+    it('does not render the contents of the list when disabled', () => {
+      render(
+        <OptionList
+          listContent={['foo', 'bar', 'bash']}
+          state="disabled"
           onOptionListClick={() => {}}
           onListItemClick={() => {}}
           openText="LIST IS OPEN"
@@ -68,7 +108,7 @@ describe('OptionButton', () => {
       render(
         <OptionList
           listContent={['foo', 'bar', 'bash']}
-          isOpen
+          state="open"
           onOptionListClick={() => {}}
           onListItemClick={() => {}}
           openText="LIST IS OPEN"
@@ -86,7 +126,7 @@ describe('OptionButton', () => {
         .create(
           <OptionList
             listContent={['foo', 'bar', 'bash']}
-            isOpen
+            state="open"
             onOptionListClick={() => {}}
             onListItemClick={() => {}}
             openText="LIST IS OPEN"
@@ -97,12 +137,28 @@ describe('OptionButton', () => {
       expect(tree).toMatchSnapshot();
     });
 
-    it('matches the expected snapshot when not open', () => {
+    it('matches the expected snapshot when enabled', () => {
       const tree = renderer
         .create(
           <OptionList
             listContent={['foo', 'bar', 'bash']}
-            isOpen={false}
+            state="enabled"
+            onOptionListClick={() => {}}
+            onListItemClick={() => {}}
+            openText="LIST IS OPEN"
+            closedText="LIST IS CLOSED"
+          />,
+        )
+        .toJSON();
+      expect(tree).toMatchSnapshot();
+    });
+
+    it('matches the expected snapshot when disabled', () => {
+      const tree = renderer
+        .create(
+          <OptionList
+            listContent={['foo', 'bar', 'bash']}
+            state="disabled"
             onOptionListClick={() => {}}
             onListItemClick={() => {}}
             openText="LIST IS OPEN"
@@ -123,7 +179,7 @@ describe('OptionButton', () => {
       render(
         <OptionList
           listContent={['foo', 'bar', 'bash']}
-          isOpen
+          state="open"
           onOptionListClick={consoleSpy}
           onListItemClick={() => {}}
           openText="LIST IS OPEN"
@@ -142,7 +198,7 @@ describe('OptionButton', () => {
       render(
         <OptionList
           listContent={['foo', 'bar', 'bash']}
-          isOpen
+          state="open"
           onOptionListClick={consoleSpy}
           onListItemClick={() => {}}
           openText="LIST IS OPEN"
@@ -162,7 +218,7 @@ describe('OptionButton', () => {
       render(
         <OptionList
           listContent={['foo', 'bar', 'bash']}
-          isOpen={false}
+          state="enabled"
           onOptionListClick={consoleSpy}
           onListItemClick={() => {}}
           openText="LIST IS OPEN"
@@ -182,7 +238,7 @@ describe('OptionButton', () => {
       render(
         <OptionList
           listContent={['foo', 'bar', 'bash']}
-          isOpen
+          state="open"
           onOptionListClick={() => {}}
           onListItemClick={consoleSpy}
           openText="LIST IS OPEN"
@@ -201,7 +257,7 @@ describe('OptionButton', () => {
       render(
         <OptionList
           listContent={['foo', 'bar', 'bash']}
-          isOpen
+          state="open"
           onOptionListClick={() => {}}
           onListItemClick={consoleSpy}
           openText="LIST IS OPEN"
@@ -221,7 +277,7 @@ describe('OptionButton', () => {
       render(
         <OptionList
           listContent={['foo', 'bar', 'bash']}
-          isOpen
+          state="open"
           onOptionListClick={() => {}}
           onListItemClick={consoleSpy}
           openText="LIST IS OPEN"
@@ -242,7 +298,7 @@ describe('OptionButton', () => {
       render(
         <OptionList
           listContent={['foo', 'bar', 'bash']}
-          isOpen
+          state="open"
           onOptionListClick={() => {}}
           onListItemClick={consoleSpy}
           openText="LIST IS OPEN"
@@ -266,7 +322,7 @@ describe('OptionButton', () => {
       expect(() => {
         render(
           <OptionList
-            isOpen
+            state="open"
             onOptionListClick={() => {}}
             onListItemClick={() => {}}
             openText="LIST IS OPEN"
@@ -286,7 +342,7 @@ describe('OptionButton', () => {
         render(
           <OptionList
             listContent="foo"
-            isOpen
+            state="open"
             onOptionListClick={() => {}}
             onListItemClick={() => {}}
             openText="LIST IS OPEN"
@@ -305,7 +361,7 @@ describe('OptionButton', () => {
       render(
         <OptionList
           listContent={[true, false, true]}
-          isOpen
+          state="open"
           onOptionListClick={() => {}}
           onListItemClick={() => {}}
           openText="LIST IS OPEN"
@@ -316,7 +372,7 @@ describe('OptionButton', () => {
       expect(consoleSpy).toHaveBeenCalled();
     });
 
-    it('logs an error when attempting to render without the isOpen prop', () => {
+    it('logs an error when attempting to render without the state prop', () => {
       const consoleSpy = jest
         .spyOn(console, 'error')
         .mockImplementation(() => {});
@@ -334,7 +390,7 @@ describe('OptionButton', () => {
       expect(consoleSpy).toHaveBeenCalled();
     });
 
-    it('logs an error when attempting to render the isOpen prop as a non bool', () => {
+    it('logs an error when attempting to render the state prop as a non string', () => {
       const consoleSpy = jest
         .spyOn(console, 'error')
         .mockImplementation(() => {});
@@ -342,7 +398,7 @@ describe('OptionButton', () => {
       render(
         <OptionList
           listContent={['foo', 'bar', 'bash']}
-          isOpen="baz"
+          state={false}
           onOptionListClick={() => {}}
           onListItemClick={() => {}}
           openText="LIST IS OPEN"
@@ -361,7 +417,7 @@ describe('OptionButton', () => {
       render(
         <OptionList
           listContent={['foo', 'bar', 'bash']}
-          isOpen
+          state="open"
           onListItemClick={() => {}}
           openText="LIST IS OPEN"
           closedText="LIST IS CLOSED"
@@ -379,7 +435,7 @@ describe('OptionButton', () => {
       render(
         <OptionList
           listContent={['foo', 'bar', 'bash']}
-          isOpen
+          state="open"
           onOptionListClick={false}
           onListItemClick={() => {}}
           openText="LIST IS OPEN"
@@ -398,7 +454,7 @@ describe('OptionButton', () => {
       render(
         <OptionList
           listContent={['foo', 'bar', 'bash']}
-          isOpen
+          state="open"
           onOptionListClick={() => {}}
           openText="LIST IS OPEN"
           closedText="LIST IS CLOSED"
@@ -416,7 +472,7 @@ describe('OptionButton', () => {
       render(
         <OptionList
           listContent={['foo', 'bar', 'bash']}
-          isOpen
+          state="open"
           onOptionListClick={() => {}}
           onListItemClick={false}
           openText="LIST IS OPEN"
@@ -435,7 +491,7 @@ describe('OptionButton', () => {
       render(
         <OptionList
           listContent={['foo', 'bar', 'bash']}
-          isOpen
+          state="open"
           onListItemClick={() => {}}
           onOptionListClick={() => {}}
           closedText="LIST IS CLOSED"
@@ -453,7 +509,7 @@ describe('OptionButton', () => {
       render(
         <OptionList
           listContent={['foo', 'bar', 'bash']}
-          isOpen
+          state="open"
           onOptionListClick={() => {}}
           onListItemClick={() => {}}
           openText={false}
@@ -472,7 +528,7 @@ describe('OptionButton', () => {
       render(
         <OptionList
           listContent={['foo', 'bar', 'bash']}
-          isOpen
+          state="open"
           onListItemClick={() => {}}
           onOptionListClick={() => {}}
           openText="LIST IS OPEN"
@@ -490,7 +546,7 @@ describe('OptionButton', () => {
       render(
         <OptionList
           listContent={['foo', 'bar', 'bash']}
-          isOpen
+          state="open"
           onOptionListClick={() => {}}
           onListItemClick={() => {}}
           openText="LIST IS OPEN"
@@ -509,7 +565,7 @@ describe('OptionButton', () => {
       render(
         <OptionList
           listContent={['foo', 'bar', 'bash']}
-          isOpen
+          state="open"
           onOptionListClick={() => {}}
           onListItemClick={() => {}}
           openText="LIST IS OPEN"

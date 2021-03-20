@@ -87,6 +87,7 @@ exports[`OptionButton rendering matches the expected snapshot when not enabled 1
 
 <button
   className="c0"
+  onClick={[Function]}
 >
   TEST
 </button>
