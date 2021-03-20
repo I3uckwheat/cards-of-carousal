@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
 import Button from '../../Buttons/Button';
 import Header from '../../Header/Header';
 import Footer from '../../Footer/Footer';
+import { PlayerContext } from '../../../contexts/PlayerContext/PlayerContext';
 
 const propTypes = {};
 
@@ -248,12 +249,14 @@ const PlayerJoinButton = styled(Button)`
 `;
 
 export default function PlayerJoinScreen() {
+  const { dispatch } = useContext(PlayerContext);
+
   const [name, setName] = useState('');
   const [joinCode, setJoinCode] = useState('');
 
   function handleSubmit(e) {
     e.preventDefault();
-    // TODO - handle form submission by taking user to waiting screen
+    dispatch({ type: 'JOIN_LOBBY', payload: { id: joinCode } });
   }
 
   return (
@@ -271,14 +274,14 @@ export default function PlayerJoinScreen() {
               type="text"
               placeholder="name"
               value={name}
-              onChange={(e) => setName(e.target.value)}
+              onChange={(e) => setName(e.target.value.toUpperCase())}
               className="player-join-name-input"
             />
             <input
               type="text"
               placeholder="join code"
               value={joinCode}
-              onChange={(e) => setJoinCode(e.target.value)}
+              onChange={(e) => setJoinCode(e.target.value.toUpperCase())}
               className="player-join-code-input"
             />
             <PlayerJoinButton type="submit">

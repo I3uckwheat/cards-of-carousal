@@ -129,9 +129,11 @@ function HostReducer(state, action) {
       return createLobby(state);
 
     case 'PLAYER_CONNECTED':
+      // TODO: Add specific recipient to this message
       socketInstance.sendMessage({
         event: 'update',
         payload: {
+          gameState: 'connected',
           message: {
             big: "You've joined the lobby",
             small: 'Please wait for the host to start the game',
