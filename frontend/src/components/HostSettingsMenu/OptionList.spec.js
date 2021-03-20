@@ -12,7 +12,8 @@ describe('OptionList', () => {
         <OptionList
           listContent={['foo', 'bar', 'bash']}
           state="open"
-          onOptionListClick={() => {}}
+          onEnabledOptionListClick={() => {}}
+          onNotEnabledOptionListClick={() => {}}
           onListItemClick={() => {}}
           openText="LIST IS OPEN"
           closedText="LIST IS CLOSED"
@@ -29,7 +30,8 @@ describe('OptionList', () => {
         <OptionList
           listContent={['foo', 'bar', 'bash']}
           state="enabled"
-          onOptionListClick={() => {}}
+          onEnabledOptionListClick={() => {}}
+          onNotEnabledOptionListClick={() => {}}
           onListItemClick={() => {}}
           openText="LIST IS OPEN"
           closedText="LIST IS CLOSED"
@@ -46,7 +48,8 @@ describe('OptionList', () => {
         <OptionList
           listContent={['foo', 'bar', 'bash']}
           state="enabled"
-          onOptionListClick={() => {}}
+          onEnabledOptionListClick={() => {}}
+          onNotEnabledOptionListClick={() => {}}
           onListItemClick={() => {}}
           openText="LIST IS OPEN"
           closedText="LIST IS CLOSED"
@@ -69,7 +72,8 @@ describe('OptionList', () => {
         <OptionList
           listContent={['foo', 'bar', 'bash']}
           state="disabled"
-          onOptionListClick={() => {}}
+          onEnabledOptionListClick={() => {}}
+          onNotEnabledOptionListClick={() => {}}
           onListItemClick={() => {}}
           openText="LIST IS OPEN"
           closedText="LIST IS CLOSED"
@@ -86,7 +90,8 @@ describe('OptionList', () => {
         <OptionList
           listContent={['foo', 'bar', 'bash']}
           state="disabled"
-          onOptionListClick={() => {}}
+          onEnabledOptionListClick={() => {}}
+          onNotEnabledOptionListClick={() => {}}
           onListItemClick={() => {}}
           openText="LIST IS OPEN"
           closedText="LIST IS CLOSED"
@@ -109,7 +114,8 @@ describe('OptionList', () => {
         <OptionList
           listContent={['foo', 'bar', 'bash']}
           state="open"
-          onOptionListClick={() => {}}
+          onEnabledOptionListClick={() => {}}
+          onNotEnabledOptionListClick={() => {}}
           onListItemClick={() => {}}
           openText="LIST IS OPEN"
           closedText="LIST IS CLOSED"
@@ -127,7 +133,8 @@ describe('OptionList', () => {
           <OptionList
             listContent={['foo', 'bar', 'bash']}
             state="open"
-            onOptionListClick={() => {}}
+            onEnabledOptionListClick={() => {}}
+            onNotEnabledOptionListClick={() => {}}
             onListItemClick={() => {}}
             openText="LIST IS OPEN"
             closedText="LIST IS CLOSED"
@@ -143,7 +150,8 @@ describe('OptionList', () => {
           <OptionList
             listContent={['foo', 'bar', 'bash']}
             state="enabled"
-            onOptionListClick={() => {}}
+            onEnabledOptionListClick={() => {}}
+            onNotEnabledOptionListClick={() => {}}
             onListItemClick={() => {}}
             openText="LIST IS OPEN"
             closedText="LIST IS CLOSED"
@@ -159,7 +167,8 @@ describe('OptionList', () => {
           <OptionList
             listContent={['foo', 'bar', 'bash']}
             state="disabled"
-            onOptionListClick={() => {}}
+            onEnabledOptionListClick={() => {}}
+            onNotEnabledOptionListClick={() => {}}
             onListItemClick={() => {}}
             openText="LIST IS OPEN"
             closedText="LIST IS CLOSED"
@@ -171,35 +180,33 @@ describe('OptionList', () => {
   });
 
   describe('functionality', () => {
-    it('does not call the onOptionListClick callback when the OptionList main button is not clicked', () => {
-      const consoleSpy = jest
-        .spyOn(console, 'error')
-        .mockImplementation(() => {});
+    it('does not call the onEnabledOptionListClick callback when the OptionList main button is not clicked', () => {
+      const onEnabledClickMock = jest.fn();
 
       render(
         <OptionList
           listContent={['foo', 'bar', 'bash']}
           state="open"
-          onOptionListClick={consoleSpy}
+          onEnabledOptionListClick={onEnabledClickMock}
+          onNotEnabledOptionListClick={() => {}}
           onListItemClick={() => {}}
           openText="LIST IS OPEN"
           closedText="LIST IS CLOSED"
         />,
       );
 
-      expect(consoleSpy).not.toHaveBeenCalled();
+      expect(onEnabledClickMock).not.toHaveBeenCalled();
     });
 
-    it('calls the onOptionListClick callback when the OptionList main button is open and is clicked', () => {
-      const consoleSpy = jest
-        .spyOn(console, 'error')
-        .mockImplementation(() => {});
+    it('does not call the onEnabledOptionListClick callback when the OptionList main button is open and is clicked', () => {
+      const onEnabledClickMock = jest.fn();
 
       render(
         <OptionList
           listContent={['foo', 'bar', 'bash']}
           state="open"
-          onOptionListClick={consoleSpy}
+          onEnabledOptionListClick={onEnabledClickMock}
+          onNotEnabledOptionListClick={() => {}}
           onListItemClick={() => {}}
           openText="LIST IS OPEN"
           closedText="LIST IS CLOSED"
@@ -207,19 +214,18 @@ describe('OptionList', () => {
       );
 
       userEvent.click(screen.getByRole('button', { name: 'LIST IS OPEN' }));
-      expect(consoleSpy).toHaveBeenCalled();
+      expect(onEnabledClickMock).not.toHaveBeenCalled();
     });
 
-    it('calls the onOptionListClick callback when the OptionList main button is closed and is clicked', () => {
-      const consoleSpy = jest
-        .spyOn(console, 'error')
-        .mockImplementation(() => {});
+    it('does not call the onEnabledOptionListClick callback when the OptionList main button is disabled and is clicked', () => {
+      const onEnabledClickMock = jest.fn();
 
       render(
         <OptionList
           listContent={['foo', 'bar', 'bash']}
-          state="enabled"
-          onOptionListClick={consoleSpy}
+          state="disabled"
+          onEnabledOptionListClick={onEnabledClickMock}
+          onNotEnabledOptionListClick={() => {}}
           onListItemClick={() => {}}
           openText="LIST IS OPEN"
           closedText="LIST IS CLOSED"
@@ -227,59 +233,150 @@ describe('OptionList', () => {
       );
 
       userEvent.click(screen.getByRole('button', { name: 'LIST IS CLOSED' }));
-      expect(consoleSpy).toHaveBeenCalled();
+      expect(onEnabledClickMock).not.toHaveBeenCalled();
     });
 
-    it('does not call the onListItemClick callback if none of the list item buttons are clicked', () => {
-      const consoleSpy = jest
-        .spyOn(console, 'error')
-        .mockImplementation(() => {});
+    it('calls the onEnabledOptionListClick callback when the OptionList main button is enabled and is clicked', () => {
+      const onEnabledClickMock = jest.fn();
 
       render(
         <OptionList
           listContent={['foo', 'bar', 'bash']}
-          state="open"
-          onOptionListClick={() => {}}
-          onListItemClick={consoleSpy}
+          state="enabled"
+          onEnabledOptionListClick={onEnabledClickMock}
+          onNotEnabledOptionListClick={() => {}}
+          onListItemClick={() => {}}
           openText="LIST IS OPEN"
           closedText="LIST IS CLOSED"
         />,
       );
 
-      expect(consoleSpy).not.toHaveBeenCalled();
+      userEvent.click(screen.getByRole('button', { name: 'LIST IS CLOSED' }));
+      expect(onEnabledClickMock).toHaveBeenCalled();
     });
 
-    it('does not call the onListItemClick callback if none of the list item buttons are clicked but the main button is', () => {
-      const consoleSpy = jest
-        .spyOn(console, 'error')
-        .mockImplementation(() => {});
+    it('does not call the onNotEnabledOptionListClick callback when the OptionList main button is not clicked', () => {
+      const onNotEnabledClickMock = jest.fn();
 
       render(
         <OptionList
           listContent={['foo', 'bar', 'bash']}
           state="open"
-          onOptionListClick={() => {}}
-          onListItemClick={consoleSpy}
+          onEnabledOptionListClick={() => {}}
+          onNotEnabledOptionListClick={onNotEnabledClickMock}
+          onListItemClick={() => {}}
+          openText="LIST IS OPEN"
+          closedText="LIST IS CLOSED"
+        />,
+      );
+
+      expect(onNotEnabledClickMock).not.toHaveBeenCalled();
+    });
+
+    it('does not call the onNotEnabledOptionListClick callback when the OptionList main button is enabled and is clicked', () => {
+      const onNotEnabledClickMock = jest.fn();
+
+      render(
+        <OptionList
+          listContent={['foo', 'bar', 'bash']}
+          state="enabled"
+          onEnabledOptionListClick={() => {}}
+          onNotEnabledOptionListClick={onNotEnabledClickMock}
+          onListItemClick={() => {}}
+          openText="LIST IS OPEN"
+          closedText="LIST IS CLOSED"
+        />,
+      );
+
+      userEvent.click(screen.getByRole('button', { name: 'LIST IS CLOSED' }));
+      expect(onNotEnabledClickMock).not.toHaveBeenCalled();
+    });
+
+    it('calls the onNotEnabledOptionListClick callback when the OptionList main button is disabled and is clicked', () => {
+      const onNotEnabledClickMock = jest.fn();
+
+      render(
+        <OptionList
+          listContent={['foo', 'bar', 'bash']}
+          state="disabled"
+          onEnabledOptionListClick={() => {}}
+          onNotEnabledOptionListClick={onNotEnabledClickMock}
+          onListItemClick={() => {}}
+          openText="LIST IS OPEN"
+          closedText="LIST IS CLOSED"
+        />,
+      );
+
+      userEvent.click(screen.getByRole('button', { name: 'LIST IS CLOSED' }));
+      expect(onNotEnabledClickMock).toHaveBeenCalled();
+    });
+
+    it('calls the onNotEnabledOptionListClick callback when the OptionList main button is open and is clicked', () => {
+      const onNotEnabledClickMock = jest.fn();
+
+      render(
+        <OptionList
+          listContent={['foo', 'bar', 'bash']}
+          state="open"
+          onEnabledOptionListClick={() => {}}
+          onNotEnabledOptionListClick={onNotEnabledClickMock}
+          onListItemClick={() => {}}
           openText="LIST IS OPEN"
           closedText="LIST IS CLOSED"
         />,
       );
 
       userEvent.click(screen.getByRole('button', { name: 'LIST IS OPEN' }));
-      expect(consoleSpy).not.toHaveBeenCalled();
+      expect(onNotEnabledClickMock).toHaveBeenCalled();
+    });
+
+    it('does not call the onListItemClick callback if none of the list item buttons are clicked', () => {
+      const onListItemClickMock = jest.fn();
+
+      render(
+        <OptionList
+          listContent={['foo', 'bar', 'bash']}
+          state="open"
+          onEnabledOptionListClick={() => {}}
+          onNotEnabledOptionListClick={() => {}}
+          onListItemClick={onListItemClickMock}
+          openText="LIST IS OPEN"
+          closedText="LIST IS CLOSED"
+        />,
+      );
+
+      expect(onListItemClickMock).not.toHaveBeenCalled();
+    });
+
+    it('does not call the onListItemClick callback if none of the list item buttons are clicked but the main button is', () => {
+      const onListItemClickMock = jest.fn();
+
+      render(
+        <OptionList
+          listContent={['foo', 'bar', 'bash']}
+          state="open"
+          onEnabledOptionListClick={() => {}}
+          onNotEnabledOptionListClick={() => {}}
+          onListItemClick={onListItemClickMock}
+          openText="LIST IS OPEN"
+          closedText="LIST IS CLOSED"
+        />,
+      );
+
+      userEvent.click(screen.getByRole('button', { name: 'LIST IS OPEN' }));
+      expect(onListItemClickMock).not.toHaveBeenCalled();
     });
 
     it('calls the onListItemClick callback once each time any of the list item buttons are clicked', () => {
-      const consoleSpy = jest
-        .spyOn(console, 'error')
-        .mockImplementation(() => {});
+      const onListItemClickMock = jest.fn();
 
       render(
         <OptionList
           listContent={['foo', 'bar', 'bash']}
           state="open"
-          onOptionListClick={() => {}}
-          onListItemClick={consoleSpy}
+          onEnabledOptionListClick={() => {}}
+          onNotEnabledOptionListClick={() => {}}
+          onListItemClick={onListItemClickMock}
           openText="LIST IS OPEN"
           closedText="LIST IS CLOSED"
         />,
@@ -287,20 +384,19 @@ describe('OptionList', () => {
 
       userEvent.click(screen.getByRole('button', { name: 'foo' }));
       userEvent.click(screen.getByRole('button', { name: 'bash' }));
-      expect(consoleSpy).toHaveBeenCalledTimes(2);
+      expect(onListItemClickMock).toHaveBeenCalledTimes(2);
     });
 
     it('calls the onListItemClick callback multiple times if a list item is clicked multiple times', () => {
-      const consoleSpy = jest
-        .spyOn(console, 'error')
-        .mockImplementation(() => {});
+      const onListItemClickMock = jest.fn();
 
       render(
         <OptionList
           listContent={['foo', 'bar', 'bash']}
           state="open"
-          onOptionListClick={() => {}}
-          onListItemClick={consoleSpy}
+          onEnabledOptionListClick={() => {}}
+          onNotEnabledOptionListClick={() => {}}
+          onListItemClick={onListItemClickMock}
           openText="LIST IS OPEN"
           closedText="LIST IS CLOSED"
         />,
@@ -309,7 +405,7 @@ describe('OptionList', () => {
       userEvent.click(screen.getByRole('button', { name: 'foo' }));
       userEvent.click(screen.getByRole('button', { name: 'foo' }));
       userEvent.click(screen.getByRole('button', { name: 'bash' }));
-      expect(consoleSpy).toHaveBeenCalledTimes(3);
+      expect(onListItemClickMock).toHaveBeenCalledTimes(3);
     });
   });
 
@@ -323,7 +419,8 @@ describe('OptionList', () => {
         render(
           <OptionList
             state="open"
-            onOptionListClick={() => {}}
+            onEnabledOptionListClick={() => {}}
+            onNotEnabledOptionListClick={() => {}}
             onListItemClick={() => {}}
             openText="LIST IS OPEN"
             closedText="LIST IS CLOSED"
@@ -343,7 +440,8 @@ describe('OptionList', () => {
           <OptionList
             listContent="foo"
             state="open"
-            onOptionListClick={() => {}}
+            onEnabledOptionListClick={() => {}}
+            onNotEnabledOptionListClick={() => {}}
             onListItemClick={() => {}}
             openText="LIST IS OPEN"
             closedText="LIST IS CLOSED"
@@ -362,7 +460,8 @@ describe('OptionList', () => {
         <OptionList
           listContent={[true, false, true]}
           state="open"
-          onOptionListClick={() => {}}
+          onEnabledOptionListClick={() => {}}
+          onNotEnabledOptionListClick={() => {}}
           onListItemClick={() => {}}
           openText="LIST IS OPEN"
           closedText="LIST IS CLOSED"
@@ -380,7 +479,8 @@ describe('OptionList', () => {
       render(
         <OptionList
           listContent={['foo', 'bar', 'bash']}
-          onOptionListClick={() => {}}
+          onEnabledOptionListClick={() => {}}
+          onNotEnabledOptionListClick={() => {}}
           onListItemClick={() => {}}
           openText="LIST IS OPEN"
           closedText="LIST IS CLOSED"
@@ -399,7 +499,8 @@ describe('OptionList', () => {
         <OptionList
           listContent={['foo', 'bar', 'bash']}
           state={false}
-          onOptionListClick={() => {}}
+          onEnabledOptionListClick={() => {}}
+          onNotEnabledOptionListClick={() => {}}
           onListItemClick={() => {}}
           openText="LIST IS OPEN"
           closedText="LIST IS CLOSED"
@@ -409,7 +510,7 @@ describe('OptionList', () => {
       expect(consoleSpy).toHaveBeenCalled();
     });
 
-    it('logs an error when attempting to render without the onOptionListClick prop', () => {
+    it('logs an error when attempting to render without the onEnabledOptionListClick prop', () => {
       const consoleSpy = jest
         .spyOn(console, 'error')
         .mockImplementation(() => {});
@@ -418,16 +519,35 @@ describe('OptionList', () => {
         <OptionList
           listContent={['foo', 'bar', 'bash']}
           state="open"
+          onNotEnabledOptionListClick={() => {}}
+          openText="LIST IS OPEN"
+          closedText="LIST IS CLOSED"
+        />,
+      );
+
+      expect(consoleSpy).toHaveBeenCalled();
+    });
+
+    it('logs an error when attempting to render the onEnabledOptionListClick prop as a non function', () => {
+      const consoleSpy = jest
+        .spyOn(console, 'error')
+        .mockImplementation(() => {});
+
+      render(
+        <OptionList
+          listContent={['foo', 'bar', 'bash']}
+          state="open"
+          onEnabledOptionListClick={false}
+          onNotEnabledOptionListClick={() => {}}
           onListItemClick={() => {}}
           openText="LIST IS OPEN"
           closedText="LIST IS CLOSED"
         />,
       );
-
       expect(consoleSpy).toHaveBeenCalled();
     });
 
-    it('logs an error when attempting to render the onOptionListClick prop as a non function', () => {
+    it('logs an error when attempting to render without the onNotEnabledOptionListClick prop', () => {
       const consoleSpy = jest
         .spyOn(console, 'error')
         .mockImplementation(() => {});
@@ -436,45 +556,27 @@ describe('OptionList', () => {
         <OptionList
           listContent={['foo', 'bar', 'bash']}
           state="open"
-          onOptionListClick={false}
+          onEnabledOptionListClick={() => {}}
+          openText="LIST IS OPEN"
+          closedText="LIST IS CLOSED"
+        />,
+      );
+
+      expect(consoleSpy).toHaveBeenCalled();
+    });
+
+    it('logs an error when attempting to render the onNotEnabledOptionListClick prop as a non function', () => {
+      const consoleSpy = jest
+        .spyOn(console, 'error')
+        .mockImplementation(() => {});
+
+      render(
+        <OptionList
+          listContent={['foo', 'bar', 'bash']}
+          state="open"
+          onEnabledOptionListClick={() => {}}
+          onNotEnabledOptionListClick={false}
           onListItemClick={() => {}}
-          openText="LIST IS OPEN"
-          closedText="LIST IS CLOSED"
-        />,
-      );
-
-      expect(consoleSpy).toHaveBeenCalled();
-    });
-
-    it('logs an error when attempting to render without the onListItemClick prop', () => {
-      const consoleSpy = jest
-        .spyOn(console, 'error')
-        .mockImplementation(() => {});
-
-      render(
-        <OptionList
-          listContent={['foo', 'bar', 'bash']}
-          state="open"
-          onOptionListClick={() => {}}
-          openText="LIST IS OPEN"
-          closedText="LIST IS CLOSED"
-        />,
-      );
-
-      expect(consoleSpy).toHaveBeenCalled();
-    });
-
-    it('logs an error when attempting to render the onListItemClick prop as a non function', () => {
-      const consoleSpy = jest
-        .spyOn(console, 'error')
-        .mockImplementation(() => {});
-
-      render(
-        <OptionList
-          listContent={['foo', 'bar', 'bash']}
-          state="open"
-          onOptionListClick={() => {}}
-          onListItemClick={false}
           openText="LIST IS OPEN"
           closedText="LIST IS CLOSED"
         />,
@@ -493,7 +595,8 @@ describe('OptionList', () => {
           listContent={['foo', 'bar', 'bash']}
           state="open"
           onListItemClick={() => {}}
-          onOptionListClick={() => {}}
+          onEnabledOptionListClick={() => {}}
+          onNotEnabledOptionListClick={() => {}}
           closedText="LIST IS CLOSED"
         />,
       );
@@ -510,7 +613,8 @@ describe('OptionList', () => {
         <OptionList
           listContent={['foo', 'bar', 'bash']}
           state="open"
-          onOptionListClick={() => {}}
+          onEnabledOptionListClick={() => {}}
+          onNotEnabledOptionListClick={() => {}}
           onListItemClick={() => {}}
           openText={false}
           closedText="LIST IS CLOSED"
@@ -530,7 +634,8 @@ describe('OptionList', () => {
           listContent={['foo', 'bar', 'bash']}
           state="open"
           onListItemClick={() => {}}
-          onOptionListClick={() => {}}
+          onEnabledOptionListClick={() => {}}
+          onNotEnabledOptionListClick={() => {}}
           openText="LIST IS OPEN"
         />,
       );
@@ -547,7 +652,8 @@ describe('OptionList', () => {
         <OptionList
           listContent={['foo', 'bar', 'bash']}
           state="open"
-          onOptionListClick={() => {}}
+          onEnabledOptionListClick={() => {}}
+          onNotEnabledOptionListClick={() => {}}
           onListItemClick={() => {}}
           openText="LIST IS OPEN"
           closedText={false}
@@ -566,7 +672,8 @@ describe('OptionList', () => {
         <OptionList
           listContent={['foo', 'bar', 'bash']}
           state="open"
-          onOptionListClick={() => {}}
+          onEnabledOptionListClick={() => {}}
+          onNotEnabledOptionListClick={() => {}}
           onListItemClick={() => {}}
           openText="LIST IS OPEN"
           closedText="LIST IS CLOSED"
