@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 
 import Header from '../Header/Header';
-import OptionList from './OptionList';
-import OptionButton from './OptionButton';
+import PlayerKicker from './PlayerKicker';
+import JoinCodeHider from './JoinCodeHider';
 
 const SettingsMenu = styled.div`
   position: absolute;
@@ -64,7 +64,7 @@ const SettingsMenu = styled.div`
 `;
 
 function HostSettingsMenu() {
-  const initialState = [{ state: 'enabled' }, { state: 'enabled' }];
+  const initialState = [{ state: 'enabled' }];
   const [accordionSettings, setAccordionSettings] = useState(initialState);
 
   const anyAreOpen = accordionSettings.some(
@@ -90,46 +90,21 @@ function HostSettingsMenu() {
     }
   }
 
-  // placeholder function
-  function skipUnusedSelections() {
-    // eslint-disable-next-line
-    console.log('skipping unused selections');
-  }
-
   return (
     <SettingsMenu onClick={onOutsideClick}>
       <Header className="host-settings-header" onClick={resetAccordions}>
         <h3>SETTINGS</h3>
       </Header>
 
-      <OptionButton
+      <JoinCodeHider
         isEnabled={!anyAreOpen}
-        onEnabledClick={skipUnusedSelections}
         onDisabledClick={resetAccordions}
-      >
-        SKIP UNUSED SELECTIONS
-      </OptionButton>
-
-      <OptionList
-        listContent={['BENDER', 'BRIGGS', 'BRANDON', 'BRENDA', 'BACON']}
-        state={accordionSettings[0].state}
-        onEnabledOptionListClick={() => handleAccordionClick(0)}
-        onNotEnabledOptionListClick={resetAccordions}
-        // eslint-disable-next-line
-        onListItemClick={(event, item) => console.log(item)}
-        openText="KICK WHO?"
-        closedText="KICK PLAYER"
       />
 
-      <OptionList
-        listContent={['FOO', 'BAR', 'BASH']}
-        state={accordionSettings[1].state}
-        onEnabledOptionListClick={() => handleAccordionClick(1)}
-        onNotEnabledOptionListClick={resetAccordions}
-        // eslint-disable-next-line
-        onListItemClick={(event, item) => console.log(item)}
-        openText="BAZ"
-        closedText="BAM"
+      <PlayerKicker
+        accordionState={accordionSettings[0].state}
+        onEnabledClick={() => handleAccordionClick(0)}
+        onNotEnabledClick={resetAccordions}
       />
     </SettingsMenu>
   );

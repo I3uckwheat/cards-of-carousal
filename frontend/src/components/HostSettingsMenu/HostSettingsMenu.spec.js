@@ -13,11 +13,11 @@ describe('HostSettingsMenu', () => {
       expect(screen.getByText('SETTINGS')).toBeInTheDocument();
     });
 
-    it('renders the skip selections button', () => {
+    it('renders the hide join code button', () => {
       render(<HostSettingsMenu />);
 
       expect(
-        screen.getByRole('button', { name: 'SKIP UNUSED SELECTIONS' }),
+        screen.getByRole('button', { name: 'HIDE JOIN CODE' }),
       ).toBeInTheDocument();
     });
 
@@ -59,9 +59,7 @@ describe('HostSettingsMenu', () => {
       render(<HostSettingsMenu />);
 
       // click the skip button once and verify that it logs to the console
-      userEvent.click(
-        screen.getByRole('button', { name: 'SKIP UNUSED SELECTIONS' }),
-      );
+      userEvent.click(screen.getByRole('button', { name: 'HIDE JOIN CODE' }));
       expect(consoleSpy).toHaveBeenCalledTimes(1);
 
       // open the OptionList
@@ -69,9 +67,7 @@ describe('HostSettingsMenu', () => {
       expect(screen.queryByText('BENDER')).toBeInTheDocument();
 
       // click the skip button again and verify that it doesn't log to the console this time
-      userEvent.click(
-        screen.getByRole('button', { name: 'SKIP UNUSED SELECTIONS' }),
-      );
+      userEvent.click(screen.getByRole('button', { name: 'HIDE JOIN CODE' }));
       expect(consoleSpy).toHaveBeenCalledTimes(1);
     });
   });

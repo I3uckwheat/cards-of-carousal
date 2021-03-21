@@ -178,7 +178,7 @@ exports[`HostSettingsMenu rendering matches the expected snapshot 1`] = `
     className="c2"
     onClick={[Function]}
   >
-    SKIP UNUSED SELECTIONS
+    HIDE JOIN CODE
   </button>
   <div>
     <button
@@ -187,15 +187,6 @@ exports[`HostSettingsMenu rendering matches the expected snapshot 1`] = `
       type="button"
     >
       KICK PLAYER
-    </button>
-  </div>
-  <div>
-    <button
-      className="c3"
-      onClick={[Function]}
-      type="button"
-    >
-      BAM
     </button>
   </div>
 </div>
