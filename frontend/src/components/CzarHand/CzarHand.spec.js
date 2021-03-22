@@ -61,7 +61,7 @@ describe('CzarHand', () => {
         }).toThrow();
       });
 
-      it('logs an error to the console when no selected group has been passed in', () => {
+      it('logs an error to the console when an undefined selectedGroup has been passed in', () => {
         render(
           <CzarHand
             cards={cards}
