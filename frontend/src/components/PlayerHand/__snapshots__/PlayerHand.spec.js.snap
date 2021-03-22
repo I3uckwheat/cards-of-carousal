@@ -40,6 +40,9 @@ Array [
 }
 
 .c0 {
+  background: none;
+  border: none;
+  text-align: left;
   position: relative;
   display: -webkit-box;
   display: -webkit-flex;
@@ -57,7 +60,8 @@ Array [
   -ms-flex-align: start;
   align-items: start;
   padding: 16px 0px;
-  border-bottom: 5px solid var(--secondary-background-color);
+  border-bottom: 5px solid;
+  border-bottom-color: var(--secondary-background-color);
 }
 
 .c0 .badge {
@@ -119,7 +123,7 @@ Array [
 
 }
 
-<div
+<button
     className="c0"
     data-testid="card-wrapper"
     onClick={[Function]}
@@ -150,7 +154,7 @@ Array [
         />
       </div>
     </div>
-  </div>,
+  </button>,
   .c1 {
   position: relative;
   border: 1px solid var(--primary-text-color);
@@ -189,6 +193,9 @@ Array [
 }
 
 .c0 {
+  background: none;
+  border: none;
+  text-align: left;
   position: relative;
   display: -webkit-box;
   display: -webkit-flex;
@@ -206,7 +213,8 @@ Array [
   -ms-flex-align: start;
   align-items: start;
   padding: 16px 0px;
-  border-bottom: 5px solid var(--secondary-background-color);
+  border-bottom: 5px solid;
+  border-bottom-color: var(--secondary-background-color);
 }
 
 .c0 .badge {
@@ -268,7 +276,7 @@ Array [
 
 }
 
-<div
+<button
     className="c0"
     data-testid="card-wrapper"
     onClick={[Function]}
@@ -299,7 +307,7 @@ Array [
         />
       </div>
     </div>
-  </div>,
+  </button>,
   .c1 {
   position: relative;
   border: 1px solid var(--primary-text-color);
@@ -338,6 +346,9 @@ Array [
 }
 
 .c0 {
+  background: none;
+  border: none;
+  text-align: left;
   position: relative;
   display: -webkit-box;
   display: -webkit-flex;
@@ -355,7 +366,8 @@ Array [
   -ms-flex-align: start;
   align-items: start;
   padding: 16px 0px;
-  border-bottom: none;
+  border-bottom: 5px solid;
+  border-bottom-color: transparent;
 }
 
 .c0 .badge {
@@ -417,7 +429,7 @@ Array [
   }
 }
 
-<div
+<button
     className="c0"
     data-testid="card-wrapper"
     onClick={[Function]}
@@ -443,7 +455,7 @@ Array [
         />
       </div>
     </div>
-  </div>,
+  </button>,
   .c1 {
   position: relative;
   border: 1px solid var(--primary-text-color);
@@ -482,6 +494,9 @@ Array [
 }
 
 .c0 {
+  background: none;
+  border: none;
+  text-align: left;
   position: relative;
   display: -webkit-box;
   display: -webkit-flex;
@@ -499,7 +514,8 @@ Array [
   -ms-flex-align: start;
   align-items: start;
   padding: 16px 0px;
-  border-bottom: none;
+  border-bottom: 5px solid;
+  border-bottom-color: transparent;
 }
 
 .c0 .badge {
@@ -561,7 +577,7 @@ Array [
   }
 }
 
-<div
+<button
     className="c0"
     data-testid="card-wrapper"
     onClick={[Function]}
@@ -587,7 +603,7 @@ Array [
         />
       </div>
     </div>
-  </div>,
+  </button>,
   .c1 {
   position: relative;
   border: 1px solid var(--primary-text-color);
@@ -626,6 +642,9 @@ Array [
 }
 
 .c0 {
+  background: none;
+  border: none;
+  text-align: left;
   position: relative;
   display: -webkit-box;
   display: -webkit-flex;
@@ -643,7 +662,8 @@ Array [
   -ms-flex-align: start;
   align-items: start;
   padding: 16px 0px;
-  border-bottom: none;
+  border-bottom: 5px solid;
+  border-bottom-color: transparent;
 }
 
 .c0 .badge {
@@ -705,7 +725,7 @@ Array [
   }
 }
 
-<div
+<button
     className="c0"
     data-testid="card-wrapper"
     onClick={[Function]}
@@ -731,6 +751,6 @@ Array [
         />
       </div>
     </div>
-  </div>,
+  </button>,
 ]
 `;

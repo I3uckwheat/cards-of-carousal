@@ -102,6 +102,9 @@ exports[`CzarHandScreen snapshot matches 1`] = `
 }
 
 .c3 {
+  background: none;
+  border: none;
+  text-align: left;
   position: relative;
   display: -webkit-box;
   display: -webkit-flex;
@@ -119,7 +122,8 @@ exports[`CzarHandScreen snapshot matches 1`] = `
   -ms-flex-align: start;
   align-items: start;
   padding: 16px 0px;
-  border-bottom: none;
+  border-bottom: 5px solid;
+  border-bottom-color: transparent;
 }
 
 .c3 .badge {
@@ -281,7 +285,7 @@ exports[`CzarHandScreen snapshot matches 1`] = `
   <div
     className="card-container"
   >
-    <div
+    <button
       className="c3"
       data-testid="card-wrapper"
       onClick={[Function]}
@@ -328,8 +332,8 @@ exports[`CzarHandScreen snapshot matches 1`] = `
            Carousal
         </p>
       </div>
-    </div>
-    <div
+    </button>
+    <button
       className="c3"
       data-testid="card-wrapper"
       onClick={[Function]}
@@ -376,8 +380,8 @@ exports[`CzarHandScreen snapshot matches 1`] = `
            Carousal
         </p>
       </div>
-    </div>
-    <div
+    </button>
+    <button
       className="c3"
       data-testid="card-wrapper"
       onClick={[Function]}
@@ -424,7 +428,7 @@ exports[`CzarHandScreen snapshot matches 1`] = `
            Carousal
         </p>
       </div>
-    </div>
+    </button>
   </div>
 </div>
 `;

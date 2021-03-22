@@ -67,6 +67,7 @@ exports[`HostLayout matches the snapshot when rendered 1`] = `
 }
 
 .c0 .components .left {
+  position: relative;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -84,6 +85,7 @@ exports[`HostLayout matches the snapshot when rendered 1`] = `
   -webkit-flex-grow: 1;
   -ms-flex-positive: 1;
   flex-grow: 1;
+  position: relative;
 }
 
 @media (min-width:800px) {
