@@ -61,17 +61,6 @@ describe('CzarHand', () => {
         }).toThrow();
       });
 
-      it('logs an error to the console when an undefined selectedGroup has been passed in', () => {
-        render(
-          <CzarHand
-            cards={cards}
-            selectedGroup={undefined}
-            onSelect={mockSelect}
-          />,
-        );
-        expect(consoleSpy).toHaveBeenCalled();
-      });
-
       it('logs an error to the console when no onSelect function has been passed in', () => {
         render(
           <CzarHand cards={cards} selectedGroup={0} onSelect={undefined} />,
