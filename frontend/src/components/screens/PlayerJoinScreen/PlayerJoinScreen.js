@@ -262,11 +262,23 @@ export default function PlayerJoinScreen() {
   function handleNameChange(e) {
     const inputValue = e.target.value;
 
-    // Filter user input to accept only alphanumeric and underscore characters
+    // Filter user input to ignore special characters
     const regex = /\W+/g;
-    if (inputValue === '' || !regex.test(inputValue)) {
-      setName(inputValue);
-    }
+    if (regex.test(inputValue)) return;
+
+    // Only accepts alphanumeric and underscore characters
+    setName(inputValue);
+  }
+
+  function handleJoinCodeChange(e) {
+    const inputValue = e.target.value;
+
+    // Filter user input to ignore numeric and special characters
+    const regex = /[^A-Za-z]+/g;
+    if (regex.test(inputValue)) return;
+
+    // Only accepts uppercase and lowercase letter characters
+    setJoinCode(inputValue);
   }
 
   return (
@@ -295,7 +307,7 @@ export default function PlayerJoinScreen() {
               type="text"
               placeholder="join code"
               value={joinCode}
-              onChange={(e) => setJoinCode(e.target.value)}
+              onChange={handleJoinCodeChange}
               className="player-join-code-input"
             />
             <PlayerJoinButton type="submit">
