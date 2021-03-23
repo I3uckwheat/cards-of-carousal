@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import Button from '../../Buttons/Button';
 import Header from '../../Header/Header';
-import Footer from '../../Footer/Footer';
+// import Footer from '../../Footer/Footer';
 
 const propTypes = {};
 
@@ -70,9 +70,6 @@ const PlayerJoinContainer = styled.div`
     font-size: 1.2rem;
   }
 
-  @media screen and (min-width: 375px) {
-  }
-
   @media screen and (min-width: 646px) {
     .player-join-form-container {
       padding-left: 40px;
@@ -135,9 +132,6 @@ const PlayerJoinContainer = styled.div`
     }
   }
 
-  @media screen and (min-width: 1024px) {
-  }
-
   @media screen and (min-width: 2000px) {
     .player-join-form-container {
       max-width: 1000px;
@@ -166,7 +160,7 @@ const PlayerJoinContainer = styled.div`
     }
   }
 
-  // 4k TODO - increase font sizes by transfering non-media-query code over from old, to go here. Just figure out breakpoints
+  // 4k
   @media screen and (min-width: 2560px) {
     .player-join-form-container {
       max-width: 1650px;
@@ -196,6 +190,74 @@ const PlayerJoinContainer = styled.div`
 
     .player-join-code-input {
       margin-left: 32px;
+    }
+  }
+
+  // small mobile landscape orientation
+  @media screen and (max-height: 320px) {
+    .player-join-form-container {
+      margin-top: -20px;
+    }
+
+    .player-join-form {
+      /* grid-template-rows: 60px 60px 1fr; */
+      grid-template-rows: 50px 40px 1fr;
+    }
+
+    input {
+      padding-top: 30px;
+    }
+  }
+
+  // medium mobile landscape orientation
+  @media screen and (min-height: 321px) and (max-height: 375px) {
+    grid-template-rows: 60px 1fr 140px;
+
+    .player-join-form-container {
+      margin-top: -20px;
+    }
+  }
+
+  // large mobile landscape orientation
+  @media screen and (min-height: 376px) and (max-height: 414px) {
+    .player-join-form-container {
+      margin-top: -10px;
+    }
+  }
+
+  //extra large mobile landscape orientation
+  @media screen and (min-height: 415px) and (max-height: 567px) {
+    .player-join-form-container {
+      margin-top: 10px;
+    }
+
+    .player-join-form {
+      grid-template-rows: 60px 60px 1fr;
+      /* grid-template-rows: 50px 40px 1fr; */
+    }
+
+    input {
+      padding-top: 20px;
+    }
+  }
+
+  // all mobile size landscape orientation
+  @media screen and (max-height: 567px) {
+    // header, main, footer
+    grid-template-rows: 60px 1fr 140px;
+
+    .player-join-form {
+      grid-template-columns: 52% 48%;
+    }
+
+    .player-join-name-input {
+      grid-row: 1;
+      grid-column: 1;
+    }
+
+    .player-join-code-input {
+      grid-row: 1;
+      grid-column: 2;
     }
   }
 `;
@@ -279,6 +341,12 @@ const PlayerJoinButton = styled(Button)`
     width: 900px;
     height: 225px;
   }
+
+  // mobile landscape orientation
+  @media screen and (max-height: 567px) {
+    grid-column: 1 / 3;
+    grid-row: 3;
+  }
 `;
 
 export default function PlayerJoinScreen() {
@@ -321,7 +389,7 @@ export default function PlayerJoinScreen() {
           </form>
         </div>
       </main>
-      <Footer />
+      {/* <Footer /> */}
     </PlayerJoinContainer>
   );
 }
