@@ -29,9 +29,19 @@ function errorDisconnect(state) {
   };
 }
 
+function submitWinner(state, { id }) {
+  socketInstance.sendMessage({
+    event: 'select-winner',
+    id,
+  });
+
+  return {
+    ...state,
+  };
+}
+
 function reducer(state, action) {
   const { type, payload } = action;
-
   switch (type) {
     case 'JOIN_LOBBY':
       socketInstance.joinLobby(payload.id, payload.name);
@@ -40,6 +50,8 @@ function reducer(state, action) {
       return update(state, payload);
     case 'ERROR_DISCONNECT':
       return errorDisconnect(state);
+    case 'SUBMIT_WINNER':
+      return submitWinner(state, payload);
     default:
       return { ...state };
   }

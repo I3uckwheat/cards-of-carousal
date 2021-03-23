@@ -42,6 +42,10 @@ function playerDisconnected(state, { playerId }) {
   };
 }
 
+function selectWinner(state, payload) {
+  // TODO: HANDLE MESSAGE
+  console.log(state, payload);
+}
 function setLobbyId(state, { id }) {
   return {
     ...state,
@@ -145,6 +149,9 @@ function HostReducer(state, action) {
     case 'PLAYER_DISCONNECTED':
       return playerDisconnected(state, payload);
 
+    case 'SELECT_WINNER':
+      // TODO: HANDLE PAYLOAD AND TEST
+      return selectWinner(state, payload);
     case 'SET_LOBBY_ID':
       return setLobbyId(state, payload);
 
