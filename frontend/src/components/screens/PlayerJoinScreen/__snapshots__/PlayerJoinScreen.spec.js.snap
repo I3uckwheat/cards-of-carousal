@@ -419,6 +419,7 @@ exports[`PlayerJoin snapshot matches 1`] = `
       >
         <input
           className="player-join-name-input"
+          maxLength="12"
           onChange={[Function]}
           placeholder="name"
           required={true}
@@ -427,6 +428,7 @@ exports[`PlayerJoin snapshot matches 1`] = `
         />
         <input
           className="player-join-code-input"
+          maxLength="4"
           onChange={[Function]}
           placeholder="join code"
           required={true}

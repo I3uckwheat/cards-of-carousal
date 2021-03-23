@@ -1578,6 +1578,7 @@ exports[`App snapshots should show the player screen after user has clicked the 
         >
           <input
             class="player-join-name-input"
+            maxlength="12"
             placeholder="name"
             required=""
             type="text"
@@ -1585,6 +1586,7 @@ exports[`App snapshots should show the player screen after user has clicked the 
           />
           <input
             class="player-join-code-input"
+            maxlength="4"
             placeholder="join code"
             required=""
             type="text"

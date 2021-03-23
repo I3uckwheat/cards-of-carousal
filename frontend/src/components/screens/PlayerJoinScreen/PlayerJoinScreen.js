@@ -259,6 +259,16 @@ export default function PlayerJoinScreen() {
     dispatch({ type: 'JOIN_LOBBY', payload: { id: joinCode, name } });
   }
 
+  function handleNameChange(e) {
+    const inputValue = e.target.value;
+
+    // Filter user input to accept only alphanumeric and underscore characters
+    const regex = /\W+/g;
+    if (inputValue === '' || !regex.test(inputValue)) {
+      setName(inputValue);
+    }
+  }
+
   return (
     <PlayerJoinContainer
       data-testid="player-join-container"
@@ -273,17 +283,19 @@ export default function PlayerJoinScreen() {
             <input
               required
               type="text"
+              maxLength="12"
               placeholder="name"
               value={name}
-              onChange={(e) => setName(e.target.value.toUpperCase())}
+              onChange={handleNameChange}
               className="player-join-name-input"
             />
             <input
               required
+              maxLength="4"
               type="text"
               placeholder="join code"
               value={joinCode}
-              onChange={(e) => setJoinCode(e.target.value.toUpperCase())}
+              onChange={(e) => setJoinCode(e.target.value)}
               className="player-join-code-input"
             />
             <PlayerJoinButton type="submit">
