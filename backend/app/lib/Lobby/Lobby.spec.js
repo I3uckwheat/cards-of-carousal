@@ -43,8 +43,11 @@ describe('Lobby', () => {
     describe('addPlayer', () => {
       it('can add a player and sends message through the socket', () => {
         messageObject.event = 'player-connected';
-        messageObject.payload = { playerId: playerSocket.id };
-        lobby.addPlayer(playerSocket);
+        messageObject.payload = {
+          playerName: 'foo',
+          playerId: playerSocket.id,
+        };
+        lobby.addPlayer(playerSocket, 'foo');
         expect(playerSocket.on).toBeCalledWith('message', expect.any(Function));
         expect(playerSocket.on).toBeCalledWith('close', expect.any(Function));
         expect(hostSocket.send).toBeCalledWith(JSON.stringify(messageObject));
@@ -57,8 +60,8 @@ describe('Lobby', () => {
         messageObject.event = 'lobby-closed';
         messageObject.payload = {};
 
-        lobby.addPlayer(playerSocket);
-        lobby.addPlayer(playerSocketTwo);
+        lobby.addPlayer(playerSocket, 'playerOneName');
+        lobby.addPlayer(playerSocketTwo, 'playerTwoName');
         lobby.closeLobby();
 
         expect(playerSocket.send).toBeCalledWith(JSON.stringify(messageObject));
