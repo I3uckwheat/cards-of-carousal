@@ -15,13 +15,6 @@ export default function PlayerScreenController() {
       return <PlayerJoinScreen />;
 
     case 'pending-connection':
-      return (
-        <PlayerMessageScreen
-          bigText="Connecting to lobby"
-          smallText="Please wait"
-        />
-      );
-
     case 'connected':
       return (
         <PlayerMessageScreen bigText={message.big} smallText={message.small} />

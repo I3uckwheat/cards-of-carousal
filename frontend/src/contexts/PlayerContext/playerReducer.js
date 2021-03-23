@@ -4,6 +4,10 @@ function joinLobby(state) {
   return {
     ...state,
     gameState: 'pending-connection',
+    message: {
+      big: 'Connecting to Lobby',
+      small: 'Please wait',
+    },
   };
 }
 
