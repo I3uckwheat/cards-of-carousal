@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 
 import OptionList from './OptionList';
+import { HostContext } from '../../contexts/HostContext/HostContext';
 
 const propTypes = {
   accordionState: PropTypes.string.isRequired,
@@ -10,37 +11,24 @@ const propTypes = {
 };
 
 function PlayerKicker({ accordionState, onEnabledClick, onNotEnabledClick }) {
-  const hostState = {
-    gameState: 'waiting-for-lobby',
-    lobbyID: '',
-    players: {
-      player1: {
-        name: 'BENDER',
-      },
-      player2: {
-        name: 'BRIGGS',
-      },
-      player3: {
-        name: 'BRANDON',
-      },
-      player4: {
-        name: 'BRENDA',
-      },
-      player5: {
-        name: 'BEERCAN',
-      },
-    },
-    playerIDs: ['player1', 'player2', 'player3', 'player4', 'player5'],
-  };
+  const {
+    state: { playerIDs, players },
+    dispatch,
+  } = useContext(HostContext);
 
-  const playerList = Object.entries(hostState.players)
-    .sort((a, b) => b[0] < a[0])
-    .map((player) => player[1].name);
+  const playerList = playerIDs
+    .map((playerId) => players[playerId].name)
+    .sort((a, b) => b > a);
 
-  // placeholder function
-  function kickPlayer(event, player) {
-    // eslint-disable-next-line
-    console.log(`Kick ${player}`);
+  function kickPlayer(playerName) {
+    const targetPlayer = playerIDs.find(
+      (playerId) => players[playerId].name === playerName,
+    );
+
+    dispatch({
+      type: 'PLAYER_DISCONNECTED',
+      payload: { playerId: targetPlayer },
+    });
   }
 
   return (

@@ -4,17 +4,26 @@ import userEvent from '@testing-library/user-event';
 import renderer from 'react-test-renderer';
 
 import HostSettingsMenu from './HostSettingsMenu';
+import HostProvider from '../../contexts/HostContext/HostContext';
 
 describe('HostSettingsMenu', () => {
   describe('rendering', () => {
     it('renders the settings heading', () => {
-      render(<HostSettingsMenu />);
+      render(
+        <HostProvider>
+          <HostSettingsMenu />
+        </HostProvider>,
+      );
 
       expect(screen.getByText('SETTINGS')).toBeInTheDocument();
     });
 
     it('renders the hide join code button', () => {
-      render(<HostSettingsMenu />);
+      render(
+        <HostProvider>
+          <HostSettingsMenu />
+        </HostProvider>,
+      );
 
       expect(
         screen.getByRole('button', { name: 'HIDE JOIN CODE' }),
@@ -22,7 +31,11 @@ describe('HostSettingsMenu', () => {
     });
 
     it('renders the kick player button', () => {
-      render(<HostSettingsMenu />);
+      render(
+        <HostProvider>
+          <HostSettingsMenu />
+        </HostProvider>,
+      );
 
       expect(
         screen.getByRole('button', { name: 'KICK PLAYER' }),
@@ -30,7 +43,13 @@ describe('HostSettingsMenu', () => {
     });
 
     it('matches the expected snapshot', () => {
-      const tree = renderer.create(<HostSettingsMenu />).toJSON();
+      const tree = renderer
+        .create(
+          <HostProvider>
+            <HostSettingsMenu />
+          </HostProvider>,
+        )
+        .toJSON();
 
       expect(tree).toMatchSnapshot();
     });
@@ -39,15 +58,19 @@ describe('HostSettingsMenu', () => {
   describe('functionality', () => {
     // temporary test pending overhall in next sprint
     it('Closes the OptionList when a click is outside of OptionList', () => {
-      render(<HostSettingsMenu />);
+      render(
+        <HostProvider>
+          <HostSettingsMenu />
+        </HostProvider>,
+      );
 
-      // open the option list and verify that it contains the expected test
+      // open the option list and verify that it is open
       userEvent.click(screen.getByRole('button', { name: 'KICK PLAYER' }));
-      expect(screen.queryByText('BENDER')).toBeInTheDocument();
+      expect(screen.getByText('KICK WHO?')).toBeInTheDocument();
 
       // click on the settings header and verify that the option list is now closed
       userEvent.click(screen.getByText('SETTINGS'));
-      expect(screen.queryByText('BENDER')).not.toBeInTheDocument();
+      expect(screen.queryByText('KICK WHO?')).not.toBeInTheDocument();
     });
 
     // temporary test pending overhall in next sprint
@@ -56,7 +79,11 @@ describe('HostSettingsMenu', () => {
         .spyOn(console, 'log')
         .mockImplementation(() => {});
 
-      render(<HostSettingsMenu />);
+      render(
+        <HostProvider>
+          <HostSettingsMenu />
+        </HostProvider>,
+      );
 
       // click the skip button once and verify that it logs to the console
       userEvent.click(screen.getByRole('button', { name: 'HIDE JOIN CODE' }));
@@ -64,7 +91,7 @@ describe('HostSettingsMenu', () => {
 
       // open the OptionList
       userEvent.click(screen.getByRole('button', { name: 'KICK PLAYER' }));
-      expect(screen.queryByText('BENDER')).toBeInTheDocument();
+      expect(screen.getByText('KICK WHO?')).toBeInTheDocument();
 
       // click the skip button again and verify that it doesn't log to the console this time
       userEvent.click(screen.getByRole('button', { name: 'HIDE JOIN CODE' }));
