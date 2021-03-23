@@ -24,6 +24,38 @@ exports[`PlayerJoin snapshot matches 1`] = `
   color: var(--secondary-text-color);
 }
 
+.c5 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+  height: 200px;
+  font-size: 3.5rem;
+  font-weight: 400;
+  padding-right: 16px;
+  padding-bottom: 10px;
+  background-color: var(--secondary-background-color);
+  color: var(--secondary-text-color);
+}
+
+.c5 p {
+  text-align: right;
+  position: relative;
+}
+
+.c5 a {
+  color: var(--secondary-text-color);
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
 .c0 {
   position: fixed;
   top: 0;
@@ -146,6 +178,46 @@ exports[`PlayerJoin snapshot matches 1`] = `
   background-color: var(--secondary-background-color);
   font-size: 1.2rem;
   text-transform: uppercase;
+}
+
+@media (max-width:2000px) {
+  .c5 {
+    height: 140px;
+    font-size: 2rem;
+  }
+}
+
+@media (max-width:970px) {
+  .c5 {
+    text-align: center;
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width:785px) {
+  .c5 {
+    height: 120px;
+    background-color: transparent;
+  }
+
+  .c5 p {
+    text-align: center;
+    font-size: 1.2rem;
+    padding-bottom: 32px;
+    color: var(--accent-text-color);
+  }
+
+  .c5 a {
+    color: var(--accent-text-color);
+    display: block;
+  }
+}
+
+@media (max-width:320px) {
+  .c5 {
+    font-size: 1rem;
+    padding-right: 0px;
+  }
 }
 
 @media screen and (min-width:646px) {
@@ -482,5 +554,27 @@ exports[`PlayerJoin snapshot matches 1`] = `
       </form>
     </div>
   </main>
+  <footer
+    className="c5"
+  >
+    <p>
+      Card content thanks to:
+       
+      <a
+        href="https://cardsagainsthumanity.com"
+      >
+        https://cardsagainsthumanity.com
+      </a>
+    </p>
+    <p>
+      Made by Odin students, with love:
+       
+      <a
+        href="https://www.theodinproject.com"
+      >
+        https://www.theodinproject.com
+      </a>
+    </p>
+  </footer>
 </div>
 `;
