@@ -52,6 +52,15 @@ describe('Lobby', () => {
         expect(playerSocket.on).toBeCalledWith('close', expect.any(Function));
         expect(hostSocket.send).toBeCalledWith(JSON.stringify(messageObject));
       });
+
+      it('if no player name is provided, uses the default empty string', () => {
+        messageObject.payload = {
+          playerName: '',
+          playerId: playerSocket.id,
+        };
+        lobby.addPlayer(playerSocket);
+        expect(hostSocket.send).toBeCalledWith(JSON.stringify(messageObject));
+      });
     });
 
     describe('closeLobby', () => {
