@@ -133,9 +133,9 @@ function HostReducer(state, action) {
       return createLobby(state);
 
     case 'PLAYER_CONNECTED':
-      // TODO: Add specific recipient to this message
       socketInstance.sendMessage({
         event: 'update',
+        recipients: [payload.playerId],
         payload: {
           gameState: 'connected',
           message: {
