@@ -1,4 +1,4 @@
-#### 1.What is the purpose:
+#### 1.Purpose:
 <!-- Give a description of what your component or submission is supposed to do/acomplish. -->
 
 
@@ -8,12 +8,12 @@
 
 
 
-#### 3.Possible isses:
+#### 3.Possible Isses:
 <!-- Anything you are unsure of, specifically want others to test. -->
 
 
 
-#### 4.How to test your component:
+#### 4.How to Test:
 <!-- List all steps from pulling your branch, list any files that need to be edited and what specifcally needs to be added/removed(include line #), and how to deploy it. -->
 
 
