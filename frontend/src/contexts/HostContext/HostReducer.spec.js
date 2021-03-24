@@ -112,6 +112,7 @@ describe('reducer', () => {
 
       expect(socketInstance.sendMessage).toHaveBeenCalledWith({
         event: 'update',
+        recipients: ['example-player-id'],
         payload: {
           gameState: 'connected',
           message: {
