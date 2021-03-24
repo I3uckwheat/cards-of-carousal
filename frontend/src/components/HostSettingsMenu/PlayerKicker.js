@@ -6,16 +6,21 @@ import { HostContext } from '../../contexts/HostContext/HostContext';
 
 const propTypes = {
   accordionState: PropTypes.string.isRequired,
-  onEnabledClick: PropTypes.func.isRequired,
-  onNotEnabledClick: PropTypes.func.isRequired,
+  onClickActions: PropTypes.shape({
+    open: PropTypes.func.isRequired,
+    enabled: PropTypes.func.isRequired,
+    disabled: PropTypes.func.isRequired,
+  }).isRequired,
 };
 
-function PlayerKicker({ accordionState, onEnabledClick, onNotEnabledClick }) {
+function PlayerKicker({ accordionState, onClickActions }) {
   const {
     state: { playerIDs, players },
     dispatch,
   } = useContext(HostContext);
 
+  // this variable is needed for the OptionList API; it needs the player names
+  // in an array of strings
   const playerList = playerIDs
     .map((playerId) => players[playerId].name)
     .sort((a, b) => b > a);
@@ -35,9 +40,8 @@ function PlayerKicker({ accordionState, onEnabledClick, onNotEnabledClick }) {
     <OptionList
       listContent={playerList}
       state={accordionState}
-      onEnabledOptionListClick={onEnabledClick}
-      onNotEnabledOptionListClick={onNotEnabledClick}
-      onListItemClick={kickPlayer}
+      onClick={onClickActions[accordionState]}
+      onItemClick={kickPlayer}
       openText="KICK WHO?"
       closedText="KICK PLAYER"
     />
