@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import { PlayerContext } from '../../../contexts/PlayerContext/PlayerContext';
 
 import CardHandLayout from '../../CardHandLayout/CardHandLayout';
@@ -11,7 +11,6 @@ export default function PlayerHandScreen() {
 
   const handleClear = () => setSelected([]);
 
-  // handleSubmit PlayerProvider handleMessage({event=SUBMIT_CARDS, payload=CardID array})?
   const handleSubmit = () => {
     dispatch({
       type: 'SUBMIT_CARDS',
@@ -37,7 +36,7 @@ export default function PlayerHandScreen() {
       >
         <PlayerHand
           cards={state.cards}
-          selected={selected}
+          selectedCards={selected}
           onSelect={(selectedCards) => updateSelected(selectedCards)}
         />
       </CardHandLayout>
