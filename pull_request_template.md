@@ -1,10 +1,10 @@
 #### 1.What is the purpose:
-<!-- If this is for a component, give a description of what your component is supposed to do/acomplishes. -->
+<!-- If this is for a component, give a description of what your component is supposed to do/acomplish. -->
 
 
 
 #### 2.Implementation:
-<!-- Brief oview of your solution. -->
+<!-- Brief overview of your solution. -->
 
 
 
