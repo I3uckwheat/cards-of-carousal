@@ -1,5 +1,5 @@
 #### 1.What is the purpose:
-<!-- If this is for a component, give a description of what your component is supposed to do/acomplish. -->
+<!-- Give a description of what your component or submission is supposed to do/acomplish. -->
 
 
 
