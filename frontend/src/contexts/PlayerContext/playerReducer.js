@@ -36,7 +36,7 @@ function reducer(state, action) {
       return update(state, payload);
     case 'ERROR_DISCONNECT':
       return errorDisconnect(state);
-    case 'SUBMIT_CARDS': // I ADDED THIS -----
+    case 'SUBMIT_CARDS':
       socketInstance.sendMessage('select-cards', payload);
       return { ...state };
     default:

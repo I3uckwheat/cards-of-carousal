@@ -5,7 +5,7 @@ import CardHandLayout from '../../CardHandLayout/CardHandLayout';
 import PlayerHand from '../../PlayerHand/PlayerHand';
 
 export default function PlayerHandScreen() {
-  const { state, dispatch } = useContext(PlayerContext); // gives provider object for `value` - playerContext line 59
+  const { state, dispatch } = useContext(PlayerContext);
 
   const [selected, setSelected] = useState([]);
 
@@ -14,11 +14,11 @@ export default function PlayerHandScreen() {
   const handleSubmit = () => {
     dispatch({
       type: 'SUBMIT_CARDS',
-      payload: selected,
+      payload: { selectedCards: selected },
     });
   };
 
-  // function for limited how many are selected based on the  'cardsNeededForSelection'
+  // limits how many cards can be selected based on the 'cardsNeededForSelection'
   const updateSelected = (selectedCards) => {
     if (selectedCards.length <= state.selectCardCount)
       setSelected(selectedCards);

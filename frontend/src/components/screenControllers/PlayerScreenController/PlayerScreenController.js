@@ -12,7 +12,7 @@ export default function PlayerScreenController() {
   switch (gameState) {
     case 'enter-code':
       return <PlayerJoinScreen />;
-    case 'player-selection':
+    case 'player-select':
       return <PlayerHandScreen />;
     default:
       throw new Error(`Unrecognized game state: ${gameState}`);
