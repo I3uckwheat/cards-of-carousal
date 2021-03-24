@@ -5,9 +5,8 @@ import styled, { css } from 'styled-components';
 const propTypes = {
   listContent: PropTypes.arrayOf(PropTypes.string).isRequired,
   state: PropTypes.string.isRequired,
-  onEnabledOptionListClick: PropTypes.func.isRequired,
-  onNotEnabledOptionListClick: PropTypes.func.isRequired,
-  onListItemClick: PropTypes.func.isRequired,
+  onClick: PropTypes.func.isRequired,
+  onItemClick: PropTypes.func.isRequired,
   openText: PropTypes.string.isRequired,
   closedText: PropTypes.string.isRequired,
 };
@@ -79,23 +78,14 @@ const OptionListItemButton = styled(OptionListButton)`
 function OptionList({
   listContent,
   state,
-  onEnabledOptionListClick,
-  onNotEnabledOptionListClick,
-  onListItemClick,
+  onClick: handleClick,
+  onItemClick,
   openText,
   closedText,
 }) {
   return (
     <div>
-      <OptionListButton
-        type="button"
-        onClick={
-          state === 'enabled'
-            ? onEnabledOptionListClick
-            : onNotEnabledOptionListClick
-        }
-        state={state}
-      >
+      <OptionListButton type="button" onClick={handleClick} state={state}>
         {state === 'open' ? openText : closedText}
       </OptionListButton>
       {state === 'open' &&
@@ -103,7 +93,7 @@ function OptionList({
           <OptionListItemButton
             type="button"
             key={listItem}
-            onClick={(event) => onListItemClick(event, listItem)}
+            onClick={() => onItemClick(listItem)}
           >
             {listItem}
           </OptionListItemButton>

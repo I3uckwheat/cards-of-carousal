@@ -103,8 +103,11 @@ function HostSettingsMenu() {
 
       <PlayerKicker
         accordionState={accordionSettings[0].state}
-        onEnabledClick={() => handleAccordionClick(0)}
-        onNotEnabledClick={resetAccordions}
+        onClickActions={{
+          open: resetAccordions,
+          enabled: () => handleAccordionClick(0),
+          disabled: resetAccordions,
+        }}
       />
     </SettingsMenu>
   );
