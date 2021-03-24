@@ -437,6 +437,7 @@ exports[`PlayerJoin snapshot matches 1`] = `
         />
         <button
           className="c3 c4"
+          data-testid="player-join-submit-button"
           type="submit"
         >
           Let's Carouse!

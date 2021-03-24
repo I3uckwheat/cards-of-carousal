@@ -310,7 +310,10 @@ export default function PlayerJoinScreen() {
               onChange={handleJoinCodeChange}
               className="player-join-code-input"
             />
-            <PlayerJoinButton type="submit">
+            <PlayerJoinButton
+              data-testid="player-join-submit-button"
+              type="submit"
+            >
               Let&apos;s Carouse!
             </PlayerJoinButton>
           </form>

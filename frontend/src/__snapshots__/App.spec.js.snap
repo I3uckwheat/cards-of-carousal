@@ -1594,6 +1594,7 @@ exports[`App snapshots should show the player screen after user has clicked the 
           />
           <button
             class="c3 c4"
+            data-testid="player-join-submit-button"
             type="submit"
           >
             Let's Carouse!
