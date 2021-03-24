@@ -1,8 +1,6 @@
-
-import React, { useState, useContext } from 'react';
-// import styled from 'styled-components';
-
+import React, { useState, useContext, useEffect } from 'react';
 import { PlayerContext } from '../../../contexts/PlayerContext/PlayerContext';
+
 import CardHandLayout from '../../CardHandLayout/CardHandLayout';
 import PlayerHand from '../../PlayerHand/PlayerHand';
 
@@ -22,12 +20,9 @@ export default function PlayerHandScreen() {
   };
 
   // function for limited how many are selected based on the  'cardsNeededForSelection'
-  const updateSelected = (index) => {
-console.log(index)
-  // want to add newly clicked card to setSelected[] if it is less than amount needed
-if (selected.length < state.selectCardCount) setSelected(index)
-
-
+  const updateSelected = (selectedCards) => {
+    if (selectedCards.length <= state.selectCardCount)
+      setSelected(selectedCards);
   };
 
   return (
@@ -43,7 +38,7 @@ if (selected.length < state.selectCardCount) setSelected(index)
         <PlayerHand
           cards={state.cards}
           selected={selected}
-          onSelect={(index)=>updateSelected(index) } 
+          onSelect={(selectedCards) => updateSelected(selectedCards)}
         />
       </CardHandLayout>
     </>
