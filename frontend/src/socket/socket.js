@@ -29,6 +29,11 @@ class SocketSingleton {
       this.#socket.send(JSON.stringify({ event, payload }));
     } catch {
       throw new Error('Socket is not connected');
+    } finally {
+      if (process.env.NODE_ENV === 'development') {
+        // eslint-disable-next-line no-console
+        console.log(`${Date.now()} | Outgoing Message: `, { event, payload })
+      }
     }
   }
 
@@ -43,6 +48,10 @@ class SocketSingleton {
     socketInstance.addEventListener('message', (message) => {
       const { event, payload } = JSON.parse(message.data);
       this.emitter.emit('message', { event, payload });
+      if (process.env.NODE_ENV === 'development') {
+        // eslint-disable-next-line no-console
+        console.log(`${Date.now()} | Incoming Message: `, { event, payload });
+      }
     });
 
     socketInstance.addEventListener('open', () => {
