@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 
 import Header from '../Header/Header';
-import PlayerKicker from './PlayerKicker';
-import JoinCodeHider from './JoinCodeHider';
 
 const SettingsMenu = styled.div`
   position: absolute;
@@ -63,8 +61,8 @@ const SettingsMenu = styled.div`
   }
 `;
 
-function HostSettingsMenu() {
-  const initialState = [{ state: 'enabled' }];
+function useSettingsMenuHandler(components) { 
+  const initialState = components.map(() => 'enabled');
   const [accordionSettings, setAccordionSettings] = useState(initialState);
 
   const anyAreOpen = accordionSettings.some(
@@ -76,13 +74,53 @@ function HostSettingsMenu() {
   }
 
   function handleAccordionClick(settingIndex) {
-    const newSettings = accordionSettings.map((setting, index) => {
-      const state = index === settingIndex ? 'open' : 'disabled';
-      return { state };
-    });
-
+    const newSettings = accordionSettings.map((setting, index) => index === settingIndex ? 'open' : 'disabled');
     setAccordionSettings(newSettings);
   }
+
+  function makePopulatedAccordion(Accordion, index) {
+    return (
+      <Accordion
+        key={Accordion.name}
+        accordionState={accordionSettings[index]}
+        onClickActions={{
+          open: resetAccordions,
+          enabled: () => handleAccordionClick(index),
+          disabled: resetAccordions
+        }}
+      />
+    )
+  }
+
+  function makePopulatedButton(Button) {
+    return <Button
+      key={Button.name}
+      isEnabled={!anyAreOpen}
+      onDisabledClick={resetAccordions}
+    />
+  }
+
+  const hydratedComponents = components.map((Component, index) => {
+    switch(Component.name) {
+      case 'PlayerKicker':
+        return makePopulatedAccordion(Component, index);
+
+      case 'JoinCodeHider':
+        return makePopulatedButton(Component);
+
+      default: 
+        throw new Error(`Please add ${Component.name} to HostSettingsMenu.js in the useSettingsMenuHandler`)
+    }
+  });
+
+  return [
+    hydratedComponents,
+    resetAccordions
+  ]
+}
+
+function HostSettingsMenu({settingsComponentList}) {
+  const [components, resetAccordions] = useSettingsMenuHandler(settingsComponentList)
 
   function onOutsideClick(event) {
     if (event.currentTarget === event.target) {
@@ -96,19 +134,7 @@ function HostSettingsMenu() {
         <h3>SETTINGS</h3>
       </Header>
 
-      <JoinCodeHider
-        isEnabled={!anyAreOpen}
-        onDisabledClick={resetAccordions}
-      />
-
-      <PlayerKicker
-        accordionState={accordionSettings[0].state}
-        onClickActions={{
-          open: resetAccordions,
-          enabled: () => handleAccordionClick(0),
-          disabled: resetAccordions,
-        }}
-      />
+      {components}
     </SettingsMenu>
   );
 }
