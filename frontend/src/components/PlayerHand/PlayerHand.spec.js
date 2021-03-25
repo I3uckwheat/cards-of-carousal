@@ -10,7 +10,9 @@ describe('PlayerHand', () => {
     const whiteCards = ['Briggs', 'Bender', 'Grace', 'hi', 'bye'];
     const onClick = jest.fn();
 
-    render(<PlayerHand cards={whiteCards} selected={[]} onSelect={onClick} />);
+    render(
+      <PlayerHand cards={whiteCards} selectedCards={[]} onSelect={onClick} />,
+    );
 
     userEvent.click(screen.getByText('Briggs'));
     expect(onClick).toHaveBeenCalledTimes(1);
@@ -21,7 +23,11 @@ describe('PlayerHand', () => {
     const onSelectMock = jest.fn();
 
     render(
-      <PlayerHand cards={whiteCards} selected={[]} onSelect={onSelectMock} />,
+      <PlayerHand
+        cards={whiteCards}
+        selectedCards={[]}
+        onSelect={onSelectMock}
+      />,
     );
 
     userEvent.click(screen.getByText('Bender'));
@@ -33,7 +39,11 @@ describe('PlayerHand', () => {
     const onSelectMock = jest.fn();
 
     render(
-      <PlayerHand cards={whiteCards} selected={[]} onSelect={onSelectMock} />,
+      <PlayerHand
+        cards={whiteCards}
+        selectedCards={[]}
+        onSelect={onSelectMock}
+      />,
     );
 
     userEvent.click(screen.getByText('Bender'));
@@ -51,7 +61,7 @@ describe('PlayerHand', () => {
     render(
       <PlayerHand
         cards={whiteCards}
-        selected={selectedCards}
+        selectedCards={selectedCards}
         onSelect={onSelectMock}
       />,
     );
@@ -67,7 +77,7 @@ describe('PlayerHand', () => {
     render(
       <PlayerHand
         cards={whiteCards}
-        selected={selectedCards}
+        selectedCards={selectedCards}
         onSelect={onSelectMock}
       />,
     );
@@ -84,7 +94,7 @@ describe('PlayerHand', () => {
     render(
       <PlayerHand
         cards={['card1', 'card2', 'card3']}
-        selected={[0, 1]}
+        selectedCards={[0, 1]}
         onSelect={() => {}}
       />,
     );
@@ -94,7 +104,9 @@ describe('PlayerHand', () => {
   it('logs an error if you pass in an array not containing strings to "cards"', () => {
     const consoleSpy = jest.spyOn(console, 'error');
 
-    render(<PlayerHand cards={[1, 2]} selected={[0, 1]} onSelect={() => {}} />);
+    render(
+      <PlayerHand cards={[1, 2]} selectedCards={[0, 1]} onSelect={() => {}} />,
+    );
 
     expect(consoleSpy).toHaveBeenCalled();
   });
@@ -105,7 +117,7 @@ describe('PlayerHand', () => {
     render(
       <PlayerHand
         cards={['card1', 'card2', 'card3']}
-        selected="not an array"
+        selectedCards="not an array"
         onSelect={() => {}}
       />,
     );
@@ -119,7 +131,7 @@ describe('PlayerHand', () => {
     render(
       <PlayerHand
         cards={['card1', 'card2', 'card3']}
-        selected={[1, 2]}
+        selectedCards={[1, 2]}
         onSelect="not a function"
       />,
     );
@@ -133,7 +145,11 @@ describe('PlayerHand', () => {
     const whiteCards = ['Briggs', 'Bender', 'Grace', 'hi', 'bye'];
     const tree = renderer
       .create(
-        <PlayerHand cards={whiteCards} selected={[0, 1]} onSelect={() => {}} />,
+        <PlayerHand
+          cards={whiteCards}
+          selectedCards={[0, 1]}
+          onSelect={() => {}}
+        />,
       )
       .toJSON();
 
