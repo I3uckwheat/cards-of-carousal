@@ -24,7 +24,7 @@ function playerConnected(state, { playerId }) {
   };
 }
 
-function playerDisconnected(state, { playerId }) {
+function removePlayer(state, { playerId }) {
   // Removes the value playerId from the original playerIDs array
   const newPlayerIds = state.playerIDs.filter(
     (playerID) => playerID !== playerId,
@@ -145,7 +145,21 @@ function HostReducer(state, action) {
       return playerConnected(state, payload);
 
     case 'PLAYER_DISCONNECTED':
-      return playerDisconnected(state, payload);
+      return removePlayer(state, payload);
+
+    case 'KICK_PLAYER':
+      socketInstance.sendMessage({
+        recipients: [payload],
+        event: 'update',
+        payload: {
+          message: {
+            big: "You've been kicked!",
+            small: 'Take off, you hoser!',
+          },
+        },
+      });
+
+      return removePlayer(state, payload);
 
     case 'SELECT_WINNER':
       // TODO: HANDLE PAYLOAD AND TEST

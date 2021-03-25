@@ -31,7 +31,7 @@ function PlayerKicker({ accordionState, onClickActions }) {
     );
 
     dispatch({
-      type: 'PLAYER_DISCONNECTED',
+      type: 'KICK_PLAYER',
       payload: { playerId: targetPlayer },
     });
   }
