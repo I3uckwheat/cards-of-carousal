@@ -65,7 +65,7 @@ exports[`PlayerJoin snapshot matches 1`] = `
   display: grid;
   height: 100%;
   background-color: var(--primary-background-color);
-  grid-template-rows: 130px 1fr 140px;
+  grid-template-rows: 130px 1fr auto;
   grid-template-columns: 1fr;
 }
 
@@ -249,7 +249,7 @@ exports[`PlayerJoin snapshot matches 1`] = `
 
 @media screen and (min-width:786px) {
   .c0 {
-    grid-template-rows: 180px 1fr 120px;
+    grid-template-rows: 180px 1fr auto;
   }
 
   .c0 .player-join-form-container {
@@ -398,7 +398,7 @@ exports[`PlayerJoin snapshot matches 1`] = `
 
 @media screen and (min-height:321px) and (max-height:375px) {
   .c0 {
-    grid-template-rows: 60px 1fr 140px;
+    grid-template-rows: 60px 1fr auto;
   }
 
   .c0 .player-join-form-container {
@@ -428,7 +428,7 @@ exports[`PlayerJoin snapshot matches 1`] = `
 
 @media screen and (max-height:567px) {
   .c0 {
-    grid-template-rows: 60px 1fr 140px;
+    grid-template-rows: 60px 1fr auto;
   }
 
   .c0 .player-join-form {

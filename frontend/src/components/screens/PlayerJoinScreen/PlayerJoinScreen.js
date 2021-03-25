@@ -15,7 +15,7 @@ const PlayerJoinContainer = styled.div`
   display: grid;
   height: 100%;
   background-color: var(--primary-background-color);
-  grid-template-rows: 130px 1fr 140px;
+  grid-template-rows: 130px 1fr auto;
   grid-template-columns: 1fr;
 
   main {
@@ -99,7 +99,7 @@ const PlayerJoinContainer = styled.div`
 
   @media screen and (min-width: 786px) {
     // header, main, footer
-    grid-template-rows: 180px 1fr 120px;
+    grid-template-rows: 180px 1fr auto;
 
     .player-join-form-container {
       max-width: 800px;
@@ -211,7 +211,7 @@ const PlayerJoinContainer = styled.div`
 
   // medium mobile landscape orientation
   @media screen and (min-height: 321px) and (max-height: 375px) {
-    grid-template-rows: 60px 1fr 140px;
+    grid-template-rows: 60px 1fr auto;
 
     .player-join-form-container {
       margin-top: -20px;
@@ -233,7 +233,6 @@ const PlayerJoinContainer = styled.div`
 
     .player-join-form {
       grid-template-rows: 60px 60px 1fr;
-      /* grid-template-rows: 50px 40px 1fr; */
     }
 
     input {
@@ -244,7 +243,7 @@ const PlayerJoinContainer = styled.div`
   // all mobile size landscape orientation
   @media screen and (max-height: 567px) {
     // header, main, footer
-    grid-template-rows: 60px 1fr 140px;
+    grid-template-rows: 60px 1fr auto;
 
     .player-join-form {
       grid-template-columns: 52% 48%;
