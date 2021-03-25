@@ -1,4 +1,4 @@
-#### 0. Make sure your issue is linked.
+#### 0. Make sure your issue is linked:
 
 
 
