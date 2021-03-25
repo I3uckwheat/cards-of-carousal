@@ -12,7 +12,11 @@ const defaultProps = {
   selection: null,
 };
 
-const CardWrapperStyles = styled.div`
+const CardWrapperStyles = styled.button`
+  background: none;
+  border: none;
+  text-align: left;
+
   position: relative;
 
   display: flex;
@@ -22,8 +26,9 @@ const CardWrapperStyles = styled.div`
 
   padding: 16px 0px;
 
-  border-bottom: ${(props) =>
-    props.underline ? '5px solid var(--secondary-background-color)' : 'none'};
+  border-bottom: 5px solid;
+  border-bottom-color: ${(props) =>
+    props.underline ? 'var(--secondary-background-color)' : 'transparent'};
 
   .badge {
     z-index: 10;

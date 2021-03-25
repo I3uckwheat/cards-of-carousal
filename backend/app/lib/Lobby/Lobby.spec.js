@@ -18,7 +18,7 @@ describe('Lobby', () => {
       const onCloseCallBack = jest.fn();
       const lobby = new Lobby(hostSocket, onCloseCallBack);
       const messageObject = {
-        event: 'create-lobby',
+        event: 'lobby-created',
         payload: { id: lobby.id },
         sender: 'server',
       };

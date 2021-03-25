@@ -7,6 +7,8 @@ import WelcomeScreen from './components/screens/WelcomeScreen/WelcomeScreen';
 import HostScreenController from './components/screenControllers/HostScreenController/HostScreenController';
 import PlayerScreenController from './components/screenControllers/PlayerScreenController/PlayerScreenController';
 import { PlayerProvider } from './contexts/PlayerContext/PlayerContext';
+import HostProvider from './contexts/HostContext/HostContext';
+
 
 function App() {
   const [screenControllerType, setScreenControllerType] = useState('welcome');
@@ -19,7 +21,11 @@ function App() {
         </PlayerProvider>
       );
     case 'host':
-      return <HostScreenController />;
+      return (
+        <HostProvider>
+          <HostScreenController />
+        </HostProvider>
+      );
     case 'welcome':
       return (
         <WelcomeScreen

@@ -5,7 +5,7 @@ import WhiteCard from '../Cards/WhiteCard';
 
 const propTypes = {
   cards: PropTypes.arrayOf(PropTypes.array).isRequired,
-  selectedGroup: PropTypes.number.isRequired,
+  selectedGroup: PropTypes.number,
   onSelect: PropTypes.func.isRequired,
 };
 
@@ -39,5 +39,9 @@ function CzarHand({ cards, selectedGroup, onSelect }) {
 }
 
 CzarHand.propTypes = propTypes;
+
+CzarHand.defaultProps = {
+  selectedGroup: null,
+};
 
 export default CzarHand;

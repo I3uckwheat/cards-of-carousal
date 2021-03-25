@@ -514,6 +514,23 @@ exports[`App snapshots should show the host screen after user has clicked the "h
   color: var(--secondary-text-color);
 }
 
+.c5 {
+  display: block;
+  border: 2px solid var(--primary-text-color);
+  font-size: 12px;
+  font-weight: bold;
+  padding: 0.7em;
+  background: var(--secondary-background-color);
+  color: var(--secondary-text-color);
+}
+
+.c5:hover,
+.c5:active,
+.c5:focus {
+  background: var(--accent-background-color);
+  cursor: pointer;
+}
+
 .c1 {
   background-image: url(inactiveHamburger.svg);
   background-size: cover;
@@ -574,6 +591,7 @@ exports[`App snapshots should show the host screen after user has clicked the "h
 }
 
 .c0 .components .left {
+  position: relative;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -591,6 +609,284 @@ exports[`App snapshots should show the host screen after user has clicked the "h
   -webkit-flex-grow: 1;
   -ms-flex-positive: 1;
   flex-grow: 1;
+  position: relative;
+}
+
+.c4 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 486px;
+  padding: 40px;
+  background-color: var(--primary-background-color);
+  position: relative;
+}
+
+.c4 > div:not(:last-child) {
+  margin-bottom: 24px;
+}
+
+.c8 {
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  height: 100%;
+  background-color: var(--secondary-background-color);
+  color: var(--secondary-text-color);
+  overflow-y: auto;
+}
+
+.c8 h1 {
+  margin-left: auto;
+  font-size: 4rem;
+  line-height: 4rem;
+  margin-top: -0.5rem;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.c9 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  padding: 24px 0 24px 60px;
+}
+
+.c9 .number-input-wrapper label {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 400px;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  font-weight: bold;
+}
+
+.c9 input[type='number'] {
+  font-weight: bold;
+  text-align: center;
+  width: 80px;
+}
+
+.c9 .select-wrapper {
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.c9 .select-wrapper h2 {
+  font-size: 1rem;
+  font-weight: bold;
+  height: 30px;
+}
+
+.c9 .card-packs {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(auto-fill,minmax(420px,1fr));
+  grid-template-rows: auto;
+  border: none;
+  margin: 0;
+  padding: 0 0 16px 0;
+}
+
+.c9 .card-packs label {
+  margin-right: 12px;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin-bottom: auto;
+}
+
+.c9 input[type='checkbox'] {
+  margin: 4px 11px auto 0;
+}
+
+.c6 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  line-height: 29px;
+}
+
+.c6 .join-code-title {
+  font-size: 18px;
+  color: var(--primary-text-color);
+  background-color: var(--primary-background-color);
+  font-weight: 700;
+  width: 97px;
+  height: 21px;
+}
+
+.c6 .join-code {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  font-size: 56px;
+  font-weight: bold;
+  color: var(--secondary-text-color);
+  background-color: var(--secondary-background-color);
+  width: 305px;
+  height: 70px;
+}
+
+.c3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  height: 100%;
+}
+
+.c3 .player-list-wrapper {
+  overflow-x: auto;
+  border-bottom: 1px solid var(--primary-text-color);
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+}
+
+.c3 .buttons-wrapper {
+  display: block;
+  margin-bottom: 20px;
+}
+
+.c3 .bottom-left-wrapper {
+  margin: 20px auto 32px;
+  position: relative;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.c3 .join-code-wrapper {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.c3 .host-pregame-button {
+  padding: 0;
+  background-color: var(--primary-background-color);
+  color: var(--primary-text-color);
+  margin: auto auto 12px;
+}
+
+.c3 .start-carousing {
+  font-size: 0.875rem;
+  padding: 16px 34px;
+}
+
+.c3 .close-game {
+  font-size: 0.625rem;
+  padding: 8px 20px;
+}
+
+.c7 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+}
+
+.c7 .game-description {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  background-color: var(--primary-background-color);
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  align-self: center;
+  margin: 24px;
+  padding: 8px;
+  border-radius: 5px;
+  font-size: 1.8rem;
+  font-weight: 700;
+  box-shadow: 0px 4px 12px rgba(0,0,0,0.25);
+}
+
+.c7 .game-description p {
+  margin: 16px 0;
+}
+
+.c7 .top {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  height: 60%;
+}
+
+.c7 .bottom {
+  height: 40%;
 }
 
 @media (max-width:2000px) {
@@ -673,6 +969,12 @@ exports[`App snapshots should show the host screen after user has clicked the "h
   }
 }
 
+@media only screen and (max-width:980px) {
+  .c8 h1 {
+    position: static;
+  }
+}
+
 <div
     class="c0 primary-background"
   >
@@ -696,16 +998,141 @@ exports[`App snapshots should show the host screen after user has clicked the "h
             CARDS OF CAROUSAL
           </h2>
         </header>
-        <p>
-          left
-        </p>
+        <div
+          class="c3"
+        >
+          <div
+            class="player-list-wrapper"
+          >
+            <div
+              class="c4"
+              data-testid="playerList-container"
+            />
+          </div>
+          <div
+            class="bottom-left-wrapper"
+          >
+            <div
+              class="buttons-wrapper"
+            >
+              <button
+                class="c5 host-pregame-button"
+              >
+                <div
+                  class="start-carousing"
+                >
+                  START CAROUSING
+                </div>
+              </button>
+              <button
+                class="c5 host-pregame-button"
+              >
+                <div
+                  class="close-game"
+                >
+                  CLOSE GAME
+                </div>
+              </button>
+            </div>
+            <div
+              class="join-code-wrapper"
+            >
+              <div
+                class="c6"
+              >
+                <p
+                  class="join-code-title"
+                >
+                  JOIN CODE:
+                </p>
+                <p
+                  class="join-code"
+                  data-testid="join-code"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
       <div
         class="right"
       >
-        <p>
-          right
-        </p>
+        <div
+          class="c7"
+        >
+          <div
+            class="top"
+          >
+            <div
+              class="game-description"
+            >
+              <p>
+                Cards of Carousal is a game for lorem ipsum dolor.
+              </p>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse, doloribus quaerat incidunt excepturi odit eos!
+              </p>
+              <p>
+                Qui delectus laboriosam aperiam maxime optio, architecto asperiores, at ullam.
+              </p>
+            </div>
+          </div>
+          <div
+            class="bottom"
+          >
+            <div
+              class="c8"
+            >
+              <h1>
+                GAME SETTINGS
+              </h1>
+              <form
+                class="c9"
+              >
+                <div
+                  class="number-input-wrapper"
+                >
+                  <label
+                    for="maxPlayers"
+                  >
+                    MAX PLAYERS
+                    <input
+                      id="maxPlayers"
+                      max="12"
+                      min="2"
+                      name="maxPlayers"
+                      type="number"
+                      value="8"
+                    />
+                  </label>
+                  <label
+                    for="winningScore"
+                  >
+                    WINNING SCORE
+                    <input
+                      id="winningScore"
+                      max="15"
+                      min="1"
+                      name="winningScore"
+                      type="number"
+                      value="7"
+                    />
+                  </label>
+                </div>
+                <div
+                  class="select-wrapper"
+                >
+                  <h2>
+                    SELECT CARD PACKS
+                  </h2>
+                  <div
+                    class="card-packs"
+                  />
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
