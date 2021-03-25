@@ -280,8 +280,8 @@ export default function PlayerJoinScreen() {
     const regex = /[^A-Za-z]+/g;
     if (regex.test(inputValue)) return;
 
-    // Only accepts uppercase and lowercase letter characters
-    setJoinCode(inputValue);
+    // Accepts uppercase and lowercase letter characters, but converts it all to uppercase
+    setJoinCode(inputValue.toUpperCase());
   }
 
   return (
