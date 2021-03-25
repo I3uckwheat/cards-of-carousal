@@ -44,7 +44,7 @@ function reducer(state, action) {
   const { type, payload } = action;
   switch (type) {
     case 'JOIN_LOBBY':
-      socketInstance.joinLobby(payload.id, payload.name);
+      socketInstance.joinLobby(payload.lobbyId, payload.playerName);
       return joinLobby(state);
     case 'UPDATE':
       return update(state, payload);

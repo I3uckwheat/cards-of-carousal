@@ -61,15 +61,18 @@ describe('reducer', () => {
       const state = {
         gameState: 'TEST',
       };
-      const id = '1234';
-      const name = 'FOO';
+      const lobbyId = '1234';
+      const playerName = 'FOO';
 
       reducer(state, {
         type: 'JOIN_LOBBY',
-        payload: { id, name },
+        payload: { lobbyId, playerName },
       });
 
-      expect(socketInstance.joinLobby).toHaveBeenCalledWith(id, name);
+      expect(socketInstance.joinLobby).toHaveBeenCalledWith(
+        lobbyId,
+        playerName,
+      );
     });
   });
 

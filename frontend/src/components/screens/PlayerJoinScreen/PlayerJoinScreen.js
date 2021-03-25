@@ -256,7 +256,10 @@ export default function PlayerJoinScreen() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    dispatch({ type: 'JOIN_LOBBY', payload: { id: joinCode, name } });
+    dispatch({
+      type: 'JOIN_LOBBY',
+      payload: { lobbyId: joinCode, playerName: name },
+    });
   }
 
   function handleNameChange(e) {

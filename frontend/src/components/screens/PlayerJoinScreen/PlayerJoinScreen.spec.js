@@ -54,8 +54,8 @@ describe('PlayerJoin', () => {
       expect(dispatch).toHaveBeenCalledWith({
         type: 'JOIN_LOBBY',
         payload: {
-          id: 'ABCD',
-          name: 'PLAYER_NAME',
+          lobbyId: 'ABCD',
+          playerName: 'PLAYER_NAME',
         },
       });
     });
