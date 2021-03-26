@@ -85,7 +85,26 @@ describe('PlayerJoin', () => {
       expect(screen.getByDisplayValue('foobar')).toBeInTheDocument();
     });
 
-    it('join code input accepts nothing but lower case and upper case letters', () => {
+    it('join code transforms input to uppercase', () => {
+      const dispatch = jest.fn();
+      const state = {};
+
+      render(
+        <PlayerContext.Provider value={{ state, dispatch }}>
+          <PlayerJoinScreen />
+        </PlayerContext.Provider>,
+      );
+
+      userEvent.type(screen.getByPlaceholderText('join code'), 'abcd');
+      expect(screen.getByDisplayValue('ABCD')).toBeInTheDocument();
+      userEvent.clear(screen.getByPlaceholderText('join code'));
+
+      userEvent.type(screen.getByPlaceholderText('join code'), 'aBcD');
+      expect(screen.getByDisplayValue('ABCD')).toBeInTheDocument();
+      userEvent.clear(screen.getByPlaceholderText('join code'));
+    });
+
+    it('join code input ignores special and space characters', () => {
       const dispatch = jest.fn();
       const state = {};
 
@@ -99,15 +118,11 @@ describe('PlayerJoin', () => {
       expect(screen.getByDisplayValue('ABCD')).toBeInTheDocument();
       userEvent.clear(screen.getByPlaceholderText('join code'));
 
-      userEvent.type(screen.getByPlaceholderText('join code'), 'abcd');
-      expect(screen.getByDisplayValue('ABCD')).toBeInTheDocument();
-      userEvent.clear(screen.getByPlaceholderText('join code'));
-
-      userEvent.type(screen.getByPlaceholderText('join code'), 'Foo!@!@#$');
+      userEvent.type(screen.getByPlaceholderText('join code'), 'FOO!@!@#$');
       expect(screen.getByDisplayValue('FOO')).toBeInTheDocument();
       userEvent.clear(screen.getByPlaceholderText('join code'));
 
-      userEvent.type(screen.getByPlaceholderText('join code'), '  aB cD  ');
+      userEvent.type(screen.getByPlaceholderText('join code'), '  AB CD  ');
       expect(screen.getByDisplayValue('ABCD')).toBeInTheDocument();
       userEvent.clear(screen.getByPlaceholderText('join code'));
     });
