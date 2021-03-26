@@ -422,7 +422,7 @@ exports[`Player screen controller render renders correctly 1`] = `
   }
 
   .c0 input {
-    padding-top: 20px;
+    padding-top: 40px;
   }
 }
 
