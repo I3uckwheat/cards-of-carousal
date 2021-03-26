@@ -35,6 +35,57 @@ describe('PlayerJoin', () => {
     });
   });
 
+  describe('user input', () => {
+    it('name input ignores special characters and spaces', () => {
+      const dispatch = jest.fn();
+      const state = {};
+
+      render(
+        <PlayerContext.Provider value={{ state, dispatch }}>
+          <PlayerJoinScreen />
+        </PlayerContext.Provider>,
+      );
+
+      userEvent.type(screen.getByPlaceholderText('name'), 'foo!bar');
+      expect(screen.getByDisplayValue('foobar')).toBeInTheDocument();
+      userEvent.clear(screen.getByPlaceholderText('name'));
+
+      userEvent.type(screen.getByPlaceholderText('name'), '!@#$%¨&*()-foo');
+      expect(screen.getByDisplayValue('foo')).toBeInTheDocument();
+      userEvent.clear(screen.getByPlaceholderText('name'));
+
+      userEvent.type(screen.getByPlaceholderText('name'), 'f@o#o$');
+      expect(screen.getByDisplayValue('foo')).toBeInTheDocument();
+      userEvent.clear(screen.getByPlaceholderText('name'));
+
+      userEvent.type(screen.getByPlaceholderText('name'), 'foo bar');
+      expect(screen.getByDisplayValue('foobar')).toBeInTheDocument();
+      userEvent.clear(screen.getByPlaceholderText('name'));
+    });
+
+    it('name input ignores all space characters including leading and trailing', () => {
+      const dispatch = jest.fn();
+      const state = {};
+
+      render(
+        <PlayerContext.Provider value={{ state, dispatch }}>
+          <PlayerJoinScreen />
+        </PlayerContext.Provider>,
+      );
+
+      userEvent.type(screen.getByPlaceholderText('name'), 'foo bar');
+      expect(screen.getByDisplayValue('foobar')).toBeInTheDocument();
+      userEvent.clear(screen.getByPlaceholderText('name'));
+
+      userEvent.type(screen.getByPlaceholderText('name'), '  foo');
+      expect(screen.getByDisplayValue('foo')).toBeInTheDocument();
+      userEvent.clear(screen.getByPlaceholderText('name'));
+
+      userEvent.type(screen.getByPlaceholderText('name'), 'foo bar   ');
+      expect(screen.getByDisplayValue('foobar')).toBeInTheDocument();
+    });
+  });
+
   describe('submit button', () => {
     it('dispatches JOIN_LOBBY action with user input values for name and join code', () => {
       const dispatch = jest.fn();
