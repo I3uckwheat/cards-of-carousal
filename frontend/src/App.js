@@ -9,7 +9,6 @@ import PlayerScreenController from './components/screenControllers/PlayerScreenC
 import { PlayerProvider } from './contexts/PlayerContext/PlayerContext';
 import HostProvider from './contexts/HostContext/HostContext';
 
-
 function App() {
   const [screenControllerType, setScreenControllerType] = useState('welcome');
 

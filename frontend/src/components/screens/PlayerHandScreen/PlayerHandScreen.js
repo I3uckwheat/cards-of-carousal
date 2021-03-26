@@ -20,8 +20,9 @@ export default function PlayerHandScreen() {
 
   // limits how many cards can be selected based on the 'cardsNeededForSelection'
   const updateSelected = (selectedCards) => {
-    if (selectedCards.length <= state.selectCardCount)
+    if (selectedCards.length <= state.selectCardCount) {
       setSelected(selectedCards);
+    }
   };
 
   return (

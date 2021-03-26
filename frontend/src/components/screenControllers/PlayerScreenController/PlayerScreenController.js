@@ -4,7 +4,6 @@ import PlayerJoinScreen from '../../screens/PlayerJoinScreen/PlayerJoinScreen';
 import PlayerHandScreen from '../../screens/PlayerHandScreen/PlayerHandScreen';
 import CzarHandScreen from '../../screens/CzarHandScreen/CzarHandScreen';
 
-
 const propTypes = {};
 
 export default function PlayerScreenController() {
