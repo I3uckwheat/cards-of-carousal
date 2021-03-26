@@ -6,11 +6,20 @@ import {
   PlayerProvider,
 } from '../../../contexts/PlayerContext/PlayerContext';
 
-import PlayerJoinScreen from '../../screens/PlayerJoinScreen/PlayerJoinScreen';
 import PlayerScreenController from './PlayerScreenController';
+import PlayerJoinScreen from '../../screens/PlayerJoinScreen/PlayerJoinScreen';
+import PlayerMessageScreen from '../../screens/PlayerMessageScreen/PlayerMessageScreen';
 
 const MockPlayerJoinScreen = () => <div data-testid="player-join-screen" />;
 jest.mock('../../screens/PlayerJoinScreen/PlayerJoinScreen.js', () => ({
+  __esModule: true,
+  default: jest.fn(),
+}));
+
+const MockPlayerMessageScreen = () => (
+  <div data-testid="player-message-screen" />
+);
+jest.mock('../../screens/PlayerMessageScreen/PlayerMessageScreen.js', () => ({
   __esModule: true,
   default: jest.fn(),
 }));
@@ -45,6 +54,26 @@ describe('Player screen controller', () => {
         );
 
         expect(screen.getByTestId('player-join-screen')).toBeInTheDocument();
+      });
+    });
+
+    describe('pending-connection', () => {
+      it('renders PlayerMessageScreen', () => {
+        PlayerMessageScreen.mockImplementation(MockPlayerMessageScreen);
+
+        const dispatch = jest.fn();
+        const state = {
+          gameState: 'pending-connection',
+          message: { big: '', small: '' },
+        };
+
+        render(
+          <PlayerContext.Provider value={{ state, dispatch }}>
+            <PlayerScreenController />
+          </PlayerContext.Provider>,
+        );
+
+        expect(screen.getByTestId('player-message-screen')).toBeInTheDocument();
       });
     });
   });
