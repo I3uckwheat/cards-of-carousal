@@ -40,6 +40,36 @@ describe('Player screen controller', () => {
   });
 
   describe('gameState switch', () => {
+    describe('default', () => {
+      it('throws an error', () => {
+        // Prevent writing error in console during this render.
+        // eslint-disable-next-line no-console
+        const err = console.error;
+        // eslint-disable-next-line no-console
+        console.error = jest.fn();
+
+        const dispatch = jest.fn();
+        const state = { gameState: '' };
+
+        let actual;
+        try {
+          render(
+            <PlayerContext.Provider value={{ state, dispatch }}>
+              <PlayerScreenController />
+            </PlayerContext.Provider>,
+          );
+        } catch (e) {
+          actual = e.message;
+        }
+        const expected = 'Unrecognized game state: ';
+        expect(actual).toEqual(expected);
+
+        // Restore writing to console.
+        // eslint-disable-next-line no-console
+        console.error = err;
+      });
+    });
+
     describe('enter-code', () => {
       it('renders PlayerJoinScreen', () => {
         PlayerJoinScreen.mockImplementation(MockPlayerJoinScreen);
