@@ -9,12 +9,12 @@ const { emitter } = socketInstance;
 
 const initialState = {
   gameState: 'enter-code',
-  cards: [], // test by putting cards in here
+  cards: [],
   message: {
     big: '',
     small: '',
   },
-  selectCardCount: 3,
+  selectCardCount: 0,
 };
 
 const propTypes = {
@@ -25,8 +25,7 @@ const propTypes = {
 export const PlayerContext = createContext();
 
 export function PlayerProvider({ children }) {
-  const [state, dispatch] = useReducer(reducer, initialState); // reducer returns a new object cto be used in state with updated value
-
+  const [state, dispatch] = useReducer(reducer, initialState);
   // this function allows us to parse any incoming messages from the event emitter
   // to make sure we know how to handle them.
   function handleMessage({ event, payload }) {
