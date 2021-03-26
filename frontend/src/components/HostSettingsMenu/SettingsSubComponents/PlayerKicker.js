@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 
 import OptionList from './OptionList';
-import { HostContext } from '../../contexts/HostContext/HostContext';
+import { HostContext } from '../../../contexts/HostContext/HostContext';
 
 const propTypes = {
   accordionState: PropTypes.string.isRequired,

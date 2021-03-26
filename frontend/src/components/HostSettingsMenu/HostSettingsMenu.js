@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 
 import Header from '../Header/Header';
-import PlayerKicker from './PlayerKicker';
-import JoinCodeHider from './JoinCodeHider';
+import PlayerKicker from './SettingsSubComponents/PlayerKicker';
+import JoinCodeHider from './SettingsSubComponents/JoinCodeHider';
 
 const SettingsMenu = styled.div`
   position: absolute;
@@ -63,8 +63,9 @@ const SettingsMenu = styled.div`
   }
 `;
 
+// TODO refactor this to take components as children and build a pregame settings modal
 function HostSettingsMenu() {
-  const initialState = [{ state: 'enabled' }];
+  const initialState = [{ state: 'enabled' }]; // FIXME change to strings
   const [accordionSettings, setAccordionSettings] = useState(initialState);
 
   const anyAreOpen = accordionSettings.some(
