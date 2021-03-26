@@ -149,7 +149,7 @@ function HostReducer(state, action) {
 
     case 'KICK_PLAYER':
       socketInstance.sendMessage({
-        recipients: [payload],
+        recipients: [payload.playerId],
         event: 'update',
         payload: {
           message: {
