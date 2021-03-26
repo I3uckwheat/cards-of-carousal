@@ -266,8 +266,7 @@ export default function PlayerJoinScreen() {
     const inputValue = e.target.value;
 
     // Filter user input to ignore special characters
-    const regex = /\W+/g;
-    if (regex.test(inputValue)) return;
+    if (/\W+/g.test(inputValue)) return;
 
     // Only accepts alphanumeric and underscore characters
     setName(inputValue);
@@ -277,8 +276,7 @@ export default function PlayerJoinScreen() {
     const inputValue = e.target.value;
 
     // Filter user input to ignore numeric and special characters
-    const regex = /[^A-Za-z]+/g;
-    if (regex.test(inputValue)) return;
+    if (/[^A-Za-z]+/g.test(inputValue)) return;
 
     // Accepts uppercase and lowercase letter characters, but converts it all to uppercase
     setJoinCode(inputValue.toUpperCase());

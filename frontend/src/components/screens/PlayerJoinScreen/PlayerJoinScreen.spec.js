@@ -84,6 +84,33 @@ describe('PlayerJoin', () => {
       userEvent.type(screen.getByPlaceholderText('name'), 'foo bar   ');
       expect(screen.getByDisplayValue('foobar')).toBeInTheDocument();
     });
+
+    it('join code input accepts nothing but lower case and upper case letters', () => {
+      const dispatch = jest.fn();
+      const state = {};
+
+      render(
+        <PlayerContext.Provider value={{ state, dispatch }}>
+          <PlayerJoinScreen />
+        </PlayerContext.Provider>,
+      );
+
+      userEvent.type(screen.getByPlaceholderText('join code'), 'ABCD');
+      expect(screen.getByDisplayValue('ABCD')).toBeInTheDocument();
+      userEvent.clear(screen.getByPlaceholderText('join code'));
+
+      userEvent.type(screen.getByPlaceholderText('join code'), 'abcd');
+      expect(screen.getByDisplayValue('ABCD')).toBeInTheDocument();
+      userEvent.clear(screen.getByPlaceholderText('join code'));
+
+      userEvent.type(screen.getByPlaceholderText('join code'), 'Foo!@!@#$');
+      expect(screen.getByDisplayValue('FOO')).toBeInTheDocument();
+      userEvent.clear(screen.getByPlaceholderText('join code'));
+
+      userEvent.type(screen.getByPlaceholderText('join code'), '  aB cD  ');
+      expect(screen.getByDisplayValue('ABCD')).toBeInTheDocument();
+      userEvent.clear(screen.getByPlaceholderText('join code'));
+    });
   });
 
   describe('submit button', () => {
