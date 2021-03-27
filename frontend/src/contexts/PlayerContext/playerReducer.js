@@ -50,6 +50,9 @@ function reducer(state, action) {
       return update(state, payload);
     case 'ERROR_DISCONNECT':
       return errorDisconnect(state);
+    case 'SUBMIT_CARDS':
+      socketInstance.sendMessage('select-cards', payload);
+      return { ...state };
     case 'SUBMIT_WINNER':
       return submitWinner(state, payload);
     default:

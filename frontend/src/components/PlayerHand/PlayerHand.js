@@ -5,19 +5,19 @@ import CardWrapper from '../CardWrapper/CardWrapper';
 
 const propType = {
   cards: PropTypes.arrayOf(PropTypes.string).isRequired,
-  selected: PropTypes.arrayOf(PropTypes.number).isRequired,
+  selectedCards: PropTypes.arrayOf(PropTypes.number).isRequired,
   onSelect: PropTypes.func.isRequired,
 };
 
-export default function PlayerHand({ cards, selected, onSelect }) {
-  const handleClick = (index) => {
-    const newArray = [...selected];
+export default function PlayerHand({ cards, selectedCards, onSelect }) {
+  const handleClick = (cardIndex) => {
+    const newArray = [...selectedCards];
 
-    if (selected.includes(index)) {
-      const indexOfSelected = selected.indexOf(index); // finds index in selected[] that  that contains the clicked card
-      newArray.splice(indexOfSelected, 1);
+    if (selectedCards.includes(cardIndex)) {
+      const indexOfSelectedCard = selectedCards.indexOf(cardIndex); // finds index in selectedCards[] that  that contains the clicked card
+      newArray.splice(indexOfSelectedCard, 1);
     } else {
-      newArray.push(index);
+      newArray.push(cardIndex);
     }
     onSelect([...newArray]);
   };
@@ -25,8 +25,8 @@ export default function PlayerHand({ cards, selected, onSelect }) {
   return (
     <>
       {cards.map((card, cardsIndex) => {
-        const badge = selected.includes(cardsIndex)
-          ? selected.indexOf(cardsIndex) + 1
+        const badge = selectedCards.includes(cardsIndex)
+          ? selectedCards.indexOf(cardsIndex) + 1
           : null;
         return (
           <CardWrapper
