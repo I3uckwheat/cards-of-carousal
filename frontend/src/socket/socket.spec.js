@@ -104,6 +104,27 @@ describe('socketInstance', () => {
       expect(true).toBeTruthy();
     });
 
+    it('sends the message only to designated recipients when host', () => {
+      const { sendMock } = setupMockSocket();
+
+      const message = {
+        event: 'hello',
+        recipients: ['player1', 'player2'],
+        payload: {},
+      };
+
+      socketInstance.createLobby();
+      socketInstance.sendMessage(message);
+
+      expect(sendMock).toHaveBeenCalledWith(
+        JSON.stringify({
+          event: 'hello',
+          recipients: ['player1', 'player2'],
+          payload: {},
+        }),
+      );
+    });
+
     it('sends the message when player', () => {
       const { sendMock } = setupMockSocket();
       const message = {
