@@ -101,7 +101,6 @@ describe('socketInstance', () => {
       socketInstance.sendMessage(message);
 
       expect(sendMock).toHaveBeenCalledWith(JSON.stringify(message));
-      expect(true).toBeTruthy();
     });
 
     it('sends the message only to designated recipients when host', () => {
