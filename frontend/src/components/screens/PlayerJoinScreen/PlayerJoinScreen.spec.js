@@ -35,96 +35,113 @@ describe('PlayerJoin', () => {
     });
   });
 
-  describe('user input', () => {
-    it('name input ignores special characters and spaces', () => {
-      const dispatch = jest.fn();
-      const state = {};
+  describe('user inputs', () => {
+    describe('name', () => {
+      it('ignores all special characters', () => {
+        const dispatch = jest.fn();
+        const state = {};
 
-      render(
-        <PlayerContext.Provider value={{ state, dispatch }}>
-          <PlayerJoinScreen />
-        </PlayerContext.Provider>,
-      );
+        render(
+          <PlayerContext.Provider value={{ state, dispatch }}>
+            <PlayerJoinScreen />
+          </PlayerContext.Provider>,
+        );
 
-      userEvent.type(screen.getByPlaceholderText('name'), 'foo!bar');
-      expect(screen.getByDisplayValue('foobar')).toBeInTheDocument();
-      userEvent.clear(screen.getByPlaceholderText('name'));
+        userEvent.type(
+          screen.getByPlaceholderText('name'),
+          '!@#$%¨&*()-foo!@#bar!@#$',
+        );
+        expect(screen.getByDisplayValue('foobar')).toBeInTheDocument();
+      });
 
-      userEvent.type(screen.getByPlaceholderText('name'), '!@#$%¨&*()-foo');
-      expect(screen.getByDisplayValue('foo')).toBeInTheDocument();
-      userEvent.clear(screen.getByPlaceholderText('name'));
+      it('ignores mid-sentence spaces', () => {
+        const dispatch = jest.fn();
+        const state = {};
 
-      userEvent.type(screen.getByPlaceholderText('name'), 'f@o#o$');
-      expect(screen.getByDisplayValue('foo')).toBeInTheDocument();
-      userEvent.clear(screen.getByPlaceholderText('name'));
+        render(
+          <PlayerContext.Provider value={{ state, dispatch }}>
+            <PlayerJoinScreen />
+          </PlayerContext.Provider>,
+        );
 
-      userEvent.type(screen.getByPlaceholderText('name'), 'foo bar');
-      expect(screen.getByDisplayValue('foobar')).toBeInTheDocument();
-      userEvent.clear(screen.getByPlaceholderText('name'));
+        userEvent.type(screen.getByPlaceholderText('name'), 'foo bar');
+        expect(screen.getByDisplayValue('foobar')).toBeInTheDocument();
+      });
+
+      it('ignores leading and trailing spaces', () => {
+        const dispatch = jest.fn();
+        const state = {};
+
+        render(
+          <PlayerContext.Provider value={{ state, dispatch }}>
+            <PlayerJoinScreen />
+          </PlayerContext.Provider>,
+        );
+
+        userEvent.type(screen.getByPlaceholderText('name'), '  foo  ');
+        expect(screen.getByDisplayValue('foo')).toBeInTheDocument();
+      });
     });
 
-    it('name input ignores all space characters including leading and trailing', () => {
-      const dispatch = jest.fn();
-      const state = {};
+    describe('join code', () => {
+      it('transforms all lowercase input to uppercase', () => {
+        const dispatch = jest.fn();
+        const state = {};
 
-      render(
-        <PlayerContext.Provider value={{ state, dispatch }}>
-          <PlayerJoinScreen />
-        </PlayerContext.Provider>,
-      );
+        render(
+          <PlayerContext.Provider value={{ state, dispatch }}>
+            <PlayerJoinScreen />
+          </PlayerContext.Provider>,
+        );
 
-      userEvent.type(screen.getByPlaceholderText('name'), 'foo bar');
-      expect(screen.getByDisplayValue('foobar')).toBeInTheDocument();
-      userEvent.clear(screen.getByPlaceholderText('name'));
+        userEvent.type(screen.getByPlaceholderText('join code'), 'abcd');
+        expect(screen.getByDisplayValue('ABCD')).toBeInTheDocument();
+      });
 
-      userEvent.type(screen.getByPlaceholderText('name'), '  foo');
-      expect(screen.getByDisplayValue('foo')).toBeInTheDocument();
-      userEvent.clear(screen.getByPlaceholderText('name'));
+      it('transforms mixed case input to all uppercase', () => {
+        const dispatch = jest.fn();
+        const state = {};
 
-      userEvent.type(screen.getByPlaceholderText('name'), 'foo bar   ');
-      expect(screen.getByDisplayValue('foobar')).toBeInTheDocument();
-    });
+        render(
+          <PlayerContext.Provider value={{ state, dispatch }}>
+            <PlayerJoinScreen />
+          </PlayerContext.Provider>,
+        );
 
-    it('join code transforms input to uppercase', () => {
-      const dispatch = jest.fn();
-      const state = {};
+        userEvent.type(screen.getByPlaceholderText('join code'), 'aBcD');
+        expect(screen.getByDisplayValue('ABCD')).toBeInTheDocument();
+      });
 
-      render(
-        <PlayerContext.Provider value={{ state, dispatch }}>
-          <PlayerJoinScreen />
-        </PlayerContext.Provider>,
-      );
+      it('ignores special characters', () => {
+        const dispatch = jest.fn();
+        const state = {};
 
-      userEvent.type(screen.getByPlaceholderText('join code'), 'abcd');
-      expect(screen.getByDisplayValue('ABCD')).toBeInTheDocument();
-      userEvent.clear(screen.getByPlaceholderText('join code'));
+        render(
+          <PlayerContext.Provider value={{ state, dispatch }}>
+            <PlayerJoinScreen />
+          </PlayerContext.Provider>,
+        );
 
-      userEvent.type(screen.getByPlaceholderText('join code'), 'aBcD');
-      expect(screen.getByDisplayValue('ABCD')).toBeInTheDocument();
-      userEvent.clear(screen.getByPlaceholderText('join code'));
-    });
+        userEvent.type(
+          screen.getByPlaceholderText('join code'),
+          '!@#$FOO!@!@#$',
+        );
+        expect(screen.getByDisplayValue('FOO')).toBeInTheDocument();
+      });
 
-    it('join code input ignores special and space characters', () => {
-      const dispatch = jest.fn();
-      const state = {};
+      it('ignores leading and trailing space characters', () => {
+        const dispatch = jest.fn();
+        const state = {};
 
-      render(
-        <PlayerContext.Provider value={{ state, dispatch }}>
-          <PlayerJoinScreen />
-        </PlayerContext.Provider>,
-      );
+        render(
+          <PlayerContext.Provider value={{ state, dispatch }}>
+            <PlayerJoinScreen />
+          </PlayerContext.Provider>,
+        );
 
-      userEvent.type(screen.getByPlaceholderText('join code'), 'ABCD');
-      expect(screen.getByDisplayValue('ABCD')).toBeInTheDocument();
-      userEvent.clear(screen.getByPlaceholderText('join code'));
-
-      userEvent.type(screen.getByPlaceholderText('join code'), 'FOO!@!@#$');
-      expect(screen.getByDisplayValue('FOO')).toBeInTheDocument();
-      userEvent.clear(screen.getByPlaceholderText('join code'));
-
-      userEvent.type(screen.getByPlaceholderText('join code'), '  AB CD  ');
-      expect(screen.getByDisplayValue('ABCD')).toBeInTheDocument();
-      userEvent.clear(screen.getByPlaceholderText('join code'));
+        userEvent.type(screen.getByPlaceholderText('join code'), '  ABCD  ');
+        expect(screen.getByDisplayValue('ABCD')).toBeInTheDocument();
+      });
     });
   });
 
