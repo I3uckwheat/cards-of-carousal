@@ -1,10 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import React from 'react';
-import renderer from 'react-test-renderer';
-import {
-  PlayerContext,
-  PlayerProvider,
-} from '../../../contexts/PlayerContext/PlayerContext';
+import { PlayerContext } from '../../../contexts/PlayerContext/PlayerContext';
 
 import PlayerScreenController from './PlayerScreenController';
 import PlayerJoinScreen from '../../screens/PlayerJoinScreen/PlayerJoinScreen';
@@ -25,20 +21,6 @@ jest.mock('../../screens/PlayerMessageScreen/PlayerMessageScreen.js', () => ({
 }));
 
 describe('Player screen controller', () => {
-  describe('render', () => {
-    it.skip('renders correctly', () => {
-      const tree = renderer
-        .create(
-          <PlayerProvider>
-            <PlayerScreenController />
-          </PlayerProvider>,
-        )
-        .toJSON();
-
-      expect(tree).toMatchSnapshot();
-    });
-  });
-
   describe('gameState switch', () => {
     describe('default', () => {
       it('throws an error', () => {
