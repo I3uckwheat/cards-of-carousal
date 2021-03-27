@@ -33,18 +33,13 @@ describe('Player screen controller', () => {
         const dispatch = jest.fn();
         const state = { gameState: '' };
 
-        let actual;
-        try {
+        expect(() =>
           render(
             <PlayerContext.Provider value={{ state, dispatch }}>
               <PlayerScreenController />
             </PlayerContext.Provider>,
-          );
-        } catch (e) {
-          actual = e.message;
-        }
-        const expected = 'Unrecognized game state: ';
-        expect(actual).toEqual(expected);
+          ),
+        ).toThrowError();
 
         // Restore writing to console.
         // eslint-disable-next-line no-console
