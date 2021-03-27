@@ -14,6 +14,7 @@ const initialState = {
     big: '',
     small: '',
   },
+  selectCardCount: 0,
 };
 
 const propTypes = {
@@ -25,7 +26,6 @@ export const PlayerContext = createContext();
 
 export function PlayerProvider({ children }) {
   const [state, dispatch] = useReducer(reducer, initialState);
-
   // this function allows us to parse any incoming messages from the event emitter
   // to make sure we know how to handle them.
   function handleMessage({ event, payload }) {
