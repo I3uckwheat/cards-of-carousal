@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`PlayerKicker rendering matches the snapshot 1`] = `
+exports[`JoinCodeHider rendering matches the snapshot 1`] = `
 <button
   data-is-enabled={true}
   data-testid="option-button"

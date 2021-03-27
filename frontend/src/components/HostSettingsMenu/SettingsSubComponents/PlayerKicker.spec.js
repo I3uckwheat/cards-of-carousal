@@ -24,7 +24,10 @@ jest.mock(
         <button type="button" onClick={onClick}>
           MAIN BUTTON
         </button>
-        {listContent.map((item) => MakeListItemButton(item))}
+        {
+          // eslint-disable-next-line react/prop-types
+          listContent.map((item) => MakeListItemButton(item))
+        }
       </div>
     );
   },
@@ -213,7 +216,7 @@ describe('PlayerKicker', () => {
         </HostContext.Provider>,
       );
 
-      expect(dispatch).not.toHaveBeenCalledWith();
+      expect(dispatch).not.toHaveBeenCalled();
     });
 
     it('dispatches with the correct type and payload when a name is clicked', () => {
@@ -250,48 +253,6 @@ describe('PlayerKicker', () => {
       expect(dispatch).toHaveBeenCalledWith({
         type: 'KICK_PLAYER',
         payload: { playerId: 'player1' },
-      });
-    });
-
-    it('dispatches with the correct types and payloads when two names are clicked', () => {
-      const state = {
-        players: {
-          player1: {
-            name: 'FOO',
-            submittedCards: [],
-          },
-          player2: {
-            name: 'BAR',
-            submittedCards: [],
-          },
-        },
-        playerIDs: ['player1', 'player2'],
-      };
-      const dispatch = jest.fn();
-
-      render(
-        <HostContext.Provider value={{ state, dispatch }}>
-          <PlayerKicker
-            accordionState="open"
-            onClickActions={{
-              open: () => {},
-              enabled: () => {},
-              disabled: () => {},
-            }}
-          />
-        </HostContext.Provider>,
-      );
-
-      userEvent.click(screen.getByRole('button', { name: 'FOO' }));
-      userEvent.click(screen.getByRole('button', { name: 'BAR' }));
-
-      expect(dispatch).toHaveBeenCalledWith({
-        type: 'KICK_PLAYER',
-        payload: { playerId: 'player1' },
-      });
-      expect(dispatch).toHaveBeenCalledWith({
-        type: 'KICK_PLAYER',
-        payload: { playerId: 'player2' },
       });
     });
   });

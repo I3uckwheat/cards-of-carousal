@@ -30,7 +30,7 @@ jest.mock(
   },
 );
 
-describe('PlayerKicker', () => {
+describe('JoinCodeHider', () => {
   describe('rendering', () => {
     it('matches the snapshot', () => {
       const tree = renderer
