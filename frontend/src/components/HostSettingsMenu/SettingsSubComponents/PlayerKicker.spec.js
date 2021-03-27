@@ -52,6 +52,35 @@ describe('PlayerKicker', () => {
         .toJSON();
       expect(tree).toMatchSnapshot();
     });
+
+    it('upcases player names before passing them to be rendered', () => {
+      const state = {
+        players: {
+          player1: {
+            name: 'foo',
+            submittedCards: [],
+          },
+        },
+        playerIDs: ['player1'],
+      };
+      const dispatch = jest.fn();
+
+      render(
+        <HostContext.Provider value={{ state, dispatch }}>
+          <PlayerKicker
+            accordionState="open"
+            onClickActions={{
+              open: () => {},
+              enabled: () => {},
+              disabled: () => {},
+            }}
+          />
+        </HostContext.Provider>,
+      );
+
+      expect(screen.queryByText('foo')).not.toBeInTheDocument();
+      expect(screen.getByText('FOO')).toBeInTheDocument();
+    });
   });
 
   describe('functionality', () => {
