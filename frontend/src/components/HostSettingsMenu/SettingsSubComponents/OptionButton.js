@@ -4,7 +4,8 @@ import styled, { css } from 'styled-components';
 
 const propTypes = {
   isEnabled: PropTypes.bool.isRequired,
-  onClick: PropTypes.func.isRequired,
+  onEnabledClick: PropTypes.func.isRequired,
+  onDisabledClick: PropTypes.func.isRequired,
   children: PropTypes.string.isRequired,
 };
 
@@ -45,13 +46,14 @@ const StyledOptionButton = styled.button`
 
 function OptionButton({
   isEnabled: optionButtonisEnabled,
-  onClick: optionClick,
+  onEnabledClick: enabledClick,
+  onDisabledClick: disabledClick,
   children,
 }) {
   return (
     <StyledOptionButton
       isEnabled={optionButtonisEnabled}
-      onClick={optionButtonisEnabled ? optionClick : undefined}
+      onClick={optionButtonisEnabled ? enabledClick : disabledClick}
     >
       {children}
     </StyledOptionButton>

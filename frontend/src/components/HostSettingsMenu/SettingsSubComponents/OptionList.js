@@ -4,9 +4,9 @@ import styled, { css } from 'styled-components';
 
 const propTypes = {
   listContent: PropTypes.arrayOf(PropTypes.string).isRequired,
-  isOpen: PropTypes.bool.isRequired,
-  onOptionListClick: PropTypes.func.isRequired,
-  onListItemClick: PropTypes.func.isRequired,
+  state: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
+  onItemClick: PropTypes.func.isRequired,
   openText: PropTypes.string.isRequired,
   closedText: PropTypes.string.isRequired,
 };
@@ -16,10 +16,19 @@ const OptionListButton = styled.button`
   background-color: var(--primary-background-color);
 
   ${(props) =>
-    props.isOpen &&
+    props.state === 'open' &&
     css`
       color: var(--secondary-text-color);
       background-color: var(--secondary-background-color);
+    `}
+
+  ${(props) =>
+    props.state === 'disabled' &&
+    css`
+      color: #dddddd;
+      :hover {
+        background-color: var(--primary-background-color);
+      }
     `}
 
   display: flex;
@@ -68,27 +77,23 @@ const OptionListItemButton = styled(OptionListButton)`
 
 function OptionList({
   listContent,
-  isOpen,
-  onOptionListClick,
-  onListItemClick,
+  state,
+  onClick: handleClick,
+  onItemClick,
   openText,
   closedText,
 }) {
   return (
     <div>
-      <OptionListButton
-        type="button"
-        onClick={onOptionListClick}
-        isOpen={isOpen}
-      >
-        {isOpen ? openText : closedText}
+      <OptionListButton type="button" onClick={handleClick} state={state}>
+        {state === 'open' ? openText : closedText}
       </OptionListButton>
-      {isOpen &&
+      {state === 'open' &&
         listContent.map((listItem) => (
           <OptionListItemButton
             type="button"
             key={listItem}
-            onClick={(event) => onListItemClick(event, listItem)}
+            onClick={() => onItemClick(listItem)}
           >
             {listItem}
           </OptionListItemButton>
