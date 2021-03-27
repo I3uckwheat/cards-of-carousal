@@ -4,7 +4,9 @@
   "description": "",
   "main": "start.js",
   "scripts": {
+    "prestart": "check-env EXPRESS_PORT=4000 SOCKET_PORT=4003",
     "start": "start.js",
+    "predev": "check-env EXPRESS_PORT=4000 SOCKET_PORT=4003",
     "dev": "nodemon start.js",
     "test": "jest ./"
   },
