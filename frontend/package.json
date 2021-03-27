@@ -17,6 +17,7 @@
 		"web-vitals": "^0.2.4"
 	},
 	"scripts": {
+		"prestart": "check-env REACT_APP_SOCKET_URL=ws://localhost:4003",
 		"start": "react-scripts start",
 		"build": "react-scripts build",
 		"test": "react-scripts test",
