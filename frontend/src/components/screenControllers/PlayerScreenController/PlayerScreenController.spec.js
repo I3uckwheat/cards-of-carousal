@@ -5,6 +5,7 @@ import { PlayerContext } from '../../../contexts/PlayerContext/PlayerContext';
 import PlayerScreenController from './PlayerScreenController';
 import PlayerJoinScreen from '../../screens/PlayerJoinScreen/PlayerJoinScreen';
 import PlayerMessageScreen from '../../screens/PlayerMessageScreen/PlayerMessageScreen';
+import CzarHandScreen from '../../screens/CzarHandScreen/CzarHandScreen';
 
 const MockPlayerJoinScreen = () => <div data-testid="player-join-screen" />;
 jest.mock('../../screens/PlayerJoinScreen/PlayerJoinScreen.js', () => ({
@@ -16,6 +17,12 @@ const MockPlayerMessageScreen = () => (
   <div data-testid="player-message-screen" />
 );
 jest.mock('../../screens/PlayerMessageScreen/PlayerMessageScreen.js', () => ({
+  __esModule: true,
+  default: jest.fn(),
+}));
+
+const MockCzarHandScreen = () => <div data-testid="czar-hand-screen" />;
+jest.mock('../../screens/CzarHandScreen/CzarHandScreen.js', () => ({
   __esModule: true,
   default: jest.fn(),
 }));
@@ -101,6 +108,25 @@ describe('Player screen controller', () => {
         );
 
         expect(screen.getByTestId('player-message-screen')).toBeInTheDocument();
+      });
+    });
+
+    describe('select-winner', () => {
+      it('renders CzarHandScreen', () => {
+        CzarHandScreen.mockImplementation(MockCzarHandScreen);
+
+        const dispatch = jest.fn();
+        const state = {
+          gameState: 'select-winner',
+        };
+
+        render(
+          <PlayerContext.Provider value={{ state, dispatch }}>
+            <PlayerScreenController />
+          </PlayerContext.Provider>,
+        );
+
+        expect(screen.getByTestId('czar-hand-screen')).toBeInTheDocument();
       });
     });
   });
