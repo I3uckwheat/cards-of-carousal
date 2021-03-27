@@ -171,6 +171,66 @@ describe('reducer', () => {
     });
   });
 
+  describe('KICK_PLAYER', () => {
+    it('removes given player from both state.playerIDs and state.players', () => {
+      const state = {
+        players: { foo: { id: 'foo' }, bar: { id: 'bar' }, baz: { id: 'baz' } },
+        playerIDs: ['foo', 'bar', 'baz'],
+      };
+
+      const result = HostReducer(state, {
+        type: 'KICK_PLAYER',
+        payload: { playerId: 'bar' },
+      });
+
+      expect(result).toMatchObject({
+        players: {
+          foo: { id: 'foo' },
+          baz: { id: 'baz' },
+        },
+
+        playerIDs: ['foo', 'baz'],
+      });
+    });
+
+    it('removes unaltered state if given player ID is invalid', () => {
+      const state = {
+        players: { foo: { id: 'foo' }, bar: { id: 'bar' }, baz: { id: 'baz' } },
+        playerIDs: ['foo', 'bar', 'baz'],
+      };
+
+      const result = HostReducer(state, {
+        type: 'KICK_PLAYER',
+        payload: { playerId: 'test' },
+      });
+
+      expect(result).toMatchObject(state);
+    });
+
+    it("calls socketInstance's sendMessage with a player kick message object", () => {
+      const state = {
+        players: {},
+        playerIDs: [],
+      };
+
+      HostReducer(state, {
+        type: 'KICK_PLAYER',
+        payload: { playerId: 'example-player-id' },
+      });
+
+      expect(socketInstance.sendMessage).toHaveBeenCalledWith({
+        event: 'update',
+        recipients: ['example-player-id'],
+        payload: {
+          message: {
+            big: "You've been kicked!",
+            small: 'Take off, you hoser!',
+          },
+        },
+      });
+    });
+  });
+
   describe('START_GAME', () => {
     it('sets the game state to the value', () => {
       const state = {
