@@ -66,8 +66,10 @@ describe('socketInstance', () => {
 
     it('opens the socket with the proper url', () => {
       const { MockSocket } = setupMockSocket();
-      socketInstance.joinLobby('myid');
-      expect(MockSocket).toHaveBeenCalledWith('ws://test.com/lobby/myid');
+      socketInstance.joinLobby('myid', 'myname');
+      expect(MockSocket).toHaveBeenCalledWith(
+        'ws://test.com/lobby/myid/myname',
+      );
     });
 
     it('throws an error when there is no id passed', () => {

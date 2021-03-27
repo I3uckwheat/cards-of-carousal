@@ -11,9 +11,9 @@ module.exports = class LobbyList {
     return lobby.id;
   };
 
-  joinLobby = (lobbyId, webSocket) => {
+  joinLobby = (lobbyId, playerName, webSocket) => {
     if (this.lobbies[lobbyId]) {
-      this.lobbies[lobbyId].addPlayer(webSocket);
+      this.lobbies[lobbyId].addPlayer(webSocket, playerName);
       return 'connected';
     }
 

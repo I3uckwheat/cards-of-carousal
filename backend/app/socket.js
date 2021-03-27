@@ -17,7 +17,17 @@ socketRouter.addRoute('GET /lobby', (_, webSocket) => {
 });
 
 socketRouter.addRoute('GET /lobby/:id', (req, webSocket) => {
-  const result = lobbyList.joinLobby(req.params.id, webSocket);
+  webSocket.send('no-lobby');
+  webSocket.close(1000, 'no-lobby');
+
+  if (process.env.NODE_ENV === 'development') {
+    // eslint-disable-next-line no-console
+    console.warn('Lobby route requires a player name to be accessed');
+  }
+});
+
+socketRouter.addRoute('GET /lobby/:id/:name', (req, webSocket) => {
+  const result = lobbyList.joinLobby(req.params.id, req.params.name, webSocket);
   if (result === 'no-lobby') {
     webSocket.send('no-lobby');
     webSocket.close(1000, 'no-lobby');

@@ -7,13 +7,13 @@ function createLobby(state) {
   };
 }
 
-function playerConnected(state, { playerId }) {
+function playerConnected(state, { playerId, playerName }) {
   return {
     ...state,
     players: {
       ...state.players,
       [playerId]: {
-        name: playerId,
+        name: playerName,
         score: 0,
         isCzar: false,
         submittedCards: [0],
@@ -135,7 +135,9 @@ function HostReducer(state, action) {
     case 'PLAYER_CONNECTED':
       socketInstance.sendMessage({
         event: 'update',
+        recipients: [payload.playerId],
         payload: {
+          gameState: 'connected',
           message: {
             big: "You've joined the lobby",
             small: 'Please wait for the host to start the game',

@@ -4,6 +4,10 @@ function joinLobby(state) {
   return {
     ...state,
     gameState: 'pending-connection',
+    message: {
+      big: 'Connecting to Lobby',
+      small: 'Please wait',
+    },
   };
 }
 
@@ -40,7 +44,7 @@ function reducer(state, action) {
   const { type, payload } = action;
   switch (type) {
     case 'JOIN_LOBBY':
-      socketInstance.joinLobby(payload.id);
+      socketInstance.joinLobby(payload.lobbyId, payload.playerName);
       return joinLobby(state);
     case 'UPDATE':
       return update(state, payload);

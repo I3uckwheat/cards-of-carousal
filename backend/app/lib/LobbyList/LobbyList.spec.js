@@ -37,7 +37,7 @@ describe('LobbyList', () => {
     expect(Lobby).not.toHaveBeenCalled();
 
     lobbyList.createLobby({});
-    const connection = lobbyList.joinLobby('test', testPlayer);
+    const connection = lobbyList.joinLobby('test', 'playerName', testPlayer);
 
     expect(lobbyList.lobbies.test.addPlayer).toHaveBeenCalled();
     expect(lobbyList.lobbies.test.players.length).toBe(1);
@@ -47,7 +47,7 @@ describe('LobbyList', () => {
 
   it('does not allow joining lobbies that do not exist', () => {
     lobbyList.createLobby({});
-    const connection = lobbyList.joinLobby('foo', testPlayer);
+    const connection = lobbyList.joinLobby('foo', 'playerName', testPlayer);
 
     expect(lobbyList.lobbies.test.addPlayer).not.toHaveBeenCalled();
     expect(lobbyList.lobbies.test.players.length).toBe(0);
@@ -60,7 +60,7 @@ describe('LobbyList', () => {
 
     lobbyList.createLobby({});
     lobbyList.lobbies.test.closeLobby = closeMock;
-    lobbyList.joinLobby('test', testPlayer);
+    lobbyList.joinLobby('test', 'playerName', testPlayer);
 
     expect(lobbyList.lobbies.test.players.length).toBe(1);
 
