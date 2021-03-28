@@ -25,15 +25,19 @@ class SocketSingleton {
     this.#socket = socket;
   }
 
-  sendMessage({ event, payload }) {
+  sendMessage({ event, recipients, payload }) {
     try {
-      this.#socket.send(JSON.stringify({ event, payload }));
+      this.#socket.send(JSON.stringify({ event, recipients, payload }));
     } catch {
       throw new Error('Socket is not connected');
     } finally {
       if (process.env.NODE_ENV === 'development') {
         // eslint-disable-next-line no-console
-        console.log(`${Date.now()} | Outgoing Message: `, { event, payload })
+        console.log(`${Date.now()} | Outgoing Message: `, {
+          event,
+          recipients,
+          payload,
+        });
       }
     }
   }
