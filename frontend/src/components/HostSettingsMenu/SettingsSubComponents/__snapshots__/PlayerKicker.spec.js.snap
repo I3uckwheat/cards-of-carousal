@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PlayerKicker rendering matches the snapshot 1`] = `
+<div>
+  <button
+    onClick={[Function]}
+    type="button"
+  >
+    MAIN BUTTON
+  </button>
+</div>
+`;

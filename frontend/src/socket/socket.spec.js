@@ -66,8 +66,10 @@ describe('socketInstance', () => {
 
     it('opens the socket with the proper url', () => {
       const { MockSocket } = setupMockSocket();
-      socketInstance.joinLobby('myid');
-      expect(MockSocket).toHaveBeenCalledWith('ws://test.com/lobby/myid');
+      socketInstance.joinLobby('myid', 'myname');
+      expect(MockSocket).toHaveBeenCalledWith(
+        'ws://test.com/lobby/myid/myname',
+      );
     });
 
     it('throws an error when there is no id passed', () => {
@@ -99,7 +101,27 @@ describe('socketInstance', () => {
       socketInstance.sendMessage(message);
 
       expect(sendMock).toHaveBeenCalledWith(JSON.stringify(message));
-      expect(true).toBeTruthy();
+    });
+
+    it('sends the message only to designated recipients when host', () => {
+      const { sendMock } = setupMockSocket();
+
+      const message = {
+        event: 'hello',
+        recipients: ['player1', 'player2'],
+        payload: {},
+      };
+
+      socketInstance.createLobby();
+      socketInstance.sendMessage(message);
+
+      expect(sendMock).toHaveBeenCalledWith(
+        JSON.stringify({
+          event: 'hello',
+          recipients: ['player1', 'player2'],
+          payload: {},
+        }),
+      );
     });
 
     it('sends the message when player', () => {

@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
 import Button from '../../Buttons/Button';
 import Header from '../../Header/Header';
 import Footer from '../../Footer/Footer';
+import { PlayerContext } from '../../../contexts/PlayerContext/PlayerContext';
 
 const propTypes = {};
 
@@ -349,12 +350,37 @@ const PlayerJoinButton = styled(Button)`
 `;
 
 export default function PlayerJoinScreen() {
+  const { dispatch } = useContext(PlayerContext);
+
   const [name, setName] = useState('');
   const [joinCode, setJoinCode] = useState('');
 
   function handleSubmit(e) {
     e.preventDefault();
-    // TODO - handle form submission by taking user to waiting screen
+    dispatch({
+      type: 'JOIN_LOBBY',
+      payload: { lobbyId: joinCode, playerName: name },
+    });
+  }
+
+  function handleNameChange(e) {
+    const inputValue = e.target.value;
+
+    // Filter user input to ignore special characters
+    if (/\W+/g.test(inputValue)) return;
+
+    // Only accepts alphanumeric and underscore characters
+    setName(inputValue);
+  }
+
+  function handleJoinCodeChange(e) {
+    const inputValue = e.target.value;
+
+    // Filter user input to ignore numeric and special characters
+    if (/[^A-Za-z]+/g.test(inputValue)) return;
+
+    // Accepts uppercase and lowercase letter characters, but converts it all to uppercase
+    setJoinCode(inputValue.toUpperCase());
   }
 
   return (
@@ -369,20 +395,27 @@ export default function PlayerJoinScreen() {
         <div className="player-join-form-container">
           <form onSubmit={(e) => handleSubmit(e)} className="player-join-form">
             <input
+              required
               type="text"
+              maxLength="12"
               placeholder="name"
               value={name}
-              onChange={(e) => setName(e.target.value)}
+              onChange={handleNameChange}
               className="player-join-name-input"
             />
             <input
+              required
+              maxLength="4"
               type="text"
               placeholder="join code"
               value={joinCode}
-              onChange={(e) => setJoinCode(e.target.value)}
+              onChange={handleJoinCodeChange}
               className="player-join-code-input"
             />
-            <PlayerJoinButton type="submit">
+            <PlayerJoinButton
+              data-testid="player-join-submit-button"
+              type="submit"
+            >
               Let&apos;s Carouse!
             </PlayerJoinButton>
           </form>

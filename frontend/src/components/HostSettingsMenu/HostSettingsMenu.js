@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 
 import Header from '../Header/Header';
-import OptionList from './OptionList';
-import OptionButton from './OptionButton';
+import PlayerKicker from './SettingsSubComponents/PlayerKicker';
+import JoinCodeHider from './SettingsSubComponents/JoinCodeHider';
 
 const SettingsMenu = styled.div`
   position: absolute;
@@ -63,50 +63,52 @@ const SettingsMenu = styled.div`
   }
 `;
 
+// TODO refactor this to take components as children and build a pregame settings modal
 function HostSettingsMenu() {
-  const [optionListIsOpen, setOptionListIsOpen] = useState(false);
+  const initialState = [{ state: 'enabled' }]; // FIXME change to strings
+  const [accordionSettings, setAccordionSettings] = useState(initialState);
 
-  // playerList temporarily hard coded until the contexts are in place
-  const playerList = ['BENDER', 'BRIGGS', 'BRANDON', 'BRENDA', 'BACON'];
+  const anyAreOpen = accordionSettings.some(
+    (setting) => setting.state === 'open',
+  );
 
-  // placeholder function
-  function skipUnusedSelections() {
-    // eslint-disable-next-line
-    console.log('skipping unused selections');
+  function resetAccordions() {
+    setAccordionSettings(initialState);
   }
 
-  // placeholder function
-  function kickPlayer(event, player) {
-    // eslint-disable-next-line
-    console.log(`Kick ${player}`);
-    event.stopPropagation();
+  function handleAccordionClick(settingIndex) {
+    const newSettings = accordionSettings.map((setting, index) => {
+      const state = index === settingIndex ? 'open' : 'disabled';
+      return { state };
+    });
+
+    setAccordionSettings(newSettings);
   }
 
-  function toggleOptionList(event) {
-    setOptionListIsOpen(!optionListIsOpen);
-    event.stopPropagation();
+  function onOutsideClick(event) {
+    if (event.currentTarget === event.target) {
+      resetAccordions();
+    }
   }
 
   return (
-    <SettingsMenu onClick={() => setOptionListIsOpen(false)}>
-      <Header className="host-settings-header">
+    <SettingsMenu onClick={onOutsideClick}>
+      <Header className="host-settings-header" onClick={resetAccordions}>
         <h3>SETTINGS</h3>
       </Header>
 
-      <OptionButton
-        isEnabled={!optionListIsOpen}
-        onClick={skipUnusedSelections}
-      >
-        SKIP UNUSED SELECTIONS
-      </OptionButton>
+      <JoinCodeHider
+        isEnabled={!anyAreOpen}
+        onDisabledClick={resetAccordions}
+      />
 
-      <OptionList
-        listContent={playerList}
-        isOpen={optionListIsOpen}
-        onOptionListClick={toggleOptionList}
-        onListItemClick={kickPlayer}
-        openText="KICK WHO?"
-        closedText="KICK PLAYER"
+      <PlayerKicker
+        accordionState={accordionSettings[0].state}
+        onClickActions={{
+          open: resetAccordions,
+          enabled: () => handleAccordionClick(0),
+          disabled: resetAccordions,
+        }}
       />
     </SettingsMenu>
   );

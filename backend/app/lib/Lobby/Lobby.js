@@ -26,7 +26,7 @@ module.exports = class Lobby {
     this.#onClose = onCloseCallback;
   }
 
-  addPlayer = (playerSocket) => {
+  addPlayer = (playerSocket, playerName = '') => {
     // the data from this message is passed into the callback returned from the method in this cb
     playerSocket.on('message', this.#handlePlayerMessage(playerSocket));
     playerSocket.on('close', this.#handlePlayerDisconnect(playerSocket));
@@ -35,6 +35,7 @@ module.exports = class Lobby {
     const message = new Message('server', {
       event: 'player-connected',
       payload: {
+        playerName,
         playerId: playerSocket.id,
       },
     });

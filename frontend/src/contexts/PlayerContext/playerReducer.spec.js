@@ -40,18 +40,39 @@ describe('reducer', () => {
       expect(result.gameState).toBe('pending-connection');
     });
 
+    it("updates state's message", () => {
+      const state = {
+        gameState: 'TEST',
+        message: { big: '', small: '' },
+      };
+
+      const result = reducer(state, {
+        type: 'JOIN_LOBBY',
+        payload: { id: '1234' },
+      });
+
+      expect(result.message).toEqual({
+        big: 'Connecting to Lobby',
+        small: 'Please wait',
+      });
+    });
+
     it('calls the joinLobby method with the correct id', () => {
       const state = {
         gameState: 'TEST',
       };
-      const id = '1234';
+      const lobbyId = '1234';
+      const playerName = 'FOO';
 
       reducer(state, {
         type: 'JOIN_LOBBY',
-        payload: { id },
+        payload: { lobbyId, playerName },
       });
 
-      expect(socketInstance.joinLobby).toHaveBeenCalledWith(id);
+      expect(socketInstance.joinLobby).toHaveBeenCalledWith(
+        lobbyId,
+        playerName,
+      );
     });
   });
 

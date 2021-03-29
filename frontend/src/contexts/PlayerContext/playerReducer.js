@@ -4,6 +4,10 @@ function joinLobby(state) {
   return {
     ...state,
     gameState: 'pending-connection',
+    message: {
+      big: 'Connecting to Lobby',
+      small: 'Please wait',
+    },
   };
 }
 
@@ -40,12 +44,15 @@ function reducer(state, action) {
   const { type, payload } = action;
   switch (type) {
     case 'JOIN_LOBBY':
-      socketInstance.joinLobby(payload.id);
+      socketInstance.joinLobby(payload.lobbyId, payload.playerName);
       return joinLobby(state);
     case 'UPDATE':
       return update(state, payload);
     case 'ERROR_DISCONNECT':
       return errorDisconnect(state);
+    case 'SUBMIT_CARDS':
+      socketInstance.sendMessage('select-cards', payload);
+      return { ...state };
     case 'SUBMIT_WINNER':
       return submitWinner(state, payload);
     default:

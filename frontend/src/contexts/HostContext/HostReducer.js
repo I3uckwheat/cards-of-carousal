@@ -7,13 +7,13 @@ function createLobby(state) {
   };
 }
 
-function playerConnected(state, { playerId }) {
+function playerConnected(state, { playerId, playerName }) {
   return {
     ...state,
     players: {
       ...state.players,
       [playerId]: {
-        name: playerId,
+        name: playerName,
         score: 0,
         isCzar: false,
         submittedCards: [0],
@@ -24,7 +24,7 @@ function playerConnected(state, { playerId }) {
   };
 }
 
-function playerDisconnected(state, { playerId }) {
+function removePlayer(state, { playerId }) {
   // Removes the value playerId from the original playerIDs array
   const newPlayerIds = state.playerIDs.filter(
     (playerID) => playerID !== playerId,
@@ -135,7 +135,9 @@ function HostReducer(state, action) {
     case 'PLAYER_CONNECTED':
       socketInstance.sendMessage({
         event: 'update',
+        recipients: [payload.playerId],
         payload: {
+          gameState: 'connected',
           message: {
             big: "You've joined the lobby",
             small: 'Please wait for the host to start the game',
@@ -145,7 +147,21 @@ function HostReducer(state, action) {
       return playerConnected(state, payload);
 
     case 'PLAYER_DISCONNECTED':
-      return playerDisconnected(state, payload);
+      return removePlayer(state, payload);
+
+    case 'KICK_PLAYER':
+      socketInstance.sendMessage({
+        recipients: [payload.playerId],
+        event: 'update',
+        payload: {
+          message: {
+            big: "You've been kicked!",
+            small: 'Take off, you hoser!',
+          },
+        },
+      });
+
+      return removePlayer(state, payload);
 
     case 'SELECT_WINNER':
       // TODO: HANDLE PAYLOAD AND TEST

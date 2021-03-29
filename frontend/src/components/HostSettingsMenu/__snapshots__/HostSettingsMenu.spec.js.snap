@@ -168,6 +168,7 @@ exports[`HostSettingsMenu rendering matches the expected snapshot 1`] = `
 >
   <header
     className="c1 host-settings-header"
+    onClick={[Function]}
   >
     <h3>
       SETTINGS
@@ -177,7 +178,7 @@ exports[`HostSettingsMenu rendering matches the expected snapshot 1`] = `
     className="c2"
     onClick={[Function]}
   >
-    SKIP UNUSED SELECTIONS
+    HIDE JOIN CODE
   </button>
   <div>
     <button
