@@ -96,9 +96,18 @@ function LeftPanel() {
   const { state, dispatch } = useContext(HostContext);
   const { players, playerIDs, lobbyID } = state;
 
-  const handleClickStart = () => {
+  const handleClickStart = async () => {
     // check if there are any players
     if (Object.keys(state.players).length) {
+      // TODO: Refactor using async dispatch
+      const apiURL = process.env.REACT_APP_API_URL;
+      const query = state.gameSettings.selectedPacks.join(',');
+      const cardsRequest = await fetch(`${apiURL}/deck/cards?packs=${query}`);
+      const cardsData = await cardsRequest.json();
+      dispatch({
+        type: 'SET_DECK',
+        payload: { deck: cardsData },
+      });
       dispatch({
         type: 'START_GAME',
         payload: {},

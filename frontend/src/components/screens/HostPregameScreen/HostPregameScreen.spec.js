@@ -120,8 +120,8 @@ describe('Host Pregame Screen', () => {
 
       fireEvent.click(screen.getByText('START CAROUSING'));
 
-      // create lobby, set game state, set new czar
-      expect(dispatch).toHaveBeenCalledTimes(3);
+      // FIX ME: create lobby, set game state, set new czar, get deck
+      expect(dispatch).toHaveBeenCalledTimes(4);
       expect(dispatch.mock.calls[1][0]).toEqual({
         type: 'START_GAME',
         payload: {},

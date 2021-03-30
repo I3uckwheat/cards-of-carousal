@@ -11,6 +11,7 @@ export default function HostScreenController() {
   switch (gameState) {
     case 'waiting-for-lobby':
     case 'waiting-for-players':
+    case 'waiting-for-deck':
       return <HostPregameScreen />;
     default:
       throw new Error(`Unrecognized game state: ${gameState}`);

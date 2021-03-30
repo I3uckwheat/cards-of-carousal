@@ -124,6 +124,13 @@ function closeGame(state) {
   };
 }
 
+function setDeck(state, { deck }) {
+  return {
+    ...state,
+    deck,
+  };
+}
+
 function HostReducer(state, action) {
   const { type, payload } = action;
 
@@ -180,6 +187,9 @@ function HostReducer(state, action) {
 
     case 'CLOSE_GAME':
       return closeGame(state);
+
+    case 'SET_DECK':
+      return setDeck(state, payload);
 
     default:
       return { ...state };
