@@ -22,7 +22,7 @@ const Loader = styled.div`
     position: absolute;
     left: 8px;
     width: 16px;
-    background: pink;
+    background: maroon;
     animation: loading 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
   }
   .loading div:nth-child(1) {
@@ -56,10 +56,12 @@ export default function LoadingIndicator({ secondary }) {
   }
 
   return (
-    <Loader className="loading">
-      <div />
-      <div />
-      <div />
+    <Loader>
+      <div className="loading">
+        <div />
+        <div />
+        <div />
+      </div>
     </Loader>
   );
 }
