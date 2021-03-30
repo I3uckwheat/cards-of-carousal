@@ -1,5 +1,3 @@
-import socketInstance from '../../socket/socket';
-
 function createLobby(state) {
   return {
     ...state,
@@ -118,7 +116,6 @@ function setNextCzar(state) {
 }
 
 function closeGame(state) {
-  socketInstance.closeSocket();
   return {
     ...state,
   };
@@ -129,38 +126,15 @@ function HostReducer(state, action) {
 
   switch (type) {
     case 'CREATE_LOBBY':
-      socketInstance.createLobby();
       return createLobby(state);
 
     case 'PLAYER_CONNECTED':
-      socketInstance.sendMessage({
-        event: 'update',
-        recipients: [payload.playerId],
-        payload: {
-          gameState: 'connected',
-          message: {
-            big: "You've joined the lobby",
-            small: 'Please wait for the host to start the game',
-          },
-        },
-      });
       return playerConnected(state, payload);
 
     case 'PLAYER_DISCONNECTED':
       return removePlayer(state, payload);
 
     case 'KICK_PLAYER':
-      socketInstance.sendMessage({
-        recipients: [payload.playerId],
-        event: 'update',
-        payload: {
-          message: {
-            big: "You've been kicked!",
-            small: 'Take off, you hoser!',
-          },
-        },
-      });
-
       return removePlayer(state, payload);
 
     case 'SELECT_WINNER':

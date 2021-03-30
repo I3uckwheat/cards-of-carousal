@@ -1,5 +1,4 @@
 import HostReducer from './HostReducer';
-import socketInstance from '../../socket/socket';
 
 jest.mock('../../socket/socket', () => ({
   createLobby: jest.fn(),
@@ -40,36 +39,6 @@ describe('reducer', () => {
       expect(result).not.toBe(state);
       expect(result.gameState).toBe('waiting-for-players');
     });
-
-    it("calls socket's createLobby() function", () => {
-      const state = {
-        gameState: 'foo',
-      };
-
-      HostReducer(state, {
-        type: 'CREATE_LOBBY',
-        payload: {},
-      });
-
-      expect(socketInstance.createLobby).toHaveBeenCalled();
-    });
-  });
-
-  describe('SET_LOBBY_ID', () => {
-    it('sets the lobby ID given by the socket emitter', () => {
-      const state = {
-        gameState: 'foo',
-        lobbyID: 'bar',
-      };
-
-      const result = HostReducer(state, {
-        type: 'SET_LOBBY_ID',
-        payload: { id: 'baz' },
-      });
-
-      expect(result).not.toBe(state);
-      expect(result.lobbyID).toBe('baz');
-    });
   });
 
   describe('PLAYER_CONNECTED', () => {
@@ -95,30 +64,6 @@ describe('reducer', () => {
           isCzar: false,
           submittedCards: [0],
           cards: [],
-        },
-      });
-    });
-
-    it("calls socketInstance's sendMessage with a default welcome message object", () => {
-      const state = {
-        players: {},
-        playerIDs: [],
-      };
-
-      HostReducer(state, {
-        type: 'PLAYER_CONNECTED',
-        payload: { playerId: 'example-player-id' },
-      });
-
-      expect(socketInstance.sendMessage).toHaveBeenCalledWith({
-        event: 'update',
-        recipients: ['example-player-id'],
-        payload: {
-          gameState: 'connected',
-          message: {
-            big: "You've joined the lobby",
-            small: 'Please wait for the host to start the game',
-          },
         },
       });
     });
@@ -210,29 +155,6 @@ describe('reducer', () => {
       });
 
       expect(result).toMatchObject(state);
-    });
-
-    it("calls socketInstance's sendMessage with a player kick message object", () => {
-      const state = {
-        players: {},
-        playerIDs: [],
-      };
-
-      HostReducer(state, {
-        type: 'KICK_PLAYER',
-        payload: { playerId: 'example-player-id' },
-      });
-
-      expect(socketInstance.sendMessage).toHaveBeenCalledWith({
-        event: 'update',
-        recipients: ['example-player-id'],
-        payload: {
-          message: {
-            big: "You've been kicked!",
-            small: 'Take off, you hoser!',
-          },
-        },
-      });
     });
   });
 
@@ -381,7 +303,7 @@ describe('reducer', () => {
   });
 
   describe('CLOSE_GAME', () => {
-    it('closes the socket and returns unaltered state', () => {
+    it('returns unaltered state', () => {
       const state = {
         gameState: 'foo',
         gameSettings: {
@@ -391,11 +313,7 @@ describe('reducer', () => {
         },
       };
 
-      expect(socketInstance.closeSocket).not.toHaveBeenCalled();
-
       const result = HostReducer(state, { type: 'CLOSE_GAME', payload: {} });
-
-      expect(socketInstance.closeSocket).toHaveBeenCalledTimes(1);
       expect(result).toEqual(state);
     });
   });
