@@ -6,6 +6,10 @@ const propType = {
   secondary: PropTypes.bool.isRequired,
 };
 
+const defaultProps = {
+  secondary: false,
+};
+
 const Loader = styled.div`
   .loading {
     display: inline-block;
@@ -61,3 +65,4 @@ export default function LoadingIndicator({ secondary }) {
 }
 
 LoadingIndicator.propTypes = propType;
+LoadingIndicator.defaultProp = defaultProps;
