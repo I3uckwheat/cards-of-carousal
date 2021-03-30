@@ -22,7 +22,10 @@ const Loader = styled.div`
     position: absolute;
     left: 8px;
     width: 16px;
-    background: maroon;
+    background: ${(props) =>
+      props.color
+        ? 'var(--primary-background-color)'
+        : 'var(--secondary-background-color)'};
     animation: loading 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
   }
   .loading div:nth-child(1) {
@@ -51,12 +54,8 @@ const Loader = styled.div`
 `;
 
 export default function LoadingIndicator({ secondary }) {
-  if (secondary) {
-    console.log('hi');
-  }
-
   return (
-    <Loader>
+    <Loader color={secondary ? 1 : 0}>
       <div className="loading">
         <div />
         <div />
