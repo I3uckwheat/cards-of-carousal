@@ -25,35 +25,34 @@ const LeftPanelWrapper = styled.div`
 `;
 
 const RightPanelWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
   flex: 1;
 
-  .game-description {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    background-color: var(--primary-background-color);
-    align-self: center;
-    margin: 24px;
-    padding: 8px;
-    border-radius: 5px;
-    font-size: 1.8rem;
-    font-weight: 700;
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding: 40px 0 0;
+`;
+
+const CzarTitle = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  span,
+  .czar-name {
+    font-weight: 900;
+    text-transform: uppercase;
+    line-height: 1em;
   }
 
-  .game-description p {
-    margin: 16px 0;
+  span {
+    font-size: 24px;
+    text-indent: -16px;
+    margin-bottom: -8px;
   }
 
-  .top {
-    display: flex;
-    height: 60%;
-  }
-
-  .bottom {
-    height: 40%;
+  .czar-name {
+    font-size: 56px;
   }
 `;
 
@@ -76,7 +75,10 @@ function LeftPanel() {
 function RightPanel() {
   return (
     <RightPanelWrapper>
-      <h1>hello world</h1>
+      <CzarTitle>
+        <span>Czar:</span>
+        <h1 className="czar-name">Briggs</h1>
+      </CzarTitle>
     </RightPanelWrapper>
   );
 }
