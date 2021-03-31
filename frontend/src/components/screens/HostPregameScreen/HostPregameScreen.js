@@ -97,25 +97,32 @@ function LeftPanel() {
   const { players, playerIDs, lobbyID } = state;
 
   const handleClickStart = async () => {
-    // check if there are any players
-    if (Object.keys(state.players).length) {
+    // check if there are any players and if packs are selected
+    if (
+      Object.keys(state.players).length &&
+      state.gameSettings.selectedPacks.length
+    ) {
       // TODO: Refactor using async dispatch
-      const apiURL = process.env.REACT_APP_API_URL;
-      const query = state.gameSettings.selectedPacks.join(',');
-      const cardsRequest = await fetch(`${apiURL}/deck/cards?packs=${query}`);
-      const cardsData = await cardsRequest.json();
-      dispatch({
-        type: 'SET_DECK',
-        payload: { deck: cardsData },
-      });
-      dispatch({
-        type: 'START_GAME',
-        payload: {},
-      });
-      dispatch({
-        type: 'SET_NEXT_CZAR',
-        payload: {},
-      });
+      try {
+        const apiURL = process.env.REACT_APP_API_URL;
+        const query = state.gameSettings.selectedPacks.join(',');
+        const cardsRequest = await fetch(`${apiURL}/deck/cards?packs=${query}`);
+        const cardsData = await cardsRequest.json();
+        dispatch({
+          type: 'SET_DECK',
+          payload: { deck: cardsData },
+        });
+        dispatch({
+          type: 'START_GAME',
+          payload: {},
+        });
+        dispatch({
+          type: 'SET_NEXT_CZAR',
+          payload: {},
+        });
+      } catch (err) {
+        throw new Error(`Error fetching deck: ${err}`);
+      }
     }
     // TODO: add else statement to warn that you cannot play a game with no players
   };
