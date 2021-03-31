@@ -1,11 +1,5 @@
 import HostReducer from './HostReducer';
 
-jest.mock('../../socket/socket', () => ({
-  createLobby: jest.fn(),
-  sendMessage: jest.fn(),
-  closeSocket: jest.fn(),
-}));
-
 describe('reducer', () => {
   describe('default', () => {
     it('returns a copy of state when no case is matched', () => {
