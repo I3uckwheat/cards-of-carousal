@@ -41,6 +41,23 @@ describe('reducer', () => {
     });
   });
 
+  describe('SET_LOBBY_ID', () => {
+    it('sets the lobby ID given by the socket emitter', () => {
+      const state = {
+        gameState: 'foo',
+        lobbyID: 'bar',
+      };
+
+      const result = HostReducer(state, {
+        type: 'SET_LOBBY_ID',
+        payload: { id: 'baz' },
+      });
+
+      expect(result).not.toBe(state);
+      expect(result.lobbyID).toBe('baz');
+    });
+  });
+
   describe('PLAYER_CONNECTED', () => {
     it('updates state.playerIDs with given id and add a default player entry in state.players', () => {
       const state = {
