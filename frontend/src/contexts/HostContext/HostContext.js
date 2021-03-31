@@ -1,8 +1,10 @@
-import React, { createContext, useEffect, useReducer } from 'react';
+import React, { createContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
+import useReducerMiddleware from '../useReducerMiddleware';
 import HostReducer from './HostReducer';
 import socketInstance from '../../socket/socket';
+import hostReducerMiddleware from './hostReducerMiddleware';
 
 const propTypes = {
   children: PropTypes.node.isRequired,
@@ -21,7 +23,11 @@ const initialState = {
 export const HostContext = createContext();
 
 function HostProvider({ children }) {
-  const [state, dispatch] = useReducer(HostReducer, initialState);
+  const [state, dispatch] = useReducerMiddleware(
+    hostReducerMiddleware,
+    HostReducer,
+    initialState,
+  );
 
   function handleMessage({ event, payload }) {
     switch (event) {
