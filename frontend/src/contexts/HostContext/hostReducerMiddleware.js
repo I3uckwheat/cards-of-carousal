@@ -1,5 +1,5 @@
 import socketInstance from '../../socket/socket';
-// TODO tests coming in hotfix
+
 function closeGame() {
   socketInstance.closeSocket();
 }
