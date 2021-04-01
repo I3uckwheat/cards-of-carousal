@@ -96,33 +96,25 @@ function LeftPanel() {
   const { state, dispatch } = useContext(HostContext);
   const { players, playerIDs, lobbyID } = state;
 
-  const handleClickStart = async () => {
+  const handleClickStart = () => {
     // check if there are any players and if packs are selected
     if (
       Object.keys(state.players).length &&
       state.gameSettings.selectedPacks.length
     ) {
-      // TODO: Refactor using async dispatch
-      try {
-        const apiURL = process.env.REACT_APP_API_URL;
-        const query = state.gameSettings.selectedPacks.join(',');
-        const cardsRequest = await fetch(`${apiURL}/deck/cards?packs=${query}`);
-        const cardsData = await cardsRequest.json();
-        dispatch({
-          type: 'SET_DECK',
-          payload: { deck: cardsData },
-        });
-        dispatch({
-          type: 'START_GAME',
-          payload: {},
-        });
-        dispatch({
-          type: 'SET_NEXT_CZAR',
-          payload: {},
-        });
-      } catch (err) {
-        throw new Error(`Error fetching deck: ${err}`);
-      }
+      const { selectedPacks } = state.gameSettings;
+      dispatch({
+        type: 'SET_DECK',
+        payload: { selectedPacks },
+      });
+      dispatch({
+        type: 'START_GAME',
+        payload: {},
+      });
+      dispatch({
+        type: 'SET_NEXT_CZAR',
+        payload: {},
+      });
     }
     // TODO: add else statement to warn that you cannot play a game with no players
   };

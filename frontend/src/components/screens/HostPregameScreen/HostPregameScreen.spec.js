@@ -1,5 +1,5 @@
 import React from 'react';
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import renderer from 'react-test-renderer';
 import { HostContext } from '../../../contexts/HostContext/HostContext';
 import HostPregameScreen from './HostPregameScreen';
@@ -145,13 +145,12 @@ describe('Host Pregame Screen', () => {
 
       fireEvent.click(screen.getByText('START CAROUSING'));
 
-      await waitFor(() => expect(fetch).toHaveBeenCalledTimes(1));
-
-      expect(fetch).toHaveBeenCalledWith(
-        expect.stringContaining('deck/cards?packs=0,1,2'),
-      );
       // create lobby, get deck, set game state, set new czar
       expect(dispatch).toHaveBeenCalledTimes(4);
+      expect(dispatch).toHaveBeenNthCalledWith(2, {
+        type: 'SET_DECK',
+        payload: { selectedPacks: state.gameSettings.selectedPacks },
+      });
       expect(dispatch).toHaveBeenNthCalledWith(3, {
         type: 'START_GAME',
         payload: {},
