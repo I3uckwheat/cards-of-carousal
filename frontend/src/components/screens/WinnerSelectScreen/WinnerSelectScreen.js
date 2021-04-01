@@ -6,6 +6,7 @@ import HostSettingsMenu from '../../HostSettingsMenu/HostSettingsMenu';
 import PlayerList from '../../PlayerList/PlayerList';
 import JoinCode from '../../JoinCode/JoinCode';
 import { HostContext } from '../../../contexts/HostContext/HostContext';
+import BlackCard from '../../Cards/BlackCard';
 
 const LeftPanelWrapper = styled.div`
   display: flex;
@@ -37,6 +38,7 @@ const RightPanelWrapper = styled.div`
 const CzarTitle = styled.div`
   display: flex;
   flex-direction: column;
+  margin-bottom: 40px;
 
   span,
   .czar-name {
@@ -79,6 +81,10 @@ function RightPanel() {
         <span>Czar:</span>
         <h1 className="czar-name">Briggs</h1>
       </CzarTitle>
+
+      <BlackCard pickCount="2">
+        He alone, who owns the _(s), gains the _(s).
+      </BlackCard>
     </RightPanelWrapper>
   );
 }
