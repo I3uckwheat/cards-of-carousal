@@ -75,14 +75,19 @@ function LeftPanel() {
 }
 
 function RightPanel() {
+  const { state } = useContext(HostContext);
+  const { players } = state;
+
+  const currentCzar = Object.values(players).find((player) => player.isCzar);
+
   return (
     <RightPanelWrapper>
       <CzarTitle>
         <span>Czar:</span>
-        <h1 className="czar-name">Briggs</h1>
+        <h1 className="czar-name">{currentCzar.name}</h1>
       </CzarTitle>
 
-      <BlackCard pickCount="2">
+      <BlackCard pickCount={2}>
         He alone, who owns the _(s), gains the _(s).
       </BlackCard>
     </RightPanelWrapper>
