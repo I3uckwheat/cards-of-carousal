@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const propType = {
-  secondary: PropTypes.bool.isRequired,
+  secondary: PropTypes.bool,
 };
 
 const defaultProps = {
@@ -55,7 +55,7 @@ const Loader = styled.div`
 
 export default function LoadingIndicator({ secondary }) {
   return (
-    <Loader color={secondary ? 1 : 0}>
+    <Loader color={secondary ? 1 : 0} data-testid="loader">
       <div className="loading">
         <div />
         <div />
@@ -66,4 +66,4 @@ export default function LoadingIndicator({ secondary }) {
 }
 
 LoadingIndicator.propTypes = propType;
-LoadingIndicator.defaultProp = defaultProps;
+LoadingIndicator.defaultProps = defaultProps;
