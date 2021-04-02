@@ -147,6 +147,7 @@ function HostReducer(state, action) {
     case 'SELECT_WINNER':
       // TODO: HANDLE PAYLOAD AND TEST
       return selectWinner(state, payload);
+
     case 'SET_LOBBY_ID':
       return setLobbyId(state, payload);
 
