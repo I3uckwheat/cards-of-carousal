@@ -68,7 +68,7 @@ export default async function hostReducerMiddleware(
       const deck = await getDeck(payload);
       return dispatch({
         type: 'SET_DECK',
-        payload: deck,
+        payload: { deck },
       });
     }
 
