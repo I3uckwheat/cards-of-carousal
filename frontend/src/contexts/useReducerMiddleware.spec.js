@@ -70,7 +70,7 @@ describe('useReducerMiddleware', () => {
 
     act(() => middlewareTest({ type: 'add', payload: 1 }));
 
-    expect(addSideEffect).toBeCalled();
+    expect(addSideEffect).toBeCalledTimes(1);
     expect(screen.getByTestId('state').textContent).toBe('2');
   });
 });
