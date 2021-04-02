@@ -17,7 +17,7 @@ describe('hostReducerMiddleware', () => {
   });
 
   describe('CLOSE_GAME', () => {
-    it("calls socketInstance's closeSocket() function", () => {
+    it("calls socketInstance's closeSocket() function once", () => {
       const dispatch = jest.fn();
 
       expect(socketInstance.closeSocket).not.toHaveBeenCalled();
@@ -35,7 +35,7 @@ describe('hostReducerMiddleware', () => {
   });
 
   describe('CREATE_LOBBY', () => {
-    it("calls socketInstance's createLobby() function", () => {
+    it("calls socketInstance's createLobby() function once", () => {
       const dispatch = jest.fn();
 
       hostReducerMiddleware(
@@ -46,7 +46,7 @@ describe('hostReducerMiddleware', () => {
         dispatch,
       );
 
-      expect(socketInstance.createLobby).toHaveBeenCalled();
+      expect(socketInstance.createLobby).toHaveBeenCalledTimes(1);
     });
   });
 
