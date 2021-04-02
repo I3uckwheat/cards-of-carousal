@@ -1,3 +1,4 @@
+/* eslint-disable */
 function createLobby(state) {
   return {
     ...state,
@@ -121,6 +122,23 @@ function closeGame(state) {
   };
 }
 
+function setBlackCard(state) {
+  const selectedCard =
+    state.deck.black[Math.floor(Math.random() * state.deck.black.length)];
+
+  const updatedBlackCards = state.deck.black.filter(
+    (card) => card !== selectedCard,
+  );
+
+  return {
+    ...state,
+    deck: {
+      ...state.deck,
+      black: updatedBlackCards,
+    },
+    blackCard: selectedCard,
+  };
+}
 function HostReducer(state, action) {
   const { type, payload } = action;
 
@@ -155,6 +173,8 @@ function HostReducer(state, action) {
     case 'CLOSE_GAME':
       return closeGame(state);
 
+    case 'SELECT_BLACK_CARD':
+      return setBlackCard(state);
     default:
       return { ...state };
   }

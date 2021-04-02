@@ -55,7 +55,6 @@ export default async function hostReducerMiddleware(
     case 'KICK_PLAYER':
       sendKickPlayerMessage(payload);
       break;
-
     default:
       break;
   }

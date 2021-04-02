@@ -18,6 +18,10 @@ const initialState = {
   players: {},
   playerIDs: [],
   gameSettings: { maxPlayers: 8, winningScore: 7, selectedPacks: [] },
+  deck: {
+    white: [],
+    black: [],
+  },
 };
 
 export const HostContext = createContext();
@@ -39,6 +43,8 @@ function HostProvider({ children }) {
         return dispatch({ type: 'SELECT_WINNER', payload });
       case 'lobby-created':
         return dispatch({ type: 'SET_LOBBY_ID', payload });
+      case 'black-card-selected':
+        return dispatch({ type: 'SELECT_BLACK_CARD', payload });
       default:
         return undefined;
     }

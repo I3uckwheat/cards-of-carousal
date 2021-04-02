@@ -107,6 +107,10 @@ function LeftPanel() {
         type: 'SET_NEXT_CZAR',
         payload: {},
       });
+      dispatch({
+        type: 'SELECT_BLACK_CARD',
+        payload: {},
+      });
     }
     // TODO: add else statement to warn that you cannot play a game with no players
   };
