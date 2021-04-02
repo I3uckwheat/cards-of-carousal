@@ -55,7 +55,7 @@ const Loader = styled.div`
 
 export default function LoadingIndicator({ secondary }) {
   return (
-    <Loader color={secondary ? 1 : 0} data-testid="loader">
+    <Loader color={+secondary} data-testid="loader">
       <div className="loading">
         <div />
         <div />
