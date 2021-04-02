@@ -12,6 +12,7 @@ describe('LoadingIndicator', () => {
         `background: var(--primary-background-color)`,
       );
     });
+
     it('renders with the secondary-background-color when the "secondary" prop is false', () => {
       render(<LoadingIndicator secondary={false} />);
 
@@ -19,6 +20,7 @@ describe('LoadingIndicator', () => {
         `background: var(--secondary-background-color)`,
       );
     });
+
     it('renders with the secondary-background-color when no prop is passed in', () => {
       render(<LoadingIndicator />);
 
@@ -46,6 +48,7 @@ describe('LoadingIndicator', () => {
 
       expect(consoleSpy).toHaveBeenCalled();
     });
+
     it('does not log an error if the prop is left out', () => {
       const consoleSpy = jest
         .spyOn(console, 'error')
