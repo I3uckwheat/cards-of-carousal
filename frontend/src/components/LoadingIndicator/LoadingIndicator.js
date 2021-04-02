@@ -60,6 +60,9 @@ const Loader = styled.div`
 
 export default function LoadingIndicator({ secondary }) {
   return (
+    // Need the + to convert the boolean to a number, styled-components requires this as props are passed to the DOM
+    // See here: https://github.com/styled-components/styled-components/issues/1198#issuecomment-776416497
+
     <Loader color={+secondary} data-testid="loader">
       <div className="loading">
         <div />
