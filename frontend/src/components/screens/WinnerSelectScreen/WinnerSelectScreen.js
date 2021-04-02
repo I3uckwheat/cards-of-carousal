@@ -7,6 +7,7 @@ import PlayerList from '../../PlayerList/PlayerList';
 import JoinCode from '../../JoinCode/JoinCode';
 import { HostContext } from '../../../contexts/HostContext/HostContext';
 import BlackCard from '../../Cards/BlackCard';
+import WhiteCard from '../../Cards/WhiteCard';
 
 const LeftPanelWrapper = styled.div`
   display: flex;
@@ -31,14 +32,13 @@ const RightPanelWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  padding: 40px 0 0;
+  justify-content: space-between;
 `;
 
 const CzarTitle = styled.div`
   display: flex;
   flex-direction: column;
-  margin-bottom: 40px;
+  margin: 25px 0;
 
   span,
   .czar-name {
@@ -56,6 +56,17 @@ const CzarTitle = styled.div`
   .czar-name {
     font-size: 56px;
   }
+`;
+
+const WhiteCards = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  gap: 20px;
+  place-items: center;
+  justify-content: center;
+  padding: 40px 0;
+  width: 100%;
+  height: 250px;
 `;
 
 function LeftPanel() {
@@ -90,6 +101,14 @@ function RightPanel() {
       <BlackCard pickCount={2}>
         He alone, who owns the _(s), gains the _(s).
       </BlackCard>
+
+      <WhiteCards>
+        <div className="foo">
+          <WhiteCard>Text for test</WhiteCard>
+        </div>
+        <WhiteCard>Text for test</WhiteCard>
+        <WhiteCard>Text for test</WhiteCard>
+      </WhiteCards>
     </RightPanelWrapper>
   );
 }
