@@ -111,6 +111,46 @@ describe('Player screen controller', () => {
       });
     });
 
+    describe('submitting-cards', () => {
+      it('renders PlayerMessageScreen', () => {
+        PlayerMessageScreen.mockImplementation(MockPlayerMessageScreen);
+
+        const dispatch = jest.fn();
+        const state = {
+          gameState: 'submitting-cards',
+          message: { big: '', small: '' },
+        };
+
+        render(
+          <PlayerContext.Provider value={{ state, dispatch }}>
+            <PlayerScreenController />
+          </PlayerContext.Provider>,
+        );
+
+        expect(screen.getByTestId('player-message-screen')).toBeInTheDocument();
+      });
+    });
+
+    describe('cards-submitted', () => {
+      it('renders PlayerMessageScreen', () => {
+        PlayerMessageScreen.mockImplementation(MockPlayerMessageScreen);
+
+        const dispatch = jest.fn();
+        const state = {
+          gameState: 'cards-submitted',
+          message: { big: '', small: '' },
+        };
+
+        render(
+          <PlayerContext.Provider value={{ state, dispatch }}>
+            <PlayerScreenController />
+          </PlayerContext.Provider>,
+        );
+
+        expect(screen.getByTestId('player-message-screen')).toBeInTheDocument();
+      });
+    });
+
     describe('select-winner', () => {
       it('renders CzarHandScreen', () => {
         CzarHandScreen.mockImplementation(MockCzarHandScreen);
