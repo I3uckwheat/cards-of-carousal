@@ -1,0 +1,24 @@
+version: '3.8'
+services:
+  backend:
+    build: .
+    restart: unless-stopped
+    ports:
+      - 4000:4000
+      - 4003:4003
+    expose:
+      - 4003
+    command: ["node", "/backend/start.js"]
+
+
+  frontend:
+    build: .
+    restart: unless-stopped
+    environment:
+      - REACT_APP_SOCKET_URL=ws://localhost:4003
+    ports:
+      - 3000:3000
+    expose:
+      - 3000
+    working_dir: /frontend
+    command: ["npm", "start"]
