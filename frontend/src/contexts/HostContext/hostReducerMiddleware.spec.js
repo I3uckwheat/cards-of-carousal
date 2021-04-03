@@ -100,4 +100,30 @@ describe('hostReducerMiddleware', () => {
       });
     });
   });
+
+  describe('PLAYER_SUBMIT', () => {
+    it("calls socketInstance's sendMessage with a wait message object", () => {
+      const dispatch = jest.fn();
+
+      hostReducerMiddleware(
+        {
+          type: 'PLAYER_SUBMIT',
+          payload: { playerId: 'example-player-id' },
+        },
+        dispatch,
+      );
+
+      expect(socketInstance.sendMessage).toHaveBeenCalledWith({
+        event: 'update',
+        recipients: ['example-player-id'],
+        payload: {
+          gameState: 'cards-submitted',
+          message: {
+            big: 'WAIT FOR OTHER PLAYERS',
+            small: 'Yell at them to hurry up if you wish',
+          },
+        },
+      });
+    });
+  });
 });
