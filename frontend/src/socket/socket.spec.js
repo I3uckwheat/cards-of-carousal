@@ -186,6 +186,18 @@ describe('socketInstance', () => {
         expect(spy.mock.calls.length).toBe(eventCallbacks.message.length);
         expect(spy).toBeCalledWith('message', message);
       });
+
+      it('emits a message event with the sender included', () => {
+        const message = { event: 'test', payload: {}, sender: 'test' };
+        const { eventCallbacks } = setupMockSocket();
+        const spy = jest.spyOn(socketInstance.emitter, 'emit');
+
+        socketInstance.createLobby();
+        eventCallbacks.message.forEach((cb) =>
+          cb({ data: JSON.stringify(message) }),
+        );
+        expect(spy).toBeCalledWith('message', message);
+      });
     });
 
     describe('open', () => {
