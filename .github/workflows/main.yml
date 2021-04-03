@@ -33,4 +33,3 @@ on:
       -
         name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
-          NETLIFY_DEPLOY_TO_PROD: true
