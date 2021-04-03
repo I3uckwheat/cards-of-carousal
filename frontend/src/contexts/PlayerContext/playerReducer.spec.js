@@ -151,6 +151,41 @@ describe('reducer', () => {
     });
   });
 
+  describe('SUBMIT_CARDS', () => {
+    it('returns a copy of state with the gameState and message set properly', () => {
+      const state = {
+        gameState: 'test state',
+        message: {
+          big: 'Test',
+          small: 'test',
+        },
+      };
+
+      const result = reducer(state, { type: 'SUBMIT_CARDS', payload: {} });
+
+      expect(result.gameState).toEqual('submitting-cards');
+      expect(result.message).toEqual({
+        big: 'Submitting your cards',
+        small: 'Please wait',
+      });
+    });
+
+    it('sends a message to the host with the submitted card indexes', () => {
+      const state = {};
+
+      const result = reducer(state, {
+        type: 'SUBMIT_CARDS',
+        payload: { selectedCards: [1, 2, 3] },
+      });
+
+      expect(result).not.toBe(state);
+      expect(socketInstance.sendMessage).toHaveBeenCalledWith({
+        event: 'player-submit',
+        payload: { selectedCards: [1, 2, 3] },
+      });
+    });
+  });
+
   describe('SUBMIT_WINNER', () => {
     it('sends a message to the host with the correct event and payload', () => {
       const state = {};
