@@ -51,8 +51,8 @@ class SocketSingleton {
 
   #attachSocketListeners = (socketInstance) => {
     socketInstance.addEventListener('message', (message) => {
-      const { event, payload } = JSON.parse(message.data);
-      this.emitter.emit('message', { event, payload });
+      const { event, payload, sender } = JSON.parse(message.data);
+      this.emitter.emit('message', { event, payload, sender });
       if (process.env.NODE_ENV === 'development') {
         // eslint-disable-next-line no-console
         console.log(`${Date.now()} | Incoming Message: `, { event, payload });
