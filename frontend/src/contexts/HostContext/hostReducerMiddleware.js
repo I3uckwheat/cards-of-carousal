@@ -1,5 +1,5 @@
 import socketInstance from '../../socket/socket';
-// TODO tests coming in hotfix
+
 function closeGame() {
   socketInstance.closeSocket();
 }
@@ -35,6 +35,18 @@ function sendKickPlayerMessage(payload) {
   });
 }
 
+async function getDeck({ selectedPacks }) {
+  try {
+    const apiURL = process.env.REACT_APP_API_URL;
+    const query = selectedPacks.join(',');
+    const cardsRequest = await fetch(`${apiURL}/deck/cards?packs=${query}`);
+    const cards = await cardsRequest.json();
+    return cards;
+  } catch (err) {
+    throw new Error(err);
+  }
+}
+
 export default async function hostReducerMiddleware(
   { type, payload },
   dispatch,
@@ -55,8 +67,17 @@ export default async function hostReducerMiddleware(
     case 'KICK_PLAYER':
       sendKickPlayerMessage(payload);
       break;
+
+    case 'SET_DECK': {
+      const deck = await getDeck(payload);
+      return dispatch({
+        type: 'SET_DECK',
+        payload: { deck },
+      });
+    }
+
     default:
       break;
   }
-  dispatch({ type, payload });
+  return dispatch({ type, payload });
 }

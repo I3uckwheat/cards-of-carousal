@@ -97,8 +97,16 @@ function LeftPanel() {
   const { players, playerIDs, lobbyID } = state;
 
   const handleClickStart = () => {
-    // check if there are any players
-    if (Object.keys(state.players).length) {
+    // check if there are any players and if packs are selected
+    if (
+      Object.keys(state.players).length &&
+      state.gameSettings.selectedPacks.length
+    ) {
+      const { selectedPacks } = state.gameSettings;
+      dispatch({
+        type: 'SET_DECK',
+        payload: { selectedPacks },
+      });
       dispatch({
         type: 'START_GAME',
         payload: {},

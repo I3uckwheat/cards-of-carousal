@@ -139,6 +139,13 @@ function setBlackCard(state) {
     blackCard: selectedCard,
   };
 }
+function setDeck(state, { deck }) {
+  return {
+    ...state,
+    deck,
+  };
+}
+
 function HostReducer(state, action) {
   const { type, payload } = action;
 
@@ -158,6 +165,7 @@ function HostReducer(state, action) {
     case 'SELECT_WINNER':
       // TODO: HANDLE PAYLOAD AND TEST
       return selectWinner(state, payload);
+
     case 'SET_LOBBY_ID':
       return setLobbyId(state, payload);
 
@@ -175,6 +183,9 @@ function HostReducer(state, action) {
 
     case 'SELECT_BLACK_CARD':
       return setBlackCard(state);
+    case 'SET_DECK':
+      return setDeck(state, payload);
+
     default:
       return { ...state };
   }
