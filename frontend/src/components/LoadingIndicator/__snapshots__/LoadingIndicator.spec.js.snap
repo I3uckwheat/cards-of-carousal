@@ -1,0 +1,52 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LoadingIndicator rendering snapshot matches the snapshot 1`] = `
+.c0 .loading {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+
+.c0 .loading div {
+  display: inline-block;
+  position: absolute;
+  left: 8px;
+  width: 16px;
+  background: var(--secondary-background-color);
+  -webkit-animation: loading 1.2s cubic-bezier(0,0.5,0.5,1) infinite;
+  animation: loading 1.2s cubic-bezier(0,0.5,0.5,1) infinite;
+}
+
+.c0 .loading div:nth-child(1) {
+  left: 8px;
+  -webkit-animation-delay: -0.24s;
+  animation-delay: -0.24s;
+}
+
+.c0 .loading div:nth-child(2) {
+  left: 32px;
+  -webkit-animation-delay: -0.12s;
+  animation-delay: -0.12s;
+}
+
+.c0 .loading div:nth-child(3) {
+  left: 56px;
+  -webkit-animation-delay: 0;
+  animation-delay: 0;
+}
+
+<div
+  className="c0"
+  color={0}
+  data-testid="loader"
+>
+  <div
+    className="loading"
+  >
+    <div />
+    <div />
+    <div />
+  </div>
+</div>
+`;
