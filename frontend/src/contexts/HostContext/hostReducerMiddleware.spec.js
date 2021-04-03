@@ -10,8 +10,12 @@ jest.mock('../../socket/socket', () => ({
 describe('hostReducerMiddleware', () => {
   it('calls the given dispatch with the given type & payload object', () => {
     const dispatch = jest.fn();
+    const state = {};
 
-    hostReducerMiddleware({ type: 'FOO', payload: { bar: 'bash' } }, dispatch);
+    hostReducerMiddleware(state, dispatch, {
+      type: 'FOO',
+      payload: { bar: 'bash' },
+    });
 
     expect(dispatch).toBeCalledWith({ type: 'FOO', payload: { bar: 'bash' } });
   });
@@ -19,16 +23,14 @@ describe('hostReducerMiddleware', () => {
   describe('CLOSE_GAME', () => {
     it("calls socketInstance's closeSocket() function once", () => {
       const dispatch = jest.fn();
+      const state = {};
 
       expect(socketInstance.closeSocket).not.toHaveBeenCalled();
 
-      hostReducerMiddleware(
-        {
-          type: 'CLOSE_GAME',
-          payload: {},
-        },
-        dispatch,
-      );
+      hostReducerMiddleware(state, dispatch, {
+        type: 'CLOSE_GAME',
+        payload: {},
+      });
 
       expect(socketInstance.closeSocket).toHaveBeenCalledTimes(1);
     });
@@ -37,14 +39,12 @@ describe('hostReducerMiddleware', () => {
   describe('CREATE_LOBBY', () => {
     it("calls socketInstance's createLobby() function once", () => {
       const dispatch = jest.fn();
+      const state = {};
 
-      hostReducerMiddleware(
-        {
-          type: 'CREATE_LOBBY',
-          payload: {},
-        },
-        dispatch,
-      );
+      hostReducerMiddleware(state, dispatch, {
+        type: 'CREATE_LOBBY',
+        payload: {},
+      });
 
       expect(socketInstance.createLobby).toHaveBeenCalledTimes(1);
     });
@@ -53,14 +53,12 @@ describe('hostReducerMiddleware', () => {
   describe('KICK_PLAYER', () => {
     it("calls socketInstance's sendMessage with a player kick message object", () => {
       const dispatch = jest.fn();
+      const state = {};
 
-      hostReducerMiddleware(
-        {
-          type: 'KICK_PLAYER',
-          payload: { playerId: 'example-player-id' },
-        },
-        dispatch,
-      );
+      hostReducerMiddleware(state, dispatch, {
+        type: 'KICK_PLAYER',
+        payload: { playerId: 'example-player-id' },
+      });
 
       expect(socketInstance.sendMessage).toHaveBeenCalledWith({
         event: 'update',
@@ -78,14 +76,12 @@ describe('hostReducerMiddleware', () => {
   describe('PLAYER_CONNECTED', () => {
     it("calls socketInstance's sendMessage with a default welcome message object", () => {
       const dispatch = jest.fn();
+      const state = {};
 
-      hostReducerMiddleware(
-        {
-          type: 'PLAYER_CONNECTED',
-          payload: { playerId: 'example-player-id' },
-        },
-        dispatch,
-      );
+      hostReducerMiddleware(state, dispatch, {
+        type: 'PLAYER_CONNECTED',
+        payload: { playerId: 'example-player-id' },
+      });
 
       expect(socketInstance.sendMessage).toHaveBeenCalledWith({
         event: 'update',

@@ -15,7 +15,7 @@ function reducerMiddlewareSetup(reducerMiddleware, reducer, initialState) {
     );
 
     dispatcher = dispatch;
-    return <p data-testid="state">{JSON.stringify(state)}</p>;
+    return <p data-testid="state">{state.toString()}</p>;
   }
   render(<TestComponent />);
   return dispatcher;
@@ -35,7 +35,7 @@ describe('useReducerMiddleware', () => {
   it('updates state and calls side effects that match the type/payload object', () => {
     const addSideEffect = jest.fn();
 
-    function reducerMiddleware({ type, payload }, dispatch) {
+    function reducerMiddleware(state, dispatch, { type, payload }) {
       switch (type) {
         case 'add':
           addSideEffect(payload);
@@ -72,5 +72,30 @@ describe('useReducerMiddleware', () => {
 
     expect(addSideEffect).toBeCalledTimes(1);
     expect(screen.getByTestId('state').textContent).toBe('2');
+  });
+
+  it('sends current state to the reducer', () => {
+    const reducer = jest.fn((state, action) => action.payload);
+    const reducerMiddleware = (state, dispatch, { type, payload }) => {
+      dispatch({ type, payload });
+    };
+    const initialState = 'foo';
+    const middlewareTest = reducerMiddlewareSetup(
+      reducerMiddleware,
+      reducer,
+      initialState,
+    );
+    const testDispatch1 = { type: 'test', payload: 'bar' };
+    const testDispatch2 = { type: 'test', payload: 'baz' };
+
+    act(() => middlewareTest(testDispatch1));
+
+    expect(screen.getByTestId('state').textContent).toBe('bar');
+    expect(reducer.mock.calls[0][0]).toEqual(initialState);
+
+    act(() => middlewareTest(testDispatch2));
+
+    expect(screen.getByTestId('state').textContent).toBe('baz');
+    expect(reducer.mock.calls[1][0]).toEqual(testDispatch1.payload);
   });
 });

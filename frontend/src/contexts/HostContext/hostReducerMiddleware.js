@@ -36,8 +36,9 @@ function sendKickPlayerMessage(payload) {
 }
 
 export default async function hostReducerMiddleware(
-  { type, payload },
+  state,
   dispatch,
+  { type, payload },
 ) {
   switch (type) {
     case `CLOSE_GAME`:

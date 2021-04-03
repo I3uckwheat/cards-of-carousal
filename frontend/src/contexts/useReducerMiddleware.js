@@ -8,7 +8,7 @@ export default function useReducerMiddleware(
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const asyncDispatcher = ({ type, payload }) => {
-    reducerMiddleware({ type, payload }, dispatch);
+    reducerMiddleware(state, dispatch, { type, payload });
   };
 
   return [state, asyncDispatcher];
