@@ -1,17 +1,17 @@
 FROM node:lts-alpine
 
-WORKDIR /backend
-
 # Copy the Package JSON files and install packages
-COPY package.json package-lock.json .
-RUN npm install
+COPY backend/package.json backend/package-lock.json /backend/
+
+RUN cd /backend \
+  && npm install
 
 # Copy the rest of the files
-COPY . .
+COPY backend /backend/
 
 # Set some sane default ENV Vars
 ENV EXPRESS_PORT=4000
 ENV SOCKET_PORT=4003
 
 # Start the server when the container starts
-CMD ["node", "start.js"]
+CMD ["node", "/backend/start.js"]
