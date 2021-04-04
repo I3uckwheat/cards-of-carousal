@@ -42,6 +42,7 @@ function removePlayer(state, { playerId }) {
 
 function selectWinner(state, payload) {
   // TODO: HANDLE MESSAGE
+  // eslint-disable-next-line no-console
   console.log(state, payload);
 }
 function setLobbyId(state, { id }) {
