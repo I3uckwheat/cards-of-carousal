@@ -1,3 +1,7 @@
+#
+# Dockerfile to build the backend
+#
+
 FROM node:lts-alpine
 
 # Copy the Package JSON files and install packages
