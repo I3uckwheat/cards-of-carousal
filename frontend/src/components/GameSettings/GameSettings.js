@@ -93,7 +93,7 @@ function GameSettings({ options, onChange }) {
   const [cardPacks, setCardPacks] = useState([]);
 
   async function getPackNames() {
-    const response = await fetch('http://localhost:4000/deck');
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/deck`);
     const data = await response.json();
     return data;
   }
