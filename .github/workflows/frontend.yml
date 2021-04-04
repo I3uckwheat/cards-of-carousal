@@ -8,12 +8,14 @@ on:
     branches: 
       - main
       - github-actions
+
+defaults:
+  run:
+    working-directory: frontend
+
 jobs:
   docker:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: frontend
     steps:
       -
         name: Login to DockerHub
