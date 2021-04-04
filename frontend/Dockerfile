@@ -13,6 +13,9 @@ COPY package.json package-lock.json /frontend/
 RUN npm install
 COPY . .
 
+ENV REACT_APP_SOCKET_URL=wss://socket.carousal.cards
+ENV REACT_APP_API_URL=https://api.carousal.cards
+
 RUN npm run build
 
 # Stage 2: Serve the build directory
