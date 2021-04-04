@@ -75,7 +75,6 @@ export default async function hostReducerMiddleware(
         payload: { deck },
       });
     }
-
     default:
       break;
   }

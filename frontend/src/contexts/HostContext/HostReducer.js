@@ -127,7 +127,7 @@ function setBlackCard(state) {
     state.deck.black[Math.floor(Math.random() * state.deck.black.length)];
 
   const updatedBlackCards = state.deck.black.filter(
-    (card) => card !== selectedCard,
+    (card) => card.text !== selectedCard.text,
   );
 
   return {
@@ -136,7 +136,7 @@ function setBlackCard(state) {
       ...state.deck,
       black: updatedBlackCards,
     },
-    blackCard: selectedCard,
+    selectedBlackCard: selectedCard,
   };
 }
 function setDeck(state, { deck }) {

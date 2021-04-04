@@ -354,4 +354,36 @@ describe('reducer', () => {
       expect(result).toEqual({ ...state, deck: newDeck });
     });
   });
+
+  describe('SELECT_BLACK_CARD', () => {
+    it('sets a random black card and removes it from the deck', () => {
+      const state = {
+        deck: {
+          black: [
+            {
+              pack: 'test pack',
+              text: 'Black Card 1',
+            },
+            {
+              pack: 'test pack',
+              text: 'Black Card 2',
+            },
+            {
+              pack: 'test pack',
+              text: 'Black Card 3',
+            },
+          ],
+          white: [],
+        },
+      };
+      const result = HostReducer(state, {
+        type: 'SELECT_BLACK_CARD',
+        payload: {},
+      });
+
+      expect(result.deck.black.length).toBe(2);
+      expect(result.selectedBlackCard).toHaveProperty('text');
+      expect(result.deck.black).not.toContain(result.selectedBlackCard);
+    });
+  });
 });
