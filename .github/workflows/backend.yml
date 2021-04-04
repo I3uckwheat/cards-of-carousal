@@ -9,6 +9,9 @@ on:
 jobs:
   docker:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
     steps:
       -
         name: Login to DockerHub
