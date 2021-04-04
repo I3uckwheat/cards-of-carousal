@@ -5,13 +5,13 @@
 name: COC Backend
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
+      - github-actions
+
 jobs:
   docker:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: backend
     steps:
       -
         name: Login to DockerHub
