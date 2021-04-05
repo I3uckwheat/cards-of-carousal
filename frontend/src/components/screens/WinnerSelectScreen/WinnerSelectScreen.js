@@ -91,6 +91,9 @@ function RightPanel() {
 
   const currentCzar = Object.values(players).find((player) => player.isCzar);
 
+  const highlightedPlayer =
+    state.players[state.playerIDs[currentCzar.submittedCards]];
+
   return (
     <RightPanelWrapper>
       <CzarTitle>
@@ -98,16 +101,13 @@ function RightPanel() {
         <h1 className="czar-name">{currentCzar.name}</h1>
       </CzarTitle>
 
-      <BlackCard pickCount={2}>
-        He alone, who owns the _(s), gains the _(s).
-      </BlackCard>
+      {/* TODO: pickCount should not be hard coded but come from selectedBlackCard or dynamically calculated from the text */}
+      <BlackCard pickCount={2}>{state.selectedBlackCard.text}</BlackCard>
 
       <WhiteCards>
-        <div className="foo">
-          <WhiteCard>Text for test</WhiteCard>
-        </div>
-        <WhiteCard>Text for test</WhiteCard>
-        <WhiteCard>Text for test</WhiteCard>
+        {highlightedPlayer.submittedCards.map((cardText) => (
+          <WhiteCard key={cardText}>{cardText}</WhiteCard>
+        ))}
       </WhiteCards>
     </RightPanelWrapper>
   );
