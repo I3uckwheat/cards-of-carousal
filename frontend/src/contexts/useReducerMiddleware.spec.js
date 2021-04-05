@@ -74,11 +74,11 @@ describe('useReducerMiddleware', () => {
     expect(screen.getByTestId('state').textContent).toBe('2');
   });
 
-  it('sends current state to the reducer', () => {
-    const reducer = jest.fn((state, action) => action.payload);
-    const reducerMiddleware = (state, dispatch, { type, payload }) => {
+  it.only('sends current state to the reducer', async () => {
+    const reducer = (state, action) => action.payload;
+    const reducerMiddleware = jest.fn((state, dispatch, { type, payload }) => {
       dispatch({ type, payload });
-    };
+    });
     const initialState = 'foo';
     const middlewareTest = reducerMiddlewareSetup(
       reducerMiddleware,
@@ -88,14 +88,15 @@ describe('useReducerMiddleware', () => {
     const testDispatch1 = { type: 'test', payload: 'bar' };
     const testDispatch2 = { type: 'test', payload: 'baz' };
 
-    act(() => middlewareTest(testDispatch1));
+    act(async () => middlewareTest(testDispatch1));
 
     expect(screen.getByTestId('state').textContent).toBe('bar');
-    expect(reducer.mock.calls[0][0]).toEqual(initialState);
+    expect(reducerMiddleware.mock.calls[0][0]).toEqual(initialState);
 
-    act(() => middlewareTest(testDispatch2));
-
+    // setTimeout(() => {
+    act(async () => middlewareTest(testDispatch2));
     expect(screen.getByTestId('state').textContent).toBe('baz');
-    expect(reducer.mock.calls[1][0]).toEqual(testDispatch1.payload);
+    expect(reducerMiddleware.mock.calls[1][0]).toEqual(testDispatch1.payload);
+    // }, 1000);
   });
 });
