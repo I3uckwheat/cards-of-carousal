@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "install-all": "npm i && cd ./frontend && npm i && cd ../backend && npm i",
-    "dev:frontend": "node env-setup.js ./frontend && cd ./frontend && npm start",
-    "dev:backend": "node env-setup.js ./backend && cd ./backend && npm run dev",
+    "dev:frontend": "node check-env.js ./frontend && cd ./frontend && npm start",
+    "dev:backend": "node check-env.js ./backend && cd ./backend && npm run dev",
     "lint:frontend": "cd ./frontend && prettier -c .; eslint .",
     "lint:backend": "cd ./backend && prettier -c .; eslint .",
     "lint": "prettier -c .; eslint .",
