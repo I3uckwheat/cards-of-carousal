@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "install-all": "npm i && cd ./frontend && npm i && cd ../backend && npm i",
-    "dev:frontend": "cd ./frontend && npm start",
-    "dev:backend": "cd ./backend && npm run dev",
+    "dev:frontend": "node env-setup.js ./frontend && cd ./frontend && npm start",
+    "dev:backend": "node env-setup.js ./backend && cd ./backend && npm run dev",
     "lint:frontend": "cd ./frontend && prettier -c .; eslint .",
     "lint:backend": "cd ./backend && prettier -c .; eslint .",
     "lint": "prettier -c .; eslint .",
@@ -48,5 +48,8 @@
   },
   "lint-staged": {
     "*.{js,css,md}": "prettier -c"
+  },
+  "dependencies": {
+    "dotenv": "^8.2.0"
   }
 }
