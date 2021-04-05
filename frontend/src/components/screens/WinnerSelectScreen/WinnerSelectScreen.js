@@ -101,8 +101,9 @@ function RightPanel() {
         <h1 className="czar-name">{currentCzar.name}</h1>
       </CzarTitle>
 
-      {/* TODO: pickCount should not be hard coded but come from selectedBlackCard or dynamically calculated from the text */}
-      <BlackCard pickCount={2}>{state.selectedBlackCard.text}</BlackCard>
+      <BlackCard pickCount={state.selectedBlackCard.pick}>
+        {state.selectedBlackCard.text}
+      </BlackCard>
 
       <WhiteCards>
         {highlightedPlayer.submittedCards.map((cardText) => (
