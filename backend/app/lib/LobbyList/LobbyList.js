@@ -1,13 +1,17 @@
+const { customAlphabet } = require('nanoid');
 const Lobby = require('../Lobby/Lobby.js');
+
+const customNanoId = customAlphabet('ABCDGHJKMNPRSTUVWXYZ', 4);
 
 module.exports = class LobbyList {
   lobbies = {};
 
   createLobby = (hostSocket) => {
     const lobby = new Lobby(
+      customNanoId(),
       hostSocket,
       this.#handleLobbyClose,
-      this.#setIdCallback,
+      this.#handleLobbyIdChange,
     );
 
     this.lobbies[lobby.id] = lobby;
@@ -37,8 +41,10 @@ module.exports = class LobbyList {
     }
   };
 
-  #setIdCallback = (lobby, newId) => {
+  #handleLobbyIdChange = (lobby) => {
+    const newId = customNanoId();
     this.lobbies[newId] = lobby;
     delete this.lobbies[lobby.id];
+    lobby.updateId(newId);
   };
 };

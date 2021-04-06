@@ -13,16 +13,22 @@ describe('Lobby', () => {
   });
 
   describe('constructor', () => {
-    it('gives the lobby a unique ID and sends message through the socket', () => {
+    it('calls host socket initialization functions and sends lobby-created message', () => {
+      const lobbyId = 'AAAA';
       const hostSocket = createSocket('socketId');
       const onCloseCallBack = jest.fn();
-      const lobby = new Lobby(hostSocket, onCloseCallBack);
+      const shuffleIdCallback = jest.fn();
+      const lobby = new Lobby(
+        lobbyId,
+        hostSocket,
+        onCloseCallBack,
+        shuffleIdCallback,
+      );
       const messageObject = {
         event: 'lobby-created',
         payload: { id: lobby.id },
         sender: 'server',
       };
-      expect(lobby.id).toBeTruthy();
       expect(hostSocket.on).toBeCalledWith('message', expect.any(Function));
       expect(hostSocket.on).toBeCalledWith('close', expect.any(Function));
       expect(hostSocket.send).toBeCalledWith(JSON.stringify(messageObject));
@@ -30,9 +36,16 @@ describe('Lobby', () => {
   });
 
   describe('has multiple players', () => {
+    const lobbyId = 'AAAA';
     const hostSocket = createSocket('socketId');
     const onCloseCallBack = jest.fn();
-    const lobby = new Lobby(hostSocket, onCloseCallBack);
+    const shuffleIdCallback = jest.fn();
+    const lobby = new Lobby(
+      lobbyId,
+      hostSocket,
+      onCloseCallBack,
+      shuffleIdCallback,
+    );
     const playerSocket = createSocket('player1Id');
     const messageObject = {
       event: '',
