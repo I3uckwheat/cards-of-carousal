@@ -145,8 +145,8 @@ describe('Host Pregame Screen', () => {
 
       fireEvent.click(screen.getByText('START CAROUSING'));
 
-      // create lobby, get deck, set game state, set new czar
-      expect(dispatch).toHaveBeenCalledTimes(4);
+      // create lobby, get deck, set game state, set new czar, get black card
+      expect(dispatch).toHaveBeenCalledTimes(5);
       expect(dispatch).toHaveBeenNthCalledWith(2, {
         type: 'SET_DECK',
         payload: { selectedPacks: state.gameSettings.selectedPacks },
@@ -157,6 +157,10 @@ describe('Host Pregame Screen', () => {
       });
       expect(dispatch).toHaveBeenNthCalledWith(4, {
         type: 'SET_NEXT_CZAR',
+        payload: {},
+      });
+      expect(dispatch).toHaveBeenNthCalledWith(5, {
+        type: 'SELECT_BLACK_CARD',
         payload: {},
       });
     });
