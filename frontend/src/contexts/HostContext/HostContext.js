@@ -39,6 +39,8 @@ function HostProvider({ children }) {
         return dispatch({ type: 'SELECT_WINNER', payload });
       case 'lobby-created':
         return dispatch({ type: 'SET_LOBBY_ID', payload });
+      case 'join-code-shuffled':
+        return dispatch({ type: 'UPDATE_JOIN_CODE', payload });
       default:
         return undefined;
     }

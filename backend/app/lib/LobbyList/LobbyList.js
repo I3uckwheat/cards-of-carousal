@@ -4,7 +4,11 @@ module.exports = class LobbyList {
   lobbies = {};
 
   createLobby = (hostSocket) => {
-    const lobby = new Lobby(hostSocket, this.#handleLobbyClose);
+    const lobby = new Lobby(
+      hostSocket,
+      this.#handleLobbyClose,
+      this.#setIdCallback,
+    );
 
     this.lobbies[lobby.id] = lobby;
 
@@ -31,5 +35,10 @@ module.exports = class LobbyList {
     } else {
       throw new Error(`Lobby ${lobbyId} does not exist`);
     }
+  };
+
+  #setIdCallback = (lobby, newId) => {
+    this.lobbies[newId] = lobby;
+    delete this.lobbies[lobby.id];
   };
 };

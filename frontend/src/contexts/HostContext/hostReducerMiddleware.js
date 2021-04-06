@@ -56,6 +56,13 @@ export default async function hostReducerMiddleware(
       sendKickPlayerMessage(payload);
       break;
 
+    case 'SHUFFLE_JOIN_CODE':
+      socketInstance.sendMessage({
+        event: 'shuffle-join-code',
+        payload: {},
+      });
+      break;
+
     default:
       break;
   }

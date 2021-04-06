@@ -7,8 +7,9 @@ module.exports = class Lobby {
   #hostSocket;
   #playerSockets = {};
   #onClose = () => {};
+  #setId = () => {};
 
-  constructor(hostSocket, onCloseCallback) {
+  constructor(hostSocket, onCloseCallback, setIdCallback) {
     this.id = customNanoid();
 
     hostSocket.on('message', this.#handleHostMessage);
@@ -24,6 +25,7 @@ module.exports = class Lobby {
     hostSocket.send(message.toJSON());
 
     this.#onClose = onCloseCallback;
+    this.#setId = setIdCallback;
   }
 
   addPlayer = (playerSocket, playerName = '') => {
@@ -91,6 +93,10 @@ module.exports = class Lobby {
         this.#removePlayer(message.payload.playerId);
       }
 
+      if (message.event === 'shuffle-join-code') {
+        this.shuffleJoinCode();
+      }
+
       if (message.isForBroadcast) {
         Object.values(this.#playerSockets).forEach((socket) => {
           socket.send(message.toJSON());
@@ -120,5 +126,20 @@ module.exports = class Lobby {
       // eslint-disable-next-line no-console
       console.error(error);
     }
+  };
+
+  shuffleJoinCode = () => {
+    const newId = customNanoid();
+    this.#setId(this, newId);
+    this.id = newId;
+
+    const message = new Message('server', {
+      event: 'join-code-shuffled',
+      payload: {
+        lobbyID: this.id,
+      },
+    });
+
+    this.#hostSocket.send(message.toJSON());
   };
 };

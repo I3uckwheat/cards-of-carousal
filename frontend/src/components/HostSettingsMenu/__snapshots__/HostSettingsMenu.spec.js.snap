@@ -189,5 +189,11 @@ exports[`HostSettingsMenu rendering matches the expected snapshot 1`] = `
       KICK PLAYER
     </button>
   </div>
+  <button
+    className="c2"
+    onClick={[Function]}
+  >
+    SHUFFLE JOIN CODE
+  </button>
 </div>
 `;

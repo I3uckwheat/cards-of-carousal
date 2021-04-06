@@ -122,6 +122,10 @@ function closeGame(state) {
   };
 }
 
+function updateJoinCode(state, { lobbyID }) {
+  return { ...state, lobbyID };
+}
+
 function HostReducer(state, action) {
   const { type, payload } = action;
 
@@ -155,6 +159,9 @@ function HostReducer(state, action) {
 
     case 'CLOSE_GAME':
       return closeGame(state);
+
+    case 'UPDATE_JOIN_CODE':
+      return updateJoinCode(state, payload);
 
     default:
       return { ...state };
