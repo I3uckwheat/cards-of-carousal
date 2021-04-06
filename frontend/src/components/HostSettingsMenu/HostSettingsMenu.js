@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import Header from '../Header/Header';
 import PlayerKicker from './SettingsSubComponents/PlayerKicker';
 import JoinCodeHider from './SettingsSubComponents/JoinCodeHider';
+import JoinCodeShuffler from './SettingsSubComponents/JoinCodeShuffler';
 
 const SettingsMenu = styled.div`
   position: absolute;
@@ -109,6 +110,11 @@ function HostSettingsMenu() {
           enabled: () => handleAccordionClick(0),
           disabled: resetAccordions,
         }}
+      />
+
+      <JoinCodeShuffler
+        isEnabled={!anyAreOpen}
+        onDisabledClick={resetAccordions}
       />
     </SettingsMenu>
   );
