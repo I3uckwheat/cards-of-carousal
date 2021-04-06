@@ -65,3 +65,5 @@ To be setup
   - Removed rule disallowing .js extensions for files with jsx
   - eslint.rc file lives at the root of the repo
   - Husky and lint-staged will not allow you to push un-linted commits. Look out for errors when you commit.
+
+Created by Odin Students
