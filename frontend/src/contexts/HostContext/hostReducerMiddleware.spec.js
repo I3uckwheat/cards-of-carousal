@@ -129,7 +129,62 @@ describe('hostReducerMiddleware', () => {
 
       expect(fetchSpy).toHaveBeenCalledTimes(1);
       expect(fetchSpy).toHaveBeenCalledWith(expect.stringContaining(testQuery));
+    });
+
+    it('calls dispatch with the retrieved data', async () => {
+      const dispatch = jest.fn();
+      const testPacks = [0, 1, 2, 3, 4, 5];
+      const testCardDeck = {
+        black: ['foo', 'bar', 'baz'],
+        white: ['boo', 'far', 'faz'],
+      };
+
+      jest
+        .spyOn(window, 'fetch')
+        .mockImplementation(async () => ({ json: async () => testCardDeck }));
+
+      await hostReducerMiddleware(
+        {
+          type: 'SET_DECK',
+          payload: { selectedPacks: testPacks },
+        },
+        dispatch,
+      );
+
       expect(dispatch).toHaveBeenCalledWith({
+        type: 'SET_DECK',
+        payload: { deck: testCardDeck },
+      });
+    });
+
+    it('sends an error message with the query if the fetch fails', async () => {
+      const dispatch = jest.fn();
+      const testPacks = [0, 1, 2, 3, 4, 5];
+      const testQuery = '/deck/cards?packs=0,1,2,3,4,5';
+      const testCardDeck = {
+        black: ['foo', 'bar', 'baz'],
+        white: ['boo', 'far', 'faz'],
+      };
+
+      jest
+        .spyOn(window, 'fetch')
+        .mockImplementation(async () => new TypeError());
+
+      await expect(() =>
+        hostReducerMiddleware(
+          {
+            type: 'SET_DECK',
+            payload: { selectedPacks: testPacks },
+          },
+          dispatch,
+        ),
+      ).rejects.toThrow(
+        `Error fetching cards. Query: ${
+          process.env.REACT_APP_API_URL + testQuery
+        }`,
+      );
+
+      expect(dispatch).not.toHaveBeenCalledWith({
         type: 'SET_DECK',
         payload: { deck: testCardDeck },
       });

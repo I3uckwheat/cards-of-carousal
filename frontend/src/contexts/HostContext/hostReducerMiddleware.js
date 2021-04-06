@@ -36,14 +36,15 @@ function sendKickPlayerMessage(payload) {
 }
 
 async function getDeck({ selectedPacks }) {
+  const apiURL = process.env.REACT_APP_API_URL;
+  const queryString = selectedPacks.join(',');
+  const query = `${apiURL}/deck/cards?packs=${queryString}`;
   try {
-    const apiURL = process.env.REACT_APP_API_URL;
-    const query = selectedPacks.join(',');
-    const cardsRequest = await fetch(`${apiURL}/deck/cards?packs=${query}`);
+    const cardsRequest = await fetch(query);
     const cards = await cardsRequest.json();
     return cards;
-  } catch (err) {
-    throw new Error(err);
+  } catch {
+    throw new Error(`Error fetching cards. Query: ${query}`);
   }
 }
 
