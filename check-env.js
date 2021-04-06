@@ -6,7 +6,7 @@ require('dotenv').config({ path: `${envPath}/.env` });
 const sampleEnv = fs.readFileSync(`${envPath}/sample.env`, 'utf-8');
 const envVars = sampleEnv.split('\n')
   // Filter out comments and empty lines
-  .filter(line => line[0] !== '#' && line)
+  .filter(line => line[0] !== '#' && line.trim())
   .map(line => line.split('=')[0]);
 
 let hasError = false;
