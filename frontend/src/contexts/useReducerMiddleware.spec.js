@@ -7,16 +7,20 @@ import useReducerMiddleware from './useReducerMiddleware';
 // function used to instantiate useReducerMiddleware inside a react component
 function reducerMiddlewareSetup(reducerMiddleware, reducer, initialState) {
   let dispatcher;
+
   function TestComponent() {
     const [state, dispatch] = useReducerMiddleware(
       reducerMiddleware,
       reducer,
       initialState,
     );
+    // console.log(state);
 
     dispatcher = dispatch;
     return <p data-testid="state">{state.toString()}</p>;
+
   }
+
   render(<TestComponent />);
   return dispatcher;
 }
@@ -35,7 +39,7 @@ describe('useReducerMiddleware', () => {
   it('updates state and calls side effects that match the type/payload object', () => {
     const addSideEffect = jest.fn();
 
-    function reducerMiddleware(state, dispatch, { type, payload }) {
+    function reducerMiddleware(dispatch, { type, payload }) {
       switch (type) {
         case 'add':
           addSideEffect(payload);
@@ -74,29 +78,27 @@ describe('useReducerMiddleware', () => {
     expect(screen.getByTestId('state').textContent).toBe('2');
   });
 
-  it.only('sends current state to the reducer', async () => {
+  it('sends current state to the reducer', async () => {
     const reducer = (state, action) => action.payload;
-    const reducerMiddleware = jest.fn((state, dispatch, { type, payload }) => {
+
+    const reducerMiddleware = jest.fn(async (dispatch, { type, payload }) => {
       dispatch({ type, payload });
     });
-    const initialState = 'foo';
+
     const middlewareTest = reducerMiddlewareSetup(
       reducerMiddleware,
       reducer,
-      initialState,
+      "foo",
     );
-    const testDispatch1 = { type: 'test', payload: 'bar' };
-    const testDispatch2 = { type: 'test', payload: 'baz' };
 
-    act(async () => middlewareTest(testDispatch1));
+    expect(screen.getByTestId('state').textContent).toBe('foo');
 
+    act(() => middlewareTest({type: 'test', payload: 'bar'}));
+    expect(reducerMiddleware).toHaveBeenNthCalledWith(1, expect.any(Function), {type: 'test', payload: 'bar'});
     expect(screen.getByTestId('state').textContent).toBe('bar');
-    expect(reducerMiddleware.mock.calls[0][0]).toEqual(initialState);
 
-    // setTimeout(() => {
-    act(async () => middlewareTest(testDispatch2));
-    expect(screen.getByTestId('state').textContent).toBe('baz');
-    expect(reducerMiddleware.mock.calls[1][0]).toEqual(testDispatch1.payload);
-    // }, 1000);
+    act(() => middlewareTest({type: 'test', payload: 'babaz'}))
+    expect(screen.getByTestId('state').textContent).toBe('babaz');
+    expect(reducerMiddleware).toHaveBeenNthCalledWith(2, expect.any(Function), {type: 'test', payload: 'babaz'});
   });
 });

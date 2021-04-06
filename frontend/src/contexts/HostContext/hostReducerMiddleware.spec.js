@@ -10,9 +10,8 @@ jest.mock('../../socket/socket', () => ({
 describe('hostReducerMiddleware', () => {
   it('calls the given dispatch with the given type & payload object', () => {
     const dispatch = jest.fn();
-    const state = {};
 
-    hostReducerMiddleware(state, dispatch, {
+    hostReducerMiddleware(dispatch, {
       type: 'FOO',
       payload: { bar: 'bash' },
     });
@@ -23,11 +22,10 @@ describe('hostReducerMiddleware', () => {
   describe('CLOSE_GAME', () => {
     it("calls socketInstance's closeSocket() function once", () => {
       const dispatch = jest.fn();
-      const state = {};
 
       expect(socketInstance.closeSocket).not.toHaveBeenCalled();
 
-      hostReducerMiddleware(state, dispatch, {
+      hostReducerMiddleware(dispatch, {
         type: 'CLOSE_GAME',
         payload: {},
       });
@@ -39,9 +37,8 @@ describe('hostReducerMiddleware', () => {
   describe('CREATE_LOBBY', () => {
     it("calls socketInstance's createLobby() function once", () => {
       const dispatch = jest.fn();
-      const state = {};
 
-      hostReducerMiddleware(state, dispatch, {
+      hostReducerMiddleware(dispatch, {
         type: 'CREATE_LOBBY',
         payload: {},
       });
@@ -53,9 +50,8 @@ describe('hostReducerMiddleware', () => {
   describe('KICK_PLAYER', () => {
     it("calls socketInstance's sendMessage with a player kick message object", () => {
       const dispatch = jest.fn();
-      const state = {};
 
-      hostReducerMiddleware(state, dispatch, {
+      hostReducerMiddleware(dispatch, {
         type: 'KICK_PLAYER',
         payload: { playerId: 'example-player-id' },
       });
@@ -76,9 +72,8 @@ describe('hostReducerMiddleware', () => {
   describe('PLAYER_CONNECTED', () => {
     it("calls socketInstance's sendMessage with a default welcome message object", () => {
       const dispatch = jest.fn();
-      const state = {};
 
-      hostReducerMiddleware(state, dispatch, {
+      hostReducerMiddleware(dispatch, {
         type: 'PLAYER_CONNECTED',
         payload: { playerId: 'example-player-id' },
       });

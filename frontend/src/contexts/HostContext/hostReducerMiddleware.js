@@ -36,7 +36,6 @@ function sendKickPlayerMessage(payload) {
 }
 
 export default async function hostReducerMiddleware(
-  state,
   dispatch,
   { type, payload },
 ) {
