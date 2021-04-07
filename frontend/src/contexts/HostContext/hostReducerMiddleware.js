@@ -47,6 +47,40 @@ async function getDeck({ selectedPacks }) {
   }
 }
 
+function dealWhiteCards({ deck, playerIDs, selectedBlackCard }) {
+  const removedCards = [];
+  const newWhiteCards = [...deck.white];
+  const numberOfTotalDraws = selectedBlackCard.pick * playerIDs.length;
+
+  // Draw all cards needed to deal, and remove them from the deck
+  for (let i = 0; i < numberOfTotalDraws; i += 1) {
+    // select random card
+    const selection = Math.floor(Math.random() * newWhiteCards.length);
+    // this both pushes the random card into the "drawn" pile, and removes the card
+    // from the new white card array
+    removedCards.push(newWhiteCards.splice(selection, 1)[0]);
+  }
+
+  // pass the correct number of random cards to each player
+  playerIDs.forEach((player) => {
+    const cardsToDeal = [];
+    for (let i = 0; i < selectedBlackCard.pick; i += 1) {
+      cardsToDeal.push(removedCards.pop());
+    }
+    socketInstance.sendMessage({
+      event: 'deal-white-cards',
+      payload: cardsToDeal,
+      recipients: [player],
+    });
+  });
+
+  // update the state with the new white cards pile
+  return {
+    ...deck,
+    white: newWhiteCards,
+  };
+}
+
 export default async function hostReducerMiddleware(
   { type, payload },
   dispatch,
@@ -76,6 +110,13 @@ export default async function hostReducerMiddleware(
       });
     }
 
+    case 'DEAL_WHITE_CARDS': {
+      const deck = dealWhiteCards(payload);
+      return dispatch({
+        type: 'SET_DECK',
+        payload: { deck },
+      });
+    }
     default:
       break;
   }

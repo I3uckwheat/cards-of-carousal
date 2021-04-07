@@ -40,6 +40,13 @@ function submitWinner(state, { id }) {
   };
 }
 
+function dealWhiteCards(state, payload) {
+  return {
+    ...state,
+    cards: payload,
+  };
+}
+
 function reducer(state, action) {
   const { type, payload } = action;
   switch (type) {
@@ -55,6 +62,8 @@ function reducer(state, action) {
       return { ...state };
     case 'SUBMIT_WINNER':
       return submitWinner(state, payload);
+    case 'DEAL_WHITE_CARDS':
+      return dealWhiteCards(state, payload);
     default:
       return { ...state };
   }
