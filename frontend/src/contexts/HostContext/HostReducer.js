@@ -124,17 +124,17 @@ function closeGame(state) {
 }
 
 function setBlackCard(state) {
+  const { deck } = state;
   const selectedCard =
-    state.deck.black[Math.floor(Math.random() * state.deck.black.length)];
+    deck.black[Math.floor(Math.random() * state.deck.black.length)];
 
-  const updatedBlackCards = state.deck.black.filter(
-    (card) => card.text !== selectedCard.text,
-  );
+  const updatedBlackCards = [...state.deck.black];
+  updatedBlackCards.splice(updatedBlackCards.indexOf(selectedCard), 1);
 
   return {
     ...state,
     deck: {
-      ...state.deck,
+      ...deck,
       black: updatedBlackCards,
     },
     selectedBlackCard: selectedCard,
@@ -184,6 +184,7 @@ function HostReducer(state, action) {
 
     case 'SELECT_BLACK_CARD':
       return setBlackCard(state);
+
     case 'SET_DECK':
       return setDeck(state, payload);
 
