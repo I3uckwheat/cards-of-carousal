@@ -393,14 +393,19 @@ describe('reducer', () => {
           white: [],
         },
       };
+
+      const spiedMath = jest.spyOn(Math, 'random').mockReturnValue(0.1);
+
       const result = HostReducer(state, {
         type: 'SELECT_BLACK_CARD',
         payload: {},
       });
 
       expect(result.deck.black.length).toBe(2);
-      expect(result.selectedBlackCard).toHaveProperty('text');
+      expect(result.selectedBlackCard.text).toBe('Black Card 1');
       expect(result.deck.black).not.toContain(result.selectedBlackCard);
+
+      spiedMath.mockRestore();
     });
   });
 });
