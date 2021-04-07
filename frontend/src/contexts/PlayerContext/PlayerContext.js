@@ -1,4 +1,4 @@
-import React, { createContext, useReducer, useEffect } from 'react';
+import React, { createContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import reducer from './playerReducer';
 import socketInstance from '../../socket/socket';
