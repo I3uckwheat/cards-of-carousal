@@ -1,8 +1,23 @@
 import React from 'react';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import renderer from 'react-test-renderer';
 import { HostContext } from '../../../contexts/HostContext/HostContext';
 import HostPregameScreen from './HostPregameScreen';
+
+jest.mock('../../GameSettings/GameSettings', () => () => (
+  <div data-testid="game-settings" />
+));
+
+function setupFetchMock() {
+  jest.spyOn(window, 'fetch').mockImplementation(() => ({
+    json: async () => [
+      { name: 'test 1' },
+      { name: 'test 2' },
+      { name: 'test 3' },
+    ],
+  }));
+}
 
 describe('Host Pregame Screen', () => {
   // This is the default state value provided by our context
@@ -24,6 +39,7 @@ describe('Host Pregame Screen', () => {
       playerIDs: [],
       gameSettings: { maxPlayers: 8, winningScore: 7, selectedPacks: [] },
     };
+    setupFetchMock();
   });
 
   describe('rendering', () => {
@@ -70,7 +86,7 @@ describe('Host Pregame Screen', () => {
         </HostContext.Provider>,
       );
 
-      fireEvent.click(screen.getByText('CLOSE GAME'));
+      userEvent.click(screen.getByText('CLOSE GAME'));
 
       expect(window.location.reload).toHaveBeenCalledTimes(1);
       // create lobby, close game
@@ -81,7 +97,12 @@ describe('Host Pregame Screen', () => {
       });
     });
 
-    it('calls a dispatch when the start button is pressed', () => {
+    it('calls dispatches with the proper payloads when the starting conditions are met and the start button is pressed', async () => {
+      setupFetchMock({
+        black: ['foo', 'bar', 'baz'],
+        white: ['boo', 'far', 'faz'],
+      });
+
       state = {
         gameState: 'waiting-for-lobby',
         lobbyID: '',
@@ -108,8 +129,13 @@ describe('Host Pregame Screen', () => {
             cards: [],
           },
         },
-        playerIDs: [],
-        gameSettings: { maxPlayers: 8, winningScore: 7, selectedPacks: [] },
+        playerIDs: ['foo', 'bar', 'baz'],
+        gameSettings: {
+          maxPlayers: 8,
+          winningScore: 7,
+          selectedPacks: [0, 1, 2],
+        },
+        deck: { black: [], white: [] },
       };
 
       render(
@@ -118,15 +144,19 @@ describe('Host Pregame Screen', () => {
         </HostContext.Provider>,
       );
 
-      fireEvent.click(screen.getByText('START CAROUSING'));
+      userEvent.click(screen.getByText('START CAROUSING'));
 
-      // create lobby, set game state, set new czar
-      expect(dispatch).toHaveBeenCalledTimes(3);
-      expect(dispatch.mock.calls[1][0]).toEqual({
+      // create lobby, get deck, set game state, set new czar
+      expect(dispatch).toHaveBeenCalledTimes(4);
+      expect(dispatch).toHaveBeenNthCalledWith(2, {
+        type: 'SET_DECK',
+        payload: { selectedPacks: state.gameSettings.selectedPacks },
+      });
+      expect(dispatch).toHaveBeenNthCalledWith(3, {
         type: 'START_GAME',
         payload: {},
       });
-      expect(dispatch.mock.calls[2][0]).toEqual({
+      expect(dispatch).toHaveBeenNthCalledWith(4, {
         type: 'SET_NEXT_CZAR',
         payload: {},
       });
@@ -139,10 +169,65 @@ describe('Host Pregame Screen', () => {
         </HostContext.Provider>,
       );
 
-      fireEvent.click(screen.getByText('START CAROUSING'));
+      userEvent.click(screen.getByText('START CAROUSING'));
 
       // only create lobby called
       expect(dispatch).toHaveBeenCalledTimes(1);
+    });
+
+    it('does not call dispatch if no packs are selected when the start button is clicked', () => {
+      state = {
+        gameState: 'waiting-for-lobby',
+        lobbyID: '',
+        players: {
+          foo: {
+            name: 'Bender',
+            score: 0,
+            isCzar: false,
+            submittedCards: [],
+            cards: [],
+          },
+          bar: {
+            name: 'Briggs',
+            score: 0,
+            isCzar: false,
+            submittedCards: [],
+            cards: [],
+          },
+          baz: {
+            name: 'Pedro',
+            score: 0,
+            isCzar: false,
+            submittedCards: [],
+            cards: [],
+          },
+        },
+        playerIDs: ['foo', 'bar', 'baz'],
+        gameSettings: { maxPlayers: 8, winningScore: 7, selectedPacks: [] },
+        deck: { black: [], white: [] },
+      };
+      render(
+        <HostContext.Provider value={{ state, dispatch }}>
+          <HostPregameScreen />
+        </HostContext.Provider>,
+      );
+
+      userEvent.click(screen.getByText('START CAROUSING'));
+
+      // only create lobby called
+      expect(dispatch).toHaveBeenCalledTimes(1);
+      expect(dispatch).not.toHaveBeenCalledWith({
+        type: 'SET_DECK',
+        payload: { selectedPacks: state.gameSettings.selectedPacks },
+      });
+      expect(dispatch).not.toHaveBeenCalledWith({
+        type: 'START_GAME',
+        payload: {},
+      });
+      expect(dispatch).not.toHaveBeenCalledWith({
+        type: 'SET_NEXT_CZAR',
+        payload: {},
+      });
     });
   });
 });

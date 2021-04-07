@@ -35,6 +35,19 @@ function sendKickPlayerMessage(payload) {
   });
 }
 
+async function getDeck({ selectedPacks }) {
+  const apiURL = process.env.REACT_APP_API_URL;
+  const queryString = selectedPacks.join(',');
+  const query = `${apiURL}/deck/cards?packs=${queryString}`;
+  try {
+    const cardsRequest = await fetch(query);
+    const cards = await cardsRequest.json();
+    return cards;
+  } catch {
+    throw new Error(`Error fetching cards. Query: ${query}`);
+  }
+}
+
 export default async function hostReducerMiddleware(
   { type, payload },
   dispatch,
@@ -56,8 +69,16 @@ export default async function hostReducerMiddleware(
       sendKickPlayerMessage(payload);
       break;
 
+    case 'SET_DECK': {
+      const deck = await getDeck(payload);
+      return dispatch({
+        type: 'SET_DECK',
+        payload: { deck },
+      });
+    }
+
     default:
       break;
   }
-  dispatch({ type, payload });
+  return dispatch({ type, payload });
 }

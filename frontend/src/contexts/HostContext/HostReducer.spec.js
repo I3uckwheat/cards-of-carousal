@@ -328,4 +328,30 @@ describe('reducer', () => {
       expect(result).toEqual(state);
     });
   });
+
+  describe('SET_DECK', () => {
+    it('sets the deck to the cards received in the payload', () => {
+      const state = {
+        foo: {
+          bar: 'baz',
+        },
+        deck: {
+          black: [],
+          white: [],
+        },
+      };
+
+      const newDeck = {
+        black: ['foo', 'bar', 'baz'],
+        white: ['boo', 'far', 'faz'],
+      };
+
+      const result = HostReducer(state, {
+        type: 'SET_DECK',
+        payload: { deck: newDeck },
+      });
+
+      expect(result).toEqual({ ...state, deck: newDeck });
+    });
+  });
 });
