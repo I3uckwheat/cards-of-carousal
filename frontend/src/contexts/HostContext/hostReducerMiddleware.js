@@ -87,12 +87,13 @@ export default async function hostReducerMiddleware(
       sendKickPlayerMessage(payload);
       break;
 
-    case 'SET_DECK': {
+    case 'GET_CARD_PACKS': {
       const deck = await getDeck(payload);
-      return dispatch({
+      dispatch({
         type: 'SET_DECK',
         payload: { deck },
       });
+      break;
     }
 
     default:

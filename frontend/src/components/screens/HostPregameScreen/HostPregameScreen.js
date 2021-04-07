@@ -99,17 +99,8 @@ function LeftPanel() {
   const handleClickStart = () => {
     // check if there are any players and if packs are selected
     if (playerIDs.length && state.gameSettings.selectedPacks.length) {
-      const { selectedPacks } = state.gameSettings;
-      dispatch({
-        type: 'SET_DECK',
-        payload: { selectedPacks },
-      });
       dispatch({
         type: 'START_GAME',
-        payload: {},
-      });
-      dispatch({
-        type: 'SET_NEXT_CZAR',
         payload: {},
       });
     }

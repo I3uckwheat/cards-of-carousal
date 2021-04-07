@@ -142,6 +142,20 @@ function setDeck(state, { deck }) {
   };
 }
 
+function goToNewRound(state) {
+  return {
+    ...state,
+    gameState: 'setting-new-round',
+  };
+}
+
+function goToPlayerSelectCards(state) {
+  return {
+    ...state,
+    gameState: 'player-select-cards',
+  };
+}
+
 function HostReducer(state, action) {
   const { type, payload } = action;
 
@@ -182,6 +196,12 @@ function HostReducer(state, action) {
 
     case 'SET_DECK':
       return setDeck(state, payload);
+
+    case 'GET_CARD_PACKS':
+      return goToNewRound(state);
+
+    case 'GO_TO_PLAYER_SELECT_CARDS':
+      return goToPlayerSelectCards(state);
 
     default:
       return { ...state };
