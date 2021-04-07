@@ -1,7 +1,9 @@
-import React, { createContext, useReducer, useEffect } from 'react';
+import React, { createContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import reducer from './playerReducer';
 import socketInstance from '../../socket/socket';
+import useReducerMiddleware from '../useReducerMiddleware';
+import playerReducerMiddleware from './playerReducerMiddleware';
 
 // when the socket receives messaged from the server, it will fire off an event from this EventEmitter
 // importing it allows us to "subscribe" to those events and update our state as needed
@@ -25,7 +27,11 @@ const propTypes = {
 export const PlayerContext = createContext();
 
 export function PlayerProvider({ children }) {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [state, dispatch] = useReducerMiddleware(
+    playerReducerMiddleware,
+    reducer,
+    initialState,
+  );
   // this function allows us to parse any incoming messages from the event emitter
   // to make sure we know how to handle them.
   function handleMessage({ event, payload }) {

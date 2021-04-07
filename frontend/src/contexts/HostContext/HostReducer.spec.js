@@ -132,6 +132,23 @@ describe('reducer', () => {
     });
   });
 
+  describe('PLAYER_SUBMIT', () => {
+    it("updates the specified player's submitted cards array with the provided indexes", () => {
+      const state = {
+        players: {
+          guy: {
+            submittedCards: [],
+          },
+        },
+      };
+      const result = HostReducer(state, {
+        type: 'PLAYER_SUBMIT',
+        payload: { selectedCards: [2, 3, 5], playerId: 'guy' },
+      });
+      expect(result.players.guy.submittedCards).toEqual([2, 3, 5]);
+    });
+  });
+
   describe('KICK_PLAYER', () => {
     it('removes given player from both state.playerIDs and state.players', () => {
       const state = {
