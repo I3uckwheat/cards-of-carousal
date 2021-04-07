@@ -22,6 +22,20 @@ function sendPlayerConnectedMessage(payload) {
   });
 }
 
+function sendCardsSubmittedMessage(payload) {
+  socketInstance.sendMessage({
+    event: 'update',
+    recipients: [payload.playerId],
+    payload: {
+      gameState: 'cards-submitted',
+      message: {
+        big: 'WAIT FOR OTHER PLAYERS',
+        small: 'Yell at them to hurry up if you wish',
+      },
+    },
+  });
+}
+
 function sendKickPlayerMessage(payload) {
   socketInstance.sendMessage({
     recipients: [payload.playerId],
@@ -63,6 +77,10 @@ export default async function hostReducerMiddleware(
 
     case 'PLAYER_CONNECTED':
       sendPlayerConnectedMessage(payload);
+      break;
+
+    case 'PLAYER_SUBMIT':
+      sendCardsSubmittedMessage(payload);
       break;
 
     case 'KICK_PLAYER':

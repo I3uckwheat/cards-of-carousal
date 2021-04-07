@@ -30,7 +30,7 @@ function HostProvider({ children }) {
     initialState,
   );
 
-  function handleMessage({ event, payload }) {
+  function handleMessage({ event, payload, sender }) {
     switch (event) {
       case 'player-connected':
         return dispatch({ type: 'PLAYER_CONNECTED', payload });
@@ -40,6 +40,11 @@ function HostProvider({ children }) {
         return dispatch({ type: 'SELECT_WINNER', payload });
       case 'lobby-created':
         return dispatch({ type: 'SET_LOBBY_ID', payload });
+      case 'player-submit':
+        return dispatch({
+          type: 'PLAYER_SUBMIT',
+          payload: { ...payload, playerId: sender },
+        });
       default:
         return undefined;
     }
