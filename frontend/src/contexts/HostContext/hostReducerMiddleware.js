@@ -22,6 +22,20 @@ function sendPlayerConnectedMessage(payload) {
   });
 }
 
+function sendCardsSubmittedMessage(payload) {
+  socketInstance.sendMessage({
+    event: 'update',
+    recipients: [payload.playerId],
+    payload: {
+      gameState: 'cards-submitted',
+      message: {
+        big: 'WAIT FOR OTHER PLAYERS',
+        small: 'Yell at them to hurry up if you wish',
+      },
+    },
+  });
+}
+
 function sendKickPlayerMessage(payload) {
   socketInstance.sendMessage({
     recipients: [payload.playerId],
@@ -36,14 +50,15 @@ function sendKickPlayerMessage(payload) {
 }
 
 async function getDeck({ selectedPacks }) {
+  const apiURL = process.env.REACT_APP_API_URL;
+  const queryString = selectedPacks.join(',');
+  const query = `${apiURL}/deck/cards?packs=${queryString}`;
   try {
-    const apiURL = process.env.REACT_APP_API_URL;
-    const query = selectedPacks.join(',');
-    const cardsRequest = await fetch(`${apiURL}/deck/cards?packs=${query}`);
+    const cardsRequest = await fetch(query);
     const cards = await cardsRequest.json();
     return cards;
-  } catch (err) {
-    throw new Error(err);
+  } catch {
+    throw new Error(`Error fetching cards. Query: ${query}`);
   }
 }
 
@@ -96,6 +111,10 @@ export default async function hostReducerMiddleware(
 
     case 'PLAYER_CONNECTED':
       sendPlayerConnectedMessage(payload);
+      break;
+
+    case 'PLAYER_SUBMIT':
+      sendCardsSubmittedMessage(payload);
       break;
 
     case 'KICK_PLAYER':

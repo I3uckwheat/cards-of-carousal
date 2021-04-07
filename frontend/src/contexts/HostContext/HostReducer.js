@@ -22,6 +22,19 @@ function playerConnected(state, { playerId, playerName }) {
   };
 }
 
+function updatePlayerCards(state, { selectedCards, playerId }) {
+  return {
+    ...state,
+    players: {
+      ...state.players,
+      [playerId]: {
+        ...state.players[playerId],
+        submittedCards: selectedCards,
+      },
+    },
+  };
+}
+
 function removePlayer(state, { playerId }) {
   // Removes the value playerId from the original playerIDs array
   const newPlayerIds = state.playerIDs.filter(
@@ -42,6 +55,7 @@ function removePlayer(state, { playerId }) {
 
 function selectWinner(state, payload) {
   // TODO: HANDLE MESSAGE
+  // eslint-disable-next-line no-console
   console.log(state, payload);
 }
 function setLobbyId(state, { id }) {
@@ -140,6 +154,9 @@ function HostReducer(state, action) {
 
     case 'PLAYER_DISCONNECTED':
       return removePlayer(state, payload);
+
+    case 'PLAYER_SUBMIT':
+      return updatePlayerCards(state, payload);
 
     case 'KICK_PLAYER':
       return removePlayer(state, payload);

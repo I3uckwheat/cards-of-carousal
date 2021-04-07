@@ -151,6 +151,33 @@ describe('reducer', () => {
     });
   });
 
+  describe('SUBMIT_CARDS', () => {
+    it('returns a copy of state with the gameState and message set properly', () => {
+      const state = {
+        gameState: 'test state',
+        message: {
+          big: 'Test',
+          small: 'test',
+        },
+      };
+
+      const result = reducer(state, { type: 'SUBMIT_CARDS', payload: {} });
+
+      expect(result).not.toBe({
+        gameState: 'test state',
+        message: {
+          big: 'Test',
+          small: 'test',
+        },
+      });
+      expect(result.gameState).toEqual('submitting-cards');
+      expect(result.message).toEqual({
+        big: 'Submitting your cards',
+        small: 'Please wait',
+      });
+    });
+  });
+
   describe('SUBMIT_WINNER', () => {
     it('sends a message to the host with the correct event and payload', () => {
       const state = {};

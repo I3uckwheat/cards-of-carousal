@@ -11,6 +11,17 @@ function joinLobby(state) {
   };
 }
 
+function submitCards(state) {
+  return {
+    ...state,
+    gameState: 'submitting-cards',
+    message: {
+      big: 'Submitting your cards',
+      small: 'Please wait',
+    },
+  };
+}
+
 function update(state, payload) {
   return {
     ...state,
@@ -58,8 +69,7 @@ function reducer(state, action) {
     case 'ERROR_DISCONNECT':
       return errorDisconnect(state);
     case 'SUBMIT_CARDS':
-      socketInstance.sendMessage('select-cards', payload);
-      return { ...state };
+      return submitCards(state);
     case 'SUBMIT_WINNER':
       return submitWinner(state, payload);
     case 'DEAL_WHITE_CARDS':
