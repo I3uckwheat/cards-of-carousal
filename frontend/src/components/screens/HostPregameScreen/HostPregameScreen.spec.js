@@ -1,5 +1,6 @@
 import React from 'react';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import renderer from 'react-test-renderer';
 import { HostContext } from '../../../contexts/HostContext/HostContext';
 import HostPregameScreen from './HostPregameScreen';
@@ -85,7 +86,7 @@ describe('Host Pregame Screen', () => {
         </HostContext.Provider>,
       );
 
-      fireEvent.click(screen.getByText('CLOSE GAME'));
+      userEvent.click(screen.getByText('CLOSE GAME'));
 
       expect(window.location.reload).toHaveBeenCalledTimes(1);
       // create lobby, close game
@@ -96,7 +97,7 @@ describe('Host Pregame Screen', () => {
       });
     });
 
-    it('calls a dispatch when the start button is pressed', async () => {
+    it('calls dispatches with the proper payloads when the starting conditions are met and the start button is pressed', async () => {
       setupFetchMock({
         black: ['foo', 'bar', 'baz'],
         white: ['boo', 'far', 'faz'],
@@ -128,7 +129,7 @@ describe('Host Pregame Screen', () => {
             cards: [],
           },
         },
-        playerIDs: [],
+        playerIDs: ['foo', 'bar', 'baz'],
         gameSettings: {
           maxPlayers: 8,
           winningScore: 7,
@@ -143,7 +144,7 @@ describe('Host Pregame Screen', () => {
         </HostContext.Provider>,
       );
 
-      fireEvent.click(screen.getByText('START CAROUSING'));
+      userEvent.click(screen.getByText('START CAROUSING'));
 
       // create lobby, get deck, set game state, set new czar, get black card
       expect(dispatch).toHaveBeenCalledTimes(5);
@@ -172,7 +173,7 @@ describe('Host Pregame Screen', () => {
         </HostContext.Provider>,
       );
 
-      fireEvent.click(screen.getByText('START CAROUSING'));
+      userEvent.click(screen.getByText('START CAROUSING'));
 
       // only create lobby called
       expect(dispatch).toHaveBeenCalledTimes(1);
@@ -205,7 +206,7 @@ describe('Host Pregame Screen', () => {
             cards: [],
           },
         },
-        playerIDs: [],
+        playerIDs: ['foo', 'bar', 'baz'],
         gameSettings: { maxPlayers: 8, winningScore: 7, selectedPacks: [] },
         deck: { black: [], white: [] },
       };
@@ -215,10 +216,22 @@ describe('Host Pregame Screen', () => {
         </HostContext.Provider>,
       );
 
-      fireEvent.click(screen.getByText('START CAROUSING'));
+      userEvent.click(screen.getByText('START CAROUSING'));
 
       // only create lobby called
       expect(dispatch).toHaveBeenCalledTimes(1);
+      expect(dispatch).not.toHaveBeenCalledWith({
+        type: 'SET_DECK',
+        payload: { selectedPacks: state.gameSettings.selectedPacks },
+      });
+      expect(dispatch).not.toHaveBeenCalledWith({
+        type: 'START_GAME',
+        payload: {},
+      });
+      expect(dispatch).not.toHaveBeenCalledWith({
+        type: 'SET_NEXT_CZAR',
+        payload: {},
+      });
     });
   });
 });

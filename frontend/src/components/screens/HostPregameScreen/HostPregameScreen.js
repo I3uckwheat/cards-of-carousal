@@ -98,10 +98,7 @@ function LeftPanel() {
 
   const handleClickStart = () => {
     // check if there are any players and if packs are selected
-    if (
-      Object.keys(state.players).length &&
-      state.gameSettings.selectedPacks.length
-    ) {
+    if (playerIDs.length && state.gameSettings.selectedPacks.length) {
       const { selectedPacks } = state.gameSettings;
       dispatch({
         type: 'SET_DECK',
