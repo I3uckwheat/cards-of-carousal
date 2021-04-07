@@ -328,4 +328,23 @@ describe('reducer', () => {
       expect(result).toEqual(state);
     });
   });
+
+  describe('UPDATE_JOIN_CODE', () => {
+    it('returns the state with the updated join code', () => {
+      const state = {
+        gameState: 'foo',
+        lobbyID: 'AAAA',
+      };
+
+      const result = HostReducer(state, {
+        type: 'UPDATE_JOIN_CODE',
+        payload: { lobbyID: 'ABCD' },
+      });
+
+      expect(result).toEqual({
+        gameState: 'foo',
+        lobbyID: 'ABCD',
+      });
+    });
+  });
 });

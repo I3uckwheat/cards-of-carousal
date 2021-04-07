@@ -100,4 +100,23 @@ describe('hostReducerMiddleware', () => {
       });
     });
   });
+
+  describe('SHUFFLE_JOIN_CODE', () => {
+    it("calls socketInstance's sendMessage with a shuffle join code message object", () => {
+      const dispatch = jest.fn();
+
+      hostReducerMiddleware(
+        {
+          type: 'SHUFFLE_JOIN_CODE',
+          payload: {},
+        },
+        dispatch,
+      );
+
+      expect(socketInstance.sendMessage).toHaveBeenCalledWith({
+        event: 'shuffle-join-code',
+        payload: {},
+      });
+    });
+  });
 });
