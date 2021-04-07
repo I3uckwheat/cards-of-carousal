@@ -4,10 +4,11 @@ const envPath = process.argv[2];
 require('dotenv').config({ path: `${envPath}/.env` });
 
 const sampleEnv = fs.readFileSync(`${envPath}/sample.env`, 'utf-8');
-const envVars = sampleEnv.split('\n')
+const envVars = sampleEnv
+  .split('\n')
   // Filter out comments and empty lines
-  .filter(line => line[0] !== '#' && line.trim())
-  .map(line => line.split('=')[0]);
+  .filter((line) => line[0] !== '#' && line.trim())
+  .map((line) => line.split('=')[0]);
 
 let hasError = false;
 envVars.forEach((envVar) => {
@@ -18,4 +19,5 @@ envVars.forEach((envVar) => {
   }
 });
 
-if (hasError) throw new Error('Missing environment variables. Check sample.env.');
+if (hasError)
+  throw new Error('Missing environment variables. Check sample.env.');

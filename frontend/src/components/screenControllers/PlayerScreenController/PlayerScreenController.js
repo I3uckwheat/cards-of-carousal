@@ -18,6 +18,8 @@ export default function PlayerScreenController() {
 
     case 'pending-connection':
     case 'connected':
+    case 'submitting-cards':
+    case 'cards-submitted':
       return (
         <PlayerMessageScreen bigText={message.big} smallText={message.small} />
       );

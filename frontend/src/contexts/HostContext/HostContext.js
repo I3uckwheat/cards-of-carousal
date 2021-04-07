@@ -33,7 +33,7 @@ function HostProvider({ children }) {
     initialState,
   );
 
-  function handleMessage({ event, payload }) {
+  function handleMessage({ event, payload, sender }) {
     switch (event) {
       case 'player-connected':
         return dispatch({ type: 'PLAYER_CONNECTED', payload });
@@ -45,6 +45,11 @@ function HostProvider({ children }) {
         return dispatch({ type: 'SET_LOBBY_ID', payload });
       case 'black-card-selected':
         return dispatch({ type: 'SELECT_BLACK_CARD', payload });
+      case 'player-submit':
+        return dispatch({
+          type: 'PLAYER_SUBMIT',
+          payload: { ...payload, playerId: sender },
+        });
       default:
         return undefined;
     }
