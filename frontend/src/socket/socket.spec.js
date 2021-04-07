@@ -68,7 +68,7 @@ describe('socketInstance', () => {
       const { MockSocket } = setupMockSocket();
       socketInstance.joinLobby('myid', 'myname');
       expect(MockSocket).toHaveBeenCalledWith(
-        'ws://test.com/lobby/myid/myname',
+        'ws://test.com/lobby/myid?name=myname',
       );
     });
 
