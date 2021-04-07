@@ -62,7 +62,6 @@ function reducer(state, action) {
     case 'ERROR_DISCONNECT':
       return errorDisconnect(state);
     case 'SUBMIT_CARDS':
-      socketInstance.sendMessage({ event: 'player-submit', payload });
       return submitCards(state);
     case 'SUBMIT_WINNER':
       return submitWinner(state, payload);
