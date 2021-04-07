@@ -106,7 +106,7 @@ describe('hostReducerMiddleware', () => {
       jest.clearAllMocks();
     });
 
-    it('calls fetch on the url passed in, and calls dispatch with the retrieved data', async () => {
+    it('calls fetch on the url passed in', async () => {
       const dispatch = jest.fn();
       const testPacks = [0, 1, 2, 3, 4, 5];
       const testQuery = '/deck/cards?packs=0,1,2,3,4,5';
