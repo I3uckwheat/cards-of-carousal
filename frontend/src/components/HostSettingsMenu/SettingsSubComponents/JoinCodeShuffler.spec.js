@@ -4,9 +4,7 @@ import userEvent from '@testing-library/user-event';
 import renderer from 'react-test-renderer';
 
 import JoinCodeShuffler from './JoinCodeShuffler';
-import HostProvider, {
-  HostContext,
-} from '../../../contexts/HostContext/HostContext';
+import { HostContext } from '../../../contexts/HostContext/HostContext';
 
 // mock the OptionButton component that is imported into JoinCodeShuffler
 jest.mock(
