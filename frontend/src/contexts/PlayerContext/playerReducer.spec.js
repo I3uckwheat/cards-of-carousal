@@ -178,7 +178,7 @@ describe('reducer', () => {
         payload: { selectedCards: [1, 2, 3] },
       });
 
-      expect(result).not.toBe(state);
+      expect(result).not.toBe({});
       expect(socketInstance.sendMessage).toHaveBeenCalledWith({
         event: 'player-submit',
         payload: { selectedCards: [1, 2, 3] },
