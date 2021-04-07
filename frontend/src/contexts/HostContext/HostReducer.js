@@ -1,4 +1,3 @@
-/* eslint-disable */
 function createLobby(state) {
   return {
     ...state,
