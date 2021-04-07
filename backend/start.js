@@ -2,8 +2,6 @@ const dotenv = require('dotenv');
 
 dotenv.config();
 
-require('./env-setup.js');
-
 const app = require('./app/express.js');
 
 /* ======= Start socket service ======= */
