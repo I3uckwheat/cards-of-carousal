@@ -18,14 +18,14 @@ export default function HostScreenController() {
         });
         break;
       case 'setting-new-round':
-        // TODO: add getting black card here
+        // TODO: add getting black card here, BEFORE setting next czar
         dispatch({
           type: 'SET_NEXT_CZAR',
           payload: {},
         });
         dispatch({ type: 'GO_TO_PLAYER_SELECT_CARDS', payload: {} });
         break;
-      // TODO: add player-select-cards dealing of cards effect here, BEFORE setting next czar
+      // TODO: add player-select-cards dealing of cards effect here
       default:
         break;
     }
