@@ -62,10 +62,10 @@ async function getDeck({ selectedPacks }) {
   }
 }
 
-function dealWhiteCards({ deck, playerIDs, selectedBlackCard }) {
+function dealWhiteCards({ deck, playerIDs, selectedBlackCard, cardsToDeal }) {
   const removedCards = [];
   const newWhiteCards = [...deck.white];
-  const numberOfTotalDraws = selectedBlackCard.pick * playerIDs.length;
+  const numberOfTotalDraws = cardsToDeal * playerIDs.length;
 
   // Draw all cards needed to deal, and remove them from the deck
   for (let i = 0; i < numberOfTotalDraws; i += 1) {
@@ -78,13 +78,16 @@ function dealWhiteCards({ deck, playerIDs, selectedBlackCard }) {
 
   // pass the correct number of random cards to each player
   playerIDs.forEach((player) => {
-    const cardsToDeal = [];
-    for (let i = 0; i < selectedBlackCard.pick; i += 1) {
-      cardsToDeal.push(removedCards.pop());
+    const cardsToBeDealt = [];
+    for (let i = 0; i < cardsToDeal; i += 1) {
+      cardsToBeDealt.push(removedCards.pop());
     }
     socketInstance.sendMessage({
       event: 'deal-white-cards',
-      payload: cardsToDeal,
+      payload: {
+        cards: cardsToBeDealt,
+        selectCardCount: selectedBlackCard.pick,
+      },
       recipients: [player],
     });
   });
@@ -130,11 +133,25 @@ export default async function hostReducerMiddleware(
     }
 
     case 'DEAL_WHITE_CARDS': {
-      const deck = dealWhiteCards(payload);
-      return dispatch({
-        type: 'SET_DECK',
-        payload: { deck },
-      });
+      // check if payload contains necessary properties
+      const requiredProperties = [
+        'deck',
+        'playerIDs',
+        'selectedBlackCard',
+        'cardsToDeal',
+      ];
+      if (requiredProperties.every((property) => property in payload)) {
+        const deck = dealWhiteCards(payload);
+        return dispatch({
+          type: 'SET_DECK',
+          payload: { deck },
+        });
+      }
+      throw new Error(
+        `DEAL_WHITE_CARDS action requires the following properties in the payload: ${requiredProperties.join(
+          ', ',
+        )}. Received: ${Object.keys(payload).join(', ')}`,
+      );
     }
     default:
       break;

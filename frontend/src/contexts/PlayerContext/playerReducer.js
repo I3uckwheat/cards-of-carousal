@@ -52,9 +52,11 @@ function submitWinner(state, { id }) {
 }
 
 function dealWhiteCards(state, payload) {
+  const { cards, selectCardCount } = payload;
   return {
     ...state,
-    cards: payload,
+    cards,
+    selectCardCount,
   };
 }
 
