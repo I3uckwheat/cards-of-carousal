@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { bool } from 'prop-types';
 
 const propTypes = {
@@ -18,14 +18,12 @@ const Button = styled.button`
   font-size: 12px;
   font-weight: bold;
   padding: 0.7em;
-  background: ${(props) =>
-    props.isActive
-      ? 'var(--primary-background-color)'
-      : 'var(--secondary-background-color)'};
-  color: ${(props) =>
-    props.isActive
-      ? 'var(--primary-text-color)'
-      : 'var(--secondary-text-color)'};
+  background: var(--secondary-background-color);
+  color: var(--secondary-text-color);
+  ${props => props.isActive && css`
+    background: var(--primary-background-color);
+    color: var(--primary-text-color);
+  `}
 
   :hover,
   :active,
