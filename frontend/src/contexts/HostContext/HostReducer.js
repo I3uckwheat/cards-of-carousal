@@ -22,6 +22,19 @@ function playerConnected(state, { playerId, playerName }) {
   };
 }
 
+function updatePlayerCards(state, { selectedCards, playerId }) {
+  return {
+    ...state,
+    players: {
+      ...state.players,
+      [playerId]: {
+        ...state.players[playerId],
+        submittedCards: selectedCards,
+      },
+    },
+  };
+}
+
 function removePlayer(state, { playerId }) {
   // Removes the value playerId from the original playerIDs array
   const newPlayerIds = state.playerIDs.filter(
@@ -122,6 +135,13 @@ function closeGame(state) {
   };
 }
 
+function setDeck(state, { deck }) {
+  return {
+    ...state,
+    deck,
+  };
+}
+
 function updateJoinCode(state, { lobbyID }) {
   return { ...state, lobbyID };
 }
@@ -139,12 +159,16 @@ function HostReducer(state, action) {
     case 'PLAYER_DISCONNECTED':
       return removePlayer(state, payload);
 
+    case 'PLAYER_SUBMIT':
+      return updatePlayerCards(state, payload);
+
     case 'KICK_PLAYER':
       return removePlayer(state, payload);
 
     case 'SELECT_WINNER':
       // TODO: HANDLE PAYLOAD AND TEST
       return selectWinner(state, payload);
+
     case 'SET_LOBBY_ID':
       return setLobbyId(state, payload);
 
@@ -159,6 +183,9 @@ function HostReducer(state, action) {
 
     case 'CLOSE_GAME':
       return closeGame(state);
+
+    case 'SET_DECK':
+      return setDeck(state, payload);
 
     case 'UPDATE_JOIN_CODE':
       return updateJoinCode(state, payload);

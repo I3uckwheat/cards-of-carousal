@@ -132,6 +132,23 @@ describe('reducer', () => {
     });
   });
 
+  describe('PLAYER_SUBMIT', () => {
+    it("updates the specified player's submitted cards array with the provided indexes", () => {
+      const state = {
+        players: {
+          guy: {
+            submittedCards: [],
+          },
+        },
+      };
+      const result = HostReducer(state, {
+        type: 'PLAYER_SUBMIT',
+        payload: { selectedCards: [2, 3, 5], playerId: 'guy' },
+      });
+      expect(result.players.guy.submittedCards).toEqual([2, 3, 5]);
+    });
+  });
+
   describe('KICK_PLAYER', () => {
     it('removes given player from both state.playerIDs and state.players', () => {
       const state = {
@@ -326,6 +343,32 @@ describe('reducer', () => {
 
       const result = HostReducer(state, { type: 'CLOSE_GAME', payload: {} });
       expect(result).toEqual(state);
+    });
+  });
+
+  describe('SET_DECK', () => {
+    it('sets the deck to the cards received in the payload', () => {
+      const state = {
+        foo: {
+          bar: 'baz',
+        },
+        deck: {
+          black: [],
+          white: [],
+        },
+      };
+
+      const newDeck = {
+        black: ['foo', 'bar', 'baz'],
+        white: ['boo', 'far', 'faz'],
+      };
+
+      const result = HostReducer(state, {
+        type: 'SET_DECK',
+        payload: { deck: newDeck },
+      });
+
+      expect(result).toEqual({ ...state, deck: newDeck });
     });
   });
 

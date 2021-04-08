@@ -18,6 +18,7 @@ const initialState = {
   players: {},
   playerIDs: [],
   gameSettings: { maxPlayers: 8, winningScore: 7, selectedPacks: [] },
+  deck: { black: [], white: [] },
 };
 
 export const HostContext = createContext();
@@ -29,18 +30,29 @@ function HostProvider({ children }) {
     initialState,
   );
 
-  function handleMessage({ event, payload }) {
+  function handleMessage({ event, payload, sender }) {
     switch (event) {
       case 'player-connected':
         return dispatch({ type: 'PLAYER_CONNECTED', payload });
+
       case 'player-disconnected':
         return dispatch({ type: 'PLAYER_DISCONNECTED', payload });
+
       case 'select-winner':
         return dispatch({ type: 'SELECT_WINNER', payload });
+
       case 'lobby-created':
         return dispatch({ type: 'SET_LOBBY_ID', payload });
+
       case 'join-code-shuffled':
         return dispatch({ type: 'UPDATE_JOIN_CODE', payload });
+
+      case 'player-submit':
+        return dispatch({
+          type: 'PLAYER_SUBMIT',
+          payload: { ...payload, playerId: sender },
+        });
+
       default:
         return undefined;
     }

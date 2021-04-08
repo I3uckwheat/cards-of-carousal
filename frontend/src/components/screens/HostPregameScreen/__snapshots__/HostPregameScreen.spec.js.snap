@@ -106,108 +106,6 @@ exports[`Host Pregame Screen rendering renders 1`] = `
   margin-bottom: 24px;
 }
 
-.c8 {
-  position: relative;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  height: 100%;
-  background-color: var(--secondary-background-color);
-  color: var(--secondary-text-color);
-  overflow-y: auto;
-}
-
-.c8 h1 {
-  margin-left: auto;
-  font-size: 4rem;
-  line-height: 4rem;
-  margin-top: -0.5rem;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  position: absolute;
-  right: 0;
-  top: 0;
-}
-
-.c9 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  padding: 24px 0 24px 60px;
-}
-
-.c9 .number-input-wrapper label {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  width: 400px;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  font-weight: bold;
-}
-
-.c9 input[type='number'] {
-  font-weight: bold;
-  text-align: center;
-  width: 80px;
-}
-
-.c9 .select-wrapper {
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-}
-
-.c9 .select-wrapper h2 {
-  font-size: 1rem;
-  font-weight: bold;
-  height: 30px;
-}
-
-.c9 .card-packs {
-  display: grid;
-  gap: 20px;
-  grid-template-columns: repeat(auto-fill,minmax(420px,1fr));
-  grid-template-rows: auto;
-  border: none;
-  margin: 0;
-  padding: 0 0 16px 0;
-}
-
-.c9 .card-packs label {
-  margin-right: 12px;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  margin-bottom: auto;
-}
-
-.c9 input[type='checkbox'] {
-  margin: 4px 11px auto 0;
-}
-
 .c6 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -426,12 +324,6 @@ exports[`Host Pregame Screen rendering renders 1`] = `
   }
 }
 
-@media only screen and (max-width:980px) {
-  .c8 h1 {
-    position: static;
-  }
-}
-
 <div
   className="c0 primary-background"
 >
@@ -543,58 +435,8 @@ exports[`Host Pregame Screen rendering renders 1`] = `
           className="bottom"
         >
           <div
-            className="c8"
-          >
-            <h1>
-              GAME SETTINGS
-            </h1>
-            <form
-              className="c9"
-            >
-              <div
-                className="number-input-wrapper"
-              >
-                <label
-                  htmlFor="maxPlayers"
-                >
-                  MAX PLAYERS
-                  <input
-                    id="maxPlayers"
-                    max="12"
-                    min="2"
-                    name="maxPlayers"
-                    onChange={[Function]}
-                    type="number"
-                    value={8}
-                  />
-                </label>
-                <label
-                  htmlFor="winningScore"
-                >
-                  WINNING SCORE
-                  <input
-                    id="winningScore"
-                    max="15"
-                    min="1"
-                    name="winningScore"
-                    onChange={[Function]}
-                    type="number"
-                    value={7}
-                  />
-                </label>
-              </div>
-              <div
-                className="select-wrapper"
-              >
-                <h2>
-                  SELECT CARD PACKS
-                </h2>
-                <div
-                  className="card-packs"
-                />
-              </div>
-            </form>
-          </div>
+            data-testid="game-settings"
+          />
         </div>
       </div>
     </div>
