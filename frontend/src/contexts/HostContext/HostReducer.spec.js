@@ -390,4 +390,67 @@ describe('reducer', () => {
       });
     });
   });
+
+  describe('PREVIEW_WINNER', () => {
+    it('returns the state with updated submittedCards for the current czar', () => {
+      const state = {
+        players: {
+          ID1: {
+            name: 'foo',
+            score: 0,
+            isCzar: false,
+            submittedCards: [0, 1],
+            cards: ['aaaa', 'bbbb', 'cccc', 'dddd'],
+          },
+          ID2: {
+            name: 'bar',
+            score: 0,
+            isCzar: true,
+            submittedCards: [],
+            cards: [],
+          },
+          ID3: {
+            name: 'baz',
+            score: 0,
+            isCzar: false,
+            submittedCards: [1, 2],
+            cards: ['eeee', 'ffff', 'gggg', 'hhhh'],
+          },
+        },
+        playerIDs: ['ID1', 'ID2', 'ID3'],
+      };
+
+      const result = HostReducer(state, {
+        type: 'PREVIEW_WINNER',
+        payload: { selectedGroupIndex: 2 },
+      });
+
+      expect(result).toEqual({
+        players: {
+          ID1: {
+            name: 'foo',
+            score: 0,
+            isCzar: false,
+            submittedCards: [0, 1],
+            cards: ['aaaa', 'bbbb', 'cccc', 'dddd'],
+          },
+          ID2: {
+            name: 'bar',
+            score: 0,
+            isCzar: true,
+            submittedCards: [2],
+            cards: [],
+          },
+          ID3: {
+            name: 'baz',
+            score: 0,
+            isCzar: false,
+            submittedCards: [1, 2],
+            cards: ['eeee', 'ffff', 'gggg', 'hhhh'],
+          },
+        },
+        playerIDs: ['ID1', 'ID2', 'ID3'],
+      });
+    });
+  });
 });
