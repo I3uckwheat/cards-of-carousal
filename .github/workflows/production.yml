@@ -4,12 +4,7 @@
 
 name: Backend - Production
 on:
-  release:
-    types:
-      - published
-      - created
-      - released
-      - edited
+  release
 
 jobs:
   docker:
