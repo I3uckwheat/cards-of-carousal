@@ -53,11 +53,31 @@ function removePlayer(state, { playerId }) {
   };
 }
 
+function previewWinner(state, { id }) {
+  const currentCzarIndex = Object.values(state.players).findIndex(
+    (player) => player.isCzar,
+  );
+  const currentCzarId = state.playerIDs[currentCzarIndex];
+  const currentCzar = state.players[currentCzarId];
+
+  return {
+    ...state,
+    players: {
+      ...state.players,
+      [currentCzarId]: {
+        ...currentCzar,
+        submittedCards: [id],
+      },
+    },
+  };
+}
+
 function selectWinner(state, payload) {
   // TODO: HANDLE MESSAGE
   // eslint-disable-next-line no-console
   console.log(state, payload);
 }
+
 function setLobbyId(state, { id }) {
   return {
     ...state,
@@ -164,6 +184,9 @@ function HostReducer(state, action) {
 
     case 'KICK_PLAYER':
       return removePlayer(state, payload);
+
+    case 'PREVIEW_WINNER':
+      return previewWinner(state, payload);
 
     case 'SELECT_WINNER':
       // TODO: HANDLE PAYLOAD AND TEST
