@@ -43,7 +43,7 @@ export function PlayerProvider({ children }) {
       case 'error-disconnect':
         return dispatch({ type: 'ERROR_DISCONNECT', payload });
       case 'deal-white-cards':
-        return dispatch({ type: 'DEAL_WHITE_CARDS', payload });
+        return dispatch({ type: 'RECEIVE_WHITE_CARDS', payload });
       default:
         return undefined;
     }

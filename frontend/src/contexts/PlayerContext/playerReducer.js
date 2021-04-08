@@ -51,7 +51,7 @@ function submitWinner(state, { id }) {
   };
 }
 
-function dealWhiteCards(state, payload) {
+function receiveWhiteCards(state, payload) {
   const { cards, selectCardCount } = payload;
   return {
     ...state,
@@ -74,8 +74,8 @@ function reducer(state, action) {
       return submitCards(state);
     case 'SUBMIT_WINNER':
       return submitWinner(state, payload);
-    case 'DEAL_WHITE_CARDS':
-      return dealWhiteCards(state, payload);
+    case 'RECEIVE_WHITE_CARDS':
+      return receiveWhiteCards(state, payload);
     default:
       return { ...state };
   }

@@ -194,4 +194,26 @@ describe('reducer', () => {
       });
     });
   });
+
+  describe('RECEIVE_WHITE_CARDS', () => {
+    it('puts the received cards into state', () => {
+      const state = {
+        cards: [{ text: 'test' }, { text: 'test' }, { text: 'test' }],
+        selectCardCount: 0,
+        testState: 'test state',
+      };
+
+      const testPayload = {
+        cards: [{ text: 'foo' }, { text: 'bar' }, { text: 'baz' }],
+        selectCardCount: 2,
+      };
+
+      const result = reducer(state, {
+        type: 'RECEIVE_WHITE_CARDS',
+        payload: testPayload,
+      });
+
+      expect(result).toEqual({ ...state, ...testPayload });
+    });
+  });
 });
