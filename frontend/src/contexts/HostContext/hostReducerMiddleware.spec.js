@@ -363,7 +363,7 @@ describe('hostReducerMiddleware', () => {
       // omit deck
       const { playerIDs, selectedBlackCard } = state;
 
-      await expect(async () =>
+      await expect(() =>
         hostReducerMiddleware(
           {
             type: 'DEAL_WHITE_CARDS',
