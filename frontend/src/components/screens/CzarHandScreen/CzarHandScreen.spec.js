@@ -51,6 +51,22 @@ describe('CzarHandScreen', () => {
 
       expect(dispatch).toHaveBeenCalledTimes(1);
     });
+
+    it('dispatches PREVIEW_WINNER event with the correct group index when tapped', () => {
+      render(
+        <PlayerContext.Provider value={{ state, dispatch }}>
+          <CzarHandScreen />
+        </PlayerContext.Provider>,
+      );
+
+      const cardWrappers = screen.queryAllByTestId('card-wrapper');
+      userEvent.click(cardWrappers[1]);
+
+      expect(dispatch).toHaveBeenCalledWith({
+        type: 'PREVIEW_WINNER',
+        payload: { selectedGroupIndex: 1 },
+      });
+    });
   });
 
   describe('submit button', () => {
