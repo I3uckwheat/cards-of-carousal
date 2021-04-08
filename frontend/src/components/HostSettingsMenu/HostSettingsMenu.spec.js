@@ -42,6 +42,18 @@ describe('HostSettingsMenu', () => {
       ).toBeInTheDocument();
     });
 
+    it('renders the shuffle join code button', () => {
+      render(
+        <HostProvider>
+          <HostSettingsMenu />
+        </HostProvider>,
+      );
+
+      expect(
+        screen.getByRole('button', { name: 'SHUFFLE JOIN CODE' }),
+      ).toBeInTheDocument();
+    });
+
     it('matches the expected snapshot', () => {
       const tree = renderer
         .create(

@@ -62,6 +62,13 @@ async function getDeck({ selectedPacks }) {
   }
 }
 
+function sendShuffleJoinCodeMessage() {
+  socketInstance.sendMessage({
+    event: 'shuffle-join-code',
+    payload: {},
+  });
+}
+
 export default async function hostReducerMiddleware(
   { type, payload },
   dispatch,
@@ -94,6 +101,10 @@ export default async function hostReducerMiddleware(
         payload: { deck },
       });
     }
+
+    case 'SHUFFLE_JOIN_CODE':
+      sendShuffleJoinCodeMessage();
+      break;
 
     default:
       break;
