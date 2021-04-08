@@ -4,7 +4,9 @@
 
 name: Backend - Production
 on:
-  release
+  release:
+    types:
+      - published
 
 jobs:
   docker:
