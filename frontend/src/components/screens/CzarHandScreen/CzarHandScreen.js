@@ -14,7 +14,10 @@ export default function CzarHandScreen() {
 
   const submitPreview = (selected) => {
     setSelection(selected);
-    dispatch({ type: 'PREVIEW_WINNER', payload: { id: selected } });
+    dispatch({
+      type: 'PREVIEW_WINNER',
+      payload: { selectedGroupIndex: selected },
+    });
   };
 
   return (

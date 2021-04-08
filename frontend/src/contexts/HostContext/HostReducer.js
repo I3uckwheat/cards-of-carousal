@@ -53,7 +53,7 @@ function removePlayer(state, { playerId }) {
   };
 }
 
-function previewWinner(state, { id }) {
+function previewWinner(state, { selectedGroupIndex }) {
   const currentCzarIndex = Object.values(state.players).findIndex(
     (player) => player.isCzar,
   );
@@ -66,7 +66,7 @@ function previewWinner(state, { id }) {
       ...state.players,
       [currentCzarId]: {
         ...currentCzar,
-        submittedCards: [id],
+        submittedCards: [selectedGroupIndex],
       },
     },
   };

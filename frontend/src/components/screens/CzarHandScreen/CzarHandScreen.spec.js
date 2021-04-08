@@ -28,7 +28,7 @@ describe('CzarHandScreen', () => {
     });
   });
 
-  describe('dispatch', () => {
+  describe('cards groups', () => {
     const state = {
       cards: [
         ['Card One', 'Card Two', 'Card Three'],
@@ -39,7 +39,32 @@ describe('CzarHandScreen', () => {
 
     const dispatch = jest.fn();
 
-    it('calls dispatch when the submit button is clicked', () => {
+    it('dispatches PREVIEW_WINNER event as a message when tapped', () => {
+      render(
+        <PlayerContext.Provider value={{ state, dispatch }}>
+          <CzarHandScreen />
+        </PlayerContext.Provider>,
+      );
+
+      const cardWrappers = screen.queryAllByTestId('card-wrapper');
+      userEvent.click(cardWrappers[0]);
+
+      expect(dispatch).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  describe('submit button', () => {
+    const state = {
+      cards: [
+        ['Card One', 'Card Two', 'Card Three'],
+        ['Card Four', 'Card Five', 'Card Six'],
+        ['Card Seven', 'Card Eight', 'Card Nine'],
+      ],
+    };
+
+    const dispatch = jest.fn();
+
+    it('dispatches SUBMIT_WINNER event as a message when clicked', () => {
       render(
         <PlayerContext.Provider value={{ state, dispatch }}>
           <CzarHandScreen />
