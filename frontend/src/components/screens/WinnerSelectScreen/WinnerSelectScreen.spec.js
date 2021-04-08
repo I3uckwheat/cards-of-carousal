@@ -47,22 +47,22 @@ describe('WinnerSelectScreen', () => {
             name: 'foo',
             score: 0,
             isCzar: false,
-            submittedCards: ['aaaa', 'bbbb'],
-            cards: [],
+            submittedCards: [0, 1],
+            cards: ['aaaa', 'bbbb', 'cccc', 'dddd'],
           },
           ID2: {
             name: 'bar',
             score: 0,
             isCzar: true,
-            submittedCards: ['2'],
+            submittedCards: [2],
             cards: [],
           },
           ID3: {
             name: 'baz',
             score: 0,
             isCzar: false,
-            submittedCards: ['cccc', 'dddd'],
-            cards: [],
+            submittedCards: [1, 2],
+            cards: ['eeee', 'ffff', 'gggg', 'hhhh'],
           },
         },
         playerIDs: ['ID1', 'ID2', 'ID3'],
@@ -97,22 +97,22 @@ describe('WinnerSelectScreen', () => {
             name: 'foo',
             score: 0,
             isCzar: false,
-            submittedCards: ['aaaa', 'bbbb'],
-            cards: [],
+            submittedCards: [0, 1],
+            cards: ['aaaa', 'bbbb', 'cccc', 'dddd'],
           },
           ID2: {
             name: 'bar',
             score: 0,
             isCzar: true,
-            submittedCards: ['2'],
+            submittedCards: [2],
             cards: [],
           },
           ID3: {
             name: 'baz',
             score: 0,
             isCzar: false,
-            submittedCards: ['cccc', 'dddd'],
-            cards: [],
+            submittedCards: [1, 2],
+            cards: ['eeee', 'ffff', 'gggg', 'hhhh'],
           },
         },
         playerIDs: ['ID1', 'ID2', 'ID3'],
@@ -127,8 +127,8 @@ describe('WinnerSelectScreen', () => {
         </HostContext.Provider>,
       );
 
-      expect(screen.getByText('cccc')).toBeInTheDocument();
-      expect(screen.getByText('dddd')).toBeInTheDocument();
+      expect(screen.getByText('ffff')).toBeInTheDocument();
+      expect(screen.getByText('gggg')).toBeInTheDocument();
     });
   });
 });

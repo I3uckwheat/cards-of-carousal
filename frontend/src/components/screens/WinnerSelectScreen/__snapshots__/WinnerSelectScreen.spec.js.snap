@@ -452,7 +452,7 @@ exports[`WinnerSelectScreen rendering renders normally for typical state values 
   justify-content: center;
   padding: 40px 0;
   width: 100%;
-  height: 250px;
+  max-height: 250px;
 }
 
 @media (min-width:800px) {
@@ -751,7 +751,7 @@ exports[`WinnerSelectScreen rendering renders normally for typical state values 
               className="whiteCardText"
             >
               <div>
-                cccc
+                ffff
               </div>
             </div>
             <div
@@ -772,7 +772,7 @@ exports[`WinnerSelectScreen rendering renders normally for typical state values 
               className="whiteCardText"
             >
               <div>
-                dddd
+                gggg
               </div>
             </div>
             <div

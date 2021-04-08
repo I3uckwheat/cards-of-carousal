@@ -66,7 +66,7 @@ const WhiteCards = styled.div`
   justify-content: center;
   padding: 40px 0;
   width: 100%;
-  height: 250px;
+  max-height: 250px;
 `;
 
 function LeftPanel() {
@@ -92,7 +92,7 @@ function RightPanel() {
   const currentCzar = Object.values(players).find((player) => player.isCzar);
 
   const highlightedPlayer =
-    state.players[state.playerIDs[currentCzar.submittedCards]];
+    state.players[state.playerIDs[currentCzar.submittedCards[0]]];
 
   return (
     <RightPanelWrapper>
@@ -106,8 +106,10 @@ function RightPanel() {
       </BlackCard>
 
       <WhiteCards>
-        {highlightedPlayer.submittedCards.map((cardText) => (
-          <WhiteCard key={cardText}>{cardText}</WhiteCard>
+        {highlightedPlayer?.submittedCards.map((cardIndex) => (
+          <WhiteCard key={cardIndex}>
+            {highlightedPlayer.cards[cardIndex]}
+          </WhiteCard>
         ))}
       </WhiteCards>
     </RightPanelWrapper>
