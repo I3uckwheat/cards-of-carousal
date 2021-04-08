@@ -12,6 +12,11 @@ export default function CzarHandScreen() {
     dispatch({ type: 'SUBMIT_WINNER', payload: { id: selection } });
   };
 
+  const submitPreview = (selected) => {
+    setSelection(selected);
+    dispatch({ type: 'PREVIEW_WINNER', payload: { id: selected } });
+  };
+
   return (
     <CardHandLayout
       onClear={() => setSelection(null)}
@@ -24,7 +29,7 @@ export default function CzarHandScreen() {
       <CzarHand
         cards={state.cards}
         selectedGroup={selection}
-        onSelect={(selected) => setSelection(selected)}
+        onSelect={submitPreview}
       />
     </CardHandLayout>
   );

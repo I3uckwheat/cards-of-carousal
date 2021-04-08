@@ -50,7 +50,6 @@ describe('CzarHandScreen', () => {
       userEvent.click(cardWrappers[0]);
       userEvent.click(screen.getByText('SUBMIT'));
 
-      expect(dispatch).toHaveBeenCalledTimes(1);
       expect(dispatch).toHaveBeenCalledWith({
         type: 'SUBMIT_WINNER',
         payload: { id: 0 },
