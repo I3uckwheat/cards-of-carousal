@@ -266,7 +266,7 @@ describe('hostReducerMiddleware', () => {
 
     it('removes the correct cards from the deck', () => {
       const dispatch = jest.fn();
-      jest.spyOn(Math, 'random').mockImplementation((value = 0) => value);
+      Math.random = jest.fn(() => 0);
       const { playerIDs, deck, selectedBlackCard } = state;
 
       hostReducerMiddleware(
@@ -295,7 +295,7 @@ describe('hostReducerMiddleware', () => {
 
     it('sends cards and the amount to select to the player sockets', () => {
       const dispatch = jest.fn();
-      jest.spyOn(Math, 'random').mockImplementation((value = 0) => value);
+      Math.random = jest.fn(() => 0);
       const { playerIDs, deck, selectedBlackCard } = state;
 
       hostReducerMiddleware(
