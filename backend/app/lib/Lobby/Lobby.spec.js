@@ -79,8 +79,13 @@ describe('Lobby', () => {
     describe('closeLobby', () => {
       it('can close a lobby and send message through the socket for each player', () => {
         const playerSocketTwo = createSocket('player2Id');
-        messageObject.event = 'lobby-closed';
-        messageObject.payload = {};
+        messageObject.event = 'update';
+        messageObject.payload = {
+          message: {
+            big: 'The lobby has been closed',
+            small: "Maybe next time the host won't be such a CoC",
+          },
+        };
 
         lobby.addPlayer(playerSocket, 'playerOneName');
         lobby.addPlayer(playerSocketTwo, 'playerTwoName');
