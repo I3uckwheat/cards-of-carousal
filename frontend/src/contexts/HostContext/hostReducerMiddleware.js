@@ -35,6 +35,13 @@ function sendKickPlayerMessage(payload) {
   });
 }
 
+function sendShuffleJoinCodeMessage() {
+  socketInstance.sendMessage({
+    event: 'shuffle-join-code',
+    payload: {},
+  });
+}
+
 export default async function hostReducerMiddleware(
   { type, payload },
   dispatch,
@@ -57,10 +64,7 @@ export default async function hostReducerMiddleware(
       break;
 
     case 'SHUFFLE_JOIN_CODE':
-      socketInstance.sendMessage({
-        event: 'shuffle-join-code',
-        payload: {},
-      });
+      sendShuffleJoinCodeMessage();
       break;
 
     default:
