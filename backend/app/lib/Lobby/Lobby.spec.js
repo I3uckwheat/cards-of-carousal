@@ -114,7 +114,7 @@ describe('Lobby', () => {
         close: jest.fn(),
       });
 
-      it('calls the shuffleIdCallback it is provided with the lobby itself', () => {
+      it('calls the shuffleIdCallback it is provided with the current lobby id', () => {
         const lobbyId = 'AAAA';
         const hostSocket = testSocket('socketId');
         const onCloseCallBack = jest.fn();
@@ -130,7 +130,7 @@ describe('Lobby', () => {
         // would send a message to the lobby in socketInstance.sendMessage()
         methods[0].callback({ event: 'shuffle-join-code', payload: {} });
 
-        expect(shuffleIdCallback).toHaveBeenCalledWith(lobby);
+        expect(shuffleIdCallback).toHaveBeenCalledWith(lobby.id);
       });
     });
 

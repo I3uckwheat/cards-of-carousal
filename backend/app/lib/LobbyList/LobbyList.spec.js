@@ -8,8 +8,11 @@ jest.mock('../Lobby/Lobby', () =>
     addPlayer: jest.fn(function addPlayer(player) {
       this.players.push(player);
     }),
+    updateId: jest.fn(),
   })),
 );
+
+jest.mock('nanoid', () => ({ customAlphabet: () => () => 'ABCD' }));
 
 describe('LobbyList', () => {
   let testPlayer;
@@ -76,5 +79,34 @@ describe('LobbyList', () => {
 
     expect(Object.keys(lobbyList.lobbies).length).toBe(0);
     expect(mockThrow).toThrow();
+  });
+
+  describe('shuffleLobbyIdById', () => {
+    it('shuffles (using customNanoId) the key in lobbyList.lobbies for the lobby with the given id', () => {
+      lobbyList.createLobby({});
+
+      expect(Object.keys(lobbyList.lobbies).length).toBe(1);
+      expect(lobbyList.lobbies).toHaveProperty('test');
+
+      const testLobby = lobbyList.lobbies.test;
+
+      lobbyList.shuffleLobbyIdById('test');
+
+      expect(Object.keys(lobbyList.lobbies).length).toBe(1);
+      expect(lobbyList.lobbies).not.toHaveProperty('test');
+      expect(lobbyList.lobbies).toHaveProperty('ABCD');
+
+      expect(lobbyList.lobbies.ABCD).toBe(testLobby);
+    });
+
+    it('calls updateId on the lobby with the new id', () => {
+      lobbyList.createLobby({});
+
+      const testLobby = lobbyList.lobbies.test;
+
+      lobbyList.shuffleLobbyIdById('test');
+
+      expect(testLobby.updateId).toHaveBeenCalledWith('ABCD');
+    });
   });
 });

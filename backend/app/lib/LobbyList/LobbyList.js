@@ -11,7 +11,7 @@ module.exports = class LobbyList {
       customNanoId(),
       hostSocket,
       this.#handleLobbyClose,
-      this.#handleLobbyIdChange,
+      this.shuffleLobbyIdById,
     );
 
     this.lobbies[lobby.id] = lobby;
@@ -41,10 +41,13 @@ module.exports = class LobbyList {
     }
   };
 
-  #handleLobbyIdChange = (lobby) => {
+  shuffleLobbyIdById = (lobbyId) => {
     const newId = customNanoId();
+
+    const lobby = this.lobbies[lobbyId];
     this.lobbies[newId] = lobby;
-    delete this.lobbies[lobby.id];
     lobby.updateId(newId);
+
+    delete this.lobbies[lobbyId];
   };
 };

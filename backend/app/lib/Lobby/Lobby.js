@@ -104,7 +104,7 @@ module.exports = class Lobby {
       }
 
       if (message.event === 'shuffle-join-code') {
-        this.#shuffleId(this);
+        this.#shuffleId(this.id);
       }
 
       if (message.isForBroadcast) {
