@@ -264,7 +264,7 @@ exports[`WinnerSelectScreen rendering renders normally for typical state values 
   height: 70px;
 }
 
-.c11 {
+.c10 {
   position: relative;
   width: 390px;
   height: 540px;
@@ -277,18 +277,18 @@ exports[`WinnerSelectScreen rendering renders normally for typical state values 
   box-shadow: 4px 4px 24px rgba(0,0,0,0.3);
 }
 
-.c11 .pickText {
+.c10 .pickText {
   font-size: 24px;
   margin-right: 7px;
 }
 
-.c11 .layeredCards {
+.c10 .layeredCards {
   position: absolute;
   bottom: 18px;
   left: 18px;
 }
 
-.c11 .pickCount {
+.c10 .pickCount {
   position: absolute;
   bottom: 8px;
   right: 21px;
@@ -306,7 +306,7 @@ exports[`WinnerSelectScreen rendering renders normally for typical state values 
   align-items: center;
 }
 
-.c12 {
+.c11 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -328,7 +328,7 @@ exports[`WinnerSelectScreen rendering renders normally for typical state values 
   font-size: 14px;
 }
 
-.c14 {
+.c12 {
   position: relative;
   border: 1px solid var(--primary-text-color);
   width: 148px;
@@ -344,24 +344,24 @@ exports[`WinnerSelectScreen rendering renders normally for typical state values 
   box-shadow: 0px 4px 12px rgba(0,0,0,0.25);
 }
 
-.c14 .whiteCardText {
+.c12 .whiteCardText {
   max-height: 150px;
   padding-right: 0;
   overflow-y: auto;
 }
 
-.c14 .whiteCardText div {
+.c12 .whiteCardText div {
   padding-bottom: 20px;
 }
 
-.c14 .stackedCards {
+.c12 .stackedCards {
   position: absolute;
   bottom: 7px;
   left: 11px;
   width: 32px;
 }
 
-.c14 .backOfCard {
+.c12 .backOfCard {
   font-weight: 600;
 }
 
@@ -413,7 +413,7 @@ exports[`WinnerSelectScreen rendering renders normally for typical state values 
   justify-content: space-between;
 }
 
-.c10 {
+.c9 .czar-title {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -422,26 +422,20 @@ exports[`WinnerSelectScreen rendering renders normally for typical state values 
   -ms-flex-direction: column;
   flex-direction: column;
   margin: 25px 0;
-}
-
-.c10 span,
-.c10 .czar-name {
+  line-height: 1em;
+  font-size: 56px;
   font-weight: 900;
   text-transform: uppercase;
+}
+
+.c9 .czar-title span {
+  font-size: 24px;
+  text-indent: -20px;
+  margin-bottom: -8px;
   line-height: 1em;
 }
 
-.c10 span {
-  font-size: 24px;
-  text-indent: -16px;
-  margin-bottom: -8px;
-}
-
-.c10 .czar-name {
-  font-size: 56px;
-}
-
-.c13 {
+.c9 .white-cards {
   display: grid;
   grid-template-columns: repeat(3,auto);
   gap: 20px;
@@ -500,7 +494,7 @@ exports[`WinnerSelectScreen rendering renders normally for typical state values 
 }
 
 @media (min-width:1025px) {
-  .c14 {
+  .c12 {
     width: 267px;
     height: 363px;
     font-size: 36px;
@@ -508,12 +502,12 @@ exports[`WinnerSelectScreen rendering renders normally for typical state values 
     padding: 30px 27px 0 27px;
   }
 
-  .c14 .whiteCardText {
+  .c12 .whiteCardText {
     max-height: 280px;
     padding-right: 0;
   }
 
-  .c14 .stackedCards {
+  .c12 .stackedCards {
     width: auto;
   }
 }
@@ -689,20 +683,16 @@ exports[`WinnerSelectScreen rendering renders normally for typical state values 
       <div
         className="c9"
       >
-        <div
-          className="c10"
+        <h1
+          className="czar-title"
         >
           <span>
             Czar:
           </span>
-          <h1
-            className="czar-name"
-          >
-            bar
-          </h1>
-        </div>
+          bar
+        </h1>
         <div
-          className="c11"
+          className="c10"
           data-testid="black-card"
         >
           <span>
@@ -734,17 +724,17 @@ exports[`WinnerSelectScreen rendering renders normally for typical state values 
               PICK
             </span>
             <div
-              className="c12"
+              className="c11"
             >
               2
             </div>
           </div>
         </div>
         <div
-          className="c13"
+          className="white-cards"
         >
           <div
-            className="c14"
+            className="c12"
             data-testid="white-card"
           >
             <div
@@ -765,7 +755,7 @@ exports[`WinnerSelectScreen rendering renders normally for typical state values 
             </div>
           </div>
           <div
-            className="c14"
+            className="c12"
             data-testid="white-card"
           >
             <div
