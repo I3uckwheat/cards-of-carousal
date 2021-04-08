@@ -20,10 +20,12 @@ const Button = styled.button`
   padding: 0.7em;
   background: var(--secondary-background-color);
   color: var(--secondary-text-color);
-  ${props => props.isActive && css`
-    background: var(--primary-background-color);
-    color: var(--primary-text-color);
-  `}
+  ${(props) =>
+    props.isActive &&
+    css`
+      background: var(--primary-background-color);
+      color: var(--primary-text-color);
+    `}
 
   :hover,
   :active,
