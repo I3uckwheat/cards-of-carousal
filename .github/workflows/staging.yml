@@ -2,10 +2,11 @@
 # Builds and publishes coc image.
 #
 
-name: Backend - Testing
+name: Backend - Staging
 on:
   push:
     branches:
+      - main
       - ft/multistage-deploys
 
 jobs:
@@ -24,4 +25,4 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: cardsofcarousal/backend:testing
+          tags: cardsofcarousal/backend:staging

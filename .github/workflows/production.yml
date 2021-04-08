@@ -2,11 +2,11 @@
 # Builds and publishes coc image.
 #
 
-name: COC Backend - Latest
+name: Backend - Production
 on:
-  push:
-    branches:
-      - main
+  release:
+    types:
+      - published
 
 jobs:
   docker:
@@ -24,4 +24,4 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: cardsofcarousal/backend:latest
+          tags: cardsofcarousal/backend:production
