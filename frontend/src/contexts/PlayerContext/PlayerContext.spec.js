@@ -256,6 +256,40 @@ describe('context', () => {
       );
     });
 
+    it('handles the lobby-closed event', () => {
+      const TestComponent = () => {
+        const { state } = useContext(PlayerContext);
+
+        return (
+          <>
+            <div>
+              <h1 data-testid="message-big">{state.message.big}</h1>
+              <p data-testid="message-small">{state.message.small}</p>
+            </div>
+          </>
+        );
+      };
+
+      const { eventHandlers } = setupEmitterMocks();
+
+      render(
+        <PlayerProvider>
+          <TestComponent />
+        </PlayerProvider>,
+      );
+
+      act(() => {
+        eventHandlers.message({ event: 'lobby-closed', payload: {} });
+      });
+
+      expect(screen.getByTestId('message-big')).toHaveTextContent(
+        'The lobby has been closed',
+      );
+      expect(screen.getByTestId('message-small')).toHaveTextContent(
+        "You don't have to go home, but you can't stay here",
+      );
+    });
+
     it('ignores events that do not have a handler', () => {
       const TestComponent = () => {
         const { state } = useContext(PlayerContext);
