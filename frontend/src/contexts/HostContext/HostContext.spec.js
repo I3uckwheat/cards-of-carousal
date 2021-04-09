@@ -233,5 +233,32 @@ describe('Context', () => {
       expect(screen.queryAllByTestId('player').length).toBe(0);
       expect(screen.queryAllByTestId('playerID').length).toBe(0);
     });
+
+    it('catches join-code-shuffled events and updates state with the new join code', () => {
+      const TestComponent = () => {
+        const { state } = useContext(HostContext);
+
+        return <div data-testid="lobby-id">{state.lobbyID}</div>;
+      };
+
+      const { eventHandlers } = setupEmitterMocks();
+
+      render(
+        <HostProvider>
+          <TestComponent />
+        </HostProvider>,
+      );
+
+      expect(screen.getByTestId('lobby-id').textContent).not.toBe('TEST');
+
+      act(() => {
+        eventHandlers.message({
+          event: 'join-code-shuffled',
+          payload: { lobbyID: 'TEST' },
+        });
+      });
+
+      expect(screen.getByTestId('lobby-id').textContent).toBe('TEST');
+    });
   });
 });

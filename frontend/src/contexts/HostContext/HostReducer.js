@@ -159,6 +159,10 @@ function setDeck(state, { deck }) {
   };
 }
 
+function updateJoinCode(state, { lobbyID }) {
+  return { ...state, lobbyID };
+}
+
 function HostReducer(state, action) {
   const { type, payload } = action;
 
@@ -202,6 +206,9 @@ function HostReducer(state, action) {
 
     case 'SET_DECK':
       return setDeck(state, payload);
+
+    case 'UPDATE_JOIN_CODE':
+      return updateJoinCode(state, payload);
 
     default:
       return { ...state };
