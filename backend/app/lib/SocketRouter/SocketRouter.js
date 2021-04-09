@@ -74,19 +74,16 @@ module.exports = class SocketRouter {
 
   #parseUrl = (route, url) => {
     const splitRoute = route.split('/');
-    // removes query parameters before splitting and returning route parameters
-    const splitUrl = url.split('?')[0].split('/');
+    const [splitUrl, queryString] = url.split('?');
 
     const params = splitRoute.reduce((acc, val, index) => {
       if (val[0] === ':') {
         const paramName = val.slice(1);
-        acc[paramName] = splitUrl[index];
+        acc[paramName] = splitUrl.split('/')[index];
       }
 
       return acc;
     }, {});
-
-    const queryString = url.split('?')[1];
 
     const query =
       queryString &&
