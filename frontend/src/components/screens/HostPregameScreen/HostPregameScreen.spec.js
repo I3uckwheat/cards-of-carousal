@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import renderer from 'react-test-renderer';
 import { HostContext } from '../../../contexts/HostContext/HostContext';
@@ -28,7 +28,6 @@ describe('Host Pregame Screen', () => {
     playerIDs: [],
     gameSettings: { maxPlayers: 8, winningScore: 7, selectedPacks: [] },
   };
-  const dispatch = jest.fn();
 
   afterEach(() => {
     // sometimes we need to change the state for test cases, this resets to initial value
@@ -44,6 +43,7 @@ describe('Host Pregame Screen', () => {
 
   describe('rendering', () => {
     it('renders', () => {
+      const dispatch = jest.fn();
       const tree = renderer
         .create(
           <HostContext.Provider value={{ state, dispatch }}>
@@ -58,6 +58,7 @@ describe('Host Pregame Screen', () => {
 
   describe('lobby', () => {
     it('creates the lobby', () => {
+      const dispatch = jest.fn();
       expect(dispatch).not.toHaveBeenCalled();
 
       render(
@@ -75,29 +76,35 @@ describe('Host Pregame Screen', () => {
   });
 
   describe('buttons', () => {
-    it('reloads when the close game button is clicked', () => {
+    it('reloads when the close game button is clicked', async () => {
       // window.location properties are read-only, we have to redefine this object to spy on reload
       Object.defineProperty(window, 'location', {
         value: { reload: jest.fn() },
       });
+
+      const dispatch = jest.fn();
+
       render(
         <HostContext.Provider value={{ state, dispatch }}>
           <HostPregameScreen />
         </HostContext.Provider>,
       );
 
-      userEvent.click(screen.getByText('CLOSE GAME'));
+      await act(async () => userEvent.click(screen.getByText('CLOSE GAME')));
 
       expect(window.location.reload).toHaveBeenCalledTimes(1);
       // create lobby, close game
       expect(dispatch).toHaveBeenCalledTimes(2);
-      expect(dispatch.mock.calls[1][0]).toEqual({
+
+      expect(dispatch).toHaveBeenNthCalledWith(2, {
         type: 'CLOSE_GAME',
         payload: {},
       });
     });
 
     it('calls dispatches with the proper payloads when the starting conditions are met and the start button is pressed', async () => {
+      const dispatch = jest.fn();
+
       setupFetchMock({
         black: ['foo', 'bar', 'baz'],
         white: ['boo', 'far', 'faz'],
@@ -144,10 +151,12 @@ describe('Host Pregame Screen', () => {
         </HostContext.Provider>,
       );
 
-      userEvent.click(screen.getByText('START CAROUSING'));
+      await act(async () =>
+        userEvent.click(screen.getByText('START CAROUSING')),
+      );
 
-      // create lobby, get deck, set game state, set new czar
-      expect(dispatch).toHaveBeenCalledTimes(4);
+      // create lobby, get deck, set game state, set new czar, get black card
+      expect(dispatch).toHaveBeenCalledTimes(5);
       expect(dispatch).toHaveBeenNthCalledWith(2, {
         type: 'SET_DECK',
         payload: { selectedPacks: state.gameSettings.selectedPacks },
@@ -160,9 +169,15 @@ describe('Host Pregame Screen', () => {
         type: 'SET_NEXT_CZAR',
         payload: {},
       });
+      expect(dispatch).toHaveBeenNthCalledWith(5, {
+        type: 'SELECT_BLACK_CARD',
+        payload: {},
+      });
     });
 
     it('does not call dispatch if no players are in the lobby when the start button is clicked', () => {
+      const dispatch = jest.fn();
+
       render(
         <HostContext.Provider value={{ state, dispatch }}>
           <HostPregameScreen />
@@ -175,7 +190,9 @@ describe('Host Pregame Screen', () => {
       expect(dispatch).toHaveBeenCalledTimes(1);
     });
 
-    it('does not call dispatch if no packs are selected when the start button is clicked', () => {
+    it('does not call dispatch if no packs are selected when the start button is clicked', async () => {
+      const dispatch = jest.fn();
+
       state = {
         gameState: 'waiting-for-lobby',
         lobbyID: '',
@@ -206,13 +223,16 @@ describe('Host Pregame Screen', () => {
         gameSettings: { maxPlayers: 8, winningScore: 7, selectedPacks: [] },
         deck: { black: [], white: [] },
       };
+
       render(
         <HostContext.Provider value={{ state, dispatch }}>
           <HostPregameScreen />
         </HostContext.Provider>,
       );
 
-      userEvent.click(screen.getByText('START CAROUSING'));
+      await act(async () =>
+        userEvent.click(screen.getByText('START CAROUSING')),
+      );
 
       // only create lobby called
       expect(dispatch).toHaveBeenCalledTimes(1);

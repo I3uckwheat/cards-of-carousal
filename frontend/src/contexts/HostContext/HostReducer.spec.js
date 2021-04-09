@@ -372,6 +372,43 @@ describe('reducer', () => {
     });
   });
 
+  describe('SELECT_BLACK_CARD', () => {
+    it('sets a random black card and removes it from the deck', () => {
+      const state = {
+        deck: {
+          black: [
+            {
+              pack: 'test pack',
+              text: 'Black Card 1',
+            },
+            {
+              pack: 'test pack',
+              text: 'Black Card 2',
+            },
+            {
+              pack: 'test pack',
+              text: 'Black Card 3',
+            },
+          ],
+          white: [],
+        },
+      };
+
+      const spiedMath = jest.spyOn(Math, 'random').mockReturnValue(0.1);
+
+      const result = HostReducer(state, {
+        type: 'SELECT_BLACK_CARD',
+        payload: {},
+      });
+
+      expect(result.deck.black.length).toBe(2);
+      expect(result.selectedBlackCard.text).toBe('Black Card 1');
+      expect(result.deck.black).not.toContain(result.selectedBlackCard);
+
+      spiedMath.mockRestore();
+    });
+  });
+
   describe('UPDATE_JOIN_CODE', () => {
     it('returns the state with the updated join code', () => {
       const state = {
