@@ -69,6 +69,20 @@ function sendShuffleJoinCodeMessage() {
   });
 }
 
+function notifyCzar({ players }) {
+  const czar = Object.keys(players).find((player) => players[player].isCzar);
+  console.log(players);
+  if (czar) {
+    socketInstance.sendMessage({
+      event: 'notify-player-is-czar',
+      payload: {},
+      recipients: [],
+    });
+  } else {
+    throw new Error('Czar not found!');
+  }
+}
+
 export default async function hostReducerMiddleware(
   { type, payload },
   dispatch,
@@ -104,6 +118,10 @@ export default async function hostReducerMiddleware(
 
     case 'SHUFFLE_JOIN_CODE':
       sendShuffleJoinCodeMessage();
+      break;
+
+    case 'NOTIFY_CZAR':
+      notifyCzar(payload);
       break;
 
     default:

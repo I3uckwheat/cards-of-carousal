@@ -52,6 +52,16 @@ export function PlayerProvider({ children }) {
             },
           },
         });
+      case 'notify-player-is-czar':
+        return dispatch({
+          type: 'UPDATE',
+          payload: {
+            message: {
+              big: "You're the Czar",
+              small: 'Wait for the players to select their cards',
+            },
+          },
+        });
 
       default:
         return undefined;
