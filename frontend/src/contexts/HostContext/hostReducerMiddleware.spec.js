@@ -226,14 +226,15 @@ describe('hostReducerMiddleware', () => {
           baz: { cards: [{ text: 'test 5' }, { text: 'test 6' }] },
         },
         selectedBlackCard: { pick: 2 },
+        playerIDs: ['foo', 'bar', 'baz'],
       };
       const dispatch = jest.fn();
-      const { players, selectedBlackCard } = state;
+      const { players, selectedBlackCard, playerIDs } = state;
 
       hostReducerMiddleware(
         {
           type: 'SEND_CARDS_TO_PLAYERS',
-          payload: { selectedBlackCard, players },
+          payload: { selectedBlackCard, players, playerIDs },
         },
         dispatch,
       );
@@ -256,6 +257,63 @@ describe('hostReducerMiddleware', () => {
         recipients: ['bar'],
       });
       expect(socketInstance.sendMessage).toHaveBeenNthCalledWith(3, {
+        event: 'deal-white-cards',
+        payload: {
+          cards: [{ text: 'test 5' }, { text: 'test 6' }],
+          selectCardCount: 2,
+        },
+        recipients: ['baz'],
+      });
+    });
+
+    it('does not send cards to czar', () => {
+      const state = {
+        players: {
+          foo: {
+            cards: [{ text: 'test 1' }, { text: 'test 2' }],
+            isCzar: true,
+          },
+          bar: {
+            cards: [{ text: 'test 3' }, { text: 'test 4' }],
+            isCzar: false,
+          },
+          baz: {
+            cards: [{ text: 'test 5' }, { text: 'test 6' }],
+            isCzar: false,
+          },
+        },
+        selectedBlackCard: { pick: 2 },
+        playerIDs: ['foo', 'bar', 'baz'],
+      };
+      const dispatch = jest.fn();
+      const { players, selectedBlackCard, playerIDs } = state;
+
+      hostReducerMiddleware(
+        {
+          type: 'SEND_CARDS_TO_PLAYERS',
+          payload: { selectedBlackCard, players, playerIDs },
+        },
+        dispatch,
+      );
+
+      expect(socketInstance.sendMessage).toHaveBeenCalledTimes(2);
+      expect(socketInstance.sendMessage).not.toHaveBeenCalledWith({
+        event: 'deal-white-cards',
+        payload: {
+          cards: [{ text: 'test 1' }, { text: 'test 2' }],
+          selectCardCount: 2,
+        },
+        recipients: ['foo'],
+      });
+      expect(socketInstance.sendMessage).toHaveBeenNthCalledWith(1, {
+        event: 'deal-white-cards',
+        payload: {
+          cards: [{ text: 'test 3' }, { text: 'test 4' }],
+          selectCardCount: 2,
+        },
+        recipients: ['bar'],
+      });
+      expect(socketInstance.sendMessage).toHaveBeenNthCalledWith(2, {
         event: 'deal-white-cards',
         payload: {
           cards: [{ text: 'test 5' }, { text: 'test 6' }],

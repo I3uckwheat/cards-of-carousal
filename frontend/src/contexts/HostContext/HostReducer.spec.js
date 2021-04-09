@@ -571,6 +571,70 @@ describe('reducer', () => {
         ],
       });
     });
+
+    it('does not deal more cards to players who have the maximum card count', () => {
+      // setup dummy state
+      const state = {
+        deck: {
+          white: [
+            { pack: 0, text: 'zero' },
+            { pack: 0, text: 'one' },
+            { pack: 0, text: 'two' },
+            { pack: 0, text: 'three' },
+            { pack: 0, text: 'four' },
+            { pack: 0, text: 'five' },
+            { pack: 0, text: 'six' },
+          ],
+          black: [{ pick: 1, pack: 0, text: 'zero' }],
+        },
+        selectedBlackCard: {
+          pick: 1,
+        },
+        playerIDs: ['foo', 'bar', 'baz', 'bender'],
+        handSize: 5,
+        players: {
+          foo: {
+            cards: [
+              { pack: 0, text: 'test' },
+              { pack: 0, text: 'test' },
+              { pack: 0, text: 'test' },
+              { pack: 0, text: 'test' },
+              { pack: 0, text: 'test' },
+            ],
+          },
+          bar: {
+            cards: [
+              { pack: 0, text: 'test' },
+              { pack: 0, text: 'test' },
+              { pack: 0, text: 'test' },
+            ],
+          },
+          baz: {
+            cards: [
+              { pack: 0, text: 'test' },
+              { pack: 0, text: 'test' },
+              { pack: 0, text: 'test' },
+            ],
+          },
+          bender: {
+            cards: [
+              { pack: 0, text: 'test' },
+              { pack: 0, text: 'test' },
+              { pack: 0, text: 'test' },
+            ],
+          },
+        },
+      };
+
+      Math.random = jest.fn(() => 0);
+
+      const result = HostReducer(state, {
+        type: 'DEAL_WHITE_CARDS',
+        payload: {},
+      });
+
+      expect(result.players.foo).toEqual(state.players.foo);
+    });
   });
 
   describe('SELECT_BLACK_CARD', () => {
