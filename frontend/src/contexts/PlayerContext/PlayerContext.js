@@ -44,6 +44,17 @@ export function PlayerProvider({ children }) {
         return dispatch({ type: 'ERROR_DISCONNECT', payload });
       case 'deal-white-cards':
         return dispatch({ type: 'RECEIVE_WHITE_CARDS', payload });
+      case 'lobby-closed':
+        return dispatch({
+          type: 'UPDATE',
+          payload: {
+            message: {
+              big: 'The lobby has been closed',
+              small: "You don't have to go home, but you can't stay here",
+            },
+          },
+        });
+
       default:
         return undefined;
     }

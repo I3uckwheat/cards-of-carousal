@@ -45,6 +45,9 @@ function HostProvider({ children }) {
       case 'lobby-created':
         return dispatch({ type: 'SET_LOBBY_ID', payload });
 
+      case 'black-card-selected':
+        return dispatch({ type: 'SELECT_BLACK_CARD', payload });
+
       case 'join-code-shuffled':
         return dispatch({ type: 'UPDATE_JOIN_CODE', payload });
 

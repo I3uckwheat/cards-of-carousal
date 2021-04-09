@@ -135,6 +135,23 @@ function closeGame(state) {
   };
 }
 
+function setBlackCard(state) {
+  const { deck } = state;
+  const selectedCard =
+    deck.black[Math.floor(Math.random() * state.deck.black.length)];
+
+  const updatedBlackCards = [...state.deck.black];
+  updatedBlackCards.splice(updatedBlackCards.indexOf(selectedCard), 1);
+
+  return {
+    ...state,
+    deck: {
+      ...deck,
+      black: updatedBlackCards,
+    },
+    selectedBlackCard: selectedCard,
+  };
+}
 function setDeck(state, { deck }) {
   return {
     ...state,
@@ -227,6 +244,9 @@ function HostReducer(state, action) {
 
     case 'CLOSE_GAME':
       return closeGame(state);
+
+    case 'SELECT_BLACK_CARD':
+      return setBlackCard(state);
 
     case 'SET_DECK':
       return setDeck(state, payload);

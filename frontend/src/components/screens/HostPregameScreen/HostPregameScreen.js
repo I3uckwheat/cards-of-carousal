@@ -96,28 +96,32 @@ function LeftPanel() {
   const { state, dispatch } = useContext(HostContext);
   const { players, playerIDs, lobbyID } = state;
 
-  const handleClickStart = () => {
+  const handleClickStart = async () => {
     // check if there are any players and if packs are selected
     if (playerIDs.length && state.gameSettings.selectedPacks.length) {
       const { selectedPacks } = state.gameSettings;
-      dispatch({
+      await dispatch({
         type: 'SET_DECK',
         payload: { selectedPacks },
       });
-      dispatch({
+      await dispatch({
         type: 'START_GAME',
         payload: {},
       });
-      dispatch({
+      await dispatch({
         type: 'SET_NEXT_CZAR',
+        payload: {},
+      });
+      await dispatch({
+        type: 'SELECT_BLACK_CARD',
         payload: {},
       });
     }
     // TODO: add else statement to warn that you cannot play a game with no players
   };
 
-  const handleClickClose = () => {
-    dispatch({ type: 'CLOSE_GAME', payload: {} });
+  const handleClickClose = async () => {
+    await dispatch({ type: 'CLOSE_GAME', payload: {} });
     window.location.reload();
   };
 
