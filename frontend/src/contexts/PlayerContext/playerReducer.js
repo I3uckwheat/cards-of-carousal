@@ -55,6 +55,7 @@ function receiveWhiteCards(state, payload) {
   const { cards, selectCardCount } = payload;
   return {
     ...state,
+    gameState: 'player-select',
     cards,
     selectCardCount,
   };

@@ -196,7 +196,7 @@ describe('reducer', () => {
   });
 
   describe('RECEIVE_WHITE_CARDS', () => {
-    it('puts the received cards into state', () => {
+    it('puts the received cards into state and updates game state', () => {
       const state = {
         cards: [{ text: 'test' }, { text: 'test' }, { text: 'test' }],
         selectCardCount: 0,
@@ -213,7 +213,11 @@ describe('reducer', () => {
         payload: testPayload,
       });
 
-      expect(result).toEqual({ ...state, ...testPayload });
+      expect(result).toEqual({
+        ...state,
+        ...testPayload,
+        gameState: 'player-select',
+      });
     });
   });
 });
