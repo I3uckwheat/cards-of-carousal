@@ -42,6 +42,17 @@ export function PlayerProvider({ children }) {
         return dispatch({ type: 'UPDATE', payload });
       case 'error-disconnect':
         return dispatch({ type: 'ERROR_DISCONNECT', payload });
+      case 'lobby-closed':
+        return dispatch({
+          type: 'UPDATE',
+          payload: {
+            message: {
+              big: 'The lobby has been closed',
+              small: "You don't have to go home, but you can't stay here",
+            },
+          },
+        });
+
       default:
         return undefined;
     }
