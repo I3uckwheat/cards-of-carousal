@@ -217,164 +217,51 @@ describe('hostReducerMiddleware', () => {
     });
   });
 
-  describe('DEAL_WHITE_CARDS', () => {
-    // setup dummy state
-    const state = {
-      deck: {
-        white: [
-          { pack: 0, text: 'zero' },
-          { pack: 0, text: 'one' },
-          { pack: 0, text: 'two' },
-          { pack: 0, text: 'three' },
-          { pack: 0, text: 'four' },
-          { pack: 0, text: 'five' },
-          { pack: 0, text: 'six' },
-          { pack: 0, text: 'seven' },
-          { pack: 0, text: 'eight' },
-          { pack: 0, text: 'nine' },
-          { pack: 0, text: 'ten' },
-          { pack: 0, text: 'eleven' },
-          { pack: 0, text: 'twelve' },
-          { pack: 0, text: 'thirteen' },
-          { pack: 0, text: 'fourteen' },
-          { pack: 0, text: 'fifteen' },
-        ],
-        black: [
-          { pick: 1, pack: 0, text: 'zero' },
-          { pick: 1, pack: 0, text: 'one' },
-          { pick: 1, pack: 0, text: 'two' },
-          { pick: 1, pack: 0, text: 'three' },
-          { pick: 1, pack: 0, text: 'four' },
-          { pick: 1, pack: 0, text: 'five' },
-          { pick: 1, pack: 0, text: 'six' },
-          { pick: 1, pack: 0, text: 'seven' },
-          { pick: 1, pack: 0, text: 'eight' },
-          { pick: 2, pack: 0, text: 'nine' },
-          { pick: 2, pack: 0, text: 'ten' },
-          { pick: 2, pack: 0, text: 'eleven' },
-          { pick: 2, pack: 0, text: 'twelve' },
-          { pick: 2, pack: 0, text: 'thirteen' },
-          { pick: 2, pack: 0, text: 'fourteen' },
-          { pick: 2, pack: 0, text: 'fifteen' },
-        ],
-      },
-      selectedBlackCard: {
-        pick: 1,
-      },
-      playerIDs: ['foo', 'bar', 'baz', 'bender'],
-    };
-
-    it('removes the correct cards from the deck', () => {
-      const dispatch = jest.fn();
-      Math.random = jest.fn(() => 0);
-      const { playerIDs, deck, selectedBlackCard } = state;
-
-      hostReducerMiddleware(
-        {
-          type: 'DEAL_WHITE_CARDS',
-          payload: { deck, selectedBlackCard, playerIDs, cardsToDeal: 3 },
-        },
-        dispatch,
-      );
-
-      expect(dispatch).toHaveBeenCalledWith({
-        type: 'SET_DECK',
-        payload: {
-          deck: {
-            black: [...state.deck.black],
-            white: [
-              { pack: 0, text: 'twelve' },
-              { pack: 0, text: 'thirteen' },
-              { pack: 0, text: 'fourteen' },
-              { pack: 0, text: 'fifteen' },
-            ],
-          },
-        },
-      });
-    });
-
+  describe('SEND_CARDS_TO_PLAYERS', () => {
     it('sends cards and the amount to select to the player sockets', () => {
+      const state = {
+        players: {
+          foo: { cards: [{ text: 'test 1' }, { text: 'test 2' }] },
+          bar: { cards: [{ text: 'test 3' }, { text: 'test 4' }] },
+          baz: { cards: [{ text: 'test 5' }, { text: 'test 6' }] },
+        },
+        selectedBlackCard: { pick: 2 },
+      };
       const dispatch = jest.fn();
-      Math.random = jest.fn(() => 0);
-      const { playerIDs, deck, selectedBlackCard } = state;
+      const { players, selectedBlackCard } = state;
 
       hostReducerMiddleware(
         {
-          type: 'DEAL_WHITE_CARDS',
-          payload: { deck, selectedBlackCard, playerIDs, cardsToDeal: 3 },
+          type: 'SEND_CARDS_TO_PLAYERS',
+          payload: { selectedBlackCard, players },
         },
         dispatch,
       );
 
-      expect(socketInstance.sendMessage).toHaveBeenCalledTimes(4);
+      expect(socketInstance.sendMessage).toHaveBeenCalledTimes(3);
       expect(socketInstance.sendMessage).toHaveBeenNthCalledWith(1, {
         event: 'deal-white-cards',
         payload: {
-          cards: [
-            { pack: 0, text: 'eleven' },
-            { pack: 0, text: 'ten' },
-            { pack: 0, text: 'nine' },
-          ],
-          selectCardCount: 1,
+          cards: [{ text: 'test 1' }, { text: 'test 2' }],
+          selectCardCount: 2,
         },
         recipients: ['foo'],
       });
       expect(socketInstance.sendMessage).toHaveBeenNthCalledWith(2, {
         event: 'deal-white-cards',
         payload: {
-          cards: [
-            { pack: 0, text: 'eight' },
-            { pack: 0, text: 'seven' },
-            { pack: 0, text: 'six' },
-          ],
-          selectCardCount: 1,
+          cards: [{ text: 'test 3' }, { text: 'test 4' }],
+          selectCardCount: 2,
         },
         recipients: ['bar'],
       });
       expect(socketInstance.sendMessage).toHaveBeenNthCalledWith(3, {
         event: 'deal-white-cards',
         payload: {
-          cards: [
-            { pack: 0, text: 'five' },
-            { pack: 0, text: 'four' },
-            { pack: 0, text: 'three' },
-          ],
-          selectCardCount: 1,
+          cards: [{ text: 'test 5' }, { text: 'test 6' }],
+          selectCardCount: 2,
         },
         recipients: ['baz'],
-      });
-      expect(socketInstance.sendMessage).toHaveBeenNthCalledWith(4, {
-        event: 'deal-white-cards',
-        payload: {
-          cards: [
-            { pack: 0, text: 'two' },
-            { pack: 0, text: 'one' },
-            { pack: 0, text: 'zero' },
-          ],
-          selectCardCount: 1,
-        },
-        recipients: ['bender'],
-      });
-    });
-
-    it('throws an error if the dispatch is called without all the required properties', async () => {
-      const dispatch = jest.fn();
-      jest.spyOn(Math, 'random').mockImplementation((value = 0) => value);
-      // omit deck
-      const { playerIDs, selectedBlackCard } = state;
-
-      await expect(() =>
-        hostReducerMiddleware(
-          {
-            type: 'DEAL_WHITE_CARDS',
-            payload: { selectedBlackCard, playerIDs, cardsToDeal: 3 },
-          },
-          dispatch,
-        ),
-      ).rejects.toThrow({
-        name: 'Error',
-        message:
-          'DEAL_WHITE_CARDS action requires the following properties in the payload: deck, playerIDs, selectedBlackCard, cardsToDeal. Received: selectedBlackCard, playerIDs, cardsToDeal',
       });
     });
   });

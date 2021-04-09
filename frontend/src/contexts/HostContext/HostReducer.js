@@ -146,7 +146,7 @@ function dealWhiteCards(state) {
   const { deck, playerIDs, players, handSize } = state;
   const newWhiteCards = [...deck.white];
   const neededCardsPerPlayer = playerIDs.map((playerID) => {
-    const player = players[[playerID]];
+    const player = players[playerID];
     return {
       playerID,
       cardsNeeded: handSize - player.cards.length,
@@ -154,22 +154,22 @@ function dealWhiteCards(state) {
   });
 
   const cardsGivenToPlayers = neededCardsPerPlayer.map(
-    ({ playerId, cardsNeeded }) => {
-      const newCards = [...players[playerId].cards];
+    ({ playerID, cardsNeeded }) => {
+      const newCards = [...players[playerID].cards];
       for (let i = 0; i < cardsNeeded; i += 1) {
         const selection = Math.floor(Math.random() * newWhiteCards.length);
         newCards.push(newWhiteCards.splice(selection, 1)[0]);
       }
       return {
-        playerId,
+        playerID,
         cards: newCards,
       };
     },
   );
 
-  const newPlayers = cardsGivenToPlayers.reduce((acc, { playerId, cards }) => {
-    acc[playerId] = {
-      ...players[playerId],
+  const newPlayers = cardsGivenToPlayers.reduce((acc, { playerID, cards }) => {
+    acc[playerID] = {
+      ...players[playerID],
       cards,
     };
     return acc;

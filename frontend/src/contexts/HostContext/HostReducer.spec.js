@@ -371,4 +371,120 @@ describe('reducer', () => {
       expect(result).toEqual({ ...state, deck: newDeck });
     });
   });
+
+  describe('DEAL_WHITE_CARDS', () => {
+    it('deals the correct cards to each player', () => {
+      // setup dummy state
+      const state = {
+        deck: {
+          white: [
+            { pack: 0, text: 'zero' },
+            { pack: 0, text: 'one' },
+            { pack: 0, text: 'two' },
+            { pack: 0, text: 'three' },
+            { pack: 0, text: 'four' },
+            { pack: 0, text: 'five' },
+            { pack: 0, text: 'six' },
+            { pack: 0, text: 'seven' },
+            { pack: 0, text: 'eight' },
+            { pack: 0, text: 'nine' },
+            { pack: 0, text: 'ten' },
+            { pack: 0, text: 'eleven' },
+            { pack: 0, text: 'twelve' },
+            { pack: 0, text: 'thirteen' },
+            { pack: 0, text: 'fourteen' },
+            { pack: 0, text: 'fifteen' },
+          ],
+          black: [
+            { pick: 1, pack: 0, text: 'zero' },
+            { pick: 1, pack: 0, text: 'one' },
+            { pick: 1, pack: 0, text: 'two' },
+          ],
+        },
+        selectedBlackCard: {
+          pick: 1,
+        },
+        playerIDs: ['foo', 'bar', 'baz', 'bender'],
+        handSize: 5,
+        players: {
+          foo: {
+            cards: [
+              { pack: 0, text: 'test' },
+              { pack: 0, text: 'test' },
+              { pack: 0, text: 'test' },
+            ],
+          },
+          bar: {
+            cards: [
+              { pack: 0, text: 'test' },
+              { pack: 0, text: 'test' },
+              { pack: 0, text: 'test' },
+            ],
+          },
+          baz: {
+            cards: [
+              { pack: 0, text: 'test' },
+              { pack: 0, text: 'test' },
+              { pack: 0, text: 'test' },
+            ],
+          },
+          bender: {
+            cards: [
+              { pack: 0, text: 'test' },
+              { pack: 0, text: 'test' },
+              { pack: 0, text: 'test' },
+            ],
+          },
+        },
+      };
+
+      Math.random = jest.fn(() => 0);
+
+      const result = HostReducer(state, {
+        type: 'DEAL_WHITE_CARDS',
+        payload: {},
+      });
+
+      expect(result.players).toEqual({
+        foo: {
+          cards: [
+            { pack: 0, text: 'test' },
+            { pack: 0, text: 'test' },
+            { pack: 0, text: 'test' },
+            { pack: 0, text: 'zero' },
+            { pack: 0, text: 'one' },
+          ],
+        },
+        bar: {
+          cards: [
+            { pack: 0, text: 'test' },
+            { pack: 0, text: 'test' },
+            { pack: 0, text: 'test' },
+            { pack: 0, text: 'two' },
+            { pack: 0, text: 'three' },
+          ],
+        },
+        baz: {
+          cards: [
+            { pack: 0, text: 'test' },
+            { pack: 0, text: 'test' },
+            { pack: 0, text: 'test' },
+            { pack: 0, text: 'four' },
+            { pack: 0, text: 'five' },
+          ],
+        },
+        bender: {
+          cards: [
+            { pack: 0, text: 'test' },
+            { pack: 0, text: 'test' },
+            { pack: 0, text: 'test' },
+            { pack: 0, text: 'six' },
+            { pack: 0, text: 'seven' },
+          ],
+        },
+      });
+    });
+
+    xit('removes the correct cards from the deck', () => {});
+  });
 });
