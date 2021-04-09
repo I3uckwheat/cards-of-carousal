@@ -62,41 +62,17 @@ async function getDeck({ selectedPacks }) {
   }
 }
 
-function dealWhiteCards({ deck, playerIDs, selectedBlackCard, cardsToDeal }) {
-  const removedCards = [];
-  const newWhiteCards = [...deck.white];
-  const numberOfTotalDraws = cardsToDeal * playerIDs.length;
-
-  // Draw all cards needed to deal, and remove them from the deck
-  for (let i = 0; i < numberOfTotalDraws; i += 1) {
-    // select random card
-    const selection = Math.floor(Math.random() * newWhiteCards.length);
-    // this both pushes the random card into the "drawn" pile, and removes the card
-    // from the new white card array
-    removedCards.push(newWhiteCards.splice(selection, 1)[0]);
-  }
-
-  // pass the correct number of random cards to each player
-  playerIDs.forEach((player) => {
-    const cardsToBeDealt = [];
-    for (let i = 0; i < cardsToDeal; i += 1) {
-      cardsToBeDealt.push(removedCards.pop());
-    }
+function sendCardsToPlayers({ selectedBlackCard, players }) {
+  Object.keys(players).forEach((player) => {
     socketInstance.sendMessage({
       event: 'deal-white-cards',
       payload: {
-        cards: cardsToBeDealt,
+        cards: players[player].cards,
         selectCardCount: selectedBlackCard.pick,
       },
       recipients: [player],
     });
   });
-
-  // update the state with the new white cards pile
-  return {
-    ...deck,
-    white: newWhiteCards,
-  };
 }
 
 export default async function hostReducerMiddleware(
@@ -132,26 +108,8 @@ export default async function hostReducerMiddleware(
       });
     }
 
-    case 'DEAL_WHITE_CARDS': {
-      // check if payload contains necessary properties
-      const requiredProperties = [
-        'deck',
-        'playerIDs',
-        'selectedBlackCard',
-        'cardsToDeal',
-      ];
-      if (requiredProperties.every((property) => property in payload)) {
-        const deck = dealWhiteCards(payload);
-        return dispatch({
-          type: 'SET_DECK',
-          payload: { deck },
-        });
-      }
-      throw new Error(
-        `DEAL_WHITE_CARDS action requires the following properties in the payload: ${requiredProperties.join(
-          ', ',
-        )}. Received: ${Object.keys(payload).join(', ')}`,
-      );
+    case 'SEND_CARDS_TO_PLAYERS': {
+      return sendCardsToPlayers(payload);
     }
     default:
       break;

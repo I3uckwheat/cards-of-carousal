@@ -142,6 +142,49 @@ function setDeck(state, { deck }) {
   };
 }
 
+function dealWhiteCards(state) {
+  const { deck, playerIDs, players, handSize } = state;
+  const newWhiteCards = [...deck.white];
+  const neededCardsPerPlayer = playerIDs.map((playerID) => {
+    const player = players[[playerID]];
+    return {
+      playerID,
+      cardsNeeded: handSize - player.cards.length,
+    };
+  });
+
+  const cardsGivenToPlayers = neededCardsPerPlayer.map(
+    ({ playerId, cardsNeeded }) => {
+      const newCards = [...players[playerId].cards];
+      for (let i = 0; i < cardsNeeded; i += 1) {
+        const selection = Math.floor(Math.random() * newWhiteCards.length);
+        newCards.push(newWhiteCards.splice(selection, 1)[0]);
+      }
+      return {
+        playerId,
+        cards: newCards,
+      };
+    },
+  );
+
+  const newPlayers = cardsGivenToPlayers.reduce((acc, { playerId, cards }) => {
+    acc[playerId] = {
+      ...players[playerId],
+      cards,
+    };
+    return acc;
+  }, {});
+
+  return {
+    ...state,
+    deck: {
+      ...deck.black,
+      white: newWhiteCards,
+    },
+    players: newPlayers,
+  };
+}
+
 function HostReducer(state, action) {
   const { type, payload } = action;
 
@@ -182,6 +225,9 @@ function HostReducer(state, action) {
 
     case 'SET_DECK':
       return setDeck(state, payload);
+
+    case 'DEAL_WHITE_CARDS':
+      return dealWhiteCards(state);
 
     default:
       return { ...state };
