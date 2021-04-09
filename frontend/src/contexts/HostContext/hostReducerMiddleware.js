@@ -108,9 +108,9 @@ export default async function hostReducerMiddleware(
       });
     }
 
-    case 'SEND_CARDS_TO_PLAYERS': {
+    case 'SEND_CARDS_TO_PLAYERS':
       return sendCardsToPlayers(payload);
-    }
+
     default:
       break;
   }
