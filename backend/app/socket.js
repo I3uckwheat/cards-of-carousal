@@ -17,14 +17,24 @@ socketRouter.addRoute('GET /lobby', (_, webSocket) => {
 });
 
 socketRouter.addRoute('GET /lobby/:id', (req, webSocket) => {
-  const result = lobbyList.joinLobby(req.params.id, req.query.name, webSocket);
+  let result;
+
+  if (req.query.name) {
+    result = lobbyList.joinLobby(req.params.id, req.query.name, webSocket);
+  }
+
+  if (!req.query.name && process.env.NODE_ENV === 'development') {
+    // eslint-disable-next-line no-console
+    console.warn('Lobby route requires a player name to be accessed');
+  }
+
   if (result === 'no-lobby') {
     webSocket.send('no-lobby');
     webSocket.close(1000, 'no-lobby');
 
     if (process.env.NODE_ENV === 'development') {
       // eslint-disable-next-line no-console
-      console.warn('Lobby route requires a player name to be accessed');
+      console.warn('Invalid lobby ID');
     }
   }
 });
