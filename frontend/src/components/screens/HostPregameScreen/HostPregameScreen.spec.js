@@ -96,8 +96,7 @@ describe('Host Pregame Screen', () => {
       // create lobby, close game
       expect(dispatch).toHaveBeenCalledTimes(2);
 
-      // FIXME
-      expect(dispatch.mock.calls[1][0]).toEqual({
+      expect(dispatch).toHaveBeenNthCalledWith(2, {
         type: 'CLOSE_GAME',
         payload: {},
       });
