@@ -44,13 +44,8 @@ module.exports = class Lobby {
 
   closeLobby = () => {
     const closeMessage = new Message('server', {
-      event: 'update',
-      payload: {
-        message: {
-          big: 'The lobby has been closed',
-          small: "Maybe next time the host won't be such a CoC",
-        },
-      },
+      event: 'lobby-closed',
+      payload: {},
     });
 
     Object.values(this.#playerSockets).forEach((socket) => {
