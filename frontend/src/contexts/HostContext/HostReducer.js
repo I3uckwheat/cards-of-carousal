@@ -178,7 +178,7 @@ function dealWhiteCards(state) {
   return {
     ...state,
     deck: {
-      ...deck.black,
+      black: [...deck.black],
       white: newWhiteCards,
     },
     players: newPlayers,
