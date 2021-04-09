@@ -62,16 +62,18 @@ async function getDeck({ selectedPacks }) {
   }
 }
 
-function sendCardsToPlayers({ selectedBlackCard, players }) {
-  Object.keys(players).forEach((player) => {
-    socketInstance.sendMessage({
-      event: 'deal-white-cards',
-      payload: {
-        cards: players[player].cards,
-        selectCardCount: selectedBlackCard.pick,
-      },
-      recipients: [player],
-    });
+function sendCardsToPlayers({ selectedBlackCard, players, playerIDs }) {
+  playerIDs.forEach((playerID) => {
+    if (!players[playerID].isCzar) {
+      socketInstance.sendMessage({
+        event: 'deal-white-cards',
+        payload: {
+          cards: players[playerID].cards,
+          selectCardCount: selectedBlackCard.pick,
+        },
+        recipients: [playerID],
+      });
+    }
   });
 }
 
