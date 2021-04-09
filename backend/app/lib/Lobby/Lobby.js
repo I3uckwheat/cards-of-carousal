@@ -1,15 +1,13 @@
-const { customAlphabet } = require('nanoid');
 const Message = require('../Message/Message.js');
-
-const customNanoid = customAlphabet('ABCDGHJKMNPRSTUVWXYZ', 4);
 
 module.exports = class Lobby {
   #hostSocket;
   #playerSockets = {};
   #onClose = () => {};
+  #shuffleId = () => {};
 
-  constructor(hostSocket, onCloseCallback) {
-    this.id = customNanoid();
+  constructor(lobbyId, hostSocket, onCloseCallback, shuffleIdCallback) {
+    this.id = lobbyId;
 
     hostSocket.on('message', this.#handleHostMessage);
     hostSocket.on('close', this.#handleHostDisconnect);
@@ -24,6 +22,7 @@ module.exports = class Lobby {
     hostSocket.send(message.toJSON());
 
     this.#onClose = onCloseCallback;
+    this.#shuffleId = shuffleIdCallback;
   }
 
   addPlayer = (playerSocket, playerName = '') => {
@@ -58,6 +57,19 @@ module.exports = class Lobby {
     this.#onClose(this.id);
   };
 
+  updateId = (newId) => {
+    this.id = newId;
+
+    const message = new Message('server', {
+      event: 'join-code-shuffled',
+      payload: {
+        lobbyID: this.id,
+      },
+    });
+
+    this.#hostSocket.send(message.toJSON());
+  };
+
   #removePlayer = (playerId) => {
     const playerSocket = this.#playerSockets[playerId];
     delete this.#playerSockets[playerSocket.id];
@@ -89,6 +101,10 @@ module.exports = class Lobby {
 
       if (message.event === 'kick-player') {
         this.#removePlayer(message.payload.playerId);
+      }
+
+      if (message.event === 'shuffle-join-code') {
+        this.#shuffleId(this.id);
       }
 
       if (message.isForBroadcast) {

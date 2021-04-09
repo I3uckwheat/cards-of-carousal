@@ -75,6 +75,13 @@ function sendCardsToPlayers({ selectedBlackCard, players }) {
   });
 }
 
+function sendShuffleJoinCodeMessage() {
+  socketInstance.sendMessage({
+    event: 'shuffle-join-code',
+    payload: {},
+  });
+}
+
 export default async function hostReducerMiddleware(
   { type, payload },
   dispatch,
@@ -110,6 +117,10 @@ export default async function hostReducerMiddleware(
 
     case 'SEND_CARDS_TO_PLAYERS':
       return sendCardsToPlayers(payload);
+
+    case 'SHUFFLE_JOIN_CODE':
+      sendShuffleJoinCodeMessage();
+      break;
 
     default:
       break;

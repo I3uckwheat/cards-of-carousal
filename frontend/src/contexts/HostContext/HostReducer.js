@@ -145,6 +145,7 @@ function setDeck(state, { deck }) {
 function dealWhiteCards(state) {
   const { deck, playerIDs, players, handSize } = state;
   const newWhiteCards = [...deck.white];
+
   const neededCardsPerPlayer = playerIDs.map((playerID) => {
     const player = players[playerID];
     return {
@@ -183,6 +184,10 @@ function dealWhiteCards(state) {
     },
     players: newPlayers,
   };
+}
+
+function updateJoinCode(state, { lobbyID }) {
+  return { ...state, lobbyID };
 }
 
 function HostReducer(state, action) {
@@ -228,6 +233,9 @@ function HostReducer(state, action) {
 
     case 'DEAL_WHITE_CARDS':
       return dealWhiteCards(state);
+
+    case 'UPDATE_JOIN_CODE':
+      return updateJoinCode(state, payload);
 
     default:
       return { ...state };
