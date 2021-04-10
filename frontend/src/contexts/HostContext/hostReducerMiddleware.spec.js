@@ -342,4 +342,38 @@ describe('hostReducerMiddleware', () => {
       });
     });
   });
+
+  describe('NOTIFY_CZAR', () => {
+    it("calls socketInstance's sendMessage with the event 'notify-player-is-czar'", async () => {
+      const dispatch = jest.fn();
+
+      await hostReducerMiddleware(
+        {
+          type: 'NOTIFY_CZAR',
+          payload: {
+            players: {
+              foo: {
+                cards: [{ text: 'test 1' }, { text: 'test 2' }],
+                isCzar: true,
+              },
+              bar: {
+                cards: [{ text: 'test 3' }, { text: 'test 4' }],
+                isCzar: false,
+              },
+              baz: {
+                cards: [{ text: 'test 5' }, { text: 'test 6' }],
+                isCzar: false,
+              },
+            },
+          },
+        },
+        dispatch,
+      );
+      expect(socketInstance.sendMessage).toHaveBeenCalledWith({
+        event: 'notify-player-is-czar',
+        payload: {},
+        recipients: [],
+      });
+    });
+  });
 });

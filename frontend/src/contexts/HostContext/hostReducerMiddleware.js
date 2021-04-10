@@ -86,7 +86,7 @@ function sendShuffleJoinCodeMessage() {
 
 function notifyCzar({ players }) {
   const czar = Object.keys(players).find((player) => players[player].isCzar);
-  console.log(players);
+
   if (czar) {
     socketInstance.sendMessage({
       event: 'notify-player-is-czar',
