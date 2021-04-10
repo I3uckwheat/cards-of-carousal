@@ -365,6 +365,7 @@ describe('hostReducerMiddleware', () => {
                 isCzar: false,
               },
             },
+            playerIDs: ['foo', 'bar', 'baz'],
           },
         },
         dispatch,
