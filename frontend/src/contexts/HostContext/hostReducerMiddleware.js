@@ -68,7 +68,7 @@ function sendCardsToPlayers({ selectedBlackCard, players, playerIDs }) {
       socketInstance.sendMessage({
         event: 'deal-white-cards',
         payload: {
-          cards: players[playerID].cards,
+          cards: players[playerID].cards.map((card) => card.text),
           selectCardCount: selectedBlackCard.pick,
         },
         recipients: [playerID],

@@ -243,7 +243,7 @@ describe('hostReducerMiddleware', () => {
       expect(socketInstance.sendMessage).toHaveBeenNthCalledWith(1, {
         event: 'deal-white-cards',
         payload: {
-          cards: [{ text: 'test 1' }, { text: 'test 2' }],
+          cards: ['test 1', 'test 2'],
           selectCardCount: 2,
         },
         recipients: ['foo'],
@@ -251,7 +251,7 @@ describe('hostReducerMiddleware', () => {
       expect(socketInstance.sendMessage).toHaveBeenNthCalledWith(2, {
         event: 'deal-white-cards',
         payload: {
-          cards: [{ text: 'test 3' }, { text: 'test 4' }],
+          cards: ['test 3', 'test 4'],
           selectCardCount: 2,
         },
         recipients: ['bar'],
@@ -259,7 +259,7 @@ describe('hostReducerMiddleware', () => {
       expect(socketInstance.sendMessage).toHaveBeenNthCalledWith(3, {
         event: 'deal-white-cards',
         payload: {
-          cards: [{ text: 'test 5' }, { text: 'test 6' }],
+          cards: ['test 5', 'test 6'],
           selectCardCount: 2,
         },
         recipients: ['baz'],
@@ -300,7 +300,7 @@ describe('hostReducerMiddleware', () => {
       expect(socketInstance.sendMessage).not.toHaveBeenCalledWith({
         event: 'deal-white-cards',
         payload: {
-          cards: [{ text: 'test 1' }, { text: 'test 2' }],
+          cards: ['test 1', 'test 2'],
           selectCardCount: 2,
         },
         recipients: ['foo'],
@@ -308,7 +308,7 @@ describe('hostReducerMiddleware', () => {
       expect(socketInstance.sendMessage).toHaveBeenNthCalledWith(1, {
         event: 'deal-white-cards',
         payload: {
-          cards: [{ text: 'test 3' }, { text: 'test 4' }],
+          cards: ['test 3', 'test 4'],
           selectCardCount: 2,
         },
         recipients: ['bar'],
@@ -316,7 +316,7 @@ describe('hostReducerMiddleware', () => {
       expect(socketInstance.sendMessage).toHaveBeenNthCalledWith(2, {
         event: 'deal-white-cards',
         payload: {
-          cards: [{ text: 'test 5' }, { text: 'test 6' }],
+          cards: ['test 5', 'test 6'],
           selectCardCount: 2,
         },
         recipients: ['baz'],
