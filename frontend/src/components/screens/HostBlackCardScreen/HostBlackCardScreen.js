@@ -1,7 +1,7 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
-import { HostContext } from '../../../contexts/HostContext/HostContext';
 import HostLayout from '../../layouts/HostLayout';
+import { HostContext } from '../../../contexts/HostContext/HostContext';
 import PlayerList from '../../PlayerList/PlayerList';
 import GameSettings from '../../GameSettings/GameSettings';
 import HostSettingsMenu from '../../HostSettingsMenu/HostSettingsMenu.js';
@@ -181,30 +181,7 @@ function RightPanel() {
   );
 }
 
-function HostPregameScreen() {
-  const { state, dispatch } = useContext(HostContext);
-  const { players, playerIDs, selectedBlackCard } = state;
-
-  useEffect(async () => {
-    if (state.gameState === 'waiting-for-players-to-send-cards') {
-      await dispatch({
-        type: 'SEND_CARDS_TO_PLAYERS',
-        payload: { players, playerIDs, selectedBlackCard },
-      });
-      await dispatch({
-        type: 'NOTIFY_CZAR',
-        payload: {
-          players,
-          playerIDs,
-        },
-      });
-    }
-  }, [state.gameState]);
-
-  useEffect(() => {
-    dispatch({ type: 'CREATE_LOBBY', payload: {} });
-  }, []);
-
+function HostBlackCardScreen() {
   return (
     <HostLayout
       className="primary-background"
@@ -215,4 +192,4 @@ function HostPregameScreen() {
   );
 }
 
-export default HostPregameScreen;
+export default HostBlackCardScreen;

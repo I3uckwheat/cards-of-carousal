@@ -91,7 +91,7 @@ function notifyCzar({ players, playerIDs }) {
     socketInstance.sendMessage({
       event: 'update',
       payload: {
-        gameState: 'waiting-to-send-cards',
+        gameState: 'waiting-for-players-to-send-cards',
         message: {
           big: "You're the Czar",
           small: 'Wait for the players to select their cards',

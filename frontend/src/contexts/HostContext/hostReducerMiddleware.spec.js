@@ -344,7 +344,7 @@ describe('hostReducerMiddleware', () => {
   });
 
   describe('NOTIFY_CZAR', () => {
-    it("calls socketInstance's sendMessage with the event 'notify-player-is-czar'", async () => {
+    it("calls socketInstance's sendMessage with the event 'update'", async () => {
       const dispatch = jest.fn();
 
       await hostReducerMiddleware(
@@ -373,7 +373,7 @@ describe('hostReducerMiddleware', () => {
       expect(socketInstance.sendMessage).toHaveBeenCalledWith({
         event: 'update',
         payload: {
-          gameState: 'waiting-to-send-cards',
+          gameState: 'waiting-for-players-to-send-cards',
           message: {
             big: "You're the Czar",
             small: 'Wait for the players to select their cards',
