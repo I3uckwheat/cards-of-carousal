@@ -329,5 +329,53 @@ describe('context', () => {
       expect(screen.getByTestId('message-big')).toHaveTextContent('');
       expect(screen.getByTestId('message-small')).toHaveTextContent('');
     });
+
+    it('responds to the deal-white-cards event', () => {
+      const TestComponent = () => {
+        const { state } = useContext(PlayerContext);
+
+        return (
+          <>
+            <div data-testid="cards">
+              {state.cards.map((card) => (
+                <p data-testid="card">{card.text}</p>
+              ))}
+            </div>
+            <div>
+              <p data-testid="select-card-count">{state.selectCardCount}</p>
+            </div>
+          </>
+        );
+      };
+
+      const { eventHandlers } = setupEmitterMocks();
+
+      render(
+        <PlayerProvider>
+          <TestComponent />
+        </PlayerProvider>,
+      );
+
+      const testPayload = {
+        cards: [{ text: 'card 1' }, { text: 'card 2' }, { text: 'card 3' }],
+        selectCardCount: 1,
+      };
+
+      expect(screen.queryByTestId('card')).toBeNull();
+      expect(screen.getByTestId('select-card-count')).toHaveTextContent('0');
+
+      act(() =>
+        eventHandlers.message({
+          event: 'deal-white-cards',
+          payload: testPayload,
+        }),
+      );
+
+      expect(screen.queryAllByTestId('card').length).toBe(3);
+      expect(screen.getByTestId('cards')).toHaveTextContent('card 1');
+      expect(screen.getByTestId('cards')).toHaveTextContent('card 2');
+      expect(screen.getByTestId('cards')).toHaveTextContent('card 3');
+      expect(screen.getByTestId('select-card-count')).toHaveTextContent('1');
+    });
   });
 });

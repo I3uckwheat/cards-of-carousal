@@ -42,6 +42,8 @@ export function PlayerProvider({ children }) {
         return dispatch({ type: 'UPDATE', payload });
       case 'error-disconnect':
         return dispatch({ type: 'ERROR_DISCONNECT', payload });
+      case 'deal-white-cards':
+        return dispatch({ type: 'RECEIVE_WHITE_CARDS', payload });
       case 'lobby-closed':
         return dispatch({
           type: 'UPDATE',
