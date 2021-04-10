@@ -64,7 +64,6 @@ async function getDeck({ selectedPacks }) {
 }
 
 function sendCardsToPlayers({ selectedBlackCard, players, playerIDs }) {
-  debugger;
   playerIDs.forEach((playerID) => {
     if (!players[playerID].isCzar) {
       socketInstance.sendMessage({

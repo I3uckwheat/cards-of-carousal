@@ -199,10 +199,10 @@ function HostPregameScreen() {
 
   useEffect(async () => {
     if (state.gameState === 'waiting-to-send-cards') {
-      // await dispatch({
-      //   type: 'SEND_CARDS_TO_PLAYERS',
-      //   payload: { players, playerIDs, selectedBlackCard },
-      // });
+      await dispatch({
+        type: 'SEND_CARDS_TO_PLAYERS',
+        payload: { players, playerIDs, selectedBlackCard },
+      });
     }
   }, [state.gameState]);
 
