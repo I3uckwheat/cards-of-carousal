@@ -372,6 +372,310 @@ describe('reducer', () => {
     });
   });
 
+  describe('DEAL_WHITE_CARDS', () => {
+    it('deals the correct cards to each player', () => {
+      // setup dummy state
+      const state = {
+        deck: {
+          white: [
+            { pack: 0, text: 'zero' },
+            { pack: 0, text: 'one' },
+            { pack: 0, text: 'two' },
+            { pack: 0, text: 'three' },
+            { pack: 0, text: 'four' },
+            { pack: 0, text: 'five' },
+            { pack: 0, text: 'six' },
+            { pack: 0, text: 'seven' },
+            { pack: 0, text: 'eight' },
+            { pack: 0, text: 'nine' },
+            { pack: 0, text: 'ten' },
+            { pack: 0, text: 'eleven' },
+            { pack: 0, text: 'twelve' },
+            { pack: 0, text: 'thirteen' },
+            { pack: 0, text: 'fourteen' },
+            { pack: 0, text: 'fifteen' },
+          ],
+          black: [
+            { pick: 1, pack: 0, text: 'zero' },
+            { pick: 1, pack: 0, text: 'one' },
+            { pick: 1, pack: 0, text: 'two' },
+          ],
+        },
+        selectedBlackCard: {
+          pick: 1,
+        },
+        playerIDs: ['foo', 'bar', 'baz', 'bender'],
+        handSize: 5,
+        players: {
+          foo: {
+            cards: [
+              { pack: 0, text: 'test' },
+              { pack: 0, text: 'test' },
+              { pack: 0, text: 'test' },
+            ],
+          },
+          bar: {
+            cards: [
+              { pack: 0, text: 'test' },
+              { pack: 0, text: 'test' },
+              { pack: 0, text: 'test' },
+            ],
+          },
+          baz: {
+            cards: [
+              { pack: 0, text: 'test' },
+              { pack: 0, text: 'test' },
+              { pack: 0, text: 'test' },
+            ],
+          },
+          bender: {
+            cards: [
+              { pack: 0, text: 'test' },
+              { pack: 0, text: 'test' },
+              { pack: 0, text: 'test' },
+            ],
+          },
+        },
+      };
+
+      Math.random = jest.fn(() => 0);
+
+      const result = HostReducer(state, {
+        type: 'DEAL_WHITE_CARDS',
+        payload: {},
+      });
+
+      expect(result.players).toEqual({
+        foo: {
+          cards: [
+            { pack: 0, text: 'test' },
+            { pack: 0, text: 'test' },
+            { pack: 0, text: 'test' },
+            { pack: 0, text: 'zero' },
+            { pack: 0, text: 'one' },
+          ],
+        },
+        bar: {
+          cards: [
+            { pack: 0, text: 'test' },
+            { pack: 0, text: 'test' },
+            { pack: 0, text: 'test' },
+            { pack: 0, text: 'two' },
+            { pack: 0, text: 'three' },
+          ],
+        },
+        baz: {
+          cards: [
+            { pack: 0, text: 'test' },
+            { pack: 0, text: 'test' },
+            { pack: 0, text: 'test' },
+            { pack: 0, text: 'four' },
+            { pack: 0, text: 'five' },
+          ],
+        },
+        bender: {
+          cards: [
+            { pack: 0, text: 'test' },
+            { pack: 0, text: 'test' },
+            { pack: 0, text: 'test' },
+            { pack: 0, text: 'six' },
+            { pack: 0, text: 'seven' },
+          ],
+        },
+      });
+    });
+
+    it('removes the correct cards from the deck', () => {
+      // setup dummy state
+      const state = {
+        deck: {
+          white: [
+            { pack: 0, text: 'zero' },
+            { pack: 0, text: 'one' },
+            { pack: 0, text: 'two' },
+            { pack: 0, text: 'three' },
+            { pack: 0, text: 'four' },
+            { pack: 0, text: 'five' },
+            { pack: 0, text: 'six' },
+            { pack: 0, text: 'seven' },
+            { pack: 0, text: 'eight' },
+            { pack: 0, text: 'nine' },
+            { pack: 0, text: 'ten' },
+            { pack: 0, text: 'eleven' },
+            { pack: 0, text: 'twelve' },
+            { pack: 0, text: 'thirteen' },
+            { pack: 0, text: 'fourteen' },
+            { pack: 0, text: 'fifteen' },
+          ],
+          black: [
+            { pick: 1, pack: 0, text: 'zero' },
+            { pick: 1, pack: 0, text: 'one' },
+            { pick: 1, pack: 0, text: 'two' },
+          ],
+        },
+        selectedBlackCard: {
+          pick: 1,
+        },
+        playerIDs: ['foo', 'bar', 'baz', 'bender'],
+        handSize: 5,
+        players: {
+          foo: {
+            cards: [
+              { pack: 0, text: 'test' },
+              { pack: 0, text: 'test' },
+              { pack: 0, text: 'test' },
+            ],
+          },
+          bar: {
+            cards: [
+              { pack: 0, text: 'test' },
+              { pack: 0, text: 'test' },
+              { pack: 0, text: 'test' },
+            ],
+          },
+          baz: {
+            cards: [
+              { pack: 0, text: 'test' },
+              { pack: 0, text: 'test' },
+              { pack: 0, text: 'test' },
+            ],
+          },
+          bender: {
+            cards: [
+              { pack: 0, text: 'test' },
+              { pack: 0, text: 'test' },
+              { pack: 0, text: 'test' },
+            ],
+          },
+        },
+      };
+
+      Math.random = jest.fn(() => 0);
+
+      const result = HostReducer(state, {
+        type: 'DEAL_WHITE_CARDS',
+        payload: {},
+      });
+
+      expect(result.deck).toEqual({
+        black: [...state.deck.black],
+        white: [
+          { pack: 0, text: 'eight' },
+          { pack: 0, text: 'nine' },
+          { pack: 0, text: 'ten' },
+          { pack: 0, text: 'eleven' },
+          { pack: 0, text: 'twelve' },
+          { pack: 0, text: 'thirteen' },
+          { pack: 0, text: 'fourteen' },
+          { pack: 0, text: 'fifteen' },
+        ],
+      });
+    });
+
+    it('does not deal more cards to players who have the maximum card count', () => {
+      // setup dummy state
+      const state = {
+        deck: {
+          white: [
+            { pack: 0, text: 'zero' },
+            { pack: 0, text: 'one' },
+            { pack: 0, text: 'two' },
+            { pack: 0, text: 'three' },
+            { pack: 0, text: 'four' },
+            { pack: 0, text: 'five' },
+            { pack: 0, text: 'six' },
+          ],
+          black: [{ pick: 1, pack: 0, text: 'zero' }],
+        },
+        selectedBlackCard: {
+          pick: 1,
+        },
+        playerIDs: ['foo', 'bar', 'baz', 'bender'],
+        handSize: 5,
+        players: {
+          foo: {
+            cards: [
+              { pack: 0, text: 'test' },
+              { pack: 0, text: 'test' },
+              { pack: 0, text: 'test' },
+              { pack: 0, text: 'test' },
+              { pack: 0, text: 'test' },
+            ],
+          },
+          bar: {
+            cards: [
+              { pack: 0, text: 'test' },
+              { pack: 0, text: 'test' },
+              { pack: 0, text: 'test' },
+            ],
+          },
+          baz: {
+            cards: [
+              { pack: 0, text: 'test' },
+              { pack: 0, text: 'test' },
+              { pack: 0, text: 'test' },
+            ],
+          },
+          bender: {
+            cards: [
+              { pack: 0, text: 'test' },
+              { pack: 0, text: 'test' },
+              { pack: 0, text: 'test' },
+            ],
+          },
+        },
+      };
+
+      Math.random = jest.fn(() => 0);
+
+      const result = HostReducer(state, {
+        type: 'DEAL_WHITE_CARDS',
+        payload: {},
+      });
+
+      expect(result.players.foo).toEqual(state.players.foo);
+    });
+
+    it('updates the game state', () => {
+      // setup dummy state
+      const state = {
+        deck: {
+          white: [
+            { pack: 0, text: 'zero' },
+            { pack: 0, text: 'one' },
+            { pack: 0, text: 'two' },
+            { pack: 0, text: 'three' },
+            { pack: 0, text: 'four' },
+          ],
+          black: [{ pick: 1, pack: 0, text: 'zero' }],
+        },
+        selectedBlackCard: {
+          pick: 1,
+        },
+        playerIDs: ['foo'],
+        handSize: 5,
+        players: {
+          foo: {
+            cards: [
+              { pack: 0, text: 'test' },
+              { pack: 0, text: 'test' },
+              { pack: 0, text: 'test' },
+            ],
+          },
+        },
+      };
+
+      Math.random = jest.fn(() => 0);
+
+      const result = HostReducer(state, {
+        type: 'DEAL_WHITE_CARDS',
+        payload: {},
+      });
+
+      expect(result.gameState).toBe('waiting-to-send-cards');
+    });
+  });
+
   describe('SELECT_BLACK_CARD', () => {
     it('sets a random black card and removes it from the deck', () => {
       const state = {

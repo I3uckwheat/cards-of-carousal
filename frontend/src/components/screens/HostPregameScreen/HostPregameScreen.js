@@ -116,6 +116,7 @@ function LeftPanel() {
         type: 'SELECT_BLACK_CARD',
         payload: {},
       });
+      await dispatch({ type: 'DEAL_WHITE_CARDS', payload: {} });
     }
     // TODO: add else statement to warn that you cannot play a game with no players
   };
@@ -181,7 +182,17 @@ function RightPanel() {
 }
 
 function HostPregameScreen() {
-  const { dispatch } = useContext(HostContext);
+  const { state, dispatch } = useContext(HostContext);
+  const { players, playerIDs, selectedBlackCard } = state;
+
+  useEffect(async () => {
+    if (state.gameState === 'waiting-to-send-cards') {
+      await dispatch({
+        type: 'SEND_CARDS_TO_PLAYERS',
+        payload: { players, playerIDs, selectedBlackCard },
+      });
+    }
+  }, [state.gameState]);
 
   useEffect(() => {
     dispatch({ type: 'CREATE_LOBBY', payload: {} });

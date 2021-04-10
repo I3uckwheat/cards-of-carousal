@@ -143,6 +143,7 @@ describe('Host Pregame Screen', () => {
           selectedPacks: [0, 1, 2],
         },
         deck: { black: [], white: [] },
+        selectedBlackCard: { text: 'test', pick: 1 },
       };
 
       render(
@@ -155,8 +156,8 @@ describe('Host Pregame Screen', () => {
         userEvent.click(screen.getByText('START CAROUSING')),
       );
 
-      // create lobby, get deck, set game state, set new czar, get black card
-      expect(dispatch).toHaveBeenCalledTimes(5);
+      // create lobby, get deck, set game state, set new czar, select black card, deal white cards
+      expect(dispatch).toHaveBeenCalledTimes(6);
       expect(dispatch).toHaveBeenNthCalledWith(2, {
         type: 'SET_DECK',
         payload: { selectedPacks: state.gameSettings.selectedPacks },
@@ -171,6 +172,10 @@ describe('Host Pregame Screen', () => {
       });
       expect(dispatch).toHaveBeenNthCalledWith(5, {
         type: 'SELECT_BLACK_CARD',
+        payload: {},
+      });
+      expect(dispatch).toHaveBeenNthCalledWith(6, {
+        type: 'DEAL_WHITE_CARDS',
         payload: {},
       });
     });
@@ -247,6 +252,53 @@ describe('Host Pregame Screen', () => {
       expect(dispatch).not.toHaveBeenCalledWith({
         type: 'SET_NEXT_CZAR',
         payload: {},
+      });
+    });
+
+    it('sends the cards to players when the game state is waiting to send cards', () => {
+      const dispatch = jest.fn();
+      state = {
+        gameState: 'waiting-to-send-cards',
+        lobbyID: '',
+        players: {
+          foo: {
+            name: 'Bender',
+            score: 0,
+            isCzar: false,
+            submittedCards: [],
+            cards: [],
+          },
+          bar: {
+            name: 'Briggs',
+            score: 0,
+            isCzar: false,
+            submittedCards: [],
+            cards: [],
+          },
+          baz: {
+            name: 'Pedro',
+            score: 0,
+            isCzar: false,
+            submittedCards: [],
+            cards: [],
+          },
+        },
+        playerIDs: ['foo', 'bar', 'baz'],
+        gameSettings: { maxPlayers: 8, winningScore: 7, selectedPacks: [] },
+        deck: { black: [], white: [] },
+      };
+
+      const { players, playerIDs, selectedBlackCard } = state;
+
+      render(
+        <HostContext.Provider value={{ state, dispatch }}>
+          <HostPregameScreen />
+        </HostContext.Provider>,
+      );
+
+      expect(dispatch).toHaveBeenCalledWith({
+        type: 'SEND_CARDS_TO_PLAYERS',
+        payload: { players, playerIDs, selectedBlackCard },
       });
     });
   });
