@@ -2,7 +2,6 @@ import React, { useContext } from 'react';
 import { HostContext } from '../../../contexts/HostContext/HostContext';
 import HostPregameScreen from '../../screens/HostPregameScreen/HostPregameScreen';
 import WinnerSelectScreen from '../../screens/WinnerSelectScreen/WinnerSelectScreen';
-import HostBlackCardScreen from '../../screens/HostBlackCardScreen/HostBlackCardScreen';
 
 const propTypes = {};
 
@@ -20,9 +19,6 @@ export default function HostScreenController() {
 
     case 'selecting-winner':
       return <WinnerSelectScreen />;
-
-    case 'waiting-to-receive-cards':
-      return <HostBlackCardScreen />;
 
     default:
       throw new Error(`Unrecognized game state: ${gameState}`);

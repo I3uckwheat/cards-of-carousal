@@ -373,7 +373,7 @@ describe('hostReducerMiddleware', () => {
       expect(socketInstance.sendMessage).toHaveBeenCalledWith({
         event: 'update',
         payload: {
-          gameState: 'waiting-for-players-to-send-cards',
+          gameState: 'waiting-for-player-card-submissions',
           message: {
             big: "You're the Czar",
             small: 'Wait for the players to select their cards',

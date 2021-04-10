@@ -258,7 +258,7 @@ describe('Host Pregame Screen', () => {
     it('sends the cards to players when the game state is waiting to send cards', () => {
       const dispatch = jest.fn();
       state = {
-        gameState: 'waiting-for-players-to-send-cards',
+        gameState: 'waiting-for-player-card-submissions',
         lobbyID: '',
         players: {
           foo: {
@@ -302,10 +302,10 @@ describe('Host Pregame Screen', () => {
       });
     });
 
-    it('notifies the czar when the game state is waiting-for-players-to-send-cards', async () => {
+    it('notifies the czar when the game state is waiting-for-player-card-submissions', async () => {
       const dispatch = jest.fn();
       state = {
-        gameState: 'waiting-for-players-to-send-cards',
+        gameState: 'waiting-for-player-card-submissions',
         lobbyID: '',
         players: {
           foo: {

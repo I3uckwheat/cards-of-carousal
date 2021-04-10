@@ -672,7 +672,7 @@ describe('reducer', () => {
         payload: {},
       });
 
-      expect(result.gameState).toBe('waiting-for-players-to-send-cards');
+      expect(result.gameState).toBe('waiting-for-player-card-submissions');
     });
   });
 
