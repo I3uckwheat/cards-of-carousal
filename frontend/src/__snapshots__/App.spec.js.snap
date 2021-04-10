@@ -607,6 +607,10 @@ exports[`App snapshots should show the host screen after user has clicked the "h
 }
 
 .c0 .components .right {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
   -webkit-box-flex: 1;
   -webkit-flex-grow: 1;
   -ms-flex-positive: 1;
