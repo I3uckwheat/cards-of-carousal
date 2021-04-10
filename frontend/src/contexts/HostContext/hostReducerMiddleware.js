@@ -88,7 +88,6 @@ function sendShuffleJoinCodeMessage() {
 export default async function hostReducerMiddleware(
   { type, payload },
   dispatch,
-  getState
 ) {
   switch (type) {
     case `CLOSE_GAME`:

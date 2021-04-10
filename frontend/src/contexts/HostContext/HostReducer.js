@@ -238,13 +238,17 @@ function HostReducer(state, action) {
       return setLobbyId(state, payload);
 
     case 'START_GAME': {
-      const a = setDeck(state, payload);
-      const b = startGame(a);
-      const c = setNextCzar(b);
-      const d = selectBlackCard(c);
-      const e = dealWhiteCards(d);
-      // debugger;
-      return e;
+      const stateReducerChain = [
+        setDeck,
+        startGame,
+        setNextCzar,
+        selectBlackCard,
+        dealWhiteCards
+      ]
+
+      return stateReducerChain.reduce((acc, callback) => {
+        return callback(acc, payload)
+      }, state);
     }
 
     case 'SET_GAME_SETTINGS':
