@@ -84,8 +84,8 @@ function sendShuffleJoinCodeMessage() {
   });
 }
 
-function notifyCzar({ players }) {
-  const czar = Object.keys(players).find((player) => players[player].isCzar);
+function notifyCzar({ players, playerIDs }) {
+  const czar = playerIDs.find((player) => players[player].isCzar);
 
   if (czar) {
     socketInstance.sendMessage({
