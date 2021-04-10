@@ -182,24 +182,7 @@ function RightPanel() {
 }
 
 function HostPregameScreen() {
-  const { state, dispatch } = useContext(HostContext);
-  const { players, playerIDs, selectedBlackCard } = state;
-
-  useEffect(async () => {
-    if (state.gameState === 'waiting-for-player-card-submissions') {
-      await dispatch({
-        type: 'SEND_CARDS_TO_PLAYERS',
-        payload: { players, playerIDs, selectedBlackCard },
-      });
-      await dispatch({
-        type: 'NOTIFY_CZAR',
-        payload: {
-          players,
-          playerIDs,
-        },
-      });
-    }
-  }, [state.gameState]);
+  const { dispatch } = useContext(HostContext);
 
   useEffect(() => {
     dispatch({ type: 'CREATE_LOBBY', payload: {} });
