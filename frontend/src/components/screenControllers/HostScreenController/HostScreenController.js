@@ -14,12 +14,12 @@ export default function HostScreenController() {
     case 'waiting-for-lobby':
     case 'waiting-for-players':
     case 'waiting-for-deck':
-    case 'waiting-to-send-cards':
+    case 'waiting-for-player-card-submissions':
       return <HostPregameScreen />;
 
     case 'selecting-winner':
       return <WinnerSelectScreen />;
-      
+
     default:
       throw new Error(`Unrecognized game state: ${gameState}`);
   }

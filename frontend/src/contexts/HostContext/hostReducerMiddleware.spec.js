@@ -342,4 +342,45 @@ describe('hostReducerMiddleware', () => {
       });
     });
   });
+
+  describe('NOTIFY_CZAR', () => {
+    it("calls socketInstance's sendMessage with the event 'update'", async () => {
+      const dispatch = jest.fn();
+
+      await hostReducerMiddleware(
+        {
+          type: 'NOTIFY_CZAR',
+          payload: {
+            players: {
+              foo: {
+                cards: [{ text: 'test 1' }, { text: 'test 2' }],
+                isCzar: true,
+              },
+              bar: {
+                cards: [{ text: 'test 3' }, { text: 'test 4' }],
+                isCzar: false,
+              },
+              baz: {
+                cards: [{ text: 'test 5' }, { text: 'test 6' }],
+                isCzar: false,
+              },
+            },
+            playerIDs: ['foo', 'bar', 'baz'],
+          },
+        },
+        dispatch,
+      );
+      expect(socketInstance.sendMessage).toHaveBeenCalledWith({
+        event: 'update',
+        payload: {
+          gameState: 'waiting-for-player-card-submissions',
+          message: {
+            big: "You're the Czar",
+            small: 'Wait for the players to select their cards',
+          },
+        },
+        recipients: ['foo'],
+      });
+    });
+  });
 });
