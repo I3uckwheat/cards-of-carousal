@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen, act } from '@testing-library/react';
+import { render, screen, act, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import renderer from 'react-test-renderer';
 import { HostContext } from '../../../contexts/HostContext/HostContext';
@@ -299,6 +299,56 @@ describe('Host Pregame Screen', () => {
       expect(dispatch).toHaveBeenCalledWith({
         type: 'SEND_CARDS_TO_PLAYERS',
         payload: { players, playerIDs, selectedBlackCard },
+      });
+    });
+
+    it('notifies the czar when the game state is waiting-to-send-cards', async () => {
+      const dispatch = jest.fn();
+      state = {
+        gameState: 'waiting-to-send-cards',
+        lobbyID: '',
+        players: {
+          foo: {
+            name: 'Bender',
+            score: 0,
+            isCzar: false,
+            submittedCards: [],
+            cards: [],
+          },
+          bar: {
+            name: 'Briggs',
+            score: 0,
+            isCzar: false,
+            submittedCards: [],
+            cards: [],
+          },
+          baz: {
+            name: 'Pedro',
+            score: 0,
+            isCzar: false,
+            submittedCards: [],
+            cards: [],
+          },
+        },
+        playerIDs: ['foo', 'bar', 'baz'],
+        gameSettings: { maxPlayers: 8, winningScore: 7, selectedPacks: [] },
+        deck: { black: [], white: [] },
+      };
+
+      const { players, playerIDs } = state;
+
+      render(
+        <HostContext.Provider value={{ state, dispatch }}>
+          <HostPregameScreen />
+        </HostContext.Provider>,
+      );
+      await waitFor(() => {
+        expect(dispatch).toHaveBeenCalledTimes(3);
+      });
+
+      expect(dispatch).toHaveBeenNthCalledWith(3, {
+        type: 'NOTIFY_CZAR',
+        payload: { players, playerIDs },
       });
     });
   });

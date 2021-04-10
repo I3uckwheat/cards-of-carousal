@@ -191,6 +191,13 @@ function HostPregameScreen() {
         type: 'SEND_CARDS_TO_PLAYERS',
         payload: { players, playerIDs, selectedBlackCard },
       });
+      await dispatch({
+        type: 'NOTIFY_CZAR',
+        payload: {
+          players,
+          playerIDs,
+        },
+      });
     }
   }, [state.gameState]);
 
