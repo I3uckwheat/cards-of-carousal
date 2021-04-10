@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import styled from 'styled-components';
 import HostLayout from '../../layouts/HostLayout';
 import { HostContext } from '../../../contexts/HostContext/HostContext';
@@ -122,6 +122,25 @@ function RightPanel() {
 }
 
 function HostBlackCardScreen() {
+  const { state, dispatch } = useContext(HostContext);
+
+  const { players, playerIDs, selectedBlackCard } = state;
+
+  useEffect(async () => {
+    if (state.gameState === 'waiting-to-receive-cards') {
+      await dispatch({
+        type: 'SEND_CARDS_TO_PLAYERS',
+        payload: { players, playerIDs, selectedBlackCard },
+      });
+      await dispatch({
+        type: 'NOTIFY_CZAR',
+        payload: {
+          players,
+          playerIDs,
+        },
+      });
+    }
+  }, [state.gameState]);
   return (
     <HostLayout
       className="primary-background"
