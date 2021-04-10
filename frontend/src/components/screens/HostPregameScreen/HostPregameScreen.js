@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useContext, useEffect } from 'react';
 import styled from 'styled-components';
 import { HostContext } from '../../../contexts/HostContext/HostContext';
@@ -100,24 +101,35 @@ function LeftPanel() {
     // check if there are any players and if packs are selected
     if (playerIDs.length && state.gameSettings.selectedPacks.length) {
       const { selectedPacks } = state.gameSettings;
-      await dispatch({
-        type: 'SET_DECK',
-        payload: { selectedPacks },
-      });
+
+      // await dispatch({
+      //   type: 'SET_DECK',
+      //   payload: { selectedPacks },
+      // });
+
       await dispatch({
         type: 'START_GAME',
         payload: {},
       });
-      await dispatch({
-        type: 'SET_NEXT_CZAR',
-        payload: {},
-      });
-      await dispatch({
-        type: 'SELECT_BLACK_CARD',
-        payload: {},
-      });
-      await dispatch({ type: 'DEAL_WHITE_CARDS', payload: {} });
+
+      // await dispatch({
+      //   type: 'SET_NEXT_CZAR',
+      //   payload: {},
+      // });
+
+      // await dispatch({
+      //   type: 'SELECT_BLACK_CARD',
+      //   payload: {},
+      // });
+
+      // await dispatch({
+      //   type: 'SEND_CARDS_TO_PLAYERS',
+      //   payload: { players, playerIDs, selectedBlackCard },
+      // });
+
+      // await dispatch({ type: 'DEAL_WHITE_CARDS', payload: {} });
     }
+
     // TODO: add else statement to warn that you cannot play a game with no players
   };
 
@@ -187,10 +199,10 @@ function HostPregameScreen() {
 
   useEffect(async () => {
     if (state.gameState === 'waiting-to-send-cards') {
-      await dispatch({
-        type: 'SEND_CARDS_TO_PLAYERS',
-        payload: { players, playerIDs, selectedBlackCard },
-      });
+      // await dispatch({
+      //   type: 'SEND_CARDS_TO_PLAYERS',
+      //   payload: { players, playerIDs, selectedBlackCard },
+      // });
     }
   }, [state.gameState]);
 

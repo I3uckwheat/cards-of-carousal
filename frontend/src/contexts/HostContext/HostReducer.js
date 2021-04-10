@@ -1,3 +1,4 @@
+/* eslint-disable */
 function createLobby(state) {
   return {
     ...state,
@@ -72,6 +73,7 @@ function startGame(state) {
     acc[key].submittedCards = [];
     return acc;
   }, {});
+
   return {
     ...state,
     gameState: 'waiting-for-deck',
@@ -135,7 +137,7 @@ function closeGame(state) {
   };
 }
 
-function setBlackCard(state) {
+function selectBlackCard(state) {
   const { deck } = state;
   const selectedCard =
     deck.black[Math.floor(Math.random() * state.deck.black.length)];
@@ -152,6 +154,7 @@ function setBlackCard(state) {
     selectedBlackCard: selectedCard,
   };
 }
+
 function setDeck(state, { deck }) {
   return {
     ...state,
@@ -234,26 +237,33 @@ function HostReducer(state, action) {
     case 'SET_LOBBY_ID':
       return setLobbyId(state, payload);
 
-    case 'START_GAME':
-      return startGame(state);
+    case 'START_GAME': {
+      const a = setDeck(state, payload);
+      const b = startGame(a);
+      const c = setNextCzar(b);
+      const d = selectBlackCard(c);
+      const e = dealWhiteCards(d);
+      // debugger;
+      return e;
+    }
 
     case 'SET_GAME_SETTINGS':
       return setGameSettings(state, payload);
 
     case 'SET_NEXT_CZAR':
-      return setNextCzar(state);
+      break;
 
     case 'CLOSE_GAME':
       return closeGame(state);
 
     case 'SELECT_BLACK_CARD':
-      return setBlackCard(state);
+      break;
 
     case 'SET_DECK':
       return setDeck(state, payload);
 
     case 'DEAL_WHITE_CARDS':
-      return dealWhiteCards(state);
+      break;
 
     case 'UPDATE_JOIN_CODE':
       return updateJoinCode(state, payload);

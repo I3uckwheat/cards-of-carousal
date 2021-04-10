@@ -1,3 +1,4 @@
+/* eslint-disable */
 import socketInstance from '../../socket/socket';
 
 function closeGame() {
@@ -63,6 +64,7 @@ async function getDeck({ selectedPacks }) {
 }
 
 function sendCardsToPlayers({ selectedBlackCard, players, playerIDs }) {
+  debugger;
   playerIDs.forEach((playerID) => {
     if (!players[playerID].isCzar) {
       socketInstance.sendMessage({
@@ -87,6 +89,7 @@ function sendShuffleJoinCodeMessage() {
 export default async function hostReducerMiddleware(
   { type, payload },
   dispatch,
+  getState
 ) {
   switch (type) {
     case `CLOSE_GAME`:
@@ -114,6 +117,15 @@ export default async function hostReducerMiddleware(
       return dispatch({
         type: 'SET_DECK',
         payload: { deck },
+      });
+    }
+
+    case 'START_GAME': {
+      const deck = await getDeck({selectedPacks: [1, 2, 3]});
+
+      return dispatch({
+        type: 'START_GAME',
+        payload: {deck},
       });
     }
 
