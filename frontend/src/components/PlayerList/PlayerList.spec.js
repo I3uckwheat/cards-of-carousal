@@ -12,7 +12,10 @@ describe('PlayerList', () => {
           score: 3,
           isCzar: false,
           submittedCards: [1, 4],
-          cards: [0, 4],
+          cards: [
+            { text: 'test', pack: 0 },
+            { text: 'test', pack: 0 },
+          ],
         },
         playerID2: {
           name: 'Bar',
@@ -43,7 +46,10 @@ describe('PlayerList', () => {
           score: 3,
           isCzar: false,
           submittedCards: [1, 4],
-          cards: [0, 4],
+          cards: [
+            { text: 'test', pack: 0 },
+            { text: 'test', pack: 0 },
+          ],
         },
         playerID2: {
           name: 'Bar',
@@ -106,7 +112,7 @@ describe('PlayerList', () => {
           score: 3,
           isCzar: false,
           submittedCards: [1, 4],
-          cards: [0, 4],
+          cards: [],
         },
         playerID2: {
           name: 'Bar',
