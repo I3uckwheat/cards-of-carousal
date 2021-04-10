@@ -13,6 +13,8 @@ exports[`App snapshots should initially show the welcome screen 1`] = `
   font-size: 12px;
   font-weight: bold;
   padding: 0.7em;
+  background: var(--secondary-background-color);
+  color: var(--secondary-text-color);
   background: var(--primary-background-color);
   color: var(--primary-text-color);
 }
@@ -1758,6 +1760,8 @@ exports[`App snapshots should show the welcome screen after user has clicked ele
   font-size: 12px;
   font-weight: bold;
   padding: 0.7em;
+  background: var(--secondary-background-color);
+  color: var(--secondary-text-color);
   background: var(--primary-background-color);
   color: var(--primary-text-color);
 }

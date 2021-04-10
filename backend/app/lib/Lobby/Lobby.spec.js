@@ -13,16 +13,22 @@ describe('Lobby', () => {
   });
 
   describe('constructor', () => {
-    it('gives the lobby a unique ID and sends message through the socket', () => {
+    it('calls host socket initialization functions and sends lobby-created message', () => {
+      const lobbyId = 'AAAA';
       const hostSocket = createSocket('socketId');
       const onCloseCallBack = jest.fn();
-      const lobby = new Lobby(hostSocket, onCloseCallBack);
+      const shuffleIdCallback = jest.fn();
+      const lobby = new Lobby(
+        lobbyId,
+        hostSocket,
+        onCloseCallBack,
+        shuffleIdCallback,
+      );
       const messageObject = {
         event: 'lobby-created',
         payload: { id: lobby.id },
         sender: 'server',
       };
-      expect(lobby.id).toBeTruthy();
       expect(hostSocket.on).toBeCalledWith('message', expect.any(Function));
       expect(hostSocket.on).toBeCalledWith('close', expect.any(Function));
       expect(hostSocket.send).toBeCalledWith(JSON.stringify(messageObject));
@@ -30,9 +36,16 @@ describe('Lobby', () => {
   });
 
   describe('has multiple players', () => {
+    const lobbyId = 'AAAA';
     const hostSocket = createSocket('socketId');
     const onCloseCallBack = jest.fn();
-    const lobby = new Lobby(hostSocket, onCloseCallBack);
+    const shuffleIdCallback = jest.fn();
+    const lobby = new Lobby(
+      lobbyId,
+      hostSocket,
+      onCloseCallBack,
+      shuffleIdCallback,
+    );
     const playerSocket = createSocket('player1Id');
     const messageObject = {
       event: '',
@@ -80,6 +93,95 @@ describe('Lobby', () => {
         );
         expect(playerSocketTwo.close).toBeCalledWith(1000, messageObject.event);
         expect(onCloseCallBack).toBeCalledWith(lobby.id);
+      });
+    });
+  });
+
+  describe('join code shuffling', () => {
+    describe('when it receives a shuffle-join-code message', () => {
+      // the below lines until before the next test are setting up to mock
+      // sending of messages to the lobby
+      const methods = [];
+
+      const socketOn = (event, callback) => {
+        methods.push({ event, callback });
+      };
+
+      const testSocket = (id) => ({
+        id,
+        on: socketOn,
+        send: jest.fn(),
+        close: jest.fn(),
+      });
+
+      it('calls the shuffleIdCallback it is provided with the current lobby id', () => {
+        const lobbyId = 'AAAA';
+        const hostSocket = testSocket('socketId');
+        const onCloseCallBack = jest.fn();
+        const shuffleIdCallback = jest.fn();
+        const lobby = new Lobby(
+          lobbyId,
+          hostSocket,
+          onCloseCallBack,
+          shuffleIdCallback,
+        );
+
+        // the below line sends the object in .callback() just like the host
+        // would send a message to the lobby in socketInstance.sendMessage()
+        methods[0].callback({ event: 'shuffle-join-code', payload: {} });
+
+        expect(shuffleIdCallback).toHaveBeenCalledWith(lobby.id);
+      });
+    });
+
+    describe('updateId', () => {
+      it('updates the lobbies id', () => {
+        const lobbyId = 'AAAA';
+        const hostSocket = createSocket('socketId');
+        const onCloseCallBack = jest.fn();
+        const shuffleIdCallback = jest.fn();
+        const lobby = new Lobby(
+          lobbyId,
+          hostSocket,
+          onCloseCallBack,
+          shuffleIdCallback,
+        );
+
+        lobby.updateId('ABCD');
+
+        expect(lobby.id).toBe('ABCD');
+      });
+
+      it('sends a join-code-shuffled message to the host with the new id', () => {
+        const socketSend = jest.fn();
+
+        const testSocket = (id) => ({
+          id,
+          on: jest.fn(),
+          send: socketSend,
+          close: jest.fn(),
+        });
+
+        const lobbyId = 'AAAA';
+        const hostSocket = testSocket('socketId');
+        const onCloseCallBack = jest.fn();
+        const shuffleIdCallback = jest.fn();
+        const lobby = new Lobby(
+          lobbyId,
+          hostSocket,
+          onCloseCallBack,
+          shuffleIdCallback,
+        );
+
+        const messageObject = {
+          event: 'join-code-shuffled',
+          payload: { lobbyID: 'ABCD' },
+          sender: 'server',
+        };
+
+        lobby.updateId('ABCD');
+
+        expect(socketSend).toHaveBeenCalledWith(JSON.stringify(messageObject));
       });
     });
   });

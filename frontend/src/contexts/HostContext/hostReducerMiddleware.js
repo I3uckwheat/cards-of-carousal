@@ -62,6 +62,28 @@ async function getDeck({ selectedPacks }) {
   }
 }
 
+function sendCardsToPlayers({ selectedBlackCard, players, playerIDs }) {
+  playerIDs.forEach((playerID) => {
+    if (!players[playerID].isCzar) {
+      socketInstance.sendMessage({
+        event: 'deal-white-cards',
+        payload: {
+          cards: players[playerID].cards.map((card) => card.text),
+          selectCardCount: selectedBlackCard.pick,
+        },
+        recipients: [playerID],
+      });
+    }
+  });
+}
+
+function sendShuffleJoinCodeMessage() {
+  socketInstance.sendMessage({
+    event: 'shuffle-join-code',
+    payload: {},
+  });
+}
+
 export default async function hostReducerMiddleware(
   { type, payload },
   dispatch,
@@ -94,6 +116,13 @@ export default async function hostReducerMiddleware(
         payload: { deck },
       });
     }
+
+    case 'SEND_CARDS_TO_PLAYERS':
+      return sendCardsToPlayers(payload);
+
+    case 'SHUFFLE_JOIN_CODE':
+      sendShuffleJoinCodeMessage();
+      break;
 
     default:
       break;
