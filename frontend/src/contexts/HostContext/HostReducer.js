@@ -200,7 +200,7 @@ function dealWhiteCards(state) {
       white: newWhiteCards,
     },
     players: newPlayers,
-    gameState: 'waiting-for-player-card-submissions',
+    gameState: 'waiting-to-receive-cards',
   };
 }
 
