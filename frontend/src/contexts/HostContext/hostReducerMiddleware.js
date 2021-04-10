@@ -89,9 +89,15 @@ function notifyCzar({ players, playerIDs }) {
 
   if (czar) {
     socketInstance.sendMessage({
-      event: 'notify-player-is-czar',
-      payload: {},
-      recipients: [],
+      event: 'update',
+      payload: {
+        gameState: 'waiting-to-send-cards',
+        message: {
+          big: "You're the Czar",
+          small: 'Wait for the players to select their cards',
+        },
+      },
+      recipients: [czar],
     });
   } else {
     throw new Error('Czar not found!');
