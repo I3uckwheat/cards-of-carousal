@@ -68,7 +68,7 @@ describe('Host Black Card Screen', () => {
       expect(screen.queryByTestId('black-card')).toBeInTheDocument();
     });
 
-    it("renders the czar's name", () => {
+    it("renders the czar's name in the czar display", () => {
       render(
         <HostContext.Provider value={{ state, dispatch }}>
           <HostBlackCardScreen />
@@ -81,7 +81,7 @@ describe('Host Black Card Screen', () => {
   });
 
   describe('dispatch', () => {
-    it('sends the cards to players when the game state is waiting for player card submissions', () => {
+    it('sends the cards to players when the game state is waiting-to-receive-cards', () => {
       const dispatch = jest.fn();
       const state = {
         gameState: 'waiting-to-receive-cards',
