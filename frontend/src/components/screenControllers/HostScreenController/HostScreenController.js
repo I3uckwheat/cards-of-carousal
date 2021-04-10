@@ -12,6 +12,7 @@ export default function HostScreenController() {
     case 'waiting-for-lobby':
     case 'waiting-for-players':
     case 'waiting-for-deck':
+    case 'waiting-to-send-cards':
       return <HostPregameScreen />;
 
     default:

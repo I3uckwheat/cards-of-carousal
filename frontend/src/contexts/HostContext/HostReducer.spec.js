@@ -635,6 +635,45 @@ describe('reducer', () => {
 
       expect(result.players.foo).toEqual(state.players.foo);
     });
+
+    it('updates the game state', () => {
+      // setup dummy state
+      const state = {
+        deck: {
+          white: [
+            { pack: 0, text: 'zero' },
+            { pack: 0, text: 'one' },
+            { pack: 0, text: 'two' },
+            { pack: 0, text: 'three' },
+            { pack: 0, text: 'four' },
+          ],
+          black: [{ pick: 1, pack: 0, text: 'zero' }],
+        },
+        selectedBlackCard: {
+          pick: 1,
+        },
+        playerIDs: ['foo'],
+        handSize: 5,
+        players: {
+          foo: {
+            cards: [
+              { pack: 0, text: 'test' },
+              { pack: 0, text: 'test' },
+              { pack: 0, text: 'test' },
+            ],
+          },
+        },
+      };
+
+      Math.random = jest.fn(() => 0);
+
+      const result = HostReducer(state, {
+        type: 'DEAL_WHITE_CARDS',
+        payload: {},
+      });
+
+      expect(result.gameState).toBe('waiting-to-send-cards');
+    });
   });
 
   describe('SELECT_BLACK_CARD', () => {
