@@ -58,6 +58,7 @@ function receiveWhiteCards(state, payload) {
     gameState: 'player-select',
     cards,
     selectCardCount,
+    submittedCards: [],
   };
 }
 

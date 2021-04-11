@@ -124,10 +124,10 @@ function RightPanel() {
 function HostBlackCardScreen() {
   const { state, dispatch } = useContext(HostContext);
 
-  const { players, playerIDs, selectedBlackCard } = state;
+  const { players, playerIDs, selectedBlackCard, gameState } = state;
 
   useEffect(async () => {
-    if (state.gameState === 'waiting-to-receive-cards') {
+    if (gameState === 'waiting-to-receive-cards') {
       await dispatch({
         type: 'SEND_CARDS_TO_PLAYERS',
         payload: { players, playerIDs, selectedBlackCard },
@@ -141,6 +141,37 @@ function HostBlackCardScreen() {
       });
     }
   }, [state.gameState]);
+
+  useEffect(() => {
+    // check if all players have submitted the required amount of cards, except the czar
+    if (
+      gameState === 'player-submit' &&
+      playerIDs.every(
+        (playerID) =>
+          !players(playerID).isCzar &&
+          players[playerID].submittedCards.length === selectedBlackCard.length,
+      )
+    ) {
+      // set new game state to prevent the above listener from running more checks
+      dispatch({
+        type: 'SET_GAME_STATE',
+        payload: { gameState: 'czar-select-winner' },
+      });
+    }
+  }, [gameState, players, playerIDs]);
+
+  useEffect(async () => {
+    if (gameState === 'czar-select-winner') {
+      await dispatch({
+        type: 'CZAR_SELECT_WINNER',
+        payload: {
+          players,
+          playerIDs,
+        },
+      });
+    }
+  }, [gameState]);
+
   return (
     <HostLayout
       className="primary-background"
