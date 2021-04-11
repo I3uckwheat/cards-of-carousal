@@ -142,25 +142,8 @@ function HostBlackCardScreen() {
     }
   }, [state.gameState]);
 
-  useEffect(() => {
-    // check if all players have submitted the required amount of cards, except the czar
-    if (
-      gameState === 'player-submit' &&
-      playerIDs.every(
-        (playerID) =>
-          !players(playerID).isCzar &&
-          players[playerID].submittedCards.length === selectedBlackCard.length,
-      )
-    ) {
-      // set new game state to prevent the above listener from running more checks
-      dispatch({
-        type: 'SET_GAME_STATE',
-        payload: { gameState: 'czar-select-winner' },
-      });
-    }
-  }, [gameState, players, playerIDs]);
-
   useEffect(async () => {
+    // game state will change when players have all submitted cards
     if (gameState === 'czar-select-winner') {
       await dispatch({
         type: 'CZAR_SELECT_WINNER',
