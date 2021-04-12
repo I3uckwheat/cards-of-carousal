@@ -826,7 +826,7 @@ describe('reducer', () => {
         newSubmittedCards.every(
           (submittedCardsArray) => submittedCardsArray.length === 0,
         ),
-      ).toBeTruthy();
+      ).toBe(true);
     });
   });
 
