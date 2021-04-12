@@ -203,6 +203,7 @@ function dealWhiteCards(state) {
     acc[playerID] = {
       ...players[playerID],
       cards,
+      submittedCards: [],
     };
     return acc;
   }, {});
