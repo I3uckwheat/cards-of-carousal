@@ -60,9 +60,7 @@ function useSettingsMenuHandler(components) {
   const initialState = components.map(() => 'enabled');
   const [accordionSettings, setAccordionSettings] = useState(initialState);
 
-  const anyAreOpen = accordionSettings.some(
-    (setting) => setting.state === 'open',
-  );
+  const anyAreOpen = accordionSettings.some((setting) => setting === 'open');
 
   function resetAccordions() {
     setAccordionSettings(initialState);
