@@ -1,4 +1,3 @@
-// TODO: Implement query params
 // TODO: Add documentation
 // TODO: Handle duplicate routes
 // TODO: Handle `all` route
@@ -75,20 +74,29 @@ module.exports = class SocketRouter {
 
   #parseUrl = (route, url) => {
     const splitRoute = route.split('/');
-    const splitUrl = url.split('/');
+    const [splitUrl, queryString] = url.split('?');
 
     const params = splitRoute.reduce((acc, val, index) => {
       if (val[0] === ':') {
         const paramName = val.slice(1);
-        acc[paramName] = splitUrl[index];
+        acc[paramName] = splitUrl.split('/')[index];
       }
 
       return acc;
     }, {});
 
+    const query =
+      queryString &&
+      queryString.split('&').reduce((acc, val) => {
+        const [key, value] = val.split('=');
+        acc[key] = value;
+        return acc;
+      }, {});
+
     return {
       url,
       params,
+      query: query || {},
     };
   };
 };
