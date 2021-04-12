@@ -96,7 +96,7 @@ module.exports = class SocketRouter {
     return {
       url,
       params,
-      query,
+      query: query || {},
     };
   };
 };

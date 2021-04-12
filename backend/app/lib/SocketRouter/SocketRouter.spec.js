@@ -263,5 +263,22 @@ describe('SocketRouter', () => {
         test: 'test',
       });
     });
+
+    it('correctly handles routes without query parameters', () => {
+      const fooRouteHandler = jest.fn((req) => req.query);
+      const socketRouter = new SocketRouter(() => {});
+
+      socketRouter.addRoute('GET /lobby', fooRouteHandler);
+
+      socketRouter.handleRequest(
+        {},
+        {
+          method: 'GET',
+          url: '/lobby',
+        },
+      );
+
+      expect(fooRouteHandler).toHaveReturnedWith({});
+    });
   });
 });
