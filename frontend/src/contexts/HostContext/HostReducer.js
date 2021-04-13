@@ -155,10 +155,72 @@ function closeGame(state) {
   };
 }
 
+function setBlackCard(state) {
+  const { deck } = state;
+  const selectedCard =
+    deck.black[Math.floor(Math.random() * state.deck.black.length)];
+
+  const updatedBlackCards = [...state.deck.black];
+  updatedBlackCards.splice(updatedBlackCards.indexOf(selectedCard), 1);
+
+  return {
+    ...state,
+    deck: {
+      ...deck,
+      black: updatedBlackCards,
+    },
+    selectedBlackCard: selectedCard,
+  };
+}
 function setDeck(state, { deck }) {
   return {
     ...state,
     deck,
+  };
+}
+
+function dealWhiteCards(state) {
+  const { deck, playerIDs, players, handSize } = state;
+  const newWhiteCards = [...deck.white];
+
+  const neededCardsPerPlayer = playerIDs.map((playerID) => {
+    const player = players[playerID];
+    return {
+      playerID,
+      cardsNeeded: handSize - player.cards.length,
+    };
+  });
+
+  const cardsGivenToPlayers = neededCardsPerPlayer.map(
+    ({ playerID, cardsNeeded }) => {
+      const newCards = [...players[playerID].cards];
+      for (let i = 0; i < cardsNeeded; i += 1) {
+        const selection = Math.floor(Math.random() * newWhiteCards.length);
+        newCards.push(newWhiteCards.splice(selection, 1)[0]);
+      }
+      return {
+        playerID,
+        cards: newCards,
+      };
+    },
+  );
+
+  const newPlayers = cardsGivenToPlayers.reduce((acc, { playerID, cards }) => {
+    acc[playerID] = {
+      ...players[playerID],
+      cards,
+    };
+    return acc;
+  }, {});
+
+  return {
+    ...state,
+    deck: {
+      black: [...deck.black],
+      white: newWhiteCards,
+    },
+    players: newPlayers,
+    gameState: 'waiting-to-receive-cards',
   };
 }
 
@@ -207,8 +269,14 @@ function HostReducer(state, action) {
     case 'CLOSE_GAME':
       return closeGame(state);
 
+    case 'SELECT_BLACK_CARD':
+      return setBlackCard(state);
+
     case 'SET_DECK':
       return setDeck(state, payload);
+
+    case 'DEAL_WHITE_CARDS':
+      return dealWhiteCards(state);
 
     case 'UPDATE_JOIN_CODE':
       return updateJoinCode(state, payload);

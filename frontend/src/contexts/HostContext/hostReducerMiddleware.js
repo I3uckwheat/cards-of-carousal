@@ -62,11 +62,46 @@ async function getDeck({ selectedPacks }) {
   }
 }
 
+function sendCardsToPlayers({ selectedBlackCard, players, playerIDs }) {
+  playerIDs.forEach((playerID) => {
+    if (!players[playerID].isCzar) {
+      socketInstance.sendMessage({
+        event: 'deal-white-cards',
+        payload: {
+          cards: players[playerID].cards.map((card) => card.text),
+          selectCardCount: selectedBlackCard.pick,
+        },
+        recipients: [playerID],
+      });
+    }
+  });
+}
+
 function sendShuffleJoinCodeMessage() {
   socketInstance.sendMessage({
     event: 'shuffle-join-code',
     payload: {},
   });
+}
+
+function notifyCzar({ players, playerIDs }) {
+  const czar = playerIDs.find((player) => players[player].isCzar);
+
+  if (czar) {
+    socketInstance.sendMessage({
+      event: 'update',
+      payload: {
+        gameState: 'waiting-for-player-card-submissions',
+        message: {
+          big: "You're the Czar",
+          small: 'Wait for the players to select their cards',
+        },
+      },
+      recipients: [czar],
+    });
+  } else {
+    throw new Error('Czar not found!');
+  }
 }
 
 export default async function hostReducerMiddleware(
@@ -102,8 +137,15 @@ export default async function hostReducerMiddleware(
       });
     }
 
+    case 'SEND_CARDS_TO_PLAYERS':
+      return sendCardsToPlayers(payload);
+
     case 'SHUFFLE_JOIN_CODE':
       sendShuffleJoinCodeMessage();
+      break;
+
+    case 'NOTIFY_CZAR':
+      notifyCzar(payload);
       break;
 
     default:

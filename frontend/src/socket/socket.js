@@ -18,8 +18,7 @@ class SocketSingleton {
       throw new Error('Missing lobbyId');
     }
 
-    // TODO: Refactor to use query parameters
-    const lobbyUrl = `${this.#url}/${lobbyId}/${playerName}`;
+    const lobbyUrl = `${this.#url}/${lobbyId}?name=${playerName}`;
     const socket = new WebSocket(lobbyUrl);
     this.#attachSocketListeners(socket);
     this.#socket = socket;

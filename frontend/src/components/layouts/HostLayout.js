@@ -58,6 +58,7 @@ const HostLayoutContainer = styled.div`
   }
 
   .components .right {
+    display: flex;
     flex-grow: 1;
     position: relative;
   }

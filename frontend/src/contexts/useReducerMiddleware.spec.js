@@ -32,7 +32,7 @@ describe('useReducerMiddleware', () => {
     expect(screen.getByTestId('state').textContent).toBe('1');
   });
 
-  it('updates state and calls side effects that match the type/payload object', () => {
+  it('updates state and calls side effects that match the type/payload object', async () => {
     const addSideEffect = jest.fn();
 
     function reducerMiddleware({ type, payload }, dispatch) {
@@ -68,7 +68,7 @@ describe('useReducerMiddleware', () => {
       initialState,
     );
 
-    act(() => middlewareTest({ type: 'add', payload: 1 }));
+    await act(() => middlewareTest({ type: 'add', payload: 1 }));
 
     expect(addSideEffect).toBeCalledTimes(1);
     expect(screen.getByTestId('state').textContent).toBe('2');

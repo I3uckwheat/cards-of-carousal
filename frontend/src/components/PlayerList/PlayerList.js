@@ -13,7 +13,12 @@ const propTypes = {
         score: PropTypes.number.isRequired,
         isCzar: PropTypes.bool.isRequired,
         submittedCards: PropTypes.arrayOf(PropTypes.number).isRequired,
-        cards: PropTypes.arrayOf(PropTypes.number).isRequired,
+        cards: PropTypes.arrayOf(
+          PropTypes.shape({
+            text: PropTypes.string,
+            pack: PropTypes.number,
+          }),
+        ).isRequired,
       }),
     ).isRequired,
 
