@@ -8,7 +8,11 @@ import JoinCodeShuffler from './SettingsSubComponents/JoinCodeShuffler';
 export default function PreGameSettingsModal() {
   return (
     <HostSettingsMenu
-      settingsComponentList={[JoinCodeHider, PlayerKicker, JoinCodeShuffler]}
+      settingsComponentList={[
+        { type: 'button', component: JoinCodeHider },
+        { type: 'accordion', component: PlayerKicker },
+        { type: 'button', component: JoinCodeShuffler },
+      ]}
     />
   );
 }

@@ -5,7 +5,12 @@ import styled from 'styled-components';
 import Header from '../Header/Header';
 
 const propTypes = {
-  settingsComponentList: PropTypes.arrayOf(PropTypes.func).isRequired,
+  settingsComponentList: PropTypes.arrayOf(
+    PropTypes.shape({
+      type: PropTypes.string,
+      component: PropTypes.func,
+    }),
+  ).isRequired,
 };
 
 const SettingsMenu = styled.div`
@@ -97,20 +102,17 @@ function useSettingsMenuHandler(components) {
     );
   }
 
-  const populatedComponents = components.map((component, index) => {
-    switch (component.name) {
-      case 'PlayerKicker':
+  const populatedComponents = components.map(({ type, component }, index) => {
+    switch (type) {
+      case 'accordion':
         return makePopulatedAccordion(component, index);
 
-      case 'JoinCodeHider':
+      case 'button':
         return makePopulatedButton(component);
-
-      case 'JoinCodeShuffler':
-        return makePopulatedButton(component, index);
 
       default:
         throw new Error(
-          `Please add ${component.name} to HostSettingsMenu.js in the useSettingsMenuHandler`,
+          `Please add a component switch case type to ${component}`,
         );
     }
   });
@@ -128,6 +130,7 @@ function HostSettingsMenu({ settingsComponentList }) {
       resetAccordions();
     }
   }
+
   return (
     <SettingsMenu onClick={onOutsideClick}>
       <Header className="host-settings-header" onClick={resetAccordions}>
