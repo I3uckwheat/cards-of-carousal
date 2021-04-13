@@ -23,7 +23,15 @@ function playerConnected(state, { playerId, playerName }) {
 }
 
 function updatePlayerCards(state, { selectedCards, playerId }) {
-  return {
+  function checkIfAllPlayersSubmitted(newState) {
+    const { players, playerIDs } = newState;
+    return playerIDs.every(
+      (playerID) =>
+        players[playerID].isCzar || players[playerID].submittedCards.length,
+    );
+  }
+
+  const newState = {
     ...state,
     players: {
       ...state.players,
@@ -33,6 +41,12 @@ function updatePlayerCards(state, { selectedCards, playerId }) {
       },
     },
   };
+
+  newState.gameState = checkIfAllPlayersSubmitted(newState)
+    ? 'czar-select-winner'
+    : newState.gameState;
+
+  return newState;
 }
 
 function removePlayer(state, { playerId }) {
@@ -189,6 +203,7 @@ function dealWhiteCards(state) {
     acc[playerID] = {
       ...players[playerID],
       cards,
+      submittedCards: [],
     };
     return acc;
   }, {});
