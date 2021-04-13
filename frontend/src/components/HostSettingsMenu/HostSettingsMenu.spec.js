@@ -5,8 +5,6 @@ import renderer from 'react-test-renderer';
 
 import HostSettingsMenu from './HostSettingsMenu';
 import HostProvider from '../../contexts/HostContext/HostContext';
-import OptionList from './SettingsSubComponents/OptionList';
-import OptionButton from './SettingsSubComponents/OptionButton';
 
 /* eslint-disable react/prop-types */
 
@@ -20,6 +18,70 @@ describe('HostSettingsMenu', () => {
       );
 
       expect(screen.getByText('SETTINGS')).toBeInTheDocument();
+    });
+
+    it('renders settings sub-components of type: accordion', () => {
+      function testComponent() {
+        return <p>TEST TEXT</p>;
+      }
+
+      render(
+        <HostProvider>
+          <HostSettingsMenu
+            settingsComponentList={[
+              { type: 'accordion', component: testComponent },
+            ]}
+          />
+        </HostProvider>,
+      );
+
+      expect(screen.getByText('TEST TEXT')).toBeInTheDocument();
+    });
+
+    it('renders settings sub-components of type: button', () => {
+      function testComponent() {
+        return <p>TEST TEXT</p>;
+      }
+
+      render(
+        <HostProvider>
+          <HostSettingsMenu
+            settingsComponentList={[
+              { type: 'button', component: testComponent },
+            ]}
+          />
+        </HostProvider>,
+      );
+
+      expect(screen.getByText('TEST TEXT')).toBeInTheDocument();
+    });
+
+    it("throws an error and does not render when a sub-component type isn't expected", () => {
+      const consoleSpy = jest
+        .spyOn(console, 'error')
+        .mockImplementation(() => {});
+
+      function ComponentNotDefinedInTheSwitch() {
+        return <p>I SHOULD NOT SHOW UP</p>;
+      }
+
+      expect(() => {
+        render(
+          <HostProvider>
+            <HostSettingsMenu
+              settingsComponentList={[
+                { type: 'foo', component: ComponentNotDefinedInTheSwitch },
+              ]}
+            />
+          </HostProvider>,
+        );
+      }).toThrow();
+
+      expect(consoleSpy).toHaveBeenCalled();
+
+      expect(
+        screen.queryByText('I SHOULD NOT SHOW UP'),
+      ).not.toBeInTheDocument();
     });
 
     it('matches the expected snapshot', () => {
@@ -36,26 +98,22 @@ describe('HostSettingsMenu', () => {
   });
 
   describe('functionality', () => {
-    // temporary test pending overhall in next sprint
-    xit('Closes the OptionList when a click is outside of OptionList', () => {
-      const kickPlayerMock = jest.fn();
-
-      function PlayerKicker({ accordionState, onClickActions }) {
+    it('closes a given accordion component when a click occurs outside of that accordion', () => {
+      function accordionComponent({ accordionState, onClickActions }) {
         return (
-          <OptionList
-            listContent={['foo', 'bar']}
-            state={accordionState}
-            onClick={onClickActions[accordionState]}
-            onItemClick={kickPlayerMock}
-            openText="OPEN TEXT"
-            closedText="CLOSED TEXT"
-          />
+          <button type="button" onClick={onClickActions[accordionState]}>
+            {accordionState === 'open' ? 'OPEN TEXT' : 'CLOSED TEXT'}
+          </button>
         );
       }
 
       render(
         <HostProvider>
-          <HostSettingsMenu settingsComponentList={[PlayerKicker]} />
+          <HostSettingsMenu
+            settingsComponentList={[
+              { type: 'accordion', component: accordionComponent },
+            ]}
+          />
         </HostProvider>,
       );
 
@@ -68,56 +126,280 @@ describe('HostSettingsMenu', () => {
       expect(screen.queryByText('OPEN TEXT')).not.toBeInTheDocument();
     });
 
-    // temporary test pending overhall in next sprint
-    xit('makes clicking another button not work when an option list is open', () => {
-      const kickPlayerMock = jest.fn();
-
-      function PlayerKicker({ accordionState, onClickActions }) {
+    it('disables all settings buttons when an accordion is open', () => {
+      function accordionComponent({ accordionState, onClickActions }) {
         return (
-          <OptionList
-            listContent={['foo', 'bar']}
-            state={accordionState}
-            onClick={onClickActions[accordionState]}
-            onItemClick={kickPlayerMock}
-            openText="OPEN TEXT"
-            closedText="CLOSED TEXT"
-          />
+          <button type="button" onClick={onClickActions[accordionState]}>
+            {accordionState === 'open' ? 'OPEN TEXT' : 'CLOSED TEXT'}
+          </button>
         );
       }
 
-      const shuffleJoinCodeMock = jest.fn();
+      const enabledButtonClick = jest.fn();
 
-      function JoinCodeShuffler({ isEnabled, onDisabledClick }) {
+      function buttonComponent({ isEnabled, onDisabledClick }) {
         return (
-          <OptionButton
-            isEnabled={isEnabled}
-            onEnabledClick={shuffleJoinCodeMock}
-            onDisabledClick={onDisabledClick}
+          <button
+            type="button"
+            isEnabled
+            onClick={isEnabled ? enabledButtonClick : onDisabledClick}
           >
             TEST BUTTON
-          </OptionButton>
+          </button>
         );
       }
 
       render(
         <HostProvider>
           <HostSettingsMenu
-            settingsComponentList={[PlayerKicker, JoinCodeShuffler]}
+            settingsComponentList={[
+              { type: 'accordion', component: accordionComponent },
+              { type: 'button', component: buttonComponent },
+            ]}
           />
         </HostProvider>,
       );
 
-      // click the skip button once and verify that its function fires
+      // click the test button once and verify that its function fires
       userEvent.click(screen.getByRole('button', { name: 'TEST BUTTON' }));
-      expect(shuffleJoinCodeMock).toHaveBeenCalledTimes(1);
+      expect(enabledButtonClick).toHaveBeenCalledTimes(1);
 
-      // open the OptionList
+      // open the accordion
       userEvent.click(screen.getByRole('button', { name: 'CLOSED TEXT' }));
       expect(screen.getByText('OPEN TEXT')).toBeInTheDocument();
 
-      // click the skip button again and verify that its function doesn't fire
+      // click the test button again and verify that its function doesn't fire
       userEvent.click(screen.getByRole('button', { name: 'TEST BUTTON' }));
-      expect(shuffleJoinCodeMock).toHaveBeenCalledTimes(1);
+      expect(enabledButtonClick).toHaveBeenCalledTimes(1);
+    });
+
+    it('closes an open accordion when a settings button is clicked', () => {
+      function accordionComponent({ accordionState, onClickActions }) {
+        return (
+          <button type="button" onClick={onClickActions[accordionState]}>
+            {accordionState === 'open' ? 'OPEN TEXT' : 'CLOSED TEXT'}
+          </button>
+        );
+      }
+
+      const enabledButtonClick = jest.fn();
+
+      function buttonComponent({ isEnabled, onDisabledClick }) {
+        return (
+          <button
+            type="button"
+            isEnabled
+            onClick={isEnabled ? enabledButtonClick : onDisabledClick}
+          >
+            TEST BUTTON
+          </button>
+        );
+      }
+
+      render(
+        <HostProvider>
+          <HostSettingsMenu
+            settingsComponentList={[
+              { type: 'accordion', component: accordionComponent },
+              { type: 'button', component: buttonComponent },
+            ]}
+          />
+        </HostProvider>,
+      );
+
+      // open the accordion
+      userEvent.click(screen.getByRole('button', { name: 'CLOSED TEXT' }));
+      expect(screen.getByText('OPEN TEXT')).toBeInTheDocument();
+
+      // click the test button and verify that the accordion is closed
+      userEvent.click(screen.getByRole('button', { name: 'TEST BUTTON' }));
+      expect(screen.queryByText('OPEN TEXT')).not.toBeInTheDocument();
+    });
+
+    it('disables all other settings accordions when an accordion is open', () => {
+      function accordionComponent({ accordionState, onClickActions }) {
+        return (
+          <button type="button" onClick={onClickActions[accordionState]}>
+            {accordionState === 'open' ? 'OPEN TEXT 1' : 'CLOSED TEXT 1'}
+          </button>
+        );
+      }
+
+      function secondAccordionComponent({ accordionState, onClickActions }) {
+        return (
+          <button type="button" onClick={onClickActions[accordionState]}>
+            {accordionState === 'open' ? 'OPEN TEXT 2' : 'CLOSED TEXT 2'}
+          </button>
+        );
+      }
+
+      render(
+        <HostProvider>
+          <HostSettingsMenu
+            settingsComponentList={[
+              { type: 'accordion', component: accordionComponent },
+              { type: 'accordion', component: secondAccordionComponent },
+            ]}
+          />
+        </HostProvider>,
+      );
+
+      // open the first accordion
+      userEvent.click(screen.getByRole('button', { name: 'CLOSED TEXT 1' }));
+      expect(screen.getByText('OPEN TEXT 1')).toBeInTheDocument();
+
+      // click the second accordion and verify that it doesn't open
+      userEvent.click(screen.getByRole('button', { name: 'CLOSED TEXT 2' }));
+      expect(screen.queryByText('OPEN TEXT 2')).not.toBeInTheDocument();
+    });
+
+    it('closes an open accordion when another accordion is clicked', () => {
+      function accordionComponent({ accordionState, onClickActions }) {
+        return (
+          <button type="button" onClick={onClickActions[accordionState]}>
+            {accordionState === 'open' ? 'OPEN TEXT 1' : 'CLOSED TEXT 1'}
+          </button>
+        );
+      }
+
+      function secondAccordionComponent({ accordionState, onClickActions }) {
+        return (
+          <button type="button" onClick={onClickActions[accordionState]}>
+            {accordionState === 'open' ? 'OPEN TEXT 2' : 'CLOSED TEXT 2'}
+          </button>
+        );
+      }
+
+      render(
+        <HostProvider>
+          <HostSettingsMenu
+            settingsComponentList={[
+              { type: 'accordion', component: accordionComponent },
+              { type: 'accordion', component: secondAccordionComponent },
+            ]}
+          />
+        </HostProvider>,
+      );
+
+      // open the first accordion
+      userEvent.click(screen.getByRole('button', { name: 'CLOSED TEXT 1' }));
+      expect(screen.getByText('OPEN TEXT 1')).toBeInTheDocument();
+
+      // click the second accordion and verify that the first accordion closes
+      userEvent.click(screen.getByRole('button', { name: 'CLOSED TEXT 2' }));
+      expect(screen.queryByText('OPEN TEXT 1')).not.toBeInTheDocument();
+    });
+  });
+
+  describe('propTypes', () => {
+    it('logs an error when not given the settingsComponentList prop', () => {
+      const consoleSpy = jest
+        .spyOn(console, 'error')
+        .mockImplementation(() => {});
+
+      expect(() => {
+        render(
+          <HostProvider>
+            <HostSettingsMenu />
+          </HostProvider>,
+        );
+      }).toThrow();
+
+      expect(consoleSpy).toHaveBeenCalled();
+    });
+
+    it("logs an error when given a settingsComponentList prop that isn't an array", () => {
+      const consoleSpy = jest
+        .spyOn(console, 'error')
+        .mockImplementation(() => {});
+
+      expect(() => {
+        render(
+          <HostProvider>
+            <HostSettingsMenu settingsComponentList={false} />
+          </HostProvider>,
+        );
+      }).toThrow();
+
+      expect(consoleSpy).toHaveBeenCalled();
+    });
+
+    it('logs an error when given a settingsComponentList prop that contains a non-object in the array', () => {
+      const consoleSpy = jest
+        .spyOn(console, 'error')
+        .mockImplementation(() => {});
+
+      expect(() => {
+        render(
+          <HostProvider>
+            <HostSettingsMenu settingsComponentList={[false]} />
+          </HostProvider>,
+        );
+      }).toThrow();
+
+      expect(consoleSpy).toHaveBeenCalled();
+    });
+
+    it('logs an error when given a settingsComponentList prop that contains an object without a type in the array', () => {
+      function ComponentNotDefinedInTheSwitch() {
+        return <p>I SHOULD NOT SHOW UP</p>;
+      }
+
+      const consoleSpy = jest
+        .spyOn(console, 'error')
+        .mockImplementation(() => {});
+
+      expect(() => {
+        render(
+          <HostProvider>
+            <HostSettingsMenu
+              settingsComponentList={[
+                { component: ComponentNotDefinedInTheSwitch },
+              ]}
+            />
+          </HostProvider>,
+        );
+      }).toThrow();
+
+      expect(consoleSpy).toHaveBeenCalled();
+    });
+
+    it('logs an error when given a settingsComponentList prop that contains an object without a component in the array', () => {
+      const consoleSpy = jest
+        .spyOn(console, 'error')
+        .mockImplementation(() => {});
+
+      expect(() => {
+        render(
+          <HostProvider>
+            <HostSettingsMenu settingsComponentList={[{ type: 'button' }]} />
+          </HostProvider>,
+        );
+      }).toThrow();
+
+      expect(consoleSpy).toHaveBeenCalled();
+    });
+
+    it('does not log an error when given a settingsComponentList prop that contains only objects with type and component in the array', () => {
+      function ComponentNotDefinedInTheSwitch() {
+        return <p>I SHOULD NOT SHOW UP</p>;
+      }
+
+      const consoleSpy = jest
+        .spyOn(console, 'error')
+        .mockImplementation(() => {});
+
+      render(
+        <HostProvider>
+          <HostSettingsMenu
+            settingsComponentList={[
+              { type: 'button', component: ComponentNotDefinedInTheSwitch },
+            ]}
+          />
+        </HostProvider>,
+      );
+
+      expect(consoleSpy).not.toHaveBeenCalled();
     });
   });
 });
