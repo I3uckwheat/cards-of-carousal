@@ -54,7 +54,7 @@ describe('PlayerHandScreen', () => {
 
     const dispatch = jest.fn();
 
-    it('it dispatches SUBMIT_CARDS with the proper payload when Submit is clicked', () => {
+    it('dispatches SUBMIT_CARDS with the proper payload when Submit is clicked', () => {
       render(
         <PlayerContext.Provider value={{ state, dispatch }}>
           <PlayerHandScreen />

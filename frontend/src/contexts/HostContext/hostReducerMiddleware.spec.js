@@ -470,6 +470,7 @@ describe('hostReducerMiddleware', () => {
         payload: {
           gameState: 'select-winner',
           cards,
+          selectCardCount: 1,
         },
         recipients: ['foo'],
       });

@@ -20,6 +20,7 @@ export default function CzarHandScreen() {
         top: "YOU'RE THE CZAR,",
         bottom: 'PICK A WINNER',
       }}
+      numberSelected={selection === null ? 0 : 1}
     >
       <CzarHand
         cards={state.cards}
