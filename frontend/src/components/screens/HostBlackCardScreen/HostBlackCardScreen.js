@@ -124,10 +124,10 @@ function RightPanel() {
 function HostBlackCardScreen() {
   const { state, dispatch } = useContext(HostContext);
 
-  const { players, playerIDs, selectedBlackCard } = state;
+  const { players, playerIDs, selectedBlackCard, gameState } = state;
 
   useEffect(async () => {
-    if (state.gameState === 'waiting-to-receive-cards') {
+    if (gameState === 'waiting-to-receive-cards') {
       await dispatch({
         type: 'SEND_CARDS_TO_PLAYERS',
         payload: { players, playerIDs, selectedBlackCard },
@@ -141,6 +141,20 @@ function HostBlackCardScreen() {
       });
     }
   }, [state.gameState]);
+
+  useEffect(async () => {
+    // game state will change when players have all submitted cards
+    if (gameState === 'czar-select-winner') {
+      await dispatch({
+        type: 'CZAR_SELECT_WINNER',
+        payload: {
+          players,
+          playerIDs,
+        },
+      });
+    }
+  }, [gameState]);
+
   return (
     <HostLayout
       className="primary-background"

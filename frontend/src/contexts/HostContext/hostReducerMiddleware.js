@@ -104,6 +104,40 @@ function notifyCzar({ players, playerIDs }) {
   }
 }
 
+function czarSelectWinner({ players, playerIDs }) {
+  // identify czar/not czar
+  const czar = playerIDs.find((playerID) => players[playerID].isCzar);
+  const notCzars = playerIDs.filter((playerID) => !players[playerID].isCzar);
+
+  // gather all players submitted cards
+  const cards = notCzars.map((playerID) =>
+    players[playerID].submittedCards.map(
+      (card) => players[playerID].cards[card].text,
+    ),
+  );
+
+  socketInstance.sendMessage({
+    event: 'update',
+    payload: {
+      gameState: 'select-winner',
+      cards,
+    },
+    recipients: [czar],
+  });
+
+  socketInstance.sendMessage({
+    event: 'update',
+    payload: {
+      gameState: 'waiting-for-czar',
+      message: {
+        big: 'the czar is selecting',
+        small: 'For best results, watch the host screen',
+      },
+    },
+    recipients: notCzars,
+  });
+}
+
 export default async function hostReducerMiddleware(
   { type, payload },
   dispatch,
@@ -146,6 +180,10 @@ export default async function hostReducerMiddleware(
 
     case 'NOTIFY_CZAR':
       notifyCzar(payload);
+      break;
+
+    case 'CZAR_SELECT_WINNER':
+      czarSelectWinner(payload);
       break;
 
     default:
