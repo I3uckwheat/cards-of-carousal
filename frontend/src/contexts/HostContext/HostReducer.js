@@ -54,10 +54,10 @@ function removePlayer(state, { playerId }) {
 }
 
 function previewWinner(state, { selectedGroupIndex }) {
-  const currentCzarIndex = Object.values(state.players).findIndex(
-    (player) => player.isCzar,
+  const currentCzarId = state.playerIDs.find(
+    (playerID) => state.players[playerID].isCzar,
   );
-  const currentCzarId = state.playerIDs[currentCzarIndex];
+
   const currentCzar = state.players[currentCzarId];
 
   return {
