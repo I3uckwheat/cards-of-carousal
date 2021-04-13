@@ -132,6 +132,7 @@ export default function CardHandLayout({
             disabled={!requiredCardsAllSelected()}
             onClick={onSubmit}
             className="button"
+            data-testid="submit"
           >
             {submitButtonText()}
           </Button>
