@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { PlayerContext } from '../../contexts/PlayerContext/PlayerContext';
 
 import Button from '../Buttons/Button';
 import Header from '../Header/Header';
@@ -13,6 +14,7 @@ const propTypes = {
   children: PropTypes.node.isRequired,
   onSubmit: PropTypes.func.isRequired,
   onClear: PropTypes.func.isRequired,
+  numberSelected: PropTypes.number.isRequired,
 };
 
 const LayoutContainer = styled.div`
@@ -95,7 +97,25 @@ const LayoutContainer = styled.div`
   }
 `;
 
-export default function CardHandLayout({ title, children, onSubmit, onClear }) {
+export default function CardHandLayout({
+  title,
+  children,
+  onSubmit,
+  onClear,
+  numberSelected,
+}) {
+  const { state } = useContext(PlayerContext);
+
+  function requiredCardsAllSelected() {
+    return numberSelected === state.selectCardCount;
+  }
+
+  function submitButtonText() {
+    return requiredCardsAllSelected()
+      ? 'SUBMIT'
+      : `${numberSelected}/${state.selectCardCount} SELECTED`;
+  }
+
   return (
     <LayoutContainer>
       <Header className="header-container">
@@ -107,8 +127,13 @@ export default function CardHandLayout({ title, children, onSubmit, onClear }) {
         </div>
 
         <section className="button-container">
-          <Button onClick={onSubmit} className="button" isActive>
-            SUBMIT
+          <Button
+            isActive={requiredCardsAllSelected()}
+            disabled={!requiredCardsAllSelected()}
+            onClick={onSubmit}
+            className="button"
+          >
+            {submitButtonText()}
           </Button>
           <Button onClick={onClear} className="button" isActive>
             CLEAR
