@@ -20,6 +20,7 @@ const initialState = {
   gameSettings: { maxPlayers: 8, winningScore: 7, selectedPacks: [] },
   deck: { black: [], white: [] },
   handSize: 10,
+  loading: [],
 };
 
 export const HostContext = createContext();

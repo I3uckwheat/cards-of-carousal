@@ -17,6 +17,7 @@ const initialState = {
     small: '',
   },
   selectCardCount: 0,
+  loading: [],
 };
 
 const propTypes = {
