@@ -5,6 +5,7 @@ import useReducerMiddleware from '../useReducerMiddleware';
 import HostReducer from './HostReducer';
 import socketInstance from '../../socket/socket';
 import hostReducerMiddleware from './hostReducerMiddleware';
+import configValues from '../../config';
 
 const propTypes = {
   children: PropTypes.node.isRequired,
@@ -12,12 +13,15 @@ const propTypes = {
 
 const { emitter } = socketInstance;
 
+const maxPlayersDefault = configValues.maxPlayersValues.default;
+const winningScoreDefault = configValues.winningScoreValues.default;
+
 const initialState = {
   gameState: 'waiting-for-lobby',
   lobbyID: '',
   players: {},
   playerIDs: [],
-  gameSettings: { maxPlayers: 8, winningScore: 7, selectedPacks: [] },
+  gameSettings: { maxPlayers: maxPlayersDefault, winningScore: winningScoreDefault, selectedPacks: [] },
   deck: { black: [], white: [] },
   handSize: 10,
 };
