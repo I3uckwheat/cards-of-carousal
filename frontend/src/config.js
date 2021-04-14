@@ -10,6 +10,10 @@ const configValues = {
     max: 15,
     default: 7,
   },
+
+  initialSelectedPack: [10],
+
+  cardHandSize: 10,
 };
 
 export default configValues;
