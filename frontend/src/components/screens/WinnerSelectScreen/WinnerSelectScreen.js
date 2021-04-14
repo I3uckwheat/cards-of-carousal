@@ -86,6 +86,7 @@ function RightPanel() {
 
   const currentCzar = Object.values(players).find((player) => player.isCzar);
 
+  // Finds the player whose cards are currently highlighted
   const highlightedPlayer =
     state.players[state.playerIDs[currentCzar.submittedCards[0]]];
 

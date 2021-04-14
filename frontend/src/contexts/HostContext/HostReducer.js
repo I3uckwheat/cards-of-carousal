@@ -67,6 +67,13 @@ function removePlayer(state, { playerId }) {
   };
 }
 
+function czarSelectWinner(state) {
+  return {
+    ...state,
+    gameState: 'selecting-winner',
+  };
+}
+
 function previewWinner(state, { selectedGroupIndex }) {
   const currentCzarId = state.playerIDs.find(
     (playerID) => state.players[playerID].isCzar,
@@ -261,6 +268,9 @@ function HostReducer(state, action) {
 
     case 'KICK_PLAYER':
       return removePlayer(state, payload);
+
+    case 'CZAR_SELECT_WINNER':
+      return czarSelectWinner(state);
 
     case 'PREVIEW_WINNER':
       return previewWinner(state, payload);
