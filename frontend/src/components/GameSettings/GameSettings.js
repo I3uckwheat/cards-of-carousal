@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import configValues from '../../config';
 
 const propTypes = {
   onChange: PropTypes.func.isRequired,
@@ -10,6 +11,7 @@ const propTypes = {
     selectedPacks: PropTypes.arrayOf(PropTypes.number).isRequired,
   }).isRequired,
 };
+
 
 const StyledGameSettings = styled.div`
   position: relative;
@@ -89,6 +91,11 @@ const StyledForm = styled.form`
   }
 `;
 
+const maxPlayersMin = configValues.maxPlayersValues.min;
+const maxPlayersMax = configValues.maxPlayersValues.max;
+const winningScoreMin = configValues.winningScoreValues.min;
+const winningScoreMax = configValues.winningScoreValues.max;
+
 function GameSettings({ options, onChange }) {
   const [cardPacks, setCardPacks] = useState([]);
 
@@ -145,8 +152,8 @@ function GameSettings({ options, onChange }) {
               id="maxPlayers"
               name="maxPlayers"
               value={options.maxPlayers}
-              min="2"
-              max="12"
+              min={maxPlayersMin}
+              max={maxPlayersMax}
             />
           </label>
 
@@ -158,8 +165,8 @@ function GameSettings({ options, onChange }) {
               id="winningScore"
               name="winningScore"
               value={options.winningScore}
-              min="1"
-              max="15"
+              min={winningScoreMin}
+              max={winningScoreMax}
             />
           </label>
         </div>
