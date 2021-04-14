@@ -204,8 +204,21 @@ function dealWhiteCards(state) {
   };
 }
 
+function getJoinCode(state) {
+  return {
+    ...state,
+    loading: [...state.loading, 'join-code'],
+  };
+}
+
 function updateJoinCode(state, { lobbyID }) {
-  return { ...state, lobbyID };
+  return {
+    ...state,
+    lobbyID,
+    loading: state.loading.filter(
+      (loadingValue) => loadingValue !== 'join-code',
+    ),
+  };
 }
 
 function HostReducer(state, action) {
@@ -254,6 +267,9 @@ function HostReducer(state, action) {
 
     case 'DEAL_WHITE_CARDS':
       return dealWhiteCards(state);
+
+    case 'SHUFFLE_JOIN_CODE':
+      return getJoinCode(state);
 
     case 'UPDATE_JOIN_CODE':
       return updateJoinCode(state, payload);
