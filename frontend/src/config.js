@@ -2,13 +2,13 @@ const configValues = {
   maxPlayersValues: {
     min: 2,
     max: 12,
-    default: 5,
+    default: 8,
   },
 
-  maxScoreValues: {
+  winningScoreValues: {
     min: 1,
     max: 15,
-    default: 5,
+    default: 7,
   },
 };
 
