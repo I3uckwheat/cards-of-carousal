@@ -636,6 +636,41 @@ exports[`App snapshots should show the host screen after user has clicked the "h
   margin-bottom: 24px;
 }
 
+.c10 .loading {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+
+.c10 .loading div {
+  display: inline-block;
+  position: absolute;
+  left: 8px;
+  width: 16px;
+  background: var(--primary-background-color);
+  -webkit-animation: loading 1.2s cubic-bezier(0,0.5,0.5,1) infinite;
+  animation: loading 1.2s cubic-bezier(0,0.5,0.5,1) infinite;
+}
+
+.c10 .loading div:nth-child(1) {
+  left: 8px;
+  -webkit-animation-delay: -0.24s;
+  animation-delay: -0.24s;
+}
+
+.c10 .loading div:nth-child(2) {
+  left: 32px;
+  -webkit-animation-delay: -0.12s;
+  animation-delay: -0.12s;
+}
+
+.c10 .loading div:nth-child(3) {
+  left: 56px;
+  -webkit-animation-delay: 0;
+  animation-delay: 0;
+}
+
 .c8 {
   position: relative;
   display: -webkit-box;
@@ -1133,7 +1168,21 @@ exports[`App snapshots should show the host screen after user has clicked the "h
                   </h2>
                   <div
                     class="card-packs"
-                  />
+                  >
+                    <div
+                      class="c10"
+                      color="1"
+                      data-testid="loader"
+                    >
+                      <div
+                        class="loading"
+                      >
+                        <div />
+                        <div />
+                        <div />
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </form>
             </div>
