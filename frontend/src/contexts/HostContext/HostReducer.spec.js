@@ -35,6 +35,33 @@ describe('reducer', () => {
     });
   });
 
+  describe('GET_PACKS', () => {
+    it("adds the 'getting-packs' string to the loading state", () => {
+      const state = {
+        loading: ['test-state'],
+      };
+      const result = HostReducer(state, { type: 'GET_PACKS', payload: {} });
+
+      expect(result).not.toBe(state);
+      expect(result.loading).toEqual(['test-state', 'getting-packs']);
+    });
+  });
+
+  describe('PACKS_RECEIVED', () => {
+    it("removes the 'getting-packs' string from the loading state", () => {
+      const state = {
+        loading: ['getting-packs', 'test-state'],
+      };
+      const result = HostReducer(state, {
+        type: 'PACKS_RECEIVED',
+        payload: {},
+      });
+
+      expect(result).not.toBe(state);
+      expect(result.loading).toEqual(['test-state']);
+    });
+  });
+
   describe('SET_LOBBY_ID', () => {
     it('sets the lobby ID given by the socket emitter', () => {
       const state = {
