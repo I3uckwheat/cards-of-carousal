@@ -740,8 +740,29 @@ describe('reducer', () => {
     });
   });
 
+  describe('SHUFFLE_JOIN_CODE', () => {
+    it("returns state with the 'join-code' string in the loading array", () => {
+      const state = {
+        gameState: 'foo',
+        lobbyID: 'AAAA',
+        loading: [],
+      };
+
+      const result = HostReducer(state, {
+        type: 'SHUFFLE_JOIN_CODE',
+        payload: {},
+      });
+
+      expect(result).toEqual({
+        gameState: 'foo',
+        lobbyID: 'AAAA',
+        loading: ['join-code'],
+      });
+    });
+  });
+
   describe('UPDATE_JOIN_CODE', () => {
-    it('returns the state with the updated join code and loading array', () => {
+    it('returns state with the updated join code and loading array', () => {
       const state = {
         gameState: 'foo',
         lobbyID: 'AAAA',
