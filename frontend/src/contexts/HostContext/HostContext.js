@@ -5,7 +5,7 @@ import useReducerMiddleware from '../useReducerMiddleware';
 import HostReducer from './HostReducer';
 import socketInstance from '../../socket/socket';
 import hostReducerMiddleware from './hostReducerMiddleware';
-import configValues from '../../config';
+import config from '../../config';
 
 const propTypes = {
   children: PropTypes.node.isRequired,
@@ -19,10 +19,10 @@ const initialState = {
   players: {},
   playerIDs: [],
   gameSettings: {
-    maxPlayers: configValues.maxPlayersValues.default,
-    winningScore: configValues.winningScoreValues.default,
-    selectedPacks: configValues.initialSelectedPack,
-    handSize: configValues.cardHandSize,
+    maxPlayers: config.maxPlayers.default,
+    winningScore: config.winningScore.default,
+    selectedPacks: config.initialSelectedPack,
+    handSize: config.handSize,
   },
   deck: { black: [], white: [] },
 };

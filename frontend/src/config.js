@@ -1,11 +1,11 @@
-const configValues = {
-  maxPlayersValues: {
+const config = {
+  maxPlayers: {
     min: 2,
     max: 12,
     default: 8,
   },
 
-  winningScoreValues: {
+  winningScore: {
     min: 1,
     max: 15,
     default: 7,
@@ -13,7 +13,7 @@ const configValues = {
 
   initialSelectedPack: [10],
 
-  cardHandSize: 10,
+  handSize: 10,
 };
 
-export default configValues;
+export default config;
