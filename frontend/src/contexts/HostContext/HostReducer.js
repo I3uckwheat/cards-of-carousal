@@ -5,6 +5,22 @@ function createLobby(state) {
   };
 }
 
+function getPacks(state) {
+  return {
+    ...state,
+    loading: [...state.loading, 'getting-packs'],
+  };
+}
+
+function packsReceived(state) {
+  return {
+    ...state,
+    loading: state.loading.filter(
+      (loadingVal) => loadingVal !== 'getting-packs',
+    ),
+  };
+}
+
 function playerConnected(state, { playerId, playerName }) {
   return {
     ...state,
@@ -227,6 +243,12 @@ function HostReducer(state, action) {
   switch (type) {
     case 'CREATE_LOBBY':
       return createLobby(state);
+
+    case 'GET_PACKS':
+      return getPacks(state);
+
+    case 'PACKS_RECEIVED':
+      return packsReceived(state);
 
     case 'PLAYER_CONNECTED':
       return playerConnected(state, payload);

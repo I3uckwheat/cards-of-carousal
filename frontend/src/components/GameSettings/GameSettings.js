@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { HostContext } from '../../contexts/HostContext/HostContext';
+import LoadingIndicator from '../LoadingIndicator/LoadingIndicator';
 
 const propTypes = {
   onChange: PropTypes.func.isRequired,
@@ -91,13 +93,16 @@ const StyledForm = styled.form`
 
 function GameSettings({ options, onChange }) {
   const [cardPacks, setCardPacks] = useState([]);
+  const { state, dispatch } = useContext(HostContext);
 
   async function getPackNames() {
     const response = await fetch(`${process.env.REACT_APP_API_URL}/deck`);
     const data = await response.json();
+    dispatch({ type: 'PACKS_RECEIVED', payload: {} });
     return data;
   }
   useEffect(async () => {
+    dispatch({ type: 'GET_PACKS', payload: {} });
     const packNames = await getPackNames();
     setCardPacks(packNames);
   }, []);
@@ -166,8 +171,10 @@ function GameSettings({ options, onChange }) {
 
         <div className="select-wrapper">
           <h2>SELECT CARD PACKS</h2>
-
           <div className="card-packs">
+            {state.loading.includes('getting-packs') && (
+              <LoadingIndicator secondary />
+            )}
             {cardPacks.map((name, index) => (
               <label htmlFor={name} key={name}>
                 <input
