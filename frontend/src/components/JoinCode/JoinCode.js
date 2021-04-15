@@ -1,8 +1,10 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import PropTypes, { string } from 'prop-types';
 import styled from 'styled-components';
+import LoadingIndicator from '../LoadingIndicator/LoadingIndicator';
 
 const propType = {
+  loading: PropTypes.arrayOf(string).isRequired,
   code: PropTypes.string.isRequired,
 };
 
@@ -33,12 +35,12 @@ const JoinCodeComponent = styled.div`
   }
 `;
 
-function DisplayJoinCode({ code }) {
+function DisplayJoinCode({ loading, code }) {
   return (
     <JoinCodeComponent>
       <p className="join-code-title">JOIN CODE:</p>
       <p className="join-code" data-testid="join-code">
-        {code}
+        {loading.includes('join-code') ? <LoadingIndicator secondary /> : code}
       </p>
     </JoinCodeComponent>
   );
