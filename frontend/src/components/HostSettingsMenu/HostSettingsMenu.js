@@ -22,26 +22,31 @@ const SettingsMenu = styled.div`
   background-color: var(--primary-background-color);
   display: flex;
   flex-direction: column;
+
   .host-settings-header {
     display: flex;
     align-items: flex-end;
     height: 50px;
   }
+
   .host-settings-header h3 {
     font-size: 1.5rem;
     line-height: 0.9rem;
     color: var(--secondary-text-color);
   }
+
   @media (min-width: 800px) {
     width: 400px;
     .host-settings-header {
       height: 130px;
     }
+
     .host-settings-header h3 {
       font-size: 3.5rem;
       line-height: 2.2rem;
     }
   }
+
   @media (min-width: 2000px) {
     width: 600px;
     .host-settings-header h3 {
@@ -49,11 +54,13 @@ const SettingsMenu = styled.div`
       line-height: 3rem;
     }
   }
+
   @media (min-width: 3500px) {
     width: 1100px;
     .host-settings-header {
       height: 200px;
     }
+
     .host-settings-header h3 {
       font-size: 8rem;
       line-height: 5rem;
