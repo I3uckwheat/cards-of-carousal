@@ -455,7 +455,13 @@ describe('hostReducerMiddleware', () => {
       };
       const { players, playerIDs } = state;
       const dispatch = jest.fn();
-      const cards = [['foo'], ['foo']];
+      const submittedCards = [
+        { playerID: 'baz', cards: ['foo'] },
+        { playerID: 'bar', cards: ['foo'] },
+      ];
+
+      // account for the shuffleArray function
+      Math.random = () => 0;
 
       await hostReducerMiddleware(
         {
@@ -469,8 +475,7 @@ describe('hostReducerMiddleware', () => {
         event: 'update',
         payload: {
           gameState: 'select-winner',
-          cards,
-          selectCardCount: 1,
+          submittedCards,
         },
         recipients: ['foo'],
       });
