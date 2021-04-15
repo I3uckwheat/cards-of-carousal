@@ -138,7 +138,7 @@ describe('CardHandLayout', () => {
       expect(mockSubmit).not.toHaveBeenCalledTimes(1);
     });
 
-    it('calls the onSubmit callback when the SUBMIT button is clicked', () => {
+    it('does not call the onSubmit callback if the submit button is pressed and there are not enough cards selected', () => {
       const mockSubmit = jest.fn();
       const state = { selectCardCount: 2 };
 
@@ -160,7 +160,7 @@ describe('CardHandLayout', () => {
       expect(mockSubmit).not.toHaveBeenCalled();
     });
 
-    it('does not call the onSubmit callback if the submit button is pressed and there are not enough cards selected', () => {
+    it('calls the onSubmit callback when the SUBMIT button is clicked', () => {
       const mockSubmit = jest.fn();
       const state = { selectCardCount: 1 };
 
