@@ -27,6 +27,7 @@ describe('Host Pregame Screen', () => {
     players: {},
     playerIDs: [],
     gameSettings: { maxPlayers: 8, winningScore: 7, selectedPacks: [] },
+    loading: [],
   };
 
   afterEach(() => {
@@ -37,6 +38,7 @@ describe('Host Pregame Screen', () => {
       players: {},
       playerIDs: [],
       gameSettings: { maxPlayers: 8, winningScore: 7, selectedPacks: [] },
+      loading: [],
     };
     setupFetchMock();
   });
@@ -144,6 +146,7 @@ describe('Host Pregame Screen', () => {
         },
         deck: { black: [], white: [] },
         selectedBlackCard: { text: 'test', pick: 1 },
+        loading: [],
       };
 
       render(
@@ -227,6 +230,7 @@ describe('Host Pregame Screen', () => {
         playerIDs: ['foo', 'bar', 'baz'],
         gameSettings: { maxPlayers: 8, winningScore: 7, selectedPacks: [] },
         deck: { black: [], white: [] },
+        loading: [],
       };
 
       render(

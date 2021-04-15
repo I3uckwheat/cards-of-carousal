@@ -9,12 +9,12 @@ describe('joinCode', () => {
   // Rendering Tests
   describe('rendering', () => {
     it('renders when "code" is an empty string', () => {
-      render(<DisplayJoinCode code="" />);
+      render(<DisplayJoinCode loading={[]} code="" />);
       expect(screen.getByTestId('join-code')).toBeInTheDocument();
     });
 
     it('renders properly', () => {
-      render(<DisplayJoinCode code="XYA3Z" />);
+      render(<DisplayJoinCode loading={[]} code="XYA3Z" />);
       expect(screen.getByText('XYA3Z')).toBeInTheDocument();
     });
   });

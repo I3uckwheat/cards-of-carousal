@@ -44,6 +44,7 @@ describe('Host Black Card Screen', () => {
       },
       playerIDs: ['ID1', 'ID2', 'ID3'],
       gameSettings: { maxPlayers: 8, winningScore: 7, selectedPacks: [] },
+      loading: [],
     };
 
     it('renders', () => {
@@ -116,6 +117,7 @@ describe('Host Black Card Screen', () => {
         },
         playerIDs: ['ID1', 'ID2', 'ID3'],
         gameSettings: { maxPlayers: 8, winningScore: 7, selectedPacks: [] },
+        loading: [],
       };
       const { players, playerIDs, selectedBlackCard } = state;
 
@@ -166,6 +168,7 @@ describe('Host Black Card Screen', () => {
         },
         playerIDs: ['ID1', 'ID2', 'ID3'],
         gameSettings: { maxPlayers: 8, winningScore: 7, selectedPacks: [] },
+        loading: [],
       };
       const { players, playerIDs } = state;
 

@@ -18,6 +18,7 @@ describe('WinnerSelectScreen', () => {
         lobbyID: '',
         players: {},
         playerIDs: [],
+        loading: [],
       };
       const dispatch = jest.fn();
 
@@ -68,6 +69,7 @@ describe('WinnerSelectScreen', () => {
         playerIDs: ['ID1', 'ID2', 'ID3'],
         gameSettings: { maxPlayers: 8, winningScore: 7, selectedPacks: [] },
         deck: { black: [], white: [] },
+        loading: [],
       };
       const dispatch = jest.fn();
 
@@ -118,6 +120,7 @@ describe('WinnerSelectScreen', () => {
         playerIDs: ['ID1', 'ID2', 'ID3'],
         gameSettings: { maxPlayers: 8, winningScore: 7, selectedPacks: [] },
         deck: { black: [], white: [] },
+        loading: [],
       };
       const dispatch = jest.fn();
 
