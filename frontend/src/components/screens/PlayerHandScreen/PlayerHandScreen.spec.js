@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent, act } from '@testing-library/react';
 import renderer from 'react-test-renderer';
 import userEvent from '@testing-library/user-event';
 import PlayerHandScreen from './PlayerHandScreen';
@@ -103,6 +103,41 @@ describe('PlayerHandScreen', () => {
         .toJSON();
 
       expect(tree).toMatchSnapshot();
+    });
+  });
+
+  describe('props', () => {
+    it('passes the correct value for numberSelected', () => {
+      const state = {
+        cards: [
+          'Card One',
+          'Card Two',
+          'Card Three',
+          'Card Four',
+          'Card Five',
+          'Card Six',
+          'Card Seven',
+          'Card Eight',
+          'Card Nine',
+          'Card Ten',
+        ],
+        selectCardCount: 2,
+      };
+      const dispatch = jest.fn();
+
+      render(
+        <PlayerContext.Provider value={{ state, dispatch }}>
+          <PlayerHandScreen />
+        </PlayerContext.Provider>,
+      );
+
+      expect(screen.getByTestId('submit')).toHaveTextContent('0/2 SELECTED');
+
+      act(() => {
+        fireEvent.click(screen.getByText('Card One'));
+      });
+
+      expect(screen.getByTestId('submit')).toHaveTextContent('1/2 SELECTED');
     });
   });
 });
