@@ -30,7 +30,9 @@ export default function CzarHandScreen() {
       }}
     >
       <CzarHand
-        cards={state.cards}
+        cards={state.submittedCards.map(
+          (submittedCardObj) => submittedCardObj.cards,
+        )}
         selectedGroup={selection}
         onSelect={submitPreview}
       />

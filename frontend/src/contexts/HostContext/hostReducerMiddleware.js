@@ -1,4 +1,5 @@
 import socketInstance from '../../socket/socket';
+import shuffleArray from '../../helpers/shuffleArray';
 
 function closeGame() {
   socketInstance.closeSocket();
@@ -110,17 +111,21 @@ function czarSelectWinner({ players, playerIDs }) {
   const notCzars = playerIDs.filter((playerID) => !players[playerID].isCzar);
 
   // gather all players submitted cards
-  const cards = notCzars.map((playerID) =>
-    players[playerID].submittedCards.map(
+  const submittedCardsOrdered = notCzars.map((playerID) => ({
+    playerID,
+    cards: players[playerID].submittedCards.map(
       (card) => players[playerID].cards[card].text,
     ),
-  );
+  }));
+
+  // shuffle the cards
+  const submittedCardsShuffled = shuffleArray(submittedCardsOrdered);
 
   socketInstance.sendMessage({
     event: 'update',
     payload: {
       gameState: 'select-winner',
-      cards,
+      submittedCards: submittedCardsShuffled,
     },
     recipients: [czar],
   });
