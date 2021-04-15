@@ -37,6 +37,7 @@ const SettingsMenu = styled.div`
 
   @media (min-width: 800px) {
     width: 400px;
+
     .host-settings-header {
       height: 130px;
     }
@@ -49,6 +50,7 @@ const SettingsMenu = styled.div`
 
   @media (min-width: 2000px) {
     width: 600px;
+
     .host-settings-header h3 {
       font-size: 5rem;
       line-height: 3rem;
@@ -57,6 +59,7 @@ const SettingsMenu = styled.div`
 
   @media (min-width: 3500px) {
     width: 1100px;
+
     .host-settings-header {
       height: 200px;
     }
