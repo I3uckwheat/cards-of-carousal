@@ -12,7 +12,6 @@ const propTypes = {
   }).isRequired,
 };
 
-
 const StyledGameSettings = styled.div`
   position: relative;
   display: flex;
@@ -91,11 +90,6 @@ const StyledForm = styled.form`
   }
 `;
 
-const maxPlayersMin = configValues.maxPlayersValues.min;
-const maxPlayersMax = configValues.maxPlayersValues.max;
-const winningScoreMin = configValues.winningScoreValues.min;
-const winningScoreMax = configValues.winningScoreValues.max;
-
 function GameSettings({ options, onChange }) {
   const [cardPacks, setCardPacks] = useState([]);
 
@@ -152,8 +146,8 @@ function GameSettings({ options, onChange }) {
               id="maxPlayers"
               name="maxPlayers"
               value={options.maxPlayers}
-              min={maxPlayersMin}
-              max={maxPlayersMax}
+              min={configValues.maxPlayersValues.min}
+              max={configValues.maxPlayersValues.max}
             />
           </label>
 
@@ -165,8 +159,8 @@ function GameSettings({ options, onChange }) {
               id="winningScore"
               name="winningScore"
               value={options.winningScore}
-              min={winningScoreMin}
-              max={winningScoreMax}
+              min={configValues.winningScoreValues.min}
+              max={configValues.winningScoreValues.max}
             />
           </label>
         </div>

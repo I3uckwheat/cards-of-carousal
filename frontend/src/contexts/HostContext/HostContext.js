@@ -13,17 +13,17 @@ const propTypes = {
 
 const { emitter } = socketInstance;
 
-const maxPlayersDefault = configValues.maxPlayersValues.default;
-const winningScoreDefault = configValues.winningScoreValues.default;
-const { initialSelectedPack } = configValues;
-const handSizeValue = configValues.cardHandSize;
-
 const initialState = {
   gameState: 'waiting-for-lobby',
   lobbyID: '',
   players: {},
   playerIDs: [],
-  gameSettings: { maxPlayers: maxPlayersDefault, winningScore: winningScoreDefault, selectedPacks: initialSelectedPack, handSize: handSizeValue,},
+  gameSettings: {
+    maxPlayers: configValues.maxPlayersValues.default,
+    winningScore: configValues.winningScoreValues.default,
+    selectedPacks: configValues.initialSelectedPack,
+    handSize: configValues.cardHandSize,
+  },
   deck: { black: [], white: [] },
 };
 
