@@ -26,6 +26,10 @@ class SocketSingleton {
 
   sendMessage({ event, recipients, payload }) {
     try {
+      // Timeout for testing loading states
+      // setTimeout(() => {
+      //   this.#socket.send(JSON.stringify({ event, recipients, payload }));
+      // }, 1500);
       this.#socket.send(JSON.stringify({ event, recipients, payload }));
     } catch {
       throw new Error('Socket is not connected');
