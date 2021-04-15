@@ -66,6 +66,28 @@ describe('GameSettings', () => {
       expect(screen.getByText('cruel')).toBeInTheDocument();
       expect(screen.getByText('world')).toBeInTheDocument();
     });
+
+    it('displays a loading indicator while the pack names are being requested', () => {
+      const dispatch = jest.fn();
+      const onChange = () => {};
+      const options = {
+        maxPlayers: 5,
+        winningScore: 6,
+        selectedPacks: [],
+      };
+
+      state = {
+        loading: ['getting-packs'],
+      };
+
+      render(
+        <HostContext.Provider value={{ state, dispatch }}>
+          <GameSettings onChange={onChange} options={options} />
+        </HostContext.Provider>,
+      );
+
+      expect(screen.getByTestId('loader')).toBeInTheDocument();
+    });
   });
 
   describe('options', () => {
