@@ -141,7 +141,7 @@ function LeftPanel() {
           </Button>
         </div>
         <div className="join-code-wrapper">
-          <JoinCode code={lobbyID} />
+          <JoinCode loading={state.loading} code={lobbyID} />
         </div>
       </div>
     </LeftPanelWrapper>
