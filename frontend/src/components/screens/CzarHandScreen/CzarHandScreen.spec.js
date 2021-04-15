@@ -8,10 +8,10 @@ import { PlayerContext } from '../../../contexts/PlayerContext/PlayerContext';
 describe('CzarHandScreen', () => {
   describe('render', () => {
     const state = {
-      cards: [
-        ['Card One', 'Card Two', 'Card Three'],
-        ['Card Four', 'Card Five', 'Card Six'],
-        ['Card Seven', 'Card Eight', 'Card Nine'],
+      submittedCards: [
+        { playerID: 'foo', cards: ['Card One', 'Card Two', 'Card Three'] },
+        { playerID: 'bar', cards: ['Card Four', 'Card Five', 'Card Six'] },
+        { playerID: 'baz', cards: ['Card Seven', 'Card Eight', 'Card Nine'] },
       ],
     };
 
@@ -30,10 +30,10 @@ describe('CzarHandScreen', () => {
 
   describe('dispatch', () => {
     const state = {
-      cards: [
-        ['Card One', 'Card Two', 'Card Three'],
-        ['Card Four', 'Card Five', 'Card Six'],
-        ['Card Seven', 'Card Eight', 'Card Nine'],
+      submittedCards: [
+        { playerID: 'foo', cards: ['Card One', 'Card Two', 'Card Three'] },
+        { playerID: 'bar', cards: ['Card Four', 'Card Five', 'Card Six'] },
+        { playerID: 'baz', cards: ['Card Seven', 'Card Eight', 'Card Nine'] },
       ],
     };
 
@@ -60,10 +60,10 @@ describe('CzarHandScreen', () => {
 
   describe('snapshot', () => {
     const state = {
-      cards: [
-        ['Card One', 'Card Two', 'Card Three'],
-        ['Card Four', 'Card Five', 'Card Six'],
-        ['Card Seven', 'Card Eight', 'Card Nine'],
+      submittedCards: [
+        { playerID: 'foo', cards: ['Card One', 'Card Two', 'Card Three'] },
+        { playerID: 'bar', cards: ['Card Four', 'Card Five', 'Card Six'] },
+        { playerID: 'baz', cards: ['Card Seven', 'Card Eight', 'Card Nine'] },
       ],
     };
 
