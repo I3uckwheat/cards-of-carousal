@@ -41,7 +41,7 @@ describe('CzarHandScreen', () => {
 
     const dispatch = jest.fn();
 
-    it('calls dispatch when the submit button is clicked', () => {
+    it('calls dispatch when the submit button is clicked and the correct amount of cards are selected', () => {
       render(
         <PlayerContext.Provider value={{ state, dispatch }}>
           <CzarHandScreen />
