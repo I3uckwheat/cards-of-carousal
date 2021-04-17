@@ -373,8 +373,20 @@ describe('reducer', () => {
     });
   });
 
+  describe('GET_DECK', () => {
+    it('adds the "getting-deck" string to the loading array in state', () => {
+      const state = {
+        loading: [],
+      };
+
+      const result = HostReducer(state, { type: 'GET_DECK', payload: {} });
+
+      expect(result).toEqual({ loading: ['getting-deck'] });
+    });
+  });
+
   describe('SET_DECK', () => {
-    it('sets the deck to the cards received in the payload', () => {
+    it('sets the deck to the cards received in the payload and removes appropriate loading state', () => {
       const state = {
         foo: {
           bar: 'baz',
@@ -383,6 +395,7 @@ describe('reducer', () => {
           black: [],
           white: [],
         },
+        loading: ['getting-deck', 'test'],
       };
 
       const newDeck = {
@@ -395,7 +408,7 @@ describe('reducer', () => {
         payload: { deck: newDeck },
       });
 
-      expect(result).toEqual({ ...state, deck: newDeck });
+      expect(result).toEqual({ ...state, deck: newDeck, loading: ['test'] });
     });
   });
 
