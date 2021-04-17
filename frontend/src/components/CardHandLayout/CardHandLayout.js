@@ -106,12 +106,10 @@ export default function CardHandLayout({
 }) {
   const { state } = useContext(PlayerContext);
 
-  function requiredCardsAllSelected() {
-    return numberSelected === state.selectCardCount;
-  }
+  const areAllCardsSelected = numberSelected === state.selectCardCount;
 
   function submitButtonText() {
-    return requiredCardsAllSelected()
+    return areAllCardsSelected
       ? 'SUBMIT'
       : `${numberSelected}/${state.selectCardCount} SELECTED`;
   }
@@ -128,8 +126,8 @@ export default function CardHandLayout({
 
         <section className="button-container">
           <Button
-            isActive={requiredCardsAllSelected()}
-            disabled={!requiredCardsAllSelected()}
+            isActive={areAllCardsSelected}
+            disabled={!areAllCardsSelected}
             onClick={onSubmit}
             className="button"
             data-testid="submit"
