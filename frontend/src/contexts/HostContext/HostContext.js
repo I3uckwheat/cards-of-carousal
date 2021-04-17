@@ -22,9 +22,9 @@ const initialState = {
     maxPlayers: config.maxPlayers.default,
     winningScore: config.winningScore.default,
     selectedPacks: config.initialSelectedPack,
-    handSize: config.handSize,
   },
   deck: { black: [], white: [] },
+  handSize: config.handSize,
 };
 
 export const HostContext = createContext();
