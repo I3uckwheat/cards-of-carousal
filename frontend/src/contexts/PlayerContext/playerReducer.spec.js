@@ -220,4 +220,25 @@ describe('reducer', () => {
       });
     });
   });
+
+  describe('LOBBY_CLOSED', () => {
+    it('returns a copy of state with the gameState and the message set properly', () => {
+      const state = {
+        gameState: 'test state',
+        message: {
+          big: 'deal',
+          small: 'pox',
+        },
+      };
+
+      const result = reducer(state, { type: 'LOBBY_CLOSED' });
+
+      expect(result).not.toBe(state);
+      expect(result.gameState).toBe('lobby-closed');
+      expect(result.message.big).toBe('THE LOBBY HAS BEEN CLOSED');
+      expect(result.message.small).toBe(
+        "You don't have to go home, but you can't stay here",
+      );
+    });
+  });
 });
