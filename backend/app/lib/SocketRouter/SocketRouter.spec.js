@@ -222,5 +222,63 @@ describe('SocketRouter', () => {
 
       expect(fooRouteHandler).toHaveReturnedWith({ param: 'bar' });
     });
+
+    it('correctly parses a query parameter', () => {
+      const fooRouteHandler = jest.fn((req) => req.query);
+      const socketRouter = new SocketRouter(() => {});
+
+      socketRouter.addRoute('GET /lobby/:id', fooRouteHandler);
+
+      socketRouter.handleRequest(
+        {},
+        {
+          method: 'GET',
+          url: '/lobby/TEST?name=CardsOfCarousal',
+        },
+      );
+
+      expect(fooRouteHandler).toHaveReturnedWith({
+        name: 'CardsOfCarousal',
+      });
+    });
+
+    it('correctly parses multiple query parameters', () => {
+      const fooRouteHandler = jest.fn((req) => req.query);
+      const socketRouter = new SocketRouter(() => {});
+
+      socketRouter.addRoute('GET /lobby/:id', fooRouteHandler);
+
+      socketRouter.handleRequest(
+        {},
+        {
+          method: 'GET',
+          url: '/lobby/TEST?color=blue&number=27&shape=triangle&test=test',
+        },
+      );
+
+      expect(fooRouteHandler).toHaveReturnedWith({
+        color: 'blue',
+        number: '27',
+        shape: 'triangle',
+        test: 'test',
+      });
+    });
+
+    it('correctly handles routes without query parameters', () => {
+      const fooRouteHandler = jest.fn((req) => req.query);
+      const socketRouter = new SocketRouter(() => {});
+
+      socketRouter.addRoute('GET /lobby', fooRouteHandler);
+
+      socketRouter.handleRequest(
+        {},
+        {
+          method: 'GET',
+          url: '/lobby',
+        },
+      );
+
+      expect(fooRouteHandler).toHaveReturnedWith({});
+    });
   });
 });

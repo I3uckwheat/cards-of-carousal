@@ -151,6 +151,26 @@ describe('Player screen controller', () => {
       });
     });
 
+    describe('lobby-closed', () => {
+      it('renders PlayerMessageScreen', () => {
+        PlayerMessageScreen.mockImplementation(MockPlayerMessageScreen);
+
+        const dispatch = jest.fn();
+        const state = {
+          gameState: 'lobby-closed',
+          message: { big: '', small: '' },
+        };
+
+        render(
+          <PlayerContext.Provider value={{ state, dispatch }}>
+            <PlayerScreenController />
+          </PlayerContext.Provider>,
+        );
+
+        expect(screen.getByTestId('player-message-screen')).toBeInTheDocument();
+      });
+    });
+
     describe('select-winner', () => {
       it('renders CzarHandScreen', () => {
         CzarHandScreen.mockImplementation(MockCzarHandScreen);
