@@ -11,7 +11,7 @@ const config = {
     default: 7,
   },
 
-  initialSelectedPack: [10],
+  initialSelectedPack: [0],
 
   handSize: 10,
 };
