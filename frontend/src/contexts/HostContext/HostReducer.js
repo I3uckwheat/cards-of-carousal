@@ -231,9 +231,7 @@ function updateJoinCode(state, { lobbyID }) {
   return {
     ...state,
     lobbyID,
-    loading: state.loading.filter(
-      (loadingValue) => loadingValue !== 'join-code',
-    ),
+    loading: state.loading.filter((loadingVal) => loadingVal !== 'join-code'),
   };
 }
 
