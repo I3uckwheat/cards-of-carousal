@@ -96,6 +96,7 @@ describe('hostReducerMiddleware', () => {
             big: "You've joined the lobby",
             small: 'Please wait for the host to start the game',
           },
+          removeLoading: 'joining-lobby',
         },
       });
     });

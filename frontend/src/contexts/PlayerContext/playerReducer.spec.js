@@ -30,6 +30,7 @@ describe('reducer', () => {
     it('returns a copy of state with "gameState" set to the proper value', () => {
       const state = {
         gameState: 'TEST',
+        loading: [],
       };
 
       const result = reducer(state, {
@@ -40,10 +41,25 @@ describe('reducer', () => {
       expect(result.gameState).toBe('pending-connection');
     });
 
+    it('updates the loading array with the proper value', () => {
+      const state = {
+        gameState: 'TEST',
+        loading: [],
+      };
+
+      const result = reducer(state, {
+        type: 'JOIN_LOBBY',
+        payload: { id: '1234' },
+      });
+      expect(result).not.toBe(state);
+      expect(result.loading).toEqual(['joining-lobby']);
+    });
+
     it("updates state's message", () => {
       const state = {
         gameState: 'TEST',
         message: { big: '', small: '' },
+        loading: [],
       };
 
       const result = reducer(state, {
@@ -60,6 +76,7 @@ describe('reducer', () => {
     it('calls the joinLobby method with the correct id', () => {
       const state = {
         gameState: 'TEST',
+        loading: [],
       };
       const lobbyId = '1234';
       const playerName = 'FOO';
