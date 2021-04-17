@@ -23,14 +23,6 @@ function playerConnected(state, { playerId, playerName }) {
 }
 
 function updatePlayerCards(state, { selectedCards, playerId }) {
-  function checkIfAllPlayersSubmitted(newState) {
-    const { players, playerIDs } = newState;
-    return playerIDs.every(
-      (playerID) =>
-        players[playerID].isCzar || players[playerID].submittedCards.length,
-    );
-  }
-
   const newState = {
     ...state,
     players: {
@@ -42,7 +34,12 @@ function updatePlayerCards(state, { selectedCards, playerId }) {
     },
   };
 
-  newState.gameState = checkIfAllPlayersSubmitted(newState)
+  const { players, playerIDs } = newState;
+
+  newState.gameState = playerIDs.every(
+    (playerID) =>
+      players[playerID].isCzar || players[playerID].submittedCards.length,
+  )
     ? 'czar-select-winner'
     : newState.gameState;
 
