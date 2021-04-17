@@ -160,24 +160,28 @@ describe('Host Pregame Screen', () => {
       );
 
       // create lobby, get deck, set game state, set new czar, select black card, deal white cards
-      expect(dispatch).toHaveBeenCalledTimes(6);
+      expect(dispatch).toHaveBeenCalledTimes(7);
       expect(dispatch).toHaveBeenNthCalledWith(2, {
+        type: 'GET_DECK',
+        payload: {},
+      });
+      expect(dispatch).toHaveBeenNthCalledWith(3, {
         type: 'SET_DECK',
         payload: { selectedPacks: state.gameSettings.selectedPacks },
       });
-      expect(dispatch).toHaveBeenNthCalledWith(3, {
+      expect(dispatch).toHaveBeenNthCalledWith(4, {
         type: 'START_GAME',
         payload: {},
       });
-      expect(dispatch).toHaveBeenNthCalledWith(4, {
+      expect(dispatch).toHaveBeenNthCalledWith(5, {
         type: 'SET_NEXT_CZAR',
         payload: {},
       });
-      expect(dispatch).toHaveBeenNthCalledWith(5, {
+      expect(dispatch).toHaveBeenNthCalledWith(6, {
         type: 'SELECT_BLACK_CARD',
         payload: {},
       });
-      expect(dispatch).toHaveBeenNthCalledWith(6, {
+      expect(dispatch).toHaveBeenNthCalledWith(7, {
         type: 'DEAL_WHITE_CARDS',
         payload: {},
       });
