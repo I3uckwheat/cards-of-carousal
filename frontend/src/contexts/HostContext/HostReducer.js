@@ -160,7 +160,7 @@ function setDeck(state, { deck }) {
 }
 
 function dealWhiteCards(state) {
-  const { deck, playerIDs, players, handSize } = state;
+  const { deck, playerIDs, players, gameSettings: {handSize} } = state;
   const newWhiteCards = [...deck.white];
 
   const neededCardsPerPlayer = playerIDs.map((playerID) => {

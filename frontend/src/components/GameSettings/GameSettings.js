@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import config from '../../config';
 
 const propTypes = {
   onChange: PropTypes.func.isRequired,
@@ -145,8 +146,8 @@ function GameSettings({ options, onChange }) {
               id="maxPlayers"
               name="maxPlayers"
               value={options.maxPlayers}
-              min="2"
-              max="12"
+              min={config.maxPlayers.min}
+              max={config.maxPlayers.max}
             />
           </label>
 
@@ -158,8 +159,8 @@ function GameSettings({ options, onChange }) {
               id="winningScore"
               name="winningScore"
               value={options.winningScore}
-              min="1"
-              max="15"
+              min={config.winningScore.min}
+              max={config.winningScore.max}
             />
           </label>
         </div>
