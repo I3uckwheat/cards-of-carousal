@@ -8,6 +8,7 @@ function joinLobby(state) {
       big: 'Connecting to Lobby',
       small: 'Please wait',
     },
+    loading: [...state.loading, 'joining-lobby'],
   };
 }
 
@@ -26,6 +27,11 @@ function update(state, payload) {
   return {
     ...state,
     ...payload,
+    loading: payload.removeLoading
+      ? state.loading.filter(
+          (loadingVal) => loadingVal !== payload.removeLoading,
+        )
+      : state.loading,
   };
 }
 
