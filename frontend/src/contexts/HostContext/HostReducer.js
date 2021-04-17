@@ -168,10 +168,21 @@ function setBlackCard(state) {
     selectedBlackCard: selectedCard,
   };
 }
+
+function getDeck(state) {
+  return {
+    ...state,
+    loading: [...state.loading, 'getting-deck'],
+  };
+}
+
 function setDeck(state, { deck }) {
   return {
     ...state,
     deck,
+    loading: state.loading.filter(
+      (loadingVal) => loadingVal !== 'getting-deck',
+    ),
   };
 }
 
@@ -281,6 +292,9 @@ function HostReducer(state, action) {
 
     case 'SELECT_BLACK_CARD':
       return setBlackCard(state);
+
+    case 'GET_DECK':
+      return getDeck(state);
 
     case 'SET_DECK':
       return setDeck(state, payload);
