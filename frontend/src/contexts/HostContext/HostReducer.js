@@ -36,14 +36,15 @@ function updatePlayerCards(state, { selectedCards, playerId }) {
 
   const { players, playerIDs } = newState;
 
-  newState.gameState = playerIDs.every(
-    (playerID) =>
-      players[playerID].isCzar || players[playerID].submittedCards.length,
-  )
-    ? 'czar-select-winner'
-    : newState.gameState;
-
-  return newState;
+  return {
+    ...newState,
+    gameState: playerIDs.every(
+      (playerID) =>
+        players[playerID].isCzar || players[playerID].submittedCards.length,
+    )
+      ? 'czar-select-winner'
+      : newState.gameState,
+  };
 }
 
 function removePlayer(state, { playerId }) {
