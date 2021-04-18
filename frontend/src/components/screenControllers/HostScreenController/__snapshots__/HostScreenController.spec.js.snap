@@ -110,7 +110,42 @@ exports[`Host screen controller render renders correctly 1`] = `
   margin-bottom: 24px;
 }
 
-.c8 {
+.c7 .loading {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+
+.c7 .loading div {
+  display: inline-block;
+  position: absolute;
+  left: 8px;
+  width: 16px;
+  background: var(--primary-background-color);
+  -webkit-animation: loading 1.2s cubic-bezier(0,0.5,0.5,1) infinite;
+  animation: loading 1.2s cubic-bezier(0,0.5,0.5,1) infinite;
+}
+
+.c7 .loading div:nth-child(1) {
+  left: 8px;
+  -webkit-animation-delay: -0.24s;
+  animation-delay: -0.24s;
+}
+
+.c7 .loading div:nth-child(2) {
+  left: 32px;
+  -webkit-animation-delay: -0.12s;
+  animation-delay: -0.12s;
+}
+
+.c7 .loading div:nth-child(3) {
+  left: 56px;
+  -webkit-animation-delay: 0;
+  animation-delay: 0;
+}
+
+.c9 {
   position: relative;
   display: -webkit-box;
   display: -webkit-flex;
@@ -125,7 +160,7 @@ exports[`Host screen controller render renders correctly 1`] = `
   overflow-y: auto;
 }
 
-.c8 h1 {
+.c9 h1 {
   margin-left: auto;
   font-size: 4rem;
   line-height: 4rem;
@@ -139,7 +174,7 @@ exports[`Host screen controller render renders correctly 1`] = `
   top: 0;
 }
 
-.c9 {
+.c10 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -154,7 +189,7 @@ exports[`Host screen controller render renders correctly 1`] = `
   padding: 24px 0 24px 60px;
 }
 
-.c9 .number-input-wrapper label {
+.c10 .number-input-wrapper label {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -167,25 +202,34 @@ exports[`Host screen controller render renders correctly 1`] = `
   font-weight: bold;
 }
 
-.c9 input[type='number'] {
+.c10 input[type='number'] {
   font-weight: bold;
   text-align: center;
   width: 80px;
 }
 
-.c9 .select-wrapper {
+.c10 .select-wrapper {
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
 }
 
-.c9 .select-wrapper h2 {
+.c10 .select-wrapper h2 {
   font-size: 1rem;
   font-weight: bold;
   height: 30px;
 }
 
-.c9 .card-packs {
+.c10 .select-wrapper .loader-wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+}
+
+.c10 .card-packs {
   display: grid;
   gap: 20px;
   grid-template-columns: repeat(auto-fill,minmax(420px,1fr));
@@ -195,7 +239,7 @@ exports[`Host screen controller render renders correctly 1`] = `
   padding: 0 0 16px 0;
 }
 
-.c9 .card-packs label {
+.c10 .card-packs label {
   margin-right: 12px;
   -webkit-align-items: center;
   -webkit-box-align: center;
@@ -208,7 +252,7 @@ exports[`Host screen controller render renders correctly 1`] = `
   margin-bottom: auto;
 }
 
-.c9 input[type='checkbox'] {
+.c10 input[type='checkbox'] {
   margin: 4px 11px auto 0;
 }
 
@@ -331,7 +375,7 @@ exports[`Host screen controller render renders correctly 1`] = `
   padding: 8px 20px;
 }
 
-.c7 {
+.c8 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -346,7 +390,7 @@ exports[`Host screen controller render renders correctly 1`] = `
   left: 0;
 }
 
-.c7 .game-description {
+.c8 .game-description {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -370,11 +414,11 @@ exports[`Host screen controller render renders correctly 1`] = `
   box-shadow: 0px 4px 12px rgba(0,0,0,0.25);
 }
 
-.c7 .game-description p {
+.c8 .game-description p {
   margin: 16px 0;
 }
 
-.c7 .top {
+.c8 .top {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -390,7 +434,7 @@ exports[`Host screen controller render renders correctly 1`] = `
   height: 60%;
 }
 
-.c7 .bottom {
+.c8 .bottom {
   height: 40%;
 }
 
@@ -439,7 +483,7 @@ exports[`Host screen controller render renders correctly 1`] = `
 }
 
 @media only screen and (max-width:980px) {
-  .c8 h1 {
+  .c9 h1 {
     position: static;
   }
 }
@@ -521,7 +565,19 @@ exports[`Host screen controller render renders correctly 1`] = `
                 className="join-code"
                 data-testid="join-code"
               >
-                
+                <div
+                  className="c7"
+                  color={1}
+                  data-testid="loader"
+                >
+                  <div
+                    className="loading"
+                  >
+                    <div />
+                    <div />
+                    <div />
+                  </div>
+                </div>
               </p>
             </div>
           </div>
@@ -532,7 +588,7 @@ exports[`Host screen controller render renders correctly 1`] = `
       className="right"
     >
       <div
-        className="c7"
+        className="c8"
       >
         <div
           className="top"
@@ -555,13 +611,13 @@ exports[`Host screen controller render renders correctly 1`] = `
           className="bottom"
         >
           <div
-            className="c8"
+            className="c9"
           >
             <h1>
               GAME SETTINGS
             </h1>
             <form
-              className="c9"
+              className="c10"
             >
               <div
                 className="number-input-wrapper"
