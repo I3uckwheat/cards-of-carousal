@@ -20,6 +20,7 @@ function submitCards(state) {
       big: 'Submitting your cards',
       small: 'Please wait',
     },
+    loading: [...state.loading, 'submitting-cards'],
   };
 }
 

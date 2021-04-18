@@ -33,6 +33,7 @@ function sendCardsSubmittedMessage(payload) {
         big: 'WAIT FOR OTHER PLAYERS',
         small: 'Yell at them to hurry up if you wish',
       },
+      removeLoading: 'submitting-cards',
     },
   });
 }
