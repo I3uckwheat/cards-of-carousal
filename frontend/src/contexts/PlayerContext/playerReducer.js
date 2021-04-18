@@ -25,13 +25,12 @@ function submitCards(state) {
 }
 
 function update(state, payload) {
+  const { removeLoading, ...newData } = payload;
   return {
     ...state,
-    ...payload,
-    loading: payload.removeLoading
-      ? state.loading.filter(
-          (loadingVal) => loadingVal !== payload.removeLoading,
-        )
+    ...newData,
+    loading: removeLoading
+      ? state.loading.filter((loadingVal) => loadingVal !== removeLoading)
       : state.loading,
   };
 }

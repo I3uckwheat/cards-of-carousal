@@ -148,6 +148,19 @@ describe('reducer', () => {
 
       expect(result).toEqual(state);
     });
+
+    it('removes the specified value from the loading array', () => {
+      const state = {
+        loading: ['submitting-cards', 'test'],
+      };
+
+      const result = reducer(state, {
+        type: 'UPDATE',
+        payload: { removeLoading: 'submitting-cards' },
+      });
+
+      expect(result.loading).toEqual(['test']);
+    });
   });
 
   describe('ERROR_DISCONNECT', () => {
@@ -169,13 +182,14 @@ describe('reducer', () => {
   });
 
   describe('SUBMIT_CARDS', () => {
-    it('returns a copy of state with the gameState and message set properly', () => {
+    it('returns a copy of state with the gameState, message, and loading array set properly', () => {
       const state = {
         gameState: 'test state',
         message: {
           big: 'Test',
           small: 'test',
         },
+        loading: [],
       };
 
       const result = reducer(state, { type: 'SUBMIT_CARDS', payload: {} });
@@ -192,6 +206,7 @@ describe('reducer', () => {
         big: 'Submitting your cards',
         small: 'Please wait',
       });
+      expect(result.loading).toEqual(['submitting-cards']);
     });
   });
 
