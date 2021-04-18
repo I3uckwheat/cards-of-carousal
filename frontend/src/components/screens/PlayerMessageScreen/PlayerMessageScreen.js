@@ -76,7 +76,8 @@ function PlayerMessageScreen({ bigText, smallText }) {
       <div className="text-container">
         <h1 className="big-text">{bigText && bigText.toUpperCase()}</h1>
         <p className="small-text">{smallText}</p>
-        {state.loading.includes('joining-lobby') && <LoadingIndicator />}
+        {(state.loading.includes('joining-lobby') ||
+          state.loading.includes('submitting-cards')) && <LoadingIndicator />}
       </div>
       <div className="footer">
         <img
