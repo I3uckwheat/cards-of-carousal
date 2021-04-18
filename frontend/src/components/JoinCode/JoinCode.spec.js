@@ -8,9 +8,9 @@ describe('joinCode', () => {
   // ----------------------------------------------------------------------------
   // Rendering Tests
   describe('rendering', () => {
-    it('renders when "code" is an empty string', () => {
+    it('renders loading indicator when "code" is an empty string', () => {
       render(<DisplayJoinCode loading={[]} code="" />);
-      expect(screen.queryByTestId('loader')).not.toBeInTheDocument();
+      expect(screen.getByTestId('loader')).toBeInTheDocument();
       expect(screen.getByTestId('join-code')).toBeInTheDocument();
     });
 
