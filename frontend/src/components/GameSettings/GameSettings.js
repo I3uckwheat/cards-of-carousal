@@ -69,6 +69,13 @@ const StyledForm = styled.form`
     height: 30px;
   }
 
+  .select-wrapper .loader-wrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
   .card-packs {
     display: grid;
     gap: 20px;
@@ -171,24 +178,27 @@ function GameSettings({ options, onChange }) {
 
         <div className="select-wrapper">
           <h2>SELECT CARD PACKS</h2>
-          <div className="card-packs">
-            {state.loading.includes('getting-packs') && (
+          {state.loading.includes('getting-packs') ? (
+            <div className="loader-wrapper">
               <LoadingIndicator secondary />
-            )}
-            {cardPacks.map((name, index) => (
-              <label htmlFor={name} key={name}>
-                <input
-                  onChange={cardPackOptionHandler}
-                  id={name}
-                  type="checkbox"
-                  name={name}
-                  checked={options.selectedPacks.includes(index)}
-                  data-index={index}
-                />
-                {name}
-              </label>
-            ))}
-          </div>
+            </div>
+          ) : (
+            <div className="card-packs">
+              {cardPacks.map((name, index) => (
+                <label htmlFor={name} key={name}>
+                  <input
+                    onChange={cardPackOptionHandler}
+                    id={name}
+                    type="checkbox"
+                    name={name}
+                    checked={options.selectedPacks.includes(index)}
+                    data-index={index}
+                  />
+                  {name}
+                </label>
+              ))}
+            </div>
+          )}
         </div>
       </StyledForm>
     </StyledGameSettings>
