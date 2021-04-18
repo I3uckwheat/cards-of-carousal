@@ -46,6 +46,20 @@ describe('Player message screen', () => {
       );
       expect(screen.getByTestId('loader')).toBeInTheDocument();
     });
+
+    it('displays a loading indicator when the loading array contains "submitting-cards"', () => {
+      render(
+        <PlayerContext.Provider
+          value={{ state: { loading: ['submitting-cards'] } }}
+        >
+          <PlayerMessageScreen
+            bigText="TEST BIG TEXT"
+            smallText="Test small text"
+          />
+        </PlayerContext.Provider>,
+      );
+      expect(screen.getByTestId('loader')).toBeInTheDocument();
+    });
   });
 
   describe('prop validation', () => {
