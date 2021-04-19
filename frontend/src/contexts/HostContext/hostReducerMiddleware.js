@@ -126,6 +126,7 @@ function czarSelectWinner({ players, playerIDs }) {
     payload: {
       gameState: 'select-winner',
       submittedCards: submittedCardsShuffled,
+      selectCardCount: 1,
     },
     recipients: [czar],
   });
