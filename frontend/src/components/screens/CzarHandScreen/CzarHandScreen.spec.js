@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, act } from '@testing-library/react';
 import renderer from 'react-test-renderer';
 import userEvent from '@testing-library/user-event';
 import CzarHandScreen from './CzarHandScreen';
@@ -8,11 +8,12 @@ import { PlayerContext } from '../../../contexts/PlayerContext/PlayerContext';
 describe('CzarHandScreen', () => {
   describe('render', () => {
     const state = {
-      cards: [
-        ['Card One', 'Card Two', 'Card Three'],
-        ['Card Four', 'Card Five', 'Card Six'],
-        ['Card Seven', 'Card Eight', 'Card Nine'],
+      submittedCards: [
+        { playerID: 'foo', cards: ['Card One', 'Card Two', 'Card Three'] },
+        { playerID: 'bar', cards: ['Card Four', 'Card Five', 'Card Six'] },
+        { playerID: 'baz', cards: ['Card Seven', 'Card Eight', 'Card Nine'] },
       ],
+      selectCardCount: 1,
     };
 
     const dispatch = jest.fn();
@@ -30,16 +31,17 @@ describe('CzarHandScreen', () => {
 
   describe('dispatch', () => {
     const state = {
-      cards: [
-        ['Card One', 'Card Two', 'Card Three'],
-        ['Card Four', 'Card Five', 'Card Six'],
-        ['Card Seven', 'Card Eight', 'Card Nine'],
+      submittedCards: [
+        { playerID: 'foo', cards: ['Card One', 'Card Two', 'Card Three'] },
+        { playerID: 'bar', cards: ['Card Four', 'Card Five', 'Card Six'] },
+        { playerID: 'baz', cards: ['Card Seven', 'Card Eight', 'Card Nine'] },
       ],
+      selectCardCount: 1,
     };
 
     const dispatch = jest.fn();
 
-    it('calls dispatch when the submit button is clicked', () => {
+    it('calls dispatch when the submit button is clicked and the correct amount of cards are selected', () => {
       render(
         <PlayerContext.Provider value={{ state, dispatch }}>
           <CzarHandScreen />
@@ -47,8 +49,11 @@ describe('CzarHandScreen', () => {
       );
 
       const cardWrappers = screen.queryAllByTestId('card-wrapper');
-      userEvent.click(cardWrappers[0]);
-      userEvent.click(screen.getByText('SUBMIT'));
+
+      act(() => {
+        userEvent.click(cardWrappers[0]);
+      });
+      userEvent.click(screen.getByTestId('submit'));
 
       expect(dispatch).toHaveBeenCalledTimes(1);
       expect(dispatch).toHaveBeenCalledWith({
@@ -56,15 +61,30 @@ describe('CzarHandScreen', () => {
         payload: { id: 0 },
       });
     });
+
+    it('does not call dispatch when the submit button is clicked when no cards are selected', () => {
+      render(
+        <PlayerContext.Provider value={{ state, dispatch }}>
+          <CzarHandScreen />
+        </PlayerContext.Provider>,
+      );
+
+      act(() => {
+        userEvent.click(screen.getByTestId('submit'));
+      });
+
+      expect(dispatch).not.toHaveBeenCalled();
+    });
   });
 
   describe('snapshot', () => {
     const state = {
-      cards: [
-        ['Card One', 'Card Two', 'Card Three'],
-        ['Card Four', 'Card Five', 'Card Six'],
-        ['Card Seven', 'Card Eight', 'Card Nine'],
+      submittedCards: [
+        { playerID: 'foo', cards: ['Card One', 'Card Two', 'Card Three'] },
+        { playerID: 'bar', cards: ['Card Four', 'Card Five', 'Card Six'] },
+        { playerID: 'baz', cards: ['Card Seven', 'Card Eight', 'Card Nine'] },
       ],
+      selectCardCount: 1,
     };
 
     const dispatch = jest.fn();
