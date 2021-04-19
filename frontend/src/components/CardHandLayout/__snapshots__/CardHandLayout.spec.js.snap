@@ -1,7 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`CardHandLayout rendering matches the snapshot 1`] = `
-.c2 {
+Array [
+  .c2 {
   display: block;
   border: 2px solid var(--primary-text-color);
   font-size: 12px;
@@ -135,42 +136,46 @@ exports[`CardHandLayout rendering matches the snapshot 1`] = `
 }
 
 <div
-  className="c0"
->
-  <header
-    className="c1 header-container"
+    className="c0"
   >
+    <header
+      className="c1 header-container"
+    >
+      <div
+        className="header-txt"
+      >
+        <h1>
+          test
+          <span>
+            bar
+          </span>
+        </h1>
+      </div>
+      <section
+        className="button-container"
+      >
+        <button
+          className="c2 button"
+          data-testid="submit"
+          disabled={false}
+          onClick={[Function]}
+        >
+          SUBMIT
+        </button>
+        <button
+          className="c2 button"
+          onClick={[Function]}
+        >
+          CLEAR
+        </button>
+      </section>
+    </header>
     <div
-      className="header-txt"
+      className="card-container"
     >
-      <h1>
-        test
-        <span>
-          bar
-        </span>
-      </h1>
+      FOO
     </div>
-    <section
-      className="button-container"
-    >
-      <button
-        className="c2 button"
-        onClick={[Function]}
-      >
-        SUBMIT
-      </button>
-      <button
-        className="c2 button"
-        onClick={[Function]}
-      >
-        CLEAR
-      </button>
-    </section>
-  </header>
-  <div
-    className="card-container"
-  >
-    FOO
-  </div>
-</div>
+  </div>,
+  ",",
+]
 `;

@@ -9,13 +9,30 @@ exports[`PlayerHandScreen snapshot matches 1`] = `
   padding: 0.7em;
   background: var(--secondary-background-color);
   color: var(--secondary-text-color);
-  background: var(--primary-background-color);
-  color: var(--primary-text-color);
 }
 
 .c2:hover,
 .c2:active,
 .c2:focus {
+  background: var(--accent-background-color);
+  cursor: pointer;
+}
+
+.c3 {
+  display: block;
+  border: 2px solid var(--primary-text-color);
+  font-size: 12px;
+  font-weight: bold;
+  padding: 0.7em;
+  background: var(--secondary-background-color);
+  color: var(--secondary-text-color);
+  background: var(--primary-background-color);
+  color: var(--primary-text-color);
+}
+
+.c3:hover,
+.c3:active,
+.c3:focus {
   background: var(--accent-background-color);
   cursor: pointer;
 }
@@ -103,7 +120,7 @@ exports[`PlayerHandScreen snapshot matches 1`] = `
   flex-shrink: 0;
 }
 
-.c4 {
+.c5 {
   position: relative;
   border: 1px solid var(--primary-text-color);
   width: 148px;
@@ -119,28 +136,28 @@ exports[`PlayerHandScreen snapshot matches 1`] = `
   box-shadow: 0px 4px 12px rgba(0,0,0,0.25);
 }
 
-.c4 .whiteCardText {
+.c5 .whiteCardText {
   max-height: 150px;
   padding-right: 0;
   overflow-y: auto;
 }
 
-.c4 .whiteCardText div {
+.c5 .whiteCardText div {
   padding-bottom: 20px;
 }
 
-.c4 .stackedCards {
+.c5 .stackedCards {
   position: absolute;
   bottom: 7px;
   left: 11px;
   width: 32px;
 }
 
-.c4 .backOfCard {
+.c5 .backOfCard {
   font-weight: 600;
 }
 
-.c3 {
+.c4 {
   background: none;
   border: none;
   text-align: left;
@@ -165,7 +182,7 @@ exports[`PlayerHandScreen snapshot matches 1`] = `
   border-bottom-color: transparent;
 }
 
-.c3 .badge {
+.c4 .badge {
   z-index: 10;
   display: -webkit-box;
   display: -webkit-flex;
@@ -223,7 +240,7 @@ exports[`PlayerHandScreen snapshot matches 1`] = `
 }
 
 @media (min-width:1025px) {
-  .c4 {
+  .c5 {
     width: 267px;
     height: 363px;
     font-size: 36px;
@@ -231,18 +248,18 @@ exports[`PlayerHandScreen snapshot matches 1`] = `
     padding: 30px 27px 0 27px;
   }
 
-  .c4 .whiteCardText {
+  .c5 .whiteCardText {
     max-height: 280px;
     padding-right: 0;
   }
 
-  .c4 .stackedCards {
+  .c5 .stackedCards {
     width: auto;
   }
 }
 
 @media (min-width:1025px) {
-  .c3 .badge {
+  .c4 .badge {
     top: 0;
     right: -15px;
     height: 40px;
@@ -272,12 +289,14 @@ exports[`PlayerHandScreen snapshot matches 1`] = `
     >
       <button
         className="c2 button"
+        data-testid="submit"
+        disabled={true}
         onClick={[Function]}
       >
-        SUBMIT
+        0/undefined SELECTED
       </button>
       <button
-        className="c2 button"
+        className="c3 button"
         onClick={[Function]}
       >
         CLEAR
@@ -288,12 +307,12 @@ exports[`PlayerHandScreen snapshot matches 1`] = `
     className="card-container"
   >
     <button
-      className="c3"
+      className="c4"
       data-testid="card-wrapper"
       onClick={[Function]}
     >
       <div
-        className="c4"
+        className="c5"
         data-testid="white-card"
       >
         <div
@@ -315,12 +334,12 @@ exports[`PlayerHandScreen snapshot matches 1`] = `
       </div>
     </button>
     <button
-      className="c3"
+      className="c4"
       data-testid="card-wrapper"
       onClick={[Function]}
     >
       <div
-        className="c4"
+        className="c5"
         data-testid="white-card"
       >
         <div
@@ -342,12 +361,12 @@ exports[`PlayerHandScreen snapshot matches 1`] = `
       </div>
     </button>
     <button
-      className="c3"
+      className="c4"
       data-testid="card-wrapper"
       onClick={[Function]}
     >
       <div
-        className="c4"
+        className="c5"
         data-testid="white-card"
       >
         <div
@@ -369,12 +388,12 @@ exports[`PlayerHandScreen snapshot matches 1`] = `
       </div>
     </button>
     <button
-      className="c3"
+      className="c4"
       data-testid="card-wrapper"
       onClick={[Function]}
     >
       <div
-        className="c4"
+        className="c5"
         data-testid="white-card"
       >
         <div
@@ -396,12 +415,12 @@ exports[`PlayerHandScreen snapshot matches 1`] = `
       </div>
     </button>
     <button
-      className="c3"
+      className="c4"
       data-testid="card-wrapper"
       onClick={[Function]}
     >
       <div
-        className="c4"
+        className="c5"
         data-testid="white-card"
       >
         <div
@@ -423,12 +442,12 @@ exports[`PlayerHandScreen snapshot matches 1`] = `
       </div>
     </button>
     <button
-      className="c3"
+      className="c4"
       data-testid="card-wrapper"
       onClick={[Function]}
     >
       <div
-        className="c4"
+        className="c5"
         data-testid="white-card"
       >
         <div
@@ -450,12 +469,12 @@ exports[`PlayerHandScreen snapshot matches 1`] = `
       </div>
     </button>
     <button
-      className="c3"
+      className="c4"
       data-testid="card-wrapper"
       onClick={[Function]}
     >
       <div
-        className="c4"
+        className="c5"
         data-testid="white-card"
       >
         <div
@@ -477,12 +496,12 @@ exports[`PlayerHandScreen snapshot matches 1`] = `
       </div>
     </button>
     <button
-      className="c3"
+      className="c4"
       data-testid="card-wrapper"
       onClick={[Function]}
     >
       <div
-        className="c4"
+        className="c5"
         data-testid="white-card"
       >
         <div
@@ -504,12 +523,12 @@ exports[`PlayerHandScreen snapshot matches 1`] = `
       </div>
     </button>
     <button
-      className="c3"
+      className="c4"
       data-testid="card-wrapper"
       onClick={[Function]}
     >
       <div
-        className="c4"
+        className="c5"
         data-testid="white-card"
       >
         <div
@@ -531,12 +550,12 @@ exports[`PlayerHandScreen snapshot matches 1`] = `
       </div>
     </button>
     <button
-      className="c3"
+      className="c4"
       data-testid="card-wrapper"
       onClick={[Function]}
     >
       <div
-        className="c4"
+        className="c5"
         data-testid="white-card"
       >
         <div
