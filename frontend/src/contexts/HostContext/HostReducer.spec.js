@@ -782,7 +782,9 @@ describe('reducer', () => {
           pick: 1,
         },
         playerIDs: ['foo', 'bar', 'baz', 'bender'],
-        gameSettings: { handSize: 5 },
+        gameSettings: {
+          handSize: 5,
+        },
         players: {
           foo: {
             cards: [
