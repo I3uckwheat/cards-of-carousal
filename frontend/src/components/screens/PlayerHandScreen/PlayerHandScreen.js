@@ -34,6 +34,7 @@ export default function PlayerHandScreen() {
         }}
         onClear={handleClear}
         onSubmit={handleSubmit}
+        numberSelected={selected.length}
       >
         <PlayerHand
           cards={state.cards}

@@ -23,14 +23,6 @@ function playerConnected(state, { playerId, playerName }) {
 }
 
 function updatePlayerCards(state, { selectedCards, playerId }) {
-  function checkIfAllPlayersSubmitted(newState) {
-    const { players, playerIDs } = newState;
-    return playerIDs.every(
-      (playerID) =>
-        players[playerID].isCzar || players[playerID].submittedCards.length,
-    );
-  }
-
   const newState = {
     ...state,
     players: {
@@ -42,11 +34,17 @@ function updatePlayerCards(state, { selectedCards, playerId }) {
     },
   };
 
-  newState.gameState = checkIfAllPlayersSubmitted(newState)
-    ? 'czar-select-winner'
-    : newState.gameState;
+  const { players, playerIDs } = newState;
 
-  return newState;
+  return {
+    ...newState,
+    gameState: playerIDs.every(
+      (playerID) =>
+        players[playerID].isCzar || players[playerID].submittedCards.length,
+    )
+      ? 'czar-select-winner'
+      : newState.gameState,
+  };
 }
 
 function removePlayer(state, { playerId }) {
@@ -201,7 +199,12 @@ function setDeck(state, { deck }) {
 }
 
 function dealWhiteCards(state) {
-  const { deck, playerIDs, players, handSize } = state;
+  const {
+    deck,
+    playerIDs,
+    players,
+    gameSettings: { handSize },
+  } = state;
   const newWhiteCards = [...deck.white];
 
   const neededCardsPerPlayer = playerIDs.map((playerID) => {
