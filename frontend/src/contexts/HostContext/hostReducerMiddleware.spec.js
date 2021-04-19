@@ -66,6 +66,7 @@ describe('hostReducerMiddleware', () => {
         event: 'update',
         recipients: ['example-player-id'],
         payload: {
+          gameState: 'player-kicked',
           message: {
             big: "You've been kicked!",
             small: 'Take off, you hoser!',

@@ -7,6 +7,7 @@ import blackCardDiagonal from '../../../assets/black-card-diagonal.svg';
 const propTypes = {
   bigText: PropTypes.string.isRequired,
   smallText: PropTypes.string.isRequired,
+  children: PropTypes.node,
 };
 
 const PlayerMessageScreenWrapper = styled.div`
@@ -66,12 +67,13 @@ const PlayerMessageScreenWrapper = styled.div`
   }
 `;
 
-function PlayerMessageScreen({ bigText, smallText }) {
+function PlayerMessageScreen({ bigText, smallText, children }) {
   return (
     <PlayerMessageScreenWrapper className="primary-background">
       <div className="text-container">
         <h1 className="big-text">{bigText && bigText.toUpperCase()}</h1>
         <p className="small-text">{smallText}</p>
+        {children}
       </div>
 
       <div className="footer">
@@ -91,5 +93,8 @@ function PlayerMessageScreen({ bigText, smallText }) {
 }
 
 PlayerMessageScreen.propTypes = propTypes;
+PlayerMessageScreen.defaultProps = {
+  children: null,
+};
 
 export default PlayerMessageScreen;

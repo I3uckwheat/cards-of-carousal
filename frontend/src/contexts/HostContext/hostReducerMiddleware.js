@@ -41,6 +41,7 @@ function sendKickPlayerMessage(payload) {
     recipients: [payload.playerId],
     event: 'update',
     payload: {
+      gameState: 'player-kicked',
       message: {
         big: "You've been kicked!",
         small: 'Take off, you hoser!',
