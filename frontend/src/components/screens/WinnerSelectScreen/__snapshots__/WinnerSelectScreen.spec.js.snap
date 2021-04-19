@@ -741,7 +741,7 @@ exports[`WinnerSelectScreen rendering renders normally for typical state values 
               className="whiteCardText"
             >
               <div>
-                ffff
+                aaaa
               </div>
             </div>
             <div
@@ -762,7 +762,7 @@ exports[`WinnerSelectScreen rendering renders normally for typical state values 
               className="whiteCardText"
             >
               <div>
-                gggg
+                bbbb
               </div>
             </div>
             <div

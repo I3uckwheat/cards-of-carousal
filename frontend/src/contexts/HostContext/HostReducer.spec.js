@@ -887,7 +887,7 @@ describe('reducer', () => {
   });
 
   describe('PREVIEW_WINNER', () => {
-    it('returns the state with updated submittedCards for the current czar', () => {
+    it('returns the state with updated roundWinner for the current czar', () => {
       const state = {
         players: {
           ID1: {
@@ -901,6 +901,7 @@ describe('reducer', () => {
             name: 'bar',
             score: 0,
             isCzar: true,
+            roundWinner: undefined,
             submittedCards: [],
             cards: [],
           },
@@ -917,7 +918,7 @@ describe('reducer', () => {
 
       const result = HostReducer(state, {
         type: 'PREVIEW_WINNER',
-        payload: { selectedGroupIndex: 2 },
+        payload: { highlightedPlayerID: 'baz' },
       });
 
       expect(result).toEqual({
@@ -933,7 +934,8 @@ describe('reducer', () => {
             name: 'bar',
             score: 0,
             isCzar: true,
-            submittedCards: [2],
+            roundWinner: 'baz',
+            submittedCards: [],
             cards: [],
           },
           ID3: {

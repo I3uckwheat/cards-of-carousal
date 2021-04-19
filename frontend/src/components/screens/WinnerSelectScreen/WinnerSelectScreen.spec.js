@@ -59,7 +59,8 @@ describe('WinnerSelectScreen', () => {
             name: 'bar',
             score: 0,
             isCzar: true,
-            submittedCards: [2],
+            submittedCards: [],
+            roundWinner: 'ID1',
             cards: [],
           },
           ID3: {
@@ -119,7 +120,8 @@ describe('WinnerSelectScreen', () => {
             name: 'bar',
             score: 0,
             isCzar: true,
-            submittedCards: [2],
+            submittedCards: [],
+            roundWinner: 'ID3',
             cards: [],
           },
           ID3: {

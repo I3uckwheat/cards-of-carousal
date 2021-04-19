@@ -74,7 +74,7 @@ function czarSelectWinner(state) {
   };
 }
 
-function previewWinner(state, { selectedGroupIndex }) {
+function previewWinner(state, { highlightedPlayerID }) {
   const currentCzarId = state.playerIDs.find(
     (playerID) => state.players[playerID].isCzar,
   );
@@ -87,7 +87,7 @@ function previewWinner(state, { selectedGroupIndex }) {
       ...state.players,
       [currentCzarId]: {
         ...currentCzar,
-        submittedCards: [selectedGroupIndex],
+        roundWinner: highlightedPlayerID,
       },
     },
   };
