@@ -67,22 +67,42 @@ function receiveWhiteCards(state, payload) {
   };
 }
 
+function lobbyClosed(state) {
+  return {
+    ...state,
+    gameState: 'lobby-closed',
+    message: {
+      big: 'THE LOBBY HAS BEEN CLOSED',
+      small: "You don't have to go home, but you can't stay here",
+    },
+  };
+}
+
 function reducer(state, action) {
   const { type, payload } = action;
   switch (type) {
     case 'JOIN_LOBBY':
       socketInstance.joinLobby(payload.lobbyId, payload.playerName);
       return joinLobby(state);
+
     case 'UPDATE':
       return update(state, payload);
+
     case 'ERROR_DISCONNECT':
       return errorDisconnect(state);
+
     case 'SUBMIT_CARDS':
       return submitCards(state);
+
     case 'SUBMIT_WINNER':
       return submitWinner(state, payload);
+
     case 'RECEIVE_WHITE_CARDS':
       return receiveWhiteCards(state, payload);
+
+    case 'LOBBY_CLOSED':
+      return lobbyClosed(state);
+
     default:
       return { ...state };
   }

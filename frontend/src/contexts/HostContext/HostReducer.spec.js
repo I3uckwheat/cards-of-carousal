@@ -416,6 +416,9 @@ describe('reducer', () => {
     it('deals the correct cards to each player', () => {
       // setup dummy state
       const state = {
+        gameSettings: {
+          handSize: 5,
+        },
         deck: {
           white: [
             { pack: 0, text: 'zero' },
@@ -445,7 +448,6 @@ describe('reducer', () => {
           pick: 1,
         },
         playerIDs: ['foo', 'bar', 'baz', 'bender'],
-        handSize: 5,
         players: {
           foo: {
             cards: [
@@ -528,6 +530,9 @@ describe('reducer', () => {
     it('removes the correct cards from the deck', () => {
       // setup dummy state
       const state = {
+        gameSettings: {
+          handSize: 5,
+        },
         deck: {
           white: [
             { pack: 0, text: 'zero' },
@@ -557,7 +562,6 @@ describe('reducer', () => {
           pick: 1,
         },
         playerIDs: ['foo', 'bar', 'baz', 'bender'],
-        handSize: 5,
         players: {
           foo: {
             cards: [
@@ -615,6 +619,9 @@ describe('reducer', () => {
     it('does not deal more cards to players who have the maximum card count', () => {
       // setup dummy state
       const state = {
+        gameSettings: {
+          handSize: 5,
+        },
         deck: {
           white: [
             { pack: 0, text: 'zero' },
@@ -631,7 +638,6 @@ describe('reducer', () => {
           pick: 1,
         },
         playerIDs: ['foo', 'bar', 'baz', 'bender'],
-        handSize: 5,
         players: {
           foo: {
             cards: [
@@ -679,6 +685,9 @@ describe('reducer', () => {
     it('updates the game state', () => {
       // setup dummy state
       const state = {
+        gameSettings: {
+          handSize: 5,
+        },
         deck: {
           white: [
             { pack: 0, text: 'zero' },
@@ -693,7 +702,6 @@ describe('reducer', () => {
           pick: 1,
         },
         playerIDs: ['foo'],
-        handSize: 5,
         players: {
           foo: {
             cards: [

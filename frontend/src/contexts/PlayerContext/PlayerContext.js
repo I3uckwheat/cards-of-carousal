@@ -39,22 +39,18 @@ export function PlayerProvider({ children }) {
     switch (event) {
       case 'join-lobby':
         return dispatch({ type: 'JOIN_LOBBY', payload });
+
       case 'update':
         return dispatch({ type: 'UPDATE', payload });
+
       case 'error-disconnect':
         return dispatch({ type: 'ERROR_DISCONNECT', payload });
+
       case 'deal-white-cards':
         return dispatch({ type: 'RECEIVE_WHITE_CARDS', payload });
+
       case 'lobby-closed':
-        return dispatch({
-          type: 'UPDATE',
-          payload: {
-            message: {
-              big: 'The lobby has been closed',
-              small: "You don't have to go home, but you can't stay here",
-            },
-          },
-        });
+        return dispatch({ type: 'LOBBY_CLOSED' });
 
       default:
         return undefined;

@@ -628,8 +628,8 @@ exports[`Host screen controller render renders correctly 1`] = `
                   MAX PLAYERS
                   <input
                     id="maxPlayers"
-                    max="12"
-                    min="2"
+                    max={12}
+                    min={2}
                     name="maxPlayers"
                     onChange={[Function]}
                     type="number"
@@ -642,8 +642,8 @@ exports[`Host screen controller render renders correctly 1`] = `
                   WINNING SCORE
                   <input
                     id="winningScore"
-                    max="15"
-                    min="1"
+                    max={15}
+                    min={1}
                     name="winningScore"
                     onChange={[Function]}
                     type="number"

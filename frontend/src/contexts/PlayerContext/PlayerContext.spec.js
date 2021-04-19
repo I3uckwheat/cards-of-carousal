@@ -263,6 +263,7 @@ describe('context', () => {
         return (
           <>
             <div>
+              <div data-testid="game-state">{state.gameState}</div>
               <h1 data-testid="message-big">{state.message.big}</h1>
               <p data-testid="message-small">{state.message.small}</p>
             </div>
@@ -282,9 +283,14 @@ describe('context', () => {
         eventHandlers.message({ event: 'lobby-closed', payload: {} });
       });
 
-      expect(screen.getByTestId('message-big')).toHaveTextContent(
-        'The lobby has been closed',
+      expect(screen.getByTestId('game-state')).toHaveTextContent(
+        'lobby-closed',
       );
+
+      expect(screen.getByTestId('message-big')).toHaveTextContent(
+        'THE LOBBY HAS BEEN CLOSED',
+      );
+
       expect(screen.getByTestId('message-small')).toHaveTextContent(
         "You don't have to go home, but you can't stay here",
       );
