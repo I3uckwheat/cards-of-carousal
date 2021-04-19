@@ -103,7 +103,7 @@ function RightPanel() {
       <div className="white-cards">
         {highlightedPlayer?.submittedCards.map((cardIndex) => (
           <WhiteCard key={cardIndex}>
-            {highlightedPlayer.cards[cardIndex]}
+            {highlightedPlayer.cards[cardIndex].text}
           </WhiteCard>
         ))}
       </div>

@@ -23,7 +23,7 @@ function playerConnected(state, { playerId, playerName }) {
 }
 
 function updatePlayerCards(state, { selectedCards, playerId }) {
-  return {
+  const newState = {
     ...state,
     players: {
       ...state.players,
@@ -32,6 +32,18 @@ function updatePlayerCards(state, { selectedCards, playerId }) {
         submittedCards: selectedCards,
       },
     },
+  };
+
+  const { players, playerIDs } = newState;
+
+  return {
+    ...newState,
+    gameState: playerIDs.every(
+      (playerID) =>
+        players[playerID].isCzar || players[playerID].submittedCards.length,
+    )
+      ? 'czar-select-winner'
+      : newState.gameState,
   };
 }
 
@@ -189,6 +201,7 @@ function dealWhiteCards(state) {
     acc[playerID] = {
       ...players[playerID],
       cards,
+      submittedCards: [],
     };
     return acc;
   }, {});
