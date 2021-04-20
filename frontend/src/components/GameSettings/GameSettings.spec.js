@@ -88,6 +88,45 @@ describe('GameSettings', () => {
 
       expect(screen.getByTestId('loader')).toBeInTheDocument();
     });
+
+    it('dispatches the GET_PACKS action on mount', () => {
+      const dispatch = jest.fn();
+      const onChange = () => {};
+      const options = {
+        maxPlayers: 5,
+        winningScore: 6,
+        selectedPacks: [],
+      };
+
+      render(
+        <HostContext.Provider value={{ state, dispatch }}>
+          <GameSettings onChange={onChange} options={options} />
+        </HostContext.Provider>,
+      );
+      expect(dispatch).toHaveBeenCalledWith({ type: 'GET_PACKS', payload: {} });
+    });
+
+    it('dispatches the PACKS_RECEIVED action when the packs have been fetched', async () => {
+      const dispatch = jest.fn();
+      const onChange = () => {};
+      const options = {
+        maxPlayers: 5,
+        winningScore: 6,
+        selectedPacks: [],
+      };
+
+      render(
+        <HostContext.Provider value={{ state, dispatch }}>
+          <GameSettings onChange={onChange} options={options} />
+        </HostContext.Provider>,
+      );
+
+      await waitFor(() => expect(window.fetch).toHaveBeenCalledTimes(1));
+      expect(dispatch).toHaveBeenCalledWith({
+        type: 'PACKS_RECEIVED',
+        payload: {},
+      });
+    });
   });
 
   describe('options', () => {
