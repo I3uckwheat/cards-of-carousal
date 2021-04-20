@@ -32,7 +32,9 @@ module.exports = class Message {
       this.#validateMessage(message);
       this.#constructMessage(message);
     } catch (error) {
-      throw new Error('message is not valid JSON');
+      throw new Error(
+        `Invalid message from "${this.sender}": ${jsonMessage} is not valid JSON`,
+      );
     }
   };
 
