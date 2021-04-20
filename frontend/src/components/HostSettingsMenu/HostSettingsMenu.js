@@ -122,7 +122,7 @@ function useSettingsMenuHandler(components) {
 
       default:
         throw new Error(
-          `Please add a component switch case type to ${component}`,
+          `Component type: '${type}' not found in HostSettingsMenu component builder`,
         );
     }
   });
