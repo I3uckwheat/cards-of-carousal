@@ -4,10 +4,6 @@ import renderer from 'react-test-renderer';
 import { HostContext } from '../../../contexts/HostContext/HostContext';
 import HostWinnerScreen from './HostWinnerScreen';
 
-jest.mock('../../GameSettings/GameSettings', () => () => (
-  <div data-testid="game-settings" />
-));
-
 describe('Host Winner Screen', () => {
   describe('rendering', () => {
     const dispatch = jest.fn();
