@@ -7,50 +7,6 @@ exports[`HostSettingsMenu rendering matches the expected snapshot 1`] = `
   color: var(--secondary-text-color);
 }
 
-.c3 {
-  color: var(--primary-text-color);
-  background-color: var(--primary-background-color);
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  border: none;
-  padding: 20px 25px;
-  width: 100%;
-  text-align: left;
-  font-size: 1rem;
-  font-weight: 700;
-}
-
-.c3:hover {
-  background-color: var(--accent-background-color);
-}
-
-.c2 {
-  color: #dddddd;
-  color: var(--primary-text-color);
-  background-color: var(--primary-background-color);
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  border: none;
-  padding: 30px 0 20px 25px;
-  text-align: left;
-  font-size: 1rem;
-  font-weight: 700;
-}
-
-.c2:hover {
-  background-color: var(--accent-background-color);
-}
-
 .c0 {
   position: absolute;
   top: 0;
@@ -83,42 +39,6 @@ exports[`HostSettingsMenu rendering matches the expected snapshot 1`] = `
   font-size: 1.5rem;
   line-height: 0.9rem;
   color: var(--secondary-text-color);
-}
-
-@media (min-width:800px) {
-  .c3 {
-    font-size: 1.5rem;
-  }
-}
-
-@media (min-width:2000px) {
-  .c3 {
-    font-size: 2.5rem;
-  }
-}
-
-@media (min-width:3500px) {
-  .c3 {
-    font-size: 4.5rem;
-  }
-}
-
-@media (min-width:800px) {
-  .c2 {
-    font-size: 1.5rem;
-  }
-}
-
-@media (min-width:2000px) {
-  .c2 {
-    font-size: 2.5rem;
-  }
-}
-
-@media (min-width:3500px) {
-  .c2 {
-    font-size: 4.5rem;
-  }
 }
 
 @media (min-width:800px) {
@@ -174,26 +94,5 @@ exports[`HostSettingsMenu rendering matches the expected snapshot 1`] = `
       SETTINGS
     </h3>
   </header>
-  <button
-    className="c2"
-    onClick={[Function]}
-  >
-    HIDE JOIN CODE
-  </button>
-  <div>
-    <button
-      className="c3"
-      onClick={[Function]}
-      type="button"
-    >
-      KICK PLAYER
-    </button>
-  </div>
-  <button
-    className="c2"
-    onClick={[Function]}
-  >
-    SHUFFLE JOIN CODE
-  </button>
 </div>
 `;

@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import styled from 'styled-components';
 
 import HostLayout from '../../layouts/HostLayout';
-import HostSettingsMenu from '../../HostSettingsMenu/HostSettingsMenu';
+import InGameSettingsModal from '../../HostSettingsMenu/InGameSettingsModal';
 import PlayerList from '../../PlayerList/PlayerList';
 import JoinCode from '../../JoinCode/JoinCode';
 import { HostContext } from '../../../contexts/HostContext/HostContext';
@@ -117,7 +117,7 @@ function WinnerSelectScreen() {
       className="primary-background"
       left={<LeftPanel />}
       right={<RightPanel />}
-      modal={<HostSettingsMenu />}
+      modal={<InGameSettingsModal />}
     />
   );
 }

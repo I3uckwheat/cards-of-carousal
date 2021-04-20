@@ -39,7 +39,7 @@ module.exports = class SocketRouter {
     const match = this.#routes[method].find(({ route }) =>
       this.#isRouteMatch(route, url),
     );
-    if (!match) return this.#notFoundHandler({ url, params: {} }, request);
+    if (!match) return this.#notFoundHandler(request, webSocket);
 
     const req = this.#parseUrl(match.route, url);
 

@@ -40,6 +40,9 @@ function PlayerKicker({ accordionState, onClickActions }) {
     <OptionList
       listContent={playerList}
       state={accordionState}
+      // if you get a "cannot read property 'undefined' of undefined" error on
+      // the below line and a bunch of propType errors in your console check
+      // that you assigned it the right component type
       onClick={onClickActions[accordionState]}
       onItemClick={kickPlayer}
       openText="KICK WHO?"
