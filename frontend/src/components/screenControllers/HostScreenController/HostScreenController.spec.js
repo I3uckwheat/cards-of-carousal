@@ -155,5 +155,22 @@ describe('Host screen controller', () => {
         expect(screen.getByTestId('host-blackcard-screen')).toBeInTheDocument();
       });
     });
+
+    describe('czar-select-winner', () => {
+      it('renders HostBlackCardScreen', () => {
+        HostBlackCardScreen.mockImplementation(MockHostBlackCardScreen);
+
+        const dispatch = jest.fn();
+        const state = { gameState: 'czar-select-winner' };
+
+        render(
+          <HostContext.Provider value={{ state, dispatch }}>
+            <HostScreenController />
+          </HostContext.Provider>,
+        );
+
+        expect(screen.getByTestId('host-blackcard-screen')).toBeInTheDocument();
+      });
+    });
   });
 });
