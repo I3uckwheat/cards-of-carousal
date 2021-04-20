@@ -25,6 +25,15 @@ describe('Player message screen', () => {
       expect(screen.getByText('THIS SHOULD BE CAPITAL')).toBeInTheDocument();
       expect(screen.getByText('sMaLl CaN hAvE AnY cAsE')).toBeInTheDocument();
     });
+
+    it('accepts children', () => {
+      render(
+        <PlayerMessageScreen bigText="big text" smallText="small text">
+          <p>test test test</p>
+        </PlayerMessageScreen>,
+      );
+      expect(screen.getByText('test test test')).toBeInTheDocument();
+    });
   });
 
   describe('prop validation', () => {
