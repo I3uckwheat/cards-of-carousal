@@ -91,11 +91,9 @@ function previewWinner(state, { highlightedPlayerID }) {
   };
 }
 
-function selectWinner(state, payload) {
-  // TODO: HANDLE MESSAGE
+function selectWinner(state) {
   return {
     ...state,
-    selectedCard: payload.winningSelection,
     gameState: 'show-winning-card',
   };
 }

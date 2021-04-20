@@ -3,7 +3,7 @@ import { HostContext } from '../../../contexts/HostContext/HostContext';
 import HostPregameScreen from '../../screens/HostPregameScreen/HostPregameScreen';
 import WinnerSelectScreen from '../../screens/WinnerSelectScreen/WinnerSelectScreen';
 import HostBlackCardScreen from '../../screens/HostBlackCardScreen/HostBlackCardScreen';
-import WinnerScreen from '../../screens/WinnerScreen/WinnerScreen';
+import WinnerScreen from '../../screens/HostWinnerScreen/HostWinnerScreen';
 
 const propTypes = {};
 
