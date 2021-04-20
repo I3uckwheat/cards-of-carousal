@@ -444,7 +444,7 @@ exports[`Host Pregame Screen rendering renders 1`] = `
               >
                 JOIN CODE:
               </p>
-              <p
+              <div
                 className="join-code"
                 data-testid="join-code"
               >
@@ -461,7 +461,7 @@ exports[`Host Pregame Screen rendering renders 1`] = `
                     <div />
                   </div>
                 </div>
-              </p>
+              </div>
             </div>
           </div>
         </div>

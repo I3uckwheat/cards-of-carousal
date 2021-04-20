@@ -667,12 +667,12 @@ exports[`WinnerSelectScreen rendering renders normally for typical state values 
             >
               JOIN CODE:
             </p>
-            <p
+            <div
               className="join-code"
               data-testid="join-code"
             >
               ABCD
-            </p>
+            </div>
           </div>
         </div>
       </div>

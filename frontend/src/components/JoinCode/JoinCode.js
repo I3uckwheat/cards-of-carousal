@@ -43,9 +43,9 @@ function DisplayJoinCode({ loading, code }) {
   return (
     <JoinCodeComponent>
       <p className="join-code-title">JOIN CODE:</p>
-      <p className="join-code" data-testid="join-code">
+      <div className="join-code" data-testid="join-code">
         {loading || !code ? <LoadingIndicator secondary /> : code}
-      </p>
+      </div>
     </JoinCodeComponent>
   );
 }

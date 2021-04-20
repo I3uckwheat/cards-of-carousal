@@ -1103,24 +1103,24 @@ exports[`App snapshots should show the host screen after user has clicked the "h
                 >
                   JOIN CODE:
                 </p>
-                <p
+                <div
                   class="join-code"
                   data-testid="join-code"
-                />
-                <div
-                  class="c7"
-                  color="1"
-                  data-testid="loader"
                 >
                   <div
-                    class="loading"
+                    class="c7"
+                    color="1"
+                    data-testid="loader"
                   >
-                    <div />
-                    <div />
-                    <div />
+                    <div
+                      class="loading"
+                    >
+                      <div />
+                      <div />
+                      <div />
+                    </div>
                   </div>
                 </div>
-                <p />
               </div>
             </div>
           </div>

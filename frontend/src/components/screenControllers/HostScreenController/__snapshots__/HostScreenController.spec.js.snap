@@ -561,7 +561,7 @@ exports[`Host screen controller render renders correctly 1`] = `
               >
                 JOIN CODE:
               </p>
-              <p
+              <div
                 className="join-code"
                 data-testid="join-code"
               >
@@ -578,7 +578,7 @@ exports[`Host screen controller render renders correctly 1`] = `
                     <div />
                   </div>
                 </div>
-              </p>
+              </div>
             </div>
           </div>
         </div>
