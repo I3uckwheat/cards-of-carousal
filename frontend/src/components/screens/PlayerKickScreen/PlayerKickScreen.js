@@ -13,12 +13,15 @@ const propTypes = {
 const RestartButton = styled(Button)`
   background-color: var(--primary-background-color);
   color: var(--secondary-color);
+  text-transform: uppercase;
 `;
 
 export default function PlayerKickScreen({ bigText, smallText }) {
   return (
     <PlayerMessageScreen bigText={bigText} smallText={smallText}>
-      <RestartButton type="button">restart</RestartButton>
+      <RestartButton type="button" onClick={() => window.location.reload()}>
+        restart
+      </RestartButton>
     </PlayerMessageScreen>
   );
 }
