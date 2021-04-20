@@ -70,14 +70,20 @@ const PlayerMessageScreenWrapper = styled.div`
 
 function PlayerMessageScreen({ bigText, smallText }) {
   const { state } = useContext(PlayerContext);
+  const loadingStates = ['joining-lobby', 'submitting-cards'];
+
+  function isLoading() {
+    return state.loading.some((loadingState) =>
+      loadingStates.includes(loadingState),
+    );
+  }
 
   return (
     <PlayerMessageScreenWrapper className="primary-background">
       <div className="text-container">
         <h1 className="big-text">{bigText && bigText.toUpperCase()}</h1>
         <p className="small-text">{smallText}</p>
-        {(state.loading.includes('joining-lobby') ||
-          state.loading.includes('submitting-cards')) && <LoadingIndicator />}
+        {isLoading() && <LoadingIndicator />}
       </div>
       <div className="footer">
         <img
