@@ -30,7 +30,9 @@ export default function PlayerHandScreen() {
       <CardHandLayout
         title={{
           top: 'PLAYER,',
-          bottom: `SUBMIT ${state.selectCardCount} CARDS`,
+          bottom: `SUBMIT ${state.selectCardCount} CARD${
+            state.selectCardCount !== 1 ? 'S' : ''
+          }`,
         }}
         onClear={handleClear}
         onSubmit={handleSubmit}

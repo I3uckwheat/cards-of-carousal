@@ -33,6 +33,30 @@ describe('PlayerHandScreen', () => {
 
       expect(screen.getByText('PLAYER,')).toBeInTheDocument();
     });
+
+    it('should have the proper pluralization of the word "card" when selectCardCount is one', () => {
+      const newState = { ...state, selectCardCount: 1 };
+
+      render(
+        <PlayerContext.Provider value={{ state: newState, dispatch }}>
+          <PlayerHandScreen />
+        </PlayerContext.Provider>,
+      );
+
+      expect(screen.getByText('SUBMIT 1 CARD')).toBeInTheDocument();
+    });
+
+    it('should have the proper pluralization of the word "card" when selectCardCount is not one', () => {
+      const newState = { ...state, selectCardCount: 2 };
+
+      render(
+        <PlayerContext.Provider value={{ state: newState, dispatch }}>
+          <PlayerHandScreen />
+        </PlayerContext.Provider>,
+      );
+
+      expect(screen.getByText('SUBMIT 2 CARDS')).toBeInTheDocument();
+    });
   });
 
   describe('dispatch', () => {
