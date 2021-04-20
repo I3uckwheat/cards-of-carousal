@@ -98,7 +98,7 @@ describe('Host Winner Screen', () => {
       );
 
       expect(screen.queryByTestId('winner-name')).toBeInTheDocument();
-      expect(screen.queryByTestId('winner-name')).toHaveTextContent('foo');
+      expect(screen.queryByTestId('winner-name')).toHaveTextContent('FOO');
     });
   });
 });

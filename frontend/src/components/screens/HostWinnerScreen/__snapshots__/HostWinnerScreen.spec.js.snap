@@ -432,7 +432,7 @@ exports[`Host Winner Screen rendering renders 1`] = `
 
 .c9 .card-display {
   height: 100%;
-  margin-top: 64px;
+  margin-top: 36px;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -468,10 +468,12 @@ exports[`Host Winner Screen rendering renders 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
+  -webkit-box-pack: space-evenly;
+  -webkit-justify-content: space-evenly;
+  -ms-flex-pack: space-evenly;
+  justify-content: space-evenly;
+  width: 80%;
+  margin: 0 auto;
   margin-top: 32px;
 }
 
@@ -726,7 +728,7 @@ exports[`Host Winner Screen rendering renders 1`] = `
               className="winner-name"
               data-testid="winner-name"
             >
-              foo
+              FOO
             </p>
           </div>
           <div
@@ -734,7 +736,7 @@ exports[`Host Winner Screen rendering renders 1`] = `
             data-testid="black-card"
           >
             <span>
-              Test Black Card
+              TEST BLACK CARD
             </span>
             <div
               className="layeredCards"

@@ -56,7 +56,7 @@ const RightPanelWrapper = styled.div`
   .card-display {
     height: 100%;
 
-    margin-top: 64px;
+    margin-top: 36px;
 
     display: flex;
     flex-direction: column;
@@ -82,7 +82,11 @@ const RightPanelWrapper = styled.div`
 const WhiteCardWrapper = styled.div`
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
+
+  width: 80%;
+
+  margin: 0 auto;
   margin-top: 32px;
 `;
 
@@ -119,12 +123,12 @@ function RightPanel() {
         <div className="czar-display">
           <p>WINNER:</p>
           <p data-testid="winner-name" className="winner-name">
-            {winner.name}
+            {winner.name.toUpperCase()}
           </p>
         </div>
 
         <BlackCard pickCount={selectedBlackCard.pick} data-test-id="black-card">
-          {selectedBlackCard.text}
+          {selectedBlackCard.text.toUpperCase()}
         </BlackCard>
       </div>
       <WhiteCardWrapper>
