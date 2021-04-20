@@ -93,8 +93,11 @@ function previewWinner(state, { highlightedPlayerID }) {
 
 function selectWinner(state, payload) {
   // TODO: HANDLE MESSAGE
-  // eslint-disable-next-line no-console
-  console.log(state, payload);
+  return {
+    ...state,
+    selectedCard: payload.winningSelection,
+    gameState: 'show-winning-card',
+  };
 }
 
 function setLobbyId(state, { id }) {
