@@ -60,6 +60,20 @@ describe('Player message screen', () => {
       );
       expect(screen.getByTestId('loader')).toBeInTheDocument();
     });
+
+    it('does not display a loading indicator when the loading array does not contain the right strings', () => {
+      render(
+        <PlayerContext.Provider
+          value={{ state: { loading: ['submitting-cars', 'test', 'aaaa'] } }}
+        >
+          <PlayerMessageScreen
+            bigText="TEST BIG TEXT"
+            smallText="Test small text"
+          />
+        </PlayerContext.Provider>,
+      );
+      expect(screen.queryByTestId('loader')).not.toBeInTheDocument();
+    });
   });
 
   describe('prop validation', () => {
