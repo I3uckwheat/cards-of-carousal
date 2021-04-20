@@ -4,9 +4,16 @@ import { HostContext } from '../../../contexts/HostContext/HostContext';
 
 import HostScreenController from './HostScreenController';
 import HostPregameScreen from '../../screens/HostPregameScreen/HostPregameScreen';
+import WinnerSelectScreen from '../../screens/WinnerSelectScreen/WinnerSelectScreen';
 
 const MockHostPregameScreen = () => <div data-testid="host-pregame-screen" />;
 jest.mock('../../screens/HostPregameScreen/HostPregameScreen.js', () => ({
+  __esModule: true,
+  default: jest.fn(),
+}));
+
+const MockWinnerSelectScreen = () => <div data-testid="winner-select-screen" />;
+jest.mock('../../screens/WinnerSelectScreen/WinnerSelectScreen.js', () => ({
   __esModule: true,
   default: jest.fn(),
 }));
@@ -103,6 +110,23 @@ describe('Host screen controller', () => {
         );
 
         expect(screen.getByTestId('host-pregame-screen')).toBeInTheDocument();
+      });
+    });
+
+    describe('selecting-winner', () => {
+      it('renders WinnerSelectScreen', () => {
+        WinnerSelectScreen.mockImplementation(MockWinnerSelectScreen);
+
+        const dispatch = jest.fn();
+        const state = { gameState: 'selecting-winner' };
+
+        render(
+          <HostContext.Provider value={{ state, dispatch }}>
+            <HostScreenController />
+          </HostContext.Provider>,
+        );
+
+        expect(screen.getByTestId('winner-select-screen')).toBeInTheDocument();
       });
     });
   });
