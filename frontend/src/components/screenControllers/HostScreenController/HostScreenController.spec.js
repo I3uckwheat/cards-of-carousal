@@ -5,6 +5,7 @@ import { HostContext } from '../../../contexts/HostContext/HostContext';
 import HostScreenController from './HostScreenController';
 import HostPregameScreen from '../../screens/HostPregameScreen/HostPregameScreen';
 import WinnerSelectScreen from '../../screens/WinnerSelectScreen/WinnerSelectScreen';
+import HostBlackCardScreen from '../../screens/HostBlackCardScreen/HostBlackCardScreen';
 
 const MockHostPregameScreen = () => <div data-testid="host-pregame-screen" />;
 jest.mock('../../screens/HostPregameScreen/HostPregameScreen.js', () => ({
@@ -14,6 +15,14 @@ jest.mock('../../screens/HostPregameScreen/HostPregameScreen.js', () => ({
 
 const MockWinnerSelectScreen = () => <div data-testid="winner-select-screen" />;
 jest.mock('../../screens/WinnerSelectScreen/WinnerSelectScreen.js', () => ({
+  __esModule: true,
+  default: jest.fn(),
+}));
+
+const MockHostBlackCardScreen = () => (
+  <div data-testid="host-blackcard-screen" />
+);
+jest.mock('../../screens/HostBlackCardScreen/HostBlackCardScreen.js', () => ({
   __esModule: true,
   default: jest.fn(),
 }));
@@ -127,6 +136,23 @@ describe('Host screen controller', () => {
         );
 
         expect(screen.getByTestId('winner-select-screen')).toBeInTheDocument();
+      });
+    });
+
+    describe('waiting-to-receive-cards', () => {
+      it('renders HostBlackCardScreen', () => {
+        HostBlackCardScreen.mockImplementation(MockHostBlackCardScreen);
+
+        const dispatch = jest.fn();
+        const state = { gameState: 'waiting-to-receive-cards' };
+
+        render(
+          <HostContext.Provider value={{ state, dispatch }}>
+            <HostScreenController />
+          </HostContext.Provider>,
+        );
+
+        expect(screen.getByTestId('host-blackcard-screen')).toBeInTheDocument();
       });
     });
   });
