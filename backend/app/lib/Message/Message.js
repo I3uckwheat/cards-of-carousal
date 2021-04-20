@@ -27,9 +27,13 @@ module.exports = class Message {
     });
 
   #fromJSON = (jsonMessage) => {
-    const message = JSON.parse(jsonMessage);
-    this.#validateMessage(message);
-    this.#constructMessage(message);
+    try {
+      const message = JSON.parse(jsonMessage);
+      this.#validateMessage(message);
+      this.#constructMessage(message);
+    } catch (error) {
+      throw new Error('message is not valid JSON');
+    }
   };
 
   #validateMessage = (message) => {

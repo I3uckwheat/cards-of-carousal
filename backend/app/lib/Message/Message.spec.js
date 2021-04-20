@@ -38,6 +38,19 @@ describe('Message', () => {
       }).toThrow('Invalid message');
     });
 
+    it('throws an error when message is not a valid JSON', () => {
+      const sender = 'test';
+      const JSONMessage = `({
+        "event": "just-testing",
+        "payload": {"hello": "world"}
+      })`;
+
+      expect(() => {
+        // eslint-disable-next-line no-new
+        new Message(sender, JSONMessage);
+      }).toThrow('message is not valid JSON');
+    });
+
     describe('JSON message', () => {
       it('constructs with a properly formed message with no recipients', () => {
         const sender = 'test';
