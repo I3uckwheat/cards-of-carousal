@@ -65,11 +65,26 @@ function removePlayer(state, { playerId }) {
   };
 }
 
+function czarSelectWinner(state) {
+  return {
+    ...state,
+    gameState: 'selecting-winner',
+  };
+}
+
+function previewWinner(state, { highlightedPlayerID }) {
+  return {
+    ...state,
+    czarSelection: highlightedPlayerID,
+  };
+}
+
 function selectWinner(state, payload) {
   // TODO: HANDLE MESSAGE
   // eslint-disable-next-line no-console
   console.log(state, payload);
 }
+
 function setLobbyId(state, { id }) {
   return {
     ...state,
@@ -172,7 +187,12 @@ function setDeck(state, { deck }) {
 }
 
 function dealWhiteCards(state) {
-  const { deck, playerIDs, players, gameSettings: {handSize} } = state;
+  const {
+    deck,
+    playerIDs,
+    players,
+    gameSettings: { handSize },
+  } = state;
   const newWhiteCards = [...deck.white];
 
   const neededCardsPerPlayer = playerIDs.map((playerID) => {
@@ -239,6 +259,12 @@ function HostReducer(state, action) {
 
     case 'KICK_PLAYER':
       return removePlayer(state, payload);
+
+    case 'CZAR_SELECT_WINNER':
+      return czarSelectWinner(state);
+
+    case 'PREVIEW_WINNER':
+      return previewWinner(state, payload);
 
     case 'SELECT_WINNER':
       // TODO: HANDLE PAYLOAD AND TEST
