@@ -132,6 +132,7 @@ function RightPanel() {
         </BlackCard>
       </div>
       <WhiteCardWrapper>
+        {/* TODO: Add resize of card text or alter display of white cards to better fit the screen */}
         {winner.submittedCards.map((card) => (
           <WhiteCard key={winner.cards[card].text}>
             {winner.cards[card].text}
