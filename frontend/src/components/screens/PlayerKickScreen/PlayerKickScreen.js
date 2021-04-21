@@ -13,6 +13,9 @@ const propTypes = {
 const RestartButton = styled(Button)`
   background-color: var(--primary-background-color);
   color: var(--secondary-color);
+  width: 116px;
+  margin: 40px auto 0 auto;
+  border-radius: 2px;
   text-transform: uppercase;
 `;
 
