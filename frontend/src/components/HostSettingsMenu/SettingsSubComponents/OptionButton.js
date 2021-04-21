@@ -31,6 +31,8 @@ const StyledOptionButton = styled.button`
   font-size: 1rem;
   font-weight: 700;
 
+  cursor: pointer;
+
   @media (min-width: 800px) {
     font-size: 1.5rem;
   }
