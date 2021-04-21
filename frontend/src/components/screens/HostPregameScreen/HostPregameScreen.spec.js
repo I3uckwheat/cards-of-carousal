@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen, act, waitFor } from '@testing-library/react';
+import { render, screen, act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import renderer from 'react-test-renderer';
 import { HostContext } from '../../../contexts/HostContext/HostContext';
@@ -55,6 +55,68 @@ describe('Host Pregame Screen', () => {
         .toJSON();
 
       expect(tree).toMatchSnapshot();
+    });
+
+    it('renders the loading indicator when lobbyID is an empty string', () => {
+      const dispatch = jest.fn();
+      render(
+        <HostContext.Provider value={{ state, dispatch }}>
+          <HostPregameScreen />
+        </HostContext.Provider>,
+      );
+
+      expect(screen.queryByTestId('loader')).toBeInTheDocument();
+    });
+
+    it("does not render the loading indicator when lobbyID is present and loading state does not contain 'join-code'", () => {
+      const dispatch = jest.fn();
+      state = {
+        ...state,
+        lobbyID: 'ABCD',
+        loading: ['aaa', 'test', 'join-cod'],
+      };
+      render(
+        <HostContext.Provider value={{ state, dispatch }}>
+          <HostPregameScreen />
+        </HostContext.Provider>,
+      );
+
+      expect(screen.queryByTestId('loader')).not.toBeInTheDocument();
+    });
+
+    it("renders the loading indicator when loading state contains 'join-code'", () => {
+      const dispatch = jest.fn();
+      state = {
+        ...state,
+        loading: ['join-code'],
+      };
+      render(
+        <HostContext.Provider
+          value={{ state: { ...state, loading: ['join-code'] }, dispatch }}
+        >
+          <HostPregameScreen />
+        </HostContext.Provider>,
+      );
+
+      expect(screen.getByTestId('loader')).toBeInTheDocument();
+    });
+
+    it("renders the loading indicator when loading state contains 'join-code' and a lobbyID is present", () => {
+      const dispatch = jest.fn();
+      state = {
+        ...state,
+        lobbyID: 'ABCD',
+        loading: ['join-code'],
+      };
+      render(
+        <HostContext.Provider
+          value={{ state: { ...state, loading: ['join-code'] }, dispatch }}
+        >
+          <HostPregameScreen />
+        </HostContext.Provider>,
+      );
+
+      expect(screen.getByTestId('loader')).toBeInTheDocument();
     });
   });
 

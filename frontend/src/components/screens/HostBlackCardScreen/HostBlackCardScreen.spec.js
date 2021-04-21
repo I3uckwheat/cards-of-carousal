@@ -79,6 +79,33 @@ describe('Host Black Card Screen', () => {
       expect(screen.queryByTestId('czar-name')).toBeInTheDocument();
       expect(screen.queryByTestId('czar-name')).toHaveTextContent('BAR');
     });
+
+    it("does not render the loading indicator when loading state does not contain 'join-code'", () => {
+      render(
+        <HostContext.Provider
+          value={{
+            state: { ...state, loading: ['aaa', 'test', 'join-cod'] },
+            dispatch,
+          }}
+        >
+          <HostBlackCardScreen />
+        </HostContext.Provider>,
+      );
+
+      expect(screen.queryByTestId('loader')).not.toBeInTheDocument();
+    });
+
+    it("renders the loading indicator when loading state contains 'join-code'", () => {
+      render(
+        <HostContext.Provider
+          value={{ state: { ...state, loading: ['join-code'] }, dispatch }}
+        >
+          <HostBlackCardScreen />
+        </HostContext.Provider>,
+      );
+
+      expect(screen.getByTestId('loader')).toBeInTheDocument();
+    });
   });
 
   describe('dispatch', () => {
