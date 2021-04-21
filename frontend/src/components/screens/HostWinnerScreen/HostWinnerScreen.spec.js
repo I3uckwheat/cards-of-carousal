@@ -8,7 +8,7 @@ describe('Host Winner Screen', () => {
   describe('rendering', () => {
     const dispatch = jest.fn();
     const state = {
-      gameState: 'show-winning-card',
+      gameState: 'showing-winning-cards',
       lobbyID: 'ABCD',
       players: {
         ID1: {

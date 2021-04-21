@@ -82,7 +82,7 @@ function previewWinner(state, { highlightedPlayerID }) {
 function selectWinner(state) {
   return {
     ...state,
-    gameState: 'show-winning-card',
+    gameState: 'showing-winning-cards',
   };
 }
 

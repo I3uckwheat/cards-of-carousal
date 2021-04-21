@@ -141,7 +141,7 @@ function RightPanel() {
   );
 }
 
-function HostBlackCardScreen() {
+function HostWinnerScreen() {
   const { state, dispatch } = useContext(HostContext);
 
   const { players, playerIDs, selectedBlackCard } = state;
@@ -171,4 +171,4 @@ function HostBlackCardScreen() {
   );
 }
 
-export default HostBlackCardScreen;
+export default HostWinnerScreen;

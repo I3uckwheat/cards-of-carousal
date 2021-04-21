@@ -26,7 +26,7 @@ export default function HostScreenController() {
     case 'czar-select-winner':
       return <HostBlackCardScreen />;
 
-    case 'show-winning-card':
+    case 'showing-winning-cards':
       return <WinnerScreen />;
 
     default:
