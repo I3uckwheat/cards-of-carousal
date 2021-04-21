@@ -628,7 +628,9 @@ exports[`Host Black Card Screen rendering renders 1`] = `
                 className="join-code"
                 data-testid="join-code"
               >
-                ABCD
+                <p>
+                  ABCD
+                </p>
               </div>
             </div>
           </div>

@@ -671,7 +671,9 @@ exports[`WinnerSelectScreen rendering renders normally for typical state values 
               className="join-code"
               data-testid="join-code"
             >
-              ABCD
+              <p>
+                ABCD
+              </p>
             </div>
           </div>
         </div>
