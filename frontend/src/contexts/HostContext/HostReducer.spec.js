@@ -897,7 +897,7 @@ describe('reducer', () => {
   });
 
   describe('PREVIEW_WINNER', () => {
-    it('returns the state with updated roundWinner for the current czar', () => {
+    it('returns the state with updated czarSelection', () => {
       const state = {
         players: {
           ID1: {
@@ -911,7 +911,6 @@ describe('reducer', () => {
             name: 'bar',
             score: 0,
             isCzar: true,
-            roundWinner: undefined,
             submittedCards: [],
             cards: [],
           },
@@ -924,6 +923,7 @@ describe('reducer', () => {
           },
         },
         playerIDs: ['ID1', 'ID2', 'ID3'],
+        czarSelection: undefined,
       };
 
       const result = HostReducer(state, {
@@ -944,7 +944,6 @@ describe('reducer', () => {
             name: 'bar',
             score: 0,
             isCzar: true,
-            roundWinner: 'baz',
             submittedCards: [],
             cards: [],
           },
@@ -956,6 +955,7 @@ describe('reducer', () => {
             cards: ['eeee', 'ffff', 'gggg', 'hhhh'],
           },
         },
+        czarSelection: 'baz',
         playerIDs: ['ID1', 'ID2', 'ID3'],
       });
     });

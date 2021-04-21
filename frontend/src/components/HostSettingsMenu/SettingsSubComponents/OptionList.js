@@ -41,6 +41,8 @@ const OptionListButton = styled.button`
   font-size: 1rem;
   font-weight: 700;
 
+  cursor: pointer;
+
   :hover {
     background-color: var(--accent-background-color);
   }

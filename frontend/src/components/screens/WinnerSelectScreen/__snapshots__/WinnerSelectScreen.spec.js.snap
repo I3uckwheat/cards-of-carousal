@@ -8,6 +8,7 @@ exports[`WinnerSelectScreen rendering renders normally for typical state values 
   border: 0;
   width: 25px;
   height: 25px;
+  cursor: pointer;
 }
 
 .c2 {

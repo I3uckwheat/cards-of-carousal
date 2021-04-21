@@ -1,10 +1,17 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import Header from '../Header/Header';
-import PlayerKicker from './SettingsSubComponents/PlayerKicker';
-import JoinCodeHider from './SettingsSubComponents/JoinCodeHider';
-import JoinCodeShuffler from './SettingsSubComponents/JoinCodeShuffler';
+
+const propTypes = {
+  settingsComponentList: PropTypes.arrayOf(
+    PropTypes.shape({
+      type: PropTypes.string,
+      component: PropTypes.func,
+    }),
+  ).isRequired,
+};
 
 const SettingsMenu = styled.div`
   position: absolute;
@@ -64,27 +71,69 @@ const SettingsMenu = styled.div`
   }
 `;
 
-// TODO refactor this to take components as children and build a pregame settings modal
-function HostSettingsMenu() {
-  const initialState = [{ state: 'enabled' }]; // FIXME change to strings
+function useSettingsMenuHandler(components) {
+  const initialState = components.map(() => 'enabled');
   const [accordionSettings, setAccordionSettings] = useState(initialState);
 
-  const anyAreOpen = accordionSettings.some(
-    (setting) => setting.state === 'open',
-  );
+  const anyAreOpen = accordionSettings.some((setting) => setting === 'open');
 
   function resetAccordions() {
     setAccordionSettings(initialState);
   }
 
   function handleAccordionClick(settingIndex) {
-    const newSettings = accordionSettings.map((setting, index) => {
-      const state = index === settingIndex ? 'open' : 'disabled';
-      return { state };
-    });
-
+    const newSettings = accordionSettings.map((setting, index) =>
+      index === settingIndex ? 'open' : 'disabled',
+    );
     setAccordionSettings(newSettings);
   }
+
+  function makePopulatedAccordion(Accordion, index) {
+    return (
+      <Accordion
+        key={Accordion.name}
+        accordionState={accordionSettings[index]}
+        onClickActions={{
+          open: resetAccordions,
+          enabled: () => handleAccordionClick(index),
+          disabled: resetAccordions,
+        }}
+      />
+    );
+  }
+
+  function makePopulatedButton(Button) {
+    return (
+      <Button
+        key={Button.name}
+        isEnabled={!anyAreOpen}
+        onDisabledClick={resetAccordions}
+      />
+    );
+  }
+
+  const populatedComponents = components.map(({ type, component }, index) => {
+    switch (type) {
+      case 'accordion':
+        return makePopulatedAccordion(component, index);
+
+      case 'button':
+        return makePopulatedButton(component);
+
+      default:
+        throw new Error(
+          `Component type: '${type}' not found in HostSettingsMenu component builder`,
+        );
+    }
+  });
+
+  return [populatedComponents, resetAccordions];
+}
+
+function HostSettingsMenu({ settingsComponentList }) {
+  const [components, resetAccordions] = useSettingsMenuHandler(
+    settingsComponentList,
+  );
 
   function onOutsideClick(event) {
     if (event.currentTarget === event.target) {
@@ -98,26 +147,11 @@ function HostSettingsMenu() {
         <h3>SETTINGS</h3>
       </Header>
 
-      <JoinCodeHider
-        isEnabled={!anyAreOpen}
-        onDisabledClick={resetAccordions}
-      />
-
-      <PlayerKicker
-        accordionState={accordionSettings[0].state}
-        onClickActions={{
-          open: resetAccordions,
-          enabled: () => handleAccordionClick(0),
-          disabled: resetAccordions,
-        }}
-      />
-
-      <JoinCodeShuffler
-        isEnabled={!anyAreOpen}
-        onDisabledClick={resetAccordions}
-      />
+      {components}
     </SettingsMenu>
   );
 }
+
+HostSettingsMenu.propTypes = propTypes;
 
 export default HostSettingsMenu;

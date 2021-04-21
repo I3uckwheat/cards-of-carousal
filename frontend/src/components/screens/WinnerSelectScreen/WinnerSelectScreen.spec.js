@@ -60,7 +60,6 @@ describe('WinnerSelectScreen', () => {
             score: 0,
             isCzar: true,
             submittedCards: [],
-            roundWinner: 'ID1',
             cards: [],
           },
           ID3: {
@@ -77,6 +76,7 @@ describe('WinnerSelectScreen', () => {
           },
         },
         playerIDs: ['ID1', 'ID2', 'ID3'],
+        czarSelection: 'ID1',
         gameSettings: { maxPlayers: 8, winningScore: 7, selectedPacks: [] },
         deck: { black: [], white: [] },
       };
@@ -121,7 +121,6 @@ describe('WinnerSelectScreen', () => {
             score: 0,
             isCzar: true,
             submittedCards: [],
-            roundWinner: 'ID3',
             cards: [],
           },
           ID3: {
@@ -138,6 +137,7 @@ describe('WinnerSelectScreen', () => {
           },
         },
         playerIDs: ['ID1', 'ID2', 'ID3'],
+        czarSelection: 'ID3',
         gameSettings: { maxPlayers: 8, winningScore: 7, selectedPacks: [] },
         deck: { black: [], white: [] },
       };

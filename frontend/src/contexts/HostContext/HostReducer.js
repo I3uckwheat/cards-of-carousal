@@ -73,21 +73,9 @@ function czarSelectWinner(state) {
 }
 
 function previewWinner(state, { highlightedPlayerID }) {
-  const currentCzarId = state.playerIDs.find(
-    (playerID) => state.players[playerID].isCzar,
-  );
-
-  const currentCzar = state.players[currentCzarId];
-
   return {
     ...state,
-    players: {
-      ...state.players,
-      [currentCzarId]: {
-        ...currentCzar,
-        roundWinner: highlightedPlayerID,
-      },
-    },
+    czarSelection: highlightedPlayerID,
   };
 }
 
