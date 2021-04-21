@@ -82,12 +82,12 @@ function LeftPanel() {
 
 function RightPanel() {
   const { state } = useContext(HostContext);
-  const { players } = state;
+  const { players, czarSelection, selectedBlackCard } = state;
 
   const currentCzar = Object.values(players).find((player) => player.isCzar);
 
-  const highlightedPlayer =
-    state.players[state.playerIDs[currentCzar.submittedCards[0]]];
+  // Finds the player whose cards are currently highlighted by the czar
+  const highlightedPlayer = players[czarSelection];
 
   return (
     <RightPanelWrapper>
@@ -96,8 +96,8 @@ function RightPanel() {
         {currentCzar.name}
       </h1>
 
-      <BlackCard pickCount={state.selectedBlackCard.pick}>
-        {state.selectedBlackCard.text}
+      <BlackCard pickCount={selectedBlackCard.pick}>
+        {selectedBlackCard.text}
       </BlackCard>
 
       <div className="white-cards">

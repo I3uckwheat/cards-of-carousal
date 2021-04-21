@@ -36,4 +36,24 @@ describe('playerReducerMiddleware', () => {
       });
     });
   });
+
+  describe('PREVIEW_WINNER', () => {
+    it('sends a message to the host with the index of the selected group of cards', () => {
+      const dispatch = jest.fn();
+
+      const result = playerReducerMiddleware(
+        {
+          type: 'PREVIEW_WINNER',
+          payload: { selectedGroupIndex: [1] },
+        },
+        dispatch,
+      );
+
+      expect(result).not.toBe({});
+      expect(socketInstance.sendMessage).toHaveBeenCalledWith({
+        event: 'preview-winner',
+        payload: { selectedGroupIndex: [1] },
+      });
+    });
+  });
 });
