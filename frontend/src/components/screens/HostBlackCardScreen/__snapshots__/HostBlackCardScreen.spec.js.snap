@@ -8,6 +8,7 @@ exports[`Host Black Card Screen rendering renders 1`] = `
   border: 0;
   width: 25px;
   height: 25px;
+  cursor: pointer;
 }
 
 .c2 {

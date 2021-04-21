@@ -39,7 +39,7 @@ function playerConnected(state, { playerId, playerName }) {
 }
 
 function updatePlayerCards(state, { selectedCards, playerId }) {
-  return {
+  const newState = {
     ...state,
     players: {
       ...state.players,
@@ -48,6 +48,18 @@ function updatePlayerCards(state, { selectedCards, playerId }) {
         submittedCards: selectedCards,
       },
     },
+  };
+
+  const { players, playerIDs } = newState;
+
+  return {
+    ...newState,
+    gameState: playerIDs.every(
+      (playerID) =>
+        players[playerID].isCzar || players[playerID].submittedCards.length,
+    )
+      ? 'czar-select-winner'
+      : newState.gameState,
   };
 }
 
@@ -69,11 +81,26 @@ function removePlayer(state, { playerId }) {
   };
 }
 
+function czarSelectWinner(state) {
+  return {
+    ...state,
+    gameState: 'selecting-winner',
+  };
+}
+
+function previewWinner(state, { highlightedPlayerID }) {
+  return {
+    ...state,
+    czarSelection: highlightedPlayerID,
+  };
+}
+
 function selectWinner(state, payload) {
   // TODO: HANDLE MESSAGE
   // eslint-disable-next-line no-console
   console.log(state, payload);
 }
+
 function setLobbyId(state, { id }) {
   return {
     ...state,
@@ -221,6 +248,7 @@ function dealWhiteCards(state) {
     acc[playerID] = {
       ...players[playerID],
       cards,
+      submittedCards: [],
     };
     return acc;
   }, {});
@@ -275,6 +303,12 @@ function HostReducer(state, action) {
 
     case 'KICK_PLAYER':
       return removePlayer(state, payload);
+
+    case 'CZAR_SELECT_WINNER':
+      return czarSelectWinner(state);
+
+    case 'PREVIEW_WINNER':
+      return previewWinner(state, payload);
 
     case 'SELECT_WINNER':
       // TODO: HANDLE PAYLOAD AND TEST

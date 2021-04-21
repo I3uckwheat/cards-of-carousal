@@ -540,6 +540,7 @@ exports[`App snapshots should show the host screen after user has clicked the "h
   border: 0;
   width: 25px;
   height: 25px;
+  cursor: pointer;
 }
 
 .c0 {

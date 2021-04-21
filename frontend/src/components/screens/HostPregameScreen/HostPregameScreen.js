@@ -4,7 +4,7 @@ import { HostContext } from '../../../contexts/HostContext/HostContext';
 import HostLayout from '../../layouts/HostLayout';
 import PlayerList from '../../PlayerList/PlayerList';
 import GameSettings from '../../GameSettings/GameSettings';
-import HostSettingsMenu from '../../HostSettingsMenu/HostSettingsMenu.js';
+import PregameSettingsModal from '../../HostSettingsMenu/PregameSettingsModal';
 import JoinCode from '../../JoinCode/JoinCode';
 import Button from '../../Buttons/Button';
 import LoadingIndicator from '../../LoadingIndicator/LoadingIndicator';
@@ -204,7 +204,7 @@ function HostPregameScreen() {
       className="primary-background"
       left={<LeftPanel />}
       right={<RightPanel />}
-      modal={<HostSettingsMenu />}
+      modal={<PregameSettingsModal />}
     />
   );
 }

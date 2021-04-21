@@ -167,12 +167,71 @@ describe('reducer', () => {
             submittedCards: [],
           },
         },
+        playerIDs: ['guy'],
       };
       const result = HostReducer(state, {
         type: 'PLAYER_SUBMIT',
         payload: { selectedCards: [2, 3, 5], playerId: 'guy' },
       });
       expect(result.players.guy.submittedCards).toEqual([2, 3, 5]);
+    });
+
+    it('changes game state if all players have submitted their cards', () => {
+      const state = {
+        players: {
+          foo: {
+            submittedCards: [],
+            cards: [{ text: 'test' }, { text: 'test' }, { text: 'test' }],
+          },
+          bar: {
+            submittedCards: [0],
+            cards: [{ text: 'test' }, { text: 'test' }, { text: 'test' }],
+          },
+          baz: {
+            submittedCards: [0],
+            cards: [{ text: 'test' }, { text: 'test' }, { text: 'test' }],
+          },
+        },
+        playerIDs: ['foo', 'bar', 'baz'],
+        gameState: 'waiting-to-receive-cards',
+        selectedBlackCard: { pick: 1 },
+      };
+
+      const result = HostReducer(state, {
+        type: 'PLAYER_SUBMIT',
+        payload: { selectedCards: [0], playerId: 'foo' },
+      });
+
+      expect(result.gameState).toBe('czar-select-winner');
+    });
+
+    it('does not change game state if all players have not submitted their cards', () => {
+      const state = {
+        players: {
+          foo: {
+            submittedCards: [],
+            cards: [{ text: 'test' }, { text: 'test' }, { text: 'test' }],
+          },
+          bar: {
+            submittedCards: [],
+            cards: [{ text: 'test' }, { text: 'test' }, { text: 'test' }],
+          },
+          baz: {
+            submittedCards: [0],
+            cards: [{ text: 'test' }, { text: 'test' }, { text: 'test' }],
+          },
+        },
+        playerIDs: ['foo', 'bar', 'baz'],
+        gameState: 'waiting-to-receive-cards',
+        selectedBlackCard: { pick: 1 },
+      };
+
+      const result = HostReducer(state, {
+        type: 'PLAYER_SUBMIT',
+        payload: { selectedCards: [0], playerId: 'foo' },
+      });
+
+      expect(result.gameState).toBe(state.gameState);
     });
   });
 
@@ -496,6 +555,7 @@ describe('reducer', () => {
             { pack: 0, text: 'zero' },
             { pack: 0, text: 'one' },
           ],
+          submittedCards: [],
         },
         bar: {
           cards: [
@@ -505,6 +565,7 @@ describe('reducer', () => {
             { pack: 0, text: 'two' },
             { pack: 0, text: 'three' },
           ],
+          submittedCards: [],
         },
         baz: {
           cards: [
@@ -514,6 +575,7 @@ describe('reducer', () => {
             { pack: 0, text: 'four' },
             { pack: 0, text: 'five' },
           ],
+          submittedCards: [],
         },
         bender: {
           cards: [
@@ -523,6 +585,7 @@ describe('reducer', () => {
             { pack: 0, text: 'six' },
             { pack: 0, text: 'seven' },
           ],
+          submittedCards: [],
         },
       });
     });
@@ -647,6 +710,7 @@ describe('reducer', () => {
               { pack: 0, text: 'test' },
               { pack: 0, text: 'test' },
             ],
+            submittedCards: [],
           },
           bar: {
             cards: [
@@ -654,6 +718,7 @@ describe('reducer', () => {
               { pack: 0, text: 'test' },
               { pack: 0, text: 'test' },
             ],
+            submittedCards: [],
           },
           baz: {
             cards: [
@@ -661,6 +726,7 @@ describe('reducer', () => {
               { pack: 0, text: 'test' },
               { pack: 0, text: 'test' },
             ],
+            submittedCards: [],
           },
           bender: {
             cards: [
@@ -668,6 +734,7 @@ describe('reducer', () => {
               { pack: 0, text: 'test' },
               { pack: 0, text: 'test' },
             ],
+            submittedCards: [],
           },
         },
       };
@@ -721,6 +788,95 @@ describe('reducer', () => {
       });
 
       expect(result.gameState).toBe('waiting-to-receive-cards');
+    });
+
+    it('clears out any submitted cards from the previous round', () => {
+      // setup dummy state
+      const state = {
+        deck: {
+          white: [
+            { pack: 0, text: 'zero' },
+            { pack: 0, text: 'one' },
+            { pack: 0, text: 'two' },
+            { pack: 0, text: 'three' },
+            { pack: 0, text: 'four' },
+            { pack: 0, text: 'five' },
+            { pack: 0, text: 'six' },
+            { pack: 0, text: 'seven' },
+            { pack: 0, text: 'eight' },
+            { pack: 0, text: 'nine' },
+            { pack: 0, text: 'ten' },
+            { pack: 0, text: 'eleven' },
+            { pack: 0, text: 'twelve' },
+            { pack: 0, text: 'thirteen' },
+            { pack: 0, text: 'fourteen' },
+            { pack: 0, text: 'fifteen' },
+          ],
+          black: [
+            { pick: 1, pack: 0, text: 'zero' },
+            { pick: 1, pack: 0, text: 'one' },
+            { pick: 1, pack: 0, text: 'two' },
+          ],
+        },
+        selectedBlackCard: {
+          pick: 1,
+        },
+        playerIDs: ['foo', 'bar', 'baz', 'bender'],
+        gameSettings: {
+          handSize: 5,
+        },
+        players: {
+          foo: {
+            cards: [
+              { pack: 0, text: 'test' },
+              { pack: 0, text: 'test' },
+              { pack: 0, text: 'test' },
+            ],
+            submittedCards: [0, 1],
+          },
+          bar: {
+            cards: [
+              { pack: 0, text: 'test' },
+              { pack: 0, text: 'test' },
+              { pack: 0, text: 'test' },
+            ],
+            submittedCards: [0, 1],
+          },
+          baz: {
+            cards: [
+              { pack: 0, text: 'test' },
+              { pack: 0, text: 'test' },
+              { pack: 0, text: 'test' },
+            ],
+            submittedCards: [0, 1],
+          },
+          bender: {
+            cards: [
+              { pack: 0, text: 'test' },
+              { pack: 0, text: 'test' },
+              { pack: 0, text: 'test' },
+            ],
+            submittedCards: [0, 1],
+          },
+        },
+      };
+
+      Math.random = jest.fn(() => 0);
+
+      const newState = HostReducer(state, {
+        type: 'DEAL_WHITE_CARDS',
+        payload: {},
+      });
+
+      const newSubmittedCards = newState.playerIDs.map(
+        (playerID) => newState.players[playerID].submittedCards,
+      );
+
+      expect(
+        newSubmittedCards.every(
+          (submittedCardsArray) => submittedCardsArray.length === 0,
+        ),
+      ).toBe(true);
     });
   });
 
@@ -799,6 +955,71 @@ describe('reducer', () => {
         gameState: 'foo',
         lobbyID: 'ABCD',
         loading: [],
+      });
+    });
+  });
+
+  describe('PREVIEW_WINNER', () => {
+    it('returns the state with updated czarSelection', () => {
+      const state = {
+        players: {
+          ID1: {
+            name: 'foo',
+            score: 0,
+            isCzar: false,
+            submittedCards: [0, 1],
+            cards: ['aaaa', 'bbbb', 'cccc', 'dddd'],
+          },
+          ID2: {
+            name: 'bar',
+            score: 0,
+            isCzar: true,
+            submittedCards: [],
+            cards: [],
+          },
+          ID3: {
+            name: 'baz',
+            score: 0,
+            isCzar: false,
+            submittedCards: [1, 2],
+            cards: ['eeee', 'ffff', 'gggg', 'hhhh'],
+          },
+        },
+        playerIDs: ['ID1', 'ID2', 'ID3'],
+        czarSelection: undefined,
+      };
+
+      const result = HostReducer(state, {
+        type: 'PREVIEW_WINNER',
+        payload: { highlightedPlayerID: 'baz' },
+      });
+
+      expect(result).toEqual({
+        players: {
+          ID1: {
+            name: 'foo',
+            score: 0,
+            isCzar: false,
+            submittedCards: [0, 1],
+            cards: ['aaaa', 'bbbb', 'cccc', 'dddd'],
+          },
+          ID2: {
+            name: 'bar',
+            score: 0,
+            isCzar: true,
+            submittedCards: [],
+            cards: [],
+          },
+          ID3: {
+            name: 'baz',
+            score: 0,
+            isCzar: false,
+            submittedCards: [1, 2],
+            cards: ['eeee', 'ffff', 'gggg', 'hhhh'],
+          },
+        },
+        czarSelection: 'baz',
+        playerIDs: ['ID1', 'ID2', 'ID3'],
       });
     });
   });
