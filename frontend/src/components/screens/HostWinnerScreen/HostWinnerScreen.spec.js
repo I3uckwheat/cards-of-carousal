@@ -34,7 +34,6 @@ describe('Host Winner Screen', () => {
             { text: 'cccc' },
             { text: 'dddd' },
           ],
-          roundWinner: 'ID1',
         },
         ID3: {
           name: 'baz',
@@ -56,6 +55,7 @@ describe('Host Winner Screen', () => {
       },
       playerIDs: ['ID1', 'ID2', 'ID3'],
       gameSettings: { maxPlayers: 8, winningScore: 7, selectedPacks: [] },
+      czarSelection: 'ID1',
     };
 
     it('renders', () => {

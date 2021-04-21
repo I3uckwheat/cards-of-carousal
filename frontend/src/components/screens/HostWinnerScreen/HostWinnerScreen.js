@@ -111,11 +111,9 @@ function LeftPanel() {
 function RightPanel() {
   const { state } = useContext(HostContext);
 
-  const { selectedBlackCard, players, playerIDs } = state;
+  const { selectedBlackCard, players, czarSelection } = state;
 
-  const czar = players[playerIDs.find((player) => players[player].isCzar)];
-
-  const winner = players[czar.roundWinner];
+  const winner = players[czarSelection];
 
   return (
     <RightPanelWrapper>
