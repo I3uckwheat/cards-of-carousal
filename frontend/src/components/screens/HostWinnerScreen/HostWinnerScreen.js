@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import HostLayout from '../../layouts/HostLayout';
 import { HostContext } from '../../../contexts/HostContext/HostContext';
 import PlayerList from '../../PlayerList/PlayerList';
-import HostSettingsMenu from '../../HostSettingsMenu/HostSettingsMenu.js';
+import InGameSettingsModal from '../../HostSettingsMenu/InGameSettingsModal.js';
 import JoinCode from '../../JoinCode/JoinCode';
 import BlackCard from '../../Cards/BlackCard';
 import WhiteCard from '../../Cards/WhiteCard';
@@ -166,7 +166,7 @@ function HostWinnerScreen() {
       className="primary-background"
       left={<LeftPanel />}
       right={<RightPanel />}
-      modal={<HostSettingsMenu />}
+      modal={<InGameSettingsModal />}
     />
   );
 }

@@ -73,9 +73,14 @@ function czarSelectWinner(state) {
 }
 
 function previewWinner(state, { highlightedPlayerID }) {
+  if (state.gameState === 'selecting-winner') {
+    return {
+      ...state,
+      czarSelection: highlightedPlayerID,
+    };
+  }
   return {
     ...state,
-    czarSelection: highlightedPlayerID,
   };
 }
 
