@@ -267,8 +267,8 @@ exports[`WinnerSelectScreen rendering renders normally for typical state values 
 
 .c10 {
   position: relative;
-  width: 260px;
-  height: 360px;
+  width: 267px;
+  height: 363px;
   background-color: var(--secondary-background-color);
   color: var(--secondary-text-color);
   border-radius: 18px;
@@ -329,7 +329,7 @@ exports[`WinnerSelectScreen rendering renders normally for typical state values 
   font-size: 14px;
 }
 
-.c12 {
+.c13 {
   position: relative;
   border: 1px solid var(--primary-text-color);
   width: 148px;
@@ -345,24 +345,24 @@ exports[`WinnerSelectScreen rendering renders normally for typical state values 
   box-shadow: 0px 4px 12px rgba(0,0,0,0.25);
 }
 
-.c12 .whiteCardText {
+.c13 .whiteCardText {
   max-height: 150px;
   padding-right: 0;
   overflow-y: auto;
 }
 
-.c12 .whiteCardText div {
+.c13 .whiteCardText div {
   padding-bottom: 20px;
 }
 
-.c12 .stackedCards {
+.c13 .stackedCards {
   position: absolute;
   bottom: 7px;
   left: 11px;
   width: 32px;
 }
 
-.c12 .backOfCard {
+.c13 .backOfCard {
   font-weight: 600;
 }
 
@@ -432,9 +432,9 @@ exports[`WinnerSelectScreen rendering renders normally for typical state values 
   line-height: 1em;
 }
 
-.c9 .white-cards {
+.c12 {
   display: grid;
-  grid-template-columns: repeat(3,auto);
+  grid-template-columns: repeat(undefined,auto);
   gap: 20px;
   place-items: center;
   -webkit-box-pack: center;
@@ -491,7 +491,7 @@ exports[`WinnerSelectScreen rendering renders normally for typical state values 
 }
 
 @media (min-width:1025px) {
-  .c12 {
+  .c13 {
     width: 267px;
     height: 363px;
     font-size: 36px;
@@ -499,12 +499,12 @@ exports[`WinnerSelectScreen rendering renders normally for typical state values 
     padding: 30px 27px 0 27px;
   }
 
-  .c12 .whiteCardText {
+  .c13 .whiteCardText {
     max-height: 280px;
     padding-right: 0;
   }
 
-  .c12 .stackedCards {
+  .c13 .stackedCards {
     width: auto;
   }
 }
@@ -728,10 +728,10 @@ exports[`WinnerSelectScreen rendering renders normally for typical state values 
           </div>
         </div>
         <div
-          className="white-cards"
+          className="c12"
         >
           <div
-            className="c12"
+            className="c13"
             data-testid="white-card"
           >
             <div
@@ -752,7 +752,7 @@ exports[`WinnerSelectScreen rendering renders normally for typical state values 
             </div>
           </div>
           <div
-            className="c12"
+            className="c13"
             data-testid="white-card"
           >
             <div

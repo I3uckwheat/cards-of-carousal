@@ -51,17 +51,6 @@ const RightPanelWrapper = styled.div`
   flex-direction: column;
   align-items: center;
 
-  .white-cards {
-    display: grid;
-    grid-template-columns: repeat(3, auto);
-    gap: 20px;
-    place-items: center;
-    justify-content: center;
-    padding: 40px 0;
-    width: 100%;
-    max-height: 250px;
-  }
-
   .winner-display {
     display: flex;
     flex-direction: column;
@@ -79,6 +68,17 @@ const RightPanelWrapper = styled.div`
       line-height: 1em;
     }
   }
+`;
+
+const WhiteCardWrapper = styled.div`
+  display: grid;
+  grid-template-columns: ${(props) => `repeat(${props.columns}, auto)`};
+  gap: 20px;
+  place-items: center;
+  justify-content: center;
+  padding: 40px 0;
+  width: 100%;
+  max-height: 250px;
 `;
 
 function LeftPanel() {
@@ -107,7 +107,7 @@ function RightPanel() {
   const winner = players[czarSelection];
 
   return (
-    <RightPanelWrapper>
+    <RightPanelWrapper columns={winner.submittedCards.length}>
       <h1 className="winner-display" data-testid="winner-display">
         <span>WINNER:</span>
         {winner.name.toUpperCase()}
@@ -118,16 +118,16 @@ function RightPanel() {
         data-test-id="black-card"
         winnerScreen
       >
-        {selectedBlackCard.text.toUpperCase()}
+        {selectedBlackCard.text}
       </BlackCard>
 
-      <div className="white-cards">
+      <WhiteCardWrapper columns={winner.submittedCards.length}>
         {winner.submittedCards.map((card) => (
           <WhiteCard key={winner.cards[card].text}>
             {winner.cards[card].text}
           </WhiteCard>
         ))}
-      </div>
+      </WhiteCardWrapper>
     </RightPanelWrapper>
   );
 }

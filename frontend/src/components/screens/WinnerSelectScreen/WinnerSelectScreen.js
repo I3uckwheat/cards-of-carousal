@@ -50,17 +50,17 @@ const RightPanelWrapper = styled.div`
       line-height: 1em;
     }
   }
+`;
 
-  .white-cards {
-    display: grid;
-    grid-template-columns: repeat(3, auto);
-    gap: 20px;
-    place-items: center;
-    justify-content: center;
-    padding: 40px 0;
-    width: 100%;
-    max-height: 250px;
-  }
+const WhiteCardWrapper = styled.div`
+  display: grid;
+  grid-template-columns: ${(props) => `repeat(${props.columns}, auto)`};
+  gap: 20px;
+  place-items: center;
+  justify-content: center;
+  padding: 40px 0;
+  width: 100%;
+  max-height: 250px;
 `;
 
 function LeftPanel() {
@@ -89,7 +89,7 @@ function RightPanel() {
   const highlightedPlayer = players[czarSelection];
 
   return (
-    <RightPanelWrapper>
+    <RightPanelWrapper columns={highlightedPlayer?.submittedCards.length}>
       <h1 className="czar-title">
         <span>Czar:</span>
         {currentCzar.name}
@@ -99,13 +99,13 @@ function RightPanel() {
         {selectedBlackCard.text}
       </BlackCard>
 
-      <div className="white-cards">
+      <WhiteCardWrapper>
         {highlightedPlayer?.submittedCards.map((cardIndex) => (
           <WhiteCard key={cardIndex}>
             {highlightedPlayer.cards[cardIndex].text}
           </WhiteCard>
         ))}
-      </div>
+      </WhiteCardWrapper>
     </RightPanelWrapper>
   );
 }

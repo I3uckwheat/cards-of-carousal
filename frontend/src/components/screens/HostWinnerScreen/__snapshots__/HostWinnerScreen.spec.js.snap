@@ -267,8 +267,8 @@ exports[`Host Winner Screen rendering renders 1`] = `
 
 .c10 {
   position: relative;
-  width: 260px;
-  height: 360px;
+  width: 267px;
+  height: 363px;
   background-color: var(--secondary-background-color);
   color: var(--secondary-text-color);
   border-radius: 18px;
@@ -329,7 +329,7 @@ exports[`Host Winner Screen rendering renders 1`] = `
   font-size: 14px;
 }
 
-.c12 {
+.c13 {
   position: relative;
   border: 1px solid var(--primary-text-color);
   width: 148px;
@@ -345,24 +345,24 @@ exports[`Host Winner Screen rendering renders 1`] = `
   box-shadow: 0px 4px 12px rgba(0,0,0,0.25);
 }
 
-.c12 .whiteCardText {
+.c13 .whiteCardText {
   max-height: 150px;
   padding-right: 0;
   overflow-y: auto;
 }
 
-.c12 .whiteCardText div {
+.c13 .whiteCardText div {
   padding-bottom: 20px;
 }
 
-.c12 .stackedCards {
+.c13 .stackedCards {
   position: absolute;
   bottom: 7px;
   left: 11px;
   width: 32px;
 }
 
-.c12 .backOfCard {
+.c13 .backOfCard {
   font-weight: 600;
 }
 
@@ -433,20 +433,6 @@ exports[`Host Winner Screen rendering renders 1`] = `
   align-items: center;
 }
 
-.c9 .white-cards {
-  display: grid;
-  grid-template-columns: repeat(3,auto);
-  gap: 20px;
-  place-items: center;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  padding: 40px 0;
-  width: 100%;
-  max-height: 250px;
-}
-
 .c9 .winner-display {
   display: -webkit-box;
   display: -webkit-flex;
@@ -467,6 +453,20 @@ exports[`Host Winner Screen rendering renders 1`] = `
   text-indent: -20px;
   margin-bottom: -8px;
   line-height: 1em;
+}
+
+.c12 {
+  display: grid;
+  grid-template-columns: repeat(1,auto);
+  gap: 20px;
+  place-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  padding: 40px 0;
+  width: 100%;
+  max-height: 250px;
 }
 
 @media (min-width:800px) {
@@ -514,7 +514,7 @@ exports[`Host Winner Screen rendering renders 1`] = `
 }
 
 @media (min-width:1025px) {
-  .c12 {
+  .c13 {
     width: 267px;
     height: 363px;
     font-size: 36px;
@@ -522,12 +522,12 @@ exports[`Host Winner Screen rendering renders 1`] = `
     padding: 30px 27px 0 27px;
   }
 
-  .c12 .whiteCardText {
+  .c13 .whiteCardText {
     max-height: 280px;
     padding-right: 0;
   }
 
-  .c12 .stackedCards {
+  .c13 .stackedCards {
     width: auto;
   }
 }
@@ -721,7 +721,7 @@ exports[`Host Winner Screen rendering renders 1`] = `
           data-testid="black-card"
         >
           <span>
-            TEST BLACK CARD
+            Test Black Card
           </span>
           <div
             className="layeredCards"
@@ -756,10 +756,10 @@ exports[`Host Winner Screen rendering renders 1`] = `
           </div>
         </div>
         <div
-          className="white-cards"
+          className="c12"
         >
           <div
-            className="c12"
+            className="c13"
             data-testid="white-card"
           >
             <div

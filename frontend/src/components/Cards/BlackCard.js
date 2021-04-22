@@ -19,8 +19,8 @@ const BLANK_LENGTH = 8;
 
 const StyledBlackCard = styled.div`
   position: relative;
-  width: ${(props) => (props.winnerDisplay ? '260px' : '390px')};
-  height: ${(props) => (props.winnerDisplay ? '360px' : '540px')};
+  width: ${(props) => (props.winnerDisplay ? '267px' : '390px')};
+  height: ${(props) => (props.winnerDisplay ? '363px' : '540px')};
   background-color: var(--secondary-background-color);
   color: var(--secondary-text-color);
   border-radius: 18px;
