@@ -33,7 +33,7 @@ export default function PlayerScreenController() {
       return <CzarHandScreen />;
 
     case 'player-kicked':
-      return <PlayerKickScreen bigText={message.big} smallText="" />;
+      return <PlayerKickScreen />;
 
     default:
       throw new Error(`Unrecognized game state: ${gameState}`);
