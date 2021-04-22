@@ -65,7 +65,7 @@ const RightPanelWrapper = styled.div`
       font-size: 24px;
       text-indent: -20px;
       margin-bottom: -8px;
-      line-height: 1em;
+      line-height: 1.5rem;
     }
   }
 `;
