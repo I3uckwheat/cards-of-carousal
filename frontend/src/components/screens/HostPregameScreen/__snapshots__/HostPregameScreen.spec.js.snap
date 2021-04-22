@@ -168,6 +168,84 @@ exports[`Host Pregame Screen rendering renders 1`] = `
   cursor: pointer;
 }
 
+.c8 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  background-color: var(--primary-background-color);
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  align-self: center;
+  margin: 24px;
+  padding: 8px;
+  border-radius: 5px;
+  font-size: 1.8rem;
+  font-weight: 700;
+  box-shadow: 0px 4px 12px rgba(0,0,0,0.25);
+}
+
+.c8 h2 {
+  line-height: 2rem;
+}
+
+.c8 h3 {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.c8 p {
+  margin: 10px;
+  font-size: 1.1rem;
+}
+
+.c8 ol {
+  margin: 10px;
+}
+
+.c8 li {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.c8 .howToWin {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  align-self: center;
+}
+
+.c8 .snarkyText {
+  font-size: 0.8rem;
+  margin: 0;
+  padding: 0;
+}
+
+.c8 .slideshowControl {
+  width: 200px;
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  align-self: center;
+}
+
+.c8 button {
+  background-color: transparent;
+  border: solid black 2px;
+}
+
 .c3 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -242,34 +320,6 @@ exports[`Host Pregame Screen rendering renders 1`] = `
   bottom: 0;
   right: 0;
   left: 0;
-}
-
-.c7 .game-description {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  background-color: var(--primary-background-color);
-  -webkit-align-self: center;
-  -ms-flex-item-align: center;
-  align-self: center;
-  margin: 24px;
-  padding: 8px;
-  border-radius: 5px;
-  font-size: 1.8rem;
-  font-weight: 700;
-  box-shadow: 0px 4px 12px rgba(0,0,0,0.25);
-}
-
-.c7 .game-description p {
-  margin: 16px 0;
 }
 
 .c7 .top {
@@ -422,17 +472,24 @@ exports[`Host Pregame Screen rendering renders 1`] = `
           className="top"
         >
           <div
-            className="game-description"
+            className="c8"
           >
             <p>
-              Cards of Carousal is a game for lorem ipsum dolor.
+              Cards of Carousal is your grandma's favorite online card game!
             </p>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse, doloribus quaerat incidunt excepturi odit eos!
+              Imagine if your indecency and crude taste in jokes was an advantage in life. It isn't, but in Cards of Carousal it can be!
             </p>
             <p>
-              Qui delectus laboriosam aperiam maxime optio, architecto asperiores, at ullam.
+              Long and short of this deal; one person (the Czar of the round) reads the black card on this screen. Everyone else submits a white card trying to be the Czar's favorite jester. More directions on the next page if you're still confused.
             </p>
+            <button
+              className="slideshowControl"
+              onClick={[Function]}
+              type="button"
+            >
+              NEXT
+            </button>
           </div>
         </div>
         <div

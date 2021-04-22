@@ -636,7 +636,7 @@ exports[`App snapshots should show the host screen after user has clicked the "h
   margin-bottom: 24px;
 }
 
-.c8 {
+.c9 {
   position: relative;
   display: -webkit-box;
   display: -webkit-flex;
@@ -651,7 +651,7 @@ exports[`App snapshots should show the host screen after user has clicked the "h
   overflow-y: auto;
 }
 
-.c8 h1 {
+.c9 h1 {
   margin-left: auto;
   font-size: 4rem;
   line-height: 4rem;
@@ -665,7 +665,7 @@ exports[`App snapshots should show the host screen after user has clicked the "h
   top: 0;
 }
 
-.c9 {
+.c10 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -680,7 +680,7 @@ exports[`App snapshots should show the host screen after user has clicked the "h
   padding: 24px 0 24px 60px;
 }
 
-.c9 .number-input-wrapper label {
+.c10 .number-input-wrapper label {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -693,25 +693,25 @@ exports[`App snapshots should show the host screen after user has clicked the "h
   font-weight: bold;
 }
 
-.c9 input[type='number'] {
+.c10 input[type='number'] {
   font-weight: bold;
   text-align: center;
   width: 80px;
 }
 
-.c9 .select-wrapper {
+.c10 .select-wrapper {
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
 }
 
-.c9 .select-wrapper h2 {
+.c10 .select-wrapper h2 {
   font-size: 1rem;
   font-weight: bold;
   height: 30px;
 }
 
-.c9 .card-packs {
+.c10 .card-packs {
   display: grid;
   gap: 20px;
   grid-template-columns: repeat(auto-fill,minmax(420px,1fr));
@@ -721,7 +721,7 @@ exports[`App snapshots should show the host screen after user has clicked the "h
   padding: 0 0 16px 0;
 }
 
-.c9 .card-packs label {
+.c10 .card-packs label {
   margin-right: 12px;
   -webkit-align-items: center;
   -webkit-box-align: center;
@@ -734,7 +734,7 @@ exports[`App snapshots should show the host screen after user has clicked the "h
   margin-bottom: auto;
 }
 
-.c9 input[type='checkbox'] {
+.c10 input[type='checkbox'] {
   margin: 4px 11px auto 0;
 }
 
@@ -777,6 +777,84 @@ exports[`App snapshots should show the host screen after user has clicked the "h
   background-color: var(--secondary-background-color);
   width: 305px;
   height: 70px;
+}
+
+.c8 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  background-color: var(--primary-background-color);
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  align-self: center;
+  margin: 24px;
+  padding: 8px;
+  border-radius: 5px;
+  font-size: 1.8rem;
+  font-weight: 700;
+  box-shadow: 0px 4px 12px rgba(0,0,0,0.25);
+}
+
+.c8 h2 {
+  line-height: 2rem;
+}
+
+.c8 h3 {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.c8 p {
+  margin: 10px;
+  font-size: 1.1rem;
+}
+
+.c8 ol {
+  margin: 10px;
+}
+
+.c8 li {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.c8 .howToWin {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  align-self: center;
+}
+
+.c8 .snarkyText {
+  font-size: 0.8rem;
+  margin: 0;
+  padding: 0;
+}
+
+.c8 .slideshowControl {
+  width: 200px;
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  align-self: center;
+}
+
+.c8 button {
+  background-color: transparent;
+  border: solid black 2px;
 }
 
 .c3 {
@@ -853,34 +931,6 @@ exports[`App snapshots should show the host screen after user has clicked the "h
   bottom: 0;
   right: 0;
   left: 0;
-}
-
-.c7 .game-description {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  background-color: var(--primary-background-color);
-  -webkit-align-self: center;
-  -ms-flex-item-align: center;
-  align-self: center;
-  margin: 24px;
-  padding: 8px;
-  border-radius: 5px;
-  font-size: 1.8rem;
-  font-weight: 700;
-  box-shadow: 0px 4px 12px rgba(0,0,0,0.25);
-}
-
-.c7 .game-description p {
-  margin: 16px 0;
 }
 
 .c7 .top {
@@ -976,7 +1026,7 @@ exports[`App snapshots should show the host screen after user has clicked the "h
 }
 
 @media only screen and (max-width:980px) {
-  .c8 h1 {
+  .c9 h1 {
     position: static;
   }
 }
@@ -1070,30 +1120,36 @@ exports[`App snapshots should show the host screen after user has clicked the "h
             class="top"
           >
             <div
-              class="game-description"
+              class="c8"
             >
               <p>
-                Cards of Carousal is a game for lorem ipsum dolor.
+                Cards of Carousal is your grandma's favorite online card game!
               </p>
               <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse, doloribus quaerat incidunt excepturi odit eos!
+                Imagine if your indecency and crude taste in jokes was an advantage in life. It isn't, but in Cards of Carousal it can be!
               </p>
               <p>
-                Qui delectus laboriosam aperiam maxime optio, architecto asperiores, at ullam.
+                Long and short of this deal; one person (the Czar of the round) reads the black card on this screen. Everyone else submits a white card trying to be the Czar's favorite jester. More directions on the next page if you're still confused.
               </p>
+              <button
+                class="slideshowControl"
+                type="button"
+              >
+                NEXT
+              </button>
             </div>
           </div>
           <div
             class="bottom"
           >
             <div
-              class="c8"
+              class="c9"
             >
               <h1>
                 GAME SETTINGS
               </h1>
               <form
-                class="c9"
+                class="c10"
               >
                 <div
                   class="number-input-wrapper"

@@ -7,6 +7,7 @@ import GameSettings from '../../GameSettings/GameSettings';
 import PregameSettingsModal from '../../HostSettingsMenu/PregameSettingsModal';
 import JoinCode from '../../JoinCode/JoinCode';
 import Button from '../../Buttons/Button';
+import PregameWelcomeText from '../../PregameWelcomeText/PregameWelcomeText';
 
 const LeftPanelWrapper = styled.div`
   display: flex;
@@ -63,24 +64,6 @@ const RightPanelWrapper = styled.div`
   bottom: 0;
   right: 0;
   left: 0;
-
-  .game-description {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    background-color: var(--primary-background-color);
-    align-self: center;
-    margin: 24px;
-    padding: 8px;
-    border-radius: 5px;
-    font-size: 1.8rem;
-    font-weight: 700;
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.25);
-  }
-
-  .game-description p {
-    margin: 16px 0;
-  }
 
   .top {
     display: flex;
@@ -162,17 +145,7 @@ function RightPanel() {
   return (
     <RightPanelWrapper>
       <div className="top">
-        <div className="game-description">
-          <p>Cards of Carousal is a game for lorem ipsum dolor.</p>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse,
-            doloribus quaerat incidunt excepturi odit eos!
-          </p>
-          <p>
-            Qui delectus laboriosam aperiam maxime optio, architecto asperiores,
-            at ullam.
-          </p>
-        </div>
+        <PregameWelcomeText />
       </div>
       <div className="bottom">
         <GameSettings options={gameSettings} onChange={onChangeSettings} />

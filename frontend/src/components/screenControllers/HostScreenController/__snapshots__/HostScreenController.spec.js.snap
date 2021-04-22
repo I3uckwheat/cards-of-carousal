@@ -110,7 +110,7 @@ exports[`Host screen controller render renders correctly 1`] = `
   margin-bottom: 24px;
 }
 
-.c8 {
+.c9 {
   position: relative;
   display: -webkit-box;
   display: -webkit-flex;
@@ -125,7 +125,7 @@ exports[`Host screen controller render renders correctly 1`] = `
   overflow-y: auto;
 }
 
-.c8 h1 {
+.c9 h1 {
   margin-left: auto;
   font-size: 4rem;
   line-height: 4rem;
@@ -139,7 +139,7 @@ exports[`Host screen controller render renders correctly 1`] = `
   top: 0;
 }
 
-.c9 {
+.c10 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -154,7 +154,7 @@ exports[`Host screen controller render renders correctly 1`] = `
   padding: 24px 0 24px 60px;
 }
 
-.c9 .number-input-wrapper label {
+.c10 .number-input-wrapper label {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -167,25 +167,25 @@ exports[`Host screen controller render renders correctly 1`] = `
   font-weight: bold;
 }
 
-.c9 input[type='number'] {
+.c10 input[type='number'] {
   font-weight: bold;
   text-align: center;
   width: 80px;
 }
 
-.c9 .select-wrapper {
+.c10 .select-wrapper {
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
 }
 
-.c9 .select-wrapper h2 {
+.c10 .select-wrapper h2 {
   font-size: 1rem;
   font-weight: bold;
   height: 30px;
 }
 
-.c9 .card-packs {
+.c10 .card-packs {
   display: grid;
   gap: 20px;
   grid-template-columns: repeat(auto-fill,minmax(420px,1fr));
@@ -195,7 +195,7 @@ exports[`Host screen controller render renders correctly 1`] = `
   padding: 0 0 16px 0;
 }
 
-.c9 .card-packs label {
+.c10 .card-packs label {
   margin-right: 12px;
   -webkit-align-items: center;
   -webkit-box-align: center;
@@ -208,7 +208,7 @@ exports[`Host screen controller render renders correctly 1`] = `
   margin-bottom: auto;
 }
 
-.c9 input[type='checkbox'] {
+.c10 input[type='checkbox'] {
   margin: 4px 11px auto 0;
 }
 
@@ -268,6 +268,84 @@ exports[`Host screen controller render renders correctly 1`] = `
 .c5:focus {
   background: var(--accent-background-color);
   cursor: pointer;
+}
+
+.c8 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  background-color: var(--primary-background-color);
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  align-self: center;
+  margin: 24px;
+  padding: 8px;
+  border-radius: 5px;
+  font-size: 1.8rem;
+  font-weight: 700;
+  box-shadow: 0px 4px 12px rgba(0,0,0,0.25);
+}
+
+.c8 h2 {
+  line-height: 2rem;
+}
+
+.c8 h3 {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.c8 p {
+  margin: 10px;
+  font-size: 1.1rem;
+}
+
+.c8 ol {
+  margin: 10px;
+}
+
+.c8 li {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.c8 .howToWin {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  align-self: center;
+}
+
+.c8 .snarkyText {
+  font-size: 0.8rem;
+  margin: 0;
+  padding: 0;
+}
+
+.c8 .slideshowControl {
+  width: 200px;
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  align-self: center;
+}
+
+.c8 button {
+  background-color: transparent;
+  border: solid black 2px;
 }
 
 .c3 {
@@ -346,34 +424,6 @@ exports[`Host screen controller render renders correctly 1`] = `
   left: 0;
 }
 
-.c7 .game-description {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  background-color: var(--primary-background-color);
-  -webkit-align-self: center;
-  -ms-flex-item-align: center;
-  align-self: center;
-  margin: 24px;
-  padding: 8px;
-  border-radius: 5px;
-  font-size: 1.8rem;
-  font-weight: 700;
-  box-shadow: 0px 4px 12px rgba(0,0,0,0.25);
-}
-
-.c7 .game-description p {
-  margin: 16px 0;
-}
-
 .c7 .top {
   display: -webkit-box;
   display: -webkit-flex;
@@ -431,7 +481,7 @@ exports[`Host screen controller render renders correctly 1`] = `
 }
 
 @media only screen and (max-width:980px) {
-  .c8 h1 {
+  .c9 h1 {
     position: static;
   }
 }
@@ -530,30 +580,37 @@ exports[`Host screen controller render renders correctly 1`] = `
           className="top"
         >
           <div
-            className="game-description"
+            className="c8"
           >
             <p>
-              Cards of Carousal is a game for lorem ipsum dolor.
+              Cards of Carousal is your grandma's favorite online card game!
             </p>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse, doloribus quaerat incidunt excepturi odit eos!
+              Imagine if your indecency and crude taste in jokes was an advantage in life. It isn't, but in Cards of Carousal it can be!
             </p>
             <p>
-              Qui delectus laboriosam aperiam maxime optio, architecto asperiores, at ullam.
+              Long and short of this deal; one person (the Czar of the round) reads the black card on this screen. Everyone else submits a white card trying to be the Czar's favorite jester. More directions on the next page if you're still confused.
             </p>
+            <button
+              className="slideshowControl"
+              onClick={[Function]}
+              type="button"
+            >
+              NEXT
+            </button>
           </div>
         </div>
         <div
           className="bottom"
         >
           <div
-            className="c8"
+            className="c9"
           >
             <h1>
               GAME SETTINGS
             </h1>
             <form
-              className="c9"
+              className="c10"
             >
               <div
                 className="number-input-wrapper"
