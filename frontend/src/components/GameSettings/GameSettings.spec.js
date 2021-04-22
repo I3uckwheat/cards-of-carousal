@@ -3,6 +3,7 @@ import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import GameSettings from './GameSettings';
 import { HostContext } from '../../contexts/HostContext/HostContext';
+import config from '../../config';
 
 function setupFetchMock(jsonValue = ['hello', 'world']) {
   jest.spyOn(window, 'fetch').mockImplementation(async () => ({
@@ -262,6 +263,58 @@ describe('GameSettings', () => {
       });
     });
 
+    it('prevents a value larger than the maximum to be set in MAX PLAYERS', async () => {
+      const dispatch = jest.fn();
+      const onChange = jest.fn();
+      const options = {
+        maxPlayers: 5,
+        winningScore: 5,
+        selectedPacks: [],
+      };
+
+      render(
+        <HostContext.Provider value={{ state, dispatch }}>
+          <GameSettings onChange={onChange} options={options} />
+        </HostContext.Provider>,
+      );
+      await waitFor(() => expect(window.fetch).toHaveBeenCalledTimes(1));
+
+      // Simulate user appending "9"
+      userEvent.type(screen.getByLabelText('MAX PLAYERS'), '9');
+      expect(onChange).toHaveBeenCalledTimes(1);
+      expect(onChange).toHaveBeenCalledWith({
+        maxPlayers: config.maxPlayers.max,
+        winningScore: 5,
+        selectedPacks: [],
+      });
+    });
+
+    it('prevents a value smaller than the minimum to be set in MAX PLAYERS', async () => {
+      const dispatch = jest.fn();
+      const onChange = jest.fn();
+      const options = {
+        maxPlayers: null,
+        winningScore: 5,
+        selectedPacks: [],
+      };
+
+      render(
+        <HostContext.Provider value={{ state, dispatch }}>
+          <GameSettings onChange={onChange} options={options} />
+        </HostContext.Provider>,
+      );
+      await waitFor(() => expect(window.fetch).toHaveBeenCalledTimes(1));
+
+      // Simulate user appending "0"
+      userEvent.type(screen.getByLabelText('MAX PLAYERS'), '0');
+      expect(onChange).toHaveBeenCalledTimes(1);
+      expect(onChange).toHaveBeenCalledWith({
+        maxPlayers: config.maxPlayers.min,
+        winningScore: 5,
+        selectedPacks: [],
+      });
+    });
+
     it('runs when WINNING SCORE is changed and passes the new value back', async () => {
       const dispatch = jest.fn();
       const onChange = jest.fn();
@@ -285,6 +338,58 @@ describe('GameSettings', () => {
       expect(onChange).toHaveBeenCalledWith({
         maxPlayers: 5,
         winningScore: 13,
+        selectedPacks: [],
+      });
+    });
+
+    it('prevents a value larger than the maximum to be set in WINNING SCORE', async () => {
+      const dispatch = jest.fn();
+      const onChange = jest.fn();
+      const options = {
+        maxPlayers: 5,
+        winningScore: 5,
+        selectedPacks: [],
+      };
+
+      render(
+        <HostContext.Provider value={{ state, dispatch }}>
+          <GameSettings onChange={onChange} options={options} />
+        </HostContext.Provider>,
+      );
+      await waitFor(() => expect(window.fetch).toHaveBeenCalledTimes(1));
+
+      // Simulate user appending "9"
+      userEvent.type(screen.getByLabelText('WINNING SCORE'), '9');
+      expect(onChange).toHaveBeenCalledTimes(1);
+      expect(onChange).toHaveBeenCalledWith({
+        maxPlayers: 5,
+        winningScore: config.winningScore.max,
+        selectedPacks: [],
+      });
+    });
+
+    it('prevents a value smaller than the minimum to be set in WINNING SCORE', async () => {
+      const dispatch = jest.fn();
+      const onChange = jest.fn();
+      const options = {
+        maxPlayers: 5,
+        winningScore: null,
+        selectedPacks: [],
+      };
+
+      render(
+        <HostContext.Provider value={{ state, dispatch }}>
+          <GameSettings onChange={onChange} options={options} />
+        </HostContext.Provider>,
+      );
+      await waitFor(() => expect(window.fetch).toHaveBeenCalledTimes(1));
+
+      // Simulate user appending "0"
+      userEvent.type(screen.getByLabelText('WINNING SCORE'), '0');
+      expect(onChange).toHaveBeenCalledTimes(1);
+      expect(onChange).toHaveBeenCalledWith({
+        maxPlayers: 5,
+        winningScore: config.winningScore.min,
         selectedPacks: [],
       });
     });
