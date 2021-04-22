@@ -19,15 +19,14 @@ export default function HostScreenController() {
     case 'waiting-for-player-card-submissions':
       return <HostPregameScreen />;
 
-    case 'selecting-winner':
-      return <WinnerSelectScreen />;
-
     case 'waiting-to-receive-cards':
     case 'czar-select-winner':
       return <HostBlackCardScreen />;
 
     case 'showing-winning-cards':
       return <WinnerScreen />;
+    case 'selecting-winner':
+      return <WinnerSelectScreen />;
 
     default:
       throw new Error(`Unrecognized game state: ${gameState}`);
