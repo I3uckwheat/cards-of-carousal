@@ -267,13 +267,13 @@ exports[`WinnerSelectScreen rendering renders normally for typical state values 
 
 .c10 {
   position: relative;
-  width: 390px;
-  height: 540px;
+  width: 260px;
+  height: 360px;
   background-color: var(--secondary-background-color);
   color: var(--secondary-text-color);
   border-radius: 18px;
   font-weight: 700;
-  font-size: 36px;
+  font-size: 24px;
   padding: 45px 21px 0 21px;
   box-shadow: 4px 4px 24px rgba(0,0,0,0.3);
 }
@@ -408,10 +408,6 @@ exports[`WinnerSelectScreen rendering renders normally for typical state values 
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
 }
 
 .c9 .czar-title {

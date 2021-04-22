@@ -267,13 +267,13 @@ exports[`Host Winner Screen rendering renders 1`] = `
 
 .c10 {
   position: relative;
-  width: 390px;
-  height: 540px;
+  width: 260px;
+  height: 360px;
   background-color: var(--secondary-background-color);
   color: var(--secondary-text-color);
   border-radius: 18px;
   font-weight: 700;
-  font-size: 36px;
+  font-size: 24px;
   padding: 45px 21px 0 21px;
   box-shadow: 4px 4px 24px rgba(0,0,0,0.3);
 }
@@ -329,7 +329,7 @@ exports[`Host Winner Screen rendering renders 1`] = `
   font-size: 14px;
 }
 
-.c13 {
+.c12 {
   position: relative;
   border: 1px solid var(--primary-text-color);
   width: 148px;
@@ -345,24 +345,24 @@ exports[`Host Winner Screen rendering renders 1`] = `
   box-shadow: 0px 4px 12px rgba(0,0,0,0.25);
 }
 
-.c13 .whiteCardText {
+.c12 .whiteCardText {
   max-height: 150px;
   padding-right: 0;
   overflow-y: auto;
 }
 
-.c13 .whiteCardText div {
+.c12 .whiteCardText div {
   padding-bottom: 20px;
 }
 
-.c13 .stackedCards {
+.c12 .stackedCards {
   position: absolute;
   bottom: 7px;
   left: 11px;
   width: 32px;
 }
 
-.c13 .backOfCard {
+.c12 .backOfCard {
   font-weight: 600;
 }
 
@@ -417,23 +417,9 @@ exports[`Host Winner Screen rendering renders 1`] = `
 }
 
 .c9 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  left: 0;
-}
-
-.c9 .card-display {
-  height: 100%;
-  margin-top: 36px;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -447,35 +433,40 @@ exports[`Host Winner Screen rendering renders 1`] = `
   align-items: center;
 }
 
-.c9 .czar-display {
+.c9 .white-cards {
+  display: grid;
+  grid-template-columns: repeat(3,auto);
+  gap: 20px;
+  place-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  padding: 40px 0;
+  width: 100%;
+  max-height: 250px;
+}
+
+.c9 .winner-display {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  margin: 25px 0;
+  line-height: 1em;
+  font-size: 56px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.c9 .winner-display span {
   font-size: 24px;
-  font-weight: 600;
-  line-height: 24px;
-}
-
-.c9 .czar-display .winner-name {
-  margin-bottom: 48px;
-  padding-left: 16px;
-  font-size: 36px;
-  font-weight: 600;
-}
-
-.c12 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: space-evenly;
-  -webkit-justify-content: space-evenly;
-  -ms-flex-pack: space-evenly;
-  justify-content: space-evenly;
-  width: 80%;
-  margin: 0 auto;
-  margin-top: 32px;
+  text-indent: -20px;
+  margin-bottom: -8px;
+  line-height: 1em;
 }
 
 @media (min-width:800px) {
@@ -523,7 +514,7 @@ exports[`Host Winner Screen rendering renders 1`] = `
 }
 
 @media (min-width:1025px) {
-  .c13 {
+  .c12 {
     width: 267px;
     height: 363px;
     font-size: 36px;
@@ -531,12 +522,12 @@ exports[`Host Winner Screen rendering renders 1`] = `
     padding: 30px 27px 0 27px;
   }
 
-  .c13 .whiteCardText {
+  .c12 .whiteCardText {
     max-height: 280px;
     padding-right: 0;
   }
 
-  .c13 .stackedCards {
+  .c12 .stackedCards {
     width: auto;
   }
 }
@@ -716,67 +707,59 @@ exports[`Host Winner Screen rendering renders 1`] = `
       <div
         className="c9"
       >
-        <div
-          className="card-display"
+        <h1
+          className="winner-display"
+          data-testid="winner-display"
         >
+          <span>
+            WINNER:
+          </span>
+          FOO
+        </h1>
+        <div
+          className="c10"
+          data-testid="black-card"
+        >
+          <span>
+            TEST BLACK CARD
+          </span>
           <div
-            className="czar-display"
+            className="layeredCards"
           >
-            <p>
-              WINNER:
-            </p>
-            <p
-              className="winner-name"
-              data-testid="winner-name"
+            <div
+              style={
+                Object {
+                  "position": "relative",
+                }
+              }
             >
-              FOO
-            </p>
+              <img
+                alt="offset black and white card stack"
+                data-testid="layerCard"
+                src="cards-stack-offset-dark-icon.svg"
+              />
+            </div>
           </div>
           <div
-            className="c10"
-            data-testid="black-card"
+            className="pickCount"
           >
-            <span>
-              TEST BLACK CARD
+            <span
+              className="pickText"
+            >
+              PICK
             </span>
             <div
-              className="layeredCards"
+              className="c11"
             >
-              <div
-                style={
-                  Object {
-                    "position": "relative",
-                  }
-                }
-              >
-                <img
-                  alt="offset black and white card stack"
-                  data-testid="layerCard"
-                  src="cards-stack-offset-dark-icon.svg"
-                />
-              </div>
-            </div>
-            <div
-              className="pickCount"
-            >
-              <span
-                className="pickText"
-              >
-                PICK
-              </span>
-              <div
-                className="c11"
-              >
-                1
-              </div>
+              1
             </div>
           </div>
         </div>
         <div
-          className="c12"
+          className="white-cards"
         >
           <div
-            className="c13"
+            className="c12"
             data-testid="white-card"
           >
             <div

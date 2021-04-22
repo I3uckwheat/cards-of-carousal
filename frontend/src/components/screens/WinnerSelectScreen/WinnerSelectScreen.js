@@ -32,7 +32,6 @@ const RightPanelWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
 
   .czar-title {
     display: flex;
@@ -96,7 +95,7 @@ function RightPanel() {
         {currentCzar.name}
       </h1>
 
-      <BlackCard pickCount={selectedBlackCard.pick}>
+      <BlackCard pickCount={selectedBlackCard.pick} winnerScreen>
         {selectedBlackCard.text}
       </BlackCard>
 
