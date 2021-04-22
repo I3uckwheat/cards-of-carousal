@@ -35,6 +35,33 @@ describe('reducer', () => {
     });
   });
 
+  describe('GET_PACKS', () => {
+    it("adds the 'getting-packs' string to the loading state", () => {
+      const state = {
+        loading: ['test-state'],
+      };
+      const result = HostReducer(state, { type: 'GET_PACKS', payload: {} });
+
+      expect(result).not.toBe(state);
+      expect(result.loading).toEqual(['test-state', 'getting-packs']);
+    });
+  });
+
+  describe('PACKS_RECEIVED', () => {
+    it("removes the 'getting-packs' string from the loading state", () => {
+      const state = {
+        loading: ['getting-packs', 'test-state'],
+      };
+      const result = HostReducer(state, {
+        type: 'PACKS_RECEIVED',
+        payload: {},
+      });
+
+      expect(result).not.toBe(state);
+      expect(result.loading).toEqual(['test-state']);
+    });
+  });
+
   describe('SET_LOBBY_ID', () => {
     it('sets the lobby ID given by the socket emitter', () => {
       const state = {
@@ -405,8 +432,20 @@ describe('reducer', () => {
     });
   });
 
+  describe('GET_DECK', () => {
+    it('adds the "getting-deck" string to the loading array in state', () => {
+      const state = {
+        loading: [],
+      };
+
+      const result = HostReducer(state, { type: 'GET_DECK', payload: {} });
+
+      expect(result).toEqual({ loading: ['getting-deck'] });
+    });
+  });
+
   describe('SET_DECK', () => {
-    it('sets the deck to the cards received in the payload', () => {
+    it('sets the deck to the cards received in the payload and removes appropriate loading state', () => {
       const state = {
         foo: {
           bar: 'baz',
@@ -415,6 +454,7 @@ describe('reducer', () => {
           black: [],
           white: [],
         },
+        loading: ['getting-deck', 'test'],
       };
 
       const newDeck = {
@@ -427,7 +467,7 @@ describe('reducer', () => {
         payload: { deck: newDeck },
       });
 
-      expect(result).toEqual({ ...state, deck: newDeck });
+      expect(result).toEqual({ ...state, deck: newDeck, loading: ['test'] });
     });
   });
 
@@ -877,11 +917,33 @@ describe('reducer', () => {
     });
   });
 
-  describe('UPDATE_JOIN_CODE', () => {
-    it('returns the state with the updated join code', () => {
+  describe('SHUFFLE_JOIN_CODE', () => {
+    it("returns state with the 'join-code' string in the loading array", () => {
       const state = {
         gameState: 'foo',
         lobbyID: 'AAAA',
+        loading: [],
+      };
+
+      const result = HostReducer(state, {
+        type: 'SHUFFLE_JOIN_CODE',
+        payload: {},
+      });
+
+      expect(result).toEqual({
+        gameState: 'foo',
+        lobbyID: 'AAAA',
+        loading: ['join-code'],
+      });
+    });
+  });
+
+  describe('UPDATE_JOIN_CODE', () => {
+    it('returns state with the updated join code and loading array', () => {
+      const state = {
+        gameState: 'foo',
+        lobbyID: 'AAAA',
+        loading: ['join-code'],
       };
 
       const result = HostReducer(state, {
@@ -892,6 +954,7 @@ describe('reducer', () => {
       expect(result).toEqual({
         gameState: 'foo',
         lobbyID: 'ABCD',
+        loading: [],
       });
     });
   });

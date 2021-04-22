@@ -25,6 +25,7 @@ const initialState = {
     handSize: config.handSize,
   },
   deck: { black: [], white: [] },
+  loading: [],
 };
 
 export const HostContext = createContext();

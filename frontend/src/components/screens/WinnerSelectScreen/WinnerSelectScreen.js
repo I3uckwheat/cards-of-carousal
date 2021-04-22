@@ -74,7 +74,10 @@ function LeftPanel() {
         <PlayerList playerList={{ players, playerIDs }} />
       </div>
       <div className="join-code-wrapper">
-        <JoinCode code={lobbyID} />
+        <JoinCode
+          loading={state.loading.includes('join-code')}
+          code={lobbyID}
+        />
       </div>
     </LeftPanelWrapper>
   );
