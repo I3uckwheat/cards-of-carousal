@@ -89,16 +89,22 @@ function czarSelectWinner(state) {
 }
 
 function previewWinner(state, { highlightedPlayerID }) {
+  if (state.gameState === 'selecting-winner') {
+    return {
+      ...state,
+      czarSelection: highlightedPlayerID,
+    };
+  }
   return {
     ...state,
-    czarSelection: highlightedPlayerID,
   };
 }
 
-function selectWinner(state, payload) {
-  // TODO: HANDLE MESSAGE
-  // eslint-disable-next-line no-console
-  console.log(state, payload);
+function selectWinner(state) {
+  return {
+    ...state,
+    gameState: 'showing-winning-cards',
+  };
 }
 
 function setLobbyId(state, { id }) {

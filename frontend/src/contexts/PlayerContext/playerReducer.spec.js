@@ -216,13 +216,13 @@ describe('reducer', () => {
 
       const result = reducer(state, {
         type: 'SUBMIT_WINNER',
-        payload: { id: 2 },
+        payload: {},
       });
       expect(result).not.toBe(state);
 
       expect(socketInstance.sendMessage).toHaveBeenCalledWith({
         event: 'select-winner',
-        id: 2,
+        payload: {},
       });
     });
   });

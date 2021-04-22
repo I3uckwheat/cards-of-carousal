@@ -1,6 +1,14 @@
 import HostReducer from './HostReducer';
 
 describe('reducer', () => {
+  beforeEach(() => {
+    jest.spyOn(global.Math, 'random').mockReturnValue(0);
+  });
+
+  afterEach(() => {
+    jest.spyOn(global.Math, 'random').mockRestore();
+  });
+
   describe('default', () => {
     it('returns a copy of state when no case is matched', () => {
       const state = {
@@ -539,8 +547,6 @@ describe('reducer', () => {
         },
       };
 
-      Math.random = jest.fn(() => 0);
-
       const result = HostReducer(state, {
         type: 'DEAL_WHITE_CARDS',
         payload: {},
@@ -657,8 +663,6 @@ describe('reducer', () => {
         },
       };
 
-      Math.random = jest.fn(() => 0);
-
       const result = HostReducer(state, {
         type: 'DEAL_WHITE_CARDS',
         payload: {},
@@ -739,8 +743,6 @@ describe('reducer', () => {
         },
       };
 
-      Math.random = jest.fn(() => 0);
-
       const result = HostReducer(state, {
         type: 'DEAL_WHITE_CARDS',
         payload: {},
@@ -779,8 +781,6 @@ describe('reducer', () => {
           },
         },
       };
-
-      Math.random = jest.fn(() => 0);
 
       const result = HostReducer(state, {
         type: 'DEAL_WHITE_CARDS',
@@ -860,8 +860,6 @@ describe('reducer', () => {
           },
         },
       };
-
-      Math.random = jest.fn(() => 0);
 
       const newState = HostReducer(state, {
         type: 'DEAL_WHITE_CARDS',
@@ -985,6 +983,72 @@ describe('reducer', () => {
             cards: ['eeee', 'ffff', 'gggg', 'hhhh'],
           },
         },
+
+        playerIDs: ['ID1', 'ID2', 'ID3'],
+        czarSelection: undefined,
+        gameState: 'selecting-winner',
+      };
+
+      const result = HostReducer(state, {
+        type: 'PREVIEW_WINNER',
+        payload: { highlightedPlayerID: 'baz' },
+      });
+
+      expect(result).toMatchObject({
+        players: {
+          ID1: {
+            name: 'foo',
+            score: 0,
+            isCzar: false,
+            submittedCards: [0, 1],
+            cards: ['aaaa', 'bbbb', 'cccc', 'dddd'],
+          },
+          ID2: {
+            name: 'bar',
+            score: 0,
+            isCzar: true,
+            submittedCards: [],
+            cards: [],
+          },
+          ID3: {
+            name: 'baz',
+            score: 0,
+            isCzar: false,
+            submittedCards: [1, 2],
+            cards: ['eeee', 'ffff', 'gggg', 'hhhh'],
+          },
+        },
+        czarSelection: 'baz',
+        gameState: 'selecting-winner',
+        playerIDs: ['ID1', 'ID2', 'ID3'],
+      });
+    });
+    it('does not update the state when the gameState is not selecting-winners', () => {
+      const state = {
+        players: {
+          ID1: {
+            name: 'foo',
+            score: 0,
+            isCzar: false,
+            submittedCards: [0, 1],
+            cards: ['aaaa', 'bbbb', 'cccc', 'dddd'],
+          },
+          ID2: {
+            name: 'bar',
+            score: 0,
+            isCzar: true,
+            submittedCards: [],
+            cards: [],
+          },
+          ID3: {
+            name: 'baz',
+            score: 0,
+            isCzar: false,
+            submittedCards: [1, 2],
+            cards: ['eeee', 'ffff', 'gggg', 'hhhh'],
+          },
+        },
+        gameState: 'showing-winners',
         playerIDs: ['ID1', 'ID2', 'ID3'],
         czarSelection: undefined,
       };
@@ -1018,8 +1082,9 @@ describe('reducer', () => {
             cards: ['eeee', 'ffff', 'gggg', 'hhhh'],
           },
         },
-        czarSelection: 'baz',
+        gameState: 'showing-winners',
         playerIDs: ['ID1', 'ID2', 'ID3'],
+        czarSelection: undefined,
       });
     });
   });
