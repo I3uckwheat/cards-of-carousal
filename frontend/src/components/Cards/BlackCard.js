@@ -7,23 +7,25 @@ import LayeredCards from './LayeredCards';
 const propTypes = {
   pickCount: PropTypes.number.isRequired,
   children: PropTypes.string,
+  winnerScreen: PropTypes.bool,
 };
 
 const defaultProps = {
   children: '',
+  winnerScreen: false,
 };
 
 const BLANK_LENGTH = 8;
 
 const StyledBlackCard = styled.div`
   position: relative;
-  width: 390px;
-  height: 540px;
+  width: ${(props) => (props.winnerDisplay ? '260px' : '360px')};
+  height: ${(props) => (props.winnerDisplay ? '360px' : '540px')};
   background-color: var(--secondary-background-color);
   color: var(--secondary-text-color);
   border-radius: 18px;
   font-weight: 700;
-  font-size: 36px;
+  font-size: ${(props) => (props.winnerDisplay ? '24px' : '36px')};
   padding: 45px 21px 0 21px;
   box-shadow: 4px 4px 24px rgba(0, 0, 0, 0.3);
 
@@ -80,9 +82,9 @@ function parseForMarkdown(string, blankLength) {
   );
 }
 
-function BlackCard({ pickCount, children }) {
+function BlackCard({ pickCount, children, winnerScreen }) {
   return (
-    <StyledBlackCard data-testid="black-card">
+    <StyledBlackCard data-testid="black-card" winnerDisplay={winnerScreen}>
       <Markdown options={{ wrapper: 'div' }}>
         {parseForMarkdown(children, BLANK_LENGTH)}
       </Markdown>

@@ -84,10 +84,10 @@ const WhiteCardWrapper = styled.div`
   align-items: center;
   justify-content: space-evenly;
 
-  width: 80%;
+  width: 100%;
 
   margin: 0 auto;
-  margin-top: 32px;
+  padding: 16px;
 `;
 
 function LeftPanel() {
@@ -125,7 +125,11 @@ function RightPanel() {
           </p>
         </div>
 
-        <BlackCard pickCount={selectedBlackCard.pick} data-test-id="black-card">
+        <BlackCard
+          pickCount={selectedBlackCard.pick}
+          data-test-id="black-card"
+          winnerScreen
+        >
           {selectedBlackCard.text.toUpperCase()}
         </BlackCard>
       </div>
