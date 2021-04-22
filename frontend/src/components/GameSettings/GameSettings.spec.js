@@ -293,7 +293,7 @@ describe('GameSettings', () => {
       const dispatch = jest.fn();
       const onChange = jest.fn();
       const options = {
-        maxPlayers: null,
+        maxPlayers: -1,
         winningScore: 5,
         selectedPacks: [],
       };
@@ -373,7 +373,7 @@ describe('GameSettings', () => {
       const onChange = jest.fn();
       const options = {
         maxPlayers: 5,
-        winningScore: null,
+        winningScore: -1,
         selectedPacks: [],
       };
 
