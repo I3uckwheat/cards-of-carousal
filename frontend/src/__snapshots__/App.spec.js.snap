@@ -540,6 +540,7 @@ exports[`App snapshots should show the host screen after user has clicked the "h
   border: 0;
   width: 25px;
   height: 25px;
+  cursor: pointer;
 }
 
 .c0 {
@@ -636,7 +637,42 @@ exports[`App snapshots should show the host screen after user has clicked the "h
   margin-bottom: 24px;
 }
 
-.c8 {
+.c7 .loading {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+
+.c7 .loading div {
+  display: inline-block;
+  position: absolute;
+  left: 8px;
+  width: 16px;
+  background: var(--primary-background-color);
+  -webkit-animation: loading 1.2s cubic-bezier(0,0.5,0.5,1) infinite;
+  animation: loading 1.2s cubic-bezier(0,0.5,0.5,1) infinite;
+}
+
+.c7 .loading div:nth-child(1) {
+  left: 8px;
+  -webkit-animation-delay: -0.24s;
+  animation-delay: -0.24s;
+}
+
+.c7 .loading div:nth-child(2) {
+  left: 32px;
+  -webkit-animation-delay: -0.12s;
+  animation-delay: -0.12s;
+}
+
+.c7 .loading div:nth-child(3) {
+  left: 56px;
+  -webkit-animation-delay: 0;
+  animation-delay: 0;
+}
+
+.c9 {
   position: relative;
   display: -webkit-box;
   display: -webkit-flex;
@@ -651,7 +687,7 @@ exports[`App snapshots should show the host screen after user has clicked the "h
   overflow-y: auto;
 }
 
-.c8 h1 {
+.c9 h1 {
   margin-left: auto;
   font-size: 4rem;
   line-height: 4rem;
@@ -665,7 +701,7 @@ exports[`App snapshots should show the host screen after user has clicked the "h
   top: 0;
 }
 
-.c9 {
+.c10 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -680,7 +716,7 @@ exports[`App snapshots should show the host screen after user has clicked the "h
   padding: 24px 0 24px 60px;
 }
 
-.c9 .number-input-wrapper label {
+.c10 .number-input-wrapper label {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -693,25 +729,34 @@ exports[`App snapshots should show the host screen after user has clicked the "h
   font-weight: bold;
 }
 
-.c9 input[type='number'] {
+.c10 input[type='number'] {
   font-weight: bold;
   text-align: center;
   width: 80px;
 }
 
-.c9 .select-wrapper {
+.c10 .select-wrapper {
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
 }
 
-.c9 .select-wrapper h2 {
+.c10 .select-wrapper h2 {
   font-size: 1rem;
   font-weight: bold;
   height: 30px;
 }
 
-.c9 .card-packs {
+.c10 .select-wrapper .loader-wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+}
+
+.c10 .card-packs {
   display: grid;
   gap: 20px;
   grid-template-columns: repeat(auto-fill,minmax(420px,1fr));
@@ -721,7 +766,7 @@ exports[`App snapshots should show the host screen after user has clicked the "h
   padding: 0 0 16px 0;
 }
 
-.c9 .card-packs label {
+.c10 .card-packs label {
   margin-right: 12px;
   -webkit-align-items: center;
   -webkit-box-align: center;
@@ -734,7 +779,7 @@ exports[`App snapshots should show the host screen after user has clicked the "h
   margin-bottom: auto;
 }
 
-.c9 input[type='checkbox'] {
+.c10 input[type='checkbox'] {
   margin: 4px 11px auto 0;
 }
 
@@ -840,7 +885,7 @@ exports[`App snapshots should show the host screen after user has clicked the "h
   padding: 8px 20px;
 }
 
-.c7 {
+.c8 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -855,7 +900,7 @@ exports[`App snapshots should show the host screen after user has clicked the "h
   left: 0;
 }
 
-.c7 .game-description {
+.c8 .game-description {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -879,19 +924,27 @@ exports[`App snapshots should show the host screen after user has clicked the "h
   box-shadow: 0px 4px 12px rgba(0,0,0,0.25);
 }
 
-.c7 .game-description p {
+.c8 .game-description p {
   margin: 16px 0;
 }
 
-.c7 .top {
+.c8 .top {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
   height: 60%;
 }
 
-.c7 .bottom {
+.c8 .bottom {
   height: 40%;
 }
 
@@ -976,7 +1029,7 @@ exports[`App snapshots should show the host screen after user has clicked the "h
 }
 
 @media only screen and (max-width:980px) {
-  .c8 h1 {
+  .c9 h1 {
     position: static;
   }
 }
@@ -1051,10 +1104,24 @@ exports[`App snapshots should show the host screen after user has clicked the "h
                 >
                   JOIN CODE:
                 </p>
-                <p
+                <div
                   class="join-code"
                   data-testid="join-code"
-                />
+                >
+                  <div
+                    class="c7"
+                    color="1"
+                    data-testid="loader"
+                  >
+                    <div
+                      class="loading"
+                    >
+                      <div />
+                      <div />
+                      <div />
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -1064,7 +1131,7 @@ exports[`App snapshots should show the host screen after user has clicked the "h
         class="right"
       >
         <div
-          class="c7"
+          class="c8"
         >
           <div
             class="top"
@@ -1087,13 +1154,13 @@ exports[`App snapshots should show the host screen after user has clicked the "h
             class="bottom"
           >
             <div
-              class="c8"
+              class="c9"
             >
               <h1>
                 GAME SETTINGS
               </h1>
               <form
-                class="c9"
+                class="c10"
               >
                 <div
                   class="number-input-wrapper"
@@ -1132,8 +1199,22 @@ exports[`App snapshots should show the host screen after user has clicked the "h
                     SELECT CARD PACKS
                   </h2>
                   <div
-                    class="card-packs"
-                  />
+                    class="loader-wrapper"
+                  >
+                    <div
+                      class="c7"
+                      color="1"
+                      data-testid="loader"
+                    >
+                      <div
+                        class="loading"
+                      >
+                        <div />
+                        <div />
+                        <div />
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </form>
             </div>

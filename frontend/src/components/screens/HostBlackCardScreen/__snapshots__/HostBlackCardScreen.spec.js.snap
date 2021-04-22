@@ -8,6 +8,7 @@ exports[`Host Black Card Screen rendering renders 1`] = `
   border: 0;
   width: 25px;
   height: 25px;
+  cursor: pointer;
 }
 
 .c2 {
@@ -624,12 +625,14 @@ exports[`Host Black Card Screen rendering renders 1`] = `
               >
                 JOIN CODE:
               </p>
-              <p
+              <div
                 className="join-code"
                 data-testid="join-code"
               >
-                ABCD
-              </p>
+                <p>
+                  ABCD
+                </p>
+              </div>
             </div>
           </div>
         </div>

@@ -25,6 +25,7 @@ const initialState = {
     handSize: config.handSize,
   },
   deck: { black: [], white: [] },
+  loading: [],
 };
 
 export const HostContext = createContext();
@@ -43,6 +44,9 @@ function HostProvider({ children }) {
 
       case 'player-disconnected':
         return dispatch({ type: 'PLAYER_DISCONNECTED', payload });
+
+      case 'preview-winner':
+        return dispatch({ type: 'PREVIEW_WINNER', payload });
 
       case 'select-winner':
         return dispatch({ type: 'SELECT_WINNER', payload });

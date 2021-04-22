@@ -19,6 +19,7 @@ function sendPlayerConnectedMessage(payload) {
         big: "You've joined the lobby",
         small: 'Please wait for the host to start the game',
       },
+      removeLoading: 'joining-lobby',
     },
   });
 }
@@ -33,6 +34,7 @@ function sendCardsSubmittedMessage(payload) {
         big: 'WAIT FOR OTHER PLAYERS',
         small: 'Yell at them to hurry up if you wish',
       },
+      removeLoading: 'submitting-cards',
     },
   });
 }
