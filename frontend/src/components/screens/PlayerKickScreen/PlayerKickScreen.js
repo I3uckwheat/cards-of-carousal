@@ -21,11 +21,25 @@ const RestartButton = styled(Button)`
   }
 
   @media screen and (min-width: 1151px) {
-    font-size: 14px;
-    line-height: 14px;
-    width: 132px;
-    height: 44px;
+    font-size: 1rem;
+    line-height: 1rem;
+    width: 144px;
+    height: 50px;
     margin: 48px auto 0 auto;
+  }
+
+  @media screen and (min-width: 1400px) {
+    font-size: 1.25rem;
+    line-height: 1.25rem;
+    width: 152px;
+    height: 58px;
+  }
+
+  @media screen and (min-width: 2560px) {
+    font-size: 1.5rem;
+    line-height: 1.5rem;
+    width: 164px;
+    height: 66px;
   }
 `;
 
