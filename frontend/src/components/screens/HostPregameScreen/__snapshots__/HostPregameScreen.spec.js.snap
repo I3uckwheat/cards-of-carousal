@@ -168,6 +168,23 @@ exports[`Host Pregame Screen rendering renders 1`] = `
   cursor: pointer;
 }
 
+.c9 button {
+  background-color: var(--primary-background-color);
+  border: solid black 2px;
+  margin: 20px;
+}
+
+.c9 .slideshowControls {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
 .c8 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -196,11 +213,6 @@ exports[`Host Pregame Screen rendering renders 1`] = `
   line-height: 2rem;
 }
 
-.c8 h3 {
-  text-align: center;
-  margin-bottom: 10px;
-}
-
 .c8 p {
   margin: 10px;
   font-size: 1.1rem;
@@ -223,27 +235,16 @@ exports[`Host Pregame Screen rendering renders 1`] = `
   -webkit-flex-direction: row;
   -ms-flex-direction: row;
   flex-direction: row;
-  -webkit-align-self: center;
-  -ms-flex-item-align: center;
-  align-self: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
 }
 
 .c8 .snarkyText {
   font-size: 0.8rem;
   margin: 0;
   padding: 0;
-}
-
-.c8 .slideshowControl {
-  width: 200px;
-  -webkit-align-self: center;
-  -ms-flex-item-align: center;
-  align-self: center;
-}
-
-.c8 button {
-  background-color: transparent;
-  border: solid black 2px;
 }
 
 .c3 {
@@ -474,22 +475,41 @@ exports[`Host Pregame Screen rendering renders 1`] = `
           <div
             className="c8"
           >
-            <p>
-              Cards of Carousal is your grandma's favorite online card game!
-            </p>
-            <p>
-              Imagine if your indecency and crude taste in jokes was an advantage in life. It isn't, but in Cards of Carousal it can be!
-            </p>
-            <p>
-              Long and short of this deal; one person (the Czar of the round) reads the black card on this screen. Everyone else submits a white card trying to be the Czar's favorite jester. More directions on the next page if you're still confused.
-            </p>
-            <button
-              className="slideshowControl"
-              onClick={[Function]}
-              type="button"
+            <div
+              className="c9"
             >
-              NEXT
-            </button>
+              <p>
+                Cards of Carousal is your grandma's favorite online card game!
+              </p>
+              <p>
+                Imagine if your indecency and crude taste in jokes was an advantage in life. It isn't, but in Cards of Carousal it can be!
+              </p>
+              <p>
+                Long and short of this deal; one person (the Czar of the round) reads the black card on this screen. Everyone else submits a white card trying to be the Czar's favorite jester. More directions on the next page if you're still confused.
+              </p>
+              <div
+                className="slideshowControls"
+              >
+                <button
+                  onClick={[Function]}
+                  type="button"
+                >
+                  LAST
+                </button>
+                <button
+                  onClick={[Function]}
+                  type="button"
+                >
+                  OKAY STOP CHANGING
+                </button>
+                <button
+                  onClick={[Function]}
+                  type="button"
+                >
+                  NEXT
+                </button>
+              </div>
+            </div>
           </div>
         </div>
         <div

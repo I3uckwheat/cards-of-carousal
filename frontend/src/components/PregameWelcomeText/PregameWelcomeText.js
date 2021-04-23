@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
+
+import Carousel from '../Carousel/Carousel';
 
 const StyledPregameWelcomeText = styled.div`
   display: flex;
@@ -16,11 +18,6 @@ const StyledPregameWelcomeText = styled.div`
 
   h2 {
     line-height: 2rem;
-  }
-
-  h3 {
-    text-align: center;
-    margin-bottom: 10px;
   }
 
   p {
@@ -40,23 +37,13 @@ const StyledPregameWelcomeText = styled.div`
   .howToWin {
     display: flex;
     flex-direction: row;
-    align-self: center;
+    justify-content: center;
   }
 
   .snarkyText {
     font-size: 0.8rem;
     margin: 0;
     padding: 0;
-  }
-
-  .slideshowControl {
-    width: 200px;
-    align-self: center;
-  }
-
-  button {
-    background-color: transparent;
-    border: solid black 2px;
   }
 `;
 
@@ -114,29 +101,9 @@ function Welcome() {
 }
 
 export default function PregameWelcomeText() {
-  const [showRules, setShowRules] = useState(false);
-  const [isCarouselActive, setIsCarouselActive] = useState(true);
-
-  function toggleText() {
-    setIsCarouselActive(false);
-    setShowRules(!showRules);
-  }
-
-  useEffect(() => {
-    if (isCarouselActive) {
-      const loop = setInterval(() => setShowRules(!showRules), 2000);
-      return () => clearInterval(loop);
-    }
-
-    return null;
-  });
-
   return (
     <StyledPregameWelcomeText>
-      {showRules ? <Rules /> : <Welcome />}
-      <button type="button" className="slideshowControl" onClick={toggleText}>
-        NEXT
-      </button>
+      <Carousel slides={[<Welcome />, <Rules />]} speed={2000} />
     </StyledPregameWelcomeText>
   );
 }
