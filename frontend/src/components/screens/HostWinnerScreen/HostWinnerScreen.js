@@ -144,23 +144,25 @@ function RightPanel() {
 function HostWinnerScreen() {
   const { state, dispatch } = useContext(HostContext);
 
-  const { players, playerIDs, selectedBlackCard } = state;
+  const { players, playerIDs, czarSelection } = state;
 
   useEffect(async () => {
-    if (state.gameState === 'waiting-to-receive-cards') {
-      await dispatch({
-        type: 'SEND_CARDS_TO_PLAYERS',
-        payload: { players, playerIDs, selectedBlackCard },
-      });
-      await dispatch({
-        type: 'NOTIFY_CZAR',
-        payload: {
-          players,
-          playerIDs,
-        },
-      });
-    }
-  }, [state.gameState]);
+    const czar = playerIDs.find((id) => players[id].isCzar);
+    const losers = playerIDs.filter(
+      (playerID) => !players[playerID].isCzar && playerID !== czarSelection,
+    );
+
+    await dispatch({
+      type: 'SEND_END_OF_ROUND_MESSAGES',
+      payload: {
+        winnerName: players[czarSelection].name,
+        winnerId: czarSelection,
+        losers,
+        czar,
+      },
+    });
+  }, []);
+
   return (
     <HostLayout
       className="primary-background"
