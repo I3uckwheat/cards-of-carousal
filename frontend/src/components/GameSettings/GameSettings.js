@@ -115,11 +115,18 @@ function GameSettings({ options, onChange }) {
     setCardPacks(packNames);
   }, []);
 
+  function numInRange(n, min, max) {
+    if (Math.min(n, min) !== min) return min;
+    if (Math.max(n, max) !== max) return max;
+    return n;
+  }
+
   function numberOptionHandler(event) {
     const { name, value: newValue } = event.target;
+
     onChange({
       ...options,
-      [name]: Number(newValue),
+      [name]: numInRange(Number(newValue), config[name].min, config[name].max),
     });
   }
 
