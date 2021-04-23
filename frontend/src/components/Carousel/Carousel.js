@@ -30,7 +30,7 @@ function Carousel({ slides, speed }) {
     );
   }
 
-  function pauseSlides() {
+  function toggleCarouselIsActive() {
     setIsCarouselActive(!isCarouselActive);
   }
 
@@ -47,7 +47,7 @@ function Carousel({ slides, speed }) {
     }
 
     return null;
-  });
+  }, [currentSlideIndex, isCarouselActive]);
 
   return (
     <StyledCarousel>
@@ -56,7 +56,7 @@ function Carousel({ slides, speed }) {
         <button type="button" onClick={previousSlide}>
           LAST
         </button>
-        <button type="button" onClick={pauseSlides}>
+        <button type="button" onClick={toggleCarouselIsActive}>
           {isCarouselActive ? 'OKAY STOP CHANGING' : 'START CHANGING AGAIN'}
         </button>
         <button type="button" onClick={nextSlide}>
