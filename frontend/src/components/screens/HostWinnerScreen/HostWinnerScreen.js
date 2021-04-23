@@ -132,6 +132,14 @@ function RightPanel() {
   );
 }
 
+const startNextRound = async (dispatch) => {
+  await dispatch({ type: 'SET_NEXT_CZAR', payload: {} });
+
+  await dispatch({ type: 'SELECT_BLACK_CARD', payload: {} });
+
+  await dispatch({ type: 'DEAL_WHITE_CARDS', payload: {} });
+};
+
 function HostWinnerScreen() {
   const { state, dispatch } = useContext(HostContext);
 
@@ -151,7 +159,10 @@ function HostWinnerScreen() {
         },
       });
     }
+
+    setTimeout(() => startNextRound(dispatch), 3000);
   }, [state.gameState]);
+
   return (
     <HostLayout
       className="primary-background"
