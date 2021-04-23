@@ -90,7 +90,6 @@ function RightPanel() {
 
   // Finds the player whose cards are currently highlighted by the czar
   const highlightedPlayer = players[czarSelection];
-  console.log(highlightedPlayer.submittedCards.length);
 
   return (
     <RightPanelWrapper>

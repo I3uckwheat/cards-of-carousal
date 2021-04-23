@@ -147,8 +147,6 @@ function HostWinnerScreen() {
   const { players, playerIDs, czarSelection } = state;
 
   useEffect(async () => {
-    const winnerName =
-      players[playerIDs.find((id) => id === czarSelection)].name;
     const czar = playerIDs.find((id) => players[id].isCzar);
     const losers = playerIDs.filter(
       (playerID) => !players[playerID].isCzar && playerID !== czarSelection,
@@ -157,7 +155,7 @@ function HostWinnerScreen() {
     await dispatch({
       type: 'SEND_END_OF_ROUND_MESSAGES',
       payload: {
-        winnerName,
+        winnerName: players[czarSelection].name,
         winnerId: czarSelection,
         losers,
         czar,
