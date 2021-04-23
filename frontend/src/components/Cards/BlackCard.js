@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
 import Markdown from 'markdown-to-jsx';
 import LayeredCards from './LayeredCards';
@@ -19,15 +19,23 @@ const BLANK_LENGTH = 8;
 
 const StyledBlackCard = styled.div`
   position: relative;
-  width: ${(props) => (props.winnerDisplay ? '267px' : '390px')};
-  height: ${(props) => (props.winnerDisplay ? '363px' : '540px')};
+  width: 390px;
+  height: 540px;
   background-color: var(--secondary-background-color);
   color: var(--secondary-text-color);
   border-radius: 18px;
   font-weight: 700;
-  font-size: ${(props) => (props.winnerDisplay ? '24px' : '36px')};
+  font-size: 36px;
   padding: 45px 21px 0 21px;
   box-shadow: 4px 4px 24px rgba(0, 0, 0, 0.3);
+
+  ${(props) =>
+    props.winnerDisplay &&
+    css`
+      width: 276px;
+      height: 363px;
+      font-size: 24px;
+    `}
 
   .pickText {
     font-size: 24px;
