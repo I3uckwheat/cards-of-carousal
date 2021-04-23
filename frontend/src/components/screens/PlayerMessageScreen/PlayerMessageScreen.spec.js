@@ -1,6 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import PlayerMessageScreen from './PlayerMessageScreen';
+import { PlayerContext } from '../../../contexts/PlayerContext/PlayerContext';
 
 describe('Player message screen', () => {
   describe('Rendering', () => {
@@ -28,9 +29,11 @@ describe('Player message screen', () => {
 
     it('accepts children', () => {
       render(
-        <PlayerMessageScreen bigText="big text" smallText="small text">
-          <p>test test test</p>
-        </PlayerMessageScreen>,
+        <PlayerContext.Provider value={{ state: { loading: [] } }}>
+          <PlayerMessageScreen bigText="big text" smallText="small text">
+            <p>test test test</p>
+          </PlayerMessageScreen>
+        </PlayerContext.Provider>,
       );
       expect(screen.getByText('test test test')).toBeInTheDocument();
     });

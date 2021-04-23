@@ -2,11 +2,16 @@ import React from 'react';
 import { render, screen, act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import PlayerKickScreen from './PlayerKickScreen';
+import { PlayerContext } from '../../../contexts/PlayerContext/PlayerContext';
 
 describe('Player kick screen', () => {
   describe('render', () => {
     it('should render', () => {
-      render(<PlayerKickScreen />);
+      render(
+        <PlayerContext.Provider value={{ state: { loading: [] } }}>
+          <PlayerKickScreen />
+        </PlayerContext.Provider>,
+      );
 
       expect(screen.getByText("YOU'VE BEEN KICKED!")).toBeInTheDocument();
       expect(screen.getByText('restart')).toBeInTheDocument();
@@ -20,7 +25,11 @@ describe('Player kick screen', () => {
         value: { reload: jest.fn() },
       });
 
-      render(<PlayerKickScreen />);
+      render(
+        <PlayerContext.Provider value={{ state: { loading: [] } }}>
+          <PlayerKickScreen />
+        </PlayerContext.Provider>,
+      );
 
       await act(async () => userEvent.click(screen.getByText('restart')));
 
