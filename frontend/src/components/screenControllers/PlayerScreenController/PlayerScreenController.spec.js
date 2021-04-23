@@ -183,5 +183,25 @@ describe('Player screen controller', () => {
         expect(screen.getByTestId('czar-hand-screen')).toBeInTheDocument();
       });
     });
+
+    describe('showing-end-round-messages', () => {
+      it('renders PlayerMessageScreen', () => {
+        PlayerMessageScreen.mockImplementation(MockPlayerMessageScreen);
+
+        const dispatch = jest.fn();
+        const state = {
+          gameState: 'showing-end-round-messages',
+          message: { big: '', small: '' },
+        };
+
+        render(
+          <PlayerContext.Provider value={{ state, dispatch }}>
+            <PlayerScreenController />
+          </PlayerContext.Provider>,
+        );
+
+        expect(screen.getByTestId('player-message-screen')).toBeInTheDocument();
+      });
+    });
   });
 });

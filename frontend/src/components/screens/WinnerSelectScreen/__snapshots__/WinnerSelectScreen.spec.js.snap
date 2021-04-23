@@ -434,7 +434,7 @@ exports[`WinnerSelectScreen rendering renders normally for typical state values 
 
 .c12 {
   display: grid;
-  grid-template-columns: repeat(undefined,auto);
+  grid-template-columns: repeat(2,auto);
   gap: 20px;
   place-items: center;
   -webkit-box-pack: center;
@@ -664,12 +664,14 @@ exports[`WinnerSelectScreen rendering renders normally for typical state values 
             >
               JOIN CODE:
             </p>
-            <p
+            <div
               className="join-code"
               data-testid="join-code"
             >
-              ABCD
-            </p>
+              <p>
+                ABCD
+              </p>
+            </div>
           </div>
         </div>
       </div>

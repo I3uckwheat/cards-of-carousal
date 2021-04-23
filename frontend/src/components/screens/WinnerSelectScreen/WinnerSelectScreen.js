@@ -73,7 +73,10 @@ function LeftPanel() {
         <PlayerList playerList={{ players, playerIDs }} />
       </div>
       <div className="join-code-wrapper">
-        <JoinCode code={lobbyID} />
+        <JoinCode
+          loading={state.loading.includes('join-code')}
+          code={lobbyID}
+        />
       </div>
     </LeftPanelWrapper>
   );
@@ -99,7 +102,7 @@ function RightPanel() {
         {selectedBlackCard.text}
       </BlackCard>
 
-      <WhiteCardWrapper>
+      <WhiteCardWrapper columns={highlightedPlayer?.submittedCards.length}>
         {highlightedPlayer?.submittedCards.map((cardIndex) => (
           <WhiteCard key={cardIndex}>
             {highlightedPlayer.cards[cardIndex].text}

@@ -96,6 +96,7 @@ describe('hostReducerMiddleware', () => {
             big: "You've joined the lobby",
             small: 'Please wait for the host to start the game',
           },
+          removeLoading: 'joining-lobby',
         },
       });
     });
@@ -212,6 +213,7 @@ describe('hostReducerMiddleware', () => {
             big: 'WAIT FOR OTHER PLAYERS',
             small: 'Yell at them to hurry up if you wish',
           },
+          removeLoading: 'submitting-cards',
         },
       });
     });
@@ -479,6 +481,65 @@ describe('hostReducerMiddleware', () => {
           selectCardCount: 1,
         },
         recipients: ['foo'],
+      });
+    });
+  });
+
+  describe('SEND_END_OF_ROUND_MESSAGES', () => {
+    it("calls socketInstance's sendMessage with the event 'update'", async () => {
+      const dispatch = jest.fn();
+
+      const winnerName = 'Winner';
+      const winnerId = 'ID1';
+      const losers = ['ID2', 'ID3', 'ID4'];
+      const czar = 'ID5';
+
+      await hostReducerMiddleware(
+        {
+          type: 'SEND_END_OF_ROUND_MESSAGES',
+          payload: {
+            winnerName,
+            winnerId,
+            losers,
+            czar,
+          },
+        },
+        dispatch,
+      );
+
+      expect(socketInstance.sendMessage).toHaveBeenCalledTimes(3);
+      expect(socketInstance.sendMessage).toHaveBeenCalledWith({
+        recipients: losers,
+        event: 'update',
+        payload: {
+          gameState: 'showing-end-round-messages',
+          message: {
+            big: `${winnerName} won this round`,
+            small: 'Better luck next time, loser',
+          },
+        },
+      });
+      expect(socketInstance.sendMessage).toHaveBeenCalledWith({
+        recipients: [winnerId],
+        event: 'update',
+        payload: {
+          gameState: 'showing-end-round-messages',
+          message: {
+            big: 'Hey! You won!',
+            small: 'Finally, now wait for the next round!',
+          },
+        },
+      });
+      expect(socketInstance.sendMessage).toHaveBeenCalledWith({
+        recipients: [czar],
+        event: 'update',
+        payload: {
+          gameState: 'showing-end-round-messages',
+          message: {
+            big: `You selected ${winnerName}`,
+            small: "Now it's your turn to win",
+          },
+        },
       });
     });
   });

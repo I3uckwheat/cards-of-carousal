@@ -10,7 +10,7 @@ const propTypes = {
 };
 
 function JoinCodeShuffler({ isEnabled, onDisabledClick }) {
-  const { dispatch } = useContext(HostContext);
+  const { state, dispatch } = useContext(HostContext);
 
   function shuffleJoinCode() {
     dispatch({
@@ -21,7 +21,7 @@ function JoinCodeShuffler({ isEnabled, onDisabledClick }) {
 
   return (
     <OptionButton
-      isEnabled={isEnabled}
+      isEnabled={isEnabled && !state.loading.includes('join-code')}
       onEnabledClick={shuffleJoinCode}
       onDisabledClick={onDisabledClick}
     >
