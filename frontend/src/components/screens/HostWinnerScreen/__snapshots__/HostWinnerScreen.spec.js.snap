@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Host Black Card Screen rendering renders 1`] = `
+exports[`Host Winner Screen rendering renders 1`] = `
 .c1 {
   background-image: url(inactiveHamburger.svg);
   background-size: cover;
@@ -329,6 +329,43 @@ exports[`Host Black Card Screen rendering renders 1`] = `
   font-size: 14px;
 }
 
+.c13 {
+  position: relative;
+  border: 1px solid var(--primary-text-color);
+  width: 148px;
+  height: 206px;
+  background-color: var(--primary-background-color);
+  color: var(--primary-text-color);
+  border-radius: 7px;
+  font-weight: 500;
+  font-size: 18px;
+  overflow-wrap: break-word;
+  line-height: 21px;
+  padding: 17px 15px 0 15px;
+  box-shadow: 0px 4px 12px rgba(0,0,0,0.25);
+}
+
+.c13 .whiteCardText {
+  max-height: 150px;
+  padding-right: 0;
+  overflow-y: auto;
+}
+
+.c13 .whiteCardText div {
+  padding-bottom: 20px;
+}
+
+.c13 .stackedCards {
+  position: absolute;
+  bottom: 7px;
+  left: 11px;
+  width: 32px;
+}
+
+.c13 .backOfCard {
+  font-weight: 600;
+}
+
 .c3 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -396,7 +433,7 @@ exports[`Host Black Card Screen rendering renders 1`] = `
 
 .c9 .card-display {
   height: 100%;
-  margin-top: 64px;
+  margin-top: 36px;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -416,11 +453,29 @@ exports[`Host Black Card Screen rendering renders 1`] = `
   line-height: 24px;
 }
 
-.c9 .czar-display .czar-name {
+.c9 .czar-display .winner-name {
   margin-bottom: 48px;
   padding-left: 16px;
   font-size: 36px;
   font-weight: 600;
+}
+
+.c12 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: space-evenly;
+  -webkit-justify-content: space-evenly;
+  -ms-flex-pack: space-evenly;
+  justify-content: space-evenly;
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 32px;
 }
 
 @media (min-width:800px) {
@@ -464,6 +519,25 @@ exports[`Host Black Card Screen rendering renders 1`] = `
     font-size: 6rem;
     margin-bottom: -25px;
     line-height: 7rem;
+  }
+}
+
+@media (min-width:1025px) {
+  .c13 {
+    width: 267px;
+    height: 363px;
+    font-size: 36px;
+    line-height: 42px;
+    padding: 30px 27px 0 27px;
+  }
+
+  .c13 .whiteCardText {
+    max-height: 280px;
+    padding-right: 0;
+  }
+
+  .c13 .stackedCards {
+    width: auto;
   }
 }
 
@@ -651,13 +725,13 @@ exports[`Host Black Card Screen rendering renders 1`] = `
             className="czar-display"
           >
             <p>
-              CZAR:
+              WINNER:
             </p>
             <p
-              className="czar-name"
-              data-testid="czar-name"
+              className="winner-name"
+              data-testid="winner-name"
             >
-              BAR
+              FOO
             </p>
           </div>
           <div
@@ -665,7 +739,7 @@ exports[`Host Black Card Screen rendering renders 1`] = `
             data-testid="black-card"
           >
             <span>
-              Test Black Card
+              TEST BLACK CARD
             </span>
             <div
               className="layeredCards"
@@ -697,6 +771,31 @@ exports[`Host Black Card Screen rendering renders 1`] = `
               >
                 1
               </div>
+            </div>
+          </div>
+        </div>
+        <div
+          className="c12"
+        >
+          <div
+            className="c13"
+            data-testid="white-card"
+          >
+            <div
+              className="whiteCardText"
+            >
+              <div>
+                aaaa
+              </div>
+            </div>
+            <div
+              className="stackedCards"
+              data-testid="stacked-cards"
+            >
+              <img
+                alt="stacked cards"
+                src="cards-stack-offset-light-icon.svg"
+              />
             </div>
           </div>
         </div>

@@ -8,6 +8,7 @@ function joinLobby(state) {
       big: 'Connecting to Lobby',
       small: 'Please wait',
     },
+    loading: [...state.loading, 'joining-lobby'],
   };
 }
 
@@ -19,13 +20,18 @@ function submitCards(state) {
       big: 'Submitting your cards',
       small: 'Please wait',
     },
+    loading: [...state.loading, 'submitting-cards'],
   };
 }
 
 function update(state, payload) {
+  const { removeLoading, ...newData } = payload;
   return {
     ...state,
-    ...payload,
+    ...newData,
+    loading: removeLoading
+      ? state.loading.filter((loadingVal) => loadingVal !== removeLoading)
+      : state.loading,
   };
 }
 
@@ -40,10 +46,10 @@ function errorDisconnect(state) {
   };
 }
 
-function submitWinner(state, { id }) {
+function submitWinner(state) {
   socketInstance.sendMessage({
     event: 'select-winner',
-    id,
+    payload: {},
   });
 
   return {
@@ -61,22 +67,42 @@ function receiveWhiteCards(state, payload) {
   };
 }
 
+function lobbyClosed(state) {
+  return {
+    ...state,
+    gameState: 'lobby-closed',
+    message: {
+      big: 'THE LOBBY HAS BEEN CLOSED',
+      small: "You don't have to go home, but you can't stay here",
+    },
+  };
+}
+
 function reducer(state, action) {
   const { type, payload } = action;
   switch (type) {
     case 'JOIN_LOBBY':
       socketInstance.joinLobby(payload.lobbyId, payload.playerName);
       return joinLobby(state);
+
     case 'UPDATE':
       return update(state, payload);
+
     case 'ERROR_DISCONNECT':
       return errorDisconnect(state);
+
     case 'SUBMIT_CARDS':
       return submitCards(state);
+
     case 'SUBMIT_WINNER':
       return submitWinner(state, payload);
+
     case 'RECEIVE_WHITE_CARDS':
       return receiveWhiteCards(state, payload);
+
+    case 'LOBBY_CLOSED':
+      return lobbyClosed(state);
+
     default:
       return { ...state };
   }

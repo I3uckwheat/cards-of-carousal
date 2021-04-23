@@ -30,6 +30,7 @@ describe('reducer', () => {
     it('returns a copy of state with "gameState" set to the proper value', () => {
       const state = {
         gameState: 'TEST',
+        loading: [],
       };
 
       const result = reducer(state, {
@@ -40,10 +41,25 @@ describe('reducer', () => {
       expect(result.gameState).toBe('pending-connection');
     });
 
+    it('updates the loading array with the proper value', () => {
+      const state = {
+        gameState: 'TEST',
+        loading: [],
+      };
+
+      const result = reducer(state, {
+        type: 'JOIN_LOBBY',
+        payload: { id: '1234' },
+      });
+      expect(result).not.toBe(state);
+      expect(result.loading).toEqual(['joining-lobby']);
+    });
+
     it("updates state's message", () => {
       const state = {
         gameState: 'TEST',
         message: { big: '', small: '' },
+        loading: [],
       };
 
       const result = reducer(state, {
@@ -60,6 +76,7 @@ describe('reducer', () => {
     it('calls the joinLobby method with the correct id', () => {
       const state = {
         gameState: 'TEST',
+        loading: [],
       };
       const lobbyId = '1234';
       const playerName = 'FOO';
@@ -131,6 +148,19 @@ describe('reducer', () => {
 
       expect(result).toEqual(state);
     });
+
+    it('removes the specified value from the loading array', () => {
+      const state = {
+        loading: ['submitting-cards', 'test'],
+      };
+
+      const result = reducer(state, {
+        type: 'UPDATE',
+        payload: { removeLoading: 'submitting-cards' },
+      });
+
+      expect(result.loading).toEqual(['test']);
+    });
   });
 
   describe('ERROR_DISCONNECT', () => {
@@ -152,13 +182,14 @@ describe('reducer', () => {
   });
 
   describe('SUBMIT_CARDS', () => {
-    it('returns a copy of state with the gameState and message set properly', () => {
+    it('returns a copy of state with the gameState, message, and loading array set properly', () => {
       const state = {
         gameState: 'test state',
         message: {
           big: 'Test',
           small: 'test',
         },
+        loading: [],
       };
 
       const result = reducer(state, { type: 'SUBMIT_CARDS', payload: {} });
@@ -175,6 +206,7 @@ describe('reducer', () => {
         big: 'Submitting your cards',
         small: 'Please wait',
       });
+      expect(result.loading).toEqual(['submitting-cards']);
     });
   });
 
@@ -184,13 +216,13 @@ describe('reducer', () => {
 
       const result = reducer(state, {
         type: 'SUBMIT_WINNER',
-        payload: { id: 2 },
+        payload: {},
       });
       expect(result).not.toBe(state);
 
       expect(socketInstance.sendMessage).toHaveBeenCalledWith({
         event: 'select-winner',
-        id: 2,
+        payload: {},
       });
     });
   });
@@ -218,6 +250,27 @@ describe('reducer', () => {
         ...testPayload,
         gameState: 'player-select',
       });
+    });
+  });
+
+  describe('LOBBY_CLOSED', () => {
+    it('returns a copy of state with the gameState and the message set properly', () => {
+      const state = {
+        gameState: 'test state',
+        message: {
+          big: 'deal',
+          small: 'pox',
+        },
+      };
+
+      const result = reducer(state, { type: 'LOBBY_CLOSED' });
+
+      expect(result).not.toBe(state);
+      expect(result.gameState).toBe('lobby-closed');
+      expect(result.message.big).toBe('THE LOBBY HAS BEEN CLOSED');
+      expect(result.message.small).toBe(
+        "You don't have to go home, but you can't stay here",
+      );
     });
   });
 });

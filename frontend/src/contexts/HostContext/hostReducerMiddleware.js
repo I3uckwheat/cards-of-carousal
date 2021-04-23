@@ -1,4 +1,5 @@
 import socketInstance from '../../socket/socket';
+import shuffleArray from '../../helpers/shuffleArray';
 
 function closeGame() {
   socketInstance.closeSocket();
@@ -18,6 +19,7 @@ function sendPlayerConnectedMessage(payload) {
         big: "You've joined the lobby",
         small: 'Please wait for the host to start the game',
       },
+      removeLoading: 'joining-lobby',
     },
   });
 }
@@ -32,6 +34,7 @@ function sendCardsSubmittedMessage(payload) {
         big: 'WAIT FOR OTHER PLAYERS',
         small: 'Yell at them to hurry up if you wish',
       },
+      removeLoading: 'submitting-cards',
     },
   });
 }
@@ -101,6 +104,45 @@ function notifyCzar({ players, playerIDs }) {
   }
 }
 
+function czarSelectWinner({ players, playerIDs }) {
+  // identify czar/not czar
+  const czar = playerIDs.find((playerID) => players[playerID].isCzar);
+  const notCzars = playerIDs.filter((playerID) => !players[playerID].isCzar);
+
+  // gather all players submitted cards
+  const submittedCardsOrdered = notCzars.map((playerID) => ({
+    playerID,
+    cards: players[playerID].submittedCards.map(
+      (card) => players[playerID].cards[card].text,
+    ),
+  }));
+
+  // shuffle the cards
+  const submittedCardsShuffled = shuffleArray(submittedCardsOrdered);
+
+  socketInstance.sendMessage({
+    event: 'update',
+    payload: {
+      gameState: 'select-winner',
+      submittedCards: submittedCardsShuffled,
+      selectCardCount: 1,
+    },
+    recipients: [czar],
+  });
+
+  socketInstance.sendMessage({
+    event: 'update',
+    payload: {
+      gameState: 'waiting-for-czar',
+      message: {
+        big: 'the czar is selecting',
+        small: 'For best results, watch the host screen',
+      },
+    },
+    recipients: notCzars,
+  });
+}
+
 export default async function hostReducerMiddleware(
   { type, payload },
   dispatch,
@@ -143,6 +185,10 @@ export default async function hostReducerMiddleware(
 
     case 'NOTIFY_CZAR':
       notifyCzar(payload);
+      break;
+
+    case 'CZAR_SELECT_WINNER':
+      czarSelectWinner(payload);
       break;
 
     default:

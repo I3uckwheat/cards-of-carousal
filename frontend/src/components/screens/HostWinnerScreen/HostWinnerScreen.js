@@ -6,6 +6,7 @@ import PlayerList from '../../PlayerList/PlayerList';
 import InGameSettingsModal from '../../HostSettingsMenu/InGameSettingsModal.js';
 import JoinCode from '../../JoinCode/JoinCode';
 import BlackCard from '../../Cards/BlackCard';
+import WhiteCard from '../../Cards/WhiteCard';
 
 const LeftPanelWrapper = styled.div`
   display: flex;
@@ -55,7 +56,7 @@ const RightPanelWrapper = styled.div`
   .card-display {
     height: 100%;
 
-    margin-top: 64px;
+    margin-top: 36px;
 
     display: flex;
     flex-direction: column;
@@ -68,7 +69,7 @@ const RightPanelWrapper = styled.div`
 
     line-height: 24px;
 
-    .czar-name {
+    .winner-name {
       margin-bottom: 48px;
       padding-left: 16px;
 
@@ -76,6 +77,17 @@ const RightPanelWrapper = styled.div`
       font-weight: 600;
     }
   }
+`;
+
+const WhiteCardWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+
+  width: 80%;
+
+  margin: 0 auto;
+  margin-top: 32px;
 `;
 
 function LeftPanel() {
@@ -89,10 +101,7 @@ function LeftPanel() {
       </div>
       <div className="bottom-left-wrapper">
         <div className="join-code-wrapper">
-          <JoinCode
-            loading={state.loading.includes('join-code')}
-            code={lobbyID}
-          />
+          <JoinCode code={lobbyID} />
         </div>
       </div>
     </LeftPanelWrapper>
@@ -102,35 +111,43 @@ function LeftPanel() {
 function RightPanel() {
   const { state } = useContext(HostContext);
 
-  const { selectedBlackCard, players, playerIDs } = state;
+  const { selectedBlackCard, players, czarSelection } = state;
 
-  const czar = players[playerIDs.find((player) => players[player].isCzar)];
+  const winner = players[czarSelection];
 
   return (
     <RightPanelWrapper>
       <div className="card-display">
         <div className="czar-display">
-          <p>CZAR:</p>
-          <p data-testid="czar-name" className="czar-name">
-            {czar.name.toUpperCase()}
+          <p>WINNER:</p>
+          <p data-testid="winner-name" className="winner-name">
+            {winner.name.toUpperCase()}
           </p>
         </div>
 
         <BlackCard pickCount={selectedBlackCard.pick} data-test-id="black-card">
-          {selectedBlackCard.text}
+          {selectedBlackCard.text.toUpperCase()}
         </BlackCard>
       </div>
+      <WhiteCardWrapper>
+        {/* TODO: Add resize of card text or alter display of white cards to better fit the screen */}
+        {winner.submittedCards.map((card) => (
+          <WhiteCard key={winner.cards[card].text}>
+            {winner.cards[card].text}
+          </WhiteCard>
+        ))}
+      </WhiteCardWrapper>
     </RightPanelWrapper>
   );
 }
 
-function HostBlackCardScreen() {
+function HostWinnerScreen() {
   const { state, dispatch } = useContext(HostContext);
 
-  const { players, playerIDs, selectedBlackCard, gameState } = state;
+  const { players, playerIDs, selectedBlackCard } = state;
 
   useEffect(async () => {
-    if (gameState === 'waiting-to-receive-cards') {
+    if (state.gameState === 'waiting-to-receive-cards') {
       await dispatch({
         type: 'SEND_CARDS_TO_PLAYERS',
         payload: { players, playerIDs, selectedBlackCard },
@@ -144,20 +161,6 @@ function HostBlackCardScreen() {
       });
     }
   }, [state.gameState]);
-
-  useEffect(async () => {
-    // game state will change when players have all submitted cards
-    if (gameState === 'czar-select-winner') {
-      await dispatch({
-        type: 'CZAR_SELECT_WINNER',
-        payload: {
-          players,
-          playerIDs,
-        },
-      });
-    }
-  }, [gameState]);
-
   return (
     <HostLayout
       className="primary-background"
@@ -168,4 +171,4 @@ function HostBlackCardScreen() {
   );
 }
 
-export default HostBlackCardScreen;
+export default HostWinnerScreen;

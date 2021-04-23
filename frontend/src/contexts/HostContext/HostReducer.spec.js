@@ -1,6 +1,14 @@
 import HostReducer from './HostReducer';
 
 describe('reducer', () => {
+  beforeEach(() => {
+    jest.spyOn(global.Math, 'random').mockReturnValue(0);
+  });
+
+  afterEach(() => {
+    jest.spyOn(global.Math, 'random').mockRestore();
+  });
+
   describe('default', () => {
     it('returns a copy of state when no case is matched', () => {
       const state = {
@@ -32,6 +40,33 @@ describe('reducer', () => {
       });
       expect(result).not.toBe(state);
       expect(result.gameState).toBe('waiting-for-players');
+    });
+  });
+
+  describe('GET_PACKS', () => {
+    it("adds the 'getting-packs' string to the loading state", () => {
+      const state = {
+        loading: ['test-state'],
+      };
+      const result = HostReducer(state, { type: 'GET_PACKS', payload: {} });
+
+      expect(result).not.toBe(state);
+      expect(result.loading).toEqual(['test-state', 'getting-packs']);
+    });
+  });
+
+  describe('PACKS_RECEIVED', () => {
+    it("removes the 'getting-packs' string from the loading state", () => {
+      const state = {
+        loading: ['getting-packs', 'test-state'],
+      };
+      const result = HostReducer(state, {
+        type: 'PACKS_RECEIVED',
+        payload: {},
+      });
+
+      expect(result).not.toBe(state);
+      expect(result.loading).toEqual(['test-state']);
     });
   });
 
@@ -140,12 +175,71 @@ describe('reducer', () => {
             submittedCards: [],
           },
         },
+        playerIDs: ['guy'],
       };
       const result = HostReducer(state, {
         type: 'PLAYER_SUBMIT',
         payload: { selectedCards: [2, 3, 5], playerId: 'guy' },
       });
       expect(result.players.guy.submittedCards).toEqual([2, 3, 5]);
+    });
+
+    it('changes game state if all players have submitted their cards', () => {
+      const state = {
+        players: {
+          foo: {
+            submittedCards: [],
+            cards: [{ text: 'test' }, { text: 'test' }, { text: 'test' }],
+          },
+          bar: {
+            submittedCards: [0],
+            cards: [{ text: 'test' }, { text: 'test' }, { text: 'test' }],
+          },
+          baz: {
+            submittedCards: [0],
+            cards: [{ text: 'test' }, { text: 'test' }, { text: 'test' }],
+          },
+        },
+        playerIDs: ['foo', 'bar', 'baz'],
+        gameState: 'waiting-to-receive-cards',
+        selectedBlackCard: { pick: 1 },
+      };
+
+      const result = HostReducer(state, {
+        type: 'PLAYER_SUBMIT',
+        payload: { selectedCards: [0], playerId: 'foo' },
+      });
+
+      expect(result.gameState).toBe('czar-select-winner');
+    });
+
+    it('does not change game state if all players have not submitted their cards', () => {
+      const state = {
+        players: {
+          foo: {
+            submittedCards: [],
+            cards: [{ text: 'test' }, { text: 'test' }, { text: 'test' }],
+          },
+          bar: {
+            submittedCards: [],
+            cards: [{ text: 'test' }, { text: 'test' }, { text: 'test' }],
+          },
+          baz: {
+            submittedCards: [0],
+            cards: [{ text: 'test' }, { text: 'test' }, { text: 'test' }],
+          },
+        },
+        playerIDs: ['foo', 'bar', 'baz'],
+        gameState: 'waiting-to-receive-cards',
+        selectedBlackCard: { pick: 1 },
+      };
+
+      const result = HostReducer(state, {
+        type: 'PLAYER_SUBMIT',
+        payload: { selectedCards: [0], playerId: 'foo' },
+      });
+
+      expect(result.gameState).toBe(state.gameState);
     });
   });
 
@@ -346,8 +440,20 @@ describe('reducer', () => {
     });
   });
 
+  describe('GET_DECK', () => {
+    it('adds the "getting-deck" string to the loading array in state', () => {
+      const state = {
+        loading: [],
+      };
+
+      const result = HostReducer(state, { type: 'GET_DECK', payload: {} });
+
+      expect(result).toEqual({ loading: ['getting-deck'] });
+    });
+  });
+
   describe('SET_DECK', () => {
-    it('sets the deck to the cards received in the payload', () => {
+    it('sets the deck to the cards received in the payload and removes appropriate loading state', () => {
       const state = {
         foo: {
           bar: 'baz',
@@ -356,6 +462,7 @@ describe('reducer', () => {
           black: [],
           white: [],
         },
+        loading: ['getting-deck', 'test'],
       };
 
       const newDeck = {
@@ -368,7 +475,7 @@ describe('reducer', () => {
         payload: { deck: newDeck },
       });
 
-      expect(result).toEqual({ ...state, deck: newDeck });
+      expect(result).toEqual({ ...state, deck: newDeck, loading: ['test'] });
     });
   });
 
@@ -376,6 +483,9 @@ describe('reducer', () => {
     it('deals the correct cards to each player', () => {
       // setup dummy state
       const state = {
+        gameSettings: {
+          handSize: 5,
+        },
         deck: {
           white: [
             { pack: 0, text: 'zero' },
@@ -405,7 +515,6 @@ describe('reducer', () => {
           pick: 1,
         },
         playerIDs: ['foo', 'bar', 'baz', 'bender'],
-        handSize: 5,
         players: {
           foo: {
             cards: [
@@ -437,8 +546,6 @@ describe('reducer', () => {
           },
         },
       };
-
-      Math.random = jest.fn(() => 0);
 
       const result = HostReducer(state, {
         type: 'DEAL_WHITE_CARDS',
@@ -454,6 +561,7 @@ describe('reducer', () => {
             { pack: 0, text: 'zero' },
             { pack: 0, text: 'one' },
           ],
+          submittedCards: [],
         },
         bar: {
           cards: [
@@ -463,6 +571,7 @@ describe('reducer', () => {
             { pack: 0, text: 'two' },
             { pack: 0, text: 'three' },
           ],
+          submittedCards: [],
         },
         baz: {
           cards: [
@@ -472,6 +581,7 @@ describe('reducer', () => {
             { pack: 0, text: 'four' },
             { pack: 0, text: 'five' },
           ],
+          submittedCards: [],
         },
         bender: {
           cards: [
@@ -481,6 +591,7 @@ describe('reducer', () => {
             { pack: 0, text: 'six' },
             { pack: 0, text: 'seven' },
           ],
+          submittedCards: [],
         },
       });
     });
@@ -488,6 +599,9 @@ describe('reducer', () => {
     it('removes the correct cards from the deck', () => {
       // setup dummy state
       const state = {
+        gameSettings: {
+          handSize: 5,
+        },
         deck: {
           white: [
             { pack: 0, text: 'zero' },
@@ -517,7 +631,6 @@ describe('reducer', () => {
           pick: 1,
         },
         playerIDs: ['foo', 'bar', 'baz', 'bender'],
-        handSize: 5,
         players: {
           foo: {
             cards: [
@@ -549,8 +662,6 @@ describe('reducer', () => {
           },
         },
       };
-
-      Math.random = jest.fn(() => 0);
 
       const result = HostReducer(state, {
         type: 'DEAL_WHITE_CARDS',
@@ -575,6 +686,9 @@ describe('reducer', () => {
     it('does not deal more cards to players who have the maximum card count', () => {
       // setup dummy state
       const state = {
+        gameSettings: {
+          handSize: 5,
+        },
         deck: {
           white: [
             { pack: 0, text: 'zero' },
@@ -591,7 +705,6 @@ describe('reducer', () => {
           pick: 1,
         },
         playerIDs: ['foo', 'bar', 'baz', 'bender'],
-        handSize: 5,
         players: {
           foo: {
             cards: [
@@ -601,6 +714,7 @@ describe('reducer', () => {
               { pack: 0, text: 'test' },
               { pack: 0, text: 'test' },
             ],
+            submittedCards: [],
           },
           bar: {
             cards: [
@@ -608,6 +722,7 @@ describe('reducer', () => {
               { pack: 0, text: 'test' },
               { pack: 0, text: 'test' },
             ],
+            submittedCards: [],
           },
           baz: {
             cards: [
@@ -615,6 +730,7 @@ describe('reducer', () => {
               { pack: 0, text: 'test' },
               { pack: 0, text: 'test' },
             ],
+            submittedCards: [],
           },
           bender: {
             cards: [
@@ -622,11 +738,10 @@ describe('reducer', () => {
               { pack: 0, text: 'test' },
               { pack: 0, text: 'test' },
             ],
+            submittedCards: [],
           },
         },
       };
-
-      Math.random = jest.fn(() => 0);
 
       const result = HostReducer(state, {
         type: 'DEAL_WHITE_CARDS',
@@ -639,6 +754,9 @@ describe('reducer', () => {
     it('updates the game state', () => {
       // setup dummy state
       const state = {
+        gameSettings: {
+          handSize: 5,
+        },
         deck: {
           white: [
             { pack: 0, text: 'zero' },
@@ -653,7 +771,6 @@ describe('reducer', () => {
           pick: 1,
         },
         playerIDs: ['foo'],
-        handSize: 5,
         players: {
           foo: {
             cards: [
@@ -665,14 +782,99 @@ describe('reducer', () => {
         },
       };
 
-      Math.random = jest.fn(() => 0);
-
       const result = HostReducer(state, {
         type: 'DEAL_WHITE_CARDS',
         payload: {},
       });
 
       expect(result.gameState).toBe('waiting-to-receive-cards');
+    });
+
+    it('clears out any submitted cards from the previous round', () => {
+      // setup dummy state
+      const state = {
+        deck: {
+          white: [
+            { pack: 0, text: 'zero' },
+            { pack: 0, text: 'one' },
+            { pack: 0, text: 'two' },
+            { pack: 0, text: 'three' },
+            { pack: 0, text: 'four' },
+            { pack: 0, text: 'five' },
+            { pack: 0, text: 'six' },
+            { pack: 0, text: 'seven' },
+            { pack: 0, text: 'eight' },
+            { pack: 0, text: 'nine' },
+            { pack: 0, text: 'ten' },
+            { pack: 0, text: 'eleven' },
+            { pack: 0, text: 'twelve' },
+            { pack: 0, text: 'thirteen' },
+            { pack: 0, text: 'fourteen' },
+            { pack: 0, text: 'fifteen' },
+          ],
+          black: [
+            { pick: 1, pack: 0, text: 'zero' },
+            { pick: 1, pack: 0, text: 'one' },
+            { pick: 1, pack: 0, text: 'two' },
+          ],
+        },
+        selectedBlackCard: {
+          pick: 1,
+        },
+        playerIDs: ['foo', 'bar', 'baz', 'bender'],
+        gameSettings: {
+          handSize: 5,
+        },
+        players: {
+          foo: {
+            cards: [
+              { pack: 0, text: 'test' },
+              { pack: 0, text: 'test' },
+              { pack: 0, text: 'test' },
+            ],
+            submittedCards: [0, 1],
+          },
+          bar: {
+            cards: [
+              { pack: 0, text: 'test' },
+              { pack: 0, text: 'test' },
+              { pack: 0, text: 'test' },
+            ],
+            submittedCards: [0, 1],
+          },
+          baz: {
+            cards: [
+              { pack: 0, text: 'test' },
+              { pack: 0, text: 'test' },
+              { pack: 0, text: 'test' },
+            ],
+            submittedCards: [0, 1],
+          },
+          bender: {
+            cards: [
+              { pack: 0, text: 'test' },
+              { pack: 0, text: 'test' },
+              { pack: 0, text: 'test' },
+            ],
+            submittedCards: [0, 1],
+          },
+        },
+      };
+
+      const newState = HostReducer(state, {
+        type: 'DEAL_WHITE_CARDS',
+        payload: {},
+      });
+
+      const newSubmittedCards = newState.playerIDs.map(
+        (playerID) => newState.players[playerID].submittedCards,
+      );
+
+      expect(
+        newSubmittedCards.every(
+          (submittedCardsArray) => submittedCardsArray.length === 0,
+        ),
+      ).toBe(true);
     });
   });
 
@@ -713,11 +915,33 @@ describe('reducer', () => {
     });
   });
 
-  describe('UPDATE_JOIN_CODE', () => {
-    it('returns the state with the updated join code', () => {
+  describe('SHUFFLE_JOIN_CODE', () => {
+    it("returns state with the 'join-code' string in the loading array", () => {
       const state = {
         gameState: 'foo',
         lobbyID: 'AAAA',
+        loading: [],
+      };
+
+      const result = HostReducer(state, {
+        type: 'SHUFFLE_JOIN_CODE',
+        payload: {},
+      });
+
+      expect(result).toEqual({
+        gameState: 'foo',
+        lobbyID: 'AAAA',
+        loading: ['join-code'],
+      });
+    });
+  });
+
+  describe('UPDATE_JOIN_CODE', () => {
+    it('returns state with the updated join code and loading array', () => {
+      const state = {
+        gameState: 'foo',
+        lobbyID: 'AAAA',
+        loading: ['join-code'],
       };
 
       const result = HostReducer(state, {
@@ -728,6 +952,139 @@ describe('reducer', () => {
       expect(result).toEqual({
         gameState: 'foo',
         lobbyID: 'ABCD',
+        loading: [],
+      });
+    });
+  });
+
+  describe('PREVIEW_WINNER', () => {
+    it('returns the state with updated czarSelection', () => {
+      const state = {
+        players: {
+          ID1: {
+            name: 'foo',
+            score: 0,
+            isCzar: false,
+            submittedCards: [0, 1],
+            cards: ['aaaa', 'bbbb', 'cccc', 'dddd'],
+          },
+          ID2: {
+            name: 'bar',
+            score: 0,
+            isCzar: true,
+            submittedCards: [],
+            cards: [],
+          },
+          ID3: {
+            name: 'baz',
+            score: 0,
+            isCzar: false,
+            submittedCards: [1, 2],
+            cards: ['eeee', 'ffff', 'gggg', 'hhhh'],
+          },
+        },
+
+        playerIDs: ['ID1', 'ID2', 'ID3'],
+        czarSelection: undefined,
+        gameState: 'selecting-winner',
+      };
+
+      const result = HostReducer(state, {
+        type: 'PREVIEW_WINNER',
+        payload: { highlightedPlayerID: 'baz' },
+      });
+
+      expect(result).toMatchObject({
+        players: {
+          ID1: {
+            name: 'foo',
+            score: 0,
+            isCzar: false,
+            submittedCards: [0, 1],
+            cards: ['aaaa', 'bbbb', 'cccc', 'dddd'],
+          },
+          ID2: {
+            name: 'bar',
+            score: 0,
+            isCzar: true,
+            submittedCards: [],
+            cards: [],
+          },
+          ID3: {
+            name: 'baz',
+            score: 0,
+            isCzar: false,
+            submittedCards: [1, 2],
+            cards: ['eeee', 'ffff', 'gggg', 'hhhh'],
+          },
+        },
+        czarSelection: 'baz',
+        gameState: 'selecting-winner',
+        playerIDs: ['ID1', 'ID2', 'ID3'],
+      });
+    });
+    it('does not update the state when the gameState is not selecting-winners', () => {
+      const state = {
+        players: {
+          ID1: {
+            name: 'foo',
+            score: 0,
+            isCzar: false,
+            submittedCards: [0, 1],
+            cards: ['aaaa', 'bbbb', 'cccc', 'dddd'],
+          },
+          ID2: {
+            name: 'bar',
+            score: 0,
+            isCzar: true,
+            submittedCards: [],
+            cards: [],
+          },
+          ID3: {
+            name: 'baz',
+            score: 0,
+            isCzar: false,
+            submittedCards: [1, 2],
+            cards: ['eeee', 'ffff', 'gggg', 'hhhh'],
+          },
+        },
+        gameState: 'showing-winners',
+        playerIDs: ['ID1', 'ID2', 'ID3'],
+        czarSelection: undefined,
+      };
+
+      const result = HostReducer(state, {
+        type: 'PREVIEW_WINNER',
+        payload: { highlightedPlayerID: 'baz' },
+      });
+
+      expect(result).toEqual({
+        players: {
+          ID1: {
+            name: 'foo',
+            score: 0,
+            isCzar: false,
+            submittedCards: [0, 1],
+            cards: ['aaaa', 'bbbb', 'cccc', 'dddd'],
+          },
+          ID2: {
+            name: 'bar',
+            score: 0,
+            isCzar: true,
+            submittedCards: [],
+            cards: [],
+          },
+          ID3: {
+            name: 'baz',
+            score: 0,
+            isCzar: false,
+            submittedCards: [1, 2],
+            cards: ['eeee', 'ffff', 'gggg', 'hhhh'],
+          },
+        },
+        gameState: 'showing-winners',
+        playerIDs: ['ID1', 'ID2', 'ID3'],
+        czarSelection: undefined,
       });
     });
   });

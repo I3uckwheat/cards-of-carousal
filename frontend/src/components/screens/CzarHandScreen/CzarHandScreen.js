@@ -12,6 +12,15 @@ export default function CzarHandScreen() {
     dispatch({ type: 'SUBMIT_WINNER', payload: { id: selection } });
   };
 
+  const submitPreview = (selectedIndex, selectedPlayerId) => {
+    setSelection(selectedIndex);
+
+    dispatch({
+      type: 'PREVIEW_WINNER',
+      payload: { highlightedPlayerID: selectedPlayerId },
+    });
+  };
+
   return (
     <CardHandLayout
       onClear={() => setSelection(null)}
@@ -20,11 +29,12 @@ export default function CzarHandScreen() {
         top: "YOU'RE THE CZAR,",
         bottom: 'PICK A WINNER',
       }}
+      numberSelected={selection === null ? 0 : 1}
     >
       <CzarHand
-        cards={state.cards}
+        cardsData={state.submittedCards}
         selectedGroup={selection}
-        onSelect={(selected) => setSelection(selected)}
+        onSelect={submitPreview}
       />
     </CardHandLayout>
   );

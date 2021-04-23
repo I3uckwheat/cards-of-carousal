@@ -93,6 +93,7 @@ describe('hostReducerMiddleware', () => {
             big: "You've joined the lobby",
             small: 'Please wait for the host to start the game',
           },
+          removeLoading: 'joining-lobby',
         },
       });
     });
@@ -209,6 +210,7 @@ describe('hostReducerMiddleware', () => {
             big: 'WAIT FOR OTHER PLAYERS',
             small: 'Yell at them to hurry up if you wish',
           },
+          removeLoading: 'submitting-cards',
         },
       });
     });
@@ -367,6 +369,7 @@ describe('hostReducerMiddleware', () => {
         },
         dispatch,
       );
+
       expect(socketInstance.sendMessage).toHaveBeenCalledWith({
         event: 'update',
         payload: {
@@ -375,6 +378,104 @@ describe('hostReducerMiddleware', () => {
             big: "You're the Czar",
             small: 'Wait for the players to select their cards',
           },
+        },
+        recipients: ['foo'],
+      });
+    });
+  });
+
+  describe('CZAR_SELECT_WINNER', () => {
+    it('sends a message to non-czars that the czar is selecting', async () => {
+      const state = {
+        players: {
+          foo: {
+            cards: [{ text: 'foo' }, { text: 'bar' }, { text: 'baz' }],
+            submittedCards: [0],
+            isCzar: true,
+          },
+          bar: {
+            cards: [{ text: 'foo' }, { text: 'bar' }, { text: 'baz' }],
+            submittedCards: [0],
+            isCzar: false,
+          },
+          baz: {
+            cards: [{ text: 'foo' }, { text: 'bar' }, { text: 'baz' }],
+            submittedCards: [0],
+            isCzar: false,
+          },
+        },
+        playerIDs: ['foo', 'bar', 'baz'],
+      };
+      const { players, playerIDs } = state;
+      const dispatch = jest.fn();
+
+      await hostReducerMiddleware(
+        {
+          type: 'CZAR_SELECT_WINNER',
+          payload: { players, playerIDs },
+        },
+        dispatch,
+      );
+
+      expect(socketInstance.sendMessage).toHaveBeenCalledTimes(2);
+      expect(socketInstance.sendMessage).toHaveBeenCalledWith({
+        event: 'update',
+        payload: {
+          gameState: 'waiting-for-czar',
+          message: {
+            big: 'the czar is selecting',
+            small: 'For best results, watch the host screen',
+          },
+        },
+        recipients: ['bar', 'baz'],
+      });
+    });
+
+    it('sends a message to czar to select a winner with the submitted cards', async () => {
+      const state = {
+        players: {
+          foo: {
+            cards: [{ text: 'foo' }, { text: 'bar' }, { text: 'baz' }],
+            submittedCards: [],
+            isCzar: true,
+          },
+          bar: {
+            cards: [{ text: 'foo' }, { text: 'bar' }, { text: 'baz' }],
+            submittedCards: [0],
+            isCzar: false,
+          },
+          baz: {
+            cards: [{ text: 'foo' }, { text: 'bar' }, { text: 'baz' }],
+            submittedCards: [0],
+            isCzar: false,
+          },
+        },
+        playerIDs: ['foo', 'bar', 'baz'],
+      };
+      const { players, playerIDs } = state;
+      const dispatch = jest.fn();
+      const submittedCards = [
+        { playerID: 'baz', cards: ['foo'] },
+        { playerID: 'bar', cards: ['foo'] },
+      ];
+
+      // account for the shuffleArray function
+      Math.random = () => 0;
+
+      await hostReducerMiddleware(
+        {
+          type: 'CZAR_SELECT_WINNER',
+          payload: { players, playerIDs },
+        },
+        dispatch,
+      );
+
+      expect(socketInstance.sendMessage).toHaveBeenCalledWith({
+        event: 'update',
+        payload: {
+          gameState: 'select-winner',
+          submittedCards,
+          selectCardCount: 1,
         },
         recipients: ['foo'],
       });

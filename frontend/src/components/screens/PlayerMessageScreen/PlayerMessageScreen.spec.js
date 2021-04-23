@@ -7,21 +7,27 @@ describe('Player message screen', () => {
   describe('Rendering', () => {
     it('renders text from props', () => {
       render(
-        <PlayerMessageScreen
-          bigText="TEST BIG TEXT"
-          smallText="Test small text"
-        />,
+        <PlayerContext.Provider value={{ state: { loading: [] } }}>
+          <PlayerMessageScreen
+            bigText="TEST BIG TEXT"
+            smallText="Test small text"
+          />
+        </PlayerContext.Provider>,
       );
+
+      expect(screen.queryByTestId('loader')).not.toBeInTheDocument();
       expect(screen.getByText('TEST BIG TEXT')).toBeInTheDocument();
       expect(screen.getByText('Test small text')).toBeInTheDocument();
     });
 
     it('renders big text as all capital letters', () => {
       render(
-        <PlayerMessageScreen
-          bigText="this should be capital"
-          smallText="sMaLl CaN hAvE AnY cAsE"
-        />,
+        <PlayerContext.Provider value={{ state: { loading: [] } }}>
+          <PlayerMessageScreen
+            bigText="this should be capital"
+            smallText="sMaLl CaN hAvE AnY cAsE"
+          />
+        </PlayerContext.Provider>,
       );
       expect(screen.getByText('THIS SHOULD BE CAPITAL')).toBeInTheDocument();
       expect(screen.getByText('sMaLl CaN hAvE AnY cAsE')).toBeInTheDocument();
@@ -37,6 +43,48 @@ describe('Player message screen', () => {
       );
       expect(screen.getByText('test test test')).toBeInTheDocument();
     });
+
+    it('displays a loading indicator when the loading array contains "joining-lobby"', () => {
+      render(
+        <PlayerContext.Provider
+          value={{ state: { loading: ['joining-lobby'] } }}
+        >
+          <PlayerMessageScreen
+            bigText="TEST BIG TEXT"
+            smallText="Test small text"
+          />
+        </PlayerContext.Provider>,
+      );
+      expect(screen.getByTestId('loader')).toBeInTheDocument();
+    });
+
+    it('displays a loading indicator when the loading array contains "submitting-cards"', () => {
+      render(
+        <PlayerContext.Provider
+          value={{ state: { loading: ['submitting-cards'] } }}
+        >
+          <PlayerMessageScreen
+            bigText="TEST BIG TEXT"
+            smallText="Test small text"
+          />
+        </PlayerContext.Provider>,
+      );
+      expect(screen.getByTestId('loader')).toBeInTheDocument();
+    });
+
+    it('does not display a loading indicator when the loading array does not contain the right strings', () => {
+      render(
+        <PlayerContext.Provider
+          value={{ state: { loading: ['submitting-cars', 'test', 'aaaa'] } }}
+        >
+          <PlayerMessageScreen
+            bigText="TEST BIG TEXT"
+            smallText="Test small text"
+          />
+        </PlayerContext.Provider>,
+      );
+      expect(screen.queryByTestId('loader')).not.toBeInTheDocument();
+    });
   });
 
   describe('prop validation', () => {
@@ -47,7 +95,11 @@ describe('Player message screen', () => {
     });
 
     it('warns twice no props', () => {
-      render(<PlayerMessageScreen />);
+      render(
+        <PlayerContext.Provider value={{ state: { loading: [] } }}>
+          <PlayerMessageScreen />
+        </PlayerContext.Provider>,
+      );
       expect(spy).toHaveBeenCalledTimes(2);
     });
     // ideally we'd have three tests here, but there is a bug with propType warnings repeating:

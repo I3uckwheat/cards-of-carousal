@@ -38,11 +38,7 @@ describe('Player screen controller', () => {
   describe('gameState switch', () => {
     describe('default', () => {
       it('throws an error', () => {
-        // Prevent writing error in console during this render.
-        // eslint-disable-next-line no-console
-        const err = console.error;
-        // eslint-disable-next-line no-console
-        console.error = jest.fn();
+        const consoleSpy = jest.spyOn(console, 'error').mockImplementation();
 
         const dispatch = jest.fn();
         const state = { gameState: '' };
@@ -55,9 +51,7 @@ describe('Player screen controller', () => {
           ),
         ).toThrowError();
 
-        // Restore writing to console.
-        // eslint-disable-next-line no-console
-        console.error = err;
+        expect(consoleSpy).toHaveBeenCalled();
       });
     });
 
@@ -145,6 +139,26 @@ describe('Player screen controller', () => {
         const dispatch = jest.fn();
         const state = {
           gameState: 'cards-submitted',
+          message: { big: '', small: '' },
+        };
+
+        render(
+          <PlayerContext.Provider value={{ state, dispatch }}>
+            <PlayerScreenController />
+          </PlayerContext.Provider>,
+        );
+
+        expect(screen.getByTestId('player-message-screen')).toBeInTheDocument();
+      });
+    });
+
+    describe('lobby-closed', () => {
+      it('renders PlayerMessageScreen', () => {
+        PlayerMessageScreen.mockImplementation(MockPlayerMessageScreen);
+
+        const dispatch = jest.fn();
+        const state = {
+          gameState: 'lobby-closed',
           message: { big: '', small: '' },
         };
 

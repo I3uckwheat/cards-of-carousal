@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import cardTrioDiagonal from '../../../assets/card-trio-diagonal.svg';
 import blackCardDiagonal from '../../../assets/black-card-diagonal.svg';
+import { PlayerContext } from '../../../contexts/PlayerContext/PlayerContext';
+import LoadingIndicator from '../../LoadingIndicator/LoadingIndicator';
 
 const propTypes = {
   bigText: PropTypes.string.isRequired,
@@ -68,14 +70,23 @@ const PlayerMessageScreenWrapper = styled.div`
 `;
 
 function PlayerMessageScreen({ bigText, smallText, children }) {
+  const { state } = useContext(PlayerContext);
+  const loadingStates = ['joining-lobby', 'submitting-cards'];
+
+  function isLoading() {
+    return state.loading.some((loadingState) =>
+      loadingStates.includes(loadingState),
+    );
+  }
+
   return (
     <PlayerMessageScreenWrapper className="primary-background">
       <div className="text-container">
         <h1 className="big-text">{bigText && bigText.toUpperCase()}</h1>
         <p className="small-text">{smallText}</p>
         {children}
+        {isLoading() && <LoadingIndicator />}
       </div>
-
       <div className="footer">
         <img
           className="card-img"

@@ -5,6 +5,7 @@ import useReducerMiddleware from '../useReducerMiddleware';
 import HostReducer from './HostReducer';
 import socketInstance from '../../socket/socket';
 import hostReducerMiddleware from './hostReducerMiddleware';
+import config from '../../config';
 
 const propTypes = {
   children: PropTypes.node.isRequired,
@@ -17,9 +18,14 @@ const initialState = {
   lobbyID: '',
   players: {},
   playerIDs: [],
-  gameSettings: { maxPlayers: 8, winningScore: 7, selectedPacks: [] },
+  gameSettings: {
+    maxPlayers: config.maxPlayers.default,
+    winningScore: config.winningScore.default,
+    selectedPacks: config.initialSelectedPack,
+    handSize: config.handSize,
+  },
   deck: { black: [], white: [] },
-  handSize: 10,
+  loading: [],
 };
 
 export const HostContext = createContext();
@@ -38,6 +44,9 @@ function HostProvider({ children }) {
 
       case 'player-disconnected':
         return dispatch({ type: 'PLAYER_DISCONNECTED', payload });
+
+      case 'preview-winner':
+        return dispatch({ type: 'PREVIEW_WINNER', payload });
 
       case 'select-winner':
         return dispatch({ type: 'SELECT_WINNER', payload });

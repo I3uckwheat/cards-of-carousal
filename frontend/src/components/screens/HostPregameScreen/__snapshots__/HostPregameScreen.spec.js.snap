@@ -8,6 +8,7 @@ exports[`Host Pregame Screen rendering renders 1`] = `
   border: 0;
   width: 25px;
   height: 25px;
+  cursor: pointer;
 }
 
 .c2 {
@@ -108,6 +109,41 @@ exports[`Host Pregame Screen rendering renders 1`] = `
 
 .c4 > div:not(:last-child) {
   margin-bottom: 24px;
+}
+
+.c7 .loading {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+
+.c7 .loading div {
+  display: inline-block;
+  position: absolute;
+  left: 8px;
+  width: 16px;
+  background: var(--primary-background-color);
+  -webkit-animation: loading 1.2s cubic-bezier(0,0.5,0.5,1) infinite;
+  animation: loading 1.2s cubic-bezier(0,0.5,0.5,1) infinite;
+}
+
+.c7 .loading div:nth-child(1) {
+  left: 8px;
+  -webkit-animation-delay: -0.24s;
+  animation-delay: -0.24s;
+}
+
+.c7 .loading div:nth-child(2) {
+  left: 32px;
+  -webkit-animation-delay: -0.12s;
+  animation-delay: -0.12s;
+}
+
+.c7 .loading div:nth-child(3) {
+  left: 56px;
+  -webkit-animation-delay: 0;
+  animation-delay: 0;
 }
 
 .c6 {
@@ -229,7 +265,7 @@ exports[`Host Pregame Screen rendering renders 1`] = `
   padding: 8px 20px;
 }
 
-.c7 {
+.c8 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -244,7 +280,7 @@ exports[`Host Pregame Screen rendering renders 1`] = `
   left: 0;
 }
 
-.c7 .game-description {
+.c8 .game-description {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -268,19 +304,27 @@ exports[`Host Pregame Screen rendering renders 1`] = `
   box-shadow: 0px 4px 12px rgba(0,0,0,0.25);
 }
 
-.c7 .game-description p {
+.c8 .game-description p {
   margin: 16px 0;
 }
 
-.c7 .top {
+.c8 .top {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
   height: 60%;
 }
 
-.c7 .bottom {
+.c8 .bottom {
   height: 40%;
 }
 
@@ -401,12 +445,24 @@ exports[`Host Pregame Screen rendering renders 1`] = `
               >
                 JOIN CODE:
               </p>
-              <p
+              <div
                 className="join-code"
                 data-testid="join-code"
               >
-                
-              </p>
+                <div
+                  className="c7"
+                  color={1}
+                  data-testid="loader"
+                >
+                  <div
+                    className="loading"
+                  >
+                    <div />
+                    <div />
+                    <div />
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -416,7 +472,7 @@ exports[`Host Pregame Screen rendering renders 1`] = `
       className="right"
     >
       <div
-        className="c7"
+        className="c8"
       >
         <div
           className="top"

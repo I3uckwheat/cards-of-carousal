@@ -8,6 +8,7 @@ exports[`WinnerSelectScreen rendering renders normally for typical state values 
   border: 0;
   width: 25px;
   height: 25px;
+  cursor: pointer;
 }
 
 .c2 {
@@ -667,12 +668,14 @@ exports[`WinnerSelectScreen rendering renders normally for typical state values 
             >
               JOIN CODE:
             </p>
-            <p
+            <div
               className="join-code"
               data-testid="join-code"
             >
-              ABCD
-            </p>
+              <p>
+                ABCD
+              </p>
+            </div>
           </div>
         </div>
       </div>
@@ -741,7 +744,7 @@ exports[`WinnerSelectScreen rendering renders normally for typical state values 
               className="whiteCardText"
             >
               <div>
-                ffff
+                aaaa
               </div>
             </div>
             <div
@@ -762,7 +765,7 @@ exports[`WinnerSelectScreen rendering renders normally for typical state values 
               className="whiteCardText"
             >
               <div>
-                gggg
+                bbbb
               </div>
             </div>
             <div

@@ -4,9 +4,10 @@ import { HostContext } from '../../../contexts/HostContext/HostContext';
 import HostLayout from '../../layouts/HostLayout';
 import PlayerList from '../../PlayerList/PlayerList';
 import GameSettings from '../../GameSettings/GameSettings';
-import HostSettingsMenu from '../../HostSettingsMenu/HostSettingsMenu.js';
+import PregameSettingsModal from '../../HostSettingsMenu/PregameSettingsModal';
 import JoinCode from '../../JoinCode/JoinCode';
 import Button from '../../Buttons/Button';
+import LoadingIndicator from '../../LoadingIndicator/LoadingIndicator';
 
 const LeftPanelWrapper = styled.div`
   display: flex;
@@ -84,6 +85,8 @@ const RightPanelWrapper = styled.div`
 
   .top {
     display: flex;
+    justify-content: center;
+    align-items: center;
     height: 60%;
   }
 
@@ -100,6 +103,7 @@ function LeftPanel() {
     // check if there are any players and if packs are selected
     if (playerIDs.length && state.gameSettings.selectedPacks.length) {
       const { selectedPacks } = state.gameSettings;
+      dispatch({ type: 'GET_DECK', payload: {} });
       await dispatch({
         type: 'SET_DECK',
         payload: { selectedPacks },
@@ -141,7 +145,10 @@ function LeftPanel() {
           </Button>
         </div>
         <div className="join-code-wrapper">
-          <JoinCode code={lobbyID} />
+          <JoinCode
+            loading={state.loading.includes('join-code')}
+            code={lobbyID}
+          />
         </div>
       </div>
     </LeftPanelWrapper>
@@ -162,17 +169,21 @@ function RightPanel() {
   return (
     <RightPanelWrapper>
       <div className="top">
-        <div className="game-description">
-          <p>Cards of Carousal is a game for lorem ipsum dolor.</p>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse,
-            doloribus quaerat incidunt excepturi odit eos!
-          </p>
-          <p>
-            Qui delectus laboriosam aperiam maxime optio, architecto asperiores,
-            at ullam.
-          </p>
-        </div>
+        {state.loading.includes('getting-deck') ? (
+          <LoadingIndicator />
+        ) : (
+          <div className="game-description">
+            <p>Cards of Carousal is a game for lorem ipsum dolor.</p>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse,
+              doloribus quaerat incidunt excepturi odit eos!
+            </p>
+            <p>
+              Qui delectus laboriosam aperiam maxime optio, architecto
+              asperiores, at ullam.
+            </p>
+          </div>
+        )}
       </div>
       <div className="bottom">
         <GameSettings options={gameSettings} onChange={onChangeSettings} />
@@ -193,7 +204,7 @@ function HostPregameScreen() {
       className="primary-background"
       left={<LeftPanel />}
       right={<RightPanel />}
-      modal={<HostSettingsMenu />}
+      modal={<PregameSettingsModal />}
     />
   );
 }
