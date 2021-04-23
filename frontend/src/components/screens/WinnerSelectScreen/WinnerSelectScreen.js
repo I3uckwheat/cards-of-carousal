@@ -32,7 +32,6 @@ const RightPanelWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
 
   .czar-title {
     display: flex;
@@ -48,20 +47,20 @@ const RightPanelWrapper = styled.div`
       font-size: 24px;
       text-indent: -20px;
       margin-bottom: -8px;
-      line-height: 1em;
+      line-height: 1.5rem;
     }
   }
+`;
 
-  .white-cards {
-    display: grid;
-    grid-template-columns: repeat(3, auto);
-    gap: 20px;
-    place-items: center;
-    justify-content: center;
-    padding: 40px 0;
-    width: 100%;
-    max-height: 250px;
-  }
+const WhiteCardWrapper = styled.div`
+  display: grid;
+  grid-template-columns: ${(props) => `repeat(${props.columns}, auto)`};
+  gap: 20px;
+  place-items: center;
+  justify-content: center;
+  padding: 40px 0;
+  width: 100%;
+  max-height: 250px;
 `;
 
 function LeftPanel() {
@@ -99,17 +98,17 @@ function RightPanel() {
         {currentCzar.name}
       </h1>
 
-      <BlackCard pickCount={selectedBlackCard.pick}>
+      <BlackCard pickCount={selectedBlackCard.pick} winnerScreen>
         {selectedBlackCard.text}
       </BlackCard>
 
-      <div className="white-cards">
+      <WhiteCardWrapper columns={highlightedPlayer?.submittedCards.length}>
         {highlightedPlayer?.submittedCards.map((cardIndex) => (
           <WhiteCard key={cardIndex}>
             {highlightedPlayer.cards[cardIndex].text}
           </WhiteCard>
         ))}
-      </div>
+      </WhiteCardWrapper>
     </RightPanelWrapper>
   );
 }
