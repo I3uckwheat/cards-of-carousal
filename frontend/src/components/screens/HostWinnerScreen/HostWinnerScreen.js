@@ -133,6 +133,8 @@ function RightPanel() {
 }
 
 function startNextRound(dispatch) {
+  dispatch({ type: 'REMOVE_SUBMITTED_CARDS_FROM_PLAYER', payload: {} });
+
   dispatch({ type: 'SET_NEXT_CZAR', payload: {} });
 
   dispatch({ type: 'SELECT_BLACK_CARD', payload: {} });
