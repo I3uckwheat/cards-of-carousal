@@ -103,7 +103,7 @@ function Welcome() {
 export default function PregameWelcomeText() {
   return (
     <StyledPregameWelcomeText>
-      <Carousel slides={[<Welcome />, <Rules />]} speed={2000} />
+      <Carousel slides={[<Welcome />, <Rules />]} interval={2000} />
     </StyledPregameWelcomeText>
   );
 }

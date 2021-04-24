@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 const propTypes = {
   slides: PropTypes.arrayOf(PropTypes.node).isRequired,
-  speed: PropTypes.number.isRequired,
+  interval: PropTypes.number.isRequired,
 };
 
 const StyledCarousel = styled.div`
@@ -20,7 +20,7 @@ const StyledCarousel = styled.div`
   }
 `;
 
-function Carousel({ slides, speed }) {
+function Carousel({ slides, interval }) {
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
   const [isCarouselActive, setIsCarouselActive] = useState(true);
 
@@ -42,7 +42,7 @@ function Carousel({ slides, speed }) {
 
   useEffect(() => {
     if (isCarouselActive) {
-      const autoCarouselRotation = setInterval(() => nextSlide(), speed);
+      const autoCarouselRotation = setInterval(() => nextSlide(), interval);
       return () => clearInterval(autoCarouselRotation);
     }
 
