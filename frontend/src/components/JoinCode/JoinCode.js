@@ -1,9 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import LoadingIndicator from '../LoadingIndicator/LoadingIndicator';
 
 const propType = {
+  loading: PropTypes.bool,
   code: PropTypes.string.isRequired,
+};
+
+const defaultProps = {
+  loading: false,
 };
 
 const JoinCodeComponent = styled.div`
@@ -33,17 +39,19 @@ const JoinCodeComponent = styled.div`
   }
 `;
 
-function DisplayJoinCode({ code }) {
+function DisplayJoinCode({ loading, code }) {
   return (
     <JoinCodeComponent>
       <p className="join-code-title">JOIN CODE:</p>
-      <p className="join-code" data-testid="join-code">
-        {code}
-      </p>
+      <div className="join-code" data-testid="join-code">
+        {loading || !code ? <LoadingIndicator secondary /> : <p>{code}</p>}
+      </div>
     </JoinCodeComponent>
   );
 }
 
 DisplayJoinCode.propTypes = propType;
+
+DisplayJoinCode.defaultProps = defaultProps;
 
 export default DisplayJoinCode;

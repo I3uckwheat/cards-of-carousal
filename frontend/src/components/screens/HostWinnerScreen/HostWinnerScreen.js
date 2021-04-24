@@ -141,9 +141,26 @@ function startNextRound(dispatch) {
 }
 
 function HostWinnerScreen() {
-  const { dispatch } = useContext(HostContext);
+  const { state, dispatch } = useContext(HostContext);
 
-  useEffect(() => {
+  const { players, playerIDs, czarSelection } = state;
+
+  useEffect(async () => {
+    const czar = playerIDs.find((id) => players[id].isCzar);
+    const losers = playerIDs.filter(
+      (playerID) => !players[playerID].isCzar && playerID !== czarSelection,
+    );
+
+    await dispatch({
+      type: 'SEND_END_OF_ROUND_MESSAGES',
+      payload: {
+        winnerName: players[czarSelection].name,
+        winnerId: czarSelection,
+        losers,
+        czar,
+      },
+    });
+
     setTimeout(() => startNextRound(dispatch), 3000);
   }, []);
 

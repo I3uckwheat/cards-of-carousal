@@ -32,11 +32,21 @@ jest.mock(
 );
 
 describe('JoinCodeShuffler', () => {
+  let state = {
+    loading: [],
+  };
+
+  afterEach(() => {
+    state = {
+      loading: [],
+    };
+  });
+
   describe('rendering', () => {
     it('matches the snapshot', () => {
       const tree = renderer
         .create(
-          <HostContext.Provider value={{ dispatch: () => {} }}>
+          <HostContext.Provider value={{ state, dispatch: () => {} }}>
             <JoinCodeShuffler isEnabled onDisabledClick={() => {}} />
           </HostContext.Provider>,
         )
@@ -49,7 +59,7 @@ describe('JoinCodeShuffler', () => {
   describe('functionality', () => {
     it('passes the expected text to be rendered as text in the option button', () => {
       render(
-        <HostContext.Provider value={{ dispatch: () => {} }}>
+        <HostContext.Provider value={{ state, dispatch: () => {} }}>
           <JoinCodeShuffler isEnabled onDisabledClick={() => {}} />
         </HostContext.Provider>,
       );
@@ -60,8 +70,24 @@ describe('JoinCodeShuffler', () => {
 
     it('passes the isEnabled prop through when false', () => {
       render(
-        <HostContext.Provider value={{ dispatch: () => {} }}>
+        <HostContext.Provider value={{ state, dispatch: () => {} }}>
           <JoinCodeShuffler isEnabled={false} onDisabledClick={() => {}} />
+        </HostContext.Provider>,
+      );
+      const optionButton = screen.getByRole('button', {
+        name: 'SHUFFLE JOIN CODE',
+      });
+
+      expect(optionButton.dataset.isEnabled).toBe('false');
+    });
+
+    it('is disabled when the loading array contains the join-code string', () => {
+      state = {
+        loading: ['join-code'],
+      };
+      render(
+        <HostContext.Provider value={{ state, dispatch: () => {} }}>
+          <JoinCodeShuffler isEnabled onDisabledClick={() => {}} />
         </HostContext.Provider>,
       );
       const optionButton = screen.getByRole('button', {
@@ -73,7 +99,7 @@ describe('JoinCodeShuffler', () => {
 
     it('passes the isEnabled prop through when true', () => {
       render(
-        <HostContext.Provider value={{ dispatch: () => {} }}>
+        <HostContext.Provider value={{ state, dispatch: () => {} }}>
           <JoinCodeShuffler isEnabled onDisabledClick={() => {}} />
         </HostContext.Provider>,
       );
@@ -90,7 +116,7 @@ describe('JoinCodeShuffler', () => {
       const dispatch = jest.fn();
 
       render(
-        <HostContext.Provider value={{ dispatch }}>
+        <HostContext.Provider value={{ state, dispatch }}>
           <JoinCodeShuffler isEnabled onDisabledClick={() => {}} />
         </HostContext.Provider>,
       );
@@ -102,7 +128,7 @@ describe('JoinCodeShuffler', () => {
       const dispatch = jest.fn();
 
       render(
-        <HostContext.Provider value={{ dispatch }}>
+        <HostContext.Provider value={{ state, dispatch }}>
           <JoinCodeShuffler isEnabled onDisabledClick={() => {}} />
         </HostContext.Provider>,
       );
@@ -121,7 +147,7 @@ describe('JoinCodeShuffler', () => {
       const mockOnDisabledClick = jest.fn();
 
       render(
-        <HostContext.Provider value={{ dispatch: () => {} }}>
+        <HostContext.Provider value={{ state, dispatch: () => {} }}>
           <JoinCodeShuffler
             isEnabled={false}
             onDisabledClick={mockOnDisabledClick}
@@ -136,7 +162,7 @@ describe('JoinCodeShuffler', () => {
       const mockOnDisabledClick = jest.fn();
 
       render(
-        <HostContext.Provider value={{ dispatch: () => {} }}>
+        <HostContext.Provider value={{ state, dispatch: () => {} }}>
           <JoinCodeShuffler
             isEnabled={false}
             onDisabledClick={mockOnDisabledClick}
@@ -158,7 +184,7 @@ describe('JoinCodeShuffler', () => {
         .mockImplementation(() => {});
 
       render(
-        <HostContext.Provider value={{ dispatch: () => {} }}>
+        <HostContext.Provider value={{ state, dispatch: () => {} }}>
           <JoinCodeShuffler onDisabledClick={() => {}} />
         </HostContext.Provider>,
       );
@@ -173,7 +199,7 @@ describe('JoinCodeShuffler', () => {
         .mockImplementation(() => {});
 
       render(
-        <HostContext.Provider value={{ dispatch: () => {} }}>
+        <HostContext.Provider value={{ state, dispatch: () => {} }}>
           <JoinCodeShuffler isEnabled="foo" onDisabledClick={() => {}} />
         </HostContext.Provider>,
       );
@@ -187,7 +213,7 @@ describe('JoinCodeShuffler', () => {
         .mockImplementation(() => {});
 
       render(
-        <HostContext.Provider value={{ dispatch: () => {} }}>
+        <HostContext.Provider value={{ state, dispatch: () => {} }}>
           <JoinCodeShuffler isEnabled />
         </HostContext.Provider>,
       );
@@ -201,7 +227,7 @@ describe('JoinCodeShuffler', () => {
         .mockImplementation(() => {});
 
       render(
-        <HostContext.Provider value={{ dispatch: () => {} }}>
+        <HostContext.Provider value={{ state, dispatch: () => {} }}>
           <JoinCodeShuffler isEnabled onDisabledClick="foo" />
         </HostContext.Provider>,
       );
@@ -215,7 +241,7 @@ describe('JoinCodeShuffler', () => {
         .mockImplementation(() => {});
 
       render(
-        <HostContext.Provider value={{ dispatch: () => {} }}>
+        <HostContext.Provider value={{ state, dispatch: () => {} }}>
           <JoinCodeShuffler isEnabled onDisabledClick={() => {}} />
         </HostContext.Provider>,
       );

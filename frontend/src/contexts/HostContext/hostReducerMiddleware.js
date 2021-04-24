@@ -19,6 +19,7 @@ function sendPlayerConnectedMessage(payload) {
         big: "You've joined the lobby",
         small: 'Please wait for the host to start the game',
       },
+      removeLoading: 'joining-lobby',
     },
   });
 }
@@ -32,6 +33,47 @@ function sendCardsSubmittedMessage(payload) {
       message: {
         big: 'WAIT FOR OTHER PLAYERS',
         small: 'Yell at them to hurry up if you wish',
+      },
+      removeLoading: 'submitting-cards',
+    },
+  });
+}
+
+function sendEndOfRoundMessages(payload) {
+  const { losers, winnerName, winnerId, czar } = payload;
+
+  socketInstance.sendMessage({
+    recipients: [...losers],
+    event: 'update',
+    payload: {
+      gameState: 'showing-end-round-messages',
+      message: {
+        big: `${winnerName} won this round`,
+        small: 'Better luck next time, loser',
+      },
+    },
+  });
+
+  socketInstance.sendMessage({
+    recipients: [winnerId],
+    event: 'update',
+    payload: {
+      gameState: 'showing-end-round-messages',
+      message: {
+        big: 'Hey! You won!',
+        small: 'Finally, now wait for the next round!',
+      },
+    },
+  });
+
+  socketInstance.sendMessage({
+    recipients: [czar],
+    event: 'update',
+    payload: {
+      gameState: 'showing-end-round-messages',
+      message: {
+        big: `You selected ${winnerName}`,
+        small: "Now it's your turn to win",
       },
     },
   });
@@ -190,6 +232,10 @@ export default async function hostReducerMiddleware(
 
     case 'CZAR_SELECT_WINNER':
       czarSelectWinner(payload);
+      break;
+
+    case 'SEND_END_OF_ROUND_MESSAGES':
+      sendEndOfRoundMessages(payload);
       break;
 
     default:

@@ -5,6 +5,22 @@ function createLobby(state) {
   };
 }
 
+function getPacks(state) {
+  return {
+    ...state,
+    loading: [...state.loading, 'getting-packs'],
+  };
+}
+
+function packsReceived(state) {
+  return {
+    ...state,
+    loading: state.loading.filter(
+      (loadingVal) => loadingVal !== 'getting-packs',
+    ),
+  };
+}
+
 function playerConnected(state, { playerId, playerName }) {
   return {
     ...state,
@@ -185,10 +201,21 @@ function setBlackCard(state) {
     selectedBlackCard: selectedCard,
   };
 }
+
+function getDeck(state) {
+  return {
+    ...state,
+    loading: [...state.loading, 'getting-deck'],
+  };
+}
+
 function setDeck(state, { deck }) {
   return {
     ...state,
     deck,
+    loading: state.loading.filter(
+      (loadingVal) => loadingVal !== 'getting-deck',
+    ),
   };
 }
 
@@ -243,8 +270,19 @@ function dealWhiteCards(state) {
   };
 }
 
+function getJoinCode(state) {
+  return {
+    ...state,
+    loading: [...state.loading, 'join-code'],
+  };
+}
+
 function updateJoinCode(state, { lobbyID }) {
-  return { ...state, lobbyID };
+  return {
+    ...state,
+    lobbyID,
+    loading: state.loading.filter((loadingVal) => loadingVal !== 'join-code'),
+  };
 }
 
 function HostReducer(state, action) {
@@ -253,6 +291,12 @@ function HostReducer(state, action) {
   switch (type) {
     case 'CREATE_LOBBY':
       return createLobby(state);
+
+    case 'GET_PACKS':
+      return getPacks(state);
+
+    case 'PACKS_RECEIVED':
+      return packsReceived(state);
 
     case 'PLAYER_CONNECTED':
       return playerConnected(state, payload);
@@ -294,11 +338,17 @@ function HostReducer(state, action) {
     case 'SELECT_BLACK_CARD':
       return setBlackCard(state);
 
+    case 'GET_DECK':
+      return getDeck(state);
+
     case 'SET_DECK':
       return setDeck(state, payload);
 
     case 'DEAL_WHITE_CARDS':
       return dealWhiteCards(state);
+
+    case 'SHUFFLE_JOIN_CODE':
+      return getJoinCode(state);
 
     case 'UPDATE_JOIN_CODE':
       return updateJoinCode(state, payload);

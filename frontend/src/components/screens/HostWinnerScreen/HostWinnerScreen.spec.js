@@ -157,10 +157,10 @@ describe('Host Winner Screen', () => {
       czarSelection: 'ID1',
     };
 
-    it('calls setTimeout once with a function and three second timer', () => {
+    it('calls setTimeout once with a function and three second timer', async () => {
       jest.useFakeTimers();
 
-      render(
+      await render(
         <HostContext.Provider value={{ state, dispatch }}>
           <HostWinnerScreen />
         </HostContext.Provider>,

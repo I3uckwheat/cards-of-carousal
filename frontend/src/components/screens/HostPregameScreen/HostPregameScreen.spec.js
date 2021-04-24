@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen, act, waitFor } from '@testing-library/react';
+import { render, screen, act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import renderer from 'react-test-renderer';
 import { HostContext } from '../../../contexts/HostContext/HostContext';
@@ -27,6 +27,7 @@ describe('Host Pregame Screen', () => {
     players: {},
     playerIDs: [],
     gameSettings: { maxPlayers: 8, winningScore: 7, selectedPacks: [] },
+    loading: [],
   };
 
   afterEach(() => {
@@ -37,6 +38,7 @@ describe('Host Pregame Screen', () => {
       players: {},
       playerIDs: [],
       gameSettings: { maxPlayers: 8, winningScore: 7, selectedPacks: [] },
+      loading: [],
     };
     setupFetchMock();
   });
@@ -53,6 +55,68 @@ describe('Host Pregame Screen', () => {
         .toJSON();
 
       expect(tree).toMatchSnapshot();
+    });
+
+    it('renders the loading indicator when lobbyID is an empty string', () => {
+      const dispatch = jest.fn();
+      render(
+        <HostContext.Provider value={{ state, dispatch }}>
+          <HostPregameScreen />
+        </HostContext.Provider>,
+      );
+
+      expect(screen.queryByTestId('loader')).toBeInTheDocument();
+    });
+
+    it("does not render the loading indicator when lobbyID is present and loading state does not contain 'join-code'", () => {
+      const dispatch = jest.fn();
+      state = {
+        ...state,
+        lobbyID: 'ABCD',
+        loading: ['aaa', 'test', 'join-cod'],
+      };
+      render(
+        <HostContext.Provider value={{ state, dispatch }}>
+          <HostPregameScreen />
+        </HostContext.Provider>,
+      );
+
+      expect(screen.queryByTestId('loader')).not.toBeInTheDocument();
+    });
+
+    it("renders the loading indicator when loading state contains 'join-code'", () => {
+      const dispatch = jest.fn();
+      state = {
+        ...state,
+        loading: ['join-code'],
+      };
+      render(
+        <HostContext.Provider
+          value={{ state: { ...state, loading: ['join-code'] }, dispatch }}
+        >
+          <HostPregameScreen />
+        </HostContext.Provider>,
+      );
+
+      expect(screen.getByTestId('loader')).toBeInTheDocument();
+    });
+
+    it("renders the loading indicator when loading state contains 'join-code' and a lobbyID is present", () => {
+      const dispatch = jest.fn();
+      state = {
+        ...state,
+        lobbyID: 'ABCD',
+        loading: ['join-code'],
+      };
+      render(
+        <HostContext.Provider
+          value={{ state: { ...state, loading: ['join-code'] }, dispatch }}
+        >
+          <HostPregameScreen />
+        </HostContext.Provider>,
+      );
+
+      expect(screen.getByTestId('loader')).toBeInTheDocument();
     });
   });
 
@@ -144,6 +208,7 @@ describe('Host Pregame Screen', () => {
         },
         deck: { black: [], white: [] },
         selectedBlackCard: { text: 'test', pick: 1 },
+        loading: [],
       };
 
       render(
@@ -157,24 +222,28 @@ describe('Host Pregame Screen', () => {
       );
 
       // create lobby, get deck, set game state, set new czar, select black card, deal white cards
-      expect(dispatch).toHaveBeenCalledTimes(6);
+      expect(dispatch).toHaveBeenCalledTimes(7);
       expect(dispatch).toHaveBeenNthCalledWith(2, {
+        type: 'GET_DECK',
+        payload: {},
+      });
+      expect(dispatch).toHaveBeenNthCalledWith(3, {
         type: 'SET_DECK',
         payload: { selectedPacks: state.gameSettings.selectedPacks },
       });
-      expect(dispatch).toHaveBeenNthCalledWith(3, {
+      expect(dispatch).toHaveBeenNthCalledWith(4, {
         type: 'START_GAME',
         payload: {},
       });
-      expect(dispatch).toHaveBeenNthCalledWith(4, {
+      expect(dispatch).toHaveBeenNthCalledWith(5, {
         type: 'SET_NEXT_CZAR',
         payload: {},
       });
-      expect(dispatch).toHaveBeenNthCalledWith(5, {
+      expect(dispatch).toHaveBeenNthCalledWith(6, {
         type: 'SELECT_BLACK_CARD',
         payload: {},
       });
-      expect(dispatch).toHaveBeenNthCalledWith(6, {
+      expect(dispatch).toHaveBeenNthCalledWith(7, {
         type: 'DEAL_WHITE_CARDS',
         payload: {},
       });
@@ -227,6 +296,7 @@ describe('Host Pregame Screen', () => {
         playerIDs: ['foo', 'bar', 'baz'],
         gameSettings: { maxPlayers: 8, winningScore: 7, selectedPacks: [] },
         deck: { black: [], white: [] },
+        loading: [],
       };
 
       render(
