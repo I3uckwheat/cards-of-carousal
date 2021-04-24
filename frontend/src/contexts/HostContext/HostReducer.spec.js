@@ -883,13 +883,13 @@ describe('reducer', () => {
       const state = {
         players: {
           bar: {
-            submittedCards: [],
-            cards: [{ text: 'test' }, { text: 'test' }, { text: 'test' }],
+            submittedCards: [0],
+            cards: [{ text: 'test1' }, { text: 'test2' }, { text: 'test3' }],
           },
 
           baz: {
-            submittedCards: [0],
-            cards: [{ text: 'test1' }, { text: 'test2' }, { text: 'test3' }],
+            submittedCards: [1],
+            cards: [{ text: 'test4' }, { text: 'test5' }, { text: 'test6' }],
           },
         },
 
@@ -901,7 +901,15 @@ describe('reducer', () => {
         payload: {},
       });
 
-      expect(result.players.baz.cards).not.toContain({ text: 'test1' });
+      expect(result.players.bar.cards).toEqual([
+        { text: 'test2' },
+        { text: 'test3' },
+      ]);
+
+      expect(result.players.baz.cards).toEqual([
+        { text: 'test4' },
+        { text: 'test6' },
+      ]);
     });
   });
 
