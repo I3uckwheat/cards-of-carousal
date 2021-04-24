@@ -45,49 +45,40 @@ const LeftPanelWrapper = styled.div`
 `;
 
 const RightPanelWrapper = styled.div`
+  flex: 1;
+
   display: flex;
   flex-direction: column;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  left: 0;
+  align-items: center;
 
-  .card-display {
-    height: 100%;
-
-    margin-top: 36px;
-
+  .winner-display {
     display: flex;
     flex-direction: column;
-    align-items: center;
-  }
+    margin: 25px 0;
+    line-height: 1em;
 
-  .czar-display {
-    font-size: 24px;
-    font-weight: 600;
+    font-size: 56px;
+    font-weight: 900;
+    text-transform: uppercase;
 
-    line-height: 24px;
-
-    .winner-name {
-      margin-bottom: 48px;
-      padding-left: 16px;
-
-      font-size: 36px;
-      font-weight: 600;
+    span {
+      font-size: 24px;
+      text-indent: -20px;
+      margin-bottom: -8px;
+      line-height: 1.5rem;
     }
   }
 `;
 
 const WhiteCardWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-
-  width: 80%;
-
-  margin: 0 auto;
-  margin-top: 32px;
+  display: grid;
+  grid-template-columns: ${(props) => `repeat(${props.columns}, auto)`};
+  gap: 20px;
+  place-items: center;
+  justify-content: center;
+  padding: 40px 0;
+  width: 100%;
+  max-height: 250px;
 `;
 
 function LeftPanel() {
@@ -116,21 +107,21 @@ function RightPanel() {
   const winner = players[czarSelection];
 
   return (
-    <RightPanelWrapper>
-      <div className="card-display">
-        <div className="czar-display">
-          <p>WINNER:</p>
-          <p data-testid="winner-name" className="winner-name">
-            {winner.name.toUpperCase()}
-          </p>
-        </div>
+    <RightPanelWrapper columns={winner.submittedCards.length}>
+      <h1 className="winner-display" data-testid="winner-display">
+        <span>WINNER:</span>
+        {winner.name.toUpperCase()}
+      </h1>
 
-        <BlackCard pickCount={selectedBlackCard.pick} data-test-id="black-card">
-          {selectedBlackCard.text.toUpperCase()}
-        </BlackCard>
-      </div>
-      <WhiteCardWrapper>
-        {/* TODO: Add resize of card text or alter display of white cards to better fit the screen */}
+      <BlackCard
+        pickCount={selectedBlackCard.pick}
+        data-test-id="black-card"
+        winnerScreen
+      >
+        {selectedBlackCard.text}
+      </BlackCard>
+
+      <WhiteCardWrapper columns={winner.submittedCards.length}>
         {winner.submittedCards.map((card) => (
           <WhiteCard key={winner.cards[card].text}>
             {winner.cards[card].text}

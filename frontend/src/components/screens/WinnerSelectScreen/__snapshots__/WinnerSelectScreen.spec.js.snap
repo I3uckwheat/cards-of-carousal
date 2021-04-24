@@ -276,6 +276,9 @@ exports[`WinnerSelectScreen rendering renders normally for typical state values 
   font-size: 36px;
   padding: 45px 21px 0 21px;
   box-shadow: 4px 4px 24px rgba(0,0,0,0.3);
+  width: 276px;
+  height: 363px;
+  font-size: 24px;
 }
 
 .c10 .pickText {

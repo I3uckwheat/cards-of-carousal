@@ -92,7 +92,7 @@ function RightPanel() {
   const highlightedPlayer = players[czarSelection];
 
   return (
-    <RightPanelWrapper>
+    <RightPanelWrapper columns={highlightedPlayer?.submittedCards.length}>
       <h1 className="czar-title">
         <span>Czar:</span>
         {currentCzar.name}

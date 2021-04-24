@@ -97,8 +97,10 @@ describe('Host Winner Screen', () => {
         </HostContext.Provider>,
       );
 
-      expect(screen.queryByTestId('winner-name')).toBeInTheDocument();
-      expect(screen.queryByTestId('winner-name')).toHaveTextContent('FOO');
+      expect(screen.queryByTestId('winner-display')).toBeInTheDocument();
+      expect(screen.queryByTestId('winner-display')).toHaveTextContent(
+        'WINNER:FOO',
+      );
     });
   });
 });
