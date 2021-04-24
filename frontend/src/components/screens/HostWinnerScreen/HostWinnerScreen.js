@@ -142,7 +142,7 @@ function startNextRound(dispatch) {
 
 function HostWinnerScreen() {
   const { state, dispatch } = useContext(HostContext);
-
+  const { winnerScreenDisplayTime } = state.gameSettings;
   const { players, playerIDs, czarSelection } = state;
 
   useEffect(async () => {
@@ -161,7 +161,7 @@ function HostWinnerScreen() {
       },
     });
 
-    setTimeout(() => startNextRound(dispatch), 3000);
+    setTimeout(() => startNextRound(dispatch), winnerScreenDisplayTime);
   }, []);
 
   return (

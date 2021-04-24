@@ -153,7 +153,13 @@ describe('Host Winner Screen', () => {
         pack: 0,
       },
       playerIDs: ['ID1', 'ID2', 'ID3'],
-      gameSettings: { maxPlayers: 8, winningScore: 7, selectedPacks: [] },
+      gameSettings: {
+        maxPlayers: 8,
+        winningScore: 7,
+        selectedPacks: [0],
+        handSize: 10,
+        winnerScreenDisplayTime: 3000,
+      },
       czarSelection: 'ID1',
     };
 
