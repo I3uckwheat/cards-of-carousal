@@ -132,9 +132,17 @@ function RightPanel() {
   );
 }
 
+function startNextRound(dispatch) {
+  dispatch({ type: 'SET_NEXT_CZAR', payload: {} });
+
+  dispatch({ type: 'SELECT_BLACK_CARD', payload: {} });
+
+  dispatch({ type: 'DEAL_WHITE_CARDS', payload: {} });
+}
+
 function HostWinnerScreen() {
   const { state, dispatch } = useContext(HostContext);
-
+  const { winnerScreenDisplayTime } = state.gameSettings;
   const { players, playerIDs, czarSelection } = state;
 
   useEffect(async () => {
@@ -152,6 +160,8 @@ function HostWinnerScreen() {
         czar,
       },
     });
+
+    setTimeout(() => startNextRound(dispatch), winnerScreenDisplayTime);
   }, []);
 
   return (
