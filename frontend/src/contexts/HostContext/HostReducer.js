@@ -38,7 +38,7 @@ function playerConnected(state, { playerId, playerName }) {
   };
 }
 
-function updatePlayerCards(state, { selectedCards, playerId }) {
+function playerSubmitCards(state, { selectedCards, playerId }) {
   const newState = {
     ...state,
     players: {
@@ -60,6 +60,30 @@ function updatePlayerCards(state, { selectedCards, playerId }) {
     )
       ? 'czar-select-winner'
       : newState.gameState,
+  };
+}
+
+function removeSubmittedCards(state) {
+  const { players, playerIDs } = state;
+  const newPlayers = playerIDs.reduce((acc, playerId) => {
+    const player = players[playerId];
+
+    const newCards = player.cards?.filter(
+      (card, index) => !player.submittedCards?.includes(index),
+    );
+
+    return {
+      ...acc,
+      [playerId]: {
+        ...player,
+        cards: newCards,
+      },
+    };
+  }, {});
+
+  return {
+    ...state,
+    players: newPlayers,
   };
 }
 
@@ -305,7 +329,7 @@ function HostReducer(state, action) {
       return removePlayer(state, payload);
 
     case 'PLAYER_SUBMIT':
-      return updatePlayerCards(state, payload);
+      return playerSubmitCards(state, payload);
 
     case 'KICK_PLAYER':
       return removePlayer(state, payload);
@@ -317,7 +341,6 @@ function HostReducer(state, action) {
       return previewWinner(state, payload);
 
     case 'SELECT_WINNER':
-      // TODO: HANDLE PAYLOAD AND TEST
       return selectWinner(state, payload);
 
     case 'SET_LOBBY_ID':
@@ -346,6 +369,9 @@ function HostReducer(state, action) {
 
     case 'DEAL_WHITE_CARDS':
       return dealWhiteCards(state);
+
+    case 'REMOVE_SUBMITTED_CARDS_FROM_PLAYER':
+      return removeSubmittedCards(state);
 
     case 'SHUFFLE_JOIN_CODE':
       return getJoinCode(state);
