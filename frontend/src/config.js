@@ -14,6 +14,8 @@ const config = {
   initialSelectedPack: [0],
 
   handSize: 10,
+
+  winnerScreenDisplayTime: 3000,
 };
 
 export default config;

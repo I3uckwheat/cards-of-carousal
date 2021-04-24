@@ -17,6 +17,8 @@ const HamburgerMenuButton = styled.button`
   border: 0;
   width: 25px;
   height: 25px;
+
+  cursor: pointer;
 `;
 
 function HamburgerMenu({ isActive, onClick: handleClick }) {

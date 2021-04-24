@@ -4,30 +4,36 @@ import CardWrapper from '../CardWrapper/CardWrapper';
 import WhiteCard from '../Cards/WhiteCard';
 
 const propTypes = {
-  cards: PropTypes.arrayOf(PropTypes.array).isRequired,
+  cardsData: PropTypes.arrayOf(
+    PropTypes.shape({
+      playerID: PropTypes.string.isRequired,
+      cards: PropTypes.arrayOf(PropTypes.string).isRequired,
+    }),
+  ).isRequired,
   selectedGroup: PropTypes.number,
   onSelect: PropTypes.func.isRequired,
 };
 
-function CzarHand({ cards, selectedGroup, onSelect }) {
+function CzarHand({ cardsData, selectedGroup, onSelect }) {
   const [unFlippedGroups, setUnflippedGroups] = useState([]);
 
-  const handleClick = (index) => {
+  const handleClick = (index, playerID) => {
     if (!unFlippedGroups.includes(index)) {
       setUnflippedGroups([...unFlippedGroups, index]);
     }
-    onSelect(index);
+
+    onSelect(index, playerID);
   };
 
   return (
     <>
-      {cards.map((group, index) => (
+      {cardsData.map(({ playerID, cards }, index) => (
         <CardWrapper
-          key={group.toString()}
+          key={playerID}
           selection={index === selectedGroup ? 'winner' : null}
-          onClick={() => handleClick(index)}
+          onClick={() => handleClick(index, playerID)}
         >
-          {group.map((card) => (
+          {cards.map((card) => (
             <WhiteCard key={card} flipped={!unFlippedGroups.includes(index)}>
               {card}
             </WhiteCard>

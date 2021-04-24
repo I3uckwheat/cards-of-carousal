@@ -17,6 +17,7 @@ exports[`OptionButton rendering matches the expected snapshot when enabled 1`] =
   text-align: left;
   font-size: 1rem;
   font-weight: 700;
+  cursor: pointer;
 }
 
 .c0:hover {
@@ -65,6 +66,7 @@ exports[`OptionButton rendering matches the expected snapshot when not enabled 1
   text-align: left;
   font-size: 1rem;
   font-weight: 700;
+  cursor: pointer;
 }
 
 @media (min-width:800px) {

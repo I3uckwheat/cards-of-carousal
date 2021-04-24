@@ -31,11 +31,7 @@ describe('Player screen controller', () => {
   describe('gameState switch', () => {
     describe('default', () => {
       it('throws an error', () => {
-        // Prevent writing error in console during this render.
-        // eslint-disable-next-line no-console
-        const err = console.error;
-        // eslint-disable-next-line no-console
-        console.error = jest.fn();
+        const consoleSpy = jest.spyOn(console, 'error').mockImplementation();
 
         const dispatch = jest.fn();
         const state = { gameState: '' };
@@ -48,9 +44,7 @@ describe('Player screen controller', () => {
           ),
         ).toThrowError();
 
-        // Restore writing to console.
-        // eslint-disable-next-line no-console
-        console.error = err;
+        expect(consoleSpy).toHaveBeenCalled();
       });
     });
 
@@ -187,6 +181,26 @@ describe('Player screen controller', () => {
         );
 
         expect(screen.getByTestId('czar-hand-screen')).toBeInTheDocument();
+      });
+    });
+
+    describe('showing-end-round-messages', () => {
+      it('renders PlayerMessageScreen', () => {
+        PlayerMessageScreen.mockImplementation(MockPlayerMessageScreen);
+
+        const dispatch = jest.fn();
+        const state = {
+          gameState: 'showing-end-round-messages',
+          message: { big: '', small: '' },
+        };
+
+        render(
+          <PlayerContext.Provider value={{ state, dispatch }}>
+            <PlayerScreenController />
+          </PlayerContext.Provider>,
+        );
+
+        expect(screen.getByTestId('player-message-screen')).toBeInTheDocument();
       });
     });
   });

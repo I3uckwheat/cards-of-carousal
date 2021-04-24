@@ -8,6 +8,7 @@ exports[`WinnerSelectScreen rendering renders normally for typical state values 
   border: 0;
   width: 25px;
   height: 25px;
+  cursor: pointer;
 }
 
 .c2 {
@@ -275,6 +276,9 @@ exports[`WinnerSelectScreen rendering renders normally for typical state values 
   font-size: 36px;
   padding: 45px 21px 0 21px;
   box-shadow: 4px 4px 24px rgba(0,0,0,0.3);
+  width: 276px;
+  height: 363px;
+  font-size: 24px;
 }
 
 .c10 .pickText {
@@ -328,7 +332,7 @@ exports[`WinnerSelectScreen rendering renders normally for typical state values 
   font-size: 14px;
 }
 
-.c12 {
+.c13 {
   position: relative;
   border: 1px solid var(--primary-text-color);
   width: 148px;
@@ -344,24 +348,24 @@ exports[`WinnerSelectScreen rendering renders normally for typical state values 
   box-shadow: 0px 4px 12px rgba(0,0,0,0.25);
 }
 
-.c12 .whiteCardText {
+.c13 .whiteCardText {
   max-height: 150px;
   padding-right: 0;
   overflow-y: auto;
 }
 
-.c12 .whiteCardText div {
+.c13 .whiteCardText div {
   padding-bottom: 20px;
 }
 
-.c12 .stackedCards {
+.c13 .stackedCards {
   position: absolute;
   bottom: 7px;
   left: 11px;
   width: 32px;
 }
 
-.c12 .backOfCard {
+.c13 .backOfCard {
   font-weight: 600;
 }
 
@@ -407,10 +411,6 @@ exports[`WinnerSelectScreen rendering renders normally for typical state values 
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
 }
 
 .c9 .czar-title {
@@ -432,12 +432,12 @@ exports[`WinnerSelectScreen rendering renders normally for typical state values 
   font-size: 24px;
   text-indent: -20px;
   margin-bottom: -8px;
-  line-height: 1em;
+  line-height: 1.5rem;
 }
 
-.c9 .white-cards {
+.c12 {
   display: grid;
-  grid-template-columns: repeat(3,auto);
+  grid-template-columns: repeat(2,auto);
   gap: 20px;
   place-items: center;
   -webkit-box-pack: center;
@@ -494,7 +494,7 @@ exports[`WinnerSelectScreen rendering renders normally for typical state values 
 }
 
 @media (min-width:1025px) {
-  .c12 {
+  .c13 {
     width: 267px;
     height: 363px;
     font-size: 36px;
@@ -502,12 +502,12 @@ exports[`WinnerSelectScreen rendering renders normally for typical state values 
     padding: 30px 27px 0 27px;
   }
 
-  .c12 .whiteCardText {
+  .c13 .whiteCardText {
     max-height: 280px;
     padding-right: 0;
   }
 
-  .c12 .stackedCards {
+  .c13 .stackedCards {
     width: auto;
   }
 }
@@ -667,12 +667,14 @@ exports[`WinnerSelectScreen rendering renders normally for typical state values 
             >
               JOIN CODE:
             </p>
-            <p
+            <div
               className="join-code"
               data-testid="join-code"
             >
-              ABCD
-            </p>
+              <p>
+                ABCD
+              </p>
+            </div>
           </div>
         </div>
       </div>
@@ -731,17 +733,17 @@ exports[`WinnerSelectScreen rendering renders normally for typical state values 
           </div>
         </div>
         <div
-          className="white-cards"
+          className="c12"
         >
           <div
-            className="c12"
+            className="c13"
             data-testid="white-card"
           >
             <div
               className="whiteCardText"
             >
               <div>
-                ffff
+                aaaa
               </div>
             </div>
             <div
@@ -755,14 +757,14 @@ exports[`WinnerSelectScreen rendering renders normally for typical state values 
             </div>
           </div>
           <div
-            className="c12"
+            className="c13"
             data-testid="white-card"
           >
             <div
               className="whiteCardText"
             >
               <div>
-                gggg
+                bbbb
               </div>
             </div>
             <div

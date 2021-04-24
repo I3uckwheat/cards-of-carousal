@@ -8,6 +8,7 @@ function joinLobby(state) {
       big: 'Connecting to Lobby',
       small: 'Please wait',
     },
+    loading: [...state.loading, 'joining-lobby'],
   };
 }
 
@@ -19,13 +20,18 @@ function submitCards(state) {
       big: 'Submitting your cards',
       small: 'Please wait',
     },
+    loading: [...state.loading, 'submitting-cards'],
   };
 }
 
 function update(state, payload) {
+  const { removeLoading, ...newData } = payload;
   return {
     ...state,
-    ...payload,
+    ...newData,
+    loading: removeLoading
+      ? state.loading.filter((loadingVal) => loadingVal !== removeLoading)
+      : state.loading,
   };
 }
 
@@ -40,10 +46,10 @@ function errorDisconnect(state) {
   };
 }
 
-function submitWinner(state, { id }) {
+function submitWinner(state) {
   socketInstance.sendMessage({
     event: 'select-winner',
-    id,
+    payload: {},
   });
 
   return {

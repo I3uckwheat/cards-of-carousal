@@ -5,6 +5,22 @@ function createLobby(state) {
   };
 }
 
+function getPacks(state) {
+  return {
+    ...state,
+    loading: [...state.loading, 'getting-packs'],
+  };
+}
+
+function packsReceived(state) {
+  return {
+    ...state,
+    loading: state.loading.filter(
+      (loadingVal) => loadingVal !== 'getting-packs',
+    ),
+  };
+}
+
 function playerConnected(state, { playerId, playerName }) {
   return {
     ...state,
@@ -22,7 +38,7 @@ function playerConnected(state, { playerId, playerName }) {
   };
 }
 
-function updatePlayerCards(state, { selectedCards, playerId }) {
+function playerSubmitCards(state, { selectedCards, playerId }) {
   const newState = {
     ...state,
     players: {
@@ -47,6 +63,30 @@ function updatePlayerCards(state, { selectedCards, playerId }) {
   };
 }
 
+function removeSubmittedCards(state) {
+  const { players, playerIDs } = state;
+  const newPlayers = playerIDs.reduce((acc, playerId) => {
+    const player = players[playerId];
+
+    const newCards = player.cards?.filter(
+      (card, index) => !player.submittedCards?.includes(index),
+    );
+
+    return {
+      ...acc,
+      [playerId]: {
+        ...player,
+        cards: newCards,
+      },
+    };
+  }, {});
+
+  return {
+    ...state,
+    players: newPlayers,
+  };
+}
+
 function removePlayer(state, { playerId }) {
   // Removes the value playerId from the original playerIDs array
   const newPlayerIds = state.playerIDs.filter(
@@ -65,11 +105,32 @@ function removePlayer(state, { playerId }) {
   };
 }
 
-function selectWinner(state, payload) {
-  // TODO: HANDLE MESSAGE
-  // eslint-disable-next-line no-console
-  console.log(state, payload);
+function czarSelectWinner(state) {
+  return {
+    ...state,
+    gameState: 'selecting-winner',
+  };
 }
+
+function previewWinner(state, { highlightedPlayerID }) {
+  if (state.gameState === 'selecting-winner') {
+    return {
+      ...state,
+      czarSelection: highlightedPlayerID,
+    };
+  }
+  return {
+    ...state,
+  };
+}
+
+function selectWinner(state) {
+  return {
+    ...state,
+    gameState: 'showing-winning-cards',
+  };
+}
+
 function setLobbyId(state, { id }) {
   return {
     ...state,
@@ -164,15 +225,31 @@ function setBlackCard(state) {
     selectedBlackCard: selectedCard,
   };
 }
+
+function getDeck(state) {
+  return {
+    ...state,
+    loading: [...state.loading, 'getting-deck'],
+  };
+}
+
 function setDeck(state, { deck }) {
   return {
     ...state,
     deck,
+    loading: state.loading.filter(
+      (loadingVal) => loadingVal !== 'getting-deck',
+    ),
   };
 }
 
 function dealWhiteCards(state) {
-  const { deck, playerIDs, players, gameSettings: {handSize} } = state;
+  const {
+    deck,
+    playerIDs,
+    players,
+    gameSettings: { handSize },
+  } = state;
   const newWhiteCards = [...deck.white];
 
   const neededCardsPerPlayer = playerIDs.map((playerID) => {
@@ -217,8 +294,19 @@ function dealWhiteCards(state) {
   };
 }
 
+function getJoinCode(state) {
+  return {
+    ...state,
+    loading: [...state.loading, 'join-code'],
+  };
+}
+
 function updateJoinCode(state, { lobbyID }) {
-  return { ...state, lobbyID };
+  return {
+    ...state,
+    lobbyID,
+    loading: state.loading.filter((loadingVal) => loadingVal !== 'join-code'),
+  };
 }
 
 function HostReducer(state, action) {
@@ -228,6 +316,12 @@ function HostReducer(state, action) {
     case 'CREATE_LOBBY':
       return createLobby(state);
 
+    case 'GET_PACKS':
+      return getPacks(state);
+
+    case 'PACKS_RECEIVED':
+      return packsReceived(state);
+
     case 'PLAYER_CONNECTED':
       return playerConnected(state, payload);
 
@@ -235,13 +329,18 @@ function HostReducer(state, action) {
       return removePlayer(state, payload);
 
     case 'PLAYER_SUBMIT':
-      return updatePlayerCards(state, payload);
+      return playerSubmitCards(state, payload);
 
     case 'KICK_PLAYER':
       return removePlayer(state, payload);
 
+    case 'CZAR_SELECT_WINNER':
+      return czarSelectWinner(state);
+
+    case 'PREVIEW_WINNER':
+      return previewWinner(state, payload);
+
     case 'SELECT_WINNER':
-      // TODO: HANDLE PAYLOAD AND TEST
       return selectWinner(state, payload);
 
     case 'SET_LOBBY_ID':
@@ -262,11 +361,20 @@ function HostReducer(state, action) {
     case 'SELECT_BLACK_CARD':
       return setBlackCard(state);
 
+    case 'GET_DECK':
+      return getDeck(state);
+
     case 'SET_DECK':
       return setDeck(state, payload);
 
     case 'DEAL_WHITE_CARDS':
       return dealWhiteCards(state);
+
+    case 'REMOVE_SUBMITTED_CARDS_FROM_PLAYER':
+      return removeSubmittedCards(state);
+
+    case 'SHUFFLE_JOIN_CODE':
+      return getJoinCode(state);
 
     case 'UPDATE_JOIN_CODE':
       return updateJoinCode(state, payload);

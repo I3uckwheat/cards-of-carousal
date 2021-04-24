@@ -8,6 +8,7 @@ exports[`HostLayout matches the snapshot when rendered 1`] = `
   border: 0;
   width: 25px;
   height: 25px;
+  cursor: pointer;
 }
 
 .c2 {

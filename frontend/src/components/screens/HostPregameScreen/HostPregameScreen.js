@@ -8,6 +8,7 @@ import PregameSettingsModal from '../../HostSettingsMenu/PregameSettingsModal';
 import JoinCode from '../../JoinCode/JoinCode';
 import Button from '../../Buttons/Button';
 import PregameWelcomeText from '../../PregameWelcomeText/PregameWelcomeText';
+import LoadingIndicator from '../../LoadingIndicator/LoadingIndicator';
 
 const LeftPanelWrapper = styled.div`
   display: flex;
@@ -67,6 +68,8 @@ const RightPanelWrapper = styled.div`
 
   .top {
     display: flex;
+    justify-content: center;
+    align-items: center;
     height: 60%;
   }
 
@@ -83,6 +86,7 @@ function LeftPanel() {
     // check if there are any players and if packs are selected
     if (playerIDs.length && state.gameSettings.selectedPacks.length) {
       const { selectedPacks } = state.gameSettings;
+      dispatch({ type: 'GET_DECK', payload: {} });
       await dispatch({
         type: 'SET_DECK',
         payload: { selectedPacks },
@@ -124,7 +128,10 @@ function LeftPanel() {
           </Button>
         </div>
         <div className="join-code-wrapper">
-          <JoinCode code={lobbyID} />
+          <JoinCode
+            loading={state.loading.includes('join-code')}
+            code={lobbyID}
+          />
         </div>
       </div>
     </LeftPanelWrapper>
@@ -145,7 +152,11 @@ function RightPanel() {
   return (
     <RightPanelWrapper>
       <div className="top">
-        <PregameWelcomeText />
+        {state.loading.includes('getting-deck') ? (
+          <LoadingIndicator />
+        ) : (
+          <PregameWelcomeText />
+        )}
       </div>
       <div className="bottom">
         <GameSettings options={gameSettings} onChange={onChangeSettings} />

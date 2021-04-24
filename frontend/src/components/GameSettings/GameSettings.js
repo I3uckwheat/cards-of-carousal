@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { HostContext } from '../../contexts/HostContext/HostContext';
+import LoadingIndicator from '../LoadingIndicator/LoadingIndicator';
 import config from '../../config';
 
 const propTypes = {
@@ -68,6 +70,13 @@ const StyledForm = styled.form`
     height: 30px;
   }
 
+  .select-wrapper .loader-wrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
   .card-packs {
     display: grid;
     gap: 20px;
@@ -92,22 +101,32 @@ const StyledForm = styled.form`
 
 function GameSettings({ options, onChange }) {
   const [cardPacks, setCardPacks] = useState([]);
+  const { state, dispatch } = useContext(HostContext);
 
   async function getPackNames() {
     const response = await fetch(`${process.env.REACT_APP_API_URL}/deck`);
     const data = await response.json();
+    dispatch({ type: 'PACKS_RECEIVED', payload: {} });
     return data;
   }
   useEffect(async () => {
+    dispatch({ type: 'GET_PACKS', payload: {} });
     const packNames = await getPackNames();
     setCardPacks(packNames);
   }, []);
 
+  function numInRange(n, min, max) {
+    if (Math.min(n, min) !== min) return min;
+    if (Math.max(n, max) !== max) return max;
+    return n;
+  }
+
   function numberOptionHandler(event) {
     const { name, value: newValue } = event.target;
+
     onChange({
       ...options,
-      [name]: Number(newValue),
+      [name]: numInRange(Number(newValue), config[name].min, config[name].max),
     });
   }
 
@@ -167,22 +186,27 @@ function GameSettings({ options, onChange }) {
 
         <div className="select-wrapper">
           <h2>SELECT CARD PACKS</h2>
-
-          <div className="card-packs">
-            {cardPacks.map((name, index) => (
-              <label htmlFor={name} key={name}>
-                <input
-                  onChange={cardPackOptionHandler}
-                  id={name}
-                  type="checkbox"
-                  name={name}
-                  checked={options.selectedPacks.includes(index)}
-                  data-index={index}
-                />
-                {name}
-              </label>
-            ))}
-          </div>
+          {state.loading.includes('getting-packs') ? (
+            <div className="loader-wrapper">
+              <LoadingIndicator secondary />
+            </div>
+          ) : (
+            <div className="card-packs">
+              {cardPacks.map((name, index) => (
+                <label htmlFor={name} key={name}>
+                  <input
+                    onChange={cardPackOptionHandler}
+                    id={name}
+                    type="checkbox"
+                    name={name}
+                    checked={options.selectedPacks.includes(index)}
+                    data-index={index}
+                  />
+                  {name}
+                </label>
+              ))}
+            </div>
+          )}
         </div>
       </StyledForm>
     </StyledGameSettings>
