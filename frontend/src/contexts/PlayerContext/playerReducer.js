@@ -1,5 +1,3 @@
-import socketInstance from '../../socket/socket';
-
 function joinLobby(state) {
   return {
     ...state,
@@ -71,7 +69,6 @@ function reducer(state, action) {
   const { type, payload } = action;
   switch (type) {
     case 'JOIN_LOBBY':
-      socketInstance.joinLobby(payload.lobbyId, payload.playerName);
       return joinLobby(state);
 
     case 'UPDATE':

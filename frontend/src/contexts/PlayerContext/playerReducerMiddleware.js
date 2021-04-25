@@ -1,5 +1,9 @@
 import socketInstance from '../../socket/socket';
 
+function joinLobby(payload) {
+  socketInstance.joinLobby(payload.lobbyId, payload.playerName);
+}
+
 function submitCards(payload) {
   socketInstance.sendMessage({ event: 'player-submit', payload });
 }
@@ -17,6 +21,10 @@ export default async function playerReducerMiddleware(
   dispatch,
 ) {
   switch (type) {
+    case `JOIN_LOBBY`:
+      joinLobby(payload);
+      break;
+
     case `SUBMIT_CARDS`:
       submitCards(payload);
       break;

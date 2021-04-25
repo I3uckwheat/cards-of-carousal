@@ -2,6 +2,7 @@ import playerReducerMiddleware from './playerReducerMiddleware';
 import socketInstance from '../../socket/socket';
 
 jest.mock('../../socket/socket', () => ({
+  joinLobby: jest.fn(),
   sendMessage: jest.fn(),
 }));
 
@@ -15,6 +16,28 @@ describe('playerReducerMiddleware', () => {
     );
 
     expect(dispatch).toBeCalledWith({ type: 'FOO', payload: { bar: 'bash' } });
+  });
+
+  describe('JOIN_LOBBY', () => {
+    it('calls the joinLobby method with the correct id', () => {
+      const dispatch = jest.fn();
+
+      const lobbyId = '1234';
+      const playerName = 'FOO';
+
+      playerReducerMiddleware(
+        {
+          type: 'JOIN_LOBBY',
+          payload: { lobbyId, playerName },
+        },
+        dispatch,
+      );
+
+      expect(socketInstance.joinLobby).toHaveBeenCalledWith(
+        lobbyId,
+        playerName,
+      );
+    });
   });
 
   describe('SUBMIT_CARDS', () => {
