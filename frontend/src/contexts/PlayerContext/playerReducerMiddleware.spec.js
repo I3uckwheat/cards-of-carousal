@@ -18,83 +18,77 @@ describe('playerReducerMiddleware', () => {
     expect(dispatch).toBeCalledWith({ type: 'FOO', payload: { bar: 'bash' } });
   });
 
-  describe('JOIN_LOBBY', () => {
-    it('calls the joinLobby method with the correct id', () => {
-      const dispatch = jest.fn();
+  describe('Action types', () => {
+    describe('JOIN_LOBBY', () => {
+      it('calls the joinLobby method on the socket with the lobbyId and playerName from the payload', () => {
+        const dispatch = jest.fn();
 
-      const lobbyId = '1234';
-      const playerName = 'FOO';
+        playerReducerMiddleware(
+          {
+            type: 'JOIN_LOBBY',
+            payload: { lobbyId: 'ABCD', playerName: 'foo' },
+          },
+          dispatch,
+        );
 
-      playerReducerMiddleware(
-        {
-          type: 'JOIN_LOBBY',
-          payload: { lobbyId, playerName },
-        },
-        dispatch,
-      );
-
-      expect(socketInstance.joinLobby).toHaveBeenCalledWith(
-        lobbyId,
-        playerName,
-      );
+        expect(socketInstance.joinLobby).toHaveBeenCalledWith('ABCD', 'foo');
+      });
     });
-  });
 
-  describe('SUBMIT_CARDS', () => {
-    it('sends a message to the host with the submitted card indexes', () => {
-      const dispatch = jest.fn();
+    describe('SUBMIT_CARDS', () => {
+      it("calls the sendMessage method on the socket with event: 'player-submit', and payload: submitted cards indexes", () => {
+        const dispatch = jest.fn();
 
-      const result = playerReducerMiddleware(
-        {
-          type: 'SUBMIT_CARDS',
+        playerReducerMiddleware(
+          {
+            type: 'SUBMIT_CARDS',
+            payload: { selectedCards: [1, 2, 3] },
+          },
+          dispatch,
+        );
+
+        expect(socketInstance.sendMessage).toHaveBeenCalledWith({
+          event: 'player-submit',
           payload: { selectedCards: [1, 2, 3] },
-        },
-        dispatch,
-      );
-
-      expect(result).not.toBe({});
-      expect(socketInstance.sendMessage).toHaveBeenCalledWith({
-        event: 'player-submit',
-        payload: { selectedCards: [1, 2, 3] },
+        });
       });
     });
-  });
 
-  describe('PREVIEW_WINNER', () => {
-    it("sends a message to the host with the selected group of cards' author ID", () => {
-      const dispatch = jest.fn();
+    describe('PREVIEW_WINNER', () => {
+      it("calls the sendMessage method on the socket with event: 'preview-winner', and payload: highlighted player ID", () => {
+        const dispatch = jest.fn();
 
-      const result = playerReducerMiddleware(
-        {
-          type: 'PREVIEW_WINNER',
+        playerReducerMiddleware(
+          {
+            type: 'PREVIEW_WINNER',
+            payload: { highlightedPlayerID: 'foo' },
+          },
+          dispatch,
+        );
+
+        expect(socketInstance.sendMessage).toHaveBeenCalledWith({
+          event: 'preview-winner',
           payload: { highlightedPlayerID: 'foo' },
-        },
-        dispatch,
-      );
-
-      expect(result).not.toBe({});
-      expect(socketInstance.sendMessage).toHaveBeenCalledWith({
-        event: 'preview-winner',
-        payload: { highlightedPlayerID: 'foo' },
+        });
       });
     });
-  });
 
-  describe('SUBMIT_WINNER', () => {
-    it('sends a message to the host with the correct event and payload', () => {
-      const dispatch = jest.fn();
+    describe('SUBMIT_WINNER', () => {
+      it("calls the sendMessage method on the socket with event: 'select-winner', and payload: empty", () => {
+        const dispatch = jest.fn();
 
-      playerReducerMiddleware(
-        {
-          type: 'SUBMIT_WINNER',
+        playerReducerMiddleware(
+          {
+            type: 'SUBMIT_WINNER',
+            payload: {},
+          },
+          dispatch,
+        );
+
+        expect(socketInstance.sendMessage).toHaveBeenCalledWith({
+          event: 'select-winner',
           payload: {},
-        },
-        dispatch,
-      );
-
-      expect(socketInstance.sendMessage).toHaveBeenCalledWith({
-        event: 'select-winner',
-        payload: {},
+        });
       });
     });
   });
