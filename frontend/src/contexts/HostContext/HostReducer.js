@@ -202,12 +202,6 @@ function setNextCzar(state) {
   return { ...state };
 }
 
-function closeGame(state) {
-  return {
-    ...state,
-  };
-}
-
 function setBlackCard(state) {
   const { deck } = state;
   const selectedCard =
@@ -354,9 +348,6 @@ function HostReducer(state, action) {
 
     case 'SET_NEXT_CZAR':
       return setNextCzar(state);
-
-    case 'CLOSE_GAME':
-      return closeGame(state);
 
     case 'SELECT_BLACK_CARD':
       return setBlackCard(state);
