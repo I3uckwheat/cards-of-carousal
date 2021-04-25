@@ -1198,6 +1198,26 @@ exports[`App snapshots should show the host screen after user has clicked the "h
                   <h2>
                     SELECT CARD PACKS
                   </h2>
+                  <button
+                    type="button"
+                  >
+                    Official
+                  </button>
+                  <button
+                    type="button"
+                  >
+                    Unofficial
+                  </button>
+                  <button
+                    type="button"
+                  >
+                    SFW
+                  </button>
+                  <button
+                    type="button"
+                  >
+                    Reset
+                  </button>
                   <div
                     class="loader-wrapper"
                   >
