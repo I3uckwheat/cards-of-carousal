@@ -8,6 +8,10 @@ function previewWinner(payload) {
   socketInstance.sendMessage({ event: 'preview-winner', payload });
 }
 
+function submitWinner(payload) {
+  socketInstance.sendMessage({ event: 'select-winner', payload });
+}
+
 export default async function playerReducerMiddleware(
   { type, payload },
   dispatch,
@@ -19,6 +23,10 @@ export default async function playerReducerMiddleware(
 
     case 'PREVIEW_WINNER':
       previewWinner(payload);
+      break;
+
+    case 'SUBMIT_WINNER':
+      submitWinner(payload);
       break;
 
     default:

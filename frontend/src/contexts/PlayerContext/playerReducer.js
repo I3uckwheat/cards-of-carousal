@@ -46,17 +46,6 @@ function errorDisconnect(state) {
   };
 }
 
-function submitWinner(state) {
-  socketInstance.sendMessage({
-    event: 'select-winner',
-    payload: {},
-  });
-
-  return {
-    ...state,
-  };
-}
-
 function receiveWhiteCards(state, payload) {
   const { cards, selectCardCount } = payload;
   return {
@@ -93,9 +82,6 @@ function reducer(state, action) {
 
     case 'SUBMIT_CARDS':
       return submitCards(state);
-
-    case 'SUBMIT_WINNER':
-      return submitWinner(state, payload);
 
     case 'RECEIVE_WHITE_CARDS':
       return receiveWhiteCards(state, payload);

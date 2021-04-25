@@ -210,23 +210,6 @@ describe('reducer', () => {
     });
   });
 
-  describe('SUBMIT_WINNER', () => {
-    it('sends a message to the host with the correct event and payload', () => {
-      const state = {};
-
-      const result = reducer(state, {
-        type: 'SUBMIT_WINNER',
-        payload: {},
-      });
-      expect(result).not.toBe(state);
-
-      expect(socketInstance.sendMessage).toHaveBeenCalledWith({
-        event: 'select-winner',
-        payload: {},
-      });
-    });
-  });
-
   describe('RECEIVE_WHITE_CARDS', () => {
     it('puts the received cards into state and updates game state', () => {
       const state = {

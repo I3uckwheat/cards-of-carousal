@@ -38,13 +38,13 @@ describe('playerReducerMiddleware', () => {
   });
 
   describe('PREVIEW_WINNER', () => {
-    it('sends a message to the host with the index of the selected group of cards', () => {
+    it("sends a message to the host with the selected group of cards' author ID", () => {
       const dispatch = jest.fn();
 
       const result = playerReducerMiddleware(
         {
           type: 'PREVIEW_WINNER',
-          payload: { selectedGroupIndex: [1] },
+          payload: { highlightedPlayerID: 'foo' },
         },
         dispatch,
       );
@@ -52,7 +52,26 @@ describe('playerReducerMiddleware', () => {
       expect(result).not.toBe({});
       expect(socketInstance.sendMessage).toHaveBeenCalledWith({
         event: 'preview-winner',
-        payload: { selectedGroupIndex: [1] },
+        payload: { highlightedPlayerID: 'foo' },
+      });
+    });
+  });
+
+  describe('SUBMIT_WINNER', () => {
+    it('sends a message to the host with the correct event and payload', () => {
+      const dispatch = jest.fn();
+
+      playerReducerMiddleware(
+        {
+          type: 'SUBMIT_WINNER',
+          payload: {},
+        },
+        dispatch,
+      );
+
+      expect(socketInstance.sendMessage).toHaveBeenCalledWith({
+        event: 'select-winner',
+        payload: {},
       });
     });
   });
