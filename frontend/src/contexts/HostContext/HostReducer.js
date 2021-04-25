@@ -193,6 +193,9 @@ function setNextCzar(state) {
         [newCzar]: {
           ...newPlayers[newCzar],
           isCzar: true,
+
+          // TODO test that the below happens
+          czarSelection: null,
         },
       },
     };

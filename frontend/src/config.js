@@ -15,7 +15,7 @@ const config = {
 
   handSize: 10,
 
-  winnerScreenDisplayTime: 3000,
+  winnerScreenDisplayTime: 5000,
 };
 
 export default config;
