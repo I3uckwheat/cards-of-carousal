@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import PlayerMessageScreen from '../PlayerMessageScreen/PlayerMessageScreen';
-import Button from '../../Buttons/Button';
+import Button from '../../components/Buttons/Button';
 
 const propTypes = {};
 
@@ -45,7 +45,10 @@ const RestartButton = styled(Button)`
 
 export default function PlayerKickScreen() {
   return (
-    <PlayerMessageScreen bigText="You've been kicked!" smallText="">
+    <PlayerMessageScreen
+      bigText="You've been kicked!"
+      smallText="Take off, you hoser!"
+    >
       <RestartButton type="button" onClick={() => window.location.reload()}>
         restart
       </RestartButton>

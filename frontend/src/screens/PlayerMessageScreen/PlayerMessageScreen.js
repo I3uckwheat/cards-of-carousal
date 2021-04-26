@@ -12,6 +12,10 @@ const propTypes = {
   children: PropTypes.node,
 };
 
+const defaultProps = {
+  children: null,
+};
+
 const PlayerMessageScreenWrapper = styled.div`
   position: fixed;
   display: flex;
@@ -104,8 +108,6 @@ function PlayerMessageScreen({ bigText, smallText, children }) {
 }
 
 PlayerMessageScreen.propTypes = propTypes;
-PlayerMessageScreen.defaultProps = {
-  children: null,
-};
+PlayerMessageScreen.defaultProps = defaultProps;
 
 export default PlayerMessageScreen;
