@@ -36,7 +36,7 @@ describe('playerReducerMiddleware', () => {
     });
 
     describe('SUBMIT_CARDS', () => {
-      it("calls the sendMessage method on the socket with event: 'player-submit', and payload: submitted cards indexes", () => {
+      it("calls the sendMessage method on the socket with 'player-submit' event and the payload it receives", () => {
         const dispatch = jest.fn();
 
         playerReducerMiddleware(
@@ -55,7 +55,7 @@ describe('playerReducerMiddleware', () => {
     });
 
     describe('PREVIEW_WINNER', () => {
-      it("calls the sendMessage method on the socket with event: 'preview-winner', and payload: highlighted player ID", () => {
+      it("calls the sendMessage method on the socket with 'preview-winner' event and the payload it receives", () => {
         const dispatch = jest.fn();
 
         playerReducerMiddleware(
@@ -74,7 +74,7 @@ describe('playerReducerMiddleware', () => {
     });
 
     describe('SUBMIT_WINNER', () => {
-      it("calls the sendMessage method on the socket with event: 'select-winner', and payload: empty", () => {
+      it("calls the sendMessage method on the socket with 'select-winner' event and the payload it receives", () => {
         const dispatch = jest.fn();
 
         playerReducerMiddleware(

@@ -1,7 +1,7 @@
 import socketInstance from '../../socket/socket';
 
-function joinLobby(payload) {
-  socketInstance.joinLobby(payload.lobbyId, payload.playerName);
+function joinLobby({ lobbyId, playerName }) {
+  socketInstance.joinLobby(lobbyId, playerName);
 }
 
 function submitCards(payload) {
