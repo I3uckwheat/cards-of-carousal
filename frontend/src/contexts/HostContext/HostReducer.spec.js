@@ -878,6 +878,41 @@ describe('reducer', () => {
     });
   });
 
+  describe('REMOVE_SUBMITTED_CARDS_FROM_PLAYER', () => {
+    it('removes the players submitted cards', () => {
+      const state = {
+        players: {
+          bar: {
+            submittedCards: [0],
+            cards: [{ text: 'test1' }, { text: 'test2' }, { text: 'test3' }],
+          },
+
+          baz: {
+            submittedCards: [1],
+            cards: [{ text: 'test4' }, { text: 'test5' }, { text: 'test6' }],
+          },
+        },
+
+        playerIDs: ['bar', 'baz'],
+      };
+
+      const result = HostReducer(state, {
+        type: 'REMOVE_SUBMITTED_CARDS_FROM_PLAYER',
+        payload: {},
+      });
+
+      expect(result.players.bar.cards).toEqual([
+        { text: 'test2' },
+        { text: 'test3' },
+      ]);
+
+      expect(result.players.baz.cards).toEqual([
+        { text: 'test4' },
+        { text: 'test6' },
+      ]);
+    });
+  });
+
   describe('SELECT_BLACK_CARD', () => {
     it('sets a random black card and removes it from the deck', () => {
       const state = {

@@ -23,6 +23,7 @@ const initialState = {
     winningScore: config.winningScore.default,
     selectedPacks: config.initialSelectedPack,
     handSize: config.handSize,
+    winnerScreenDisplayTime: config.winnerScreenDisplayTime,
   },
   deck: { black: [], white: [] },
   loading: [],

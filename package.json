@@ -7,9 +7,9 @@
     "install-all": "npm i && cd ./frontend && npm i && cd ../backend && npm i",
     "dev:frontend": "node check-env.js ./frontend && cd ./frontend && npm start",
     "dev:backend": "node check-env.js ./backend && cd ./backend && npm run dev",
-    "lint:frontend": "cd ./frontend && prettier -c .; eslint .",
-    "lint:backend": "cd ./backend && prettier -c .; eslint .",
-    "lint": "prettier -c .; eslint .",
+    "lint:frontend": "cd ./frontend && prettier -c src/**/*.{js,css,md} ; eslint src",
+    "lint:backend": "cd ./backend && prettier -c app/**/*.{js,css,md} ; eslint app",
+    "lint": "npm run lint:frontend && npm run lint:backend",
     "test:backend": "cd ./backend && npm test",
     "test:frontend": "cd ./frontend && npm test -- --watchAll=false",
     "test": "npm run test:backend && npm run test:frontend",
@@ -48,7 +48,8 @@
     }
   },
   "lint-staged": {
-    "*.{js,css,md}": "prettier -c"
+    "*.{js,css,md}": "prettier -c",
+    "*.js": "eslint"
   },
   "dependencies": {
     "dotenv": "^8.2.0"
