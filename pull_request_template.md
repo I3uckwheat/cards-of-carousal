@@ -23,6 +23,6 @@
 
 #### 5. Cleanup
 - [ ] I've added all TODOs needed
-- [ ] I've removed all un-needed comments
+- [ ] I've removed all unneeded comments
 - [ ] I've updated the snapshot tests and checked to make sure they're accurate if they changed
-- [ ] I've removed all un-nessessary `console.log`s
+- [ ] I've removed all unnecessary `console.log`s
