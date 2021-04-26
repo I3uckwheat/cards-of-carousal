@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
 import Markdown from 'markdown-to-jsx';
 import LayeredCards from './LayeredCards';
@@ -7,10 +7,12 @@ import LayeredCards from './LayeredCards';
 const propTypes = {
   pickCount: PropTypes.number.isRequired,
   children: PropTypes.string,
+  winnerScreen: PropTypes.bool,
 };
 
 const defaultProps = {
   children: '',
+  winnerScreen: false,
 };
 
 const BLANK_LENGTH = 8;
@@ -26,6 +28,14 @@ const StyledBlackCard = styled.div`
   font-size: 36px;
   padding: 45px 21px 0 21px;
   box-shadow: 4px 4px 24px rgba(0, 0, 0, 0.3);
+
+  ${(props) =>
+    props.winnerDisplay &&
+    css`
+      width: 276px;
+      height: 363px;
+      font-size: 24px;
+    `}
 
   .pickText {
     font-size: 24px;
@@ -80,9 +90,9 @@ function parseForMarkdown(string, blankLength) {
   );
 }
 
-function BlackCard({ pickCount, children }) {
+function BlackCard({ pickCount, children, winnerScreen }) {
   return (
-    <StyledBlackCard data-testid="black-card">
+    <StyledBlackCard data-testid="black-card" winnerDisplay={winnerScreen}>
       <Markdown options={{ wrapper: 'div' }}>
         {parseForMarkdown(children, BLANK_LENGTH)}
       </Markdown>

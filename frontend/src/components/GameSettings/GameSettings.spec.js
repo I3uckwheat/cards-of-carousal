@@ -68,7 +68,7 @@ describe('GameSettings', () => {
       expect(screen.getByText('world')).toBeInTheDocument();
     });
 
-    it('displays a loading indicator while the pack names are being requested', () => {
+    it('displays a loading indicator while the pack names are being requested', async () => {
       const dispatch = jest.fn();
       const onChange = () => {};
       const options = {
@@ -87,10 +87,12 @@ describe('GameSettings', () => {
         </HostContext.Provider>,
       );
 
+      await waitFor(() => expect(window.fetch).toHaveBeenCalledTimes(1));
+
       expect(screen.getByTestId('loader')).toBeInTheDocument();
     });
 
-    it('dispatches the GET_PACKS action on mount', () => {
+    it('dispatches the GET_PACKS action on mount', async () => {
       const dispatch = jest.fn();
       const onChange = () => {};
       const options = {
@@ -104,6 +106,9 @@ describe('GameSettings', () => {
           <GameSettings onChange={onChange} options={options} />
         </HostContext.Provider>,
       );
+
+      await waitFor(() => expect(window.fetch).toHaveBeenCalledTimes(1));
+
       expect(dispatch).toHaveBeenCalledWith({ type: 'GET_PACKS', payload: {} });
     });
 
