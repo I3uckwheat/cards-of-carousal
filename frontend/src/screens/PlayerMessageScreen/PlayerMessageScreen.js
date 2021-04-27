@@ -9,6 +9,11 @@ import LoadingIndicator from '../../components/LoadingIndicator/LoadingIndicator
 const propTypes = {
   bigText: PropTypes.string.isRequired,
   smallText: PropTypes.string.isRequired,
+  children: PropTypes.node,
+};
+
+const defaultProps = {
+  children: null,
 };
 
 const PlayerMessageScreenWrapper = styled.div`
@@ -68,7 +73,7 @@ const PlayerMessageScreenWrapper = styled.div`
   }
 `;
 
-function PlayerMessageScreen({ bigText, smallText }) {
+function PlayerMessageScreen({ bigText, smallText, children }) {
   const { state } = useContext(PlayerContext);
   const loadingStates = ['joining-lobby', 'submitting-cards'];
 
@@ -83,6 +88,7 @@ function PlayerMessageScreen({ bigText, smallText }) {
       <div className="text-container">
         <h1 className="big-text">{bigText && bigText.toUpperCase()}</h1>
         <p className="small-text">{smallText}</p>
+        {children}
         {isLoading() && <LoadingIndicator />}
       </div>
       <div className="footer">
@@ -102,5 +108,6 @@ function PlayerMessageScreen({ bigText, smallText }) {
 }
 
 PlayerMessageScreen.propTypes = propTypes;
+PlayerMessageScreen.defaultProps = defaultProps;
 
 export default PlayerMessageScreen;

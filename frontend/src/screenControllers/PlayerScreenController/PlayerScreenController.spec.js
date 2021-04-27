@@ -6,6 +6,7 @@ import PlayerScreenController from './PlayerScreenController';
 import PlayerJoinScreen from '../../screens/PlayerJoinScreen/PlayerJoinScreen';
 import PlayerMessageScreen from '../../screens/PlayerMessageScreen/PlayerMessageScreen';
 import CzarHandScreen from '../../screens/CzarHandScreen/CzarHandScreen';
+import PlayerKickScreen from '../../screens/PlayerKickScreen/PlayerKickScreen';
 
 const MockPlayerJoinScreen = () => <div data-testid="player-join-screen" />;
 jest.mock('../../screens/PlayerJoinScreen/PlayerJoinScreen.js', () => ({
@@ -23,6 +24,12 @@ jest.mock('../../screens/PlayerMessageScreen/PlayerMessageScreen.js', () => ({
 
 const MockCzarHandScreen = () => <div data-testid="czar-hand-screen" />;
 jest.mock('../../screens/CzarHandScreen/CzarHandScreen.js', () => ({
+  __esModule: true,
+  default: jest.fn(),
+}));
+
+const MockPlayerKickScreen = () => <div data-testid="player-kick-screen" />;
+jest.mock('../../screens/PlayerKickScreen/PlayerKickScreen.js', () => ({
   __esModule: true,
   default: jest.fn(),
 }));
@@ -181,6 +188,26 @@ describe('Player screen controller', () => {
         );
 
         expect(screen.getByTestId('czar-hand-screen')).toBeInTheDocument();
+      });
+    });
+
+    describe('player-kicked', () => {
+      it('renders PlayerKickScreen', () => {
+        PlayerKickScreen.mockImplementation(MockPlayerKickScreen);
+
+        const dispatch = jest.fn();
+        const state = {
+          gameState: 'player-kicked',
+          message: { big: '', small: '' },
+        };
+
+        render(
+          <PlayerContext.Provider value={{ state, dispatch }}>
+            <PlayerScreenController />
+          </PlayerContext.Provider>,
+        );
+
+        expect(screen.getByTestId('player-kick-screen')).toBeInTheDocument();
       });
     });
 

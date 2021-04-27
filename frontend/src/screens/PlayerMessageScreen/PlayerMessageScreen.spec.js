@@ -33,6 +33,17 @@ describe('Player message screen', () => {
       expect(screen.getByText('sMaLl CaN hAvE AnY cAsE')).toBeInTheDocument();
     });
 
+    it('accepts children', () => {
+      render(
+        <PlayerContext.Provider value={{ state: { loading: [] } }}>
+          <PlayerMessageScreen bigText="big text" smallText="small text">
+            <p>test test test</p>
+          </PlayerMessageScreen>
+        </PlayerContext.Provider>,
+      );
+      expect(screen.getByText('test test test')).toBeInTheDocument();
+    });
+
     it('displays a loading indicator when the loading array contains "joining-lobby"', () => {
       render(
         <PlayerContext.Provider
