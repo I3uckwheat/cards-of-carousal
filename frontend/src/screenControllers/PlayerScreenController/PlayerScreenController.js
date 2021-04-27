@@ -43,6 +43,11 @@ export default function PlayerScreenController() {
         />
       );
 
+    case 'error':
+      return (
+        <PlayerErrorScreen bigText={message.big} smallText={message.small} />
+      );
+
     default:
       throw new Error(`Unrecognized game state: ${gameState}`);
   }
