@@ -15,22 +15,50 @@ const Header = styled.header`
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  height: 262px;
+  height: 420px;
 
   .welcome-to {
-    font-size: 36px;
+    font-size: 66px;
     font-weight: 500;
     line-height: 100%;
-    margin-bottom: -15px;
+    margin-bottom: -20px;
   }
   .CoC {
-    font-size: 96px;
+    font-size: 175px;
     font-weight: 700;
     line-height: 100%;
-    margin-bottom: -16px;
+    margin-bottom: -21px;
   }
 
-  @media (max-width: 1024px) {
+  @media (max-width: 2560px) {
+    height: 300px;
+    .welcome-to {
+      font-size: 45px;
+      margin-bottom: -19px;
+    }
+    .CoC {
+      font-size: 120px;
+      margin-bottom: -18px;
+    }
+  }
+
+  @media (max-width: 2000px) {
+    height: 262px;
+    .welcome-to {
+      font-size: 36px;
+      margin-bottom: -15px;
+    }
+    .CoC {
+      font-size: 96px;
+      margin-bottom: -16px;
+    }
+  }
+
+  /* @media (max-width: 1440p) {
+
+  } */
+
+  @media (max-width: 1439px) {
     height: 200px;
     .welcome-to {
       font-size: 28px;
@@ -45,7 +73,7 @@ const Header = styled.header`
   @media (max-width: 785px) {
     height: 150px;
     .welcome-to {
-      font-size: 18px;
+      font-size: 20px;
       margin-bottom: -7px;
     }
     .CoC {
@@ -65,7 +93,19 @@ const Header = styled.header`
 
     .CoC {
       font-size: 48px;
-      margin-bottom: -6px;
+      margin-bottom: -7px;
+    }
+  }
+
+  // Landscape mobile
+  @media (max-height: 500px) {
+    height: 80px;
+    .welcome-to {
+      display: none;
+    }
+    .CoC {
+      font-size: 56px;
+      margin-bottom: -9px;
     }
   }
 `;
