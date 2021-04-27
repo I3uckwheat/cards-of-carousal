@@ -8,7 +8,7 @@ import HostScreenController from './screenControllers/HostScreenController/HostS
 import PlayerScreenController from './screenControllers/PlayerScreenController/PlayerScreenController';
 import { PlayerProvider } from './contexts/PlayerContext/PlayerContext';
 import HostProvider from './contexts/HostContext/HostContext';
-import PlayerErrorBoundary from './ErrorHandlers/PlayerErrorHandlers/PlayerErrorBoundary';
+import PlayerErrorBoundary from './errorHandlers/playerErrorHandlers/PlayerErrorBoundary';
 
 function App() {
   const [screenControllerType, setScreenControllerType] = useState('welcome');

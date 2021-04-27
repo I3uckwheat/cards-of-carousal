@@ -4,7 +4,7 @@ import PlayerJoinScreen from '../../screens/PlayerJoinScreen/PlayerJoinScreen';
 import PlayerMessageScreen from '../../screens/PlayerMessageScreen/PlayerMessageScreen';
 import PlayerHandScreen from '../../screens/PlayerHandScreen/PlayerHandScreen';
 import CzarHandScreen from '../../screens/CzarHandScreen/CzarHandScreen';
-import PlayerKickScreen from '../../screens/PlayerKickScreen/PlayerKickScreen';
+import PlayerErrorScreen from '../../screens/PlayerErrorScreen/PlayerErrorScreen';
 
 const propTypes = {};
 
@@ -36,7 +36,12 @@ export default function PlayerScreenController() {
       return <CzarHandScreen />;
 
     case 'player-kicked':
-      return <PlayerKickScreen />;
+      return (
+        <PlayerErrorScreen
+          bigText="You've been kicked!"
+          smallText="Take off, you hoser!"
+        />
+      );
 
     default:
       throw new Error(`Unrecognized game state: ${gameState}`);
