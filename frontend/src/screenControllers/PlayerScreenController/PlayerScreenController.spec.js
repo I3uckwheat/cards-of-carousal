@@ -153,8 +153,8 @@ describe('Player screen controller', () => {
     });
 
     describe('lobby-closed', () => {
-      it('renders PlayerMessageScreen', () => {
-        PlayerMessageScreen.mockImplementation(MockPlayerMessageScreen);
+      it('renders PlayerErrorScreen', () => {
+        PlayerErrorScreen.mockImplementation(MockPlayerErrorScreen);
 
         const dispatch = jest.fn();
         const state = {
@@ -168,7 +168,7 @@ describe('Player screen controller', () => {
           </PlayerContext.Provider>,
         );
 
-        expect(screen.getByTestId('player-message-screen')).toBeInTheDocument();
+        expect(screen.getByTestId('player-error-screen')).toBeInTheDocument();
       });
     });
 

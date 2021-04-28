@@ -38,10 +38,9 @@ function update(state, payload) {
 function errorDisconnect(state) {
   return {
     ...state,
-    gameState: 'disconnected-error',
+    gameState: 'error',
     message: {
       big: 'AN ERROR OCCURRED',
-      small: 'Refresh to try again',
     },
   };
 }

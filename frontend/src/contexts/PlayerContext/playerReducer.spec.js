@@ -175,9 +175,9 @@ describe('reducer', () => {
 
       const result = reducer(state, { type: 'ERROR_DISCONNECT', payload: {} });
       expect(result).not.toBe(state);
-      expect(result.gameState).toBe('disconnected-error');
+      expect(result.gameState).toBe('error');
       expect(result.message.big).toBe('AN ERROR OCCURRED');
-      expect(result.message.small).toBe('Refresh to try again');
+      expect(result.message.small).toBeUndefined();
     });
   });
 

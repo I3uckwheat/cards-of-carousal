@@ -24,7 +24,6 @@ export default function PlayerScreenController() {
     case 'waiting-for-player-card-submissions':
     case 'waiting-for-czar':
     case 'showing-end-round-messages':
-    case 'lobby-closed':
       return (
         <PlayerMessageScreen bigText={message.big} smallText={message.small} />
       );
@@ -43,6 +42,7 @@ export default function PlayerScreenController() {
         />
       );
 
+    case 'lobby-closed':
     case 'error':
       return (
         <PlayerErrorScreen bigText={message.big} smallText={message.small} />
