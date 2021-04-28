@@ -37,18 +37,6 @@ describe('Alert Modal', () => {
   });
 
   describe('reloading', () => {
-    // let windowSpy;
-
-    // beforeEach(() => {
-    //   windowSpy = jest.spyOn(window, 'location').mockImplementation(() => ({
-    //     reload: jest.fn(),
-    //   }));
-    // });
-
-    // afterEach(() => {
-    //   windowSpy.mockRestore();
-    // });
-
     it('reloads when the modal is clicked anywhere', () => {
       // window.location properties are read-only, we have to redefine this object to spy on reload
       Object.defineProperty(window, 'location', {
