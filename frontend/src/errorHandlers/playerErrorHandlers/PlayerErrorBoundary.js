@@ -30,7 +30,7 @@ export default class ErrorBoundary extends Component {
     return hasError ? (
       // render the error screen
       <PlayerProvider>
-        <PlayerErrorScreen bigText="Player code is invalid" buttonText="OK" />
+        <PlayerErrorScreen />
       </PlayerProvider>
     ) : (
       // everything is okay
