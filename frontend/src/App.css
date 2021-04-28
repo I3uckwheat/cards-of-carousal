@@ -30,7 +30,8 @@
   height: 300px;
 }
 
-.primary-background {
+.primary-background,
+.primary-background-modal {
   position: relative;
   overflow: hidden;
 }
@@ -42,6 +43,19 @@
   background-image: url('./assets/halftone-effect.svg');
   background-size: contain;
   transform: rotate(11deg) translate(-450px, calc(-1250px + (2vh * 30)));
+  background-repeat: repeat-x;
+  height: 5000px;
+  width: 4200px;
+}
+
+.primary-background-modal::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  background-image: url('./assets/halftone-effect.svg');
+  background-size: contain;
+  background-color: var(--primary-background-color);
+  transform: rotate(11deg) translate(-3000px, calc(-1150px));
   background-repeat: repeat-x;
   height: 5000px;
   width: 4200px;
