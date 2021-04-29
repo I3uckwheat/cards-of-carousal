@@ -15,98 +15,19 @@ const Header = styled.header`
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  height: 420px;
+  height: min(25.6vh, 420px);
 
   .welcome-to {
-    font-size: 66px;
+    font-size: clamp(28px, 2.6vw, 66px);
     font-weight: 500;
     line-height: 100%;
-    margin-bottom: -20px;
+    margin-bottom: max(-0.8vw, -18px);
   }
   .CoC {
-    font-size: 175px;
+    font-size: clamp(48px, 7vw, 175px);
     font-weight: 700;
     line-height: 100%;
-    margin-bottom: -21px;
-  }
-
-  @media (max-width: 2560px) {
-    height: 300px;
-    .welcome-to {
-      font-size: 45px;
-      margin-bottom: -19px;
-    }
-    .CoC {
-      font-size: 120px;
-      margin-bottom: -18px;
-    }
-  }
-
-  @media (max-width: 2000px) {
-    height: 262px;
-    .welcome-to {
-      font-size: 36px;
-      margin-bottom: -15px;
-    }
-    .CoC {
-      font-size: 96px;
-      margin-bottom: -16px;
-    }
-  }
-
-  /* @media (max-width: 1440p) {
-
-  } */
-
-  @media (max-width: 1439px) {
-    height: 200px;
-    .welcome-to {
-      font-size: 28px;
-      margin-bottom: -10px;
-    }
-    .CoC {
-      font-size: 75px;
-      margin-bottom: -12px;
-    }
-  }
-
-  @media (max-width: 785px) {
-    height: 150px;
-    .welcome-to {
-      font-size: 20px;
-      margin-bottom: -7px;
-    }
-    .CoC {
-      font-size: 56px;
-      margin-bottom: -9px;
-    }
-  }
-
-  @media (max-width: 566px) {
-    .welcome-to {
-      display: none;
-    }
-  }
-
-  @media (max-width: 480px) {
-    height: 133px;
-
-    .CoC {
-      font-size: 48px;
-      margin-bottom: -7px;
-    }
-  }
-
-  // Landscape mobile
-  @media (max-height: 500px) {
-    height: 80px;
-    .welcome-to {
-      display: none;
-    }
-    .CoC {
-      font-size: 56px;
-      margin-bottom: -9px;
-    }
+    margin-bottom: max(-1.1vw, -30px);
   }
 `;
 
