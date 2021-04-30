@@ -13,13 +13,13 @@ labels: bug
 **Browser(s) Used:**
 - [ ] Chrome
 - [ ] Safari
-- [ ] Fire Fox
+- [ ] FireFox
 - [ ] Other: ______
 
 **Environment:** 
 - [ ] Production
 - [ ] Staging
-- [ ] Local host
+- [ ] Localhost
 
 # Description
 
