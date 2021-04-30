@@ -1,5 +1,3 @@
-import socketInstance from '../../socket/socket';
-
 function joinLobby(state) {
   return {
     ...state,
@@ -46,17 +44,6 @@ function errorDisconnect(state) {
   };
 }
 
-function submitWinner(state) {
-  socketInstance.sendMessage({
-    event: 'select-winner',
-    payload: {},
-  });
-
-  return {
-    ...state,
-  };
-}
-
 function receiveWhiteCards(state, payload) {
   const { cards, selectCardCount } = payload;
   return {
@@ -82,7 +69,6 @@ function reducer(state, action) {
   const { type, payload } = action;
   switch (type) {
     case 'JOIN_LOBBY':
-      socketInstance.joinLobby(payload.lobbyId, payload.playerName);
       return joinLobby(state);
 
     case 'UPDATE':
@@ -93,9 +79,6 @@ function reducer(state, action) {
 
     case 'SUBMIT_CARDS':
       return submitCards(state);
-
-    case 'SUBMIT_WINNER':
-      return submitWinner(state, payload);
 
     case 'RECEIVE_WHITE_CARDS':
       return receiveWhiteCards(state, payload);

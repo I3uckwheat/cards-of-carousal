@@ -424,22 +424,6 @@ describe('reducer', () => {
     });
   });
 
-  describe('CLOSE_GAME', () => {
-    it('returns unaltered state', () => {
-      const state = {
-        gameState: 'foo',
-        gameSettings: {
-          foo: 'foo',
-          bar: 'bar',
-          baz: 'baz',
-        },
-      };
-
-      const result = HostReducer(state, { type: 'CLOSE_GAME', payload: {} });
-      expect(result).toEqual(state);
-    });
-  });
-
   describe('GET_DECK', () => {
     it('adds the "getting-deck" string to the loading array in state', () => {
       const state = {
