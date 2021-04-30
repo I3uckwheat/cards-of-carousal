@@ -15,10 +15,10 @@ assignees: CatQueenCodes
 # Description
 
 ### Expected Behavior
-Description
+-Type your description here-
 
 ### Actual Behavior
-Description
+-Type your description here- 
 
 ## Replication Steps & Data
 Include step by step directions on how you found this bug. Include the specific data inputs you used.
