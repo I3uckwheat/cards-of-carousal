@@ -6,7 +6,7 @@ import { PlayerContext } from '../../contexts/PlayerContext/PlayerContext';
 
 describe('Player error screen', () => {
   describe('render', () => {
-    it('renders with default props', () => {
+    it('renders with default text props', () => {
       render(
         <PlayerContext.Provider value={{ state: { loading: [] } }}>
           <PlayerErrorScreen />
@@ -52,11 +52,14 @@ describe('Player error screen', () => {
     });
   });
 
-  describe('buttons', () => {
-    it('reloads when restart button is clicked', async () => {
+  describe('button', () => {
+    it('reloads when restart button is clicked and no onClickButton callback is passed in', async () => {
+      const { reload } = window.location;
+
       // window.location properties are read-only, we have to redefine this object to spy on reload
       Object.defineProperty(window, 'location', {
-        value: { reload: jest.fn() },
+        writable: true,
+        value: { ...window.location, reload: jest.fn() },
       });
 
       render(
@@ -65,27 +68,67 @@ describe('Player error screen', () => {
         </PlayerContext.Provider>,
       );
 
-      await act(async () => userEvent.click(screen.getByTestId('restart')));
+      act(() => userEvent.click(screen.getByTestId('restart')));
 
       expect(window.location.reload).toHaveBeenCalledTimes(1);
+
+      window.location.reload = reload;
     });
 
-    it('does NOT reload when restart button has NOT been clicked', async () => {
+    it('calls a custom callback passed in as onClickButton', () => {
+      const handleClick = jest.fn();
+      render(
+        <PlayerContext.Provider value={{ state: { loading: [] } }}>
+          <PlayerErrorScreen onClickButton={handleClick} />
+        </PlayerContext.Provider>,
+      );
+
+      act(() => userEvent.click(screen.getByTestId('restart')));
+
+      expect(handleClick).toHaveBeenCalledTimes(1);
+    });
+
+    it('does NOT reload when an onClickButton function has been passed in', async () => {
+      const handleClick = jest.fn();
+      const { reload } = window.location;
+
+      // window.location properties are read-only, we have to redefine this object to spy on reload
       Object.defineProperty(window, 'location', {
-        value: { reload: jest.fn() },
+        writable: true,
+        value: { ...window.location, reload: jest.fn() },
       });
 
       render(
         <PlayerContext.Provider value={{ state: { loading: [] } }}>
-          <PlayerErrorScreen />
+          <PlayerErrorScreen onClickButton={handleClick} />
         </PlayerContext.Provider>,
       );
 
-      await act(async () =>
-        userEvent.click(screen.getByText('SOMETHING WENT WRONG')),
-      );
+      act(() => userEvent.click(screen.getByTestId('restart')));
 
       expect(window.location.reload).not.toHaveBeenCalled();
+
+      window.location.reload = reload;
+    });
+
+    it('does NOT call the onClickButton callback when restart button has NOT been clicked', async () => {
+      const handleClick = jest.fn();
+
+      render(
+        <PlayerContext.Provider value={{ state: { loading: [] } }}>
+          <PlayerErrorScreen
+            smallText="small text"
+            onClickButton={handleClick}
+          />
+        </PlayerContext.Provider>,
+      );
+
+      act(() => {
+        userEvent.click(screen.getByText('SOMETHING WENT WRONG'));
+        userEvent.click(screen.getByText('small text'));
+      });
+
+      expect(handleClick).not.toHaveBeenCalled();
     });
   });
 });

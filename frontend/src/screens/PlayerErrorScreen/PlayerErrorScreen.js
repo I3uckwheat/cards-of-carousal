@@ -9,12 +9,14 @@ const propTypes = {
   bigText: PropTypes.string,
   smallText: PropTypes.string,
   buttonText: PropTypes.string,
+  onClickButton: PropTypes.func,
 };
 
 const defaultProps = {
   bigText: 'Something went wrong',
   smallText: '',
   buttonText: 'Click to restart',
+  onClickButton: () => window.location.reload(),
 };
 
 const RestartButton = styled(Button)`
@@ -54,13 +56,18 @@ const RestartButton = styled(Button)`
   }
 `;
 
-export default function PlayerErrorScreen({ bigText, smallText, buttonText }) {
+export default function PlayerErrorScreen({
+  bigText,
+  smallText,
+  buttonText,
+  onClickButton: handleClickButton,
+}) {
   return (
     <PlayerMessageScreen bigText={bigText} smallText={smallText}>
       <RestartButton
         data-testid="restart"
         type="button"
-        onClick={() => window.location.reload()}
+        onClick={handleClickButton}
       >
         {buttonText}
       </RestartButton>
