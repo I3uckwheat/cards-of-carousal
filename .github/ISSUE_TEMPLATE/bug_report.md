@@ -14,8 +14,9 @@ assignees: CatQueenCodes
 **Browser(s) Used:**
 - [ ] Chrome
 - [ ] Safari
-- [ ] Fire Fox
+- [ ] FireFox
 - [ ] Other: ______
+
 # Description
 
 ### Expected Behavior
