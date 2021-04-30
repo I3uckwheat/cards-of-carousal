@@ -6,11 +6,22 @@ labels: bug
 
 ---
 
-**Linked User Story Issue#:** (if applicable)
+**Linked User Story:** (if applicable)
 
-**Device used:**
-**Browser(s) used:**
-**Locally run or on official site:** 
+**Device Used:**
+
+**Browser(s) Used:**
+- [ ] Chrome
+- [ ] Safari
+- [ ] Fire Fox
+- [ ] Other: ______
+
+**Environment:** 
+- [ ] Local
+- [ ] Development
+- [ ] Production
+- [ ] Staging
+- [ ] Live
 
 # Description
 
