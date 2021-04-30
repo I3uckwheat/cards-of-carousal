@@ -83,8 +83,14 @@ const AlertWrapper = styled.div`
   @media (max-width: 620px) {
     max-height: 180px;
     max-width: 360px;
+    width: 90%;
+
+    .bottom {
+      padding: 10px;
+    }
+
     .big-text {
-      font-size: 1.5rem;
+      font-size: 1.2rem;
       padding: 0;
     }
 
