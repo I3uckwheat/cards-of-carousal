@@ -17,11 +17,9 @@ labels: bug
 - [ ] Other: ______
 
 **Environment:** 
-- [ ] Local
-- [ ] Development
 - [ ] Production
 - [ ] Staging
-- [ ] Live
+- [ ] Local host
 
 # Description
 
@@ -37,6 +35,8 @@ labels: bug
 # Replication Steps & Data
 Include step by step directions on how you found this bug. Include the specific data inputs you used.
 
+# User Story
+As a ____ (type of user, such as player), I want to _____ (have an ability to do something, such as login), so that ____ (benefit to the user, such as so that one can play the game)
 
 # Acceptance Criteria
 Criteria needed for this to work as intended in the user story.
