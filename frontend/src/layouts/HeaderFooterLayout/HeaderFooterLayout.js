@@ -28,6 +28,19 @@ const Header = styled.header`
     font-weight: 700;
     line-height: 100%;
     margin-bottom: max(-1.1vw, -30px);
+    padding-right: 5px;
+  }
+
+  @media (max-width: 600px) {
+    .CoC {
+      margin-bottom: -7px;
+    }
+  }
+
+  @media (max-width: 490px), (orientation: landscape) and (max-height: 500px) {
+    .welcome-to {
+      display: none;
+    }
   }
 `;
 
