@@ -28,6 +28,7 @@ Include step by step directions on how you found this bug. Include the specific 
 - Copy over the "Completion Criteria" check boxes for the device/browser you are using from the test case and paste it in place of this bullet (or accessibility checkboxes if this is an accessibility bug).
 - [ ] Add to the "Triage" category in the [Bugs/Refactor Kanban](https://github.com/I3uckwheat/cards-of-carousal/projects/2)
 - [ ] Add the "Bug" tag (and the "Accessibility Bug" tag if necessary)
+- [ ] On the right hand side click `Projects` and add it to `Bugs/Refactor`
 - [ ] Link this issue to your pull request.
 
 
