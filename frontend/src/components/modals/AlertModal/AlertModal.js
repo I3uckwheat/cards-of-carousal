@@ -11,7 +11,7 @@ const propTypes = {
 
 const defaultProps = {
   bigText: 'SOMETHING WENT WRONG',
-  smallText: 'An unrecoverable error occured',
+  smallText: 'An unrecoverable error occurred',
   buttonText: 'Click anywhere to restart',
 };
 

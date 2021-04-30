@@ -10,7 +10,7 @@ describe('Alert Modal', () => {
 
       expect(screen.getByText('SOMETHING WENT WRONG')).toBeInTheDocument();
       expect(
-        screen.getByText('An unrecoverable error occured'),
+        screen.getByText('An unrecoverable error occurred'),
       ).toBeInTheDocument();
       expect(screen.getByText('Click anywhere to restart')).toBeInTheDocument();
     });
