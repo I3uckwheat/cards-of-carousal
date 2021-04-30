@@ -7,11 +7,15 @@ assignees: CatQueenCodes
 
 ---
 
-**Link Test Case Issue#:**
+**Link Test Case #:**
 
 **Device used:**
-**Browser(s) used:**
 
+**Browser(s) Used:**
+- [ ] Chrome
+- [ ] Safari
+- [ ] Fire Fox
+- [ ] Other: ______
 # Description
 
 ### Expected Behavior
@@ -23,6 +27,8 @@ assignees: CatQueenCodes
 # Replication Steps & Data
 Include step by step directions on how you found this bug. Include the specific data inputs you used.
 
+# User Story
+As a player, I want to _____ (have an ability to do something, such as login), so that ____ (benefit to the user, such as so that one can play the game)
 
 # Acceptance Criteria:
 - Copy over the "Completion Criteria" check boxes for the device/browser you are using from the test case and paste it in place of this bullet (or accessibility checkboxes if this is an accessibility bug).
