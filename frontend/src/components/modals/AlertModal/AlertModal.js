@@ -7,12 +7,14 @@ const propTypes = {
   bigText: PropTypes.string,
   smallText: PropTypes.string,
   buttonText: PropTypes.string,
+  onClick: PropTypes.func,
 };
 
 const defaultProps = {
   bigText: 'SOMETHING WENT WRONG',
   smallText: 'An unrecoverable error occurred',
   buttonText: 'Click anywhere to restart',
+  onClick: () => window.location.reload(),
 };
 
 const AlertWrapper = styled.div`
@@ -105,11 +107,14 @@ const AlertWrapper = styled.div`
   }
 `;
 
-export default function AlertModal({ bigText, smallText, buttonText }) {
-  const reload = () => window.location.reload();
-
+export default function AlertModal({
+  bigText,
+  smallText,
+  buttonText,
+  onClick: handleClick,
+}) {
   return (
-    <AlertWrapper onClick={reload} className="primary-background-modal">
+    <AlertWrapper onClick={handleClick} className="primary-background-modal">
       <div className="main-box">
         <div className="top">
           <h1 className="big-text">{bigText.toUpperCase()}</h1>
