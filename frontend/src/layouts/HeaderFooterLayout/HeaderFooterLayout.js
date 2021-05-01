@@ -5,11 +5,12 @@ import Footer from './Footer/Footer';
 
 const propTypes = {
   isWelcoming: PropTypes.bool,
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
 };
 
 const defaultProps = {
   isWelcoming: false,
+  children: '',
 };
 
 const Header = styled.header`
@@ -66,8 +67,12 @@ const Header = styled.header`
 function HeaderFooterLayout({ isWelcoming, children }) {
   return (
     <>
-      <Header>
-        {isWelcoming && <p className="welcome-to">WELCOME TO</p>}
+      <Header data-testid="header">
+        {isWelcoming && (
+          <p data-testid="welcome-text" className="welcome-to">
+            WELCOME TO
+          </p>
+        )}
         <h1 className="CoC">CARDS OF CAROUSAL</h1>
       </Header>
       {children}

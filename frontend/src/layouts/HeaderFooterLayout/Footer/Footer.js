@@ -78,7 +78,7 @@ const FooterWrapper = styled.footer`
 
 function Footer() {
   return (
-    <FooterWrapper>
+    <FooterWrapper data-testid="footer">
       <p>
         Card content thanks to:{' '}
         <a href="https://cardsagainsthumanity.com">
