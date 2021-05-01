@@ -25,7 +25,7 @@ const Header = styled.header`
     font-size: clamp(28px, 2.6vw, 66px);
     font-weight: 500;
     line-height: 100%;
-    margin-bottom: max(-0.8vw, -18px);
+    margin-bottom: max(-1vw, -21px);
   }
   .CoC {
     font-size: clamp(48px, 7vw, 175px);
@@ -42,6 +42,21 @@ const Header = styled.header`
   }
 
   @media (max-width: 490px), (orientation: landscape) and (max-height: 500px) {
+    .welcome-to {
+      display: none;
+    }
+  }
+
+  @media (orientation: landscape) and (max-height: 500px) {
+    height: 80px;
+  }
+
+  @media (max-height: 40vw) {
+    height: 15vh;
+    .CoC {
+      font-size: 56px;
+      margin-bottom: -9px;
+    }
     .welcome-to {
       display: none;
     }

@@ -38,6 +38,11 @@ const FooterWrapper = styled.footer`
     font-size: 1.5rem;
   }
 
+  @media (max-height: 40vw) {
+    height: 70px;
+    font-size: 1.1rem;
+  }
+
   /*largest desktop player mode */
   @media (max-width: 785px) and (min-height: 501px) {
     height: 120px;
