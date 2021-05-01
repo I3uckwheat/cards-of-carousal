@@ -36,10 +36,9 @@ function update(state, payload) {
 function errorDisconnect(state) {
   return {
     ...state,
-    gameState: 'disconnected-error',
+    gameState: 'error',
     message: {
       big: 'AN ERROR OCCURRED',
-      small: 'Refresh to try again',
     },
   };
 }
@@ -65,6 +64,18 @@ function lobbyClosed(state) {
   };
 }
 
+function noLobby(state) {
+  return {
+    ...state,
+    gameState: 'error',
+    message: {
+      big: 'Lobby does not exist',
+      small: 'We understand, spelling is pretty hard.',
+    },
+    loading: [],
+  };
+}
+
 function reducer(state, action) {
   const { type, payload } = action;
   switch (type) {
@@ -85,6 +96,9 @@ function reducer(state, action) {
 
     case 'LOBBY_CLOSED':
       return lobbyClosed(state);
+
+    case 'NO_LOBBY':
+      return noLobby(state);
 
     default:
       return { ...state };

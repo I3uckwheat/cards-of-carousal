@@ -4,7 +4,7 @@ import PlayerJoinScreen from '../../screens/PlayerJoinScreen/PlayerJoinScreen';
 import PlayerMessageScreen from '../../screens/PlayerMessageScreen/PlayerMessageScreen';
 import PlayerHandScreen from '../../screens/PlayerHandScreen/PlayerHandScreen';
 import CzarHandScreen from '../../screens/CzarHandScreen/CzarHandScreen';
-import PlayerKickScreen from '../../screens/PlayerKickScreen/PlayerKickScreen';
+import PlayerErrorScreen from '../../screens/PlayerErrorScreen/PlayerErrorScreen';
 
 const propTypes = {};
 
@@ -24,7 +24,6 @@ export default function PlayerScreenController() {
     case 'waiting-for-player-card-submissions':
     case 'waiting-for-czar':
     case 'showing-end-round-messages':
-    case 'lobby-closed':
       return (
         <PlayerMessageScreen bigText={message.big} smallText={message.small} />
       );
@@ -36,7 +35,18 @@ export default function PlayerScreenController() {
       return <CzarHandScreen />;
 
     case 'player-kicked':
-      return <PlayerKickScreen />;
+      return (
+        <PlayerErrorScreen
+          bigText="You've been kicked!"
+          smallText="Take off, you hoser!"
+        />
+      );
+
+    case 'lobby-closed':
+    case 'error':
+      return (
+        <PlayerErrorScreen bigText={message.big} smallText={message.small} />
+      );
 
     default:
       throw new Error(`Unrecognized game state: ${gameState}`);
