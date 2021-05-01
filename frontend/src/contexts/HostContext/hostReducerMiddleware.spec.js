@@ -321,6 +321,68 @@ describe('hostReducerMiddleware', () => {
         recipients: ['baz'],
       });
     });
+
+    it('only insists the new player updates game state if a new player joins in the middle of a round', () => {
+      const state = {
+        players: {
+          foo: {
+            cards: [{ text: 'test 1' }, { text: 'test 2' }],
+            isCzar: true,
+          },
+          bar: {
+            cards: [{ text: 'test 3' }, { text: 'test 4' }],
+            isCzar: false,
+          },
+          baz: {
+            cards: [{ text: 'test 5' }, { text: 'test 6' }],
+            isCzar: false,
+          },
+          test: {
+            cards: [],
+            isCzar: false,
+          },
+        },
+        selectedBlackCard: { pick: 2 },
+        playerIDs: ['foo', 'bar', 'baz', 'test'],
+      };
+
+      const dispatch = jest.fn();
+      const { players, selectedBlackCard, playerIDs } = state;
+      const payload = {
+        selectedBlackCard,
+        players,
+        playerIDs,
+        newPlayer: 'test',
+      };
+
+      hostReducerMiddleware(
+        {
+          type: 'SEND_CARDS_TO_PLAYERS',
+          payload,
+        },
+        dispatch,
+      );
+
+      expect(socketInstance.sendMessage).toHaveBeenNthCalledWith(1, {
+        event: 'deal-white-cards',
+        payload: {
+          cards: players.bar.cards.map((card) => card.text),
+          selectCardCount: selectedBlackCard.pick,
+          shouldPreserveGameState: true,
+        },
+        recipients: ['bar'],
+      });
+
+      expect(socketInstance.sendMessage).toHaveBeenNthCalledWith(3, {
+        event: 'deal-white-cards',
+        payload: {
+          cards: players.test.cards.map((card) => card.text),
+          selectCardCount: selectedBlackCard.pick,
+          shouldPreserveGameState: false,
+        },
+        recipients: ['test'],
+      });
+    });
   });
 
   describe('SHUFFLE_JOIN_CODE', () => {

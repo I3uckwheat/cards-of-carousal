@@ -1,4 +1,7 @@
 import HostReducer from './HostReducer';
+import hostReducerMiddleware from './hostReducerMiddleware';
+
+jest.mock('./hostReducerMiddleware', () => jest.fn());
 
 describe('reducer', () => {
   beforeEach(() => {
@@ -127,6 +130,175 @@ describe('reducer', () => {
 
       expect(result.players['example-player-id'].submittedCards.length).toBe(1);
       expect(result.players['example-player-id'].submittedCards[0]).toBe(0);
+    });
+
+    describe('player connected while game in progress', () => {
+      it('deals cards to the new player', () => {
+        const state = {
+          playerIDs: ['foo', 'bar', 'baz'],
+          players: {
+            foo: {
+              name: 'foo',
+              cards: [{ text: '1' }, { text: '2' }],
+              submittedCards: [0],
+              isCzar: false,
+            },
+            bar: {
+              name: 'bar',
+              cards: [{ text: '1' }, { text: '2' }],
+              submittedCards: [],
+              isCzar: false,
+            },
+            baz: {
+              name: 'baz',
+              cards: [{ text: '1' }, { text: '2' }],
+              submittedCards: [],
+              isCzar: true,
+            },
+          },
+          gameState: 'waiting-to-receive-cards',
+          deck: {
+            black: [],
+            white: [{ text: '3' }, { text: '4' }, { text: '5' }],
+          },
+          gameSettings: { handSize: 2 },
+        };
+
+        const result = HostReducer(state, {
+          type: 'PLAYER_CONNECTED',
+          payload: { playerId: 'test', name: 'test name' },
+        });
+
+        expect(result.players.test.cards).toEqual([
+          { text: '3' },
+          { text: '4' },
+        ]);
+      });
+
+      it("removes the new player's dummy submittedCards", () => {
+        const state = {
+          playerIDs: ['foo', 'bar', 'baz'],
+          players: {
+            foo: {
+              name: 'foo',
+              cards: [{ text: '1' }, { text: '2' }],
+              submittedCards: [0],
+              isCzar: false,
+            },
+            bar: {
+              name: 'bar',
+              cards: [{ text: '1' }, { text: '2' }],
+              submittedCards: [],
+              isCzar: false,
+            },
+            baz: {
+              name: 'baz',
+              cards: [{ text: '1' }, { text: '2' }],
+              submittedCards: [],
+              isCzar: true,
+            },
+          },
+          gameState: 'waiting-to-receive-cards',
+          deck: {
+            black: [],
+            white: [{ text: '3' }, { text: '4' }, { text: '5' }],
+          },
+          gameSettings: { handSize: 2 },
+        };
+
+        const result = HostReducer(state, {
+          type: 'PLAYER_CONNECTED',
+          payload: { playerId: 'test', name: 'test name' },
+        });
+
+        expect(result.players.test.submittedCards).toEqual([]);
+      });
+
+      it("preserves the existing player's dummy submittedCards", () => {
+        const state = {
+          playerIDs: ['foo', 'bar', 'baz'],
+          players: {
+            foo: {
+              name: 'foo',
+              cards: [{ text: '1' }, { text: '2' }],
+              submittedCards: [0],
+              isCzar: false,
+            },
+            bar: {
+              name: 'bar',
+              cards: [{ text: '1' }, { text: '2' }],
+              submittedCards: [],
+              isCzar: false,
+            },
+            baz: {
+              name: 'baz',
+              cards: [{ text: '1' }, { text: '2' }],
+              submittedCards: [],
+              isCzar: true,
+            },
+          },
+          gameState: 'waiting-to-receive-cards',
+          deck: {
+            black: [],
+            white: [{ text: '3' }, { text: '4' }, { text: '5' }],
+          },
+          gameSettings: { handSize: 2 },
+        };
+
+        const result = HostReducer(state, {
+          type: 'PLAYER_CONNECTED',
+          payload: { playerId: 'test', name: 'test name' },
+        });
+
+        expect(result.players.foo.submittedCards).toEqual([0]);
+        expect(result.players.bar.submittedCards).toEqual([]);
+        expect(result.players.baz.submittedCards).toEqual([]);
+      });
+
+      it('sends the cards to the players', () => {
+        const state = {
+          playerIDs: ['foo', 'bar', 'baz'],
+          players: {
+            foo: {
+              name: 'foo',
+              cards: [{ text: '1' }, { text: '2' }],
+              submittedCards: [0],
+              isCzar: false,
+            },
+            bar: {
+              name: 'bar',
+              cards: [{ text: '1' }, { text: '2' }],
+              submittedCards: [],
+              isCzar: false,
+            },
+            baz: {
+              name: 'baz',
+              cards: [{ text: '1' }, { text: '2' }],
+              submittedCards: [],
+              isCzar: true,
+            },
+          },
+          gameState: 'waiting-to-receive-cards',
+          deck: {
+            black: [],
+            white: [{ text: '3' }, { text: '4' }, { text: '5' }],
+          },
+          gameSettings: { handSize: 2 },
+        };
+
+        const result = HostReducer(state, {
+          type: 'PLAYER_CONNECTED',
+          payload: { playerId: 'test', name: 'test name' },
+        });
+
+        expect(hostReducerMiddleware).toHaveBeenCalledWith(
+          {
+            type: 'SEND_CARDS_TO_PLAYERS',
+            payload: { ...result, newPlayer: 'test' },
+          },
+          expect.any(Function),
+        );
+      });
     });
   });
 

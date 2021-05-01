@@ -1,3 +1,5 @@
+import hostReducerMiddleware from './hostReducerMiddleware';
+
 function createLobby(state) {
   return {
     ...state,
@@ -21,8 +23,73 @@ function packsReceived(state) {
   };
 }
 
-function playerConnected(state, { playerId, playerName }) {
+function clearSubmittedCards(state) {
+  const newState = { ...state };
+  const { playerIDs, players } = newState;
+  playerIDs.forEach((playerID) => {
+    players[playerID].submittedCards = [];
+  });
+
+  return newState;
+}
+
+function dealWhiteCards(state) {
+  const {
+    deck,
+    playerIDs,
+    players,
+    gameSettings: { handSize },
+  } = state;
+  const newWhiteCards = [...deck.white];
+
+  const neededCardsPerPlayer = playerIDs.map((playerID) => {
+    const player = players[playerID];
+    return {
+      playerID,
+      cardsNeeded: handSize - player.cards.length,
+    };
+  });
+
+  const cardsGivenToPlayers = neededCardsPerPlayer.map(
+    ({ playerID, cardsNeeded }) => {
+      const newCards = [...players[playerID].cards];
+      for (let i = 0; i < cardsNeeded; i += 1) {
+        const selection = Math.floor(Math.random() * newWhiteCards.length);
+        newCards.push(newWhiteCards.splice(selection, 1)[0]);
+      }
+      return {
+        playerID,
+        cards: newCards,
+      };
+    },
+  );
+
+  const newPlayers = cardsGivenToPlayers.reduce((acc, { playerID, cards }) => {
+    acc[playerID] = {
+      ...players[playerID],
+      cards,
+    };
+    return acc;
+  }, {});
+
   return {
+    ...state,
+    deck: {
+      black: [...deck.black],
+      white: newWhiteCards,
+    },
+    players: newPlayers,
+    gameState: 'waiting-to-receive-cards',
+  };
+}
+
+function playerConnected(state, { playerId, playerName }) {
+  /*
+    if game is in progress, we want to reassign state to allow the dealing of cards
+    to the new player. We also need to make sure they don't receive the "dummy"
+    submitted cards a new player receives in the pregame screen.
+  */
+  let newState = {
     ...state,
     players: {
       ...state.players,
@@ -36,6 +103,26 @@ function playerConnected(state, { playerId, playerName }) {
     },
     playerIDs: [...state.playerIDs, playerId],
   };
+
+  if (state.gameState === 'waiting-to-receive-cards') {
+    // this will give a hand of cards to our new player, but preserve the hands of the others
+    newState = dealWhiteCards(newState);
+
+    // clear the vanity dummy card each player gets when connecting
+    newState.players[playerId].submittedCards = [];
+
+    // this will send the cards out. the second argument is the dispatch function which is not
+    // not called in this reducer case.
+    hostReducerMiddleware(
+      {
+        type: 'SEND_CARDS_TO_PLAYERS',
+        payload: { ...newState, newPlayer: playerId },
+      },
+      () => {},
+    );
+  }
+
+  return newState;
 }
 
 function playerSubmitCards(state, { selectedCards, playerId }) {
@@ -237,57 +324,6 @@ function setDeck(state, { deck }) {
   };
 }
 
-function dealWhiteCards(state) {
-  const {
-    deck,
-    playerIDs,
-    players,
-    gameSettings: { handSize },
-  } = state;
-  const newWhiteCards = [...deck.white];
-
-  const neededCardsPerPlayer = playerIDs.map((playerID) => {
-    const player = players[playerID];
-    return {
-      playerID,
-      cardsNeeded: handSize - player.cards.length,
-    };
-  });
-
-  const cardsGivenToPlayers = neededCardsPerPlayer.map(
-    ({ playerID, cardsNeeded }) => {
-      const newCards = [...players[playerID].cards];
-      for (let i = 0; i < cardsNeeded; i += 1) {
-        const selection = Math.floor(Math.random() * newWhiteCards.length);
-        newCards.push(newWhiteCards.splice(selection, 1)[0]);
-      }
-      return {
-        playerID,
-        cards: newCards,
-      };
-    },
-  );
-
-  const newPlayers = cardsGivenToPlayers.reduce((acc, { playerID, cards }) => {
-    acc[playerID] = {
-      ...players[playerID],
-      cards,
-      submittedCards: [],
-    };
-    return acc;
-  }, {});
-
-  return {
-    ...state,
-    deck: {
-      black: [...deck.black],
-      white: newWhiteCards,
-    },
-    players: newPlayers,
-    gameState: 'waiting-to-receive-cards',
-  };
-}
-
 function getJoinCode(state) {
   return {
     ...state,
@@ -359,7 +395,7 @@ function HostReducer(state, action) {
       return setDeck(state, payload);
 
     case 'DEAL_WHITE_CARDS':
-      return dealWhiteCards(state);
+      return dealWhiteCards(clearSubmittedCards(state));
 
     case 'REMOVE_SUBMITTED_CARDS_FROM_PLAYER':
       return removeSubmittedCards(state);

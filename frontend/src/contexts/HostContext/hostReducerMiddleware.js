@@ -102,7 +102,15 @@ async function getDeck({ selectedPacks }) {
   }
 }
 
-function sendCardsToPlayers({ selectedBlackCard, players, playerIDs }) {
+function sendCardsToPlayers({
+  selectedBlackCard,
+  players,
+  playerIDs,
+  newPlayer,
+}) {
+  // the fourth object property is passed in from the host reducer to tell this dispatcher
+  // that there is a round in progress and current players submitted cards should not be wiped
+
   playerIDs.forEach((playerID) => {
     if (!players[playerID].isCzar) {
       socketInstance.sendMessage({
@@ -110,6 +118,7 @@ function sendCardsToPlayers({ selectedBlackCard, players, playerIDs }) {
         payload: {
           cards: players[playerID].cards.map((card) => card.text),
           selectCardCount: selectedBlackCard.pick,
+          shouldPreserveGameState: newPlayer && newPlayer !== playerID,
         },
         recipients: [playerID],
       });
