@@ -47,6 +47,13 @@ exports[`Footer renders correctly 1`] = `
   }
 }
 
+@media (max-height:40vw) {
+  .c0 {
+    height: 70px;
+    font-size: 1.1rem;
+  }
+}
+
 @media (max-width:785px) and (min-height:501px) {
   .c0 {
     height: 120px;

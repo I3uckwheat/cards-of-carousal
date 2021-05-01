@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`PlayerJoin snapshot matches 1`] = `
-.c3 {
+.c2 {
   display: block;
   border: 2px solid var(--primary-text-color);
   font-size: 12px;
@@ -11,20 +11,14 @@ exports[`PlayerJoin snapshot matches 1`] = `
   color: var(--secondary-text-color);
 }
 
-.c3:hover,
-.c3:active,
-.c3:focus {
+.c2:hover,
+.c2:active,
+.c2:focus {
   background: var(--accent-background-color);
   cursor: pointer;
 }
 
-.c1 {
-  width: 100%;
-  background-color: var(--secondary-background-color);
-  color: var(--secondary-text-color);
-}
-
-.c5 {
+.c4 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -45,15 +39,48 @@ exports[`PlayerJoin snapshot matches 1`] = `
   color: var(--secondary-text-color);
 }
 
-.c5 p {
+.c4 p {
   text-align: right;
   position: relative;
 }
 
-.c5 a {
+.c4 a {
   color: var(--secondary-text-color);
   -webkit-text-decoration: none;
   text-decoration: none;
+}
+
+.c1 {
+  width: 100%;
+  background-color: var(--secondary-background-color);
+  color: var(--secondary-text-color);
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+  height: min(25.6vh,420px);
+}
+
+.c1 .welcome-to {
+  font-size: clamp(28px,2.6vw,66px);
+  font-weight: 500;
+  line-height: 100%;
+  margin-bottom: max(-1vw,-21px);
+}
+
+.c1 .CoC {
+  font-size: clamp(48px,7vw,175px);
+  font-weight: 700;
+  line-height: 100%;
+  margin-bottom: max(-1.1vw,-30px);
+  padding-right: 5px;
 }
 
 .c0 {
@@ -147,29 +174,7 @@ exports[`PlayerJoin snapshot matches 1`] = `
   font-size: 1.2rem;
 }
 
-.c2 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  -webkit-box-pack: end;
-  -webkit-justify-content: flex-end;
-  -ms-flex-pack: end;
-  justify-content: flex-end;
-}
-
-.c2 h1 {
-  font-size: 3rem;
-  line-height: 3.5rem;
-  text-transform: uppercase;
-  margin-bottom: -12px;
-  vertical-align: bottom;
-}
-
-.c4 {
+.c3 {
   grid-row: 4;
   margin: 0 auto;
   width: 260px;
@@ -181,42 +186,92 @@ exports[`PlayerJoin snapshot matches 1`] = `
 }
 
 @media (max-width:2000px) {
-  .c5 {
+  .c4 {
     height: 140px;
     font-size: 2rem;
   }
 }
 
 @media (max-width:970px) {
-  .c5 {
+  .c4 {
     text-align: center;
     font-size: 1.5rem;
   }
 }
 
-@media (max-width:785px) {
-  .c5 {
+@media (max-height:40vw) {
+  .c4 {
+    height: 70px;
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width:785px) and (min-height:501px) {
+  .c4 {
     height: 120px;
     background-color: transparent;
   }
 
-  .c5 p {
+  .c4 p {
     text-align: center;
     font-size: 1.2rem;
     padding-bottom: 32px;
     color: var(--accent-text-color);
   }
 
-  .c5 a {
+  .c4 a {
     color: var(--accent-text-color);
     display: block;
   }
 }
 
+@media (max-height:500px) {
+  .c4 {
+    height: 80px;
+  }
+
+  .c4 p {
+    font-size: 13px;
+  }
+}
+
 @media (max-width:320px) {
-  .c5 {
+  .c4 {
     font-size: 1rem;
     padding-right: 0px;
+  }
+}
+
+@media (max-width:600px) {
+  .c1 .CoC {
+    margin-bottom: -7px;
+  }
+}
+
+@media (max-width:490px),(orientation:landscape) and (max-height:500px) {
+  .c1 .welcome-to {
+    display: none;
+  }
+}
+
+@media (orientation:landscape) and (max-height:500px) {
+  .c1 {
+    height: 80px;
+  }
+}
+
+@media (max-height:40vw) {
+  .c1 {
+    height: 15vh;
+  }
+
+  .c1 .CoC {
+    font-size: 56px;
+    margin-bottom: -9px;
+  }
+
+  .c1 .welcome-to {
+    display: none;
   }
 }
 
@@ -446,43 +501,20 @@ exports[`PlayerJoin snapshot matches 1`] = `
   }
 }
 
-@media screen and(min-width:786px) {
-  .c2 h1 {
-    font-size: 4rem;
-    line-height: 4.5rem;
-    margin-bottom: -15px;
-  }
-}
-
-@media screen and (min-width:970px) {
-  .c2 h1 {
-    line-height: 5rem;
-    margin-bottom: -24px;
-  }
-}
-
-@media screen and (min-width:2560px) {
-  .c2 h1 {
-    font-size: 6rem;
-    line-height: 6rem;
-    margin-bottom: -16px;
-  }
-}
-
 @media screen and (min-width:646px) {
-  .c4 {
+  .c3 {
     grid-column: 1 / 3;
   }
 }
 
 @media screen and (min-width:786px) {
-  .c4 {
+  .c3 {
     grid-row: 4;
   }
 }
 
 @media screen and (min-width:970px) {
-  .c4 {
+  .c3 {
     font-size: 1.2rem;
     width: 288px;
     height: 80px;
@@ -490,7 +522,7 @@ exports[`PlayerJoin snapshot matches 1`] = `
 }
 
 @media screen and (min-width:2000px) {
-  .c4 {
+  .c3 {
     font-size: 1.5rem;
     width: 360px;
     height: 100px;
@@ -498,7 +530,7 @@ exports[`PlayerJoin snapshot matches 1`] = `
 }
 
 @media screen and (min-width:2560px) {
-  .c4 {
+  .c3 {
     font-size: 4rem;
     width: 900px;
     height: 225px;
@@ -506,7 +538,7 @@ exports[`PlayerJoin snapshot matches 1`] = `
 }
 
 @media screen and (max-height:567px) {
-  .c4 {
+  .c3 {
     grid-column: 1 / 3;
     grid-row: 3;
   }
@@ -517,10 +549,12 @@ exports[`PlayerJoin snapshot matches 1`] = `
   data-testid="player-join-container"
 >
   <header
-    className="c1 c2"
+    className="c1"
   >
-    <h1>
-      Cards of Carousal
+    <h1
+      className="CoC"
+    >
+      CARDS OF CAROUSAL
     </h1>
   </header>
   <main>
@@ -550,7 +584,7 @@ exports[`PlayerJoin snapshot matches 1`] = `
           value=""
         />
         <button
-          className="c3 c4"
+          className="c2 c3"
           data-testid="player-join-submit-button"
           type="submit"
         >
@@ -560,7 +594,7 @@ exports[`PlayerJoin snapshot matches 1`] = `
     </div>
   </main>
   <footer
-    className="c5"
+    className="c4"
   >
     <p>
       Card content thanks to:
