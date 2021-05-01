@@ -1,9 +1,8 @@
 import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
 import Button from '../../components/Buttons/Button';
-import Header from '../../components/Header/Header';
-import Footer from '../../components/Footer/Footer';
 import { PlayerContext } from '../../contexts/PlayerContext/PlayerContext';
+import HeaderFooterLayout from '../../layouts/HeaderFooterLayout/HeaderFooterLayout';
 
 const propTypes = {};
 
@@ -262,48 +261,6 @@ const PlayerJoinContainer = styled.div`
   }
 `;
 
-const PlayerJoinHeader = styled(Header)`
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-
-  // CoC logo
-  h1 {
-    font-size: 3rem;
-    line-height: 3.5rem;
-    text-transform: uppercase;
-
-    margin-bottom: -12px;
-    vertical-align: bottom;
-  }
-
-  @media screen and(min-width: 786px) {
-    h1 {
-      font-size: 4rem;
-      line-height: 4.5rem;
-
-      margin-bottom: -15px;
-    }
-  }
-
-  @media screen and (min-width: 970px) {
-    h1 {
-      line-height: 5rem;
-
-      margin-bottom: -24px;
-    }
-  }
-
-  @media screen and (min-width: 2560px) {
-    h1 {
-      font-size: 6rem;
-      line-height: 6rem;
-
-      margin-bottom: -16px;
-    }
-  }
-`;
-
 const PlayerJoinButton = styled(Button)`
   grid-row: 4;
   margin: 0 auto;
@@ -388,40 +345,41 @@ export default function PlayerJoinScreen() {
       data-testid="player-join-container"
       className="primary-background"
     >
-      <PlayerJoinHeader>
-        <h1>Cards of Carousal</h1>
-      </PlayerJoinHeader>
-      <main>
-        <div className="player-join-form-container">
-          <form onSubmit={(e) => handleSubmit(e)} className="player-join-form">
-            <input
-              required
-              type="text"
-              maxLength="12"
-              placeholder="name"
-              value={name}
-              onChange={handleNameChange}
-              className="player-join-name-input"
-            />
-            <input
-              required
-              maxLength="4"
-              type="text"
-              placeholder="join code"
-              value={joinCode}
-              onChange={handleJoinCodeChange}
-              className="player-join-code-input"
-            />
-            <PlayerJoinButton
-              data-testid="player-join-submit-button"
-              type="submit"
+      <HeaderFooterLayout>
+        <main>
+          <div className="player-join-form-container">
+            <form
+              onSubmit={(e) => handleSubmit(e)}
+              className="player-join-form"
             >
-              Let&apos;s Carouse!
-            </PlayerJoinButton>
-          </form>
-        </div>
-      </main>
-      <Footer />
+              <input
+                required
+                type="text"
+                maxLength="12"
+                placeholder="name"
+                value={name}
+                onChange={handleNameChange}
+                className="player-join-name-input"
+              />
+              <input
+                required
+                maxLength="4"
+                type="text"
+                placeholder="join code"
+                value={joinCode}
+                onChange={handleJoinCodeChange}
+                className="player-join-code-input"
+              />
+              <PlayerJoinButton
+                data-testid="player-join-submit-button"
+                type="submit"
+              >
+                Let&apos;s Carouse!
+              </PlayerJoinButton>
+            </form>
+          </div>
+        </main>
+      </HeaderFooterLayout>
     </PlayerJoinContainer>
   );
 }
