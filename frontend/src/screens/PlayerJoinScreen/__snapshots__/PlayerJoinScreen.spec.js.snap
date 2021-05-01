@@ -550,6 +550,7 @@ exports[`PlayerJoin snapshot matches 1`] = `
 >
   <header
     className="c1"
+    data-testid="header"
   >
     <h1
       className="CoC"
@@ -595,6 +596,7 @@ exports[`PlayerJoin snapshot matches 1`] = `
   </main>
   <footer
     className="c4"
+    data-testid="footer"
   >
     <p>
       Card content thanks to:

@@ -341,9 +341,11 @@ exports[`WelcomeScreen render renders correctly 1`] = `
 >
   <header
     className="c1"
+    data-testid="header"
   >
     <p
       className="welcome-to"
+      data-testid="welcome-text"
     >
       WELCOME TO
     </p>
@@ -403,6 +405,7 @@ exports[`WelcomeScreen render renders correctly 1`] = `
   </main>
   <footer
     className="c3"
+    data-testid="footer"
   >
     <p>
       Card content thanks to:

@@ -92,6 +92,7 @@ exports[`Footer renders correctly 1`] = `
 
 <footer
   className="c0"
+  data-testid="footer"
 >
   <p>
     Card content thanks to:

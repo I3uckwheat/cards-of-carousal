@@ -1,0 +1,475 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HeaderFooterLayout render renders correctly 1`] = `
+Array [
+  .c0 {
+  width: 100%;
+  background-color: var(--secondary-background-color);
+  color: var(--secondary-text-color);
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+  height: min(25.6vh,420px);
+}
+
+.c0 .welcome-to {
+  font-size: clamp(28px,2.6vw,66px);
+  font-weight: 500;
+  line-height: 100%;
+  margin-bottom: max(-1vw,-21px);
+}
+
+.c0 .CoC {
+  font-size: clamp(48px,7vw,175px);
+  font-weight: 700;
+  line-height: 100%;
+  margin-bottom: max(-1.1vw,-30px);
+  padding-right: 5px;
+}
+
+@media (max-width:2000px) {
+
+}
+
+@media (max-width:970px) {
+
+}
+
+@media (max-height:40vw) {
+
+}
+
+@media (max-width:785px) and (min-height:501px) {
+
+}
+
+@media (max-height:500px) {
+
+}
+
+@media (max-width:320px) {
+
+}
+
+@media (max-width:600px) {
+  .c0 .CoC {
+    margin-bottom: -7px;
+  }
+}
+
+@media (max-width:490px),(orientation:landscape) and (max-height:500px) {
+  .c0 .welcome-to {
+    display: none;
+  }
+}
+
+@media (orientation:landscape) and (max-height:500px) {
+  .c0 {
+    height: 80px;
+  }
+}
+
+@media (max-height:40vw) {
+  .c0 {
+    height: 15vh;
+  }
+
+  .c0 .CoC {
+    font-size: 56px;
+    margin-bottom: -9px;
+  }
+
+  .c0 .welcome-to {
+    display: none;
+  }
+}
+
+<header
+    className="c0"
+    data-testid="header"
+  >
+    <h1
+      className="CoC"
+    >
+      CARDS OF CAROUSAL
+    </h1>
+  </header>,
+  "Test",
+  .c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+  height: 200px;
+  font-size: 3.5rem;
+  font-weight: 400;
+  padding-right: 16px;
+  padding-bottom: 10px;
+  background-color: var(--secondary-background-color);
+  color: var(--secondary-text-color);
+}
+
+.c0 p {
+  text-align: right;
+  position: relative;
+}
+
+.c0 a {
+  color: var(--secondary-text-color);
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+@media (max-width:2000px) {
+  .c0 {
+    height: 140px;
+    font-size: 2rem;
+  }
+}
+
+@media (max-width:970px) {
+  .c0 {
+    text-align: center;
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-height:40vw) {
+  .c0 {
+    height: 70px;
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width:785px) and (min-height:501px) {
+  .c0 {
+    height: 120px;
+    background-color: transparent;
+  }
+
+  .c0 p {
+    text-align: center;
+    font-size: 1.2rem;
+    padding-bottom: 32px;
+    color: var(--accent-text-color);
+  }
+
+  .c0 a {
+    color: var(--accent-text-color);
+    display: block;
+  }
+}
+
+@media (max-height:500px) {
+  .c0 {
+    height: 80px;
+  }
+
+  .c0 p {
+    font-size: 13px;
+  }
+}
+
+@media (max-width:320px) {
+  .c0 {
+    font-size: 1rem;
+    padding-right: 0px;
+  }
+}
+
+@media (max-width:600px) {
+
+}
+
+@media (max-width:490px),(orientation:landscape) and (max-height:500px) {
+
+}
+
+@media (orientation:landscape) and (max-height:500px) {
+
+}
+
+@media (max-height:40vw) {
+
+}
+
+<footer
+    className="c0"
+    data-testid="footer"
+  >
+    <p>
+      Card content thanks to:
+       
+      <a
+        href="https://cardsagainsthumanity.com"
+      >
+        https://cardsagainsthumanity.com
+      </a>
+    </p>
+    <p>
+      Made by Odin students, with love:
+       
+      <a
+        href="https://www.theodinproject.com"
+      >
+        https://www.theodinproject.com
+      </a>
+    </p>
+  </footer>,
+]
+`;
+
+exports[`HeaderFooterLayout render renders correctly with the isWelcoming prop 1`] = `
+Array [
+  .c0 {
+  width: 100%;
+  background-color: var(--secondary-background-color);
+  color: var(--secondary-text-color);
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+  height: min(25.6vh,420px);
+}
+
+.c0 .welcome-to {
+  font-size: clamp(28px,2.6vw,66px);
+  font-weight: 500;
+  line-height: 100%;
+  margin-bottom: max(-1vw,-21px);
+}
+
+.c0 .CoC {
+  font-size: clamp(48px,7vw,175px);
+  font-weight: 700;
+  line-height: 100%;
+  margin-bottom: max(-1.1vw,-30px);
+  padding-right: 5px;
+}
+
+@media (max-width:2000px) {
+
+}
+
+@media (max-width:970px) {
+
+}
+
+@media (max-height:40vw) {
+
+}
+
+@media (max-width:785px) and (min-height:501px) {
+
+}
+
+@media (max-height:500px) {
+
+}
+
+@media (max-width:320px) {
+
+}
+
+@media (max-width:600px) {
+  .c0 .CoC {
+    margin-bottom: -7px;
+  }
+}
+
+@media (max-width:490px),(orientation:landscape) and (max-height:500px) {
+  .c0 .welcome-to {
+    display: none;
+  }
+}
+
+@media (orientation:landscape) and (max-height:500px) {
+  .c0 {
+    height: 80px;
+  }
+}
+
+@media (max-height:40vw) {
+  .c0 {
+    height: 15vh;
+  }
+
+  .c0 .CoC {
+    font-size: 56px;
+    margin-bottom: -9px;
+  }
+
+  .c0 .welcome-to {
+    display: none;
+  }
+}
+
+<header
+    className="c0"
+    data-testid="header"
+  >
+    <p
+      className="welcome-to"
+      data-testid="welcome-text"
+    >
+      WELCOME TO
+    </p>
+    <h1
+      className="CoC"
+    >
+      CARDS OF CAROUSAL
+    </h1>
+  </header>,
+  "Test",
+  .c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+  height: 200px;
+  font-size: 3.5rem;
+  font-weight: 400;
+  padding-right: 16px;
+  padding-bottom: 10px;
+  background-color: var(--secondary-background-color);
+  color: var(--secondary-text-color);
+}
+
+.c0 p {
+  text-align: right;
+  position: relative;
+}
+
+.c0 a {
+  color: var(--secondary-text-color);
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+@media (max-width:2000px) {
+  .c0 {
+    height: 140px;
+    font-size: 2rem;
+  }
+}
+
+@media (max-width:970px) {
+  .c0 {
+    text-align: center;
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-height:40vw) {
+  .c0 {
+    height: 70px;
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width:785px) and (min-height:501px) {
+  .c0 {
+    height: 120px;
+    background-color: transparent;
+  }
+
+  .c0 p {
+    text-align: center;
+    font-size: 1.2rem;
+    padding-bottom: 32px;
+    color: var(--accent-text-color);
+  }
+
+  .c0 a {
+    color: var(--accent-text-color);
+    display: block;
+  }
+}
+
+@media (max-height:500px) {
+  .c0 {
+    height: 80px;
+  }
+
+  .c0 p {
+    font-size: 13px;
+  }
+}
+
+@media (max-width:320px) {
+  .c0 {
+    font-size: 1rem;
+    padding-right: 0px;
+  }
+}
+
+@media (max-width:600px) {
+
+}
+
+@media (max-width:490px),(orientation:landscape) and (max-height:500px) {
+
+}
+
+@media (orientation:landscape) and (max-height:500px) {
+
+}
+
+@media (max-height:40vw) {
+
+}
+
+<footer
+    className="c0"
+    data-testid="footer"
+  >
+    <p>
+      Card content thanks to:
+       
+      <a
+        href="https://cardsagainsthumanity.com"
+      >
+        https://cardsagainsthumanity.com
+      </a>
+    </p>
+    <p>
+      Made by Odin students, with love:
+       
+      <a
+        href="https://www.theodinproject.com"
+      >
+        https://www.theodinproject.com
+      </a>
+    </p>
+  </footer>,
+]
+`;

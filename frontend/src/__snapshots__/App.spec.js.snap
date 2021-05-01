@@ -341,9 +341,11 @@ exports[`App snapshots should initially show the welcome screen 1`] = `
 >
   <header
     className="c1"
+    data-testid="header"
   >
     <p
       className="welcome-to"
+      data-testid="welcome-text"
     >
       WELCOME TO
     </p>
@@ -403,6 +405,7 @@ exports[`App snapshots should initially show the welcome screen 1`] = `
   </main>
   <footer
     className="c3"
+    data-testid="footer"
   >
     <p>
       Card content thanks to:
@@ -1715,6 +1718,7 @@ exports[`App snapshots should show the player screen after user has clicked the 
   >
     <header
       class="c1"
+      data-testid="header"
     >
       <h1
         class="CoC"
@@ -1757,6 +1761,7 @@ exports[`App snapshots should show the player screen after user has clicked the 
     </main>
     <footer
       class="c4"
+      data-testid="footer"
     >
       <p>
         Card content thanks to: 
@@ -2121,9 +2126,11 @@ exports[`App snapshots should show the welcome screen after user has clicked ele
   >
     <header
       class="c1"
+      data-testid="header"
     >
       <p
         class="welcome-to"
+        data-testid="welcome-text"
       >
         WELCOME TO
       </p>
@@ -2181,6 +2188,7 @@ exports[`App snapshots should show the welcome screen after user has clicked ele
     </main>
     <footer
       class="c3"
+      data-testid="footer"
     >
       <p>
         Card content thanks to: 
