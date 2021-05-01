@@ -4,8 +4,12 @@ import styled from 'styled-components';
 import Footer from './Footer/Footer';
 
 const propTypes = {
-  isWelcoming: PropTypes.bool.isRequired,
+  isWelcoming: PropTypes.bool,
   children: PropTypes.node.isRequired,
+};
+
+const defaultProps = {
+  isWelcoming: false,
 };
 
 const Header = styled.header`
@@ -46,17 +50,18 @@ const Header = styled.header`
 
 function HeaderFooterLayout({ isWelcoming, children }) {
   return (
-    <div>
+    <>
       <Header>
         {isWelcoming && <p className="welcome-to">WELCOME TO</p>}
         <h1 className="CoC">CARDS OF CAROUSAL</h1>
       </Header>
       {children}
       <Footer isWelcoming={isWelcoming} />
-    </div>
+    </>
   );
 }
 
 HeaderFooterLayout.propTypes = propTypes;
+HeaderFooterLayout.defaultProps = defaultProps;
 
 export default HeaderFooterLayout;
