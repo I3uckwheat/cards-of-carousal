@@ -348,10 +348,7 @@ export default function PlayerJoinScreen() {
       <HeaderFooterLayout>
         <main>
           <div className="player-join-form-container">
-            <form
-              onSubmit={(e) => handleSubmit(e)}
-              className="player-join-form"
-            >
+            <form onSubmit={handleSubmit} className="player-join-form">
               <input
                 required
                 type="text"
