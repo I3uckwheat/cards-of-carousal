@@ -9,6 +9,7 @@ import PlayerScreenController from './screenControllers/PlayerScreenController/P
 import { PlayerProvider } from './contexts/PlayerContext/PlayerContext';
 import HostProvider from './contexts/HostContext/HostContext';
 import PlayerErrorBoundary from './errorHandlers/playerErrorHandlers/PlayerErrorBoundary';
+import HostErrorBoundary from './errorHandlers/hostErrorHandlers/HostErrorBoundary';
 
 function App() {
   const [screenControllerType, setScreenControllerType] = useState('welcome');
@@ -24,9 +25,11 @@ function App() {
       );
     case 'host':
       return (
-        <HostProvider>
-          <HostScreenController />
-        </HostProvider>
+        <HostErrorBoundary>
+          <HostProvider>
+            <HostScreenController />
+          </HostProvider>
+        </HostErrorBoundary>
       );
     case 'welcome':
       return (
