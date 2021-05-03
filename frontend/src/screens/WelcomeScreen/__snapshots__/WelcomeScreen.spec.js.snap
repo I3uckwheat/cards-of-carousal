@@ -281,21 +281,6 @@ exports[`WelcomeScreen render renders correctly 1`] = `
   }
 }
 
-@media (max-height:40vw) {
-  .c1 {
-    height: 15vh;
-  }
-
-  .c1 .CoC {
-    font-size: 56px;
-    margin-bottom: -9px;
-  }
-
-  .c1 .welcome-to {
-    display: none;
-  }
-}
-
 @media (max-width:820px) {
   .c0 .definition-container {
     font-size: 2.2rem;

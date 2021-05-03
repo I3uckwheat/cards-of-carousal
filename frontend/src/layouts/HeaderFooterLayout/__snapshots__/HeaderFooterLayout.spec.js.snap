@@ -77,21 +77,6 @@ Array [
   }
 }
 
-@media (max-height:40vw) {
-  .c0 {
-    height: 15vh;
-  }
-
-  .c0 .CoC {
-    font-size: 56px;
-    margin-bottom: -9px;
-  }
-
-  .c0 .welcome-to {
-    display: none;
-  }
-}
-
 <header
     className="c0"
     data-testid="header"
@@ -204,10 +189,6 @@ Array [
 
 }
 
-@media (max-height:40vw) {
-
-}
-
 <footer
     className="c0"
     data-testid="footer"
@@ -308,21 +289,6 @@ Array [
 @media (orientation:landscape) and (max-height:500px) {
   .c0 {
     height: 80px;
-  }
-}
-
-@media (max-height:40vw) {
-  .c0 {
-    height: 15vh;
-  }
-
-  .c0 .CoC {
-    font-size: 56px;
-    margin-bottom: -9px;
-  }
-
-  .c0 .welcome-to {
-    display: none;
   }
 }
 
@@ -441,10 +407,6 @@ Array [
 }
 
 @media (orientation:landscape) and (max-height:500px) {
-
-}
-
-@media (max-height:40vw) {
 
 }
 

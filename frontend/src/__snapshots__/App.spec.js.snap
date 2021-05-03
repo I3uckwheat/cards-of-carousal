@@ -281,21 +281,6 @@ exports[`App snapshots should initially show the welcome screen 1`] = `
   }
 }
 
-@media (max-height:40vw) {
-  .c1 {
-    height: 15vh;
-  }
-
-  .c1 .CoC {
-    font-size: 56px;
-    margin-bottom: -9px;
-  }
-
-  .c1 .welcome-to {
-    display: none;
-  }
-}
-
 @media (max-width:820px) {
   .c0 .definition-container {
     font-size: 2.2rem;
@@ -905,10 +890,6 @@ exports[`App snapshots should show the host screen after user has clicked the "h
 
 }
 
-@media (max-height:40vw) {
-
-}
-
 @media (max-width:820px) {
 
 }
@@ -1417,21 +1398,6 @@ exports[`App snapshots should show the player screen after user has clicked the 
 @media (orientation:landscape) and (max-height:500px) {
   .c1 {
     height: 80px;
-  }
-}
-
-@media (max-height:40vw) {
-  .c1 {
-    height: 15vh;
-  }
-
-  .c1 .CoC {
-    font-size: 56px;
-    margin-bottom: -9px;
-  }
-
-  .c1 .welcome-to {
-    display: none;
   }
 }
 
@@ -2063,21 +2029,6 @@ exports[`App snapshots should show the welcome screen after user has clicked ele
 @media (orientation:landscape) and (max-height:500px) {
   .c1 {
     height: 80px;
-  }
-}
-
-@media (max-height:40vw) {
-  .c1 {
-    height: 15vh;
-  }
-
-  .c1 .CoC {
-    font-size: 56px;
-    margin-bottom: -9px;
-  }
-
-  .c1 .welcome-to {
-    display: none;
   }
 }
 

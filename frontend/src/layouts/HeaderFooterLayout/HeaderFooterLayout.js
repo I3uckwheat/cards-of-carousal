@@ -51,17 +51,6 @@ const Header = styled.header`
   @media (orientation: landscape) and (max-height: 500px) {
     height: 80px;
   }
-
-  @media (max-height: 40vw) {
-    height: 15vh;
-    .CoC {
-      font-size: 56px;
-      margin-bottom: -9px;
-    }
-    .welcome-to {
-      display: none;
-    }
-  }
 `;
 
 function HeaderFooterLayout({ isWelcoming, children }) {

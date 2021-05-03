@@ -260,21 +260,6 @@ exports[`PlayerJoin snapshot matches 1`] = `
   }
 }
 
-@media (max-height:40vw) {
-  .c1 {
-    height: 15vh;
-  }
-
-  .c1 .CoC {
-    font-size: 56px;
-    margin-bottom: -9px;
-  }
-
-  .c1 .welcome-to {
-    display: none;
-  }
-}
-
 @media screen and (min-width:646px) {
   .c0 .player-join-form-container {
     padding-left: 40px;
