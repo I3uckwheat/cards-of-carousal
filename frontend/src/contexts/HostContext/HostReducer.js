@@ -306,7 +306,10 @@ function updateJoinCode(state, { lobbyID }) {
 function setErrorState(state, errorState) {
   return {
     ...state,
-    error: errorState,
+    error: {
+      ...state.error,
+      ...errorState,
+    },
   };
 }
 

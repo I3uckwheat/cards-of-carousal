@@ -239,11 +239,9 @@ describe('HostLayout', () => {
       .spyOn(console, 'error')
       .mockImplementation(() => {});
 
-    console.log(render);
-
     render(
       <HostContext.Provider value={{ state }}>
-        <HostContext
+        <HostLayout
           left={leftComponent}
           right={rightComponent}
           modal={modalComponent}
@@ -287,7 +285,7 @@ describe('HostLayout', () => {
 
       render(
         <HostContext.Provider value={{ state }}>
-          <HostContext
+          <HostLayout
             left={leftComponent}
             right={rightComponent}
             modal={modalComponent}
@@ -296,6 +294,8 @@ describe('HostLayout', () => {
       );
 
       expect(screen.getByText('BIG ERROR MESSAGE')).toBeInTheDocument();
+      expect(screen.getByText('small error message')).toBeInTheDocument();
+      expect(screen.getByText('button error message')).toBeInTheDocument();
     });
   });
 });

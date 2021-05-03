@@ -1107,4 +1107,54 @@ describe('reducer', () => {
       });
     });
   });
+
+  describe('SET_ERROR_STATE', () => {
+    it('sets the error state', () => {
+      const state = {
+        foo: 'bar',
+        error: {},
+      };
+
+      const result = HostReducer(state, {
+        type: 'SET_ERROR_STATE',
+        payload: {
+          hasError: true,
+          message: { bigText: 'foo', smallText: 'bar', buttonText: 'baz' },
+          callback: null,
+        },
+      });
+
+      expect(result.foo).toBe('bar');
+      expect(result.error).toEqual({
+        hasError: true,
+        message: { bigText: 'foo', smallText: 'bar', buttonText: 'baz' },
+        callback: null,
+      });
+    });
+  });
+
+  describe('RESET_ERROR_STATE', () => {
+    it('resets the error state', () => {
+      const state = {
+        foo: 'bar',
+        error: {
+          hasError: true,
+          message: { bigText: 'foo', smallText: 'bar', buttonText: 'baz' },
+          callback: null,
+        },
+      };
+
+      const result = HostReducer(state, {
+        type: 'RESET_ERROR_STATE',
+        payload: {},
+      });
+
+      expect(result.foo).toBe('bar');
+      expect(result.error).toEqual({
+        hasError: false,
+        message: { bigText: '', smallText: '', buttonText: '' },
+        callback: null,
+      });
+    });
+  });
 });
