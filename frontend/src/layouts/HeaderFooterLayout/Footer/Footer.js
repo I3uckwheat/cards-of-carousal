@@ -38,8 +38,13 @@ const FooterWrapper = styled.footer`
     font-size: 1.5rem;
   }
 
+  @media (max-height: 40vw) {
+    height: 70px;
+    font-size: 1.1rem;
+  }
+
   /*largest desktop player mode */
-  @media (max-width: 785px) {
+  @media (max-width: 785px) and (min-height: 501px) {
     height: 120px;
     background-color: transparent;
 
@@ -57,6 +62,13 @@ const FooterWrapper = styled.footer`
     }
   }
 
+  @media (max-height: 500px) {
+    height: 80px;
+    p {
+      font-size: 13px;
+    }
+  }
+
   /*iphone 5*/
   @media (max-width: 320px) {
     font-size: 1rem;
@@ -66,7 +78,7 @@ const FooterWrapper = styled.footer`
 
 function Footer() {
   return (
-    <FooterWrapper>
+    <FooterWrapper data-testid="footer">
       <p>
         Card content thanks to:{' '}
         <a href="https://cardsagainsthumanity.com">

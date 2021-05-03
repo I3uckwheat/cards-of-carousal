@@ -47,7 +47,14 @@ exports[`Footer renders correctly 1`] = `
   }
 }
 
-@media (max-width:785px) {
+@media (max-height:40vw) {
+  .c0 {
+    height: 70px;
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width:785px) and (min-height:501px) {
   .c0 {
     height: 120px;
     background-color: transparent;
@@ -66,6 +73,16 @@ exports[`Footer renders correctly 1`] = `
   }
 }
 
+@media (max-height:500px) {
+  .c0 {
+    height: 80px;
+  }
+
+  .c0 p {
+    font-size: 13px;
+  }
+}
+
 @media (max-width:320px) {
   .c0 {
     font-size: 1rem;
@@ -75,6 +92,7 @@ exports[`Footer renders correctly 1`] = `
 
 <footer
   className="c0"
+  data-testid="footer"
 >
   <p>
     Card content thanks to:
