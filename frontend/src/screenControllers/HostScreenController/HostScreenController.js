@@ -4,6 +4,7 @@ import HostPregameScreen from '../../screens/HostPregameScreen/HostPregameScreen
 import WinnerSelectScreen from '../../screens/WinnerSelectScreen/WinnerSelectScreen';
 import HostBlackCardScreen from '../../screens/HostBlackCardScreen/HostBlackCardScreen';
 import HostRoundWinnerScreen from '../../screens/HostRoundWinnerScreen/HostRoundWinnerScreen';
+import HostGameOverScreen from '../../screens/HostGameOverScreen/HostGameOverScreen';
 
 const propTypes = {};
 
@@ -28,6 +29,9 @@ export default function HostScreenController() {
 
     case 'showing-winning-cards':
       return <HostRoundWinnerScreen />;
+
+    case 'game-over':
+      return <HostGameOverScreen />;
 
     default:
       throw new Error(`Unrecognized game state: ${gameState}`);

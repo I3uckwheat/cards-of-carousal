@@ -101,7 +101,7 @@ function RightPanel() {
   );
 }
 
-function HostGameWinnerScreen() {
+function HostGameOverScreen() {
   return (
     <HostLayout
       className="primary-background"
@@ -112,4 +112,4 @@ function HostGameWinnerScreen() {
   );
 }
 
-export default HostGameWinnerScreen;
+export default HostGameOverScreen;
