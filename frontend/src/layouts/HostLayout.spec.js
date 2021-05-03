@@ -4,20 +4,39 @@ import userEvent from '@testing-library/user-event';
 import renderer from 'react-test-renderer';
 
 import HostLayout from './HostLayout';
+import { HostContext } from '../contexts/HostContext/HostContext';
 
 describe('HostLayout', () => {
+  let state;
   const leftComponent = <p>Im a left component</p>;
   const rightComponent = <p>Im a right component</p>;
   const modalComponent = <p>Im a modal component</p>;
+
+  beforeEach(() => {
+    state = {
+      error: {
+        hasError: false,
+        message: {
+          bigText: '',
+          smallText: '',
+          buttonText: '',
+        },
+        callback: null,
+      },
+    };
+  });
+
   // --------------------------------------------------------------------------
   // Rendering Tests
   it('renders the header text', () => {
     render(
-      <HostLayout
-        left={leftComponent}
-        right={rightComponent}
-        modal={modalComponent}
-      />,
+      <HostContext.Provider value={{ state }}>
+        <HostLayout
+          left={leftComponent}
+          right={rightComponent}
+          modal={modalComponent}
+        />
+      </HostContext.Provider>,
     );
 
     expect(screen.getByText('CARDS OF CAROUSAL')).toBeInTheDocument();
@@ -25,11 +44,13 @@ describe('HostLayout', () => {
 
   it('renders the text present in the left component', () => {
     render(
-      <HostLayout
-        left={leftComponent}
-        right={rightComponent}
-        modal={modalComponent}
-      />,
+      <HostContext.Provider value={{ state }}>
+        <HostLayout
+          left={leftComponent}
+          right={rightComponent}
+          modal={modalComponent}
+        />
+      </HostContext.Provider>,
     );
 
     expect(screen.getByText('Im a left component')).toBeInTheDocument();
@@ -37,11 +58,13 @@ describe('HostLayout', () => {
 
   it('renders the text present in the right component', () => {
     render(
-      <HostLayout
-        left={leftComponent}
-        right={rightComponent}
-        modal={modalComponent}
-      />,
+      <HostContext.Provider value={{ state }}>
+        <HostLayout
+          left={leftComponent}
+          right={rightComponent}
+          modal={modalComponent}
+        />
+      </HostContext.Provider>,
     );
 
     expect(screen.getByText('Im a right component')).toBeInTheDocument();
@@ -49,11 +72,13 @@ describe('HostLayout', () => {
 
   it('renders the hamburger menu button', () => {
     render(
-      <HostLayout
-        left={leftComponent}
-        right={rightComponent}
-        modal={modalComponent}
-      />,
+      <HostContext.Provider value={{ state }}>
+        <HostLayout
+          left={leftComponent}
+          right={rightComponent}
+          modal={modalComponent}
+        />
+      </HostContext.Provider>,
     );
 
     expect(screen.getByRole('button')).toBeInTheDocument();
@@ -61,11 +86,13 @@ describe('HostLayout', () => {
 
   it('does not render the modal until the hamburger menu button is clicked', () => {
     render(
-      <HostLayout
-        left={leftComponent}
-        right={rightComponent}
-        modal={modalComponent}
-      />,
+      <HostContext.Provider value={{ state }}>
+        <HostLayout
+          left={leftComponent}
+          right={rightComponent}
+          modal={modalComponent}
+        />
+      </HostContext.Provider>,
     );
 
     expect(screen.queryByText('Im a modal component')).not.toBeInTheDocument();
@@ -77,11 +104,13 @@ describe('HostLayout', () => {
   `;
 
     render(
-      <HostLayout
-        left={leftComponent}
-        right={rightComponent}
-        modal={modalComponent}
-      />,
+      <HostContext.Provider value={{ state }}>
+        <HostLayout
+          left={leftComponent}
+          right={rightComponent}
+          modal={modalComponent}
+        />
+      </HostContext.Provider>,
     );
 
     userEvent.click(screen.getByRole('button'));
@@ -91,11 +120,13 @@ describe('HostLayout', () => {
 
   it('does not render the modal when the hamburger menu button is clicked a second time', () => {
     render(
-      <HostLayout
-        left={leftComponent}
-        right={rightComponent}
-        modal={modalComponent}
-      />,
+      <HostContext.Provider value={{ state }}>
+        <HostLayout
+          left={leftComponent}
+          right={rightComponent}
+          modal={modalComponent}
+        />
+      </HostContext.Provider>,
     );
 
     userEvent.click(screen.getByRole('button'));
@@ -112,7 +143,11 @@ describe('HostLayout', () => {
       .spyOn(console, 'error')
       .mockImplementation(() => {});
 
-    render(<HostLayout right={rightComponent} modal={modalComponent} />);
+    render(
+      <HostContext.Provider value={{ state }}>
+        <HostLayout right={rightComponent} modal={modalComponent} />
+      </HostContext.Provider>,
+    );
 
     expect(consoleSpy).toHaveBeenCalled();
   });
@@ -123,11 +158,13 @@ describe('HostLayout', () => {
       .mockImplementation(() => {});
 
     render(
-      <HostLayout
-        left={() => {}}
-        right={rightComponent}
-        modal={modalComponent}
-      />,
+      <HostContext.Provider value={{ state }}>
+        <HostLayout
+          left={() => {}}
+          right={rightComponent}
+          modal={modalComponent}
+        />
+      </HostContext.Provider>,
     );
 
     expect(consoleSpy).toHaveBeenCalled();
@@ -138,7 +175,11 @@ describe('HostLayout', () => {
       .spyOn(console, 'error')
       .mockImplementation(() => {});
 
-    render(<HostLayout left={leftComponent} modal={modalComponent} />);
+    render(
+      <HostContext.Provider value={{ state }}>
+        <HostLayout left={leftComponent} modal={modalComponent} />
+      </HostContext.Provider>,
+    );
 
     expect(consoleSpy).toHaveBeenCalled();
   });
@@ -149,11 +190,13 @@ describe('HostLayout', () => {
       .mockImplementation(() => {});
 
     render(
-      <HostLayout
-        left={leftComponent}
-        right={() => {}}
-        modal={modalComponent}
-      />,
+      <HostContext.Provider value={{ state }}>
+        <HostLayout
+          left={leftComponent}
+          right={() => {}}
+          modal={modalComponent}
+        />
+      </HostContext.Provider>,
     );
 
     expect(consoleSpy).toHaveBeenCalled();
@@ -164,7 +207,11 @@ describe('HostLayout', () => {
       .spyOn(console, 'error')
       .mockImplementation(() => {});
 
-    render(<HostLayout left={leftComponent} right={rightComponent} />);
+    render(
+      <HostContext.Provider value={{ state }}>
+        <HostLayout left={leftComponent} right={rightComponent} />
+      </HostContext.Provider>,
+    );
 
     expect(consoleSpy).toHaveBeenCalled();
   });
@@ -175,11 +222,13 @@ describe('HostLayout', () => {
       .mockImplementation(() => {});
 
     render(
-      <HostLayout
-        left={leftComponent}
-        right={rightComponent}
-        modal={() => {}}
-      />,
+      <HostContext.Provider value={{ state }}>
+        <HostLayout
+          left={leftComponent}
+          right={rightComponent}
+          modal={() => {}}
+        />
+      </HostContext.Provider>,
     );
 
     expect(consoleSpy).toHaveBeenCalled();
@@ -190,12 +239,16 @@ describe('HostLayout', () => {
       .spyOn(console, 'error')
       .mockImplementation(() => {});
 
+    console.log(render);
+
     render(
-      <HostLayout
-        left={leftComponent}
-        right={rightComponent}
-        modal={modalComponent}
-      />,
+      <HostContext.Provider value={{ state }}>
+        <HostContext
+          left={leftComponent}
+          right={rightComponent}
+          modal={modalComponent}
+        />
+      </HostContext.Provider>,
     );
 
     expect(consoleSpy).not.toHaveBeenCalled();
@@ -207,13 +260,42 @@ describe('HostLayout', () => {
   it('matches the snapshot when rendered', () => {
     const tree = renderer
       .create(
-        <HostLayout
-          left={leftComponent}
-          right={rightComponent}
-          modal={modalComponent}
-        />,
+        <HostContext.Provider value={{ state }}>
+          <HostLayout
+            left={leftComponent}
+            right={rightComponent}
+            modal={modalComponent}
+          />
+        </HostContext.Provider>,
       )
       .toJSON();
     expect(tree).toMatchSnapshot();
+  });
+
+  describe('errors', () => {
+    it('renders the alert modal when in an error state', () => {
+      state = {
+        error: {
+          hasError: true,
+          message: {
+            bigText: 'big error message',
+            smallText: 'small error message',
+            buttonText: 'button error message',
+          },
+        },
+      };
+
+      render(
+        <HostContext.Provider value={{ state }}>
+          <HostContext
+            left={leftComponent}
+            right={rightComponent}
+            modal={modalComponent}
+          />
+        </HostContext.Provider>,
+      );
+
+      expect(screen.getByText('BIG ERROR MESSAGE')).toBeInTheDocument();
+    });
   });
 });

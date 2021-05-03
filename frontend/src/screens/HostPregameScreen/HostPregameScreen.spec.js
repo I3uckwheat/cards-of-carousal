@@ -9,6 +9,12 @@ jest.mock('../../components/GameSettings/GameSettings', () => () => (
   <div data-testid="game-settings" />
 ));
 
+jest.mock('../../components/Modal/Modal.js', () => ({
+  __esModule: true,
+  // eslint-disable-next-line react/prop-types
+  default: ({ children }) => <div data-testid="modal">{children}</div>,
+}));
+
 function setupFetchMock() {
   jest.spyOn(window, 'fetch').mockImplementation(() => ({
     json: async () => [
@@ -254,7 +260,7 @@ describe('Host Pregame Screen', () => {
       });
     });
 
-    it('does not call dispatch if no players are in the lobby when the start button is clicked', () => {
+    it('alerts the host if no players are in the lobby when the start button is clicked', () => {
       const dispatch = jest.fn();
 
       render(
@@ -267,9 +273,25 @@ describe('Host Pregame Screen', () => {
 
       // only create lobby called
       expect(dispatch).toHaveBeenCalledTimes(1);
+      expect(dispatch).not.toHaveBeenCalledWith({
+        type: 'SET_DECK',
+        payload: { selectedPacks: state.gameSettings.selectedPacks },
+      });
+      expect(dispatch).not.toHaveBeenCalledWith({
+        type: 'START_GAME',
+        payload: {},
+      });
+      expect(dispatch).not.toHaveBeenCalledWith({
+        type: 'SET_NEXT_CZAR',
+        payload: {},
+      });
+      expect(screen.getByText('UNABLE TO START GAME')).toBeInTheDocument();
+      expect(
+        screen.getByText('No offense, but this game requires friends to play.'),
+      ).toBeInTheDocument();
     });
 
-    it('does not call dispatch if no packs are selected when the start button is clicked', async () => {
+    it('alerts the host if no packs are selected when the start button is clicked', async () => {
       const dispatch = jest.fn();
 
       state = {
@@ -328,6 +350,74 @@ describe('Host Pregame Screen', () => {
         type: 'SET_NEXT_CZAR',
         payload: {},
       });
+      expect(screen.getByText('UNABLE TO START GAME')).toBeInTheDocument();
+      expect(
+        screen.getByText('Please pick at least one card pack.'),
+      ).toBeInTheDocument();
+    });
+
+    it('alerts the host if fetching cards has failed', async () => {
+      // we need to mock the console.error or else jest will error out
+      // https://github.com/facebook/react/issues/11098#issuecomment-523977830
+      const errorSpy = jest
+        .spyOn(console, 'error')
+        .mockImplementation(() => {});
+
+      const dispatch = jest.fn(({ type }) => {
+        // simulating a failed fetch
+        if (type === 'SET_DECK') throw new Error('Failed to fetch');
+      });
+
+      state = {
+        gameState: 'waiting-for-lobby',
+        lobbyID: '',
+        players: {
+          foo: {
+            name: 'Bender',
+            score: 0,
+            isCzar: false,
+            submittedCards: [],
+            cards: [],
+          },
+          bar: {
+            name: 'Briggs',
+            score: 0,
+            isCzar: false,
+            submittedCards: [],
+            cards: [],
+          },
+          baz: {
+            name: 'Pedro',
+            score: 0,
+            isCzar: false,
+            submittedCards: [],
+            cards: [],
+          },
+        },
+        playerIDs: ['foo', 'bar', 'baz'],
+        gameSettings: {
+          maxPlayers: 8,
+          winningScore: 7,
+          selectedPacks: [0, 1, 2],
+        },
+        deck: { black: [], white: [] },
+        loading: [],
+      };
+
+      render(
+        <HostContext.Provider value={{ state, dispatch }}>
+          <HostPregameScreen />
+        </HostContext.Provider>,
+      );
+
+      await act(async () => {
+        userEvent.click(screen.getByText('START CAROUSING'));
+      });
+
+      expect(screen.getByText('UNABLE TO GET CARD PACKS')).toBeInTheDocument();
+      expect(screen.getByText('Failed to fetch')).toBeInTheDocument();
+
+      errorSpy.mockRestore();
     });
   });
 });

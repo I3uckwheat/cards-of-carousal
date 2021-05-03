@@ -101,28 +101,71 @@ function LeftPanel() {
 
   const handleClickStart = async () => {
     // check if there are any players and if packs are selected
-    if (playerIDs.length && state.gameSettings.selectedPacks.length) {
+    if (playerIDs.length > 1 && state.gameSettings.selectedPacks.length) {
       const { selectedPacks } = state.gameSettings;
+
       dispatch({ type: 'GET_DECK', payload: {} });
-      await dispatch({
-        type: 'SET_DECK',
-        payload: { selectedPacks },
+
+      try {
+        await dispatch({
+          type: 'SET_DECK',
+          payload: { selectedPacks },
+        });
+
+        dispatch({
+          type: 'START_GAME',
+          payload: {},
+        });
+
+        dispatch({
+          type: 'SET_NEXT_CZAR',
+          payload: {},
+        });
+
+        dispatch({
+          type: 'SELECT_BLACK_CARD',
+          payload: {},
+        });
+
+        dispatch({ type: 'DEAL_WHITE_CARDS', payload: {} });
+      } catch (err) {
+        // The only cause of an error here would be a failure to retrieve card packs
+        dispatch({
+          type: 'SET_ERROR_STATE',
+          payload: {
+            hasError: true,
+            message: {
+              bigText: 'Unable to get card packs',
+              smallText: err.message,
+            },
+          },
+        });
+      }
+    } else {
+      // The only failure cases here are:
+      //  a) not enough players, and
+      //  b) card packs aren't selected
+      const errorMessage =
+        playerIDs.length > 1
+          ? 'Please pick at least one card pack.'
+          : 'No offense, but this game requires friends to play.';
+
+      dispatch({
+        type: 'SET_ERROR_STATE',
+        payload: {
+          hasError: true,
+          message: {
+            bigText: 'Unable to start game',
+            smallText: errorMessage,
+            buttonText: 'Click anywhere to continue',
+          },
+          callback: () => {
+            // we don't need the window to reload for these, so we just reset the error state
+            dispatch({ type: 'RESET_ERROR_STATE' });
+          },
+        },
       });
-      await dispatch({
-        type: 'START_GAME',
-        payload: {},
-      });
-      await dispatch({
-        type: 'SET_NEXT_CZAR',
-        payload: {},
-      });
-      await dispatch({
-        type: 'SELECT_BLACK_CARD',
-        payload: {},
-      });
-      await dispatch({ type: 'DEAL_WHITE_CARDS', payload: {} });
     }
-    // TODO: add else statement to warn that you cannot play a game with no players
   };
 
   const handleClickClose = async () => {
