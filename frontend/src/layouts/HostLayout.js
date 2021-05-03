@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import HamburgerMenu from '../components/Buttons/HamburgerMenu/HamburgerMenu.js';
 import Header from '../components/Header/Header.js';
 import Modal from '../components/Modal/Modal.js';
+import AlertModal from '../components/modals/AlertModal/AlertModal';
+import { HostContext } from '../contexts/HostContext/HostContext';
 
 const propTypes = {
   left: PropTypes.node.isRequired,
@@ -109,6 +111,9 @@ const HostLayoutContainer = styled.div`
 `;
 
 function HostLayout({ left, right, modal }) {
+  const { state } = useContext(HostContext);
+  const { hasError, message, callback } = state.error;
+  const { bigText, smallText, buttonText } = message;
   const [hamburgerMenuActive, setHamburgerMenuActive] = useState(false);
   const [showModal, setShowModal] = useState(false);
 
@@ -120,6 +125,17 @@ function HostLayout({ left, right, modal }) {
   return (
     <HostLayoutContainer className="primary-background">
       {showModal && <Modal onClickOutside={handleModalClick}>{modal}</Modal>}
+
+      {hasError && (
+        <Modal onClickOutside={callback || (() => window.location.reload())}>
+          <AlertModal
+            bigText={bigText}
+            smallText={smallText}
+            buttonText={buttonText}
+            onClick={callback}
+          />
+        </Modal>
+      )}
 
       <div className="hamburger-container">
         <HamburgerMenu

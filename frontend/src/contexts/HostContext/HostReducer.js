@@ -303,6 +303,24 @@ function updateJoinCode(state, { lobbyID }) {
   };
 }
 
+function setErrorState(state, errorState) {
+  return {
+    ...state,
+    error: errorState,
+  };
+}
+
+function resetErrorState(state) {
+  return {
+    ...state,
+    error: {
+      hasError: false,
+      message: { bigText: '', smallText: '', buttonText: '' },
+      callback: null,
+    },
+  };
+}
+
 function HostReducer(state, action) {
   const { type, payload } = action;
 
@@ -369,6 +387,12 @@ function HostReducer(state, action) {
 
     case 'UPDATE_JOIN_CODE':
       return updateJoinCode(state, payload);
+
+    case 'SET_ERROR_STATE':
+      return setErrorState(state, payload);
+
+    case 'RESET_ERROR_STATE':
+      return resetErrorState(state);
 
     default:
       return { ...state };
