@@ -124,10 +124,19 @@ function previewWinner(state, { highlightedPlayerID }) {
   };
 }
 
-function selectWinner(state) {
+function winnerSelected(state) {
+  const roundWinner = state.players[state.czarSelection];
+
   return {
     ...state,
     gameState: 'showing-winning-cards',
+    players: {
+      ...state.players,
+      [state.czarSelection]: {
+        ...roundWinner,
+        score: roundWinner.score + 1,
+      },
+    },
   };
 }
 
@@ -334,8 +343,10 @@ function HostReducer(state, action) {
     case 'PREVIEW_WINNER':
       return previewWinner(state, payload);
 
+    // TODO: Update this to be 'winner-selected'
+    // TODO: Identify the bug in which this event is being called twice
     case 'SELECT_WINNER':
-      return selectWinner(state, payload);
+      return winnerSelected(state, payload);
 
     case 'SET_LOBBY_ID':
       return setLobbyId(state, payload);

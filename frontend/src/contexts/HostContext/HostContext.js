@@ -49,6 +49,7 @@ function HostProvider({ children }) {
       case 'preview-winner':
         return dispatch({ type: 'PREVIEW_WINNER', payload });
 
+      // TODO: Update this to be 'winner-selected'
       case 'select-winner':
         return dispatch({ type: 'SELECT_WINNER', payload });
 
