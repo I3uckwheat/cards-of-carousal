@@ -142,7 +142,7 @@ function startNextRound(dispatch) {
   dispatch({ type: 'DEAL_WHITE_CARDS', payload: {} });
 }
 
-function HostWinnerScreen() {
+function HostRoundWinnerScreen() {
   const { state, dispatch } = useContext(HostContext);
   const { winnerScreenDisplayTime } = state.gameSettings;
   const { players, playerIDs, czarSelection } = state;
@@ -176,4 +176,4 @@ function HostWinnerScreen() {
   );
 }
 
-export default HostWinnerScreen;
+export default HostRoundWinnerScreen;

@@ -2,7 +2,7 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import renderer from 'react-test-renderer';
 import { HostContext } from '../../contexts/HostContext/HostContext';
-import HostWinnerScreen from './HostWinnerScreen';
+import HostRoundWinnerScreen from './HostRoundWinnerScreen';
 
 describe('Host Winner Screen', () => {
   describe('rendering', () => {
@@ -62,7 +62,7 @@ describe('Host Winner Screen', () => {
       const tree = renderer
         .create(
           <HostContext.Provider value={{ state, dispatch }}>
-            <HostWinnerScreen />
+            <HostRoundWinnerScreen />
           </HostContext.Provider>,
         )
         .toJSON();
@@ -73,7 +73,7 @@ describe('Host Winner Screen', () => {
     it('renders the winning card', () => {
       render(
         <HostContext.Provider value={{ state, dispatch }}>
-          <HostWinnerScreen />
+          <HostRoundWinnerScreen />
         </HostContext.Provider>,
       );
 
@@ -83,7 +83,7 @@ describe('Host Winner Screen', () => {
     it('renders the black card', () => {
       render(
         <HostContext.Provider value={{ state, dispatch }}>
-          <HostWinnerScreen />
+          <HostRoundWinnerScreen />
         </HostContext.Provider>,
       );
 
@@ -93,7 +93,7 @@ describe('Host Winner Screen', () => {
     it("renders the winner's name in the czar display", () => {
       render(
         <HostContext.Provider value={{ state, dispatch }}>
-          <HostWinnerScreen />
+          <HostRoundWinnerScreen />
         </HostContext.Provider>,
       );
 
@@ -168,7 +168,7 @@ describe('Host Winner Screen', () => {
 
       await render(
         <HostContext.Provider value={{ state, dispatch }}>
-          <HostWinnerScreen />
+          <HostRoundWinnerScreen />
         </HostContext.Provider>,
       );
 
@@ -179,7 +179,7 @@ describe('Host Winner Screen', () => {
     it('does not send next round dispatches before the setTimeout executes', () => {
       render(
         <HostContext.Provider value={{ state, dispatch }}>
-          <HostWinnerScreen />
+          <HostRoundWinnerScreen />
         </HostContext.Provider>,
       );
 
@@ -211,7 +211,7 @@ describe('Host Winner Screen', () => {
     it('sends next round dispatches once the setTimeout executes', () => {
       render(
         <HostContext.Provider value={{ state, dispatch }}>
-          <HostWinnerScreen />
+          <HostRoundWinnerScreen />
         </HostContext.Provider>,
       );
 
