@@ -1107,4 +1107,72 @@ describe('reducer', () => {
       });
     });
   });
+
+  describe('WINNER_SELECTED', () => {
+    it('Updates gameState to showing-winning-cards', () => {
+      const state = {
+        players: {
+          ID1: {
+            name: 'foo',
+            score: 0,
+            isCzar: false,
+          },
+          ID2: {
+            name: 'bar',
+            score: 0,
+            isCzar: true,
+          },
+          ID3: {
+            name: 'baz',
+            score: 0,
+            isCzar: false,
+          },
+        },
+        gameState: 'example-game-state',
+        playerIDs: ['ID1', 'ID2', 'ID3'],
+        czarSelection: 'ID2',
+      };
+
+      const result = HostReducer(state, {
+        type: 'WINNER_SELECTED',
+        payload: {},
+      });
+
+      expect(result).not.toBe(state);
+      expect(result.gameState).toBe('showing-winning-cards');
+    });
+
+    it('Adds one point to roundWinner s score, determined by the current state.czarSelection', () => {
+      const state = {
+        players: {
+          ID1: {
+            name: 'foo',
+            score: 0,
+            isCzar: false,
+          },
+          ID2: {
+            name: 'bar',
+            score: 0,
+            isCzar: true,
+          },
+          ID3: {
+            name: 'baz',
+            score: 0,
+            isCzar: false,
+          },
+        },
+        gameState: 'example-game-state',
+        playerIDs: ['ID1', 'ID2', 'ID3'],
+        czarSelection: 'ID2',
+      };
+
+      const result = HostReducer(state, {
+        type: 'WINNER_SELECTED',
+        payload: {},
+      });
+
+      expect(result).not.toBe(state);
+      expect(result.players.ID2.score).toBe(1);
+    });
+  });
 });

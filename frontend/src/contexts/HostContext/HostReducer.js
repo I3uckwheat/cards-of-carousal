@@ -344,9 +344,8 @@ function HostReducer(state, action) {
       return previewWinner(state, payload);
 
     // TODO: Update this to be 'winner-selected'
-    // TODO: Identify the bug in which this event is being called twice
-    case 'SELECT_WINNER':
-      return winnerSelected(state, payload);
+    case 'WINNER_SELECTED':
+      return winnerSelected(state);
 
     case 'SET_LOBBY_ID':
       return setLobbyId(state, payload);
