@@ -105,14 +105,32 @@ function GameSettings({ options, onChange }) {
 
   async function getPackNames() {
     const response = await fetch(`${process.env.REACT_APP_API_URL}/deck`);
-    const data = await response.json();
-    dispatch({ type: 'PACKS_RECEIVED', payload: {} });
-    return data;
+    if (response.ok) {
+      const data = await response.json();
+      dispatch({ type: 'PACKS_RECEIVED', payload: {} });
+      return data;
+    }
+    throw new Error();
   }
   useEffect(async () => {
     dispatch({ type: 'GET_PACKS', payload: {} });
-    const packNames = await getPackNames();
-    setCardPacks(packNames);
+    try {
+      const packNames = await getPackNames();
+      return setCardPacks(packNames);
+    } catch {
+      return dispatch({
+        type: 'SET_ERROR_STATE',
+        payload: {
+          hasError: true,
+          message: {
+            bigText: 'Server error',
+            smallText: 'Failed to fetch packs',
+            buttonText: 'Click anywhere to restart',
+          },
+          errorCallback: 'RELOAD',
+        },
+      });
+    }
   }, []);
 
   function numInRange(n, min, max) {
