@@ -32,8 +32,14 @@ const Header = styled.header`
     font-size: clamp(48px, 4.5vw, 110px);
     font-weight: 700;
     line-height: 100%;
-    margin-bottom: max(-0.98vw, -18px);
+    margin-bottom: max(-0.8vw, -20px);
     padding-right: 5px;
+  }
+
+  @media (max-width: 900px) {
+    .CoC {
+      margin-bottom: -8px;
+    }
   }
 
   @media (max-width: 600px) {
