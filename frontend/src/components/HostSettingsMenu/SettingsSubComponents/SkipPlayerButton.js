@@ -10,12 +10,15 @@ const propTypes = {
 };
 
 function SkipPlayerButton({ isEnabled, onDisabledClick }) {
-  const { dispatch } = useContext(HostContext);
+  const {
+    state: { playerIDs, players },
+    dispatch,
+  } = useContext(HostContext);
 
   function handleClick() {
     dispatch({
       type: 'SKIP_UNSUBMITTED_PLAYERS',
-      payload: {},
+      payload: { players, playerIDs },
     });
   }
 
