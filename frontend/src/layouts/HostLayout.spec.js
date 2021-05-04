@@ -300,6 +300,21 @@ describe('HostLayout', () => {
     });
 
     describe('error callbacks', () => {
+      let reload;
+
+      beforeEach(() => {
+        reload = window.location.reload;
+        // window.location properties are read-only, we have to redefine this object to spy on reload
+        Object.defineProperty(window, 'location', {
+          writable: true,
+          value: { ...window.location, reload: jest.fn() },
+        });
+      });
+
+      afterEach(() => {
+        window.location.reload = reload;
+      });
+
       it('passes along a callback to reset error state', () => {
         const dispatch = jest.fn();
 
@@ -327,7 +342,71 @@ describe('HostLayout', () => {
 
         act(() => userEvent.click(screen.getByText('button error message')));
 
-        expect(dispatch).toHaveBeenCalled();
+        expect(dispatch).toHaveBeenCalledWith({
+          type: 'RESET_ERROR_STATE',
+          payload: {},
+        });
+        expect(window.location.reload).not.toHaveBeenCalled();
+      });
+
+      it('passes along a callback to reload error state', () => {
+        const dispatch = jest.fn();
+        state = {
+          error: {
+            hasError: true,
+            message: {
+              bigText: 'big error message',
+              smallText: 'small error message',
+              buttonText: 'button error message',
+            },
+            errorCallbackType: 'RELOAD',
+          },
+        };
+
+        render(
+          <HostContext.Provider value={{ state, dispatch }}>
+            <HostLayout
+              left={leftComponent}
+              right={rightComponent}
+              modal={modalComponent}
+            />
+          </HostContext.Provider>,
+        );
+
+        act(() => userEvent.click(screen.getByText('button error message')));
+
+        expect(dispatch).not.toHaveBeenCalled();
+        expect(window.location.reload).toHaveBeenCalledTimes(1);
+      });
+
+      it('defaults the error callback to a window reload', () => {
+        const dispatch = jest.fn();
+        state = {
+          error: {
+            hasError: true,
+            message: {
+              bigText: 'big error message',
+              smallText: 'small error message',
+              buttonText: 'button error message',
+            },
+            errorCallbackType: 'FOO',
+          },
+        };
+
+        render(
+          <HostContext.Provider value={{ state, dispatch }}>
+            <HostLayout
+              left={leftComponent}
+              right={rightComponent}
+              modal={modalComponent}
+            />
+          </HostContext.Provider>,
+        );
+
+        act(() => userEvent.click(screen.getByText('button error message')));
+
+        expect(dispatch).not.toHaveBeenCalled();
+        expect(window.location.reload).toHaveBeenCalledTimes(1);
       });
     });
   });
