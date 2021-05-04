@@ -1113,6 +1113,7 @@ describe('reducer', () => {
       const state = {
         foo: 'bar',
         error: {},
+        loading: ['baz', 'boo'],
       };
 
       const result = HostReducer(state, {
@@ -1130,6 +1131,33 @@ describe('reducer', () => {
         message: { bigText: 'foo', smallText: 'bar', buttonText: 'baz' },
         callback: 'RELOAD',
       });
+      expect(result.loading.length).toBe(0);
+    });
+
+    it('does not overwrite an already existing error state', () => {
+      const state = {
+        error: {
+          hasError: true,
+          message: { bigText: 'foo', smallText: 'bar', buttonText: 'baz' },
+          errorCallback: 'RELOAD',
+        },
+        loading: [],
+      };
+
+      const result = HostReducer(state, {
+        type: 'SET_ERROR_STATE',
+        payload: {
+          hasError: true,
+          message: {
+            bigText: 'not foo',
+            smallText: 'not bar',
+            buttonText: 'not baz',
+          },
+          callback: 'NOT RELOAD',
+        },
+      });
+
+      expect(result).toEqual(state);
     });
   });
 
