@@ -190,8 +190,8 @@ function sendTooManyPlayersMessage(payload) {
     payload: {
       gameState: 'error',
       message: {
-        big: 'too many ppl',
-        small: 'tell host to increase player max',
+        big: 'Player limit has been reached',
+        small: '',
       },
     },
   });

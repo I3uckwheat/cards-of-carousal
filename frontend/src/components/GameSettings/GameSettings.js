@@ -101,6 +101,9 @@ const StyledForm = styled.form`
 
 function GameSettings({ options, onChange }) {
   const [cardPacks, setCardPacks] = useState([]);
+  const [minimumPlayerLimit, setMinimumPlayerLimit] = useState(
+    config.maxPlayers.min,
+  );
   const { state, dispatch } = useContext(HostContext);
 
   async function getPackNames() {
@@ -114,6 +117,13 @@ function GameSettings({ options, onChange }) {
     const packNames = await getPackNames();
     setCardPacks(packNames);
   }, []);
+
+  useEffect(() => {
+    const playerCount = Object.values(state.players).length;
+    setMinimumPlayerLimit(() =>
+      playerCount > config.maxPlayers.min ? playerCount : config.maxPlayers.min,
+    );
+  }, [state.players]);
 
   function numInRange(n, min, max) {
     if (Math.min(n, min) !== min) return min;
@@ -165,7 +175,7 @@ function GameSettings({ options, onChange }) {
               id="maxPlayers"
               name="maxPlayers"
               value={options.maxPlayers}
-              min={config.maxPlayers.min}
+              min={minimumPlayerLimit}
               max={config.maxPlayers.max}
             />
           </label>

@@ -14,10 +14,13 @@ function setupFetchMock(jsonValue = ['hello', 'world']) {
 describe('GameSettings', () => {
   let state = {
     loading: [],
+    players: {},
   };
+
   beforeEach(() => {
     state = {
       loading: [],
+      players: {},
     };
     setupFetchMock();
   });
@@ -79,6 +82,7 @@ describe('GameSettings', () => {
 
       state = {
         loading: ['getting-packs'],
+        players: {},
       };
 
       render(
