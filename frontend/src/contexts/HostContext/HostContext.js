@@ -1,4 +1,4 @@
-import React, { createContext, useEffect } from 'react';
+import React, { createContext, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 
 import useReducerMiddleware from '../useReducerMiddleware';
@@ -78,6 +78,29 @@ function HostProvider({ children }) {
       emitter.off('message', handleMessage);
     };
   }, []);
+
+  const prevPlayerIDs = useRef([]);
+
+  useEffect(() => {
+    if (
+      prevPlayerIDs.current.length < state.playerIDs.length &&
+      state.gameState === 'waiting-to-receive-cards'
+    ) {
+      const newPlayerId = state.playerIDs.find(
+        (playerID) => !prevPlayerIDs.current.includes(playerID),
+      );
+      // this will send the cards out. the second argument is the dispatch function which is not
+      // not called in this reducer case.
+      hostReducerMiddleware(
+        {
+          type: 'SEND_CARDS_TO_PLAYERS',
+          payload: { ...state, newPlayer: newPlayerId },
+        },
+        () => {},
+      );
+    }
+    prevPlayerIDs.current = state.playerIDs;
+  }, [state.playerIDs]);
 
   return (
     <HostContext.Provider value={{ state, dispatch }}>

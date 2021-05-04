@@ -1,5 +1,3 @@
-import hostReducerMiddleware from './hostReducerMiddleware';
-
 function createLobby(state) {
   return {
     ...state,
@@ -107,19 +105,8 @@ function playerConnected(state, { playerId, playerName }) {
   if (state.gameState === 'waiting-to-receive-cards') {
     // this will give a hand of cards to our new player, but preserve the hands of the others
     newState = dealWhiteCards(newState);
-
     // clear the vanity dummy card each player gets when connecting
     newState.players[playerId].submittedCards = [];
-
-    // this will send the cards out. the second argument is the dispatch function which is not
-    // not called in this reducer case.
-    hostReducerMiddleware(
-      {
-        type: 'SEND_CARDS_TO_PLAYERS',
-        payload: { ...newState, newPlayer: playerId },
-      },
-      () => {},
-    );
   }
 
   return newState;
