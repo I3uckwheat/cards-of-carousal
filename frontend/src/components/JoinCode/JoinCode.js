@@ -6,10 +6,12 @@ import LoadingIndicator from '../LoadingIndicator/LoadingIndicator';
 const propType = {
   loading: PropTypes.bool,
   code: PropTypes.string.isRequired,
+  hidden: PropTypes.bool,
 };
 
 const defaultProps = {
   loading: false,
+  hidden: false,
 };
 
 const JoinCodeComponent = styled.div`
@@ -39,12 +41,20 @@ const JoinCodeComponent = styled.div`
   }
 `;
 
-function DisplayJoinCode({ loading, code }) {
+function DisplayJoinCode({ loading, code, hidden }) {
   return (
     <JoinCodeComponent>
       <p className="join-code-title">JOIN CODE:</p>
       <div className="join-code" data-testid="join-code">
-        {loading || !code ? <LoadingIndicator secondary /> : <p>{code}</p>}
+        {
+          // TODO REMOVE NESTED TERNARY
+          // eslint-disable-next-line no-nested-ternary
+          loading || !code ? (
+            <LoadingIndicator secondary />
+          ) : !hidden ? (
+            <p>{code}</p>
+          ) : null
+        }
       </div>
     </JoinCodeComponent>
   );
