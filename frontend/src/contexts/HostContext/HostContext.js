@@ -30,7 +30,7 @@ const initialState = {
   error: {
     hasError: false,
     message: { bigText: '', smallText: '', buttonText: '' },
-    callback: null,
+    errorCallback: '',
   },
 };
 
@@ -70,6 +70,21 @@ function HostProvider({ children }) {
         return dispatch({
           type: 'PLAYER_SUBMIT',
           payload: { ...payload, playerId: sender },
+        });
+
+      case 'socket-connection-error':
+        dispatch({ type: 'SET_LOBBY_ID', payload: { id: 'ERROR' } });
+        return dispatch({
+          type: 'SET_ERROR_STATE',
+          payload: {
+            hasError: true,
+            message: {
+              bigText: 'Socket error',
+              smallText: 'Please try again later',
+              buttonText: 'Click anywhere to restart',
+            },
+            errorCallback: 'RELOAD',
+          },
         });
 
       default:

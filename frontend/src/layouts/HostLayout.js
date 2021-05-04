@@ -111,8 +111,8 @@ const HostLayoutContainer = styled.div`
 `;
 
 function HostLayout({ left, right, modal }) {
-  const { state } = useContext(HostContext);
-  const { hasError, message, callback } = state.error;
+  const { state, dispatch } = useContext(HostContext);
+  const { hasError, message, errorCallbackType } = state.error;
   const { bigText, smallText, buttonText } = message;
   const [hamburgerMenuActive, setHamburgerMenuActive] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -122,17 +122,27 @@ function HostLayout({ left, right, modal }) {
     setShowModal(!showModal);
   }
 
+  function parseErrorCallback(errorCallback) {
+    switch (errorCallback) {
+      case 'RESET':
+        return () => dispatch({ type: 'RESET_ERROR_STATE', payload: {} });
+      case 'RELOAD':
+      default:
+        return () => window.location.reload();
+    }
+  }
+
   return (
     <HostLayoutContainer className="primary-background">
       {showModal && <Modal onClickOutside={handleModalClick}>{modal}</Modal>}
 
       {hasError && (
-        <Modal onClickOutside={callback || (() => window.location.reload())}>
+        <Modal onClickOutside={parseErrorCallback(errorCallbackType)}>
           <AlertModal
             bigText={bigText}
             smallText={smallText}
             buttonText={buttonText}
-            onClick={callback}
+            onClick={parseErrorCallback(errorCallbackType)}
           />
         </Modal>
       )}

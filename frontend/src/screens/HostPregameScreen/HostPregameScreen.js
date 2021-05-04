@@ -138,6 +138,7 @@ function LeftPanel() {
               bigText: 'Unable to get card packs',
               smallText: err.message,
             },
+            errorCallback: 'RELOAD',
           },
         });
       }
@@ -159,10 +160,8 @@ function LeftPanel() {
             smallText: errorMessage,
             buttonText: 'Click anywhere to continue',
           },
-          callback: () => {
-            // we don't need the window to reload for these, so we just reset the error state
-            dispatch({ type: 'RESET_ERROR_STATE' });
-          },
+          // we don't need the window to reload for these, so we just reset the error state
+          callback: 'RESET',
         },
       });
     }
