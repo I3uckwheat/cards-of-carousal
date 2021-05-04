@@ -8,6 +8,7 @@ import config from '../../config';
 function setupFetchMock(jsonValue = ['hello', 'world']) {
   jest.spyOn(window, 'fetch').mockImplementation(async () => ({
     json: async () => jsonValue,
+    ok: true,
   }));
 }
 
@@ -131,6 +132,42 @@ describe('GameSettings', () => {
       expect(dispatch).toHaveBeenCalledWith({
         type: 'PACKS_RECEIVED',
         payload: {},
+      });
+    });
+
+    it('dispatches an error if the fetch fails', async () => {
+      jest.spyOn(window, 'fetch').mockImplementationOnce(async () => ({
+        json: async () => new Error('Failed to fetch'),
+        ok: false,
+      }));
+
+      const dispatch = jest.fn();
+      const onChange = () => {};
+      const options = {
+        maxPlayers: 5,
+        winningScore: 6,
+        selectedPacks: [],
+      };
+
+      render(
+        <HostContext.Provider value={{ state, dispatch }}>
+          <GameSettings onChange={onChange} options={options} />
+        </HostContext.Provider>,
+      );
+
+      await waitFor(() => expect(window.fetch).toHaveBeenCalledTimes(1));
+
+      expect(dispatch).toHaveBeenCalledWith({
+        type: 'SET_ERROR_STATE',
+        payload: {
+          hasError: true,
+          message: {
+            bigText: 'Server error',
+            smallText: 'Failed to fetch packs',
+            buttonText: 'Click anywhere to restart',
+          },
+          errorCallback: 'RELOAD',
+        },
       });
     });
   });
