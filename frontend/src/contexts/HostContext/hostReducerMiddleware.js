@@ -183,6 +183,20 @@ function czarSelectWinner({ players, playerIDs }) {
   });
 }
 
+function sendTooManyPlayersMessage(payload) {
+  socketInstance.sendMessage({
+    recipients: [payload.playerId],
+    event: 'update',
+    payload: {
+      gameState: 'error',
+      message: {
+        big: 'too many ppl',
+        small: 'tell host to increase player max',
+      },
+    },
+  });
+}
+
 export default async function hostReducerMiddleware(
   { type, payload },
   dispatch,
@@ -233,6 +247,10 @@ export default async function hostReducerMiddleware(
 
     case 'SEND_END_OF_ROUND_MESSAGES':
       sendEndOfRoundMessages(payload);
+      break;
+
+    case 'TOO_MANY_PLAYERS':
+      sendTooManyPlayersMessage(payload);
       break;
 
     default:

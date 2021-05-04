@@ -92,6 +92,9 @@ describe('reducer', () => {
       const state = {
         players: {},
         playerIDs: [],
+        gameSettings: {
+          maxPlayers: 12,
+        },
       };
 
       const result = HostReducer(state, {
@@ -118,6 +121,9 @@ describe('reducer', () => {
       const state = {
         players: {},
         playerIDs: [],
+        gameSettings: {
+          maxPlayers: 12,
+        },
       };
 
       const result = HostReducer(state, {
