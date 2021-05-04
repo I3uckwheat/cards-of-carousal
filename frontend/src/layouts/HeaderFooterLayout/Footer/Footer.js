@@ -50,7 +50,7 @@ const FooterWrapper = styled.footer`
   }
 
   /*largest desktop player mode */
-  @media (max-width: 785px) and (min-height: 501px) {
+  @media (max-width: 570px) and (min-height: 501px) {
     height: 120px;
     background-color: transparent;
 

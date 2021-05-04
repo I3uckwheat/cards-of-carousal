@@ -121,8 +121,8 @@ const WelcomeScreenWrapper = styled.div`
     }
   }
 
-  /*if less than 700px do this.... */
-  @media (max-width: 645px) {
+  /*if less than 700px, or on mobile landscape, do this.... */
+  @media (max-width: 700px), (max-width: 900px) and (max-height: 500px) {
     .definition-container {
       display: none;
     }
