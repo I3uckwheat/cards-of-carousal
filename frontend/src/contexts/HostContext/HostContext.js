@@ -79,18 +79,23 @@ function HostProvider({ children }) {
     };
   }, []);
 
+  // reference to the old state of playerIDs
   const prevPlayerIDs = useRef([]);
 
   useEffect(() => {
     if (
+      // a new player is added to the game
       prevPlayerIDs.current.length < state.playerIDs.length &&
       state.gameState === 'waiting-to-receive-cards'
     ) {
+      // find the new player's ID
       const newPlayerId = state.playerIDs.find(
         (playerID) => !prevPlayerIDs.current.includes(playerID),
       );
-      // this will send the cards out. the second argument is the dispatch function which is not
-      // not called in this reducer case.
+
+      // this will send the cards out and get the new player into the current round.
+      // the second argument is the dispatch function which is not called in this reducer case.
+
       hostReducerMiddleware(
         {
           type: 'SEND_CARDS_TO_PLAYERS',
@@ -99,6 +104,7 @@ function HostProvider({ children }) {
         () => {},
       );
     }
+    // update the ref
     prevPlayerIDs.current = state.playerIDs;
   }, [state.playerIDs]);
 
