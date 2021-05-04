@@ -79,7 +79,7 @@ exports[`PlayerJoin snapshot matches 1`] = `
   font-size: clamp(48px,4.5vw,110px);
   font-weight: 700;
   line-height: 100%;
-  margin-bottom: max(-0.98vw,-18px);
+  margin-bottom: max(-0.8vw,-20px);
   padding-right: 5px;
 }
 
@@ -249,6 +249,12 @@ exports[`PlayerJoin snapshot matches 1`] = `
   .c4 {
     font-size: 1rem;
     padding-right: 0px;
+  }
+}
+
+@media (max-width:900px) {
+  .c1 .CoC {
+    margin-bottom: -8px;
   }
 }
 

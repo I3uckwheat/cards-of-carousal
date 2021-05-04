@@ -34,16 +34,16 @@ const WelcomeScreenWrapper = styled.div`
     display: flex;
     flex-direction: column;
 
-    font-size: 3rem;
+    font-size: 3.2rem;
     font-weight: 700;
-    line-height: 2rem;
+    line-height: 2.6rem;
 
     transform: rotate(-5deg);
     margin-bottom: 90px;
   }
 
   .definition {
-    font-size: 2rem;
+    font-size: 2.25rem;
     font-weight: 400;
   }
 
