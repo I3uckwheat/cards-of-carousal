@@ -161,7 +161,7 @@ function LeftPanel() {
             buttonText: 'Click anywhere to continue',
           },
           // we don't need the window to reload for these, so we just reset the error state
-          callback: 'RESET',
+          errorCallbackType: 'RESET',
         },
       });
     }

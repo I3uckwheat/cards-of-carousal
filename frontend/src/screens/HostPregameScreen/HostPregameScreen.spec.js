@@ -31,7 +31,7 @@ describe('Host Pregame Screen', () => {
     error: {
       hasError: false,
       message: { bigText: '', smallText: '', buttonText: '' },
-      callback: 'RELOAD',
+      errorCallbackType: 'RELOAD',
     },
   };
 
@@ -47,7 +47,7 @@ describe('Host Pregame Screen', () => {
       error: {
         hasError: false,
         message: { bigText: '', smallText: '', buttonText: '' },
-        callback: 'RELOAD',
+        errorCallbackType: 'RELOAD',
       },
     };
     setupFetchMock();
@@ -227,7 +227,7 @@ describe('Host Pregame Screen', () => {
         error: {
           hasError: false,
           message: { bigText: '', smallText: '', buttonText: '' },
-          callback: 'RELOAD',
+          errorCallbackType: 'RELOAD',
         },
       };
 
@@ -314,7 +314,7 @@ describe('Host Pregame Screen', () => {
             smallText: 'No offense, but this game requires friends to play.',
             buttonText: 'Click anywhere to continue',
           },
-          callback: 'RESET',
+          errorCallbackType: 'RESET',
         },
       });
     });
@@ -355,7 +355,7 @@ describe('Host Pregame Screen', () => {
         error: {
           hasError: false,
           message: { bigText: '', smallText: '', buttonText: '' },
-          callback: 'RELOAD',
+          errorCallbackType: 'RELOAD',
         },
       };
 
@@ -392,7 +392,7 @@ describe('Host Pregame Screen', () => {
             smallText: 'Please pick at least one card pack.',
             buttonText: 'Click anywhere to continue',
           },
-          callback: 'RESET',
+          errorCallbackType: 'RESET',
         },
       });
     });
@@ -446,7 +446,7 @@ describe('Host Pregame Screen', () => {
         error: {
           hasError: false,
           message: { bigText: '', smallText: '', buttonText: '' },
-          callback: 'RELOAD',
+          errorCallbackType: 'RELOAD',
         },
       };
 
