@@ -20,19 +20,19 @@ const Header = styled.header`
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  height: min(25.6vh, 420px);
+  height: min(20vh, 400px);
 
   .welcome-to {
-    font-size: clamp(28px, 2.6vw, 66px);
+    font-size: clamp(18px, 1.7vw, 42px);
     font-weight: 500;
     line-height: 100%;
-    margin-bottom: max(-1vw, -21px);
+    margin-bottom: max(-0.7vw, -10px);
   }
   .CoC {
-    font-size: clamp(48px, 7vw, 175px);
+    font-size: clamp(48px, 4.5vw, 110px);
     font-weight: 700;
     line-height: 100%;
-    margin-bottom: max(-1.1vw, -30px);
+    margin-bottom: max(-0.98vw, -18px);
     padding-right: 5px;
   }
 

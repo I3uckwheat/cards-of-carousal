@@ -32,11 +32,11 @@ exports[`App snapshots should initially show the welcome screen 1`] = `
   -webkit-justify-content: flex-end;
   -ms-flex-pack: end;
   justify-content: flex-end;
-  height: 200px;
-  font-size: 3.5rem;
+  height: 122px;
+  font-size: 36px;
   font-weight: 400;
   padding-right: 16px;
-  padding-bottom: 10px;
+  padding-bottom: 2px;
   background-color: var(--secondary-background-color);
   color: var(--secondary-text-color);
 }
@@ -67,21 +67,21 @@ exports[`App snapshots should initially show the welcome screen 1`] = `
   -webkit-justify-content: flex-end;
   -ms-flex-pack: end;
   justify-content: flex-end;
-  height: min(25.6vh,420px);
+  height: min(20vh,400px);
 }
 
 .c1 .welcome-to {
-  font-size: clamp(28px,2.6vw,66px);
+  font-size: clamp(18px,1.7vw,42px);
   font-weight: 500;
   line-height: 100%;
-  margin-bottom: max(-1vw,-21px);
+  margin-bottom: max(-0.7vw,-10px);
 }
 
 .c1 .CoC {
-  font-size: clamp(48px,7vw,175px);
+  font-size: clamp(48px,4.5vw,110px);
   font-weight: 700;
   line-height: 100%;
-  margin-bottom: max(-1.1vw,-30px);
+  margin-bottom: max(-0.98vw,-18px);
   padding-right: 5px;
 }
 
@@ -206,24 +206,32 @@ exports[`App snapshots should initially show the welcome screen 1`] = `
   margin-right: 93px;
 }
 
-@media (max-width:2000px) {
+@media (max-width:1920px) {
   .c3 {
-    height: 140px;
-    font-size: 2rem;
+    height: 110px;
+    font-size: 30px;
+  }
+}
+
+@media (max-width:1440px) {
+  .c3 {
+    height: 90px;
+    font-size: 26px;
+  }
+}
+
+@media (max-width:1300px) {
+  .c3 {
+    height: 80px;
+    font-size: 23px;
   }
 }
 
 @media (max-width:970px) {
   .c3 {
     text-align: center;
-    font-size: 1.5rem;
-  }
-}
-
-@media (max-height:40vw) {
-  .c3 {
     height: 70px;
-    font-size: 1.1rem;
+    font-size: 18px;
   }
 }
 
@@ -248,7 +256,9 @@ exports[`App snapshots should initially show the welcome screen 1`] = `
 
 @media (max-height:500px) {
   .c3 {
-    height: 80px;
+    height: 50px;
+    padding-bottom: 4px;
+    padding-right: 10px;
   }
 
   .c3 p {
@@ -854,15 +864,19 @@ exports[`App snapshots should show the host screen after user has clicked the "h
   height: 40%;
 }
 
-@media (max-width:2000px) {
+@media (max-width:1920px) {
+
+}
+
+@media (max-width:1440px) {
+
+}
+
+@media (max-width:1300px) {
 
 }
 
 @media (max-width:970px) {
-
-}
-
-@media (max-height:40vw) {
 
 }
 
@@ -1171,11 +1185,11 @@ exports[`App snapshots should show the player screen after user has clicked the 
   -webkit-justify-content: flex-end;
   -ms-flex-pack: end;
   justify-content: flex-end;
-  height: 200px;
-  font-size: 3.5rem;
+  height: 122px;
+  font-size: 36px;
   font-weight: 400;
   padding-right: 16px;
-  padding-bottom: 10px;
+  padding-bottom: 2px;
   background-color: var(--secondary-background-color);
   color: var(--secondary-text-color);
 }
@@ -1206,21 +1220,21 @@ exports[`App snapshots should show the player screen after user has clicked the 
   -webkit-justify-content: flex-end;
   -ms-flex-pack: end;
   justify-content: flex-end;
-  height: min(25.6vh,420px);
+  height: min(20vh,400px);
 }
 
 .c1 .welcome-to {
-  font-size: clamp(28px,2.6vw,66px);
+  font-size: clamp(18px,1.7vw,42px);
   font-weight: 500;
   line-height: 100%;
-  margin-bottom: max(-1vw,-21px);
+  margin-bottom: max(-0.7vw,-10px);
 }
 
 .c1 .CoC {
-  font-size: clamp(48px,7vw,175px);
+  font-size: clamp(48px,4.5vw,110px);
   font-weight: 700;
   line-height: 100%;
-  margin-bottom: max(-1.1vw,-30px);
+  margin-bottom: max(-0.98vw,-18px);
   padding-right: 5px;
 }
 
@@ -1326,24 +1340,32 @@ exports[`App snapshots should show the player screen after user has clicked the 
   text-transform: uppercase;
 }
 
-@media (max-width:2000px) {
+@media (max-width:1920px) {
   .c4 {
-    height: 140px;
-    font-size: 2rem;
+    height: 110px;
+    font-size: 30px;
+  }
+}
+
+@media (max-width:1440px) {
+  .c4 {
+    height: 90px;
+    font-size: 26px;
+  }
+}
+
+@media (max-width:1300px) {
+  .c4 {
+    height: 80px;
+    font-size: 23px;
   }
 }
 
 @media (max-width:970px) {
   .c4 {
     text-align: center;
-    font-size: 1.5rem;
-  }
-}
-
-@media (max-height:40vw) {
-  .c4 {
     height: 70px;
-    font-size: 1.1rem;
+    font-size: 18px;
   }
 }
 
@@ -1368,7 +1390,9 @@ exports[`App snapshots should show the player screen after user has clicked the 
 
 @media (max-height:500px) {
   .c4 {
-    height: 80px;
+    height: 50px;
+    padding-bottom: 4px;
+    padding-right: 10px;
   }
 
   .c4 p {
@@ -1783,11 +1807,11 @@ exports[`App snapshots should show the welcome screen after user has clicked ele
   -webkit-justify-content: flex-end;
   -ms-flex-pack: end;
   justify-content: flex-end;
-  height: 200px;
-  font-size: 3.5rem;
+  height: 122px;
+  font-size: 36px;
   font-weight: 400;
   padding-right: 16px;
-  padding-bottom: 10px;
+  padding-bottom: 2px;
   background-color: var(--secondary-background-color);
   color: var(--secondary-text-color);
 }
@@ -1818,21 +1842,21 @@ exports[`App snapshots should show the welcome screen after user has clicked ele
   -webkit-justify-content: flex-end;
   -ms-flex-pack: end;
   justify-content: flex-end;
-  height: min(25.6vh,420px);
+  height: min(20vh,400px);
 }
 
 .c1 .welcome-to {
-  font-size: clamp(28px,2.6vw,66px);
+  font-size: clamp(18px,1.7vw,42px);
   font-weight: 500;
   line-height: 100%;
-  margin-bottom: max(-1vw,-21px);
+  margin-bottom: max(-0.7vw,-10px);
 }
 
 .c1 .CoC {
-  font-size: clamp(48px,7vw,175px);
+  font-size: clamp(48px,4.5vw,110px);
   font-weight: 700;
   line-height: 100%;
-  margin-bottom: max(-1.1vw,-30px);
+  margin-bottom: max(-0.98vw,-18px);
   padding-right: 5px;
 }
 
@@ -1957,24 +1981,32 @@ exports[`App snapshots should show the welcome screen after user has clicked ele
   margin-right: 93px;
 }
 
-@media (max-width:2000px) {
+@media (max-width:1920px) {
   .c3 {
-    height: 140px;
-    font-size: 2rem;
+    height: 110px;
+    font-size: 30px;
+  }
+}
+
+@media (max-width:1440px) {
+  .c3 {
+    height: 90px;
+    font-size: 26px;
+  }
+}
+
+@media (max-width:1300px) {
+  .c3 {
+    height: 80px;
+    font-size: 23px;
   }
 }
 
 @media (max-width:970px) {
   .c3 {
     text-align: center;
-    font-size: 1.5rem;
-  }
-}
-
-@media (max-height:40vw) {
-  .c3 {
     height: 70px;
-    font-size: 1.1rem;
+    font-size: 18px;
   }
 }
 
@@ -1999,7 +2031,9 @@ exports[`App snapshots should show the welcome screen after user has clicked ele
 
 @media (max-height:500px) {
   .c3 {
-    height: 80px;
+    height: 50px;
+    padding-bottom: 4px;
+    padding-right: 10px;
   }
 
   .c3 p {
