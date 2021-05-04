@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import { HostContext } from '../../../contexts/HostContext/HostContext';
@@ -11,9 +11,26 @@ const propTypes = {
 
 function SkipPlayerButton({ isEnabled, onDisabledClick }) {
   const {
-    state: { playerIDs, players },
+    state: { gameState, playerIDs, players },
     dispatch,
   } = useContext(HostContext);
+
+  const [minimumPlayersSubmitted, setMinimumPlayersSubmitted] = useState(false);
+
+  useEffect(() => {
+    const determineSubmittedPlayers = () => {
+      const submittedPlayers = playerIDs.filter(
+        (playerID) =>
+          !players[playerID].isCzar &&
+          players[playerID].submittedCards.length > 0,
+      );
+
+      return submittedPlayers.length >= 2;
+    };
+    return () => {
+      setMinimumPlayersSubmitted(determineSubmittedPlayers());
+    };
+  }, [players]);
 
   function handleClick() {
     dispatch({
@@ -24,7 +41,11 @@ function SkipPlayerButton({ isEnabled, onDisabledClick }) {
 
   return (
     <OptionButton
-      isEnabled={isEnabled}
+      isEnabled={
+        isEnabled &&
+        minimumPlayersSubmitted &&
+        gameState === 'waiting-to-receive-cards'
+      }
       onEnabledClick={handleClick}
       onDisabledClick={onDisabledClick}
     >
