@@ -1,10 +1,14 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
-import HostLayout from '../../layouts/HostLayout';
+
 import { HostContext } from '../../contexts/HostContext/HostContext';
+import HostLayout from '../../layouts/HostLayout';
 import PlayerList from '../../components/PlayerList/PlayerList';
 import InGameSettingsModal from '../../components/HostSettingsMenu/InGameSettingsModal.js';
 import JoinCode from '../../components/JoinCode/JoinCode';
+
+import WhiteCardsTrio from '../../assets/card-trio-diagonal.svg';
+import BlackCardDiagonal from '../../assets/black-card-diagonal.svg';
 
 const LeftPanelWrapper = styled.div`
   display: flex;
@@ -33,13 +37,6 @@ const LeftPanelWrapper = styled.div`
     display: flex;
     justify-content: center;
   }
-
-  .host-pregame-button {
-    padding: 0;
-    background-color: var(--primary-background-color);
-    color: var(--primary-text-color);
-    margin: auto auto 12px;
-  }
 `;
 
 const RightPanelWrapper = styled.div`
@@ -48,22 +45,57 @@ const RightPanelWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 
   .winner-display {
     display: flex;
     flex-direction: column;
-    margin: 25px 0;
-    line-height: 1em;
+    justify-content: center;
+    margin: 40px 0;
 
-    font-size: 56px;
-    font-weight: 900;
+    flex: 2;
+    line-height: 1em;
     text-transform: uppercase;
 
-    span {
-      font-size: 24px;
-      text-indent: -20px;
-      margin-bottom: -8px;
-      line-height: 1.5rem;
+    .prelude {
+      font-size: 28px;
+      text-indent: -40px;
+    }
+
+    .title {
+      font-size: 64px;
+      font-weight: 900;
+      text-align: right;
+    }
+  }
+
+  .thanks-message {
+    font-size: 46px;
+    font-weight: 700;
+    text-align: center;
+    text-transform: uppercase;
+    flex: 1;
+  }
+
+  .details {
+    position: relative;
+    width: 100%;
+    flex: 2;
+
+    .detail-white,
+    .detail-black {
+      position: absolute;
+      bottom: 0;
+    }
+
+    .detail-white {
+      left: 0;
+      width: 150px;
+    }
+
+    .detail-black {
+      right: 0;
+      width: 110px;
     }
   }
 `;
@@ -87,16 +119,19 @@ function LeftPanel() {
 }
 
 function RightPanel() {
-  const { state } = useContext(HostContext);
-  const { players, czarSelection } = state;
-  const winner = players[czarSelection];
-
   return (
-    <RightPanelWrapper columns={winner.submittedCards.length}>
-      <h1 className="winner-display" data-testid="winner-display">
-        <span>WINNER:</span>
-        {winner.name.toUpperCase()}
+    <RightPanelWrapper>
+      <h1 className="winner-display">
+        <span className="prelude">And the winner is...</span>
+        <p className="title">BACON</p>
       </h1>
+
+      <p className="thanks-message">Thank you for playing 🖖</p>
+
+      <div className="details">
+        <img className="detail-white" src={WhiteCardsTrio} alt="" />
+        <img className="detail-black" src={BlackCardDiagonal} alt="" />
+      </div>
     </RightPanelWrapper>
   );
 }
