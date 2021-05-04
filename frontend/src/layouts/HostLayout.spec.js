@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import renderer from 'react-test-renderer';
 
@@ -21,7 +21,7 @@ describe('HostLayout', () => {
           smallText: '',
           buttonText: '',
         },
-        errorCallback: '',
+        errorCallbackType: '',
       },
     };
   });
@@ -280,6 +280,7 @@ describe('HostLayout', () => {
             smallText: 'small error message',
             buttonText: 'button error message',
           },
+          errorCallbackType: '',
         },
       };
 
@@ -296,6 +297,38 @@ describe('HostLayout', () => {
       expect(screen.getByText('BIG ERROR MESSAGE')).toBeInTheDocument();
       expect(screen.getByText('small error message')).toBeInTheDocument();
       expect(screen.getByText('button error message')).toBeInTheDocument();
+    });
+
+    describe('error callbacks', () => {
+      it('passes along a callback to reset error state', () => {
+        const dispatch = jest.fn();
+
+        state = {
+          error: {
+            hasError: true,
+            message: {
+              bigText: 'big error message',
+              smallText: 'small error message',
+              buttonText: 'button error message',
+            },
+            errorCallbackType: 'RESET',
+          },
+        };
+
+        render(
+          <HostContext.Provider value={{ state, dispatch }}>
+            <HostLayout
+              left={leftComponent}
+              right={rightComponent}
+              modal={modalComponent}
+            />
+          </HostContext.Provider>,
+        );
+
+        act(() => userEvent.click(screen.getByText('button error message')));
+
+        expect(dispatch).toHaveBeenCalled();
+      });
     });
   });
 });
