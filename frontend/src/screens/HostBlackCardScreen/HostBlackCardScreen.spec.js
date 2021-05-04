@@ -55,6 +55,15 @@ describe('Host Black Card Screen', () => {
       playerIDs: ['ID1', 'ID2', 'ID3'],
       gameSettings: { maxPlayers: 8, winningScore: 7, selectedPacks: [] },
       loading: [],
+      error: {
+        hasError: false,
+        message: {
+          bigText: '',
+          smallText: '',
+          buttonText: '',
+        },
+        errorCallback: '',
+      },
     };
 
     it('renders', () => {
@@ -165,6 +174,15 @@ describe('Host Black Card Screen', () => {
         playerIDs: ['ID1', 'ID2', 'ID3'],
         gameSettings: { maxPlayers: 8, winningScore: 7, selectedPacks: [] },
         loading: [],
+        error: {
+          hasError: false,
+          message: {
+            bigText: '',
+            smallText: '',
+            buttonText: '',
+          },
+          errorCallback: '',
+        },
       };
       const { players, playerIDs, selectedBlackCard } = state;
 
@@ -226,6 +244,15 @@ describe('Host Black Card Screen', () => {
         playerIDs: ['ID1', 'ID2', 'ID3'],
         gameSettings: { maxPlayers: 8, winningScore: 7, selectedPacks: [] },
         loading: [],
+        error: {
+          hasError: false,
+          message: {
+            bigText: '',
+            smallText: '',
+            buttonText: '',
+          },
+          errorCallback: '',
+        },
       };
       const { players, playerIDs } = state;
 
@@ -291,6 +318,15 @@ describe('Host Black Card Screen', () => {
         playerIDs: ['ID1', 'ID2', 'ID3'],
         gameSettings: { maxPlayers: 8, winningScore: 7, selectedPacks: [] },
         loading: [],
+        error: {
+          hasError: false,
+          message: {
+            bigText: '',
+            smallText: '',
+            buttonText: '',
+          },
+          errorCallback: '',
+        },
       };
       const { players, playerIDs } = state;
 

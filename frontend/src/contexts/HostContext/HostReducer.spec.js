@@ -1120,7 +1120,7 @@ describe('reducer', () => {
         payload: {
           hasError: true,
           message: { bigText: 'foo', smallText: 'bar', buttonText: 'baz' },
-          callback: null,
+          callback: 'RELOAD',
         },
       });
 
@@ -1128,7 +1128,7 @@ describe('reducer', () => {
       expect(result.error).toEqual({
         hasError: true,
         message: { bigText: 'foo', smallText: 'bar', buttonText: 'baz' },
-        callback: null,
+        callback: 'RELOAD',
       });
     });
   });
@@ -1140,7 +1140,7 @@ describe('reducer', () => {
         error: {
           hasError: true,
           message: { bigText: 'foo', smallText: 'bar', buttonText: 'baz' },
-          callback: null,
+          errorCallback: 'RELOAD',
         },
       };
 
@@ -1153,7 +1153,7 @@ describe('reducer', () => {
       expect(result.error).toEqual({
         hasError: false,
         message: { bigText: '', smallText: '', buttonText: '' },
-        callback: null,
+        errorCallback: '',
       });
     });
   });

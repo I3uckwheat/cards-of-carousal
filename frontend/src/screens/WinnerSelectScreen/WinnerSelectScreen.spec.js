@@ -51,6 +51,15 @@ describe('WinnerSelectScreen', () => {
       gameSettings: { maxPlayers: 8, winningScore: 7, selectedPacks: [] },
       deck: { black: [], white: [] },
       loading: [],
+      error: {
+        hasError: false,
+        message: {
+          bigText: '',
+          smallText: '',
+          buttonText: '',
+        },
+        errorCallback: '',
+      },
     };
 
     it('throws an error for default context state values', () => {
@@ -177,6 +186,15 @@ describe('WinnerSelectScreen', () => {
         gameSettings: { maxPlayers: 8, winningScore: 7, selectedPacks: [] },
         deck: { black: [], white: [] },
         loading: [],
+        error: {
+          hasError: false,
+          message: {
+            bigText: '',
+            smallText: '',
+            buttonText: '',
+          },
+          errorCallback: '',
+        },
       };
       const dispatch = jest.fn();
 

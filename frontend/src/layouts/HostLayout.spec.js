@@ -21,7 +21,7 @@ describe('HostLayout', () => {
           smallText: '',
           buttonText: '',
         },
-        callback: null,
+        errorCallback: '',
       },
     };
   });

@@ -17,6 +17,23 @@ exports[`Host Pregame Screen rendering renders 1`] = `
   color: var(--secondary-text-color);
 }
 
+.c5 {
+  display: block;
+  border: 2px solid var(--primary-text-color);
+  font-size: 12px;
+  font-weight: bold;
+  padding: 0.7em;
+  background: var(--secondary-background-color);
+  color: var(--secondary-text-color);
+}
+
+.c5:hover,
+.c5:active,
+.c5:focus {
+  background: var(--accent-background-color);
+  cursor: pointer;
+}
+
 .c0 {
   position: absolute;
   top: 0;
@@ -185,23 +202,6 @@ exports[`Host Pregame Screen rendering renders 1`] = `
   background-color: var(--secondary-background-color);
   width: 305px;
   height: 70px;
-}
-
-.c5 {
-  display: block;
-  border: 2px solid var(--primary-text-color);
-  font-size: 12px;
-  font-weight: bold;
-  padding: 0.7em;
-  background: var(--secondary-background-color);
-  color: var(--secondary-text-color);
-}
-
-.c5:hover,
-.c5:active,
-.c5:focus {
-  background: var(--accent-background-color);
-  cursor: pointer;
 }
 
 .c3 {
