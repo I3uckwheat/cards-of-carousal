@@ -129,17 +129,17 @@ exports[`App snapshots should initially show the welcome screen 1`] = `
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
-  font-size: 3.2rem;
+  font-size: 5.2rem;
   font-weight: 700;
-  line-height: 2.6rem;
+  line-height: 4.2rem;
   -webkit-transform: rotate(-5deg);
   -ms-transform: rotate(-5deg);
   transform: rotate(-5deg);
-  margin-bottom: 90px;
+  margin-bottom: 190px;
 }
 
 .c0 .definition {
-  font-size: 2.25rem;
+  font-size: 4rem;
   font-weight: 400;
 }
 
@@ -176,9 +176,9 @@ exports[`App snapshots should initially show the welcome screen 1`] = `
   align-items: center;
   font-size: 6rem;
   font-weight: 900;
-  width: 256px;
-  height: 48px;
-  font-size: 2.5rem;
+  width: 317px;
+  height: 82px;
+  font-size: 3.6rem;
 }
 
 .c0 .OR {
@@ -198,10 +198,10 @@ exports[`App snapshots should initially show the welcome screen 1`] = `
   color: var(--secondary-text-color);
   border-radius: 50%;
   padding: 16px;
-  font-size: 2.25rem;
+  font-size: 2.3rem;
   font-weight: 700;
-  width: 72px;
-  height: 72px;
+  width: 82px;
+  height: 82px;
   margin-left: 93px;
   margin-right: 93px;
 }
@@ -297,29 +297,80 @@ exports[`App snapshots should initially show the welcome screen 1`] = `
   }
 }
 
-@media (max-width:820px) {
+@media (max-width:1920px) {
   .c0 .definition-container {
-    font-size: 2.2rem;
-    line-height: 1.8rem;
+    font-size: 4.5rem;
+    line-height: 3.7rem;
+    margin-bottom: 150px;
+  }
+
+  .c0 .definition {
+    font-size: 3.5rem;
+  }
+
+  .c0 .button {
+    width: 290px;
+    height: 74px;
+    font-size: 3.2rem;
+  }
+
+  .c0 .OR {
+    width: 74px;
+    height: 74px;
+    margin-left: 93px;
+    margin-right: 93px;
+    font-size: 2rem;
+  }
+}
+
+@media (max-width:1440px) {
+  .c0 .definition-container {
+    font-size: 3.2rem;
+    line-height: 2.6rem;
     margin-bottom: 90px;
   }
 
   .c0 .definition {
-    font-size: 1.7rem;
+    font-size: 2.5rem;
   }
 
   .c0 .button {
-    width: 200px;
-    height: 48px;
+    width: 256px;
+    height: 66px;
     font-size: 2.5rem;
   }
 
   .c0 .OR {
-    width: 60px;
-    height: 60px;
+    width: 66px;
+    height: 66px;
+    margin-left: 93px;
+    margin-right: 93px;
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width:950px) {
+  .c0 .definition-container {
+    font-size: 2.4rem;
+    line-height: 1.8rem;
+  }
+
+  .c0 .definition {
+    font-size: 1.85rem;
+  }
+
+  .c0 .button {
+    width: 200px;
+    height: 51px;
+    font-size: 2rem;
+  }
+
+  .c0 .OR {
+    width: 51px;
+    height: 51px;
     margin-left: 70px;
     margin-right: 70px;
-    font-size: 2rem;
+    font-size: 1.4rem;
   }
 }
 
@@ -334,6 +385,32 @@ exports[`App snapshots should initially show the welcome screen 1`] = `
 
   .c0 .OR {
     display: none;
+  }
+}
+
+@media (min-width:2561px) {
+  .c0 .definition-container {
+    font-size: 6.5rem;
+    line-height: 4.8rem;
+    margin-bottom: 300px;
+  }
+
+  .c0 .definition {
+    font-size: 5rem;
+  }
+
+  .c0 .button {
+    width: 490px;
+    height: 126px;
+    font-size: 5.2rem;
+  }
+
+  .c0 .OR {
+    width: 126px;
+    height: 126px;
+    margin-left: 93px;
+    margin-right: 93px;
+    font-size: 3.8rem;
   }
 }
 
@@ -914,11 +991,23 @@ exports[`App snapshots should show the host screen after user has clicked the "h
 
 }
 
-@media (max-width:820px) {
+@media (max-width:1920px) {
+
+}
+
+@media (max-width:1440px) {
+
+}
+
+@media (max-width:950px) {
 
 }
 
 @media (max-width:700px),(max-width:900px) and (max-height:500px) {
+
+}
+
+@media (min-width:2561px) {
 
 }
 
@@ -1441,11 +1530,23 @@ exports[`App snapshots should show the player screen after user has clicked the 
   }
 }
 
-@media (max-width:820px) {
+@media (max-width:1920px) {
+
+}
+
+@media (max-width:1440px) {
+
+}
+
+@media (max-width:950px) {
 
 }
 
 @media (max-width:700px),(max-width:900px) and (max-height:500px) {
+
+}
+
+@media (min-width:2561px) {
 
 }
 
@@ -1920,17 +2021,17 @@ exports[`App snapshots should show the welcome screen after user has clicked ele
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
-  font-size: 3.2rem;
+  font-size: 5.2rem;
   font-weight: 700;
-  line-height: 2.6rem;
+  line-height: 4.2rem;
   -webkit-transform: rotate(-5deg);
   -ms-transform: rotate(-5deg);
   transform: rotate(-5deg);
-  margin-bottom: 90px;
+  margin-bottom: 190px;
 }
 
 .c0 .definition {
-  font-size: 2.25rem;
+  font-size: 4rem;
   font-weight: 400;
 }
 
@@ -1967,9 +2068,9 @@ exports[`App snapshots should show the welcome screen after user has clicked ele
   align-items: center;
   font-size: 6rem;
   font-weight: 900;
-  width: 256px;
-  height: 48px;
-  font-size: 2.5rem;
+  width: 317px;
+  height: 82px;
+  font-size: 3.6rem;
 }
 
 .c0 .OR {
@@ -1989,10 +2090,10 @@ exports[`App snapshots should show the welcome screen after user has clicked ele
   color: var(--secondary-text-color);
   border-radius: 50%;
   padding: 16px;
-  font-size: 2.25rem;
+  font-size: 2.3rem;
   font-weight: 700;
-  width: 72px;
-  height: 72px;
+  width: 82px;
+  height: 82px;
   margin-left: 93px;
   margin-right: 93px;
 }
@@ -2088,29 +2189,80 @@ exports[`App snapshots should show the welcome screen after user has clicked ele
   }
 }
 
-@media (max-width:820px) {
+@media (max-width:1920px) {
   .c0 .definition-container {
-    font-size: 2.2rem;
-    line-height: 1.8rem;
+    font-size: 4.5rem;
+    line-height: 3.7rem;
+    margin-bottom: 150px;
+  }
+
+  .c0 .definition {
+    font-size: 3.5rem;
+  }
+
+  .c0 .button {
+    width: 290px;
+    height: 74px;
+    font-size: 3.2rem;
+  }
+
+  .c0 .OR {
+    width: 74px;
+    height: 74px;
+    margin-left: 93px;
+    margin-right: 93px;
+    font-size: 2rem;
+  }
+}
+
+@media (max-width:1440px) {
+  .c0 .definition-container {
+    font-size: 3.2rem;
+    line-height: 2.6rem;
     margin-bottom: 90px;
   }
 
   .c0 .definition {
-    font-size: 1.7rem;
+    font-size: 2.5rem;
   }
 
   .c0 .button {
-    width: 200px;
-    height: 48px;
+    width: 256px;
+    height: 66px;
     font-size: 2.5rem;
   }
 
   .c0 .OR {
-    width: 60px;
-    height: 60px;
+    width: 66px;
+    height: 66px;
+    margin-left: 93px;
+    margin-right: 93px;
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width:950px) {
+  .c0 .definition-container {
+    font-size: 2.4rem;
+    line-height: 1.8rem;
+  }
+
+  .c0 .definition {
+    font-size: 1.85rem;
+  }
+
+  .c0 .button {
+    width: 200px;
+    height: 51px;
+    font-size: 2rem;
+  }
+
+  .c0 .OR {
+    width: 51px;
+    height: 51px;
     margin-left: 70px;
     margin-right: 70px;
-    font-size: 2rem;
+    font-size: 1.4rem;
   }
 }
 
@@ -2125,6 +2277,32 @@ exports[`App snapshots should show the welcome screen after user has clicked ele
 
   .c0 .OR {
     display: none;
+  }
+}
+
+@media (min-width:2561px) {
+  .c0 .definition-container {
+    font-size: 6.5rem;
+    line-height: 4.8rem;
+    margin-bottom: 300px;
+  }
+
+  .c0 .definition {
+    font-size: 5rem;
+  }
+
+  .c0 .button {
+    width: 490px;
+    height: 126px;
+    font-size: 5.2rem;
+  }
+
+  .c0 .OR {
+    width: 126px;
+    height: 126px;
+    margin-left: 93px;
+    margin-right: 93px;
+    font-size: 3.8rem;
   }
 }
 
