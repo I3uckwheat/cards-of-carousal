@@ -10,15 +10,21 @@ function createLobby() {
 }
 
 function sendPlayerConnectedMessage(payload) {
+  const message = payload.playerWillBeStaged
+    ? {
+        big: 'A round is in progress',
+        small: 'You will begin playing at the start of the next round',
+      }
+    : {
+        big: "You've joined the lobby",
+        small: 'Please wait for the host to start the game',
+      };
   socketInstance.sendMessage({
     event: 'update',
     recipients: [payload.playerId],
     payload: {
       gameState: 'connected',
-      message: {
-        big: "You've joined the lobby",
-        small: 'Please wait for the host to start the game',
-      },
+      message,
       removeLoading: 'joining-lobby',
     },
   });

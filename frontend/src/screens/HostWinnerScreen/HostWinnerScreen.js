@@ -133,6 +133,8 @@ function RightPanel() {
 }
 
 function startNextRound(dispatch) {
+  dispatch({ type: 'ADD_PLAYERS_FROM_STAGING', payload: {} });
+
   dispatch({ type: 'REMOVE_SUBMITTED_CARDS_FROM_PLAYER', payload: {} });
 
   dispatch({ type: 'SET_NEXT_CZAR', payload: {} });

@@ -82,12 +82,23 @@ function dealWhiteCards(state) {
 }
 
 function playerConnected(state, { playerId, playerName }) {
-  /*
-    if game is in progress, we want to reassign state to allow the dealing of cards
-    to the new player. We also need to make sure they don't receive the "dummy"
-    submitted cards a new player receives in the pregame screen.
-  */
-  let newState = {
+  // if game is in progress, push the new player to the staging area
+  if (state.gameState === 'waiting-to-receive-cards') {
+    const newPlayer = {
+      playerId,
+      name: playerName,
+      score: 0,
+      isCzar: false,
+      submittedCards: [],
+      cards: [],
+    };
+    return {
+      ...state,
+      newPlayerStaging: [...state.newPlayerStaging, newPlayer],
+    };
+  }
+
+  return {
     ...state,
     players: {
       ...state.players,
@@ -101,15 +112,6 @@ function playerConnected(state, { playerId, playerName }) {
     },
     playerIDs: [...state.playerIDs, playerId],
   };
-
-  if (state.gameState === 'waiting-to-receive-cards') {
-    // this will give a hand of cards to our new player, but preserve the hands of the others
-    newState = dealWhiteCards(newState);
-    // clear the vanity dummy card each player gets when connecting
-    newState.players[playerId].submittedCards = [];
-  }
-
-  return newState;
 }
 
 function playerSubmitCards(state, { selectedCards, playerId }) {
@@ -326,6 +328,30 @@ function updateJoinCode(state, { lobbyID }) {
   };
 }
 
+function addPlayersFromStaging(state) {
+  const newState = { ...state };
+
+  state.newPlayerStaging.forEach((player) => {
+    newState.playerIDs = [...newState.playerIDs, player.playerId];
+
+    // remove the id from the player object
+    const playerData = Object.entries(player).reduce((acc, [key, value]) => {
+      if (key !== 'playerId') acc[key] = value;
+      return acc;
+    }, {});
+
+    newState.players = {
+      ...newState.players,
+      [player.playerId]: playerData,
+    };
+  });
+
+  return {
+    ...newState,
+    newPlayerStaging: [],
+  };
+}
+
 function HostReducer(state, action) {
   const { type, payload } = action;
 
@@ -392,6 +418,9 @@ function HostReducer(state, action) {
 
     case 'UPDATE_JOIN_CODE':
       return updateJoinCode(state, payload);
+
+    case 'ADD_PLAYERS_FROM_STAGING':
+      return addPlayersFromStaging(state);
 
     default:
       return { ...state };
