@@ -62,7 +62,7 @@ exports[`Footer renders correctly 1`] = `
   }
 }
 
-@media (max-width:785px) and (min-height:501px) {
+@media (max-width:570px) and (min-height:501px) {
   .c0 {
     height: 120px;
     background-color: transparent;

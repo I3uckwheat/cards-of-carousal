@@ -235,7 +235,7 @@ exports[`App snapshots should initially show the welcome screen 1`] = `
   }
 }
 
-@media (max-width:785px) and (min-height:501px) {
+@media (max-width:570px) and (min-height:501px) {
   .c3 {
     height: 120px;
     background-color: transparent;
@@ -317,7 +317,7 @@ exports[`App snapshots should initially show the welcome screen 1`] = `
   }
 }
 
-@media (max-width:645px) {
+@media (max-width:700px),(max-width:900px) and (max-height:500px) {
   .c0 .definition-container {
     display: none;
   }
@@ -880,7 +880,7 @@ exports[`App snapshots should show the host screen after user has clicked the "h
 
 }
 
-@media (max-width:785px) and (min-height:501px) {
+@media (max-width:570px) and (min-height:501px) {
 
 }
 
@@ -908,7 +908,7 @@ exports[`App snapshots should show the host screen after user has clicked the "h
 
 }
 
-@media (max-width:645px) {
+@media (max-width:700px),(max-width:900px) and (max-height:500px) {
 
 }
 
@@ -1369,7 +1369,7 @@ exports[`App snapshots should show the player screen after user has clicked the 
   }
 }
 
-@media (max-width:785px) and (min-height:501px) {
+@media (max-width:570px) and (min-height:501px) {
   .c4 {
     height: 120px;
     background-color: transparent;
@@ -1429,7 +1429,7 @@ exports[`App snapshots should show the player screen after user has clicked the 
 
 }
 
-@media (max-width:645px) {
+@media (max-width:700px),(max-width:900px) and (max-height:500px) {
 
 }
 
@@ -2010,7 +2010,7 @@ exports[`App snapshots should show the welcome screen after user has clicked ele
   }
 }
 
-@media (max-width:785px) and (min-height:501px) {
+@media (max-width:570px) and (min-height:501px) {
   .c3 {
     height: 120px;
     background-color: transparent;
@@ -2092,7 +2092,7 @@ exports[`App snapshots should show the welcome screen after user has clicked ele
   }
 }
 
-@media (max-width:645px) {
+@media (max-width:700px),(max-width:900px) and (max-height:500px) {
   .c0 .definition-container {
     display: none;
   }
