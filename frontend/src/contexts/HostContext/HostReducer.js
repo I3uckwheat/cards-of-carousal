@@ -312,6 +312,14 @@ function updateJoinCode(state, { lobbyID }) {
   };
 }
 
+function gameOver(state, { gameWinner }) {
+  return {
+    ...state,
+    gameState: 'game-over',
+    gameWinner,
+  };
+}
+
 function HostReducer(state, action) {
   const { type, payload } = action;
 
@@ -379,6 +387,9 @@ function HostReducer(state, action) {
 
     case 'UPDATE_JOIN_CODE':
       return updateJoinCode(state, payload);
+
+    case 'GAME_OVER':
+      return gameOver(state, payload);
 
     default:
       return { ...state };

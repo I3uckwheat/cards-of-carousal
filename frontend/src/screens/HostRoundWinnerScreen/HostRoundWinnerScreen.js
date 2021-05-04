@@ -142,9 +142,13 @@ function startNextRound(dispatch) {
   dispatch({ type: 'DEAL_WHITE_CARDS', payload: {} });
 }
 
+function endGame(dispatch, gameWinner) {
+  dispatch({ type: 'GAME_OVER', payload: { gameWinner } });
+}
+
 function HostRoundWinnerScreen() {
   const { state, dispatch } = useContext(HostContext);
-  const { winnerScreenDisplayTime } = state.gameSettings;
+  const { winnerScreenDisplayTime, winningScore } = state.gameSettings;
   const { players, playerIDs, czarSelection } = state;
 
   useEffect(async () => {
@@ -163,7 +167,12 @@ function HostRoundWinnerScreen() {
       },
     });
 
-    setTimeout(() => startNextRound(dispatch), winnerScreenDisplayTime);
+    setTimeout(() => {
+      if (players[czarSelection].score >= winningScore)
+        return endGame(dispatch, czarSelection);
+
+      return startNextRound(dispatch);
+    }, winnerScreenDisplayTime);
   }, []);
 
   return (

@@ -119,18 +119,29 @@ function LeftPanel() {
 }
 
 function RightPanel() {
+  const { state } = useContext(HostContext);
+  const { players, gameWinner } = state;
+
   return (
     <RightPanelWrapper>
       <h1 className="winner-display">
         <span className="prelude">And the winner is...</span>
-        <p className="title">BACON</p>
+        <p className="title">{players[gameWinner].name}</p>
       </h1>
 
       <p className="thanks-message">Thank you for playing 🖖</p>
 
       <div className="details">
-        <img className="detail-white" src={WhiteCardsTrio} alt="" />
-        <img className="detail-black" src={BlackCardDiagonal} alt="" />
+        <img
+          className="detail-white"
+          src={WhiteCardsTrio}
+          alt="Three white cards"
+        />
+        <img
+          className="detail-black"
+          src={BlackCardDiagonal}
+          alt="Diagonal black card"
+        />
       </div>
     </RightPanelWrapper>
   );
