@@ -58,7 +58,7 @@ describe('WinnerSelectScreen', () => {
           smallText: '',
           buttonText: '',
         },
-        errorCallback: '',
+        errorCallbackType: '',
       },
     };
 
@@ -193,7 +193,7 @@ describe('WinnerSelectScreen', () => {
             smallText: '',
             buttonText: '',
           },
-          errorCallback: '',
+          errorCallbackType: '',
         },
       };
       const dispatch = jest.fn();

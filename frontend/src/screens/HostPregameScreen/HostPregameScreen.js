@@ -138,7 +138,7 @@ function LeftPanel() {
               bigText: 'Unable to get card packs',
               smallText: err.message,
             },
-            errorCallback: 'RELOAD',
+            errorCallbackType: 'RELOAD',
           },
         });
       }

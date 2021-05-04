@@ -1139,7 +1139,7 @@ describe('reducer', () => {
         error: {
           hasError: true,
           message: { bigText: 'foo', smallText: 'bar', buttonText: 'baz' },
-          errorCallback: 'RELOAD',
+          errorCallbackType: 'RELOAD',
         },
         loading: [],
       };
@@ -1168,7 +1168,7 @@ describe('reducer', () => {
         error: {
           hasError: true,
           message: { bigText: 'foo', smallText: 'bar', buttonText: 'baz' },
-          errorCallback: 'RELOAD',
+          errorCallbackType: 'RELOAD',
         },
       };
 
@@ -1181,7 +1181,7 @@ describe('reducer', () => {
       expect(result.error).toEqual({
         hasError: false,
         message: { bigText: '', smallText: '', buttonText: '' },
-        errorCallback: '',
+        errorCallbackType: '',
       });
     });
   });

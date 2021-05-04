@@ -63,7 +63,7 @@ describe('Host Winner Screen', () => {
           smallText: '',
           buttonText: '',
         },
-        errorCallback: '',
+        errorCallbackType: '',
       },
     };
 
@@ -177,7 +177,7 @@ describe('Host Winner Screen', () => {
           smallText: '',
           buttonText: '',
         },
-        errorCallback: '',
+        errorCallbackType: '',
       },
     };
 

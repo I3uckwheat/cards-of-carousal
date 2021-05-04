@@ -30,7 +30,7 @@ const initialState = {
   error: {
     hasError: false,
     message: { bigText: '', smallText: '', buttonText: '' },
-    errorCallback: '',
+    errorCallbackType: '',
   },
 };
 
@@ -83,7 +83,7 @@ function HostProvider({ children }) {
               smallText: 'Please try again later',
               buttonText: 'Click anywhere to restart',
             },
-            errorCallback: 'RELOAD',
+            errorCallbackType: 'RELOAD',
           },
         });
 

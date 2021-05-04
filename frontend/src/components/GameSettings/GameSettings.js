@@ -127,7 +127,7 @@ function GameSettings({ options, onChange }) {
             smallText: 'Failed to fetch packs',
             buttonText: 'Click anywhere to restart',
           },
-          errorCallback: 'RELOAD',
+          errorCallbackType: 'RELOAD',
         },
       });
     }

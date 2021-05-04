@@ -324,7 +324,7 @@ function resetErrorState(state) {
     error: {
       hasError: false,
       message: { bigText: '', smallText: '', buttonText: '' },
-      errorCallback: '',
+      errorCallbackType: '',
     },
   };
 }

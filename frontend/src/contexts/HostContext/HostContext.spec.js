@@ -275,7 +275,9 @@ describe('Context', () => {
             <div data-testid="error-button">
               {state.error.message.buttonText}
             </div>
-            <div data-testid="error-callback">{state.error.errorCallback}</div>
+            <div data-testid="error-callback">
+              {state.error.errorCallbackType}
+            </div>
           </>
         );
       };

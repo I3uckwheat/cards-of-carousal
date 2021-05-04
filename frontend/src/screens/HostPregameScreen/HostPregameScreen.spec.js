@@ -457,7 +457,7 @@ describe('Host Pregame Screen', () => {
             bigText: 'Unable to get card packs',
             smallText: 'Failed to fetch',
           },
-          errorCallback: 'RELOAD',
+          errorCallbackType: 'RELOAD',
         },
       });
 

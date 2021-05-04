@@ -62,7 +62,7 @@ describe('Host Black Card Screen', () => {
           smallText: '',
           buttonText: '',
         },
-        errorCallback: '',
+        errorCallbackType: '',
       },
     };
 
@@ -181,7 +181,7 @@ describe('Host Black Card Screen', () => {
             smallText: '',
             buttonText: '',
           },
-          errorCallback: '',
+          errorCallbackType: '',
         },
       };
       const { players, playerIDs, selectedBlackCard } = state;
@@ -251,7 +251,7 @@ describe('Host Black Card Screen', () => {
             smallText: '',
             buttonText: '',
           },
-          errorCallback: '',
+          errorCallbackType: '',
         },
       };
       const { players, playerIDs } = state;
@@ -325,7 +325,7 @@ describe('Host Black Card Screen', () => {
             smallText: '',
             buttonText: '',
           },
-          errorCallback: '',
+          errorCallbackType: '',
         },
       };
       const { players, playerIDs } = state;
