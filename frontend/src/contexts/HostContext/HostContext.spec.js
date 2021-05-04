@@ -260,5 +260,48 @@ describe('Context', () => {
 
       expect(screen.getByTestId('lobby-id').textContent).toBe('TEST');
     });
+
+    it('catches socket connection error events and updates the error state', () => {
+      const { eventHandlers } = setupEmitterMocks();
+
+      const TestComponent = () => {
+        const { state } = useContext(HostContext);
+
+        return (
+          <>
+            <div data-testid="has-error">{state.error.hasError.toString()}</div>
+            <div data-testid="error-big">{state.error.message.bigText}</div>
+            <div data-testid="error-small">{state.error.message.smallText}</div>
+            <div data-testid="error-button">
+              {state.error.message.buttonText}
+            </div>
+            <div data-testid="error-callback">{state.error.errorCallback}</div>
+          </>
+        );
+      };
+
+      render(
+        <HostProvider>
+          <TestComponent />
+        </HostProvider>,
+      );
+
+      act(() => {
+        eventHandlers.message({
+          event: 'socket-connection-error',
+          payload: {},
+        });
+      });
+
+      expect(screen.getByTestId('has-error')).toHaveTextContent('true');
+      expect(screen.getByTestId('error-big')).toHaveTextContent('Socket error');
+      expect(screen.getByTestId('error-small')).toHaveTextContent(
+        'Please try again later',
+      );
+      expect(screen.getByTestId('error-button')).toHaveTextContent(
+        'Click anywhere to restart',
+      );
+      expect(screen.getByTestId('error-callback')).toHaveTextContent('RELOAD');
+    });
   });
 });
