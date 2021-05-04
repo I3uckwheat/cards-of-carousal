@@ -269,8 +269,19 @@ describe('Host Pregame Screen', () => {
       });
     });
 
-    it('alerts the host if no players are in the lobby when the start button is clicked', () => {
+    it('alerts the host if fewer than 2 players are in the lobby when the start button is clicked', () => {
       const dispatch = jest.fn();
+
+      state.playerIDs = ['foo'];
+      state.players = {
+        foo: {
+          cards: [],
+          submittedCards: [],
+          isCzar: false,
+          name: 'foo',
+          score: 0,
+        },
+      };
 
       render(
         <HostContext.Provider value={{ state, dispatch }}>
