@@ -147,6 +147,7 @@ const PlayerJoinButton = styled(Button)`
   border-radius: 2px;
   background-color: var(--secondary-background-color);
   font-size: 1.5rem;
+  font-weight: 900;
   text-transform: uppercase;
   margin-top: 50px;
 
