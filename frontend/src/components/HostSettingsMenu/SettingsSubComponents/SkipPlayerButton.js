@@ -24,12 +24,9 @@ function SkipPlayerButton({ isEnabled, onDisabledClick }) {
           !players[playerID].isCzar &&
           players[playerID].submittedCards.length > 0,
       );
-
       return submittedPlayers.length >= 2;
     };
-    return () => {
-      setMinimumPlayersSubmitted(determineSubmittedPlayers());
-    };
+    setMinimumPlayersSubmitted(determineSubmittedPlayers());
   }, [players]);
 
   function handleClick() {
