@@ -81,36 +81,20 @@ function dealWhiteCards(state) {
   };
 }
 
+// TEST ME
 function playerConnected(state, { playerId, playerName }) {
-  // if game is in progress, push the new player to the staging area
-  if (state.gameState === 'waiting-to-receive-cards') {
-    const newPlayer = {
-      playerId,
-      name: playerName,
-      score: 0,
-      isCzar: false,
-      submittedCards: [],
-      cards: [],
-    };
-    return {
-      ...state,
-      newPlayerStaging: [...state.newPlayerStaging, newPlayer],
-    };
-  }
-
+  // push the new player to the staging array
+  const newPlayer = {
+    playerId,
+    name: playerName,
+    score: 0,
+    isCzar: false,
+    submittedCards: [0],
+    cards: [],
+  };
   return {
     ...state,
-    players: {
-      ...state.players,
-      [playerId]: {
-        name: playerName,
-        score: 0,
-        isCzar: false,
-        submittedCards: [0],
-        cards: [],
-      },
-    },
-    playerIDs: [...state.playerIDs, playerId],
+    newPlayerStaging: [...state.newPlayerStaging, newPlayer],
   };
 }
 

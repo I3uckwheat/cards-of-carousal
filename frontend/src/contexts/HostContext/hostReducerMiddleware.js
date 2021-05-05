@@ -9,15 +9,32 @@ function createLobby() {
   socketInstance.createLobby();
 }
 
+// TEST ME
 function sendPlayerConnectedMessage(payload) {
-  const message = payload.playerWillBeStaged
+  socketInstance.sendMessage({
+    event: 'update',
+    recipients: payload.players,
+    payload: {
+      gameState: 'connected',
+      message: {
+        big: "You've joined the lobby",
+        small: 'Please wait for the host to start the game',
+      },
+      removeLoading: 'joining-lobby',
+    },
+  });
+}
+
+// TEST ME
+function playerConnected(payload) {
+  const message = payload.playerJoinedMidRound
     ? {
         big: 'A round is in progress',
         small: 'You will begin playing at the start of the next round',
       }
     : {
-        big: "You've joined the lobby",
-        small: 'Please wait for the host to start the game',
+        big: 'Attempting to join lobby',
+        small: 'Please wait',
       };
   socketInstance.sendMessage({
     event: 'update',
@@ -25,7 +42,6 @@ function sendPlayerConnectedMessage(payload) {
     payload: {
       gameState: 'connected',
       message,
-      removeLoading: 'joining-lobby',
     },
   });
 }
@@ -212,8 +228,11 @@ export default async function hostReducerMiddleware(
       break;
 
     case 'PLAYER_CONNECTED':
-      sendPlayerConnectedMessage(payload);
+      playerConnected(payload);
       break;
+
+    case 'SEND_PLAYER_CONNECTED_MESSAGES':
+      return sendPlayerConnectedMessage(payload);
 
     case 'PLAYER_SUBMIT':
       sendCardsSubmittedMessage(payload);

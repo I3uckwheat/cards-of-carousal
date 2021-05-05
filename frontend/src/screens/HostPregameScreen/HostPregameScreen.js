@@ -193,11 +193,29 @@ function RightPanel() {
 }
 
 function HostPregameScreen() {
-  const { dispatch } = useContext(HostContext);
+  const { state, dispatch } = useContext(HostContext);
 
   useEffect(() => {
     dispatch({ type: 'CREATE_LOBBY', payload: {} });
   }, []);
+
+  // TEST ME
+  useEffect(() => {
+    if (
+      state.gameState === 'waiting-for-players' &&
+      state.newPlayerStaging.length
+    ) {
+      const newPlayerIDs = state.newPlayerStaging.map(
+        (player) => player.playerId,
+      );
+
+      dispatch({
+        type: 'SEND_PLAYER_CONNECTED_MESSAGES',
+        payload: { players: newPlayerIDs },
+      });
+      dispatch({ type: 'ADD_PLAYERS_FROM_STAGING', payload: {} });
+    }
+  }, [state.newPlayerStaging, state.gameState]);
 
   return (
     <HostLayout

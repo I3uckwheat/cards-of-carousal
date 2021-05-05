@@ -43,7 +43,10 @@ function HostProvider({ children }) {
     switch (event) {
       case 'player-connected': {
         const newPayload = { ...payload };
-        newPayload.playerWillBeStaged =
+
+        // this is so we can send the player a message letting them know to wait for the next round
+        // TEST ME
+        newPayload.playerJoinedMidRound =
           state.gameState !== 'waiting-for-players';
         return dispatch({ type: 'PLAYER_CONNECTED', payload: newPayload });
       }
