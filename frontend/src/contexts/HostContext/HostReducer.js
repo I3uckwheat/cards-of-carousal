@@ -81,7 +81,6 @@ function dealWhiteCards(state) {
   };
 }
 
-// TEST ME
 function playerConnected(state, { playerId, playerName }) {
   // push the new player to the staging array
   const newPlayer = {
