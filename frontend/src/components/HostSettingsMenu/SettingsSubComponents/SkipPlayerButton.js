@@ -15,7 +15,9 @@ function SkipPlayerButton({ isEnabled, onDisabledClick }) {
     dispatch,
   } = useContext(HostContext);
 
-  const [minimumPlayersSubmitted, setMinimumPlayersSubmitted] = useState(false);
+  const [hasMinimumPlayersSubmitted, setHasMinimumPlayersSubmitted] = useState(
+    false,
+  );
 
   useEffect(() => {
     const determineSubmittedPlayers = () => {
@@ -26,7 +28,7 @@ function SkipPlayerButton({ isEnabled, onDisabledClick }) {
       );
       return submittedPlayers.length >= 2;
     };
-    setMinimumPlayersSubmitted(determineSubmittedPlayers());
+    setHasMinimumPlayersSubmitted(determineSubmittedPlayers());
   }, [players]);
 
   function handleClick() {
@@ -40,7 +42,7 @@ function SkipPlayerButton({ isEnabled, onDisabledClick }) {
     <OptionButton
       isEnabled={
         isEnabled &&
-        minimumPlayersSubmitted &&
+        hasMinimumPlayersSubmitted &&
         gameState === 'waiting-to-receive-cards'
       }
       onEnabledClick={handleClick}
