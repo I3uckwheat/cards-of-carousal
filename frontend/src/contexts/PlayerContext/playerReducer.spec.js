@@ -209,27 +209,6 @@ describe('reducer', () => {
         gameState: 'player-select',
       });
     });
-
-    it('does not update game state if host says not to', () => {
-      const state = {
-        cards: [{ text: 'test' }, { text: 'test' }, { text: 'test' }],
-        selectCardCount: 0,
-        gameState: 'test state',
-      };
-
-      const testPayload = {
-        cards: [{ text: 'foo' }, { text: 'bar' }, { text: 'baz' }],
-        selectCardCount: 2,
-        shouldPreserveGameState: true,
-      };
-
-      const result = reducer(state, {
-        type: 'RECEIVE_WHITE_CARDS',
-        payload: testPayload,
-      });
-
-      expect(result.gameState).toEqual('test state');
-    });
   });
 
   describe('LOBBY_CLOSED', () => {

@@ -45,12 +45,11 @@ function errorDisconnect(state) {
 }
 
 function receiveWhiteCards(state, payload) {
-  const { cards, selectCardCount, shouldPreserveGameState } = payload;
-  const gameState = shouldPreserveGameState ? state.gameState : 'player-select';
+  const { cards, selectCardCount } = payload;
 
   return {
     ...state,
-    gameState,
+    gameState: 'player-select',
     cards,
     selectCardCount,
   };
