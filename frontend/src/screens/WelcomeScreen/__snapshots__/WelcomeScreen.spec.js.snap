@@ -243,7 +243,7 @@ exports[`WelcomeScreen render renders correctly 1`] = `
 
   .c3 p {
     text-align: center;
-    font-size: 1.2rem;
+    font-size: 13px;
     padding-bottom: 32px;
     color: var(--accent-text-color);
   }
@@ -377,6 +377,12 @@ exports[`WelcomeScreen render renders correctly 1`] = `
 @media (max-width:700px),(max-width:900px) and (max-height:500px) {
   .c0 .definition-container {
     display: none;
+  }
+
+  .c0 .button {
+    width: 268px;
+    height: 69px;
+    font-size: 2rem;
   }
 
   .c0 .host-button {
