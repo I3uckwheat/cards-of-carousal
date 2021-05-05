@@ -5,7 +5,7 @@ import { HostContext } from '../../contexts/HostContext/HostContext';
 import HostLayout from '../../layouts/HostLayout';
 import PlayerList from '../../components/PlayerList/PlayerList';
 import InGameSettingsModal from '../../components/HostSettingsMenu/InGameSettingsModal.js';
-import JoinCode from '../../components/JoinCode/JoinCode';
+import Button from '../../components/Buttons/Button';
 
 import WhiteCardsTrio from '../../assets/card-trio-diagonal.svg';
 import BlackCardDiagonal from '../../assets/black-card-diagonal.svg';
@@ -21,21 +21,15 @@ const LeftPanelWrapper = styled.div`
   }
 
   .buttons-wrapper {
-    display: block;
-    margin-bottom: 20px;
-  }
-
-  .bottom-left-wrapper {
-    margin: 20px auto 32px;
-    position: relative;
-    bottom: 0;
-    left: 0;
-    right: 0;
-  }
-
-  .join-code-wrapper {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    margin: 32px auto 32px;
+
+    .button.primary {
+      font-size: 20px;
+      margin-bottom: 16px;
+    }
   }
 `;
 
@@ -77,23 +71,23 @@ const RightPanelWrapper = styled.div`
     flex: 1;
   }
 
-  .details {
+  .decorations-wrapper {
     position: relative;
     width: 100%;
     flex: 2;
 
-    .detail-white,
-    .detail-black {
+    .decoration-white-cards,
+    .decoration-black-card {
       position: absolute;
       bottom: 0;
     }
 
-    .detail-white {
+    .decoration-white-cards {
       left: 0;
       width: 150px;
     }
 
-    .detail-black {
+    .decoration-black-card {
       right: 0;
       width: 110px;
     }
@@ -101,18 +95,41 @@ const RightPanelWrapper = styled.div`
 `;
 
 function LeftPanel() {
-  const { state } = useContext(HostContext);
-  const { players, playerIDs, lobbyID } = state;
+  const { state, dispatch } = useContext(HostContext);
+  const { players, playerIDs } = state;
+
+  const handleNewGameClick = () => {
+    // TODO: reset all game states and recreate lobby
+  };
+
+  const handleClickClose = async () => {
+    await dispatch({ type: 'CLOSE_GAME', payload: {} });
+    window.location.reload();
+  };
 
   return (
     <LeftPanelWrapper>
       <div className="player-list-wrapper">
         <PlayerList playerList={{ players, playerIDs }} />
       </div>
-      <div className="bottom-left-wrapper">
-        <div className="join-code-wrapper">
-          <JoinCode code={lobbyID} />
-        </div>
+      <div className="buttons-wrapper">
+        <Button
+          type="button"
+          isActive
+          className="button primary"
+          onClick={handleNewGameClick}
+        >
+          <p>START NEW GAME</p>
+        </Button>
+
+        <Button
+          type="button"
+          isActive
+          className="button"
+          onClick={handleClickClose}
+        >
+          <p>CLOSE GAME</p>
+        </Button>
       </div>
     </LeftPanelWrapper>
   );
@@ -131,14 +148,14 @@ function RightPanel() {
 
       <p className="thanks-message">Thank you for playing 🖖</p>
 
-      <div className="details">
+      <div className="decorations-wrapper">
         <img
-          className="detail-white"
+          className="decoration-white-cards"
           src={WhiteCardsTrio}
           alt="Three white cards"
         />
         <img
-          className="detail-black"
+          className="decoration-black-card"
           src={BlackCardDiagonal}
           alt="Diagonal black card"
         />

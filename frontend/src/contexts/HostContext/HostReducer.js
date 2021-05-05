@@ -351,7 +351,6 @@ function HostReducer(state, action) {
     case 'PREVIEW_WINNER':
       return previewWinner(state, payload);
 
-    // TODO: Update this to be 'winner-selected'
     case 'WINNER_SELECTED':
       return winnerSelected(state);
 
