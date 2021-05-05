@@ -269,7 +269,7 @@ describe('Host Winner Screen', () => {
       expect(dispatch).toHaveBeenCalledTimes(2);
       expect(dispatch).toHaveBeenLastCalledWith({
         type: 'GAME_OVER',
-        payload: { gameWinner: 'ID3' },
+        payload: { gameWinner: 'ID3', playerIDs: newState.playerIDs },
       });
     });
   });

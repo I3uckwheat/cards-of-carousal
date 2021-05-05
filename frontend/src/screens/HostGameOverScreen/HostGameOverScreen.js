@@ -98,8 +98,10 @@ function LeftPanel() {
   const { state, dispatch } = useContext(HostContext);
   const { players, playerIDs } = state;
 
-  const handleNewGameClick = () => {
-    // TODO: reset all game states and recreate lobby
+  const handleNewGameClick = async () => {
+    // TODO: Ideally this would clean up player scores, gameWinner, czarSelection and then replicate the effects seen in HostPregameScreen's Start Button
+    await dispatch({ type: 'CLOSE_GAME', payload: {} });
+    window.location.reload();
   };
 
   const handleClickClose = async () => {
@@ -146,7 +148,7 @@ function RightPanel() {
         <p className="title">{players[gameWinner].name}</p>
       </h1>
 
-      <p className="thanks-message">Thank you for playing 🖖</p>
+      <p className="thanks-message">Thank you for playing!</p>
 
       <div className="decorations-wrapper">
         <img

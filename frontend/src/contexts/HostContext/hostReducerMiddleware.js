@@ -183,8 +183,32 @@ function czarSelectWinner({ players, playerIDs }) {
   });
 }
 
-function sendEndOfGameMessages() {
-  // TODO: send messages to players warning that the game is over
+function sendEndOfGameMessages({ gameWinner, playerIDs }) {
+  const losers = playerIDs.filter((playerID) => playerID !== gameWinner);
+
+  socketInstance.sendMessage({
+    event: 'update',
+    payload: {
+      gameState: 'showing-end-game-messages',
+      message: {
+        big: 'Congrats! You won it all!!1!',
+        small: 'Not necessarily something to be proud of',
+      },
+    },
+    recipients: [gameWinner],
+  });
+
+  socketInstance.sendMessage({
+    event: 'update',
+    payload: {
+      gameState: 'showing-end-game-messages',
+      message: {
+        big: 'Loser 👎︎',
+        small: `Better to lose the game than your integrety`,
+      },
+    },
+    recipients: losers,
+  });
 }
 
 export default async function hostReducerMiddleware(
@@ -240,7 +264,7 @@ export default async function hostReducerMiddleware(
       break;
 
     case 'GAME_OVER':
-      sendEndOfGameMessages();
+      sendEndOfGameMessages(payload);
       break;
 
     default:

@@ -44,6 +44,7 @@ export default function PlayerScreenController() {
 
     case 'lobby-closed':
     case 'error':
+    case 'showing-end-game-messages':
       return (
         <PlayerErrorScreen bigText={message.big} smallText={message.small} />
       );

@@ -142,8 +142,8 @@ function startNextRound(dispatch) {
   dispatch({ type: 'DEAL_WHITE_CARDS', payload: {} });
 }
 
-function endGame(dispatch, gameWinner) {
-  dispatch({ type: 'GAME_OVER', payload: { gameWinner } });
+function endGame(dispatch, payload) {
+  dispatch({ type: 'GAME_OVER', payload });
 }
 
 function HostRoundWinnerScreen() {
@@ -169,7 +169,7 @@ function HostRoundWinnerScreen() {
 
     setTimeout(() => {
       if (players[czarSelection].score >= winningScore) {
-        return endGame(dispatch, czarSelection);
+        return endGame(dispatch, { gameWinner: czarSelection, playerIDs });
       }
 
       return startNextRound(dispatch);
