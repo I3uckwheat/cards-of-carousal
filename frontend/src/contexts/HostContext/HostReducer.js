@@ -342,6 +342,7 @@ function HostReducer(state, action) {
     case 'KICK_PLAYER':
       return removePlayer(state, payload);
 
+    case 'SKIP_UNSUBMITTED_PLAYERS':
     case 'CZAR_SELECT_WINNER':
       return czarSelectWinner(state);
 

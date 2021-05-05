@@ -123,8 +123,9 @@ function RightPanel() {
 
       <WhiteCardWrapper columns={winner.submittedCards.length}>
         {winner.submittedCards.map((card) => (
-          <WhiteCard key={winner.cards[card].text}>
-            {winner.cards[card].text}
+          <WhiteCard key={card}>
+            {/* When round changes, the card may become undefined temporarily resulting in an error */}
+            {winner.cards[card] && winner.cards[card].text}
           </WhiteCard>
         ))}
       </WhiteCardWrapper>
