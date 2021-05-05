@@ -41,15 +41,8 @@ function HostProvider({ children }) {
 
   function handleMessage({ event, payload, sender }) {
     switch (event) {
-      case 'player-connected': {
-        const newPayload = { ...payload };
-
-        // this is so we can send the player a message letting them know to wait for the next round
-        // TEST ME
-        newPayload.playerJoinedMidRound =
-          state.gameState !== 'waiting-for-players';
-        return dispatch({ type: 'PLAYER_CONNECTED', payload: newPayload });
-      }
+      case 'player-connected':
+        return dispatch({ type: 'PLAYER_CONNECTED', payload });
 
       case 'player-disconnected':
         return dispatch({ type: 'PLAYER_DISCONNECTED', payload });
@@ -86,6 +79,38 @@ function HostProvider({ children }) {
       emitter.off('message', handleMessage);
     };
   }, []);
+
+  useEffect(() => {
+    if (state.newPlayerStaging.length) {
+      const newPlayerIDs = state.newPlayerStaging.map(
+        (player) => player.playerId,
+      );
+      if (state.gameState === 'waiting-for-players') {
+        dispatch({ type: 'ADD_PLAYERS_FROM_STAGING', payload: {} });
+        dispatch({
+          type: 'SEND_PLAYER_CONNECTED_MESSAGES',
+          payload: {
+            players: newPlayerIDs,
+            message: {
+              big: "You've joined the lobby",
+              small: 'Please wait for the host to start the game',
+            },
+          },
+        });
+      } else {
+        dispatch({
+          type: 'SEND_PLAYER_CONNECTED_MESSAGES',
+          payload: {
+            players: newPlayerIDs,
+            message: {
+              big: 'A round is in progress',
+              small: 'You will join the next round automatically',
+            },
+          },
+        });
+      }
+    }
+  }, [state.newPlayerStaging, state.gameState]);
 
   return (
     <HostContext.Provider value={{ state, dispatch }}>
