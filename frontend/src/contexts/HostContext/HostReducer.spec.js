@@ -1175,4 +1175,35 @@ describe('reducer', () => {
       expect(result.players.ID2.score).toBe(1);
     });
   });
+
+  describe('GAME_OVER', () => {
+    it(`updates gameState to 'game-over'`, () => {
+      const state = {
+        gameState: 'example-game-state',
+      };
+
+      const result = HostReducer(state, {
+        type: 'GAME_OVER',
+        payload: { gameWinner: 'foo' },
+      });
+
+      expect(result).not.toBe(state);
+      expect(result.gameState).toBe('game-over');
+    });
+
+    it('sets top-level gameWinner to the string that comes in the payload', () => {
+      const state = {
+        gameState: 'example-game-state',
+        gameWinner: undefined,
+      };
+
+      const result = HostReducer(state, {
+        type: 'GAME_OVER',
+        payload: { gameWinner: 'foo' },
+      });
+
+      expect(result).not.toBe(state);
+      expect(result.gameWinner).toBe('foo');
+    });
+  });
 });
