@@ -9,39 +9,28 @@ function createLobby() {
   socketInstance.createLobby();
 }
 
-// TEST ME
-function sendPlayerConnectedMessage(payload) {
+function sendPlayerConnectedMessages(payload) {
   socketInstance.sendMessage({
     event: 'update',
     recipients: payload.players,
     payload: {
       gameState: 'connected',
-      message: {
-        big: "You've joined the lobby",
-        small: 'Please wait for the host to start the game',
-      },
+      message: payload.message,
       removeLoading: 'joining-lobby',
     },
   });
 }
 
-// TEST ME
 function playerConnected(payload) {
-  const message = payload.playerJoinedMidRound
-    ? {
-        big: 'A round is in progress',
-        small: 'You will begin playing at the start of the next round',
-      }
-    : {
-        big: 'Attempting to join lobby',
-        small: 'Please wait',
-      };
   socketInstance.sendMessage({
     event: 'update',
     recipients: [payload.playerId],
     payload: {
       gameState: 'connected',
-      message,
+      message: {
+        big: 'Attempting to join lobby',
+        small: 'Please wait',
+      },
     },
   });
 }
@@ -124,15 +113,7 @@ async function getDeck({ selectedPacks }) {
   }
 }
 
-function sendCardsToPlayers({
-  selectedBlackCard,
-  players,
-  playerIDs,
-  newPlayer,
-}) {
-  // the fourth object property is passed in from the host reducer to tell this dispatcher
-  // that there is a round in progress and current players submitted cards should not be wiped
-
+function sendCardsToPlayers({ selectedBlackCard, players, playerIDs }) {
   playerIDs.forEach((playerID) => {
     if (!players[playerID].isCzar) {
       socketInstance.sendMessage({
@@ -140,7 +121,6 @@ function sendCardsToPlayers({
         payload: {
           cards: players[playerID].cards.map((card) => card.text),
           selectCardCount: selectedBlackCard.pick,
-          shouldPreserveGameState: newPlayer && newPlayer !== playerID,
         },
         recipients: [playerID],
       });
@@ -232,7 +212,7 @@ export default async function hostReducerMiddleware(
       break;
 
     case 'SEND_PLAYER_CONNECTED_MESSAGES':
-      return sendPlayerConnectedMessage(payload);
+      return sendPlayerConnectedMessages(payload);
 
     case 'PLAYER_SUBMIT':
       sendCardsSubmittedMessage(payload);

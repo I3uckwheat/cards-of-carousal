@@ -73,7 +73,7 @@ describe('hostReducerMiddleware', () => {
   });
 
   describe('PLAYER_CONNECTED', () => {
-    it("calls socketInstance's sendMessage with a default welcome message object", () => {
+    it("calls socketInstance's sendMessage with a loading message", () => {
       const dispatch = jest.fn();
 
       hostReducerMiddleware(
@@ -90,8 +90,40 @@ describe('hostReducerMiddleware', () => {
         payload: {
           gameState: 'connected',
           message: {
-            big: "You've joined the lobby",
-            small: 'Please wait for the host to start the game',
+            big: 'Attempting to join lobby',
+            small: 'Please wait',
+          },
+        },
+      });
+    });
+  });
+
+  describe('SEND_PLAYER_CONNECTED_MESSAGES', () => {
+    it("calls socketInstance's sendMessage with a custom welcome message", () => {
+      const dispatch = jest.fn();
+
+      hostReducerMiddleware(
+        {
+          type: 'SEND_PLAYER_CONNECTED_MESSAGES',
+          payload: {
+            players: ['foo', 'bar'],
+            message: {
+              big: 'Some big message',
+              small: 'Some small message',
+            },
+          },
+        },
+        dispatch,
+      );
+
+      expect(socketInstance.sendMessage).toHaveBeenCalledWith({
+        event: 'update',
+        recipients: ['foo', 'bar'],
+        payload: {
+          gameState: 'connected',
+          message: {
+            big: 'Some big message',
+            small: 'Some small message',
           },
           removeLoading: 'joining-lobby',
         },
@@ -352,7 +384,6 @@ describe('hostReducerMiddleware', () => {
         selectedBlackCard,
         players,
         playerIDs,
-        newPlayer: 'test',
       };
 
       hostReducerMiddleware(
@@ -368,7 +399,6 @@ describe('hostReducerMiddleware', () => {
         payload: {
           cards: players.bar.cards.map((card) => card.text),
           selectCardCount: selectedBlackCard.pick,
-          shouldPreserveGameState: true,
         },
         recipients: ['bar'],
       });
@@ -378,7 +408,6 @@ describe('hostReducerMiddleware', () => {
         payload: {
           cards: players.test.cards.map((card) => card.text),
           selectCardCount: selectedBlackCard.pick,
-          shouldPreserveGameState: false,
         },
         recipients: ['test'],
       });
