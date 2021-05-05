@@ -239,5 +239,38 @@ describe('Host Winner Screen', () => {
 
       expect(dispatch).toHaveBeenCalledTimes(5);
     });
+
+    it('if max score is met by a player, dispatches GAME_OVER event once the setTimeout executes', () => {
+      jest.useFakeTimers();
+
+      const newState = {
+        ...state,
+        czarSelection: 'ID3',
+        players: {
+          ...state.players,
+          ID3: {
+            ...state.players.ID3,
+            score: state.gameSettings.winningScore,
+          },
+        },
+      };
+      render(
+        <HostContext.Provider value={{ state: newState, dispatch }}>
+          <HostRoundWinnerScreen />
+        </HostContext.Provider>,
+      );
+
+      // Dispatch is called with End of Round event
+      expect(dispatch).toHaveBeenCalledTimes(1);
+
+      jest.advanceTimersByTime(3000);
+
+      // Dispatch is called with Game Over event
+      expect(dispatch).toHaveBeenCalledTimes(2);
+      expect(dispatch).toHaveBeenLastCalledWith({
+        type: 'GAME_OVER',
+        payload: { gameWinner: 'ID3' },
+      });
+    });
   });
 });

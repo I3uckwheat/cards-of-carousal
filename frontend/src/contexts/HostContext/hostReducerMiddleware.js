@@ -183,6 +183,10 @@ function czarSelectWinner({ players, playerIDs }) {
   });
 }
 
+function sendEndOfGameMessages() {
+  // TODO: send messages to players warning that the game is over
+}
+
 export default async function hostReducerMiddleware(
   { type, payload },
   dispatch,
@@ -233,6 +237,10 @@ export default async function hostReducerMiddleware(
 
     case 'SEND_END_OF_ROUND_MESSAGES':
       sendEndOfRoundMessages(payload);
+      break;
+
+    case 'GAME_OVER':
+      sendEndOfGameMessages();
       break;
 
     default:

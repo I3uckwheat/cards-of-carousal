@@ -151,13 +151,13 @@ function HostRoundWinnerScreen() {
   const { winnerScreenDisplayTime, winningScore } = state.gameSettings;
   const { players, playerIDs, czarSelection } = state;
 
-  useEffect(async () => {
+  useEffect(() => {
     const czar = playerIDs.find((id) => players[id].isCzar);
     const losers = playerIDs.filter(
       (playerID) => !players[playerID].isCzar && playerID !== czarSelection,
     );
 
-    await dispatch({
+    dispatch({
       type: 'SEND_END_OF_ROUND_MESSAGES',
       payload: {
         winnerName: players[czarSelection].name,
@@ -168,8 +168,9 @@ function HostRoundWinnerScreen() {
     });
 
     setTimeout(() => {
-      if (players[czarSelection].score >= winningScore)
+      if (players[czarSelection].score >= winningScore) {
         return endGame(dispatch, czarSelection);
+      }
 
       return startNextRound(dispatch);
     }, winnerScreenDisplayTime);
