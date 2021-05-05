@@ -182,6 +182,13 @@ const WelcomeScreenWrapper = styled.div`
       display: none;
     }
 
+    .button {
+      width: 268px;
+      height: 69px;
+
+      font-size: 2rem;
+    }
+
     .host-button {
       display: none;
     }

@@ -56,7 +56,7 @@ const FooterWrapper = styled.footer`
 
     p {
       text-align: center;
-      font-size: 1.2rem;
+      font-size: 13px;
 
       padding-bottom: 32px;
       color: var(--accent-text-color);
