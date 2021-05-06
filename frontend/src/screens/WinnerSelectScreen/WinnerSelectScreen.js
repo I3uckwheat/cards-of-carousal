@@ -65,12 +65,12 @@ const WhiteCardWrapper = styled.div`
 
 function LeftPanel() {
   const { state } = useContext(HostContext);
-  const { players, playerIDs, lobbyID, newPlayerStaging } = state;
+  const { lobbyID } = state;
 
   return (
     <LeftPanelWrapper>
       <div className="player-list-wrapper">
-        <PlayerList playerList={{ players, playerIDs, newPlayerStaging }} />
+        <PlayerList />
       </div>
       <div className="join-code-wrapper">
         <JoinCode

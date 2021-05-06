@@ -1,11 +1,12 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
+import { HostContext } from '../../contexts/HostContext/HostContext';
 
 import PlayerList from './PlayerList';
 
 describe('PlayerList', () => {
   it('renders PlayerList component given a simple playerList object', () => {
-    const playerList = {
+    const state = {
       players: {
         playerID1: {
           name: 'Foo',
@@ -29,18 +30,18 @@ describe('PlayerList', () => {
       newPlayerStaging: [],
     };
 
-    render(<PlayerList playerList={playerList} />);
+    render(
+      <HostContext.Provider value={{ state }}>
+        <PlayerList />
+      </HostContext.Provider>,
+    );
 
-    expect(
-      screen.getByText(playerList.players.playerID1.name),
-    ).toBeInTheDocument();
-    expect(
-      screen.getByText(playerList.players.playerID2.name),
-    ).toBeInTheDocument();
+    expect(screen.getByText(state.players.playerID1.name)).toBeInTheDocument();
+    expect(screen.getByText(state.players.playerID2.name)).toBeInTheDocument();
   });
 
   it('renders players from the newPlayerStaging array', () => {
-    const playerList = {
+    const state = {
       players: {},
       playerIDs: [],
       newPlayerStaging: [
@@ -66,18 +67,22 @@ describe('PlayerList', () => {
       ],
     };
 
-    render(<PlayerList playerList={playerList} />);
+    render(
+      <HostContext.Provider value={{ state }}>
+        <PlayerList />
+      </HostContext.Provider>,
+    );
 
     expect(
-      screen.getByText(playerList.newPlayerStaging[0].name),
+      screen.getByText(state.newPlayerStaging[0].name),
     ).toBeInTheDocument();
     expect(
-      screen.getByText(playerList.newPlayerStaging[1].name),
+      screen.getByText(state.newPlayerStaging[1].name),
     ).toBeInTheDocument();
   });
 
   it('If player has submitted his cards or player is czar, render the icon fully visible', () => {
-    const playerList = {
+    const state = {
       players: {
         playerID1: {
           name: 'Foo',
@@ -101,18 +106,22 @@ describe('PlayerList', () => {
       newPlayerStaging: [],
     };
 
-    render(<PlayerList playerList={playerList} />);
+    render(
+      <HostContext.Provider value={{ state }}>
+        <PlayerList />
+      </HostContext.Provider>,
+    );
 
     expect(
-      screen.getByTestId(`icon-${playerList.players.playerID1.name}`),
+      screen.getByTestId(`icon-${state.players.playerID1.name}`),
     ).toBeVisible();
     expect(
-      screen.getByTestId(`icon-${playerList.players.playerID2.name}`),
+      screen.getByTestId(`icon-${state.players.playerID2.name}`),
     ).toBeVisible();
   });
 
   it('If player has NOT submitted his cards, render the icon with visibility hidden', () => {
-    const playerList = {
+    const state = {
       players: {
         playerID1: {
           name: 'Foo',
@@ -126,27 +135,35 @@ describe('PlayerList', () => {
       newPlayerStaging: [],
     };
 
-    render(<PlayerList playerList={playerList} />);
+    render(
+      <HostContext.Provider value={{ state }}>
+        <PlayerList />
+      </HostContext.Provider>,
+    );
 
     expect(
-      screen.getByTestId(`icon-${playerList.players.playerID1.name}`),
+      screen.getByTestId(`icon-${state.players.playerID1.name}`),
     ).not.toBeVisible();
   });
 
   it('If playerIDs and newPlayerStaging is empty, PlayerList still renders as an empty container', () => {
-    const playerList = {
+    const state = {
       players: {},
       playerIDs: [],
       newPlayerStaging: [],
     };
 
-    render(<PlayerList playerList={playerList} />);
+    render(
+      <HostContext.Provider value={{ state }}>
+        <PlayerList />
+      </HostContext.Provider>,
+    );
 
     expect(screen.getByTestId('playerList-container')).toBeInTheDocument();
   });
 
   it('If the player object goes in a different order than playerIDs, the component follow playerIDs order', () => {
-    const playerList = {
+    const state = {
       players: {
         playerID1: {
           name: 'Foo',
@@ -167,7 +184,11 @@ describe('PlayerList', () => {
       newPlayerStaging: [],
     };
 
-    render(<PlayerList playerList={playerList} />);
+    render(
+      <HostContext.Provider value={{ state }}>
+        <PlayerList />
+      </HostContext.Provider>,
+    );
 
     const player2 = screen.getByTestId('row-Bar');
 

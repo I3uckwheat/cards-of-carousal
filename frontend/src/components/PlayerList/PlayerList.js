@@ -1,45 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
+import { HostContext } from '../../contexts/HostContext/HostContext';
 import BlackCard from '../../assets/black-card-icon.svg';
 import OffsetWhiteCardStack from '../../assets/offset-white-card-stack-icon.svg';
 import TallyCount from '../TallyMarker/TallyCount';
-
-const propTypes = {
-  playerList: PropTypes.shape({
-    players: PropTypes.objectOf(
-      PropTypes.shape({
-        name: PropTypes.string.isRequired,
-        score: PropTypes.number.isRequired,
-        isCzar: PropTypes.bool.isRequired,
-        submittedCards: PropTypes.arrayOf(PropTypes.number).isRequired,
-        cards: PropTypes.arrayOf(
-          PropTypes.shape({
-            text: PropTypes.string,
-            pack: PropTypes.number,
-          }),
-        ).isRequired,
-      }),
-    ).isRequired,
-
-    playerIDs: PropTypes.arrayOf(PropTypes.string).isRequired,
-    newPlayerStaging: PropTypes.arrayOf(
-      PropTypes.shape({
-        playerId: PropTypes.string.isRequired,
-        name: PropTypes.string.isRequired,
-        score: PropTypes.number.isRequired,
-        isCzar: PropTypes.bool.isRequired,
-        cards: PropTypes.arrayOf(
-          PropTypes.shape({
-            text: PropTypes.string,
-            pack: PropTypes.number,
-          }),
-        ).isRequired,
-        submittedCards: PropTypes.arrayOf(PropTypes.number).isRequired,
-      }),
-    ),
-  }).isRequired,
-};
 
 const PlayerTable = styled.div`
   display: flex;
@@ -83,10 +47,15 @@ const PlayerRow = styled.div`
       font-weight: 900;
       letter-spacing: 1px;
       line-height: 1.5em;
-      color: ${(props) =>
-        props.isCzar
-          ? 'var(--secondary-text-color)'
-          : 'var(--primary-text-color)'};
+      color: ${(props) => {
+        if (props.isCzar) {
+          return 'var(--secondary-text-color)';
+        }
+        if (props.isInStaging) {
+          return 'var(--accent-text-color)';
+        }
+        return 'var(--primary-text-color)';
+      }};
     }
 
     span {
@@ -99,10 +68,13 @@ const PlayerRow = styled.div`
     }
   }
 `;
-function PlayerList({ playerList }) {
+function PlayerList() {
+  const { state } = useContext(HostContext);
+  const { playerIDs, players, newPlayerStaging } = state;
+
   const playersArray = [
-    ...playerList.playerIDs.map((id) => playerList.players[id]),
-    ...playerList.newPlayerStaging,
+    ...playerIDs.map((id) => players[id]),
+    ...newPlayerStaging,
   ];
 
   return (
@@ -115,6 +87,7 @@ function PlayerList({ playerList }) {
           <PlayerRow
             key={player.name}
             isCzar={player.isCzar}
+            isInStaging={player.playerId}
             data-testid={`row-${player.name}`}
           >
             <img
@@ -137,7 +110,5 @@ function PlayerList({ playerList }) {
     </PlayerTable>
   );
 }
-
-PlayerList.propTypes = propTypes;
 
 export default PlayerList;

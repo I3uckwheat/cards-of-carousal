@@ -97,7 +97,7 @@ const RightPanelWrapper = styled.div`
 
 function LeftPanel() {
   const { state, dispatch } = useContext(HostContext);
-  const { players, playerIDs, lobbyID, newPlayerStaging } = state;
+  const { lobbyID, newPlayerStaging } = state;
 
   const handleClickStart = async () => {
     // check if there are any players and if packs are selected
@@ -137,7 +137,7 @@ function LeftPanel() {
   return (
     <LeftPanelWrapper>
       <div className="player-list-wrapper">
-        <PlayerList playerList={{ players, playerIDs, newPlayerStaging }} />
+        <PlayerList />
       </div>
       <div className="bottom-left-wrapper">
         <div className="buttons-wrapper">
