@@ -204,13 +204,7 @@ exports[`Host Pregame Screen rendering renders 1`] = `
   cursor: pointer;
 }
 
-.c10 button {
-  background-color: var(--primary-background-color);
-  border: solid black 2px;
-  margin: 20px;
-}
-
-.c10 .slideshowControls {
+.c11 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -219,6 +213,16 @@ exports[`Host Pregame Screen rendering renders 1`] = `
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
+}
+
+.c11 .positionButton {
+  border: none;
+  background-color: transparent;
+}
+
+.c10 {
+  width: 100%;
+  height: 100%;
 }
 
 .c9 {
@@ -544,25 +548,47 @@ exports[`Host Pregame Screen rendering renders 1`] = `
                 Long and short of this deal; one person (the Czar of the round) reads the black card on this screen. Everyone else submits a white card trying to be the Czar's favorite jester. More directions on the next page if you're still confused.
               </p>
               <div
-                className="slideshowControls"
+                className="c11"
               >
                 <button
+                  className="positionButton"
                   onClick={[Function]}
                   type="button"
                 >
-                  LAST
+                  <img
+                    alt="positionIndicator"
+                    src="blackCard.svg"
+                  />
                 </button>
                 <button
+                  className="positionButton"
                   onClick={[Function]}
                   type="button"
                 >
-                  OKAY STOP CHANGING
+                  <img
+                    alt="positionIndicator"
+                    src="whiteCard.svg"
+                  />
                 </button>
                 <button
+                  className="positionButton"
                   onClick={[Function]}
                   type="button"
                 >
-                  NEXT
+                  <img
+                    alt="positionIndicator"
+                    src="whiteCard.svg"
+                  />
+                </button>
+                <button
+                  className="positionButton"
+                  onClick={[Function]}
+                  type="button"
+                >
+                  <img
+                    alt="positionIndicator"
+                    src="whiteCard.svg"
+                  />
                 </button>
               </div>
             </div>

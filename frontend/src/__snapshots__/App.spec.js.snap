@@ -672,7 +672,7 @@ exports[`App snapshots should show the host screen after user has clicked the "h
   animation-delay: 0;
 }
 
-.c11 {
+.c12 {
   position: relative;
   display: -webkit-box;
   display: -webkit-flex;
@@ -687,7 +687,7 @@ exports[`App snapshots should show the host screen after user has clicked the "h
   overflow-y: auto;
 }
 
-.c11 h1 {
+.c12 h1 {
   margin-left: auto;
   font-size: 4rem;
   line-height: 4rem;
@@ -701,7 +701,7 @@ exports[`App snapshots should show the host screen after user has clicked the "h
   top: 0;
 }
 
-.c12 {
+.c13 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -716,7 +716,7 @@ exports[`App snapshots should show the host screen after user has clicked the "h
   padding: 24px 0 24px 60px;
 }
 
-.c12 .number-input-wrapper label {
+.c13 .number-input-wrapper label {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -729,25 +729,25 @@ exports[`App snapshots should show the host screen after user has clicked the "h
   font-weight: bold;
 }
 
-.c12 input[type='number'] {
+.c13 input[type='number'] {
   font-weight: bold;
   text-align: center;
   width: 80px;
 }
 
-.c12 .select-wrapper {
+.c13 .select-wrapper {
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
 }
 
-.c12 .select-wrapper h2 {
+.c13 .select-wrapper h2 {
   font-size: 1rem;
   font-weight: bold;
   height: 30px;
 }
 
-.c12 .select-wrapper .loader-wrapper {
+.c13 .select-wrapper .loader-wrapper {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -756,7 +756,7 @@ exports[`App snapshots should show the host screen after user has clicked the "h
   transform: translate(-50%,-50%);
 }
 
-.c12 .card-packs {
+.c13 .card-packs {
   display: grid;
   gap: 20px;
   grid-template-columns: repeat(auto-fill,minmax(420px,1fr));
@@ -766,7 +766,7 @@ exports[`App snapshots should show the host screen after user has clicked the "h
   padding: 0 0 16px 0;
 }
 
-.c12 .card-packs label {
+.c13 .card-packs label {
   margin-right: 12px;
   -webkit-align-items: center;
   -webkit-box-align: center;
@@ -779,7 +779,7 @@ exports[`App snapshots should show the host screen after user has clicked the "h
   margin-bottom: auto;
 }
 
-.c12 input[type='checkbox'] {
+.c13 input[type='checkbox'] {
   margin: 4px 11px auto 0;
 }
 
@@ -824,13 +824,7 @@ exports[`App snapshots should show the host screen after user has clicked the "h
   height: 70px;
 }
 
-.c10 button {
-  background-color: var(--primary-background-color);
-  border: solid black 2px;
-  margin: 20px;
-}
-
-.c10 .slideshowControls {
+.c11 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -839,6 +833,16 @@ exports[`App snapshots should show the host screen after user has clicked the "h
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
+}
+
+.c11 .positionButton {
+  border: none;
+  background-color: transparent;
+}
+
+.c10 {
+  width: 100%;
+  height: 100%;
 }
 
 .c9 {
@@ -1080,7 +1084,7 @@ exports[`App snapshots should show the host screen after user has clicked the "h
 }
 
 @media only screen and (max-width:980px) {
-  .c11 h1 {
+  .c12 h1 {
     position: static;
   }
 }
@@ -1203,22 +1207,43 @@ exports[`App snapshots should show the host screen after user has clicked the "h
                   Long and short of this deal; one person (the Czar of the round) reads the black card on this screen. Everyone else submits a white card trying to be the Czar's favorite jester. More directions on the next page if you're still confused.
                 </p>
                 <div
-                  class="slideshowControls"
+                  class="c11"
                 >
                   <button
+                    class="positionButton"
                     type="button"
                   >
-                    LAST
+                    <img
+                      alt="positionIndicator"
+                      src="blackCard.svg"
+                    />
                   </button>
                   <button
+                    class="positionButton"
                     type="button"
                   >
-                    OKAY STOP CHANGING
+                    <img
+                      alt="positionIndicator"
+                      src="whiteCard.svg"
+                    />
                   </button>
                   <button
+                    class="positionButton"
                     type="button"
                   >
-                    NEXT
+                    <img
+                      alt="positionIndicator"
+                      src="whiteCard.svg"
+                    />
+                  </button>
+                  <button
+                    class="positionButton"
+                    type="button"
+                  >
+                    <img
+                      alt="positionIndicator"
+                      src="whiteCard.svg"
+                    />
                   </button>
                 </div>
               </div>
@@ -1228,13 +1253,13 @@ exports[`App snapshots should show the host screen after user has clicked the "h
             class="bottom"
           >
             <div
-              class="c11"
+              class="c12"
             >
               <h1>
                 GAME SETTINGS
               </h1>
               <form
-                class="c12"
+                class="c13"
               >
                 <div
                   class="number-input-wrapper"
