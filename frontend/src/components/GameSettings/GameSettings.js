@@ -110,7 +110,7 @@ function GameSettings({ options, onChange }) {
       dispatch({ type: 'PACKS_RECEIVED', payload: {} });
       return data;
     }
-    throw new Error();
+    throw new Error('Failed to fetch packs');
   }
   useEffect(async () => {
     dispatch({ type: 'GET_PACKS', payload: {} });
