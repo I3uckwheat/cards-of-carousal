@@ -24,6 +24,7 @@ const initialState = {
     selectedPacks: config.initialSelectedPack,
     handSize: config.handSize,
     winnerScreenDisplayTime: config.winnerScreenDisplayTime,
+    hideJoinCode: false,
   },
   deck: { black: [], white: [] },
   loading: [],
