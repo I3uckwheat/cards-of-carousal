@@ -337,7 +337,6 @@ function addPlayersFromStaging(state) {
 
 function HostReducer(state, action) {
   const { type, payload } = action;
-
   switch (type) {
     case 'CREATE_LOBBY':
       return createLobby(state);

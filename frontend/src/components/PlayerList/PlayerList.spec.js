@@ -26,6 +26,7 @@ describe('PlayerList', () => {
         },
       },
       playerIDs: ['playerID1', 'playerID2'],
+      newPlayerStaging: [],
     };
 
     render(<PlayerList playerList={playerList} />);
@@ -35,6 +36,43 @@ describe('PlayerList', () => {
     ).toBeInTheDocument();
     expect(
       screen.getByText(playerList.players.playerID2.name),
+    ).toBeInTheDocument();
+  });
+
+  it('renders players from the newPlayerStaging array', () => {
+    const playerList = {
+      players: {},
+      playerIDs: [],
+      newPlayerStaging: [
+        {
+          playerId: 'playerID1',
+          name: 'Foo',
+          score: 3,
+          isCzar: false,
+          submittedCards: [1, 4],
+          cards: [
+            { text: 'test', pack: 0 },
+            { text: 'test', pack: 0 },
+          ],
+        },
+        {
+          playerId: 'playerID2',
+          name: 'Bar',
+          score: 5,
+          isCzar: true,
+          submittedCards: [],
+          cards: [],
+        },
+      ],
+    };
+
+    render(<PlayerList playerList={playerList} />);
+
+    expect(
+      screen.getByText(playerList.newPlayerStaging[0].name),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(playerList.newPlayerStaging[1].name),
     ).toBeInTheDocument();
   });
 
@@ -60,6 +98,7 @@ describe('PlayerList', () => {
         },
       },
       playerIDs: ['playerID1', 'playerID2'],
+      newPlayerStaging: [],
     };
 
     render(<PlayerList playerList={playerList} />);
@@ -84,6 +123,7 @@ describe('PlayerList', () => {
         },
       },
       playerIDs: ['playerID1'],
+      newPlayerStaging: [],
     };
 
     render(<PlayerList playerList={playerList} />);
@@ -93,10 +133,11 @@ describe('PlayerList', () => {
     ).not.toBeVisible();
   });
 
-  it('If playerIDs is empty, PlayerList still renders as an empty container', () => {
+  it('If playerIDs and newPlayerStaging is empty, PlayerList still renders as an empty container', () => {
     const playerList = {
       players: {},
       playerIDs: [],
+      newPlayerStaging: [],
     };
 
     render(<PlayerList playerList={playerList} />);
@@ -123,6 +164,7 @@ describe('PlayerList', () => {
         },
       },
       playerIDs: ['playerID2', 'playerID1'],
+      newPlayerStaging: [],
     };
 
     render(<PlayerList playerList={playerList} />);

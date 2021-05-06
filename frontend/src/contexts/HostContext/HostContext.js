@@ -85,32 +85,27 @@ function HostProvider({ children }) {
       const newPlayerIDs = state.newPlayerStaging.map(
         (player) => player.playerId,
       );
-      if (state.gameState === 'waiting-for-players') {
-        dispatch({ type: 'ADD_PLAYERS_FROM_STAGING', payload: {} });
-        dispatch({
-          type: 'SEND_PLAYER_CONNECTED_MESSAGES',
-          payload: {
-            players: newPlayerIDs,
-            message: {
+
+      const message =
+        state.gameState === 'waiting-for-players'
+          ? {
               big: "You've joined the lobby",
               small: 'Please wait for the host to start the game',
-            },
-          },
-        });
-      } else {
-        dispatch({
-          type: 'SEND_PLAYER_CONNECTED_MESSAGES',
-          payload: {
-            players: newPlayerIDs,
-            message: {
+            }
+          : {
               big: 'A round is in progress',
               small: 'You will join the next round automatically',
-            },
-          },
-        });
-      }
+            };
+
+      dispatch({
+        type: 'SEND_PLAYER_CONNECTED_MESSAGES',
+        payload: {
+          players: newPlayerIDs,
+          message,
+        },
+      });
     }
-  }, [state.newPlayerStaging, state.gameState]);
+  }, [state.newPlayerStaging]);
 
   return (
     <HostContext.Provider value={{ state, dispatch }}>

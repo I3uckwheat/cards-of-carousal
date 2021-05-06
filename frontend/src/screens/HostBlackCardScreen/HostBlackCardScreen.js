@@ -80,12 +80,12 @@ const RightPanelWrapper = styled.div`
 
 function LeftPanel() {
   const { state } = useContext(HostContext);
-  const { players, playerIDs, lobbyID } = state;
+  const { players, playerIDs, lobbyID, newPlayerStaging } = state;
 
   return (
     <LeftPanelWrapper>
       <div className="player-list-wrapper">
-        <PlayerList playerList={{ players, playerIDs }} />
+        <PlayerList playerList={{ players, playerIDs, newPlayerStaging }} />
       </div>
       <div className="bottom-left-wrapper">
         <div className="join-code-wrapper">

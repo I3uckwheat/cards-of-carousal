@@ -23,6 +23,21 @@ const propTypes = {
     ).isRequired,
 
     playerIDs: PropTypes.arrayOf(PropTypes.string).isRequired,
+    newPlayerStaging: PropTypes.arrayOf(
+      PropTypes.shape({
+        playerId: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired,
+        score: PropTypes.number.isRequired,
+        isCzar: PropTypes.bool.isRequired,
+        cards: PropTypes.arrayOf(
+          PropTypes.shape({
+            text: PropTypes.string,
+            pack: PropTypes.number,
+          }),
+        ).isRequired,
+        submittedCards: PropTypes.arrayOf(PropTypes.number).isRequired,
+      }),
+    ),
   }).isRequired,
 };
 
@@ -85,7 +100,10 @@ const PlayerRow = styled.div`
   }
 `;
 function PlayerList({ playerList }) {
-  const playersArray = playerList.playerIDs.map((id) => playerList.players[id]);
+  const playersArray = [
+    ...playerList.playerIDs.map((id) => playerList.players[id]),
+    ...playerList.newPlayerStaging,
+  ];
 
   return (
     <PlayerTable data-testid="playerList-container">

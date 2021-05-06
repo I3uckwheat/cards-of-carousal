@@ -268,50 +268,6 @@ describe('Context', () => {
       });
     });
 
-    it('automatically adds players from the staging array to the game who join when game state is waiting-for-players', () => {
-      const TestComponent = () => {
-        const { state, dispatch } = useContext(HostContext);
-
-        useEffect(() => {
-          dispatch({
-            type: 'CREATE_LOBBY',
-            payload: {},
-          });
-        }, []);
-
-        return (
-          <>
-            <div data-testid="game-state">{state.gameState}</div>
-
-            <div>
-              {state.playerIDs.map((player) => (
-                <span key={player} data-testid="player-ids" />
-              ))}
-            </div>
-          </>
-        );
-      };
-
-      const { eventHandlers } = setupEmitterMocks();
-
-      render(
-        <HostProvider>
-          <TestComponent />
-        </HostProvider>,
-      );
-
-      expect(screen.queryAllByTestId('player-ids').length).toBe(0);
-
-      act(() => {
-        eventHandlers.message({
-          event: 'player-connected',
-          payload: { playerId: 'TEST' },
-        });
-      });
-
-      expect(screen.queryAllByTestId('player-ids').length).toBe(1);
-    });
-
     it('catches player-disconnected events and dispatches its respective action', () => {
       const TestComponent = () => {
         const { state, dispatch } = useContext(HostContext);
