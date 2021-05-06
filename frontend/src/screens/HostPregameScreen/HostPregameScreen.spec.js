@@ -143,9 +143,12 @@ describe('Host Pregame Screen', () => {
 
   describe('buttons', () => {
     it('reloads when the close game button is clicked', async () => {
+      const { reload } = window.location;
+
       // window.location properties are read-only, we have to redefine this object to spy on reload
       Object.defineProperty(window, 'location', {
-        value: { reload: jest.fn() },
+        writable: true,
+        value: { ...window.location, reload: jest.fn() },
       });
 
       const dispatch = jest.fn();
@@ -166,6 +169,8 @@ describe('Host Pregame Screen', () => {
         type: 'CLOSE_GAME',
         payload: {},
       });
+
+      window.location.reload = reload;
     });
 
     it('calls dispatches with the proper payloads when the starting conditions are met and the start button is pressed', async () => {

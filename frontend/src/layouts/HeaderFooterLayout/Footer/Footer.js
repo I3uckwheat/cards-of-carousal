@@ -6,12 +6,12 @@ const FooterWrapper = styled.footer`
   flex-direction: column;
   justify-content: flex-end;
 
-  height: 200px;
-  font-size: 3.5rem;
+  height: 122px;
+  font-size: 36px;
   font-weight: 400;
 
   padding-right: 16px;
-  padding-bottom: 10px;
+  padding-bottom: 2px;
 
   background-color: var(--secondary-background-color);
   color: var(--secondary-text-color);
@@ -26,26 +26,37 @@ const FooterWrapper = styled.footer`
     text-decoration: none;
   }
 
+  @media (max-width: 1920px) {
+    height: 110px;
+    font-size: 30px;
+  }
+
   /*average size hosting screen*/
-  @media (max-width: 2000px) {
-    height: 140px;
-    font-size: 2rem;
+  @media (max-width: 1440px) {
+    height: 90px;
+    font-size: 26px;
+  }
+
+  @media (max-width: 1300px) {
+    height: 80px;
+    font-size: 23px;
   }
 
   /*small size hosting screen */
   @media (max-width: 970px) {
     text-align: center;
-    font-size: 1.5rem;
+    height: 70px;
+    font-size: 18px;
   }
 
   /*largest desktop player mode */
-  @media (max-width: 785px) {
+  @media (max-width: 570px) and (min-height: 501px) {
     height: 120px;
     background-color: transparent;
 
     p {
       text-align: center;
-      font-size: 1.2rem;
+      font-size: 13px;
 
       padding-bottom: 32px;
       color: var(--accent-text-color);
@@ -54,6 +65,15 @@ const FooterWrapper = styled.footer`
     a {
       color: var(--accent-text-color);
       display: block;
+    }
+  }
+
+  @media (max-height: 500px) {
+    height: 50px;
+    padding-bottom: 4px;
+    padding-right: 10px;
+    p {
+      font-size: 13px;
     }
   }
 
@@ -66,7 +86,7 @@ const FooterWrapper = styled.footer`
 
 function Footer() {
   return (
-    <FooterWrapper>
+    <FooterWrapper data-testid="footer">
       <p>
         Card content thanks to:{' '}
         <a href="https://cardsagainsthumanity.com">

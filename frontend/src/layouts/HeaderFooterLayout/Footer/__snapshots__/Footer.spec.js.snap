@@ -13,11 +13,11 @@ exports[`Footer renders correctly 1`] = `
   -webkit-justify-content: flex-end;
   -ms-flex-pack: end;
   justify-content: flex-end;
-  height: 200px;
-  font-size: 3.5rem;
+  height: 122px;
+  font-size: 36px;
   font-weight: 400;
   padding-right: 16px;
-  padding-bottom: 10px;
+  padding-bottom: 2px;
   background-color: var(--secondary-background-color);
   color: var(--secondary-text-color);
 }
@@ -33,21 +33,36 @@ exports[`Footer renders correctly 1`] = `
   text-decoration: none;
 }
 
-@media (max-width:2000px) {
+@media (max-width:1920px) {
   .c0 {
-    height: 140px;
-    font-size: 2rem;
+    height: 110px;
+    font-size: 30px;
+  }
+}
+
+@media (max-width:1440px) {
+  .c0 {
+    height: 90px;
+    font-size: 26px;
+  }
+}
+
+@media (max-width:1300px) {
+  .c0 {
+    height: 80px;
+    font-size: 23px;
   }
 }
 
 @media (max-width:970px) {
   .c0 {
     text-align: center;
-    font-size: 1.5rem;
+    height: 70px;
+    font-size: 18px;
   }
 }
 
-@media (max-width:785px) {
+@media (max-width:570px) and (min-height:501px) {
   .c0 {
     height: 120px;
     background-color: transparent;
@@ -55,7 +70,7 @@ exports[`Footer renders correctly 1`] = `
 
   .c0 p {
     text-align: center;
-    font-size: 1.2rem;
+    font-size: 13px;
     padding-bottom: 32px;
     color: var(--accent-text-color);
   }
@@ -63,6 +78,18 @@ exports[`Footer renders correctly 1`] = `
   .c0 a {
     color: var(--accent-text-color);
     display: block;
+  }
+}
+
+@media (max-height:500px) {
+  .c0 {
+    height: 50px;
+    padding-bottom: 4px;
+    padding-right: 10px;
+  }
+
+  .c0 p {
+    font-size: 13px;
   }
 }
 
@@ -75,6 +102,7 @@ exports[`Footer renders correctly 1`] = `
 
 <footer
   className="c0"
+  data-testid="footer"
 >
   <p>
     Card content thanks to:

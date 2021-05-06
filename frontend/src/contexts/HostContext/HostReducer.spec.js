@@ -1028,6 +1028,44 @@ describe('reducer', () => {
     });
   });
 
+  describe('TOGGLE_JOIN_CODE_VISIBILITY', () => {
+    it('changes the hideJoinCode setting to false, if it is true', () => {
+      const state = {
+        gameSettings: {
+          hideJoinCode: true,
+        },
+      };
+
+      const result = HostReducer(state, {
+        type: 'TOGGLE_JOIN_CODE_VISIBILITY',
+      });
+
+      expect(result).toEqual({
+        gameSettings: {
+          hideJoinCode: false,
+        },
+      });
+    });
+
+    it('changes the hideJoinCode setting to true, if it is false', () => {
+      const state = {
+        gameSettings: {
+          hideJoinCode: false,
+        },
+      };
+
+      const result = HostReducer(state, {
+        type: 'TOGGLE_JOIN_CODE_VISIBILITY',
+      });
+
+      expect(result).toEqual({
+        gameSettings: {
+          hideJoinCode: true,
+        },
+      });
+    });
+  });
+
   describe('PREVIEW_WINNER', () => {
     it('returns the state with updated czarSelection', () => {
       const state = {

@@ -4,6 +4,7 @@ const { nanoid } = require('nanoid');
 
 const LobbyList = require('./lib/LobbyList/LobbyList.js');
 const SocketRouter = require('./lib/SocketRouter/SocketRouter.js');
+const Message = require('./lib/Message/Message');
 
 const lobbyList = new LobbyList();
 
@@ -32,13 +33,14 @@ socketRouter.addRoute('GET /lobby/:id', (req, webSocket) => {
   const result = lobbyList.joinLobby(req.params.id, req.query.name, webSocket);
 
   if (result === 'no-lobby') {
-    webSocket.send('no-lobby');
-    webSocket.close(1000, 'no-lobby');
+    const message = new Message('server', {
+      event: 'no-lobby',
+      payload: {},
+      recipients: [webSocket.id],
+    });
 
-    if (process.env.NODE_ENV === 'development') {
-      // eslint-disable-next-line no-console
-      console.warn('Invalid lobby ID');
-    }
+    webSocket.send(message.toJSON());
+    webSocket.close(1000, 'no-lobby');
   }
 });
 

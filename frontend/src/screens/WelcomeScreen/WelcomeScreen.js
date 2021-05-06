@@ -2,9 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import Header from '../../components/Header/Header';
 import Button from '../../components/Buttons/Button';
-import Footer from '../../components/Footer/Footer';
+import HeaderFooterLayout from '../../layouts/HeaderFooterLayout/HeaderFooterLayout';
 
 const propTypes = {
   handleJoinClick: PropTypes.func.isRequired,
@@ -23,33 +22,6 @@ const WelcomeScreenWrapper = styled.div`
   height: 100%;
   background-color: var(--primary-background-color);
 
-  .header {
-    height: 190px;
-  }
-
-  .header-text {
-    position: relative;
-    bottom: -122px;
-  }
-
-  .welcome-to {
-    font-size: 2rem;
-    line-height: 0.2rem;
-    font-weight: 500;
-
-    margin-top: 0px;
-    margin-bottom: -14px;
-  }
-
-  .CoC {
-    font-size: 5rem;
-    line-height: 6.8rem;
-    font-weight: 700;
-
-    margin-bottom: -5px;
-    vertical-align: bottom;
-  }
-
   main {
     display: flex;
     flex-direction: column;
@@ -62,16 +34,16 @@ const WelcomeScreenWrapper = styled.div`
     display: flex;
     flex-direction: column;
 
-    font-size: 3rem;
+    font-size: 5.2rem;
     font-weight: 700;
-    line-height: 2rem;
+    line-height: 4.2rem;
 
     transform: rotate(-5deg);
-    margin-bottom: 90px;
+    margin-bottom: 190px;
   }
 
   .definition {
-    font-size: 2rem;
+    font-size: 4rem;
     font-weight: 400;
   }
 
@@ -93,10 +65,10 @@ const WelcomeScreenWrapper = styled.div`
     font-size: 6rem;
     font-weight: 900;
 
-    width: 256px;
-    height: 48px;
+    width: 317px;
+    height: 82px;
 
-    font-size: 2.5rem;
+    font-size: 3.6rem;
   }
 
   .OR {
@@ -110,66 +82,111 @@ const WelcomeScreenWrapper = styled.div`
     border-radius: 50%;
     padding: 16px;
 
-    font-size: 2.25rem;
+    font-size: 2.3rem;
     font-weight: 700;
 
-    width: 72px;
-    height: 72px;
+    width: 82px;
+    height: 82px;
     margin-left: 93px;
-    margin-right: 93px;    
+    margin-right: 93px;
   }
 
-  /*if less than 890px do this.... */
-  @media (max-width: 820px) {
-    .header-text {
-      bottom: -134px;
-    }
-
-    .welcome-to {
-      font-size: 1.5rem;
-    }
-
-    .CoC {
-      font-size: 4rem;
-      line-height: 6rem;
-    }
-
+  @media (max-width: 1920px) {
     .definition-container {
-      font-size: 2.2rem;
-      line-height: 1.8rem;
+      font-size: 4.5rem;
+      line-height: 3.7rem;
 
-      margin-bottom: 90px;
+      margin-bottom: 150px;
     }
 
     .definition {
-      font-size: 1.7rem;
+      font-size: 3.5rem;
     }
 
     .button {
-      width: 200px;
-      height: 48px;
+      width: 290px;
+      height: 74px;
 
-      font-size: 2.5rem;
+      font-size: 3.2rem;
     }
 
     .OR {
-      width: 60px;
-      height: 60px;
-      margin-left: 70px;
-      margin-right: 70px;
+      width: 74px;
+      height: 74px;
+      margin-left: 93px;
+      margin-right: 93px;
 
       font-size: 2rem;
     }
   }
 
-  /*if less than 700px do this.... */
-  @media (max-width: 645px) {
-     .header-text {
-      bottom: -85px;
+  @media (max-width: 1440px) {
+    .definition-container {
+      font-size: 3.2rem;
+      line-height: 2.6rem;
+
+      margin-bottom: 90px;
     }
 
+    .definition {
+      font-size: 2.5rem;
+    }
+
+    .button {
+      width: 256px;
+      height: 66px;
+
+      font-size: 2.5rem;
+    }
+
+    .OR {
+      width: 66px;
+      height: 66px;
+      margin-left: 93px;
+      margin-right: 93px;
+
+      font-size: 1.8rem;
+    }
+  }
+
+  @media (max-width: 950px) {
+    .definition-container {
+      font-size: 2.4rem;
+      line-height: 1.8rem;
+    }
+
+    .definition {
+      font-size: 1.85rem;
+    }
+
+    .button {
+      width: 200px;
+      height: 51px;
+
+      font-size: 2rem;
+    }
+
+    .OR {
+      width: 51px;
+      height: 51px;
+      margin-left: 70px;
+      margin-right: 70px;
+
+      font-size: 1.4rem;
+    }
+  }
+
+  /*if less than 700px, or on mobile landscape, do this.... */
+  @media (max-width: 700px), (max-width: 900px) and (max-height: 500px) {
     .definition-container {
       display: none;
+    }
+
+    .button {
+      width: 268px;
+      height: 69px;
+
+      font-size: 2rem;
     }
 
     .host-button {
@@ -178,171 +195,77 @@ const WelcomeScreenWrapper = styled.div`
 
     .OR {
       display: none;
-    } 
-
-    .welcome-to {
-      display: none;
-    }
-
-      .CoC {
-      line-height: 3.5rem;
     }
   }
 
-  /*if less than 320px do this.... */
-  @media (max-width: 320px) {
-   .header {
-      height: 130px;
-    }
-
-    .header-text {
-      bottom: -30px;
-    }
-
-    .CoC {
-      font-size: 3rem;
-      margin-bottom: 12px;
-    } 
-  }
-
-  /*If greater than 2000px wide OR greater than 1500px tall */
-  @media (min-width: 2000px), (min-height: 1500px) {
-    .header {
-      height: 400px;
-    }
-    .header-text {
-      bottom: -260px;
-    }
-
-    .welcome-to {
-      font-size: 3rem;
-      line-height: 3.8rem;
-    }
-
-    .CoC {
-      font-size: 8rem;
-      line-height: 6.5rem;
-    }
-
-    .definition-container {
-      font-size: 4.5rem;
-      line-height: 3.5rem;
-      margin-bottom: 250px;
-    }
-
-    .definition {
-      font-size: 3.5rem;
-    }
-
-    .OR {
-      font-size: 2.5rem;
-
-      width: 100px;
-      height: 100px;
-      margin-left: 100px;
-      margin-right: 100px;
-    }
-
-    .button {
-      width: 500px;
-      height: 100px;
-      border: solid black 4px;
-      font-size: 3rem;
-    }
-  }
-  
-
-  /*if greater than 2450px do this.... */
-  @media (min-width: 2450px) {
-    .header {
-      height: 400px;
-    }
-
-    .header-text {
-      bottom: -260px;
-    }
-
-    .welcome-to {
-      font-size: 3rem;
-      line-height: 3.8rem;
-    }
-
-    .CoC {
-      font-size: 8rem;
-      line-height: 6.5rem;
-    }
-
-
+  /* Screens above 1440p */
+  @media (min-width: 2561px) {
     .definition-container {
       font-size: 6.5rem;
-      line-height: 5.5rem;
+      line-height: 4.8rem;
+
       margin-bottom: 300px;
     }
 
     .definition {
-      font-size: 6rem;
-    }
-
-    .OR {
-      font-size: 4.5rem;
-
-      width: 150px;
-      height: 150px;
-      margin-left: 120px;
-      margin-right: 120px;
+      font-size: 5rem;
     }
 
     .button {
-      width: 600px;
-      height: 150px;
-      border: solid black 4px;
-      font-size: 5rem;
+      width: 490px;
+      height: 126px;
+
+      font-size: 5.2rem;
     }
-  } 
-}`;
+
+    .OR {
+      width: 126px;
+      height: 126px;
+      margin-left: 93px;
+      margin-right: 93px;
+
+      font-size: 3.8rem;
+    }
+  }
+`;
 
 function WelcomeScreen({ handleJoinClick, handleHostClick }) {
   return (
     <WelcomeScreenWrapper className="primary-background">
-      <Header className="header">
-        <div className="header-text">
-          <p className="welcome-to">WELCOME TO</p>
-          <h1 className="CoC">CARDS OF CAROUSAL</h1>
-        </div>
-      </Header>
-      <main>
-        <div className="definition-container">
-          <p className="word">
-            CAROUSAL <span className="definition">(n)</span>
-          </p>
-          <p className="definition">
-            a wild, drunken party or celebration : a drunken revel
-          </p>
-        </div>
+      <HeaderFooterLayout isWelcoming>
+        <main>
+          <div className="definition-container">
+            <p className="word">
+              CAROUSAL <span className="definition">(n)</span>
+            </p>
+            <p className="definition">
+              a wild, drunken party or celebration : a drunken revel
+            </p>
+          </div>
 
-        <div className="button-container">
-          <Button
-            type="button"
-            isActive
-            className="button"
-            onClick={handleJoinClick}
-          >
-            <p>JOIN</p>
-          </Button>
+          <div className="button-container">
+            <Button
+              type="button"
+              isActive
+              className="button"
+              onClick={handleJoinClick}
+            >
+              <p>JOIN</p>
+            </Button>
 
-          <div className="OR">OR</div>
+            <div className="OR">OR</div>
 
-          <Button
-            type="button"
-            isActive
-            className="button host-button"
-            onClick={handleHostClick}
-          >
-            <p>HOST</p>
-          </Button>
-        </div>
-      </main>
-      <Footer />
+            <Button
+              type="button"
+              isActive
+              className="button host-button"
+              onClick={handleHostClick}
+            >
+              <p>HOST</p>
+            </Button>
+          </div>
+        </main>
+      </HeaderFooterLayout>
     </WelcomeScreenWrapper>
   );
 }

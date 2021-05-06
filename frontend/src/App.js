@@ -8,6 +8,7 @@ import HostScreenController from './screenControllers/HostScreenController/HostS
 import PlayerScreenController from './screenControllers/PlayerScreenController/PlayerScreenController';
 import { PlayerProvider } from './contexts/PlayerContext/PlayerContext';
 import HostProvider from './contexts/HostContext/HostContext';
+import PlayerErrorBoundary from './errorHandlers/playerErrorHandlers/PlayerErrorBoundary';
 
 function App() {
   const [screenControllerType, setScreenControllerType] = useState('welcome');
@@ -15,9 +16,11 @@ function App() {
   switch (screenControllerType) {
     case 'player':
       return (
-        <PlayerProvider>
-          <PlayerScreenController />
-        </PlayerProvider>
+        <PlayerErrorBoundary>
+          <PlayerProvider>
+            <PlayerScreenController />
+          </PlayerProvider>
+        </PlayerErrorBoundary>
       );
     case 'host':
       return (

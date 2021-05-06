@@ -335,6 +335,16 @@ function addPlayersFromStaging(state) {
   };
 }
 
+function toggleJoinCode(state) {
+  return {
+    ...state,
+    gameSettings: {
+      ...state.gameSettings,
+      hideJoinCode: !state.gameSettings.hideJoinCode,
+    },
+  };
+}
+
 function HostReducer(state, action) {
   const { type, payload } = action;
   switch (type) {
@@ -359,6 +369,7 @@ function HostReducer(state, action) {
     case 'KICK_PLAYER':
       return removePlayer(state, payload);
 
+    case 'SKIP_UNSUBMITTED_PLAYERS':
     case 'CZAR_SELECT_WINNER':
       return czarSelectWinner(state);
 
@@ -403,6 +414,9 @@ function HostReducer(state, action) {
 
     case 'ADD_PLAYERS_FROM_STAGING':
       return addPlayersFromStaging(state);
+
+    case 'TOGGLE_JOIN_CODE_VISIBILITY':
+      return toggleJoinCode(state);
 
     default:
       return { ...state };

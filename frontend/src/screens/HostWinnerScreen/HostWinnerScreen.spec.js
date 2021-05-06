@@ -188,17 +188,26 @@ describe('Host Winner Screen', () => {
       jest.advanceTimersByTime(2000);
 
       expect(dispatch).not.toHaveBeenCalledWith({
+        type: 'REMOVE_SUBMITTED_CARDS_FROM_PLAYER',
+        payload: {},
+      });
+
+      expect(dispatch).not.toHaveBeenCalledWith({
         type: 'SET_NEXT_CZAR',
         payload: {},
       });
+
       expect(dispatch).not.toHaveBeenCalledWith({
         type: 'SELECT_BLACK_CARD',
         payload: {},
       });
+
       expect(dispatch).not.toHaveBeenCalledWith({
         type: 'DEAL_WHITE_CARDS',
         payload: {},
       });
+
+      expect(dispatch).toHaveBeenCalledTimes(1);
     });
 
     it('sends next round dispatches once the setTimeout executes', () => {
@@ -211,17 +220,26 @@ describe('Host Winner Screen', () => {
       jest.advanceTimersByTime(3000);
 
       expect(dispatch).toHaveBeenCalledWith({
+        type: 'REMOVE_SUBMITTED_CARDS_FROM_PLAYER',
+        payload: {},
+      });
+
+      expect(dispatch).toHaveBeenCalledWith({
         type: 'SET_NEXT_CZAR',
         payload: {},
       });
+
       expect(dispatch).toHaveBeenCalledWith({
         type: 'SELECT_BLACK_CARD',
         payload: {},
       });
+
       expect(dispatch).toHaveBeenCalledWith({
         type: 'DEAL_WHITE_CARDS',
         payload: {},
       });
+
+      expect(dispatch).toHaveBeenCalledTimes(5);
     });
   });
 });
