@@ -239,7 +239,7 @@ describe('Host Winner Screen', () => {
         payload: {},
       });
 
-      expect(dispatch).toHaveBeenCalledTimes(5);
+      expect(dispatch).toHaveBeenCalledTimes(6);
     });
   });
 });
