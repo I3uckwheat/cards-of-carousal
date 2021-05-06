@@ -21,20 +21,79 @@ function packsReceived(state) {
   };
 }
 
-function playerConnected(state, { playerId, playerName }) {
+function clearSubmittedCards(state) {
+  const newState = { ...state };
+  const { playerIDs, players } = newState;
+  playerIDs.forEach((playerID) => {
+    players[playerID].submittedCards = [];
+  });
+
+  return newState;
+}
+
+function dealWhiteCards(state) {
+  const {
+    deck,
+    playerIDs,
+    players,
+    gameSettings: { handSize },
+  } = state;
+  const newWhiteCards = [...deck.white];
+
+  const neededCardsPerPlayer = playerIDs.map((playerID) => {
+    const player = players[playerID];
+    return {
+      playerID,
+      cardsNeeded: handSize - player.cards.length,
+    };
+  });
+
+  const cardsGivenToPlayers = neededCardsPerPlayer.map(
+    ({ playerID, cardsNeeded }) => {
+      const newCards = [...players[playerID].cards];
+      for (let i = 0; i < cardsNeeded; i += 1) {
+        const selection = Math.floor(Math.random() * newWhiteCards.length);
+        newCards.push(newWhiteCards.splice(selection, 1)[0]);
+      }
+      return {
+        playerID,
+        cards: newCards,
+      };
+    },
+  );
+
+  const newPlayers = cardsGivenToPlayers.reduce((acc, { playerID, cards }) => {
+    acc[playerID] = {
+      ...players[playerID],
+      cards,
+    };
+    return acc;
+  }, {});
+
   return {
     ...state,
-    players: {
-      ...state.players,
-      [playerId]: {
-        name: playerName,
-        score: 0,
-        isCzar: false,
-        submittedCards: [0],
-        cards: [],
-      },
+    deck: {
+      black: [...deck.black],
+      white: newWhiteCards,
     },
-    playerIDs: [...state.playerIDs, playerId],
+    players: newPlayers,
+    gameState: 'waiting-to-receive-cards',
+  };
+}
+
+function playerConnected(state, { playerId, playerName }) {
+  // push the new player to the staging array
+  const newPlayer = {
+    playerId,
+    name: playerName,
+    score: 0,
+    isCzar: false,
+    submittedCards: [0],
+    cards: [],
+  };
+  return {
+    ...state,
+    newPlayerStaging: [...state.newPlayerStaging, newPlayer],
   };
 }
 
@@ -237,57 +296,6 @@ function setDeck(state, { deck }) {
   };
 }
 
-function dealWhiteCards(state) {
-  const {
-    deck,
-    playerIDs,
-    players,
-    gameSettings: { handSize },
-  } = state;
-  const newWhiteCards = [...deck.white];
-
-  const neededCardsPerPlayer = playerIDs.map((playerID) => {
-    const player = players[playerID];
-    return {
-      playerID,
-      cardsNeeded: handSize - player.cards.length,
-    };
-  });
-
-  const cardsGivenToPlayers = neededCardsPerPlayer.map(
-    ({ playerID, cardsNeeded }) => {
-      const newCards = [...players[playerID].cards];
-      for (let i = 0; i < cardsNeeded; i += 1) {
-        const selection = Math.floor(Math.random() * newWhiteCards.length);
-        newCards.push(newWhiteCards.splice(selection, 1)[0]);
-      }
-      return {
-        playerID,
-        cards: newCards,
-      };
-    },
-  );
-
-  const newPlayers = cardsGivenToPlayers.reduce((acc, { playerID, cards }) => {
-    acc[playerID] = {
-      ...players[playerID],
-      cards,
-      submittedCards: [],
-    };
-    return acc;
-  }, {});
-
-  return {
-    ...state,
-    deck: {
-      black: [...deck.black],
-      white: newWhiteCards,
-    },
-    players: newPlayers,
-    gameState: 'waiting-to-receive-cards',
-  };
-}
-
 function getJoinCode(state) {
   return {
     ...state,
@@ -303,6 +311,30 @@ function updateJoinCode(state, { lobbyID }) {
   };
 }
 
+function addPlayersFromStaging(state) {
+  const newState = { ...state };
+
+  state.newPlayerStaging.forEach((player) => {
+    newState.playerIDs = [...newState.playerIDs, player.playerId];
+
+    // remove the id from the player object
+    const playerData = Object.entries(player).reduce((acc, [key, value]) => {
+      if (key !== 'playerId') acc[key] = value;
+      return acc;
+    }, {});
+
+    newState.players = {
+      ...newState.players,
+      [player.playerId]: playerData,
+    };
+  });
+
+  return {
+    ...newState,
+    newPlayerStaging: [],
+  };
+}
+
 function toggleJoinCode(state) {
   return {
     ...state,
@@ -315,7 +347,6 @@ function toggleJoinCode(state) {
 
 function HostReducer(state, action) {
   const { type, payload } = action;
-
   switch (type) {
     case 'CREATE_LOBBY':
       return createLobby(state);
@@ -370,7 +401,7 @@ function HostReducer(state, action) {
       return setDeck(state, payload);
 
     case 'DEAL_WHITE_CARDS':
-      return dealWhiteCards(state);
+      return dealWhiteCards(clearSubmittedCards(state));
 
     case 'REMOVE_SUBMITTED_CARDS_FROM_PLAYER':
       return removeSubmittedCards(state);
@@ -380,6 +411,9 @@ function HostReducer(state, action) {
 
     case 'UPDATE_JOIN_CODE':
       return updateJoinCode(state, payload);
+
+    case 'ADD_PLAYERS_FROM_STAGING':
+      return addPlayersFromStaging(state);
 
     case 'TOGGLE_JOIN_CODE_VISIBILITY':
       return toggleJoinCode(state);

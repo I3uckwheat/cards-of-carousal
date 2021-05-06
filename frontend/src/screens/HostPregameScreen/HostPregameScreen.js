@@ -97,17 +97,21 @@ const RightPanelWrapper = styled.div`
 
 function LeftPanel() {
   const { state, dispatch } = useContext(HostContext);
-  const { players, playerIDs, lobbyID } = state;
+  const { lobbyID, newPlayerStaging } = state;
 
   const handleClickStart = async () => {
     // check if there are any players and if packs are selected
-    if (playerIDs.length && state.gameSettings.selectedPacks.length) {
+    if (
+      newPlayerStaging.length > 1 &&
+      state.gameSettings.selectedPacks.length
+    ) {
       const { selectedPacks } = state.gameSettings;
       dispatch({ type: 'GET_DECK', payload: {} });
       await dispatch({
         type: 'SET_DECK',
         payload: { selectedPacks },
       });
+      dispatch({ type: 'ADD_PLAYERS_FROM_STAGING', payload: {} });
       await dispatch({
         type: 'START_GAME',
         payload: {},
@@ -133,7 +137,7 @@ function LeftPanel() {
   return (
     <LeftPanelWrapper>
       <div className="player-list-wrapper">
-        <PlayerList playerList={{ players, playerIDs }} />
+        <PlayerList />
       </div>
       <div className="bottom-left-wrapper">
         <div className="buttons-wrapper">
