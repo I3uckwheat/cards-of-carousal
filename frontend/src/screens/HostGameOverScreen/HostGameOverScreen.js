@@ -48,18 +48,20 @@ const RightPanelWrapper = styled.div`
     margin: 40px 0;
 
     flex: 2;
-    line-height: 1em;
     text-transform: uppercase;
 
     .prelude {
       font-size: 28px;
       text-indent: -40px;
+      line-height: 1em;
+      margin-bottom: -12px;
     }
 
     .title {
       font-size: 64px;
       font-weight: 900;
       text-align: right;
+      line-height: 1em;
     }
   }
 

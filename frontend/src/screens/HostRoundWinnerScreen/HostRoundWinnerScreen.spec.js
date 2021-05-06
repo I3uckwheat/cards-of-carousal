@@ -272,5 +272,76 @@ describe('Host Winner Screen', () => {
         payload: { gameWinner: 'ID3', playerIDs: newState.playerIDs },
       });
     });
+
+    it('if max score is NOT met by the round winning player, GAME_OVER is not dispatched', () => {
+      jest.useFakeTimers();
+
+      const newState = {
+        ...state,
+        czarSelection: 'ID3',
+        players: {
+          ...state.players,
+          ID3: {
+            ...state.players.ID3,
+            score: state.gameSettings.winningScore - 1,
+          },
+        },
+      };
+      render(
+        <HostContext.Provider value={{ state: newState, dispatch }}>
+          <HostRoundWinnerScreen />
+        </HostContext.Provider>,
+      );
+
+      // Dispatch is called with End of Round event
+      expect(dispatch).toHaveBeenCalledTimes(1);
+
+      jest.advanceTimersByTime(3000);
+
+      expect(dispatch).not.toHaveBeenCalledWith({
+        type: 'GAME_OVER',
+        payload: { gameWinner: 'ID3', playerIDs: newState.playerIDs },
+      });
+    });
+
+    it('if max score is met by the round winning player, GAME_OVER is dispatched only after timer is up', () => {
+      jest.useFakeTimers();
+
+      const newState = {
+        ...state,
+        czarSelection: 'ID3',
+        players: {
+          ...state.players,
+          ID3: {
+            ...state.players.ID3,
+            score: state.gameSettings.winningScore,
+          },
+        },
+      };
+      render(
+        <HostContext.Provider value={{ state: newState, dispatch }}>
+          <HostRoundWinnerScreen />
+        </HostContext.Provider>,
+      );
+
+      // Dispatch is called with End of Round event
+      expect(dispatch).toHaveBeenCalledTimes(1);
+
+      jest.advanceTimersByTime(2999);
+
+      expect(dispatch).toHaveBeenCalledTimes(1);
+      expect(dispatch).not.toHaveBeenCalledWith({
+        type: 'GAME_OVER',
+        payload: { gameWinner: 'ID3', playerIDs: newState.playerIDs },
+      });
+
+      jest.advanceTimersByTime(1);
+
+      expect(dispatch).toHaveBeenCalledTimes(2);
+      expect(dispatch).toHaveBeenCalledWith({
+        type: 'GAME_OVER',
+        payload: { gameWinner: 'ID3', playerIDs: newState.playerIDs },
+      });
+    });
   });
 });
