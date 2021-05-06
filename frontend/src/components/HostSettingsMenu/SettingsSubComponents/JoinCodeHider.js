@@ -1,27 +1,25 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 
 import OptionButton from './OptionButton';
+import { HostContext } from '../../../contexts/HostContext/HostContext';
 
 const propTypes = {
   isEnabled: PropTypes.bool.isRequired,
   onDisabledClick: PropTypes.func.isRequired,
 };
 
-// placeholder function
-function hideJoinCode() {
-  // eslint-disable-next-line
-  console.log('PRETEND THE JOIN CODE IS HIDDEN');
-}
-
 function JoinCodeHider({ isEnabled, onDisabledClick }) {
+  const { state, dispatch } = useContext(HostContext);
+  const hidden = state.gameSettings.hideJoinCode;
+
   return (
     <OptionButton
       isEnabled={isEnabled}
-      onEnabledClick={hideJoinCode}
+      onEnabledClick={() => dispatch({ type: 'TOGGLE_JOIN_CODE_VISIBILITY' })}
       onDisabledClick={onDisabledClick}
     >
-      HIDE JOIN CODE
+      {hidden ? 'SHOW JOIN CODE' : 'HIDE JOIN CODE'}
     </OptionButton>
   );
 }

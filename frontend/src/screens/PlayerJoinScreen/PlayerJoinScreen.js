@@ -7,22 +7,23 @@ import HeaderFooterLayout from '../../layouts/HeaderFooterLayout/HeaderFooterLay
 const propTypes = {};
 
 const PlayerJoinContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+
   position: fixed;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
-  display: grid;
   height: 100%;
   background-color: var(--primary-background-color);
-  grid-template-rows: 130px 1fr auto;
-  grid-template-columns: 1fr;
 
   main {
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
+    align-items: center;
+    margin: auto;
   }
 
   .player-join-form-container {
@@ -30,279 +31,154 @@ const PlayerJoinContainer = styled.div`
     max-width: 1650px;
     margin: 0 auto;
     text-align: center;
-    padding: 20px;
-    margin-top: -88px;
+    margin-top: -50px;
+  }
+
+  .player-join-form-input-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 
   .player-join-form {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 60px 60px 40px 1fr;
-  }
-
-  .player-join-name-input {
-    grid-row: 1;
-    grid-column: 1;
-  }
-
-  .player-join-code-input {
-    grid-row: 2;
-    grid-column: 1;
-  }
-
-  .player-join-name-input,
-  .player-join-code-input {
-    margin: 0 16px;
+    display: flex;
+    flex-direction: column;
   }
 
   input {
     text-transform: uppercase;
-    font-size: 1.2rem;
+    font-size: 1.5rem;
+    font-weight: 700;
     border: none;
     border-bottom: 2px solid var(--primary-text-color);
-    padding-top: 40px;
+    padding-top: 24px;
     background: transparent;
     padding-left: 0;
+    width: 268px;
   }
 
   input::placeholder {
     color: var(--primary-text-color);
-    font-size: 1.2rem;
+    font-size: 1.5rem;
   }
 
   @media screen and (min-width: 646px) {
     .player-join-form-container {
-      padding-left: 40px;
-      padding-right: 40px;
+      margin-top: 0;
     }
-
-    .player-join-form {
-      grid-template-columns: 52% 48%;
-      grid-template-rows: 60px 60px 40px 1fr;
+    .player-join-form-input-container {
+      flex-direction: row;
     }
-
     .player-join-name-input {
-      grid-row: 1;
-      grid-column: 1 / 3;
-    }
-
-    .player-join-code-input {
-      grid-row: 2;
-      grid-column: 1 / 3;
-    }
-
-    .player-join-name-input,
-    .player-join-code-input {
-      margin: 0 16px;
+      margin-right: 20px;
     }
   }
 
-  @media screen and (min-width: 786px) {
-    // header, main, footer
-    grid-template-rows: 180px 1fr auto;
-
-    .player-join-form-container {
-      max-width: 800px;
-    }
-
-    .player-join-form {
-      grid-template-rows: 60px 60px 1fr;
-    }
-
-    .player-join-name-input {
-      grid-row: 1;
-      grid-column: 1;
-    }
-
-    .player-join-code-input {
-      grid-row: 1;
-      grid-column: 2;
-    }
-  }
-
-  @media screen and (min-width: 970px) {
-    input {
-      font-size: 1.2rem;
-      border-bottom: 2px solid var(--primary-text-color);
-      padding-top: 40px;
-    }
-
+  @media screen and (min-width: 951px) {
+    input,
     input::placeholder {
-      font-size: 1.2rem;
+      font-size: 1.5rem;
+    }
+    input {
+      width: 356px;
+    }
+    .player-join-name-input {
+      margin-right: 50px;
     }
   }
 
-  @media screen and (min-width: 2000px) {
-    .player-join-form-container {
-      max-width: 1000px;
-    }
-
-    .player-join-form {
-      grid-template-rows: 60px 88px 1fr;
-    }
-
-    input {
-      font-size: 1.6rem;
-      border-bottom: 2px solid var(--primary-text-color);
-      padding-top: 36px;
-    }
-
+  @media screen and (min-width: 1441px) {
+    input,
     input::placeholder {
-      font-size: 1.6rem;
+      font-size: 1.8rem;
     }
-
-    .player-join-name-input {
-      margin-right: 16px;
-    }
-
-    .player-join-code-input {
-      margin-left: 16px;
+    input {
+      width: 400px;
     }
   }
 
-  // 4k
-  @media screen and (min-width: 2560px) {
-    .player-join-form-container {
-      max-width: 1650px;
-      padding: 20px 80px 20px 80px;
-    }
-
-    .player-join-form {
-      grid-template-rows: 90px 160px 1fr;
-    }
-
-    input {
-      font-size: 4.4rem;
-      font-weight: 500;
-      border-bottom: 4px solid var(--primary-text-color);
-      padding-top: 24px;
-      padding-left: 0;
-    }
-
+  @media screen and (min-width: 1921px) {
+    input,
     input::placeholder {
-      font-weight: 500;
-      font-size: 4.4rem;
+      font-size: 2rem;
     }
-
-    .player-join-name-input {
-      margin-right: 32px;
-    }
-
-    .player-join-code-input {
-      margin-left: 32px;
-    }
-  }
-
-  // small mobile landscape orientation
-  @media screen and (max-height: 320px) {
-    .player-join-form-container {
-      margin-top: -20px;
-    }
-
-    .player-join-form {
-      /* grid-template-rows: 60px 60px 1fr; */
-      grid-template-rows: 50px 40px 1fr;
-    }
-
     input {
-      padding-top: 30px;
+      width: 500px;
     }
   }
 
-  // medium mobile landscape orientation
-  @media screen and (min-height: 321px) and (max-height: 375px) {
-    grid-template-rows: 60px 1fr auto;
-
-    .player-join-form-container {
-      margin-top: -20px;
+  @media (min-width: 2561px) {
+    input,
+    input::placeholder {
+      font-size: 3rem;
     }
-  }
-
-  // large mobile landscape orientation
-  @media screen and (min-height: 376px) and (max-height: 414px) {
-    .player-join-form-container {
-      margin-top: -10px;
-    }
-  }
-
-  //extra large mobile landscape orientation
-  @media screen and (min-height: 415px) and (max-height: 567px) {
-    .player-join-form-container {
-      margin-top: 10px;
-    }
-
-    .player-join-form {
-      grid-template-rows: 60px 60px 1fr;
-    }
-
     input {
-      padding-top: 40px;
+      width: 900px;
     }
   }
 
-  // all mobile size landscape orientation
-  @media screen and (max-height: 567px) {
-    // header, main, footer
-    grid-template-rows: 60px 1fr auto;
-
-    .player-join-form {
-      grid-template-columns: 52% 48%;
+  // mobile landscape orientation
+  @media screen and (max-height: 567px) and (min-width: 568px) {
+    .player-join-form-container {
+      margin-top: 0;
     }
-
+    .player-join-form-input-container {
+      flex-direction: row;
+    }
+    input {
+      width: 45%;
+    }
     .player-join-name-input {
-      grid-row: 1;
-      grid-column: 1;
-    }
-
-    .player-join-code-input {
-      grid-row: 1;
-      grid-column: 2;
+      margin-right: 20px;
     }
   }
 `;
 
 const PlayerJoinButton = styled(Button)`
-  grid-row: 4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   margin: 0 auto;
 
-  width: 260px;
-  height: 72px;
+  width: 268px;
+  height: 69px;
 
   border-radius: 2px;
   background-color: var(--secondary-background-color);
-  font-size: 1.2rem;
+  font-size: 1.5rem;
+  font-weight: 900;
   text-transform: uppercase;
+  margin-top: 50px;
 
-  @media screen and (min-width: 646px) {
-    grid-column: 1 / 3;
-  }
-
-  @media screen and (min-width: 786px) {
-    grid-row: 4;
-  }
-
-  @media screen and (min-width: 970px) {
-    font-size: 1.2rem;
-    width: 288px;
-    height: 80px;
-  }
-
-  @media screen and (min-width: 2000px) {
+  @media screen and (min-width: 951px) {
     font-size: 1.5rem;
-    width: 360px;
-    height: 100px;
+    width: 256px;
+    height: 66px;
+    margin-top: 100px;
   }
 
-  @media screen and (min-width: 2560px) {
-    font-size: 4rem;
-    width: 900px;
-    height: 225px;
+  @media screen and (min-width: 1441px) {
+    font-size: 1.8rem;
+    width: 290px;
+    height: 74px;
   }
 
-  // mobile landscape orientation
-  @media screen and (max-height: 567px) {
-    grid-column: 1 / 3;
-    grid-row: 3;
+  @media screen and (min-width: 1921px) {
+    font-size: 2rem;
+    width: 317px;
+    height: 82px;
+  }
+
+  @media (min-width: 2561px) {
+    width: 490px;
+    height: 126px;
+
+    font-size: 3rem;
+  }
+
+  @media screen and (max-height: 567px) and (min-width: 568px) {
+    margin-top: 30px;
   }
 `;
 
@@ -349,24 +225,26 @@ export default function PlayerJoinScreen() {
         <main>
           <div className="player-join-form-container">
             <form onSubmit={handleSubmit} className="player-join-form">
-              <input
-                required
-                type="text"
-                maxLength="12"
-                placeholder="name"
-                value={name}
-                onChange={handleNameChange}
-                className="player-join-name-input"
-              />
-              <input
-                required
-                maxLength="4"
-                type="text"
-                placeholder="join code"
-                value={joinCode}
-                onChange={handleJoinCodeChange}
-                className="player-join-code-input"
-              />
+              <div className="player-join-form-input-container">
+                <input
+                  required
+                  type="text"
+                  maxLength="12"
+                  placeholder="name"
+                  value={name}
+                  onChange={handleNameChange}
+                  className="player-join-name-input"
+                />
+                <input
+                  required
+                  maxLength="4"
+                  type="text"
+                  placeholder="join code"
+                  value={joinCode}
+                  onChange={handleJoinCodeChange}
+                  className="player-join-code-input"
+                />
+              </div>
               <PlayerJoinButton
                 data-testid="player-join-submit-button"
                 type="submit"

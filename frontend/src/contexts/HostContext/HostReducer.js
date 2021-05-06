@@ -312,6 +312,16 @@ function updateJoinCode(state, { lobbyID }) {
   };
 }
 
+function toggleJoinCode(state) {
+  return {
+    ...state,
+    gameSettings: {
+      ...state.gameSettings,
+      hideJoinCode: !state.gameSettings.hideJoinCode,
+    },
+  };
+}
+
 function gameOver(state, { gameWinner }) {
   return {
     ...state,
@@ -345,6 +355,7 @@ function HostReducer(state, action) {
     case 'KICK_PLAYER':
       return removePlayer(state, payload);
 
+    case 'SKIP_UNSUBMITTED_PLAYERS':
     case 'CZAR_SELECT_WINNER':
       return czarSelectWinner(state);
 
@@ -386,6 +397,9 @@ function HostReducer(state, action) {
 
     case 'UPDATE_JOIN_CODE':
       return updateJoinCode(state, payload);
+
+    case 'TOGGLE_JOIN_CODE_VISIBILITY':
+      return toggleJoinCode(state);
 
     case 'GAME_OVER':
       return gameOver(state, payload);

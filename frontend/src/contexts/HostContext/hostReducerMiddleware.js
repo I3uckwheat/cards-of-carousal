@@ -255,6 +255,7 @@ export default async function hostReducerMiddleware(
       notifyCzar(payload);
       break;
 
+    case 'SKIP_UNSUBMITTED_PLAYERS':
     case 'CZAR_SELECT_WINNER':
       czarSelectWinner(payload);
       break;
