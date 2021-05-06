@@ -1,17 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import LoadingIndicator from '../LoadingIndicator/LoadingIndicator';
+import { HostContext } from '../../contexts/HostContext/HostContext';
 
 const propType = {
   loading: PropTypes.bool,
   code: PropTypes.string.isRequired,
-  hidden: PropTypes.bool,
 };
 
 const defaultProps = {
   loading: false,
-  hidden: false,
 };
 
 const JoinCodeComponent = styled.div`
@@ -41,20 +40,16 @@ const JoinCodeComponent = styled.div`
   }
 `;
 
-function DisplayJoinCode({ loading, code, hidden }) {
+function DisplayJoinCode({ loading, code }) {
+  const { state } = useContext(HostContext);
+  const hidden = state.gameSettings.hideJoinCode;
+
   return (
     <JoinCodeComponent>
       <p className="join-code-title">JOIN CODE:</p>
       <div className="join-code" data-testid="join-code">
-        {
-          // TODO REMOVE NESTED TERNARY
-          // eslint-disable-next-line no-nested-ternary
-          loading || !code ? (
-            <LoadingIndicator secondary />
-          ) : !hidden ? (
-            <p>{code}</p>
-          ) : null
-        }
+        {!hidden &&
+          (loading || !code ? <LoadingIndicator secondary /> : <p>{code}</p>)}
       </div>
     </JoinCodeComponent>
   );
