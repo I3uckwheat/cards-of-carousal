@@ -6,6 +6,8 @@ import HostScreenController from './HostScreenController';
 import HostPregameScreen from '../../screens/HostPregameScreen/HostPregameScreen';
 import WinnerSelectScreen from '../../screens/WinnerSelectScreen/WinnerSelectScreen';
 import HostBlackCardScreen from '../../screens/HostBlackCardScreen/HostBlackCardScreen';
+import HostRoundWinnerScreen from '../../screens/HostRoundWinnerScreen/HostRoundWinnerScreen';
+import HostGameOverScreen from '../../screens/HostGameOverScreen/HostGameOverScreen';
 
 const MockHostPregameScreen = () => <div data-testid="host-pregame-screen" />;
 jest.mock('../../screens/HostPregameScreen/HostPregameScreen.js', () => ({
@@ -23,6 +25,25 @@ const MockHostBlackCardScreen = () => (
   <div data-testid="host-blackcard-screen" />
 );
 jest.mock('../../screens/HostBlackCardScreen/HostBlackCardScreen.js', () => ({
+  __esModule: true,
+  default: jest.fn(),
+}));
+
+const MockHostRoundWinnerScreen = () => (
+  <div data-testid="host-round-winner-screen" />
+);
+jest.mock(
+  '../../screens/HostRoundWinnerScreen/HostRoundWinnerScreen.js',
+  () => ({
+    __esModule: true,
+    default: jest.fn(),
+  }),
+);
+
+const MockHostGameOverScreen = () => (
+  <div data-testid="host-game-over-screen" />
+);
+jest.mock('../../screens/HostGameOverScreen/HostGameOverScreen.js', () => ({
   __esModule: true,
   default: jest.fn(),
 }));
@@ -164,6 +185,42 @@ describe('Host screen controller', () => {
         );
 
         expect(screen.getByTestId('host-blackcard-screen')).toBeInTheDocument();
+      });
+    });
+
+    describe('showing-winning-cards', () => {
+      it('renders HostRoundWinnerScreen', () => {
+        HostRoundWinnerScreen.mockImplementation(MockHostRoundWinnerScreen);
+
+        const dispatch = jest.fn();
+        const state = { gameState: 'showing-winning-cards' };
+
+        render(
+          <HostContext.Provider value={{ state, dispatch }}>
+            <HostScreenController />
+          </HostContext.Provider>,
+        );
+
+        expect(
+          screen.getByTestId('host-round-winner-screen'),
+        ).toBeInTheDocument();
+      });
+    });
+
+    describe('game-over', () => {
+      it('renders HostGameOverScreen', () => {
+        HostGameOverScreen.mockImplementation(MockHostGameOverScreen);
+
+        const dispatch = jest.fn();
+        const state = { gameState: 'game-over' };
+
+        render(
+          <HostContext.Provider value={{ state, dispatch }}>
+            <HostScreenController />
+          </HostContext.Provider>,
+        );
+
+        expect(screen.getByTestId('host-game-over-screen')).toBeInTheDocument();
       });
     });
   });
