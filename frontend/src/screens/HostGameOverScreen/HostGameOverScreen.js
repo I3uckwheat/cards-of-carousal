@@ -147,7 +147,9 @@ function RightPanel() {
     <RightPanelWrapper>
       <h1 className="winner-display">
         <span className="prelude">And the winner is...</span>
-        <p className="title">{players[gameWinner].name}</p>
+        <p className="title" data-testid="winner-name">
+          {players[gameWinner].name}
+        </p>
       </h1>
 
       <p className="thanks-message">Thank you for playing!</p>
