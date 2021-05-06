@@ -204,7 +204,7 @@ function sendEndOfGameMessages({ gameWinner, playerIDs }) {
       gameState: 'showing-end-game-messages',
       message: {
         big: 'Loser 👎︎',
-        small: `Better to lose the game than your integrety`,
+        small: `Better to lose the game than your integrity`,
       },
     },
     recipients: losers,
