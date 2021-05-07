@@ -1,7 +1,5 @@
 import HostReducer from './HostReducer';
 
-jest.mock('./hostReducerMiddleware', () => jest.fn());
-
 describe('reducer', () => {
   beforeEach(() => {
     jest.spyOn(global.Math, 'random').mockReturnValue(0);
