@@ -3,6 +3,12 @@ import { act, render, screen } from '@testing-library/react';
 import socketInstance from '../../socket/socket';
 import HostProvider, { HostContext } from './HostContext';
 
+// Need to mock the Modal or createPortal errors are thrown: [Error: Target container is not a DOM element.]
+// eslint-disable-next-line react/prop-types
+jest.mock('../../components/Modal/Modal', () => ({ children }) => (
+  <div>{children}</div>
+));
+
 jest.mock('../../socket/socket', () => ({
   emitter: {
     on: jest.fn(),
@@ -264,23 +270,7 @@ describe('Context', () => {
     it('catches socket connection error events and updates the error state', () => {
       const { eventHandlers } = setupEmitterMocks();
 
-      const TestComponent = () => {
-        const { state } = useContext(HostContext);
-
-        return (
-          <>
-            <div data-testid="has-error">{state.error.hasError.toString()}</div>
-            <div data-testid="error-big">{state.error.message.bigText}</div>
-            <div data-testid="error-small">{state.error.message.smallText}</div>
-            <div data-testid="error-button">
-              {state.error.message.buttonText}
-            </div>
-            <div data-testid="error-callback">
-              {state.error.errorCallbackType}
-            </div>
-          </>
-        );
-      };
+      const TestComponent = () => <div />;
 
       render(
         <HostProvider>
@@ -295,15 +285,9 @@ describe('Context', () => {
         });
       });
 
-      expect(screen.getByTestId('has-error')).toHaveTextContent('true');
-      expect(screen.getByTestId('error-big')).toHaveTextContent('Socket error');
-      expect(screen.getByTestId('error-small')).toHaveTextContent(
-        'Please try again later',
-      );
-      expect(screen.getByTestId('error-button')).toHaveTextContent(
-        'Click anywhere to restart',
-      );
-      expect(screen.getByTestId('error-callback')).toHaveTextContent('RELOAD');
+      expect(screen.getByText('SOCKET ERROR')).toBeInTheDocument();
+      expect(screen.getByText('Please try again later')).toBeInTheDocument();
+      expect(screen.getByText('Click anywhere to restart')).toBeInTheDocument();
     });
   });
 });
