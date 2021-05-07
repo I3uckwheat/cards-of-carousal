@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import config from '../../config';
 import { HostContext } from '../../contexts/HostContext/HostContext';
 import HostLayout from '../../layouts/HostLayout';
 import PlayerList from '../../components/PlayerList/PlayerList';
@@ -152,7 +153,10 @@ function LeftPanel() {
 
   const handleClickStart = async () => {
     // check if there are any players and if packs are selected
-    if (playerIDs.length > 1 && state.gameSettings.selectedPacks.length) {
+    if (
+      playerIDs.length >= config.maxPlayers.min &&
+      state.gameSettings.selectedPacks.length
+    ) {
       const { selectedPacks } = state.gameSettings;
 
       dispatch({ type: 'GET_DECK', payload: {} });
@@ -187,7 +191,9 @@ function LeftPanel() {
       // The only failure cases here are:
       //  a) not enough players, or b) card packs aren't selected
       const errorString =
-        playerIDs.length > 1 ? 'no-card-packs-selected' : 'not-enough-players';
+        playerIDs.length > config.maxPlayers.min
+          ? 'no-card-packs-selected'
+          : 'not-enough-players';
 
       setError(errorString);
     }
