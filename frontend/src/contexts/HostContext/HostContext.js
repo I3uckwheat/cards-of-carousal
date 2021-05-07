@@ -1,4 +1,4 @@
-import React, { createContext, useEffect } from 'react';
+import React, { createContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import useReducerMiddleware from '../useReducerMiddleware';
@@ -6,6 +6,7 @@ import HostReducer from './HostReducer';
 import socketInstance from '../../socket/socket';
 import hostReducerMiddleware from './hostReducerMiddleware';
 import config from '../../config';
+import AlertModal from '../../components/Modal/AlertModal';
 
 const propTypes = {
   children: PropTypes.node.isRequired,
@@ -43,6 +44,8 @@ function HostProvider({ children }) {
     initialState,
   );
 
+  const [socketHasError, setSocketHasError] = useState(false);
+
   function handleMessage({ event, payload, sender }) {
     switch (event) {
       case 'player-connected':
@@ -73,19 +76,8 @@ function HostProvider({ children }) {
         });
 
       case 'socket-connection-error':
-        dispatch({ type: 'SET_LOBBY_ID', payload: { id: 'ERROR' } });
-        return dispatch({
-          type: 'SET_ERROR_STATE',
-          payload: {
-            hasError: true,
-            message: {
-              bigText: 'Socket error',
-              smallText: 'Please try again later',
-              buttonText: 'Click anywhere to restart',
-            },
-            errorCallbackType: 'RELOAD',
-          },
-        });
+        dispatch({ type: 'UPDATE_JOIN_CODE', payload: { lobbyID: 'ERROR' } });
+        return setSocketHasError(true);
 
       default:
         return undefined;
@@ -102,6 +94,13 @@ function HostProvider({ children }) {
   return (
     <HostContext.Provider value={{ state, dispatch }}>
       {children}
+      {socketHasError && (
+        <AlertModal
+          bigText="SOCKET ERROR"
+          smallText="Please try again later"
+          onClick={() => window.location.reload()}
+        />
+      )}
     </HostContext.Provider>
   );
 }
