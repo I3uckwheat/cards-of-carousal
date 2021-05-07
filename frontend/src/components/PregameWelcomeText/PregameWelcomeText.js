@@ -26,7 +26,7 @@ const StyledPregameWelcomeText = styled.div`
   }
 
   ol {
-    margin: 10px;
+    margin: 20px;
   }
 
   li {
@@ -38,6 +38,7 @@ const StyledPregameWelcomeText = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: center;
+    margin: 20px 0;
   }
 
   .snarkyText {
@@ -50,6 +51,7 @@ const StyledPregameWelcomeText = styled.div`
 function Welcome() {
   return (
     <>
+      <h2>Welcome! ¡Bienvenidos! Добро пожаловать!</h2>
       <p>Cards of Carousal is your grandma&apos;s favorite online card game!</p>
       <p>
         Imagine if your indecency and crude taste in jokes was an advantage in
@@ -58,8 +60,8 @@ function Welcome() {
       <p>
         Long and short of this deal; one person (the Czar of the round) reads
         the black card on this screen. Everyone else submits a white card trying
-        to be the Czar&apos;s favorite jester. More directions on the next page
-        if you&apos;re still confused.
+        to be the Czar&apos;s favorite jester. More directions on the following
+        pages if you&apos;re still confused.
       </p>
     </>
   );
@@ -72,7 +74,7 @@ function Setup() {
       <ol>
         <li>
           All players get on a voice chat together / gather around a tv with a
-          web browser if in person
+          web browser if in person (as if you have real life friends)
         </li>
         <li>
           One player streams this screen to all the others / has this on the
@@ -108,10 +110,15 @@ function Rules1() {
           Each round 1 player is selected as the Czar, and the other players
           will be jesters
         </li>
-        <li>A black card with a sentence will appear on this screen</li>
+        <li>
+          A black card with a sentence will appear on this screen. You might
+          think &quot;how could this card be funny&quot; but that&apos;s just
+          because you have no sense of humor
+        </li>
         <li>
           Jesters will each receive a hand of white cards with a unique
-          word/phrase
+          word/phrase. See above with regards to cards you don&apos;t think are
+          funny
         </li>
         <li>The Czar reads the text on the black card out loud</li>
         <li>
@@ -130,13 +137,18 @@ function Rules2() {
       <ol start="6">
         <li>
           The Czar reads each submission out loud, in the context of the black
-          card
+          card... yes every time Janet
         </li>
         <li>
           The Czar picks their favorite submission, the winning jester gets one
           point
         </li>
-        <li>Next player becomes Czar and a new round starts</li>
+        <li>
+          A different player becomes Czar and a new round starts. Just think of
+          it like you&apos;re in imperial Russia. TIP: if you start losing claim
+          a communist revolution and give everyone equal points. Except for you
+          of course, as the leader of the revolution you deserve more
+        </li>
         <div className="howToWin">
           <h3>The first player to reach the winning score wins!</h3>
           <p className="snarkyText">(duh)</p>
