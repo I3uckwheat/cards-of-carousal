@@ -94,16 +94,12 @@ async function getDeck({ selectedPacks }) {
   const queryString = selectedPacks.join(',');
   const query = `${apiURL}/deck/cards?packs=${queryString}`;
   const errorMessage = `Error fetching cards. Query: ${query}`;
-  try {
-    const cardsRequest = await fetch(query);
-    const cards = await cardsRequest.json();
-    if (cards.white.length) {
-      return cards;
-    }
-    throw new Error(errorMessage);
-  } catch {
-    throw new Error(errorMessage);
+  const cardsRequest = await fetch(query);
+  const cards = await cardsRequest.json();
+  if (cards.white.length) {
+    return cards;
   }
+  throw new Error(errorMessage);
 }
 
 function sendCardsToPlayers({ selectedBlackCard, players, playerIDs }) {
