@@ -98,6 +98,7 @@ function HostProvider({ children }) {
         <AlertModal
           bigText="SOCKET ERROR"
           smallText="Please try again later"
+          buttonText="Click anywhere to restart"
           onClick={() => window.location.reload()}
         />
       )}
