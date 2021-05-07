@@ -5,6 +5,12 @@ import renderer from 'react-test-renderer';
 import { HostContext } from '../../contexts/HostContext/HostContext';
 import HostPregameScreen from './HostPregameScreen';
 
+// Need to mock the Modal or createPortal errors are thrown: [Error: Target container is not a DOM element.]
+// eslint-disable-next-line react/prop-types
+jest.mock('../../components/Modal/Modal', () => ({ children }) => (
+  <div>{children}</div>
+));
+
 jest.mock('../../components/GameSettings/GameSettings', () => () => (
   <div data-testid="game-settings" />
 ));
@@ -291,8 +297,8 @@ describe('Host Pregame Screen', () => {
 
       userEvent.click(screen.getByText('START CAROUSING'));
 
-      // once for create lobby, once for the error message
-      expect(dispatch).toHaveBeenCalledTimes(2);
+      // once for create lobby
+      expect(dispatch).toHaveBeenCalledTimes(1);
       expect(dispatch).not.toHaveBeenCalledWith({
         type: 'SET_DECK',
         payload: { selectedPacks: state.gameSettings.selectedPacks },
@@ -305,18 +311,13 @@ describe('Host Pregame Screen', () => {
         type: 'SET_NEXT_CZAR',
         payload: {},
       });
-      expect(dispatch.mock.calls[1][0]).toEqual({
-        type: 'SET_ERROR_STATE',
-        payload: {
-          hasError: true,
-          message: {
-            bigText: 'Unable to start game',
-            smallText: 'No offense, but this game requires friends to play.',
-            buttonText: 'Click anywhere to continue',
-          },
-          errorCallbackType: 'RESET',
-        },
-      });
+      expect(screen.getByText('UNABLE TO START GAME')).toBeInTheDocument();
+      expect(
+        screen.getByText('No offense, but this game requires friends to play.'),
+      ).toBeInTheDocument();
+      expect(
+        screen.getByText('Click anywhere to continue'),
+      ).toBeInTheDocument();
     });
 
     it('alerts the host if no packs are selected when the start button is clicked', async () => {
@@ -369,8 +370,8 @@ describe('Host Pregame Screen', () => {
         userEvent.click(screen.getByText('START CAROUSING')),
       );
 
-      // once for create lobby, once for the error message
-      expect(dispatch).toHaveBeenCalledTimes(2);
+      // once for create lobby
+      expect(dispatch).toHaveBeenCalledTimes(1);
       expect(dispatch).not.toHaveBeenCalledWith({
         type: 'SET_DECK',
         payload: { selectedPacks: state.gameSettings.selectedPacks },
@@ -383,18 +384,13 @@ describe('Host Pregame Screen', () => {
         type: 'SET_NEXT_CZAR',
         payload: {},
       });
-      expect(dispatch.mock.calls[1][0]).toEqual({
-        type: 'SET_ERROR_STATE',
-        payload: {
-          hasError: true,
-          message: {
-            bigText: 'Unable to start game',
-            smallText: 'Please pick at least one card pack.',
-            buttonText: 'Click anywhere to continue',
-          },
-          errorCallbackType: 'RESET',
-        },
-      });
+      expect(screen.getByText('UNABLE TO START GAME')).toBeInTheDocument();
+      expect(
+        screen.getByText('Please pick at least one card pack.'),
+      ).toBeInTheDocument();
+      expect(
+        screen.getByText('Click anywhere to continue'),
+      ).toBeInTheDocument();
     });
 
     it('alerts the host if fetching cards has failed', async () => {
@@ -460,17 +456,9 @@ describe('Host Pregame Screen', () => {
         userEvent.click(screen.getByText('START CAROUSING'));
       });
 
-      expect(dispatch).toHaveBeenLastCalledWith({
-        type: 'SET_ERROR_STATE',
-        payload: {
-          hasError: true,
-          message: {
-            bigText: 'Unable to get card packs',
-            smallText: 'Failed to fetch',
-          },
-          errorCallbackType: 'RELOAD',
-        },
-      });
+      expect(screen.getByText('FAILED TO RETRIEVE CARDS')).toBeInTheDocument();
+      expect(screen.getByText('Please try again later')).toBeInTheDocument();
+      expect(screen.getByText('Click to restart')).toBeInTheDocument();
 
       errorSpy.mockRestore();
     });
