@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { HostContext } from '../../contexts/HostContext/HostContext';
 import LoadingIndicator from '../LoadingIndicator/LoadingIndicator';
 import config from '../../config';
+import AlertModal from '../Modal/AlertModal';
 
 const propTypes = {
   onChange: PropTypes.func.isRequired,
@@ -101,6 +102,7 @@ const StyledForm = styled.form`
 
 function GameSettings({ options, onChange }) {
   const [cardPacks, setCardPacks] = useState([]);
+  const [error, setError] = useState('');
   const { state, dispatch } = useContext(HostContext);
 
   async function getPackNames() {
@@ -118,18 +120,7 @@ function GameSettings({ options, onChange }) {
       const packNames = await getPackNames();
       return setCardPacks(packNames);
     } catch {
-      return dispatch({
-        type: 'SET_ERROR_STATE',
-        payload: {
-          hasError: true,
-          message: {
-            bigText: 'Server error',
-            smallText: 'Failed to fetch packs',
-            buttonText: 'Click anywhere to restart',
-          },
-          errorCallbackType: 'RELOAD',
-        },
-      });
+      return setError('failed-to-fetch-packs');
     }
   }, []);
 
@@ -227,6 +218,14 @@ function GameSettings({ options, onChange }) {
           )}
         </div>
       </StyledForm>
+      {error && (
+        <AlertModal
+          bigText="Failed to get card packs"
+          smallText="Please try again later"
+          buttonText="Click anywhere to restart"
+          onClick={() => window.location.reload()}
+        />
+      )}
     </StyledGameSettings>
   );
 }
