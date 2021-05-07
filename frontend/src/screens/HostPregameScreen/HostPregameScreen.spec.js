@@ -34,11 +34,7 @@ describe('Host Pregame Screen', () => {
     playerIDs: [],
     gameSettings: { maxPlayers: 8, winningScore: 7, selectedPacks: [] },
     loading: [],
-    error: {
-      hasError: false,
-      message: { bigText: '', smallText: '', buttonText: '' },
-      errorCallbackType: 'RELOAD',
-    },
+    newPlayerStaging: [],
   };
 
   afterEach(() => {
@@ -50,11 +46,7 @@ describe('Host Pregame Screen', () => {
       playerIDs: [],
       gameSettings: { maxPlayers: 8, winningScore: 7, selectedPacks: [] },
       loading: [],
-      error: {
-        hasError: false,
-        message: { bigText: '', smallText: '', buttonText: '' },
-        errorCallbackType: 'RELOAD',
-      },
+      newPlayerStaging: [],
     };
     setupFetchMock();
   });
@@ -198,30 +190,8 @@ describe('Host Pregame Screen', () => {
       state = {
         gameState: 'waiting-for-lobby',
         lobbyID: '',
-        players: {
-          foo: {
-            name: 'Bender',
-            score: 0,
-            isCzar: false,
-            submittedCards: [],
-            cards: [],
-          },
-          bar: {
-            name: 'Briggs',
-            score: 0,
-            isCzar: false,
-            submittedCards: [],
-            cards: [],
-          },
-          baz: {
-            name: 'Pedro',
-            score: 0,
-            isCzar: false,
-            submittedCards: [],
-            cards: [],
-          },
-        },
-        playerIDs: ['foo', 'bar', 'baz'],
+        players: {},
+        playerIDs: [],
         gameSettings: {
           maxPlayers: 8,
           winningScore: 7,
@@ -230,11 +200,32 @@ describe('Host Pregame Screen', () => {
         deck: { black: [], white: [] },
         selectedBlackCard: { text: 'test', pick: 1 },
         loading: [],
-        error: {
-          hasError: false,
-          message: { bigText: '', smallText: '', buttonText: '' },
-          errorCallbackType: 'RELOAD',
-        },
+        newPlayerStaging: [
+          {
+            playerId: 'foo',
+            name: 'Bender',
+            score: 0,
+            isCzar: false,
+            submittedCards: [],
+            cards: [],
+          },
+          {
+            playerId: 'bar',
+            name: 'Briggs',
+            score: 0,
+            isCzar: false,
+            submittedCards: [],
+            cards: [],
+          },
+          {
+            playerId: 'baz',
+            name: 'Pedro',
+            score: 0,
+            isCzar: false,
+            submittedCards: [],
+            cards: [],
+          },
+        ],
       };
 
       render(
@@ -248,7 +239,7 @@ describe('Host Pregame Screen', () => {
       );
 
       // create lobby, get deck, set game state, set new czar, select black card, deal white cards
-      expect(dispatch).toHaveBeenCalledTimes(7);
+      expect(dispatch).toHaveBeenCalledTimes(8);
       expect(dispatch).toHaveBeenNthCalledWith(2, {
         type: 'GET_DECK',
         payload: {},
@@ -258,18 +249,22 @@ describe('Host Pregame Screen', () => {
         payload: { selectedPacks: state.gameSettings.selectedPacks },
       });
       expect(dispatch).toHaveBeenNthCalledWith(4, {
-        type: 'START_GAME',
+        type: 'ADD_PLAYERS_FROM_STAGING',
         payload: {},
       });
       expect(dispatch).toHaveBeenNthCalledWith(5, {
-        type: 'SET_NEXT_CZAR',
+        type: 'START_GAME',
         payload: {},
       });
       expect(dispatch).toHaveBeenNthCalledWith(6, {
-        type: 'SELECT_BLACK_CARD',
+        type: 'SET_NEXT_CZAR',
         payload: {},
       });
       expect(dispatch).toHaveBeenNthCalledWith(7, {
+        type: 'SELECT_BLACK_CARD',
+        payload: {},
+      });
+      expect(dispatch).toHaveBeenNthCalledWith(8, {
         type: 'DEAL_WHITE_CARDS',
         payload: {},
       });
@@ -318,38 +313,37 @@ describe('Host Pregame Screen', () => {
       state = {
         gameState: 'waiting-for-lobby',
         lobbyID: '',
-        players: {
-          foo: {
+        players: {},
+        playerIDs: [],
+        gameSettings: { maxPlayers: 8, winningScore: 7, selectedPacks: [] },
+        deck: { black: [], white: [] },
+        loading: [],
+        newPlayerStaging: [
+          {
+            playerId: 'foo',
             name: 'Bender',
             score: 0,
             isCzar: false,
             submittedCards: [],
             cards: [],
           },
-          bar: {
+          {
+            playerId: 'bar',
             name: 'Briggs',
             score: 0,
             isCzar: false,
             submittedCards: [],
             cards: [],
           },
-          baz: {
+          {
+            playerId: 'baz',
             name: 'Pedro',
             score: 0,
             isCzar: false,
             submittedCards: [],
             cards: [],
           },
-        },
-        playerIDs: ['foo', 'bar', 'baz'],
-        gameSettings: { maxPlayers: 8, winningScore: 7, selectedPacks: [] },
-        deck: { black: [], white: [] },
-        loading: [],
-        error: {
-          hasError: false,
-          message: { bigText: '', smallText: '', buttonText: '' },
-          errorCallbackType: 'RELOAD',
-        },
+        ],
       };
 
       render(
@@ -400,30 +394,8 @@ describe('Host Pregame Screen', () => {
       state = {
         gameState: 'waiting-for-lobby',
         lobbyID: '',
-        players: {
-          foo: {
-            name: 'Bender',
-            score: 0,
-            isCzar: false,
-            submittedCards: [],
-            cards: [],
-          },
-          bar: {
-            name: 'Briggs',
-            score: 0,
-            isCzar: false,
-            submittedCards: [],
-            cards: [],
-          },
-          baz: {
-            name: 'Pedro',
-            score: 0,
-            isCzar: false,
-            submittedCards: [],
-            cards: [],
-          },
-        },
-        playerIDs: ['foo', 'bar', 'baz'],
+        players: {},
+        playerIDs: [],
         gameSettings: {
           maxPlayers: 8,
           winningScore: 7,
@@ -431,11 +403,32 @@ describe('Host Pregame Screen', () => {
         },
         deck: { black: [], white: [] },
         loading: [],
-        error: {
-          hasError: false,
-          message: { bigText: '', smallText: '', buttonText: '' },
-          errorCallbackType: 'RELOAD',
-        },
+        newPlayerStaging: [
+          {
+            playerId: 'foo',
+            name: 'Bender',
+            score: 0,
+            isCzar: false,
+            submittedCards: [],
+            cards: [],
+          },
+          {
+            playerId: 'bar',
+            name: 'Briggs',
+            score: 0,
+            isCzar: false,
+            submittedCards: [],
+            cards: [],
+          },
+          {
+            playerId: 'baz',
+            name: 'Pedro',
+            score: 0,
+            isCzar: false,
+            submittedCards: [],
+            cards: [],
+          },
+        ],
       };
 
       render(

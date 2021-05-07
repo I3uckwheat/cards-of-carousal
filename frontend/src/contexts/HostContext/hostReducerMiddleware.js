@@ -9,17 +9,28 @@ function createLobby() {
   socketInstance.createLobby();
 }
 
-function sendPlayerConnectedMessage(payload) {
+function sendPlayerConnectedMessages(payload) {
+  socketInstance.sendMessage({
+    event: 'update',
+    recipients: payload.players,
+    payload: {
+      gameState: 'connected',
+      message: payload.message,
+      removeLoading: 'joining-lobby',
+    },
+  });
+}
+
+function playerConnected(payload) {
   socketInstance.sendMessage({
     event: 'update',
     recipients: [payload.playerId],
     payload: {
       gameState: 'connected',
       message: {
-        big: "You've joined the lobby",
-        small: 'Please wait for the host to start the game',
+        big: 'Attempting to join lobby',
+        small: 'Please wait',
       },
-      removeLoading: 'joining-lobby',
     },
   });
 }
@@ -199,8 +210,11 @@ export default async function hostReducerMiddleware(
       break;
 
     case 'PLAYER_CONNECTED':
-      sendPlayerConnectedMessage(payload);
+      playerConnected(payload);
       break;
+
+    case 'SEND_PLAYER_CONNECTED_MESSAGES':
+      return sendPlayerConnectedMessages(payload);
 
     case 'PLAYER_SUBMIT':
       sendCardsSubmittedMessage(payload);
@@ -233,6 +247,7 @@ export default async function hostReducerMiddleware(
       notifyCzar(payload);
       break;
 
+    case 'SKIP_UNSUBMITTED_PLAYERS':
     case 'CZAR_SELECT_WINNER':
       czarSelectWinner(payload);
       break;

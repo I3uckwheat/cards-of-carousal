@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import { PlayerContext } from '../../contexts/PlayerContext/PlayerContext';
 
 import Button from '../../components/Buttons/Button';
-import Header from '../../components/Header/Header';
 
 const propTypes = {
   title: PropTypes.shape({
@@ -28,14 +27,46 @@ const LayoutContainer = styled.div`
   display: flex;
   flex-direction: column;
 
-  .header-container {
+  .card-container {
     display: flex;
-    justify-content: space-between;
+    max-width: 100%;
+    margin: auto 0 auto 0;
+    overflow: auto;
+    padding-left: 20px;
   }
 
+  .card-container > * {
+    margin-right: 20px;
+    flex-shrink: 0;
+  }
+
+  @media (min-height: 640px) and (min-width: 650px) {
+    .card-container {
+      flex-wrap: wrap;
+      justify-content: center;
+      padding-top: 40px;
+    }
+
+    .card-container > * {
+      margin-bottom: 40px;
+    }
+  }
+`;
+
+const Header = styled.header`
+  width: 100%;
+  min-height: 85px;
+  background-color: var(--secondary-background-color);
+  color: var(--secondary-text-color);
+
+  display: flex;
+  justify-content: space-between;
+
   .header-txt {
-    margin: 10px 70px -10px -2px;
-    line-height: 2.5rem;
+    margin: 10px 25px -6px -2px;
+    line-height: 200%;
+    align-self: flex-end;
+    font-size: 18px;
   }
 
   h1 span {
@@ -57,42 +88,34 @@ const LayoutContainer = styled.div`
     border: none;
   }
 
-  .card-container {
-    display: flex;
-    max-width: 100%;
-    margin: auto 0 auto 0;
-    overflow: auto;
-    padding-left: 20px;
-  }
-
-  .card-container > * {
-    margin-right: 20px;
-    flex-shrink: 0;
-  }
-
-  @media (min-height: 640px) {
-    .header-container {
-      height: 100px;
-    }
+  @media (min-height: 640px) and (min-width: 650px) {
+    min-height: 100px;
 
     .header-txt {
-      margin: 26px 70px 0px -2px;
-      line-height: 2.5rem;
+      margin: 26px 70px -7px -2px;
       font-size: 1.3rem;
-    }
-
-    .card-container {
-      flex-wrap: wrap;
-      justify-content: center;
-      padding-top: 40px;
-    }
-
-    .card-container > * {
-      margin-bottom: 40px;
     }
 
     .button-container {
       margin-right: 40px;
+    }
+  }
+
+  @media (max-width: 396px) {
+    .header-txt {
+      margin: 10px;
+      margin-left: 0;
+      font-size: 12px;
+      margin-bottom: -4px;
+    }
+  }
+
+  @media (min-width: 397px) and (max-width: 500px) {
+    .header-txt {
+      margin: 10px;
+      margin-left: 0;
+      font-size: 18px;
+      margin-bottom: -7px;
     }
   }
 `;

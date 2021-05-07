@@ -83,12 +83,12 @@ const WhiteCardWrapper = styled.div`
 
 function LeftPanel() {
   const { state } = useContext(HostContext);
-  const { players, playerIDs, lobbyID } = state;
+  const { lobbyID } = state;
 
   return (
     <LeftPanelWrapper>
       <div className="player-list-wrapper">
-        <PlayerList playerList={{ players, playerIDs }} />
+        <PlayerList />
       </div>
       <div className="bottom-left-wrapper">
         <div className="join-code-wrapper">
@@ -123,8 +123,9 @@ function RightPanel() {
 
       <WhiteCardWrapper columns={winner.submittedCards.length}>
         {winner.submittedCards.map((card) => (
-          <WhiteCard key={winner.cards[card].text}>
-            {winner.cards[card].text}
+          <WhiteCard key={card}>
+            {/* When round changes, the card may become undefined temporarily resulting in an error */}
+            {winner.cards[card] && winner.cards[card].text}
           </WhiteCard>
         ))}
       </WhiteCardWrapper>
@@ -133,6 +134,8 @@ function RightPanel() {
 }
 
 function startNextRound(dispatch) {
+  dispatch({ type: 'ADD_PLAYERS_FROM_STAGING', payload: {} });
+
   dispatch({ type: 'REMOVE_SUBMITTED_CARDS_FROM_PLAYER', payload: {} });
 
   dispatch({ type: 'SET_NEXT_CZAR', payload: {} });

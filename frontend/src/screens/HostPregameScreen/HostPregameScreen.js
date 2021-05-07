@@ -148,13 +148,14 @@ ErrorHandler.propTypes = errorHandlerPropTypes;
 
 function LeftPanel() {
   const { state, dispatch } = useContext(HostContext);
-  const { players, playerIDs, lobbyID } = state;
+  const { lobbyID, newPlayerStaging } = state;
+
   const [error, setError] = useState('');
 
   const handleClickStart = async () => {
     // check if there are any players and if packs are selected
     if (
-      playerIDs.length >= config.maxPlayers.min &&
+      newPlayerStaging.length > config.maxPlayers.min &&
       state.gameSettings.selectedPacks.length
     ) {
       const { selectedPacks } = state.gameSettings;
@@ -166,23 +167,20 @@ function LeftPanel() {
           type: 'SET_DECK',
           payload: { selectedPacks },
         });
-
-        dispatch({
+        dispatch({ type: 'ADD_PLAYERS_FROM_STAGING', payload: {} });
+        await dispatch({
           type: 'START_GAME',
           payload: {},
         });
-
-        dispatch({
+        await dispatch({
           type: 'SET_NEXT_CZAR',
           payload: {},
         });
-
-        dispatch({
+        await dispatch({
           type: 'SELECT_BLACK_CARD',
           payload: {},
         });
-
-        dispatch({ type: 'DEAL_WHITE_CARDS', payload: {} });
+        await dispatch({ type: 'DEAL_WHITE_CARDS', payload: {} });
       } catch (err) {
         // The only cause of an error here would be a failure to retrieve card packs
         setError('error-getting-cards');
@@ -191,7 +189,7 @@ function LeftPanel() {
       // The only failure cases here are:
       //  a) not enough players, or b) card packs aren't selected
       const errorString =
-        playerIDs.length > config.maxPlayers.min
+        newPlayerStaging.length > config.maxPlayers.min
           ? 'no-card-packs-selected'
           : 'not-enough-players';
 
@@ -207,7 +205,7 @@ function LeftPanel() {
   return (
     <LeftPanelWrapper>
       <div className="player-list-wrapper">
-        <PlayerList playerList={{ players, playerIDs }} />
+        <PlayerList />
       </div>
       <div className="bottom-left-wrapper">
         <div className="buttons-wrapper">

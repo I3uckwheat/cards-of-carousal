@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SkipPlayerButton rendering matches the snapshot 1`] = `
+<button
+  data-is-enabled={false}
+  data-testid="option-button"
+  onClick={[Function]}
+  type="button"
+>
+  SKIP UNSUBMITTED PLAYERS
+</button>
+`;

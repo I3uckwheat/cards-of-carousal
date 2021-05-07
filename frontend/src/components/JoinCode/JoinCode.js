@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import LoadingIndicator from '../LoadingIndicator/LoadingIndicator';
+import { HostContext } from '../../contexts/HostContext/HostContext';
 
 const propType = {
   loading: PropTypes.bool,
@@ -40,11 +41,15 @@ const JoinCodeComponent = styled.div`
 `;
 
 function DisplayJoinCode({ loading, code }) {
+  const { state } = useContext(HostContext);
+  const hidden = state.gameSettings.hideJoinCode;
+
   return (
     <JoinCodeComponent>
       <p className="join-code-title">JOIN CODE:</p>
       <div className="join-code" data-testid="join-code">
-        {loading || !code ? <LoadingIndicator secondary /> : <p>{code}</p>}
+        {!hidden &&
+          (loading || !code ? <LoadingIndicator secondary /> : <p>{code}</p>)}
       </div>
     </JoinCodeComponent>
   );
