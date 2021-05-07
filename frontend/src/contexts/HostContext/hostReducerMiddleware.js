@@ -196,7 +196,7 @@ function czarSelectWinner({ players, playerIDs }) {
 
 function sendTooManyPlayersMessage(payload) {
   socketInstance.sendMessage({
-    recipients: [payload.playerId],
+    recipients: [payload.player],
     event: 'update',
     payload: {
       gameState: 'error',

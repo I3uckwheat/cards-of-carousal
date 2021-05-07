@@ -345,6 +345,16 @@ function toggleJoinCode(state) {
   };
 }
 
+function removeLastPlayerFromStaging(state) {
+  return {
+    ...state,
+    newPlayerStaging: state.newPlayerStaging.slice(
+      0,
+      state.newPlayerStaging.length - 1,
+    ),
+  };
+}
+
 function HostReducer(state, action) {
   const { type, payload } = action;
   switch (type) {
@@ -417,6 +427,9 @@ function HostReducer(state, action) {
 
     case 'TOGGLE_JOIN_CODE_VISIBILITY':
       return toggleJoinCode(state);
+
+    case 'TOO_MANY_PLAYERS':
+      return removeLastPlayerFromStaging(state);
 
     default:
       return { ...state };
