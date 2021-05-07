@@ -215,7 +215,7 @@ describe('socketInstance', () => {
     });
 
     describe('close', () => {
-      it('emits a message event with the proper payload', () => {
+      it('emits a message event when the error code represents a normal socket close', () => {
         const message = { event: 'socket-close', payload: {} };
         const { eventCallbacks } = setupMockSocket();
         const spy = jest.spyOn(socketInstance.emitter, 'emit');
