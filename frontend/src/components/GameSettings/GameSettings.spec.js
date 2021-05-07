@@ -5,6 +5,10 @@ import GameSettings from './GameSettings';
 import { HostContext } from '../../contexts/HostContext/HostContext';
 import config from '../../config';
 
+// Need to mock the Modal or createPortal errors are thrown: [Error: Target container is not a DOM element.]
+// eslint-disable-next-line react/prop-types
+jest.mock('../Modal/Modal', () => ({ children }) => <div>{children}</div>);
+
 function setupFetchMock(jsonValue = ['hello', 'world']) {
   jest.spyOn(window, 'fetch').mockImplementation(async () => ({
     json: async () => jsonValue,
@@ -136,10 +140,12 @@ describe('GameSettings', () => {
     });
 
     it('dispatches an error if the fetch fails', async () => {
-      jest.spyOn(window, 'fetch').mockImplementationOnce(async () => ({
-        json: async () => new Error('Failed to fetch'),
-        ok: false,
-      }));
+      const fetchSpy = jest
+        .spyOn(window, 'fetch')
+        .mockImplementation(async () => ({
+          json: async () => new Error('Failed to fetch'),
+          ok: false,
+        }));
 
       const dispatch = jest.fn();
       const onChange = () => {};
@@ -155,20 +161,13 @@ describe('GameSettings', () => {
         </HostContext.Provider>,
       );
 
-      await waitFor(() => expect(window.fetch).toHaveBeenCalledTimes(1));
+      await waitFor(() => expect(fetchSpy).toHaveBeenCalledTimes(1));
 
-      expect(dispatch).toHaveBeenCalledWith({
-        type: 'SET_ERROR_STATE',
-        payload: {
-          hasError: true,
-          message: {
-            bigText: 'Server error',
-            smallText: 'Failed to fetch packs',
-            buttonText: 'Click anywhere to restart',
-          },
-          errorCallbackType: 'RELOAD',
-        },
-      });
+      expect(screen.getByText('FAILED TO GET CARD PACKS')).toBeInTheDocument();
+      expect(screen.getByText('Please try again later')).toBeInTheDocument();
+      expect(screen.getByText('Click anywhere to restart')).toBeInTheDocument();
+
+      fetchSpy.mockRestore();
     });
   });
 
