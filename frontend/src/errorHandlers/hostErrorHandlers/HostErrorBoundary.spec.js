@@ -1,9 +1,8 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import HostErrorBoundary from './HostErrorBoundary';
-// import AlertModal from '../../components/modals/AlertModal/AlertModal'
 
-jest.mock('../../components/modals/AlertModal/AlertModal.js', () => ({
+jest.mock('../../components/Modal/AlertModal.js', () => ({
   __esModule: true,
   default: () => <div data-testid="alert-modal">Error Modal</div>,
 }));

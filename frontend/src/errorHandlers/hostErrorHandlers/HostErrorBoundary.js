@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import AlertModal from '../../components/modals/AlertModal/AlertModal';
+import AlertModal from '../../components/Modal/AlertModal';
 import Modal from '../../components/Modal/Modal';
 
 const propTypes = {
