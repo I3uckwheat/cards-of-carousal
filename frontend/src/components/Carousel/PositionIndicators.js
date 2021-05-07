@@ -32,7 +32,7 @@ function PositionIndicators({ slides, currentIndex, selectThisSlide }) {
           key={slide.type.name}
         >
           <img
-            src={slides[index] === slides[currentIndex] ? blackCard : whiteCard}
+            src={index === currentIndex ? blackCard : whiteCard}
             alt="positionIndicator"
           />
         </button>
