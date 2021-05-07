@@ -289,5 +289,29 @@ describe('Context', () => {
       expect(screen.getByText('Please try again later')).toBeInTheDocument();
       expect(screen.getByText('Click anywhere to restart')).toBeInTheDocument();
     });
+
+    it('sends a vanity message to the join code component when an error occurs', () => {
+      const { eventHandlers } = setupEmitterMocks();
+
+      const TestComponent = () => {
+        const { state } = useContext(HostContext);
+        return <div data-testid="join-code">{state.lobbyID}</div>;
+      };
+
+      render(
+        <HostProvider>
+          <TestComponent />
+        </HostProvider>,
+      );
+
+      act(() => {
+        eventHandlers.message({
+          event: 'socket-connection-error',
+          payload: {},
+        });
+      });
+
+      expect(screen.getByTestId('join-code')).toHaveTextContent('ERROR');
+    });
   });
 });

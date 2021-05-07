@@ -28,11 +28,6 @@ const initialState = {
   },
   deck: { black: [], white: [] },
   loading: [],
-  error: {
-    hasError: false,
-    message: { bigText: '', smallText: '', buttonText: '' },
-    errorCallbackType: '',
-  },
 };
 
 export const HostContext = createContext();
