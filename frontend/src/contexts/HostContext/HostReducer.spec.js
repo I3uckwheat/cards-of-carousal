@@ -136,25 +136,6 @@ describe('reducer', () => {
       expect(result.players['example-player-id'].submittedCards.length).toBe(1);
       expect(result.players['example-player-id'].submittedCards[0]).toBe(0);
     });
-
-    it('does not let players join when maxPlayer limit has been reached', () => {
-      const state = {
-        players: { foo: { id: 'foo' }, bar: { id: 'bar' }, baz: { id: 'baz' } },
-        playerIDs: ['foo', 'bar', 'baz'],
-        gameSettings: {
-          maxPlayers: 3,
-        },
-      };
-
-      const result = HostReducer(state, {
-        type: 'PLAYER_CONNECTED',
-        payload: { playerId: 'example-player-id' },
-      });
-
-      expect(Object.values(result.players).length).toBe(
-        state.gameSettings.maxPlayers,
-      );
-    });
   });
 
   describe('PLAYER_DISCONNECTED', () => {

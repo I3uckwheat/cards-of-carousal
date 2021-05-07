@@ -1,5 +1,3 @@
-import hostReducerMiddleware from './hostReducerMiddleware';
-
 function createLobby(state) {
   return {
     ...state,
@@ -24,18 +22,6 @@ function packsReceived(state) {
 }
 
 function playerConnected(state, { playerId, playerName }) {
-  if (Object.values(state.players).length >= state.gameSettings.maxPlayers) {
-    hostReducerMiddleware(
-      {
-        type: 'TOO_MANY_PLAYERS',
-        payload: { playerId },
-      },
-      () => {},
-    );
-
-    return state;
-  }
-
   return {
     ...state,
     players: {
