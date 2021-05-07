@@ -145,14 +145,8 @@ describe('Context', () => {
             <div data-testid="lobby-id">{state.lobbyID}</div>
 
             <div>
-              {Object.keys(state.players).map(() => (
-                <span data-testid="player" />
-              ))}
-            </div>
-
-            <div>
-              {state.playerIDs.map(() => (
-                <span data-testid="playerID" />
+              {state.newPlayerStaging.map(() => (
+                <span data-testid="player-staging" />
               ))}
             </div>
           </>
@@ -167,8 +161,7 @@ describe('Context', () => {
         </HostProvider>,
       );
 
-      expect(screen.queryAllByTestId('player').length).toBe(0);
-      expect(screen.queryAllByTestId('playerID').length).toBe(0);
+      expect(screen.queryAllByTestId('player-staging').length).toBe(0);
 
       act(() => {
         eventHandlers.message({
@@ -177,13 +170,113 @@ describe('Context', () => {
         });
       });
 
-      expect(screen.queryAllByTestId('player').length).toBe(1);
-      expect(screen.queryAllByTestId('playerID').length).toBe(1);
+      expect(screen.queryAllByTestId('player-staging').length).toBe(1);
+    });
+
+    it('tells the middleware to tell the player to wait while they join the lobby', () => {
+      const TestComponent = () => {
+        const { state, dispatch } = useContext(HostContext);
+
+        useEffect(() => {
+          dispatch({
+            type: 'CREATE_LOBBY',
+            payload: {},
+          });
+        }, []);
+
+        return (
+          <>
+            <div data-testid="game-state">{state.gameState}</div>
+            <div data-testid="lobby-id">{state.lobbyID}</div>
+
+            <div>
+              {state.newPlayerStaging.map((player) => (
+                <span key={player} data-testid="player-staging" />
+              ))}
+            </div>
+          </>
+        );
+      };
+
+      const { eventHandlers } = setupEmitterMocks();
+
+      render(
+        <HostProvider>
+          <TestComponent />
+        </HostProvider>,
+      );
+
+      expect(screen.queryAllByTestId('player-staging').length).toBe(0);
+
+      act(() => {
+        eventHandlers.message({
+          event: 'player-connected',
+          payload: { playerId: 'TEST' },
+        });
+      });
+
+      expect(socketInstance.sendMessage).toHaveBeenCalledWith({
+        event: 'update',
+        recipients: ['TEST'],
+        payload: {
+          gameState: 'connected',
+          message: {
+            big: 'Attempting to join lobby',
+            small: 'Please wait',
+          },
+        },
+      });
+    });
+
+    it('tells the middleware the player joined mid round if the game state is not waiting-for-players', () => {
+      const TestComponent = () => {
+        const { dispatch } = useContext(HostContext);
+
+        useEffect(() => {
+          dispatch({ type: 'DEAL_WHITE_CARDS', payload: {} });
+        }, []);
+
+        return <div />;
+      };
+
+      const { eventHandlers } = setupEmitterMocks();
+
+      render(
+        <HostProvider>
+          <TestComponent />
+        </HostProvider>,
+      );
+
+      act(() => {
+        eventHandlers.message({
+          event: 'player-connected',
+          payload: { playerId: 'TEST' },
+        });
+      });
+
+      expect(socketInstance.sendMessage).toHaveBeenCalledWith({
+        event: 'update',
+        recipients: ['TEST'],
+        payload: {
+          gameState: 'connected',
+          message: {
+            big: 'A round is in progress',
+            small: 'You will join the next round automatically',
+          },
+          removeLoading: 'joining-lobby',
+        },
+      });
     });
 
     it('catches player-disconnected events and dispatches its respective action', () => {
       const TestComponent = () => {
-        const { state } = useContext(HostContext);
+        const { state, dispatch } = useContext(HostContext);
+
+        useEffect(() => {
+          if (state.newPlayerStaging.length) {
+            dispatch({ type: 'ADD_PLAYERS_FROM_STAGING', payload: {} });
+          }
+        }, [state.newPlayerStaging]);
 
         return (
           <>

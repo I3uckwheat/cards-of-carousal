@@ -37,12 +37,6 @@ exports[`PlayerHandScreen snapshot matches 1`] = `
   cursor: pointer;
 }
 
-.c1 {
-  width: 100%;
-  background-color: var(--secondary-background-color);
-  color: var(--secondary-text-color);
-}
-
 .c0 {
   position: absolute;
   top: 0;
@@ -57,49 +51,6 @@ exports[`PlayerHandScreen snapshot matches 1`] = `
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
-}
-
-.c0 .header-container {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-}
-
-.c0 .header-txt {
-  margin: 10px 70px -10px -2px;
-  line-height: 2.5rem;
-}
-
-.c0 h1 span {
-  display: block;
-}
-
-.c0 .button-container {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
-.c0 .button {
-  text-align: center;
-  padding: 0 10px 0 10px;
-  height: 30px;
-  width: 90px;
-  margin-right: 15px;
-  border: none;
 }
 
 .c0 .card-container {
@@ -118,6 +69,57 @@ exports[`PlayerHandScreen snapshot matches 1`] = `
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
+}
+
+.c1 {
+  width: 100%;
+  min-height: 85px;
+  background-color: var(--secondary-background-color);
+  color: var(--secondary-text-color);
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+
+.c1 .header-txt {
+  margin: 10px 25px -6px -2px;
+  line-height: 200%;
+  -webkit-align-self: flex-end;
+  -ms-flex-item-align: end;
+  align-self: flex-end;
+  font-size: 18px;
+}
+
+.c1 h1 span {
+  display: block;
+}
+
+.c1 .button-container {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c1 .button {
+  text-align: center;
+  padding: 0 10px 0 10px;
+  height: 30px;
+  width: 90px;
+  margin-right: 15px;
+  border: none;
 }
 
 .c5 {
@@ -208,17 +210,7 @@ exports[`PlayerHandScreen snapshot matches 1`] = `
   font-weight: 600;
 }
 
-@media (min-height:640px) {
-  .c0 .header-container {
-    height: 100px;
-  }
-
-  .c0 .header-txt {
-    margin: 26px 70px 0px -2px;
-    line-height: 2.5rem;
-    font-size: 1.3rem;
-  }
-
+@media (min-height:640px) and (min-width:650px) {
   .c0 .card-container {
     -webkit-flex-wrap: wrap;
     -ms-flex-wrap: wrap;
@@ -233,9 +225,38 @@ exports[`PlayerHandScreen snapshot matches 1`] = `
   .c0 .card-container > * {
     margin-bottom: 40px;
   }
+}
 
-  .c0 .button-container {
+@media (min-height:640px) and (min-width:650px) {
+  .c1 {
+    min-height: 100px;
+  }
+
+  .c1 .header-txt {
+    margin: 26px 70px -7px -2px;
+    font-size: 1.3rem;
+  }
+
+  .c1 .button-container {
     margin-right: 40px;
+  }
+}
+
+@media (max-width:396px) {
+  .c1 .header-txt {
+    margin: 10px;
+    margin-left: 0;
+    font-size: 12px;
+    margin-bottom: -4px;
+  }
+}
+
+@media (min-width:397px) and (max-width:500px) {
+  .c1 .header-txt {
+    margin: 10px;
+    margin-left: 0;
+    font-size: 18px;
+    margin-bottom: -7px;
   }
 }
 
