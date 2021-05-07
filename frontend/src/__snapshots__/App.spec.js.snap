@@ -542,12 +542,6 @@ exports[`App snapshots should show the host screen after user has clicked the "h
   cursor: pointer;
 }
 
-.c2 {
-  width: 100%;
-  background-color: var(--secondary-background-color);
-  color: var(--secondary-text-color);
-}
-
 .c0 {
   position: absolute;
   top: 0;
@@ -622,6 +616,12 @@ exports[`App snapshots should show the host screen after user has clicked the "h
   -ms-flex-positive: 1;
   flex-grow: 1;
   position: relative;
+}
+
+.c2 {
+  width: 100%;
+  background-color: var(--secondary-background-color);
+  color: var(--secondary-text-color);
 }
 
 .c4 {

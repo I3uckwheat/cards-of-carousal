@@ -11,12 +11,6 @@ exports[`Host Pregame Screen rendering renders 1`] = `
   cursor: pointer;
 }
 
-.c2 {
-  width: 100%;
-  background-color: var(--secondary-background-color);
-  color: var(--secondary-text-color);
-}
-
 .c0 {
   position: absolute;
   top: 0;
@@ -91,6 +85,12 @@ exports[`Host Pregame Screen rendering renders 1`] = `
   -ms-flex-positive: 1;
   flex-grow: 1;
   position: relative;
+}
+
+.c2 {
+  width: 100%;
+  background-color: var(--secondary-background-color);
+  color: var(--secondary-text-color);
 }
 
 .c4 {
