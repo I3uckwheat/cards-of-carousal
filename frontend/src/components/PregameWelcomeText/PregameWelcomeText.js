@@ -136,9 +136,9 @@ function Setup() {
           shared screen
         </li>
         <li>
-          All players go to this site in a web browser, hit the join button, and
-          input the &quot;JOIN CODE&quot; shown in the bottom left of this
-          screen
+          All players go to cardsofcarousal.com in a web browser, hit the join
+          button, and input the &quot;JOIN CODE&quot; shown in the bottom left
+          of this screen
         </li>
         <li>
           The host selects the card packs to play with, what the winning score
