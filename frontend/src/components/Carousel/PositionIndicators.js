@@ -33,7 +33,11 @@ function PositionIndicators({ slides, currentIndex, selectThisSlide }) {
         >
           <img
             src={index === currentIndex ? blackCard : whiteCard}
-            alt="positionIndicator"
+            alt={
+              index === currentIndex
+                ? 'active position indicator'
+                : 'inactive position indicator'
+            }
           />
         </button>
       ))}
