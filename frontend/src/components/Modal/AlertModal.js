@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import Button from '../../Buttons/Button';
+import Button from '../Buttons/Button';
+import Modal from './Modal';
 
 const propTypes = {
   bigText: PropTypes.string,
@@ -114,19 +115,21 @@ export default function AlertModal({
   onClick: handleClick,
 }) {
   return (
-    <AlertWrapper onClick={handleClick} className="primary-background-modal">
-      <div className="main-box">
-        <div className="top">
-          <h1 className="big-text">{bigText.toUpperCase()}</h1>
+    <Modal onClickOutside={handleClick}>
+      <AlertWrapper onClick={handleClick} className="primary-background-modal">
+        <div className="main-box">
+          <div className="top">
+            <h1 className="big-text">{bigText.toUpperCase()}</h1>
+          </div>
+          <div className="bottom">
+            <p className="small-text">{smallText}</p>
+            <Button className="button">
+              <p className="button-text">{buttonText}</p>
+            </Button>
+          </div>
         </div>
-        <div className="bottom">
-          <p className="small-text">{smallText}</p>
-          <Button className="button">
-            <p className="button-text">{buttonText}</p>
-          </Button>
-        </div>
-      </div>
-    </AlertWrapper>
+      </AlertWrapper>
+    </Modal>
   );
 }
 

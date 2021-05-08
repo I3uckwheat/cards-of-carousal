@@ -147,7 +147,10 @@ describe('hostReducerMiddleware', () => {
 
       const fetchSpy = jest
         .spyOn(window, 'fetch')
-        .mockImplementation(async () => ({ json: async () => testCardDeck }));
+        .mockImplementation(async () => ({
+          json: async () => testCardDeck,
+          ok: true,
+        }));
 
       await hostReducerMiddleware(
         {
@@ -169,9 +172,10 @@ describe('hostReducerMiddleware', () => {
         white: ['boo', 'far', 'faz'],
       };
 
-      jest
-        .spyOn(window, 'fetch')
-        .mockImplementation(async () => ({ json: async () => testCardDeck }));
+      jest.spyOn(window, 'fetch').mockImplementation(async () => ({
+        json: async () => testCardDeck,
+        ok: true,
+      }));
 
       await hostReducerMiddleware(
         {
@@ -188,6 +192,9 @@ describe('hostReducerMiddleware', () => {
     });
 
     it('sends an error message with the query if the fetch fails', async () => {
+      const consoleSpy = jest
+        .spyOn(console, 'error')
+        .mockImplementation(() => {});
       const dispatch = jest.fn();
       const testPacks = [0, 1, 2, 3, 4, 5];
       const testQuery = '/deck/cards?packs=0,1,2,3,4,5';
@@ -198,7 +205,7 @@ describe('hostReducerMiddleware', () => {
 
       jest
         .spyOn(window, 'fetch')
-        .mockImplementation(async () => new TypeError());
+        .mockImplementation(async () => new Error('Failed to fetch'));
 
       await expect(() =>
         hostReducerMiddleware(
@@ -218,6 +225,8 @@ describe('hostReducerMiddleware', () => {
         type: 'SET_DECK',
         payload: { deck: testCardDeck },
       });
+
+      consoleSpy.mockRestore();
     });
   });
 

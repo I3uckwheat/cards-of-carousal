@@ -1,5 +1,7 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import config from '../../config';
 import { HostContext } from '../../contexts/HostContext/HostContext';
 import HostLayout from '../../layouts/HostLayout';
 import PlayerList from '../../components/PlayerList/PlayerList';
@@ -8,6 +10,12 @@ import PregameSettingsModal from '../../components/HostSettingsMenu/PregameSetti
 import JoinCode from '../../components/JoinCode/JoinCode';
 import Button from '../../components/Buttons/Button';
 import LoadingIndicator from '../../components/LoadingIndicator/LoadingIndicator';
+import AlertModal from '../../components/Modal/AlertModal';
+
+const errorHandlerPropTypes = {
+  errorString: PropTypes.string.isRequired,
+  setError: PropTypes.func.isRequired,
+};
 
 const LeftPanelWrapper = styled.div`
   display: flex;
@@ -95,38 +103,98 @@ const RightPanelWrapper = styled.div`
   }
 `;
 
+function ErrorHandler({ errorString, setError }) {
+  function reload() {
+    return window.location.reload();
+  }
+  function closeModal() {
+    return setError('');
+  }
+
+  switch (errorString) {
+    case 'error-getting-cards':
+      return (
+        <AlertModal
+          bigText="Failed to retrieve cards"
+          smallText="Please try again later"
+          buttonText="Click to restart"
+          onClick={reload}
+        />
+      );
+    case 'not-enough-players':
+      return (
+        <AlertModal
+          bigText="Unable to start game"
+          smallText="No offense, but this game requires friends to play."
+          buttonText="Click anywhere to continue"
+          onClick={closeModal}
+        />
+      );
+    case 'no-card-packs-selected':
+      return (
+        <AlertModal
+          bigText="Unable to start game"
+          smallText="Please pick at least one card pack."
+          buttonText="Click anywhere to continue"
+          onClick={closeModal}
+        />
+      );
+    default:
+      return null;
+  }
+}
+
+ErrorHandler.propTypes = errorHandlerPropTypes;
+
 function LeftPanel() {
   const { state, dispatch } = useContext(HostContext);
   const { lobbyID, newPlayerStaging } = state;
 
+  const [error, setError] = useState('');
+
   const handleClickStart = async () => {
     // check if there are any players and if packs are selected
     if (
-      newPlayerStaging.length > 1 &&
+      newPlayerStaging.length >= config.maxPlayers.min &&
       state.gameSettings.selectedPacks.length
     ) {
       const { selectedPacks } = state.gameSettings;
+
       dispatch({ type: 'GET_DECK', payload: {} });
-      await dispatch({
-        type: 'SET_DECK',
-        payload: { selectedPacks },
-      });
-      dispatch({ type: 'ADD_PLAYERS_FROM_STAGING', payload: {} });
-      await dispatch({
-        type: 'START_GAME',
-        payload: {},
-      });
-      await dispatch({
-        type: 'SET_NEXT_CZAR',
-        payload: {},
-      });
-      await dispatch({
-        type: 'SELECT_BLACK_CARD',
-        payload: {},
-      });
-      await dispatch({ type: 'DEAL_WHITE_CARDS', payload: {} });
+
+      try {
+        await dispatch({
+          type: 'SET_DECK',
+          payload: { selectedPacks },
+        });
+        dispatch({ type: 'ADD_PLAYERS_FROM_STAGING', payload: {} });
+        await dispatch({
+          type: 'START_GAME',
+          payload: {},
+        });
+        await dispatch({
+          type: 'SET_NEXT_CZAR',
+          payload: {},
+        });
+        await dispatch({
+          type: 'SELECT_BLACK_CARD',
+          payload: {},
+        });
+        await dispatch({ type: 'DEAL_WHITE_CARDS', payload: {} });
+      } catch (err) {
+        // The only cause of an error here would be a failure to retrieve card packs
+        setError('error-getting-cards');
+      }
+    } else {
+      // The only failure cases here are:
+      //  a) not enough players, or b) card packs aren't selected
+      const errorString =
+        newPlayerStaging.length >= config.maxPlayers.min
+          ? 'no-card-packs-selected'
+          : 'not-enough-players';
+
+      setError(errorString);
     }
-    // TODO: add else statement to warn that you cannot play a game with no players
   };
 
   const handleClickClose = async () => {
@@ -155,6 +223,8 @@ function LeftPanel() {
           />
         </div>
       </div>
+
+      <ErrorHandler errorString={error} setError={setError} />
     </LeftPanelWrapper>
   );
 }

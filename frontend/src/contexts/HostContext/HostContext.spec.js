@@ -3,6 +3,12 @@ import { act, render, screen } from '@testing-library/react';
 import socketInstance from '../../socket/socket';
 import HostProvider, { HostContext } from './HostContext';
 
+// Need to mock the Modal or createPortal errors are thrown: [Error: Target container is not a DOM element.]
+// eslint-disable-next-line react/prop-types
+jest.mock('../../components/Modal/Modal', () => ({ children }) => (
+  <div>{children}</div>
+));
+
 jest.mock('../../socket/socket', () => ({
   emitter: {
     on: jest.fn(),
@@ -352,6 +358,53 @@ describe('Context', () => {
       });
 
       expect(screen.getByTestId('lobby-id').textContent).toBe('TEST');
+    });
+
+    it('catches socket connection error events and updates the error state', () => {
+      const { eventHandlers } = setupEmitterMocks();
+
+      const TestComponent = () => <div />;
+
+      render(
+        <HostProvider>
+          <TestComponent />
+        </HostProvider>,
+      );
+
+      act(() => {
+        eventHandlers.message({
+          event: 'socket-connection-error',
+          payload: {},
+        });
+      });
+
+      expect(screen.getByText('SOCKET ERROR')).toBeInTheDocument();
+      expect(screen.getByText('Please try again later')).toBeInTheDocument();
+      expect(screen.getByText('Click anywhere to restart')).toBeInTheDocument();
+    });
+
+    it('sends a vanity message to the join code component when an error occurs', () => {
+      const { eventHandlers } = setupEmitterMocks();
+
+      const TestComponent = () => {
+        const { state } = useContext(HostContext);
+        return <div data-testid="join-code">{state.lobbyID}</div>;
+      };
+
+      render(
+        <HostProvider>
+          <TestComponent />
+        </HostProvider>,
+      );
+
+      act(() => {
+        eventHandlers.message({
+          event: 'socket-connection-error',
+          payload: {},
+        });
+      });
+
+      expect(screen.getByTestId('join-code')).toHaveTextContent('ERROR');
     });
   });
 });

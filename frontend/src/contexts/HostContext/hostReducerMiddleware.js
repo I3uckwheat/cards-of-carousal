@@ -104,13 +104,15 @@ async function getDeck({ selectedPacks }) {
   const apiURL = process.env.REACT_APP_API_URL;
   const queryString = selectedPacks.join(',');
   const query = `${apiURL}/deck/cards?packs=${queryString}`;
-  try {
-    const cardsRequest = await fetch(query);
+  const errorMessage = `Error fetching cards. Query: ${query}`;
+  const cardsRequest = await fetch(query);
+  if (cardsRequest.ok) {
     const cards = await cardsRequest.json();
-    return cards;
-  } catch {
-    throw new Error(`Error fetching cards. Query: ${query}`);
+    if (cards.white.length) {
+      return cards;
+    }
   }
+  throw new Error(errorMessage);
 }
 
 function sendCardsToPlayers({ selectedBlackCard, players, playerIDs }) {
@@ -223,11 +225,15 @@ export default async function hostReducerMiddleware(
       break;
 
     case 'SET_DECK': {
-      const deck = await getDeck(payload);
-      return dispatch({
-        type: 'SET_DECK',
-        payload: { deck },
-      });
+      try {
+        const deck = await getDeck(payload);
+        return dispatch({
+          type: 'SET_DECK',
+          payload: { deck },
+        });
+      } catch (err) {
+        throw new Error(err);
+      }
     }
 
     case 'SEND_CARDS_TO_PLAYERS':

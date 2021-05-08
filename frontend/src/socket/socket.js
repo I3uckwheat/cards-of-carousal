@@ -62,8 +62,15 @@ class SocketSingleton {
       this.emitter.emit('message', { event: 'socket-open', payload: {} });
     });
 
-    socketInstance.addEventListener('close', () => {
-      this.emitter.emit('message', { event: 'socket-close', payload: {} });
+    socketInstance.addEventListener('close', (e) => {
+      if (e.code > 1000 && e.code <= 1015) {
+        this.emitter.emit('message', {
+          event: 'socket-connection-error',
+          payload: {},
+        });
+      } else {
+        this.emitter.emit('message', { event: 'socket-close', payload: {} });
+      }
     });
   };
 }
