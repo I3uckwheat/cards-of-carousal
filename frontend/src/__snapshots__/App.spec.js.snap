@@ -672,7 +672,7 @@ exports[`App snapshots should show the host screen after user has clicked the "h
   animation-delay: 0;
 }
 
-.c12 {
+.c11 {
   position: relative;
   display: -webkit-box;
   display: -webkit-flex;
@@ -687,7 +687,7 @@ exports[`App snapshots should show the host screen after user has clicked the "h
   overflow-y: auto;
 }
 
-.c12 h1 {
+.c11 h1 {
   margin-left: auto;
   font-size: 4rem;
   line-height: 4rem;
@@ -701,7 +701,7 @@ exports[`App snapshots should show the host screen after user has clicked the "h
   top: 0;
 }
 
-.c13 {
+.c12 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -716,7 +716,7 @@ exports[`App snapshots should show the host screen after user has clicked the "h
   padding: 24px 0 24px 60px;
 }
 
-.c13 .number-input-wrapper label {
+.c12 .number-input-wrapper label {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -729,25 +729,25 @@ exports[`App snapshots should show the host screen after user has clicked the "h
   font-weight: bold;
 }
 
-.c13 input[type='number'] {
+.c12 input[type='number'] {
   font-weight: bold;
   text-align: center;
   width: 80px;
 }
 
-.c13 .select-wrapper {
+.c12 .select-wrapper {
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
 }
 
-.c13 .select-wrapper h2 {
+.c12 .select-wrapper h2 {
   font-size: 1rem;
   font-weight: bold;
   height: 30px;
 }
 
-.c13 .select-wrapper .loader-wrapper {
+.c12 .select-wrapper .loader-wrapper {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -756,7 +756,7 @@ exports[`App snapshots should show the host screen after user has clicked the "h
   transform: translate(-50%,-50%);
 }
 
-.c13 .card-packs {
+.c12 .card-packs {
   display: grid;
   gap: 20px;
   grid-template-columns: repeat(auto-fill,minmax(420px,1fr));
@@ -766,7 +766,7 @@ exports[`App snapshots should show the host screen after user has clicked the "h
   padding: 0 0 16px 0;
 }
 
-.c13 .card-packs label {
+.c12 .card-packs label {
   margin-right: 12px;
   -webkit-align-items: center;
   -webkit-box-align: center;
@@ -779,7 +779,7 @@ exports[`App snapshots should show the host screen after user has clicked the "h
   margin-bottom: auto;
 }
 
-.c13 input[type='checkbox'] {
+.c12 input[type='checkbox'] {
   margin: 4px 11px auto 0;
 }
 
@@ -824,7 +824,7 @@ exports[`App snapshots should show the host screen after user has clicked the "h
   height: 70px;
 }
 
-.c11 {
+.c10 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -835,14 +835,9 @@ exports[`App snapshots should show the host screen after user has clicked the "h
   justify-content: center;
 }
 
-.c11 .positionButton {
+.c10 .positionButton {
   border: none;
   background-color: transparent;
-}
-
-.c10 {
-  width: 100%;
-  height: 100%;
 }
 
 .c9 {
@@ -858,9 +853,9 @@ exports[`App snapshots should show the host screen after user has clicked the "h
   -ms-flex-pack: justify;
   justify-content: space-between;
   background-color: var(--primary-background-color);
-  -webkit-align-self: center;
-  -ms-flex-item-align: center;
-  align-self: center;
+  -webkit-align-self: flex-start;
+  -ms-flex-item-align: start;
+  align-self: flex-start;
   margin: 24px;
   padding: 8px;
   border-radius: 5px;
@@ -870,7 +865,12 @@ exports[`App snapshots should show the host screen after user has clicked the "h
 }
 
 .c9 h2 {
-  line-height: 2rem;
+  line-height: 2.4rem;
+}
+
+.c9 h3 {
+  font-size: 1.5rem;
+  line-height: 1.8rem;
 }
 
 .c9 p {
@@ -879,7 +879,7 @@ exports[`App snapshots should show the host screen after user has clicked the "h
 }
 
 .c9 ol {
-  margin: 10px;
+  margin: 20px;
 }
 
 .c9 li {
@@ -899,6 +899,7 @@ exports[`App snapshots should show the host screen after user has clicked the "h
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
+  margin: 20px 0;
 }
 
 .c9 .snarkyText {
@@ -992,11 +993,8 @@ exports[`App snapshots should show the host screen after user has clicked the "h
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
   height: 60%;
+  overflow-y: auto;
 }
 
 .c8 .bottom {
@@ -1084,8 +1082,69 @@ exports[`App snapshots should show the host screen after user has clicked the "h
 }
 
 @media only screen and (max-width:980px) {
-  .c12 h1 {
+  .c11 h1 {
     position: static;
+  }
+}
+
+@media (min-width:1100px) {
+  .c9 {
+    -webkit-align-self: center;
+    -ms-flex-item-align: center;
+    align-self: center;
+  }
+}
+
+@media (min-width:1600px) {
+  .c9 h3 {
+    font-size: 1.8rem;
+  }
+}
+
+@media (min-width:3200px) {
+  .c9 h2 {
+    font-size: 4rem;
+    line-height: 4.4rem;
+  }
+
+  .c9 h3 {
+    font-size: 3rem;
+    line-height: 3rem;
+  }
+
+  .c9 p {
+    margin: 20px;
+    font-size: 2rem;
+  }
+
+  .c9 ol {
+    margin: 40px;
+  }
+
+  .c9 li {
+    margin: 10px;
+    font-size: 2rem;
+  }
+
+  .c9 .howToWin {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    margin: 20px 0;
+  }
+
+  .c9 .snarkyText {
+    font-size: 1.5rem;
+    margin: 0;
+    padding: 0;
   }
 }
 
@@ -1194,9 +1253,10 @@ exports[`App snapshots should show the host screen after user has clicked the "h
             <div
               class="c9"
             >
-              <div
-                class="c10"
-              >
+              <div>
+                <h2>
+                  Welcome! ¡Bienvenidos! Добро пожаловать!
+                </h2>
                 <p>
                   Cards of Carousal is your grandma's favorite online card game!
                 </p>
@@ -1204,17 +1264,17 @@ exports[`App snapshots should show the host screen after user has clicked the "h
                   Imagine if your indecency and crude taste in jokes was an advantage in life. It isn't, but in Cards of Carousal it can be!
                 </p>
                 <p>
-                  Long and short of this deal; one person (the Czar of the round) reads the black card on this screen. Everyone else submits a white card trying to be the Czar's favorite jester. More directions on the next page if you're still confused.
+                  Long and short of this deal; one person (the Czar of the round) reads the black card on this screen. Everyone else submits a white card trying to be the Czar's favorite jester. More directions on the following pages if you're still confused.
                 </p>
                 <div
-                  class="c11"
+                  class="c10"
                 >
                   <button
                     class="positionButton"
                     type="button"
                   >
                     <img
-                      alt="positionIndicator"
+                      alt="active position indicator"
                       src="blackCard.svg"
                     />
                   </button>
@@ -1223,7 +1283,7 @@ exports[`App snapshots should show the host screen after user has clicked the "h
                     type="button"
                   >
                     <img
-                      alt="positionIndicator"
+                      alt="inactive position indicator"
                       src="whiteCard.svg"
                     />
                   </button>
@@ -1232,7 +1292,7 @@ exports[`App snapshots should show the host screen after user has clicked the "h
                     type="button"
                   >
                     <img
-                      alt="positionIndicator"
+                      alt="inactive position indicator"
                       src="whiteCard.svg"
                     />
                   </button>
@@ -1241,7 +1301,7 @@ exports[`App snapshots should show the host screen after user has clicked the "h
                     type="button"
                   >
                     <img
-                      alt="positionIndicator"
+                      alt="inactive position indicator"
                       src="whiteCard.svg"
                     />
                   </button>
@@ -1253,13 +1313,13 @@ exports[`App snapshots should show the host screen after user has clicked the "h
             class="bottom"
           >
             <div
-              class="c12"
+              class="c11"
             >
               <h1>
                 GAME SETTINGS
               </h1>
               <form
-                class="c13"
+                class="c12"
               >
                 <div
                   class="number-input-wrapper"

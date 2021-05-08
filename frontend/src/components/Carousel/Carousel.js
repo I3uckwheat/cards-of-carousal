@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 import PositionIndicators from './PositionIndicators';
@@ -9,10 +8,6 @@ const propTypes = {
   interval: PropTypes.number.isRequired,
 };
 
-const StyledCarousel = styled.div`
-  width: 100%;
-  height: 100%;
-`;
 function Carousel({ slides, interval }) {
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
   const [isCarouselActive, setIsCarouselActive] = useState(true);
@@ -38,14 +33,14 @@ function Carousel({ slides, interval }) {
   }, [currentSlideIndex, isCarouselActive]);
 
   return (
-    <StyledCarousel>
+    <div>
       {slides[currentSlideIndex]}
       <PositionIndicators
         slides={slides}
         currentIndex={currentSlideIndex}
         selectThisSlide={selectSlide}
       />
-    </StyledCarousel>
+    </div>
   );
 }
 

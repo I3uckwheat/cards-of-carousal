@@ -69,8 +69,8 @@ const RightPanelWrapper = styled.div`
   .top {
     display: flex;
     justify-content: center;
-    align-items: center;
     height: 60%;
+    overflow-y: auto;
   }
 
   .bottom {

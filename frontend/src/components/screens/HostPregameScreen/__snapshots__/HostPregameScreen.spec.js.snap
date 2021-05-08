@@ -204,7 +204,7 @@ exports[`Host Pregame Screen rendering renders 1`] = `
   cursor: pointer;
 }
 
-.c11 {
+.c10 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -215,14 +215,9 @@ exports[`Host Pregame Screen rendering renders 1`] = `
   justify-content: center;
 }
 
-.c11 .positionButton {
+.c10 .positionButton {
   border: none;
   background-color: transparent;
-}
-
-.c10 {
-  width: 100%;
-  height: 100%;
 }
 
 .c9 {
@@ -238,9 +233,9 @@ exports[`Host Pregame Screen rendering renders 1`] = `
   -ms-flex-pack: justify;
   justify-content: space-between;
   background-color: var(--primary-background-color);
-  -webkit-align-self: center;
-  -ms-flex-item-align: center;
-  align-self: center;
+  -webkit-align-self: flex-start;
+  -ms-flex-item-align: start;
+  align-self: flex-start;
   margin: 24px;
   padding: 8px;
   border-radius: 5px;
@@ -250,7 +245,12 @@ exports[`Host Pregame Screen rendering renders 1`] = `
 }
 
 .c9 h2 {
-  line-height: 2rem;
+  line-height: 2.4rem;
+}
+
+.c9 h3 {
+  font-size: 1.5rem;
+  line-height: 1.8rem;
 }
 
 .c9 p {
@@ -259,7 +259,7 @@ exports[`Host Pregame Screen rendering renders 1`] = `
 }
 
 .c9 ol {
-  margin: 10px;
+  margin: 20px;
 }
 
 .c9 li {
@@ -279,6 +279,7 @@ exports[`Host Pregame Screen rendering renders 1`] = `
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
+  margin: 20px 0;
 }
 
 .c9 .snarkyText {
@@ -372,11 +373,8 @@ exports[`Host Pregame Screen rendering renders 1`] = `
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
   height: 60%;
+  overflow-y: auto;
 }
 
 .c8 .bottom {
@@ -424,6 +422,67 @@ exports[`Host Pregame Screen rendering renders 1`] = `
     font-size: 6rem;
     margin-bottom: -25px;
     line-height: 7rem;
+  }
+}
+
+@media (min-width:1100px) {
+  .c9 {
+    -webkit-align-self: center;
+    -ms-flex-item-align: center;
+    align-self: center;
+  }
+}
+
+@media (min-width:1600px) {
+  .c9 h3 {
+    font-size: 1.8rem;
+  }
+}
+
+@media (min-width:3200px) {
+  .c9 h2 {
+    font-size: 4rem;
+    line-height: 4.4rem;
+  }
+
+  .c9 h3 {
+    font-size: 3rem;
+    line-height: 3rem;
+  }
+
+  .c9 p {
+    margin: 20px;
+    font-size: 2rem;
+  }
+
+  .c9 ol {
+    margin: 40px;
+  }
+
+  .c9 li {
+    margin: 10px;
+    font-size: 2rem;
+  }
+
+  .c9 .howToWin {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    margin: 20px 0;
+  }
+
+  .c9 .snarkyText {
+    font-size: 1.5rem;
+    margin: 0;
+    padding: 0;
   }
 }
 
@@ -535,9 +594,10 @@ exports[`Host Pregame Screen rendering renders 1`] = `
           <div
             className="c9"
           >
-            <div
-              className="c10"
-            >
+            <div>
+              <h2>
+                Welcome! ¡Bienvenidos! Добро пожаловать!
+              </h2>
               <p>
                 Cards of Carousal is your grandma's favorite online card game!
               </p>
@@ -545,10 +605,10 @@ exports[`Host Pregame Screen rendering renders 1`] = `
                 Imagine if your indecency and crude taste in jokes was an advantage in life. It isn't, but in Cards of Carousal it can be!
               </p>
               <p>
-                Long and short of this deal; one person (the Czar of the round) reads the black card on this screen. Everyone else submits a white card trying to be the Czar's favorite jester. More directions on the next page if you're still confused.
+                Long and short of this deal; one person (the Czar of the round) reads the black card on this screen. Everyone else submits a white card trying to be the Czar's favorite jester. More directions on the following pages if you're still confused.
               </p>
               <div
-                className="c11"
+                className="c10"
               >
                 <button
                   className="positionButton"
@@ -556,7 +616,7 @@ exports[`Host Pregame Screen rendering renders 1`] = `
                   type="button"
                 >
                   <img
-                    alt="positionIndicator"
+                    alt="active position indicator"
                     src="blackCard.svg"
                   />
                 </button>
@@ -566,7 +626,7 @@ exports[`Host Pregame Screen rendering renders 1`] = `
                   type="button"
                 >
                   <img
-                    alt="positionIndicator"
+                    alt="inactive position indicator"
                     src="whiteCard.svg"
                   />
                 </button>
@@ -576,7 +636,7 @@ exports[`Host Pregame Screen rendering renders 1`] = `
                   type="button"
                 >
                   <img
-                    alt="positionIndicator"
+                    alt="inactive position indicator"
                     src="whiteCard.svg"
                   />
                 </button>
@@ -586,7 +646,7 @@ exports[`Host Pregame Screen rendering renders 1`] = `
                   type="button"
                 >
                   <img
-                    alt="positionIndicator"
+                    alt="inactive position indicator"
                     src="whiteCard.svg"
                   />
                 </button>
