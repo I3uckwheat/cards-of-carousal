@@ -843,6 +843,7 @@ exports[`App snapshots should show the host screen after user has clicked the "h
 .c10 .positionButton {
   border: none;
   background-color: transparent;
+  cursor: pointer;
 }
 
 .c9 {

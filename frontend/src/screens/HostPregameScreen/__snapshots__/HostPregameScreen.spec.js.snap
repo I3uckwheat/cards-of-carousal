@@ -218,6 +218,7 @@ exports[`Host Pregame Screen rendering renders 1`] = `
 .c10 .positionButton {
   border: none;
   background-color: transparent;
+  cursor: pointer;
 }
 
 .c9 {

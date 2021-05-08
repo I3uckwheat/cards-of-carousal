@@ -18,6 +18,7 @@ const StyledPositionIndicators = styled.div`
   .positionButton {
     border: none;
     background-color: transparent;
+    cursor: pointer;
   }
 `;
 
