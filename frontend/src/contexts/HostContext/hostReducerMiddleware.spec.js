@@ -577,7 +577,7 @@ describe('hostReducerMiddleware', () => {
         expect(socketInstance.sendMessage).toHaveBeenCalledWith({
           event: 'update',
           payload: {
-            gameState: 'showing-end-game-messages',
+            gameState: 'end-game',
             message: expect.objectContaining({
               big: 'Congrats! You won it all!!1!',
               small: expect.any(String),
@@ -623,7 +623,7 @@ describe('hostReducerMiddleware', () => {
         expect(socketInstance.sendMessage).toHaveBeenCalledWith({
           event: 'update',
           payload: {
-            gameState: 'showing-end-game-messages',
+            gameState: 'end-game',
             message: expect.objectContaining({
               big: 'Loser 👎︎',
               small: expect.any(String),

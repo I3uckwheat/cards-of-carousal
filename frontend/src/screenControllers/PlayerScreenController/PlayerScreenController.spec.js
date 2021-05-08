@@ -231,13 +231,13 @@ describe('Player screen controller', () => {
       });
     });
 
-    describe('showing-end-game-messages', () => {
+    describe('end-game', () => {
       it('renders PlayerErrorScreen', () => {
         PlayerErrorScreen.mockImplementation(MockPlayerErrorScreen);
 
         const dispatch = jest.fn();
         const state = {
-          gameState: 'showing-end-game-messages',
+          gameState: 'end-game',
           message: { big: '', small: '' },
         };
 

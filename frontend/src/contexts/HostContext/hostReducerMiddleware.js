@@ -189,7 +189,7 @@ function sendEndOfGameMessages({ gameWinner, playerIDs }) {
   socketInstance.sendMessage({
     event: 'update',
     payload: {
-      gameState: 'showing-end-game-messages',
+      gameState: 'end-game',
       message: {
         big: 'Congrats! You won it all!!1!',
         small: 'Not necessarily something to be proud of',
@@ -201,7 +201,7 @@ function sendEndOfGameMessages({ gameWinner, playerIDs }) {
   socketInstance.sendMessage({
     event: 'update',
     payload: {
-      gameState: 'showing-end-game-messages',
+      gameState: 'end-game',
       message: {
         big: 'Loser 👎︎',
         small: `Better to lose the game than your integrity`,
