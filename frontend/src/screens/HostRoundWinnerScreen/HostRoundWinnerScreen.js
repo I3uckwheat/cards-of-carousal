@@ -145,18 +145,22 @@ function startNextRound(dispatch) {
   dispatch({ type: 'DEAL_WHITE_CARDS', payload: {} });
 }
 
-function HostWinnerScreen() {
+function endGame(dispatch, payload) {
+  dispatch({ type: 'GAME_OVER', payload });
+}
+
+function HostRoundWinnerScreen() {
   const { state, dispatch } = useContext(HostContext);
-  const { winnerScreenDisplayTime } = state.gameSettings;
+  const { winnerScreenDisplayTime, winningScore } = state.gameSettings;
   const { players, playerIDs, czarSelection } = state;
 
-  useEffect(async () => {
+  useEffect(() => {
     const czar = playerIDs.find((id) => players[id].isCzar);
     const losers = playerIDs.filter(
       (playerID) => !players[playerID].isCzar && playerID !== czarSelection,
     );
 
-    await dispatch({
+    dispatch({
       type: 'SEND_END_OF_ROUND_MESSAGES',
       payload: {
         winnerName: players[czarSelection].name,
@@ -166,7 +170,13 @@ function HostWinnerScreen() {
       },
     });
 
-    setTimeout(() => startNextRound(dispatch), winnerScreenDisplayTime);
+    setTimeout(() => {
+      if (players[czarSelection].score >= winningScore) {
+        return endGame(dispatch, { gameWinner: czarSelection, playerIDs });
+      }
+
+      return startNextRound(dispatch);
+    }, winnerScreenDisplayTime);
   }, []);
 
   return (
@@ -179,4 +189,4 @@ function HostWinnerScreen() {
   );
 }
 
-export default HostWinnerScreen;
+export default HostRoundWinnerScreen;

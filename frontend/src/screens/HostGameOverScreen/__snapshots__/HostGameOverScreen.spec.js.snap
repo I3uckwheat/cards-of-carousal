@@ -1,0 +1,728 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HostGameOverScreen render renders 1`] = `
+.c10 {
+  display: block;
+  border: 2px solid var(--primary-text-color);
+  font-size: 12px;
+  font-weight: bold;
+  padding: 0.7em;
+  background: var(--secondary-background-color);
+  color: var(--secondary-text-color);
+  background: var(--primary-background-color);
+  color: var(--primary-text-color);
+}
+
+.c10:hover,
+.c10:active,
+.c10:focus {
+  background: var(--accent-background-color);
+  cursor: pointer;
+}
+
+.c1 {
+  background-image: url(inactiveHamburger.svg);
+  background-size: cover;
+  background-color: transparent;
+  border: 0;
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+}
+
+.c0 {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.c0 .hamburger-container {
+  position: absolute;
+  right: 17px;
+  top: 11px;
+  z-index: 10100;
+}
+
+.c0 .host-layout-header {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: flex-end;
+  -webkit-box-align: flex-end;
+  -ms-flex-align: flex-end;
+  align-items: flex-end;
+  height: 50px;
+}
+
+.c0 .host-layout-header h2 {
+  position: relative;
+  bottom: -1px;
+  font-size: 1rem;
+  line-height: 0.8rem;
+}
+
+.c0 .components {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  height: 100%;
+}
+
+.c0 .components .left {
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  min-width: 200px;
+  background-color: var(--primary-background-color);
+  box-shadow: 0px 4px 12px rgba(0,0,0,0.25);
+}
+
+.c0 .components .right {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  position: relative;
+}
+
+.c2 {
+  width: 100%;
+  background-color: var(--secondary-background-color);
+  color: var(--secondary-text-color);
+}
+
+.c7 {
+  stroke: var(--primary-text-color);
+}
+
+.c9 {
+  stroke: var(--secondary-text-color);
+}
+
+.c6 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c4 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 486px;
+  padding: 40px;
+  background-color: var(--primary-background-color);
+  position: relative;
+}
+
+.c4 > div:not(:last-child) {
+  margin-bottom: 24px;
+}
+
+.c5 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 100%;
+}
+
+.c5 .player-info {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  margin: 0 24px 0 26px;
+  padding: 7px 0;
+  border-bottom: 1px solid #ccc;
+  border-radius: 0;
+  background-color: var(--primary-background-color);
+}
+
+.c5 .player-info h1 {
+  text-transform: uppercase;
+  font-size: 24px;
+  font-weight: 900;
+  -webkit-letter-spacing: 1px;
+  -moz-letter-spacing: 1px;
+  -ms-letter-spacing: 1px;
+  letter-spacing: 1px;
+  line-height: 1.5em;
+  color: var(--primary-text-color);
+}
+
+.c5 .player-info span {
+  color: var(--primary-text-color);
+  font-size: 24px;
+  font-weight: 900;
+}
+
+.c8 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 100%;
+}
+
+.c8 .player-info {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  margin: 0 12px 0 26px;
+  padding: 7px 12px;
+  border-bottom: 0;
+  border-radius: 4px;
+  background-color: var(--secondary-background-color);
+}
+
+.c8 .player-info h1 {
+  text-transform: uppercase;
+  font-size: 24px;
+  font-weight: 900;
+  -webkit-letter-spacing: 1px;
+  -moz-letter-spacing: 1px;
+  -ms-letter-spacing: 1px;
+  letter-spacing: 1px;
+  line-height: 1.5em;
+  color: var(--secondary-text-color);
+}
+
+.c8 .player-info span {
+  color: var(--secondary-text-color);
+  font-size: 24px;
+  font-weight: 900;
+}
+
+.c3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  height: 100%;
+}
+
+.c3 .player-list-wrapper {
+  overflow-x: auto;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+}
+
+.c3 .buttons-wrapper {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin: 32px auto 32px;
+}
+
+.c3 .buttons-wrapper .button.primary {
+  font-size: 20px;
+  margin-bottom: 16px;
+}
+
+.c11 {
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.c11 .winner-display {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  margin: 40px 0;
+  -webkit-flex: 2;
+  -ms-flex: 2;
+  flex: 2;
+  text-transform: uppercase;
+}
+
+.c11 .winner-display .prelude {
+  font-size: 28px;
+  text-indent: -40px;
+  line-height: 1em;
+  margin-bottom: -12px;
+}
+
+.c11 .winner-display .title {
+  font-size: 64px;
+  font-weight: 900;
+  text-align: right;
+  line-height: 1em;
+}
+
+.c11 .thanks-message {
+  font-size: 46px;
+  font-weight: 700;
+  text-align: center;
+  text-transform: uppercase;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+}
+
+.c11 .decorations-wrapper {
+  position: relative;
+  width: 100%;
+  -webkit-flex: 2;
+  -ms-flex: 2;
+  flex: 2;
+}
+
+.c11 .decorations-wrapper .decoration-white-cards,
+.c11 .decorations-wrapper .decoration-black-card {
+  position: absolute;
+  bottom: 0;
+}
+
+.c11 .decorations-wrapper .decoration-white-cards {
+  left: 0;
+  width: 150px;
+}
+
+.c11 .decorations-wrapper .decoration-black-card {
+  right: 0;
+  width: 110px;
+}
+
+@media (min-width:800px) {
+  .c0 .host-layout-header {
+    height: 130px;
+  }
+
+  .c0 .components .left {
+    min-width: 450px;
+  }
+
+  .c0 .components .host-layout-header h2 {
+    font-size: 2.5rem;
+    margin-bottom: -4px;
+    line-height: 2rem;
+  }
+}
+
+@media (min-width:2000px) {
+  .c0 .components .left {
+    min-width: 700px;
+  }
+
+  .c0 .components .host-layout-header h2 {
+    font-size: 3.5rem;
+    margin-bottom: -35px;
+    line-height: 7rem;
+  }
+}
+
+@media (min-width:3500px) {
+  .c0 .host-layout-header {
+    height: 200px;
+  }
+
+  .c0 .components .left {
+    min-width: 1100px;
+  }
+
+  .c0 .components .host-layout-header h2 {
+    font-size: 6rem;
+    margin-bottom: -25px;
+    line-height: 7rem;
+  }
+}
+
+<div
+  className="c0 primary-background"
+>
+  <div
+    className="hamburger-container"
+  >
+    <button
+      className="c1"
+      onClick={[Function]}
+    />
+  </div>
+  <div
+    className="components"
+  >
+    <div
+      className="left"
+    >
+      <header
+        className="c2 host-layout-header"
+      >
+        <h2>
+          CARDS OF CAROUSAL
+        </h2>
+      </header>
+      <div
+        className="c3"
+      >
+        <div
+          className="player-list-wrapper"
+        >
+          <div
+            className="c4"
+            data-testid="playerList-container"
+          >
+            <div
+              className="c5"
+              data-testid="row-foo"
+            >
+              <img
+                alt="card icon"
+                data-testid="icon-foo"
+                src="offset-white-card-stack-icon.svg"
+                style={
+                  Object {
+                    "visibility": "visible",
+                  }
+                }
+              />
+              <div
+                className="player-info"
+              >
+                <h1>
+                  foo
+                </h1>
+                <div
+                  className="c6"
+                >
+                  <svg
+                    data-testid="tally-svg"
+                    fill="none"
+                    height="30"
+                    viewBox="0 0 42 30"
+                    width="42"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <g>
+                      <path
+                        className="c7"
+                        color="primary"
+                        d="M32.4285 3.19775V29.5701"
+                        data-testid="tally"
+                        strokeWidth="2"
+                      />
+                      <path
+                        className="c7"
+                        color="primary"
+                        d="M25.4439 3.51099L23.2217 29.5966"
+                        data-testid="tally"
+                        strokeWidth="2"
+                      />
+                      <path
+                        className="c7"
+                        color="primary"
+                        d="M16.5548 3.51099L14.3326 29.5966"
+                        data-testid="tally"
+                        strokeWidth="2"
+                      />
+                    </g>
+                  </svg>
+                </div>
+              </div>
+            </div>
+            <div
+              className="c8"
+              data-testid="row-bar"
+            >
+              <img
+                alt="card icon"
+                data-testid="icon-bar"
+                src="black-card-icon.svg"
+                style={
+                  Object {
+                    "visibility": "visible",
+                  }
+                }
+              />
+              <div
+                className="player-info"
+              >
+                <h1>
+                  bar
+                </h1>
+                <div
+                  className="c6"
+                >
+                  <svg
+                    data-testid="tally-svg"
+                    fill="none"
+                    height="30"
+                    viewBox="0 0 42 30"
+                    width="42"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <g>
+                      <path
+                        className="c9"
+                        color="secondary"
+                        d="M32.4285 3.19775V29.5701"
+                        data-testid="tally"
+                        strokeWidth="2"
+                      />
+                    </g>
+                  </svg>
+                </div>
+              </div>
+            </div>
+            <div
+              className="c5"
+              data-testid="row-baz"
+            >
+              <img
+                alt="card icon"
+                data-testid="icon-baz"
+                src="offset-white-card-stack-icon.svg"
+                style={
+                  Object {
+                    "visibility": "visible",
+                  }
+                }
+              />
+              <div
+                className="player-info"
+              >
+                <h1>
+                  baz
+                </h1>
+                <div
+                  className="c6"
+                >
+                  <svg
+                    data-testid="tally-svg"
+                    fill="none"
+                    height="30"
+                    viewBox="0 0 42 30"
+                    width="42"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <g>
+                      <path
+                        className="c7"
+                        color="primary"
+                        d="M32.4285 3.19775V29.5701"
+                        data-testid="tally"
+                        strokeWidth="2"
+                      />
+                      <path
+                        className="c7"
+                        color="primary"
+                        d="M25.4439 3.51099L23.2217 29.5966"
+                        data-testid="tally"
+                        strokeWidth="2"
+                      />
+                      <path
+                        className="c7"
+                        color="primary"
+                        d="M16.5548 3.51099L14.3326 29.5966"
+                        data-testid="tally"
+                        strokeWidth="2"
+                      />
+                      <path
+                        className="c7"
+                        color="primary"
+                        d="M7.66589 3.51099L5.44367 29.5966"
+                        data-testid="tally"
+                        strokeWidth="2"
+                      />
+                      <path
+                        className="c7"
+                        color="primary"
+                        d="M0.916168 0.599211L40.9161 29.1692"
+                        data-testid="tally"
+                        strokeWidth="2"
+                      />
+                    </g>
+                  </svg>
+                  <svg
+                    data-testid="tally-svg"
+                    fill="none"
+                    height="30"
+                    viewBox="0 0 42 30"
+                    width="42"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <g>
+                      <path
+                        className="c7"
+                        color="primary"
+                        d="M32.4285 3.19775V29.5701"
+                        data-testid="tally"
+                        strokeWidth="2"
+                      />
+                      <path
+                        className="c7"
+                        color="primary"
+                        d="M25.4439 3.51099L23.2217 29.5966"
+                        data-testid="tally"
+                        strokeWidth="2"
+                      />
+                    </g>
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          className="buttons-wrapper"
+        >
+          <button
+            className="c10 button primary"
+            onClick={[Function]}
+            type="button"
+          >
+            <p>
+              START NEW GAME
+            </p>
+          </button>
+          <button
+            className="c10 button"
+            onClick={[Function]}
+            type="button"
+          >
+            <p>
+              CLOSE GAME
+            </p>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div
+      className="right"
+    >
+      <div
+        className="c11"
+      >
+        <h1
+          className="winner-display"
+        >
+          <span
+            className="prelude"
+          >
+            And the winner is...
+          </span>
+          <p
+            className="title"
+            data-testid="winner-name"
+          >
+            baz
+          </p>
+        </h1>
+        <p
+          className="thanks-message"
+        >
+          Thank you for playing!
+        </p>
+        <div
+          className="decorations-wrapper"
+        >
+          <img
+            alt="Three white cards"
+            className="decoration-white-cards"
+            src="card-trio-diagonal.svg"
+          />
+          <img
+            alt="Diagonal black card"
+            className="decoration-black-card"
+            src="black-card-diagonal.svg"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

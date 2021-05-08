@@ -183,10 +183,19 @@ function previewWinner(state, { highlightedPlayerID }) {
   };
 }
 
-function selectWinner(state) {
+function winnerSelected(state) {
+  const roundWinner = state.players[state.czarSelection];
+
   return {
     ...state,
     gameState: 'showing-winning-cards',
+    players: {
+      ...state.players,
+      [state.czarSelection]: {
+        ...roundWinner,
+        score: roundWinner.score + 1,
+      },
+    },
   };
 }
 
@@ -345,6 +354,14 @@ function toggleJoinCode(state) {
   };
 }
 
+function gameOver(state, { gameWinner }) {
+  return {
+    ...state,
+    gameState: 'game-over',
+    gameWinner,
+  };
+}
+
 function HostReducer(state, action) {
   const { type, payload } = action;
   switch (type) {
@@ -376,8 +393,8 @@ function HostReducer(state, action) {
     case 'PREVIEW_WINNER':
       return previewWinner(state, payload);
 
-    case 'SELECT_WINNER':
-      return selectWinner(state, payload);
+    case 'WINNER_SELECTED':
+      return winnerSelected(state);
 
     case 'SET_LOBBY_ID':
       return setLobbyId(state, payload);
@@ -417,6 +434,9 @@ function HostReducer(state, action) {
 
     case 'TOGGLE_JOIN_CODE_VISIBILITY':
       return toggleJoinCode(state);
+
+    case 'GAME_OVER':
+      return gameOver(state, payload);
 
     default:
       return { ...state };

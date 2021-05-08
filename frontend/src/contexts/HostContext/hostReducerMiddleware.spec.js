@@ -639,5 +639,99 @@ describe('hostReducerMiddleware', () => {
         },
       });
     });
+
+    describe('GAME_OVER', () => {
+      it('sends a message to winner to announce his/her victory', () => {
+        const state = {
+          players: {
+            foo: {
+              cards: [{ text: 'foo' }, { text: 'bar' }, { text: 'baz' }],
+              submittedCards: [],
+              isCzar: true,
+            },
+            bar: {
+              cards: [{ text: 'foo' }, { text: 'bar' }, { text: 'baz' }],
+              submittedCards: [0],
+              isCzar: false,
+            },
+            baz: {
+              cards: [{ text: 'foo' }, { text: 'bar' }, { text: 'baz' }],
+              submittedCards: [0],
+              isCzar: false,
+            },
+          },
+          playerIDs: ['foo', 'bar', 'baz'],
+          gameWinner: 'foo',
+        };
+        const { gameWinner, playerIDs } = state;
+        const dispatch = jest.fn();
+
+        hostReducerMiddleware(
+          {
+            type: 'GAME_OVER',
+            payload: { gameWinner, playerIDs },
+          },
+          dispatch,
+        );
+
+        expect(socketInstance.sendMessage).toHaveBeenCalledWith({
+          event: 'update',
+          payload: {
+            gameState: 'end-game',
+            message: expect.objectContaining({
+              big: 'Congrats! You won it all!!1!',
+              small: expect.any(String),
+            }),
+          },
+          recipients: ['foo'],
+        });
+      });
+
+      it('sends a message to losers to announce their defeat', () => {
+        const state = {
+          players: {
+            foo: {
+              cards: [{ text: 'foo' }, { text: 'bar' }, { text: 'baz' }],
+              submittedCards: [],
+              isCzar: true,
+            },
+            bar: {
+              cards: [{ text: 'foo' }, { text: 'bar' }, { text: 'baz' }],
+              submittedCards: [0],
+              isCzar: false,
+            },
+            baz: {
+              cards: [{ text: 'foo' }, { text: 'bar' }, { text: 'baz' }],
+              submittedCards: [0],
+              isCzar: false,
+            },
+          },
+          playerIDs: ['foo', 'bar', 'baz'],
+          gameWinner: 'foo',
+        };
+        const { gameWinner, playerIDs } = state;
+        const dispatch = jest.fn();
+
+        hostReducerMiddleware(
+          {
+            type: 'GAME_OVER',
+            payload: { gameWinner, playerIDs },
+          },
+          dispatch,
+        );
+
+        expect(socketInstance.sendMessage).toHaveBeenCalledWith({
+          event: 'update',
+          payload: {
+            gameState: 'end-game',
+            message: expect.objectContaining({
+              big: 'Loser 👎︎',
+              small: expect.any(String),
+            }),
+          },
+          recipients: ['bar', 'baz'],
+        });
+      });
+    });
   });
 });
