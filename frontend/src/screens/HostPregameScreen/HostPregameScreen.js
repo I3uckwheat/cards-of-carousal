@@ -11,6 +11,7 @@ import JoinCode from '../../components/JoinCode/JoinCode';
 import Button from '../../components/Buttons/Button';
 import LoadingIndicator from '../../components/LoadingIndicator/LoadingIndicator';
 import AlertModal from '../../components/Modal/AlertModal';
+import PregameWelcomeText from '../../components/PregameWelcomeText/PregameWelcomeText';
 
 const errorHandlerPropTypes = {
   errorString: PropTypes.string.isRequired,
@@ -73,29 +74,11 @@ const RightPanelWrapper = styled.div`
   right: 0;
   left: 0;
 
-  .game-description {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    background-color: var(--primary-background-color);
-    align-self: center;
-    margin: 24px;
-    padding: 8px;
-    border-radius: 5px;
-    font-size: 1.8rem;
-    font-weight: 700;
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.25);
-  }
-
-  .game-description p {
-    margin: 16px 0;
-  }
-
   .top {
     display: flex;
     justify-content: center;
-    align-items: center;
     height: 60%;
+    overflow-y: auto;
   }
 
   .bottom {
@@ -246,17 +229,7 @@ function RightPanel() {
         {state.loading.includes('getting-deck') ? (
           <LoadingIndicator />
         ) : (
-          <div className="game-description">
-            <p>Cards of Carousal is a game for lorem ipsum dolor.</p>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse,
-              doloribus quaerat incidunt excepturi odit eos!
-            </p>
-            <p>
-              Qui delectus laboriosam aperiam maxime optio, architecto
-              asperiores, at ullam.
-            </p>
-          </div>
+          <PregameWelcomeText />
         )}
       </div>
       <div className="bottom">
