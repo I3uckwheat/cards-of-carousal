@@ -24,9 +24,11 @@ const initialState = {
     selectedPacks: config.initialSelectedPack,
     handSize: config.handSize,
     winnerScreenDisplayTime: config.winnerScreenDisplayTime,
+    hideJoinCode: false,
   },
   deck: { black: [], white: [] },
   loading: [],
+  newPlayerStaging: [],
 };
 
 export const HostContext = createContext();
@@ -78,6 +80,33 @@ function HostProvider({ children }) {
       emitter.off('message', handleMessage);
     };
   }, []);
+
+  useEffect(() => {
+    if (state.newPlayerStaging.length) {
+      const newPlayerIDs = state.newPlayerStaging.map(
+        (player) => player.playerId,
+      );
+
+      const message =
+        state.gameState === 'waiting-for-players'
+          ? {
+              big: "You've joined the lobby",
+              small: 'Please wait for the host to start the game',
+            }
+          : {
+              big: 'A round is in progress',
+              small: 'You will join the next round automatically',
+            };
+
+      dispatch({
+        type: 'SEND_PLAYER_CONNECTED_MESSAGES',
+        payload: {
+          players: newPlayerIDs,
+          message,
+        },
+      });
+    }
+  }, [state.newPlayerStaging]);
 
   return (
     <HostContext.Provider value={{ state, dispatch }}>

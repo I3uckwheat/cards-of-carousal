@@ -1,12 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`HostSettingsMenu rendering matches the expected snapshot 1`] = `
-.c1 {
-  width: 100%;
-  background-color: var(--secondary-background-color);
-  color: var(--secondary-text-color);
-}
-
 .c0 {
   position: absolute;
   top: 0;
@@ -38,6 +32,12 @@ exports[`HostSettingsMenu rendering matches the expected snapshot 1`] = `
 .c0 .host-settings-header h3 {
   font-size: 1.5rem;
   line-height: 0.9rem;
+  color: var(--secondary-text-color);
+}
+
+.c1 {
+  width: 100%;
+  background-color: var(--secondary-background-color);
   color: var(--secondary-text-color);
 }
 

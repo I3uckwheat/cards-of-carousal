@@ -1,10 +1,4 @@
 import reducer from './playerReducer';
-import socketInstance from '../../socket/socket';
-
-jest.mock('../../socket/socket', () => ({
-  joinLobby: jest.fn(),
-  sendMessage: jest.fn(),
-}));
 
 describe('reducer', () => {
   describe('default', () => {
@@ -71,25 +65,6 @@ describe('reducer', () => {
         big: 'Connecting to Lobby',
         small: 'Please wait',
       });
-    });
-
-    it('calls the joinLobby method with the correct id', () => {
-      const state = {
-        gameState: 'TEST',
-        loading: [],
-      };
-      const lobbyId = '1234';
-      const playerName = 'FOO';
-
-      reducer(state, {
-        type: 'JOIN_LOBBY',
-        payload: { lobbyId, playerName },
-      });
-
-      expect(socketInstance.joinLobby).toHaveBeenCalledWith(
-        lobbyId,
-        playerName,
-      );
     });
   });
 
@@ -175,9 +150,9 @@ describe('reducer', () => {
 
       const result = reducer(state, { type: 'ERROR_DISCONNECT', payload: {} });
       expect(result).not.toBe(state);
-      expect(result.gameState).toBe('disconnected-error');
+      expect(result.gameState).toBe('error');
       expect(result.message.big).toBe('AN ERROR OCCURRED');
-      expect(result.message.small).toBe('Refresh to try again');
+      expect(result.message.small).toBeUndefined();
     });
   });
 
@@ -207,23 +182,6 @@ describe('reducer', () => {
         small: 'Please wait',
       });
       expect(result.loading).toEqual(['submitting-cards']);
-    });
-  });
-
-  describe('SUBMIT_WINNER', () => {
-    it('sends a message to the host with the correct event and payload', () => {
-      const state = {};
-
-      const result = reducer(state, {
-        type: 'SUBMIT_WINNER',
-        payload: {},
-      });
-      expect(result).not.toBe(state);
-
-      expect(socketInstance.sendMessage).toHaveBeenCalledWith({
-        event: 'select-winner',
-        payload: {},
-      });
     });
   });
 

@@ -3,11 +3,12 @@ import React, { useState } from 'react';
 import './reset.css';
 import './App.css';
 
-import WelcomeScreen from './components/screens/WelcomeScreen/WelcomeScreen';
-import HostScreenController from './components/screenControllers/HostScreenController/HostScreenController';
-import PlayerScreenController from './components/screenControllers/PlayerScreenController/PlayerScreenController';
+import WelcomeScreen from './screens/WelcomeScreen/WelcomeScreen';
+import HostScreenController from './screenControllers/HostScreenController/HostScreenController';
+import PlayerScreenController from './screenControllers/PlayerScreenController/PlayerScreenController';
 import { PlayerProvider } from './contexts/PlayerContext/PlayerContext';
 import HostProvider from './contexts/HostContext/HostContext';
+import PlayerErrorBoundary from './errorHandlers/playerErrorHandlers/PlayerErrorBoundary';
 
 function App() {
   const [screenControllerType, setScreenControllerType] = useState('welcome');
@@ -15,9 +16,11 @@ function App() {
   switch (screenControllerType) {
     case 'player':
       return (
-        <PlayerProvider>
-          <PlayerScreenController />
-        </PlayerProvider>
+        <PlayerErrorBoundary>
+          <PlayerProvider>
+            <PlayerScreenController />
+          </PlayerProvider>
+        </PlayerErrorBoundary>
       );
     case 'host':
       return (

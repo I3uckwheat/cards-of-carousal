@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import Header from '../Header/Header';
-
 const propTypes = {
   settingsComponentList: PropTypes.arrayOf(
     PropTypes.shape({
@@ -69,6 +67,12 @@ const SettingsMenu = styled.div`
       line-height: 5rem;
     }
   }
+`;
+
+const Header = styled.header`
+  width: 100%;
+  background-color: var(--secondary-background-color);
+  color: var(--secondary-text-color);
 `;
 
 function useSettingsMenuHandler(components) {

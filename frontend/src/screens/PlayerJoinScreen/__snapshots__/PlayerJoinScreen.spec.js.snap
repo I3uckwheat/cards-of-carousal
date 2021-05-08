@@ -1,0 +1,562 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PlayerJoin snapshot matches 1`] = `
+.c2 {
+  display: block;
+  border: 2px solid var(--primary-text-color);
+  font-size: 12px;
+  font-weight: bold;
+  padding: 0.7em;
+  background: var(--secondary-background-color);
+  color: var(--secondary-text-color);
+}
+
+.c2:hover,
+.c2:active,
+.c2:focus {
+  background: var(--accent-background-color);
+  cursor: pointer;
+}
+
+.c4 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+  height: 122px;
+  font-size: 36px;
+  font-weight: 400;
+  padding-right: 16px;
+  padding-bottom: 2px;
+  background-color: var(--secondary-background-color);
+  color: var(--secondary-text-color);
+}
+
+.c4 p {
+  text-align: right;
+  position: relative;
+}
+
+.c4 a {
+  color: var(--secondary-text-color);
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.c1 {
+  width: 100%;
+  background-color: var(--secondary-background-color);
+  color: var(--secondary-text-color);
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+  height: min(20vh,400px);
+}
+
+.c1 .welcome-to {
+  font-size: clamp(18px,1.7vw,42px);
+  font-weight: 500;
+  line-height: 100%;
+  margin-bottom: max(-0.7vw,-10px);
+}
+
+.c1 .CoC {
+  font-size: clamp(48px,4.5vw,110px);
+  font-weight: 700;
+  line-height: 100%;
+  margin-bottom: max(-0.8vw,-20px);
+  padding-right: 5px;
+}
+
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  background-color: var(--primary-background-color);
+}
+
+.c0 main {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin: auto;
+}
+
+.c0 .player-join-form-container {
+  width: 100%;
+  max-width: 1650px;
+  margin: 0 auto;
+  text-align: center;
+  margin-top: -50px;
+}
+
+.c0 .player-join-form-input-container {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.c0 .player-join-form {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.c0 input {
+  text-transform: uppercase;
+  font-size: 1.5rem;
+  font-weight: 700;
+  border: none;
+  border-bottom: 2px solid var(--primary-text-color);
+  padding-top: 24px;
+  background: transparent;
+  padding-left: 0;
+  width: 268px;
+}
+
+.c0 input::-webkit-input-placeholder {
+  color: var(--primary-text-color);
+  font-size: 1.5rem;
+}
+
+.c0 input::-moz-placeholder {
+  color: var(--primary-text-color);
+  font-size: 1.5rem;
+}
+
+.c0 input:-ms-input-placeholder {
+  color: var(--primary-text-color);
+  font-size: 1.5rem;
+}
+
+.c0 input::placeholder {
+  color: var(--primary-text-color);
+  font-size: 1.5rem;
+}
+
+.c3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin: 0 auto;
+  width: 268px;
+  height: 69px;
+  border-radius: 2px;
+  background-color: var(--secondary-background-color);
+  font-size: 1.5rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  margin-top: 50px;
+}
+
+@media (max-width:1920px) {
+  .c4 {
+    height: 110px;
+    font-size: 30px;
+  }
+}
+
+@media (max-width:1440px) {
+  .c4 {
+    height: 90px;
+    font-size: 26px;
+  }
+}
+
+@media (max-width:1300px) {
+  .c4 {
+    height: 80px;
+    font-size: 23px;
+  }
+}
+
+@media (max-width:970px) {
+  .c4 {
+    text-align: center;
+    height: 70px;
+    font-size: 18px;
+  }
+}
+
+@media (max-width:570px) and (min-height:501px) {
+  .c4 {
+    height: 120px;
+    background-color: transparent;
+  }
+
+  .c4 p {
+    text-align: center;
+    font-size: 13px;
+    padding-bottom: 32px;
+    color: var(--accent-text-color);
+  }
+
+  .c4 a {
+    color: var(--accent-text-color);
+    display: block;
+  }
+}
+
+@media (max-height:500px) {
+  .c4 {
+    height: 50px;
+    padding-bottom: 4px;
+    padding-right: 10px;
+  }
+
+  .c4 p {
+    font-size: 13px;
+  }
+}
+
+@media (max-width:320px) {
+  .c4 {
+    font-size: 1rem;
+    padding-right: 0px;
+  }
+}
+
+@media (max-width:900px) {
+  .c1 .CoC {
+    margin-bottom: -8px;
+  }
+}
+
+@media (max-width:600px) {
+  .c1 .CoC {
+    margin-bottom: -7px;
+  }
+}
+
+@media (max-width:490px),(orientation:landscape) and (max-height:500px) {
+  .c1 .welcome-to {
+    display: none;
+  }
+}
+
+@media (orientation:landscape) and (max-height:500px) {
+  .c1 {
+    height: 80px;
+  }
+}
+
+@media screen and (min-width:646px) {
+  .c0 .player-join-form-container {
+    margin-top: 0;
+  }
+
+  .c0 .player-join-form-input-container {
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+  }
+
+  .c0 .player-join-name-input {
+    margin-right: 20px;
+  }
+}
+
+@media screen and (min-width:951px) {
+  .c0 input,
+  .c0 input::-webkit-input-placeholder {
+    font-size: 1.5rem;
+  }
+
+  .c0 input,
+  .c0 input::-moz-placeholder {
+    font-size: 1.5rem;
+  }
+
+  .c0 input,
+  .c0 input:-ms-input-placeholder {
+    font-size: 1.5rem;
+  }
+
+  .c0 input,
+  .c0 input::placeholder {
+    font-size: 1.5rem;
+  }
+
+  .c0 input {
+    width: 356px;
+  }
+
+  .c0 .player-join-name-input {
+    margin-right: 50px;
+  }
+}
+
+@media screen and (min-width:1441px) {
+  .c0 input,
+  .c0 input::-webkit-input-placeholder {
+    font-size: 1.8rem;
+  }
+
+  .c0 input,
+  .c0 input::-moz-placeholder {
+    font-size: 1.8rem;
+  }
+
+  .c0 input,
+  .c0 input:-ms-input-placeholder {
+    font-size: 1.8rem;
+  }
+
+  .c0 input,
+  .c0 input::placeholder {
+    font-size: 1.8rem;
+  }
+
+  .c0 input {
+    width: 400px;
+  }
+}
+
+@media screen and (min-width:1921px) {
+  .c0 input,
+  .c0 input::-webkit-input-placeholder {
+    font-size: 2rem;
+  }
+
+  .c0 input,
+  .c0 input::-moz-placeholder {
+    font-size: 2rem;
+  }
+
+  .c0 input,
+  .c0 input:-ms-input-placeholder {
+    font-size: 2rem;
+  }
+
+  .c0 input,
+  .c0 input::placeholder {
+    font-size: 2rem;
+  }
+
+  .c0 input {
+    width: 500px;
+  }
+}
+
+@media (min-width:2561px) {
+  .c0 input,
+  .c0 input::-webkit-input-placeholder {
+    font-size: 3rem;
+  }
+
+  .c0 input,
+  .c0 input::-moz-placeholder {
+    font-size: 3rem;
+  }
+
+  .c0 input,
+  .c0 input:-ms-input-placeholder {
+    font-size: 3rem;
+  }
+
+  .c0 input,
+  .c0 input::placeholder {
+    font-size: 3rem;
+  }
+
+  .c0 input {
+    width: 900px;
+  }
+}
+
+@media screen and (max-height:567px) and (min-width:568px) {
+  .c0 .player-join-form-container {
+    margin-top: 0;
+  }
+
+  .c0 .player-join-form-input-container {
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+  }
+
+  .c0 input {
+    width: 45%;
+  }
+
+  .c0 .player-join-name-input {
+    margin-right: 20px;
+  }
+}
+
+@media screen and (min-width:951px) {
+  .c3 {
+    font-size: 1.5rem;
+    width: 256px;
+    height: 66px;
+    margin-top: 100px;
+  }
+}
+
+@media screen and (min-width:1441px) {
+  .c3 {
+    font-size: 1.8rem;
+    width: 290px;
+    height: 74px;
+  }
+}
+
+@media screen and (min-width:1921px) {
+  .c3 {
+    font-size: 2rem;
+    width: 317px;
+    height: 82px;
+  }
+}
+
+@media (min-width:2561px) {
+  .c3 {
+    width: 490px;
+    height: 126px;
+    font-size: 3rem;
+  }
+}
+
+@media screen and (max-height:567px) and (min-width:568px) {
+  .c3 {
+    margin-top: 30px;
+  }
+}
+
+<div
+  className="c0 primary-background"
+  data-testid="player-join-container"
+>
+  <header
+    className="c1"
+    data-testid="header"
+  >
+    <h1
+      className="CoC"
+    >
+      CARDS OF CAROUSAL
+    </h1>
+  </header>
+  <main>
+    <div
+      className="player-join-form-container"
+    >
+      <form
+        className="player-join-form"
+        onSubmit={[Function]}
+      >
+        <div
+          className="player-join-form-input-container"
+        >
+          <input
+            className="player-join-name-input"
+            maxLength="12"
+            onChange={[Function]}
+            placeholder="name"
+            required={true}
+            type="text"
+            value=""
+          />
+          <input
+            className="player-join-code-input"
+            maxLength="4"
+            onChange={[Function]}
+            placeholder="join code"
+            required={true}
+            type="text"
+            value=""
+          />
+        </div>
+        <button
+          className="c2 c3"
+          data-testid="player-join-submit-button"
+          type="submit"
+        >
+          Let's Carouse!
+        </button>
+      </form>
+    </div>
+  </main>
+  <footer
+    className="c4"
+    data-testid="footer"
+  >
+    <p>
+      Card content thanks to:
+       
+      <a
+        href="https://cardsagainsthumanity.com"
+      >
+        https://cardsagainsthumanity.com
+      </a>
+    </p>
+    <p>
+      Made by Odin students, with love:
+       
+      <a
+        href="https://www.theodinproject.com"
+      >
+        https://www.theodinproject.com
+      </a>
+    </p>
+  </footer>
+</div>
+`;

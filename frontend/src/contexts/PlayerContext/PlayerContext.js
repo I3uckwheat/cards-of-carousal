@@ -52,6 +52,9 @@ export function PlayerProvider({ children }) {
       case 'lobby-closed':
         return dispatch({ type: 'LOBBY_CLOSED' });
 
+      case 'no-lobby':
+        return dispatch({ type: 'NO_LOBBY', payload });
+
       default:
         return undefined;
     }

@@ -5,9 +5,13 @@ import { render, screen } from '@testing-library/react';
 import TallyCount from './TallyCount';
 
 // https://jestjs.io/docs/en/tutorial-react#snapshot-testing-with-mocks-enzyme-and-react-16
-jest.mock('./TallyGroup', () => ({ tallyCount, color }) => 
-  <tally-group-mock data-testid='tally-group' data-tallycount={ tallyCount } data-color={ color } />
-);
+jest.mock('./TallyGroup', () => ({ tallyCount, color }) => (
+  <tally-group-mock
+    data-testid="tally-group"
+    data-tallycount={tallyCount}
+    data-color={color}
+  />
+));
 
 describe('TallyCount', () => {
   describe('score', () => {
@@ -38,17 +42,17 @@ describe('TallyCount', () => {
     it('renders two tallygroups in the correct order when score is 8', () => {
       render(<TallyCount color="primary" score={8} />);
 
-      // Because we're querying ALL, we can expect the order of the array to match what is 
+      // Because we're querying ALL, we can expect the order of the array to match what is
       // rendered in the view. QueryAllByTestId reads the DOM tree from top to bottom.
       const tallyGroups = screen.queryAllByTestId('tally-group');
       expect(tallyGroups[0].dataset.tallycount).toBe('5');
       expect(tallyGroups[1].dataset.tallycount).toBe('3');
     });
 
-    it('doesn\'t render two tallygroups in the incorrect order when score is 8', () => {
+    it("doesn't render two tallygroups in the incorrect order when score is 8", () => {
       render(<TallyCount color="primary" score={8} />);
 
-      // Because we're querying ALL, we can expect the order of the array to match what is 
+      // Because we're querying ALL, we can expect the order of the array to match what is
       // rendered in the view. QueryAllByTestId reads the DOM tree from top to bottom.
       const tallyGroups = screen.queryAllByTestId('tally-group');
       expect(tallyGroups[0].dataset.tallycount).not.toBe('3');

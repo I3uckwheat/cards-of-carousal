@@ -245,14 +245,9 @@ describe('context', () => {
         eventHandlers.message({ event: 'error-disconnect', payload: {} });
       });
 
-      expect(screen.getByTestId('game-state')).toHaveTextContent(
-        'disconnected-error',
-      );
+      expect(screen.getByTestId('game-state')).toHaveTextContent('error');
       expect(screen.getByTestId('message-big')).toHaveTextContent(
         'AN ERROR OCCURRED',
-      );
-      expect(screen.getByTestId('message-small')).toHaveTextContent(
-        'Refresh to try again',
       );
     });
 

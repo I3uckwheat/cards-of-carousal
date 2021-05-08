@@ -1,12 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`App snapshots should initially show the welcome screen 1`] = `
-.c1 {
-  width: 100%;
-  background-color: var(--secondary-background-color);
-  color: var(--secondary-text-color);
-}
-
 .c2 {
   display: block;
   border: 2px solid var(--primary-text-color);
@@ -38,11 +32,11 @@ exports[`App snapshots should initially show the welcome screen 1`] = `
   -webkit-justify-content: flex-end;
   -ms-flex-pack: end;
   justify-content: flex-end;
-  height: 200px;
-  font-size: 3.5rem;
+  height: 122px;
+  font-size: 36px;
   font-weight: 400;
   padding-right: 16px;
-  padding-bottom: 10px;
+  padding-bottom: 2px;
   background-color: var(--secondary-background-color);
   color: var(--secondary-text-color);
 }
@@ -56,6 +50,39 @@ exports[`App snapshots should initially show the welcome screen 1`] = `
   color: var(--secondary-text-color);
   -webkit-text-decoration: none;
   text-decoration: none;
+}
+
+.c1 {
+  width: 100%;
+  background-color: var(--secondary-background-color);
+  color: var(--secondary-text-color);
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+  height: min(20vh,400px);
+}
+
+.c1 .welcome-to {
+  font-size: clamp(18px,1.7vw,42px);
+  font-weight: 500;
+  line-height: 100%;
+  margin-bottom: max(-0.7vw,-10px);
+}
+
+.c1 .CoC {
+  font-size: clamp(48px,4.5vw,110px);
+  font-weight: 700;
+  line-height: 100%;
+  margin-bottom: max(-0.8vw,-20px);
+  padding-right: 5px;
 }
 
 .c0 {
@@ -73,31 +100,6 @@ exports[`App snapshots should initially show the welcome screen 1`] = `
   right: 0;
   height: 100%;
   background-color: var(--primary-background-color);
-}
-
-.c0 .header {
-  height: 190px;
-}
-
-.c0 .header-text {
-  position: relative;
-  bottom: -122px;
-}
-
-.c0 .welcome-to {
-  font-size: 2rem;
-  line-height: 0.2rem;
-  font-weight: 500;
-  margin-top: 0px;
-  margin-bottom: -14px;
-}
-
-.c0 .CoC {
-  font-size: 5rem;
-  line-height: 6.8rem;
-  font-weight: 700;
-  margin-bottom: -5px;
-  vertical-align: bottom;
 }
 
 .c0 main {
@@ -127,17 +129,17 @@ exports[`App snapshots should initially show the welcome screen 1`] = `
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
-  font-size: 3rem;
+  font-size: 5.2rem;
   font-weight: 700;
-  line-height: 2rem;
+  line-height: 4.2rem;
   -webkit-transform: rotate(-5deg);
   -ms-transform: rotate(-5deg);
   transform: rotate(-5deg);
-  margin-bottom: 90px;
+  margin-bottom: 190px;
 }
 
 .c0 .definition {
-  font-size: 2rem;
+  font-size: 4rem;
   font-weight: 400;
 }
 
@@ -174,9 +176,9 @@ exports[`App snapshots should initially show the welcome screen 1`] = `
   align-items: center;
   font-size: 6rem;
   font-weight: 900;
-  width: 256px;
-  height: 48px;
-  font-size: 2.5rem;
+  width: 317px;
+  height: 82px;
+  font-size: 3.6rem;
 }
 
 .c0 .OR {
@@ -196,29 +198,44 @@ exports[`App snapshots should initially show the welcome screen 1`] = `
   color: var(--secondary-text-color);
   border-radius: 50%;
   padding: 16px;
-  font-size: 2.25rem;
+  font-size: 2.3rem;
   font-weight: 700;
-  width: 72px;
-  height: 72px;
+  width: 82px;
+  height: 82px;
   margin-left: 93px;
   margin-right: 93px;
 }
 
-@media (max-width:2000px) {
+@media (max-width:1920px) {
   .c3 {
-    height: 140px;
-    font-size: 2rem;
+    height: 110px;
+    font-size: 30px;
+  }
+}
+
+@media (max-width:1440px) {
+  .c3 {
+    height: 90px;
+    font-size: 26px;
+  }
+}
+
+@media (max-width:1300px) {
+  .c3 {
+    height: 80px;
+    font-size: 23px;
   }
 }
 
 @media (max-width:970px) {
   .c3 {
     text-align: center;
-    font-size: 1.5rem;
+    height: 70px;
+    font-size: 18px;
   }
 }
 
-@media (max-width:785px) {
+@media (max-width:570px) and (min-height:501px) {
   .c3 {
     height: 120px;
     background-color: transparent;
@@ -226,7 +243,7 @@ exports[`App snapshots should initially show the welcome screen 1`] = `
 
   .c3 p {
     text-align: center;
-    font-size: 1.2rem;
+    font-size: 13px;
     padding-bottom: 32px;
     color: var(--accent-text-color);
   }
@@ -237,6 +254,18 @@ exports[`App snapshots should initially show the welcome screen 1`] = `
   }
 }
 
+@media (max-height:500px) {
+  .c3 {
+    height: 50px;
+    padding-bottom: 4px;
+    padding-right: 10px;
+  }
+
+  .c3 p {
+    font-size: 13px;
+  }
+}
+
 @media (max-width:320px) {
   .c3 {
     font-size: 1rem;
@@ -244,52 +273,116 @@ exports[`App snapshots should initially show the welcome screen 1`] = `
   }
 }
 
-@media (max-width:820px) {
-  .c0 .header-text {
-    bottom: -134px;
+@media (max-width:900px) {
+  .c1 .CoC {
+    margin-bottom: -8px;
   }
+}
 
-  .c0 .welcome-to {
-    font-size: 1.5rem;
+@media (max-width:600px) {
+  .c1 .CoC {
+    margin-bottom: -7px;
   }
+}
 
-  .c0 .CoC {
-    font-size: 4rem;
-    line-height: 6rem;
+@media (max-width:490px),(orientation:landscape) and (max-height:500px) {
+  .c1 .welcome-to {
+    display: none;
   }
+}
 
+@media (orientation:landscape) and (max-height:500px) {
+  .c1 {
+    height: 80px;
+  }
+}
+
+@media (max-width:1920px) {
   .c0 .definition-container {
-    font-size: 2.2rem;
-    line-height: 1.8rem;
-    margin-bottom: 90px;
+    font-size: 4.5rem;
+    line-height: 3.7rem;
+    margin-bottom: 150px;
   }
 
   .c0 .definition {
-    font-size: 1.7rem;
+    font-size: 3.5rem;
   }
 
   .c0 .button {
-    width: 200px;
-    height: 48px;
-    font-size: 2.5rem;
+    width: 290px;
+    height: 74px;
+    font-size: 3.2rem;
   }
 
   .c0 .OR {
-    width: 60px;
-    height: 60px;
-    margin-left: 70px;
-    margin-right: 70px;
+    width: 74px;
+    height: 74px;
+    margin-left: 93px;
+    margin-right: 93px;
     font-size: 2rem;
   }
 }
 
-@media (max-width:645px) {
-  .c0 .header-text {
-    bottom: -85px;
+@media (max-width:1440px) {
+  .c0 .definition-container {
+    font-size: 3.2rem;
+    line-height: 2.6rem;
+    margin-bottom: 90px;
   }
 
+  .c0 .definition {
+    font-size: 2.5rem;
+  }
+
+  .c0 .button {
+    width: 256px;
+    height: 66px;
+    font-size: 2.5rem;
+  }
+
+  .c0 .OR {
+    width: 66px;
+    height: 66px;
+    margin-left: 93px;
+    margin-right: 93px;
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width:950px) {
+  .c0 .definition-container {
+    font-size: 2.4rem;
+    line-height: 1.8rem;
+  }
+
+  .c0 .definition {
+    font-size: 1.85rem;
+  }
+
+  .c0 .button {
+    width: 200px;
+    height: 51px;
+    font-size: 2rem;
+  }
+
+  .c0 .OR {
+    width: 51px;
+    height: 51px;
+    margin-left: 70px;
+    margin-right: 70px;
+    font-size: 1.4rem;
+  }
+}
+
+@media (max-width:700px),(max-width:900px) and (max-height:500px) {
   .c0 .definition-container {
     display: none;
+  }
+
+  .c0 .button {
+    width: 268px;
+    height: 69px;
+    font-size: 2rem;
   }
 
   .c0 .host-button {
@@ -299,118 +392,31 @@ exports[`App snapshots should initially show the welcome screen 1`] = `
   .c0 .OR {
     display: none;
   }
-
-  .c0 .welcome-to {
-    display: none;
-  }
-
-  .c0 .CoC {
-    line-height: 3.5rem;
-  }
 }
 
-@media (max-width:320px) {
-  .c0 .header {
-    height: 130px;
-  }
-
-  .c0 .header-text {
-    bottom: -30px;
-  }
-
-  .c0 .CoC {
-    font-size: 3rem;
-    margin-bottom: 12px;
-  }
-}
-
-@media (min-width:2000px),(min-height:1500px) {
-  .c0 .header {
-    height: 400px;
-  }
-
-  .c0 .header-text {
-    bottom: -260px;
-  }
-
-  .c0 .welcome-to {
-    font-size: 3rem;
-    line-height: 3.8rem;
-  }
-
-  .c0 .CoC {
-    font-size: 8rem;
-    line-height: 6.5rem;
-  }
-
-  .c0 .definition-container {
-    font-size: 4.5rem;
-    line-height: 3.5rem;
-    margin-bottom: 250px;
-  }
-
-  .c0 .definition {
-    font-size: 3.5rem;
-  }
-
-  .c0 .OR {
-    font-size: 2.5rem;
-    width: 100px;
-    height: 100px;
-    margin-left: 100px;
-    margin-right: 100px;
-  }
-
-  .c0 .button {
-    width: 500px;
-    height: 100px;
-    border: solid black 4px;
-    font-size: 3rem;
-  }
-}
-
-@media (min-width:2450px) {
-  .c0 .header {
-    height: 400px;
-  }
-
-  .c0 .header-text {
-    bottom: -260px;
-  }
-
-  .c0 .welcome-to {
-    font-size: 3rem;
-    line-height: 3.8rem;
-  }
-
-  .c0 .CoC {
-    font-size: 8rem;
-    line-height: 6.5rem;
-  }
-
+@media (min-width:2561px) {
   .c0 .definition-container {
     font-size: 6.5rem;
-    line-height: 5.5rem;
+    line-height: 4.8rem;
     margin-bottom: 300px;
   }
 
   .c0 .definition {
-    font-size: 6rem;
-  }
-
-  .c0 .OR {
-    font-size: 4.5rem;
-    width: 150px;
-    height: 150px;
-    margin-left: 120px;
-    margin-right: 120px;
+    font-size: 5rem;
   }
 
   .c0 .button {
-    width: 600px;
-    height: 150px;
-    border: solid black 4px;
-    font-size: 5rem;
+    width: 490px;
+    height: 126px;
+    font-size: 5.2rem;
+  }
+
+  .c0 .OR {
+    width: 126px;
+    height: 126px;
+    margin-left: 93px;
+    margin-right: 93px;
+    font-size: 3.8rem;
   }
 }
 
@@ -418,22 +424,20 @@ exports[`App snapshots should initially show the welcome screen 1`] = `
   className="c0 primary-background"
 >
   <header
-    className="c1 header"
+    className="c1"
+    data-testid="header"
   >
-    <div
-      className="header-text"
+    <p
+      className="welcome-to"
+      data-testid="welcome-text"
     >
-      <p
-        className="welcome-to"
-      >
-        WELCOME TO
-      </p>
-      <h1
-        className="CoC"
-      >
-        CARDS OF CAROUSAL
-      </h1>
-    </div>
+      WELCOME TO
+    </p>
+    <h1
+      className="CoC"
+    >
+      CARDS OF CAROUSAL
+    </h1>
   </header>
   <main>
     <div
@@ -485,6 +489,7 @@ exports[`App snapshots should initially show the welcome screen 1`] = `
   </main>
   <footer
     className="c3"
+    data-testid="footer"
   >
     <p>
       Card content thanks to:
@@ -510,13 +515,7 @@ exports[`App snapshots should initially show the welcome screen 1`] = `
 
 exports[`App snapshots should show the host screen after user has clicked the "host" button 1`] = `
 <DocumentFragment>
-  .c2 {
-  width: 100%;
-  background-color: var(--secondary-background-color);
-  color: var(--secondary-text-color);
-}
-
-.c5 {
+  .c5 {
   display: block;
   border: 2px solid var(--primary-text-color);
   font-size: 12px;
@@ -617,6 +616,12 @@ exports[`App snapshots should show the host screen after user has clicked the "h
   -ms-flex-positive: 1;
   flex-grow: 1;
   position: relative;
+}
+
+.c2 {
+  width: 100%;
+  background-color: var(--secondary-background-color);
+  color: var(--secondary-text-color);
 }
 
 .c4 {
@@ -1001,7 +1006,15 @@ exports[`App snapshots should show the host screen after user has clicked the "h
   height: 40%;
 }
 
-@media (max-width:2000px) {
+@media (max-width:1920px) {
+
+}
+
+@media (max-width:1440px) {
+
+}
+
+@media (max-width:1300px) {
 
 }
 
@@ -1009,7 +1022,11 @@ exports[`App snapshots should show the host screen after user has clicked the "h
 
 }
 
-@media (max-width:785px) {
+@media (max-width:570px) and (min-height:501px) {
+
+}
+
+@media (max-height:500px) {
 
 }
 
@@ -1017,23 +1034,39 @@ exports[`App snapshots should show the host screen after user has clicked the "h
 
 }
 
-@media (max-width:820px) {
+@media (max-width:900px) {
 
 }
 
-@media (max-width:645px) {
+@media (max-width:600px) {
 
 }
 
-@media (max-width:320px) {
+@media (max-width:490px),(orientation:landscape) and (max-height:500px) {
 
 }
 
-@media (min-width:2000px),(min-height:1500px) {
+@media (orientation:landscape) and (max-height:500px) {
 
 }
 
-@media (min-width:2450px) {
+@media (max-width:1920px) {
+
+}
+
+@media (max-width:1440px) {
+
+}
+
+@media (max-width:950px) {
+
+}
+
+@media (max-width:700px),(max-width:900px) and (max-height:500px) {
+
+}
+
+@media (min-width:2561px) {
 
 }
 
@@ -1387,13 +1420,7 @@ exports[`App snapshots should show the host screen after user has clicked the "h
 
 exports[`App snapshots should show the player screen after user has clicked the "join" button 1`] = `
 <DocumentFragment>
-  .c1 {
-  width: 100%;
-  background-color: var(--secondary-background-color);
-  color: var(--secondary-text-color);
-}
-
-.c3 {
+  .c2 {
   display: block;
   border: 2px solid var(--primary-text-color);
   font-size: 12px;
@@ -1403,14 +1430,14 @@ exports[`App snapshots should show the player screen after user has clicked the 
   color: var(--secondary-text-color);
 }
 
-.c3:hover,
-.c3:active,
-.c3:focus {
+.c2:hover,
+.c2:active,
+.c2:focus {
   background: var(--accent-background-color);
   cursor: pointer;
 }
 
-.c5 {
+.c4 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -1422,37 +1449,74 @@ exports[`App snapshots should show the player screen after user has clicked the 
   -webkit-justify-content: flex-end;
   -ms-flex-pack: end;
   justify-content: flex-end;
-  height: 200px;
-  font-size: 3.5rem;
+  height: 122px;
+  font-size: 36px;
   font-weight: 400;
   padding-right: 16px;
-  padding-bottom: 10px;
+  padding-bottom: 2px;
   background-color: var(--secondary-background-color);
   color: var(--secondary-text-color);
 }
 
-.c5 p {
+.c4 p {
   text-align: right;
   position: relative;
 }
 
-.c5 a {
+.c4 a {
   color: var(--secondary-text-color);
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
+.c1 {
+  width: 100%;
+  background-color: var(--secondary-background-color);
+  color: var(--secondary-text-color);
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+  height: min(20vh,400px);
+}
+
+.c1 .welcome-to {
+  font-size: clamp(18px,1.7vw,42px);
+  font-weight: 500;
+  line-height: 100%;
+  margin-bottom: max(-0.7vw,-10px);
+}
+
+.c1 .CoC {
+  font-size: clamp(48px,4.5vw,110px);
+  font-weight: 700;
+  line-height: 100%;
+  margin-bottom: max(-0.8vw,-20px);
+  padding-right: 5px;
+}
+
 .c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
   position: fixed;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
-  display: grid;
   height: 100%;
   background-color: var(--primary-background-color);
-  grid-template-rows: 130px 1fr auto;
-  grid-template-columns: 1fr;
 }
 
 .c0 main {
@@ -1463,14 +1527,15 @@ exports[`App snapshots should show the player screen after user has clicked the 
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
   -webkit-box-pack: center;
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin: auto;
 }
 
 .c0 .player-join-form-container {
@@ -1478,62 +1543,10 @@ exports[`App snapshots should show the player screen after user has clicked the 
   max-width: 1650px;
   margin: 0 auto;
   text-align: center;
-  padding: 20px;
-  margin-top: -88px;
+  margin-top: -50px;
 }
 
-.c0 .player-join-form {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 60px 60px 40px 1fr;
-}
-
-.c0 .player-join-name-input {
-  grid-row: 1;
-  grid-column: 1;
-}
-
-.c0 .player-join-code-input {
-  grid-row: 2;
-  grid-column: 1;
-}
-
-.c0 .player-join-name-input,
-.c0 .player-join-code-input {
-  margin: 0 16px;
-}
-
-.c0 input {
-  text-transform: uppercase;
-  font-size: 1.2rem;
-  border: none;
-  border-bottom: 2px solid var(--primary-text-color);
-  padding-top: 40px;
-  background: transparent;
-  padding-left: 0;
-}
-
-.c0 input::-webkit-input-placeholder {
-  color: var(--primary-text-color);
-  font-size: 1.2rem;
-}
-
-.c0 input::-moz-placeholder {
-  color: var(--primary-text-color);
-  font-size: 1.2rem;
-}
-
-.c0 input:-ms-input-placeholder {
-  color: var(--primary-text-color);
-  font-size: 1.2rem;
-}
-
-.c0 input::placeholder {
-  color: var(--primary-text-color);
-  font-size: 1.2rem;
-}
-
-.c2 {
+.c0 .player-join-form-input-container {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -1541,380 +1554,369 @@ exports[`App snapshots should show the player screen after user has clicked the 
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
-  -webkit-box-pack: end;
-  -webkit-justify-content: flex-end;
-  -ms-flex-pack: end;
-  justify-content: flex-end;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
 }
 
-.c2 h1 {
-  font-size: 3rem;
-  line-height: 3.5rem;
+.c0 .player-join-form {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.c0 input {
   text-transform: uppercase;
-  margin-bottom: -12px;
-  vertical-align: bottom;
+  font-size: 1.5rem;
+  font-weight: 700;
+  border: none;
+  border-bottom: 2px solid var(--primary-text-color);
+  padding-top: 24px;
+  background: transparent;
+  padding-left: 0;
+  width: 268px;
 }
 
-.c4 {
-  grid-row: 4;
+.c0 input::-webkit-input-placeholder {
+  color: var(--primary-text-color);
+  font-size: 1.5rem;
+}
+
+.c0 input::-moz-placeholder {
+  color: var(--primary-text-color);
+  font-size: 1.5rem;
+}
+
+.c0 input:-ms-input-placeholder {
+  color: var(--primary-text-color);
+  font-size: 1.5rem;
+}
+
+.c0 input::placeholder {
+  color: var(--primary-text-color);
+  font-size: 1.5rem;
+}
+
+.c3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
   margin: 0 auto;
-  width: 260px;
-  height: 72px;
+  width: 268px;
+  height: 69px;
   border-radius: 2px;
   background-color: var(--secondary-background-color);
-  font-size: 1.2rem;
+  font-size: 1.5rem;
+  font-weight: 900;
   text-transform: uppercase;
+  margin-top: 50px;
 }
 
-@media (max-width:2000px) {
-  .c5 {
-    height: 140px;
-    font-size: 2rem;
+@media (max-width:1920px) {
+  .c4 {
+    height: 110px;
+    font-size: 30px;
+  }
+}
+
+@media (max-width:1440px) {
+  .c4 {
+    height: 90px;
+    font-size: 26px;
+  }
+}
+
+@media (max-width:1300px) {
+  .c4 {
+    height: 80px;
+    font-size: 23px;
   }
 }
 
 @media (max-width:970px) {
-  .c5 {
+  .c4 {
     text-align: center;
-    font-size: 1.5rem;
+    height: 70px;
+    font-size: 18px;
   }
 }
 
-@media (max-width:785px) {
-  .c5 {
+@media (max-width:570px) and (min-height:501px) {
+  .c4 {
     height: 120px;
     background-color: transparent;
   }
 
-  .c5 p {
+  .c4 p {
     text-align: center;
-    font-size: 1.2rem;
+    font-size: 13px;
     padding-bottom: 32px;
     color: var(--accent-text-color);
   }
 
-  .c5 a {
+  .c4 a {
     color: var(--accent-text-color);
     display: block;
   }
 }
 
+@media (max-height:500px) {
+  .c4 {
+    height: 50px;
+    padding-bottom: 4px;
+    padding-right: 10px;
+  }
+
+  .c4 p {
+    font-size: 13px;
+  }
+}
+
 @media (max-width:320px) {
-  .c5 {
+  .c4 {
     font-size: 1rem;
     padding-right: 0px;
   }
 }
 
-@media (max-width:820px) {
-
-}
-
-@media (max-width:645px) {
-
-}
-
-@media (max-width:320px) {
-
-}
-
-@media (min-width:2000px),(min-height:1500px) {
-
-}
-
-@media (min-width:2450px) {
-
-}
-
-@media screen and (min-width:646px) {
-  .c0 .player-join-form-container {
-    padding-left: 40px;
-    padding-right: 40px;
-  }
-
-  .c0 .player-join-form {
-    grid-template-columns: 52% 48%;
-    grid-template-rows: 60px 60px 40px 1fr;
-  }
-
-  .c0 .player-join-name-input {
-    grid-row: 1;
-    grid-column: 1 / 3;
-  }
-
-  .c0 .player-join-code-input {
-    grid-row: 2;
-    grid-column: 1 / 3;
-  }
-
-  .c0 .player-join-name-input,
-  .c0 .player-join-code-input {
-    margin: 0 16px;
+@media (max-width:900px) {
+  .c1 .CoC {
+    margin-bottom: -8px;
   }
 }
 
-@media screen and (min-width:786px) {
-  .c0 {
-    grid-template-rows: 180px 1fr auto;
-  }
-
-  .c0 .player-join-form-container {
-    max-width: 800px;
-  }
-
-  .c0 .player-join-form {
-    grid-template-rows: 60px 60px 1fr;
-  }
-
-  .c0 .player-join-name-input {
-    grid-row: 1;
-    grid-column: 1;
-  }
-
-  .c0 .player-join-code-input {
-    grid-row: 1;
-    grid-column: 2;
+@media (max-width:600px) {
+  .c1 .CoC {
+    margin-bottom: -7px;
   }
 }
 
-@media screen and (min-width:970px) {
-  .c0 input {
-    font-size: 1.2rem;
-    border-bottom: 2px solid var(--primary-text-color);
-    padding-top: 40px;
-  }
-
-  .c0 input::-webkit-input-placeholder {
-    font-size: 1.2rem;
-  }
-
-  .c0 input::-moz-placeholder {
-    font-size: 1.2rem;
-  }
-
-  .c0 input:-ms-input-placeholder {
-    font-size: 1.2rem;
-  }
-
-  .c0 input::placeholder {
-    font-size: 1.2rem;
+@media (max-width:490px),(orientation:landscape) and (max-height:500px) {
+  .c1 .welcome-to {
+    display: none;
   }
 }
 
-@media screen and (min-width:2000px) {
-  .c0 .player-join-form-container {
-    max-width: 1000px;
-  }
-
-  .c0 .player-join-form {
-    grid-template-rows: 60px 88px 1fr;
-  }
-
-  .c0 input {
-    font-size: 1.6rem;
-    border-bottom: 2px solid var(--primary-text-color);
-    padding-top: 36px;
-  }
-
-  .c0 input::-webkit-input-placeholder {
-    font-size: 1.6rem;
-  }
-
-  .c0 input::-moz-placeholder {
-    font-size: 1.6rem;
-  }
-
-  .c0 input:-ms-input-placeholder {
-    font-size: 1.6rem;
-  }
-
-  .c0 input::placeholder {
-    font-size: 1.6rem;
-  }
-
-  .c0 .player-join-name-input {
-    margin-right: 16px;
-  }
-
-  .c0 .player-join-code-input {
-    margin-left: 16px;
-  }
-}
-
-@media screen and (min-width:2560px) {
-  .c0 .player-join-form-container {
-    max-width: 1650px;
-    padding: 20px 80px 20px 80px;
-  }
-
-  .c0 .player-join-form {
-    grid-template-rows: 90px 160px 1fr;
-  }
-
-  .c0 input {
-    font-size: 4.4rem;
-    font-weight: 500;
-    border-bottom: 4px solid var(--primary-text-color);
-    padding-top: 24px;
-    padding-left: 0;
-  }
-
-  .c0 input::-webkit-input-placeholder {
-    font-weight: 500;
-    font-size: 4.4rem;
-  }
-
-  .c0 input::-moz-placeholder {
-    font-weight: 500;
-    font-size: 4.4rem;
-  }
-
-  .c0 input:-ms-input-placeholder {
-    font-weight: 500;
-    font-size: 4.4rem;
-  }
-
-  .c0 input::placeholder {
-    font-weight: 500;
-    font-size: 4.4rem;
-  }
-
-  .c0 .player-join-name-input {
-    margin-right: 32px;
-  }
-
-  .c0 .player-join-code-input {
-    margin-left: 32px;
-  }
-}
-
-@media screen and (max-height:320px) {
-  .c0 .player-join-form-container {
-    margin-top: -20px;
-  }
-
-  .c0 .player-join-form {
-    grid-template-rows: 50px 40px 1fr;
-  }
-
-  .c0 input {
-    padding-top: 30px;
-  }
-}
-
-@media screen and (min-height:321px) and (max-height:375px) {
-  .c0 {
-    grid-template-rows: 60px 1fr auto;
-  }
-
-  .c0 .player-join-form-container {
-    margin-top: -20px;
-  }
-}
-
-@media screen and (min-height:376px) and (max-height:414px) {
-  .c0 .player-join-form-container {
-    margin-top: -10px;
-  }
-}
-
-@media screen and (min-height:415px) and (max-height:567px) {
-  .c0 .player-join-form-container {
-    margin-top: 10px;
-  }
-
-  .c0 .player-join-form {
-    grid-template-rows: 60px 60px 1fr;
-  }
-
-  .c0 input {
-    padding-top: 40px;
-  }
-}
-
-@media screen and (max-height:567px) {
-  .c0 {
-    grid-template-rows: 60px 1fr auto;
-  }
-
-  .c0 .player-join-form {
-    grid-template-columns: 52% 48%;
-  }
-
-  .c0 .player-join-name-input {
-    grid-row: 1;
-    grid-column: 1;
-  }
-
-  .c0 .player-join-code-input {
-    grid-row: 1;
-    grid-column: 2;
-  }
-}
-
-@media screen and(min-width:786px) {
-  .c2 h1 {
-    font-size: 4rem;
-    line-height: 4.5rem;
-    margin-bottom: -15px;
-  }
-}
-
-@media screen and (min-width:970px) {
-  .c2 h1 {
-    line-height: 5rem;
-    margin-bottom: -24px;
-  }
-}
-
-@media screen and (min-width:2560px) {
-  .c2 h1 {
-    font-size: 6rem;
-    line-height: 6rem;
-    margin-bottom: -16px;
-  }
-}
-
-@media screen and (min-width:646px) {
-  .c4 {
-    grid-column: 1 / 3;
-  }
-}
-
-@media screen and (min-width:786px) {
-  .c4 {
-    grid-row: 4;
-  }
-}
-
-@media screen and (min-width:970px) {
-  .c4 {
-    font-size: 1.2rem;
-    width: 288px;
+@media (orientation:landscape) and (max-height:500px) {
+  .c1 {
     height: 80px;
   }
 }
 
-@media screen and (min-width:2000px) {
-  .c4 {
+@media (max-width:1920px) {
+
+}
+
+@media (max-width:1440px) {
+
+}
+
+@media (max-width:950px) {
+
+}
+
+@media (max-width:700px),(max-width:900px) and (max-height:500px) {
+
+}
+
+@media (min-width:2561px) {
+
+}
+
+@media screen and (min-width:646px) {
+  .c0 .player-join-form-container {
+    margin-top: 0;
+  }
+
+  .c0 .player-join-form-input-container {
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+  }
+
+  .c0 .player-join-name-input {
+    margin-right: 20px;
+  }
+}
+
+@media screen and (min-width:951px) {
+  .c0 input,
+  .c0 input::-webkit-input-placeholder {
     font-size: 1.5rem;
-    width: 360px;
-    height: 100px;
+  }
+
+  .c0 input,
+  .c0 input::-moz-placeholder {
+    font-size: 1.5rem;
+  }
+
+  .c0 input,
+  .c0 input:-ms-input-placeholder {
+    font-size: 1.5rem;
+  }
+
+  .c0 input,
+  .c0 input::placeholder {
+    font-size: 1.5rem;
+  }
+
+  .c0 input {
+    width: 356px;
+  }
+
+  .c0 .player-join-name-input {
+    margin-right: 50px;
   }
 }
 
-@media screen and (min-width:2560px) {
-  .c4 {
-    font-size: 4rem;
+@media screen and (min-width:1441px) {
+  .c0 input,
+  .c0 input::-webkit-input-placeholder {
+    font-size: 1.8rem;
+  }
+
+  .c0 input,
+  .c0 input::-moz-placeholder {
+    font-size: 1.8rem;
+  }
+
+  .c0 input,
+  .c0 input:-ms-input-placeholder {
+    font-size: 1.8rem;
+  }
+
+  .c0 input,
+  .c0 input::placeholder {
+    font-size: 1.8rem;
+  }
+
+  .c0 input {
+    width: 400px;
+  }
+}
+
+@media screen and (min-width:1921px) {
+  .c0 input,
+  .c0 input::-webkit-input-placeholder {
+    font-size: 2rem;
+  }
+
+  .c0 input,
+  .c0 input::-moz-placeholder {
+    font-size: 2rem;
+  }
+
+  .c0 input,
+  .c0 input:-ms-input-placeholder {
+    font-size: 2rem;
+  }
+
+  .c0 input,
+  .c0 input::placeholder {
+    font-size: 2rem;
+  }
+
+  .c0 input {
+    width: 500px;
+  }
+}
+
+@media (min-width:2561px) {
+  .c0 input,
+  .c0 input::-webkit-input-placeholder {
+    font-size: 3rem;
+  }
+
+  .c0 input,
+  .c0 input::-moz-placeholder {
+    font-size: 3rem;
+  }
+
+  .c0 input,
+  .c0 input:-ms-input-placeholder {
+    font-size: 3rem;
+  }
+
+  .c0 input,
+  .c0 input::placeholder {
+    font-size: 3rem;
+  }
+
+  .c0 input {
     width: 900px;
-    height: 225px;
   }
 }
 
-@media screen and (max-height:567px) {
-  .c4 {
-    grid-column: 1 / 3;
-    grid-row: 3;
+@media screen and (max-height:567px) and (min-width:568px) {
+  .c0 .player-join-form-container {
+    margin-top: 0;
+  }
+
+  .c0 .player-join-form-input-container {
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+  }
+
+  .c0 input {
+    width: 45%;
+  }
+
+  .c0 .player-join-name-input {
+    margin-right: 20px;
+  }
+}
+
+@media screen and (min-width:951px) {
+  .c3 {
+    font-size: 1.5rem;
+    width: 256px;
+    height: 66px;
+    margin-top: 100px;
+  }
+}
+
+@media screen and (min-width:1441px) {
+  .c3 {
+    font-size: 1.8rem;
+    width: 290px;
+    height: 74px;
+  }
+}
+
+@media screen and (min-width:1921px) {
+  .c3 {
+    font-size: 2rem;
+    width: 317px;
+    height: 82px;
+  }
+}
+
+@media (min-width:2561px) {
+  .c3 {
+    width: 490px;
+    height: 126px;
+    font-size: 3rem;
+  }
+}
+
+@media screen and (max-height:567px) and (min-width:568px) {
+  .c3 {
+    margin-top: 30px;
   }
 }
 
@@ -1923,10 +1925,13 @@ exports[`App snapshots should show the player screen after user has clicked the 
     data-testid="player-join-container"
   >
     <header
-      class="c1 c2"
+      class="c1"
+      data-testid="header"
     >
-      <h1>
-        Cards of Carousal
+      <h1
+        class="CoC"
+      >
+        CARDS OF CAROUSAL
       </h1>
     </header>
     <main>
@@ -1936,24 +1941,28 @@ exports[`App snapshots should show the player screen after user has clicked the 
         <form
           class="player-join-form"
         >
-          <input
-            class="player-join-name-input"
-            maxlength="12"
-            placeholder="name"
-            required=""
-            type="text"
-            value=""
-          />
-          <input
-            class="player-join-code-input"
-            maxlength="4"
-            placeholder="join code"
-            required=""
-            type="text"
-            value=""
-          />
+          <div
+            class="player-join-form-input-container"
+          >
+            <input
+              class="player-join-name-input"
+              maxlength="12"
+              placeholder="name"
+              required=""
+              type="text"
+              value=""
+            />
+            <input
+              class="player-join-code-input"
+              maxlength="4"
+              placeholder="join code"
+              required=""
+              type="text"
+              value=""
+            />
+          </div>
           <button
-            class="c3 c4"
+            class="c2 c3"
             data-testid="player-join-submit-button"
             type="submit"
           >
@@ -1963,7 +1972,8 @@ exports[`App snapshots should show the player screen after user has clicked the 
       </div>
     </main>
     <footer
-      class="c5"
+      class="c4"
+      data-testid="footer"
     >
       <p>
         Card content thanks to: 
@@ -1988,13 +1998,7 @@ exports[`App snapshots should show the player screen after user has clicked the 
 
 exports[`App snapshots should show the welcome screen after user has clicked elements other than the "host" or "join" buttons 1`] = `
 <DocumentFragment>
-  .c1 {
-  width: 100%;
-  background-color: var(--secondary-background-color);
-  color: var(--secondary-text-color);
-}
-
-.c2 {
+  .c2 {
   display: block;
   border: 2px solid var(--primary-text-color);
   font-size: 12px;
@@ -2025,11 +2029,11 @@ exports[`App snapshots should show the welcome screen after user has clicked ele
   -webkit-justify-content: flex-end;
   -ms-flex-pack: end;
   justify-content: flex-end;
-  height: 200px;
-  font-size: 3.5rem;
+  height: 122px;
+  font-size: 36px;
   font-weight: 400;
   padding-right: 16px;
-  padding-bottom: 10px;
+  padding-bottom: 2px;
   background-color: var(--secondary-background-color);
   color: var(--secondary-text-color);
 }
@@ -2043,6 +2047,39 @@ exports[`App snapshots should show the welcome screen after user has clicked ele
   color: var(--secondary-text-color);
   -webkit-text-decoration: none;
   text-decoration: none;
+}
+
+.c1 {
+  width: 100%;
+  background-color: var(--secondary-background-color);
+  color: var(--secondary-text-color);
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+  height: min(20vh,400px);
+}
+
+.c1 .welcome-to {
+  font-size: clamp(18px,1.7vw,42px);
+  font-weight: 500;
+  line-height: 100%;
+  margin-bottom: max(-0.7vw,-10px);
+}
+
+.c1 .CoC {
+  font-size: clamp(48px,4.5vw,110px);
+  font-weight: 700;
+  line-height: 100%;
+  margin-bottom: max(-0.8vw,-20px);
+  padding-right: 5px;
 }
 
 .c0 {
@@ -2060,31 +2097,6 @@ exports[`App snapshots should show the welcome screen after user has clicked ele
   right: 0;
   height: 100%;
   background-color: var(--primary-background-color);
-}
-
-.c0 .header {
-  height: 190px;
-}
-
-.c0 .header-text {
-  position: relative;
-  bottom: -122px;
-}
-
-.c0 .welcome-to {
-  font-size: 2rem;
-  line-height: 0.2rem;
-  font-weight: 500;
-  margin-top: 0px;
-  margin-bottom: -14px;
-}
-
-.c0 .CoC {
-  font-size: 5rem;
-  line-height: 6.8rem;
-  font-weight: 700;
-  margin-bottom: -5px;
-  vertical-align: bottom;
 }
 
 .c0 main {
@@ -2114,17 +2126,17 @@ exports[`App snapshots should show the welcome screen after user has clicked ele
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
-  font-size: 3rem;
+  font-size: 5.2rem;
   font-weight: 700;
-  line-height: 2rem;
+  line-height: 4.2rem;
   -webkit-transform: rotate(-5deg);
   -ms-transform: rotate(-5deg);
   transform: rotate(-5deg);
-  margin-bottom: 90px;
+  margin-bottom: 190px;
 }
 
 .c0 .definition {
-  font-size: 2rem;
+  font-size: 4rem;
   font-weight: 400;
 }
 
@@ -2161,9 +2173,9 @@ exports[`App snapshots should show the welcome screen after user has clicked ele
   align-items: center;
   font-size: 6rem;
   font-weight: 900;
-  width: 256px;
-  height: 48px;
-  font-size: 2.5rem;
+  width: 317px;
+  height: 82px;
+  font-size: 3.6rem;
 }
 
 .c0 .OR {
@@ -2183,29 +2195,44 @@ exports[`App snapshots should show the welcome screen after user has clicked ele
   color: var(--secondary-text-color);
   border-radius: 50%;
   padding: 16px;
-  font-size: 2.25rem;
+  font-size: 2.3rem;
   font-weight: 700;
-  width: 72px;
-  height: 72px;
+  width: 82px;
+  height: 82px;
   margin-left: 93px;
   margin-right: 93px;
 }
 
-@media (max-width:2000px) {
+@media (max-width:1920px) {
   .c3 {
-    height: 140px;
-    font-size: 2rem;
+    height: 110px;
+    font-size: 30px;
+  }
+}
+
+@media (max-width:1440px) {
+  .c3 {
+    height: 90px;
+    font-size: 26px;
+  }
+}
+
+@media (max-width:1300px) {
+  .c3 {
+    height: 80px;
+    font-size: 23px;
   }
 }
 
 @media (max-width:970px) {
   .c3 {
     text-align: center;
-    font-size: 1.5rem;
+    height: 70px;
+    font-size: 18px;
   }
 }
 
-@media (max-width:785px) {
+@media (max-width:570px) and (min-height:501px) {
   .c3 {
     height: 120px;
     background-color: transparent;
@@ -2213,7 +2240,7 @@ exports[`App snapshots should show the welcome screen after user has clicked ele
 
   .c3 p {
     text-align: center;
-    font-size: 1.2rem;
+    font-size: 13px;
     padding-bottom: 32px;
     color: var(--accent-text-color);
   }
@@ -2224,6 +2251,18 @@ exports[`App snapshots should show the welcome screen after user has clicked ele
   }
 }
 
+@media (max-height:500px) {
+  .c3 {
+    height: 50px;
+    padding-bottom: 4px;
+    padding-right: 10px;
+  }
+
+  .c3 p {
+    font-size: 13px;
+  }
+}
+
 @media (max-width:320px) {
   .c3 {
     font-size: 1rem;
@@ -2231,52 +2270,116 @@ exports[`App snapshots should show the welcome screen after user has clicked ele
   }
 }
 
-@media (max-width:820px) {
-  .c0 .header-text {
-    bottom: -134px;
+@media (max-width:900px) {
+  .c1 .CoC {
+    margin-bottom: -8px;
   }
+}
 
-  .c0 .welcome-to {
-    font-size: 1.5rem;
+@media (max-width:600px) {
+  .c1 .CoC {
+    margin-bottom: -7px;
   }
+}
 
-  .c0 .CoC {
-    font-size: 4rem;
-    line-height: 6rem;
+@media (max-width:490px),(orientation:landscape) and (max-height:500px) {
+  .c1 .welcome-to {
+    display: none;
   }
+}
 
+@media (orientation:landscape) and (max-height:500px) {
+  .c1 {
+    height: 80px;
+  }
+}
+
+@media (max-width:1920px) {
   .c0 .definition-container {
-    font-size: 2.2rem;
-    line-height: 1.8rem;
-    margin-bottom: 90px;
+    font-size: 4.5rem;
+    line-height: 3.7rem;
+    margin-bottom: 150px;
   }
 
   .c0 .definition {
-    font-size: 1.7rem;
+    font-size: 3.5rem;
   }
 
   .c0 .button {
-    width: 200px;
-    height: 48px;
-    font-size: 2.5rem;
+    width: 290px;
+    height: 74px;
+    font-size: 3.2rem;
   }
 
   .c0 .OR {
-    width: 60px;
-    height: 60px;
-    margin-left: 70px;
-    margin-right: 70px;
+    width: 74px;
+    height: 74px;
+    margin-left: 93px;
+    margin-right: 93px;
     font-size: 2rem;
   }
 }
 
-@media (max-width:645px) {
-  .c0 .header-text {
-    bottom: -85px;
+@media (max-width:1440px) {
+  .c0 .definition-container {
+    font-size: 3.2rem;
+    line-height: 2.6rem;
+    margin-bottom: 90px;
   }
 
+  .c0 .definition {
+    font-size: 2.5rem;
+  }
+
+  .c0 .button {
+    width: 256px;
+    height: 66px;
+    font-size: 2.5rem;
+  }
+
+  .c0 .OR {
+    width: 66px;
+    height: 66px;
+    margin-left: 93px;
+    margin-right: 93px;
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width:950px) {
+  .c0 .definition-container {
+    font-size: 2.4rem;
+    line-height: 1.8rem;
+  }
+
+  .c0 .definition {
+    font-size: 1.85rem;
+  }
+
+  .c0 .button {
+    width: 200px;
+    height: 51px;
+    font-size: 2rem;
+  }
+
+  .c0 .OR {
+    width: 51px;
+    height: 51px;
+    margin-left: 70px;
+    margin-right: 70px;
+    font-size: 1.4rem;
+  }
+}
+
+@media (max-width:700px),(max-width:900px) and (max-height:500px) {
   .c0 .definition-container {
     display: none;
+  }
+
+  .c0 .button {
+    width: 268px;
+    height: 69px;
+    font-size: 2rem;
   }
 
   .c0 .host-button {
@@ -2286,118 +2389,31 @@ exports[`App snapshots should show the welcome screen after user has clicked ele
   .c0 .OR {
     display: none;
   }
-
-  .c0 .welcome-to {
-    display: none;
-  }
-
-  .c0 .CoC {
-    line-height: 3.5rem;
-  }
 }
 
-@media (max-width:320px) {
-  .c0 .header {
-    height: 130px;
-  }
-
-  .c0 .header-text {
-    bottom: -30px;
-  }
-
-  .c0 .CoC {
-    font-size: 3rem;
-    margin-bottom: 12px;
-  }
-}
-
-@media (min-width:2000px),(min-height:1500px) {
-  .c0 .header {
-    height: 400px;
-  }
-
-  .c0 .header-text {
-    bottom: -260px;
-  }
-
-  .c0 .welcome-to {
-    font-size: 3rem;
-    line-height: 3.8rem;
-  }
-
-  .c0 .CoC {
-    font-size: 8rem;
-    line-height: 6.5rem;
-  }
-
-  .c0 .definition-container {
-    font-size: 4.5rem;
-    line-height: 3.5rem;
-    margin-bottom: 250px;
-  }
-
-  .c0 .definition {
-    font-size: 3.5rem;
-  }
-
-  .c0 .OR {
-    font-size: 2.5rem;
-    width: 100px;
-    height: 100px;
-    margin-left: 100px;
-    margin-right: 100px;
-  }
-
-  .c0 .button {
-    width: 500px;
-    height: 100px;
-    border: solid black 4px;
-    font-size: 3rem;
-  }
-}
-
-@media (min-width:2450px) {
-  .c0 .header {
-    height: 400px;
-  }
-
-  .c0 .header-text {
-    bottom: -260px;
-  }
-
-  .c0 .welcome-to {
-    font-size: 3rem;
-    line-height: 3.8rem;
-  }
-
-  .c0 .CoC {
-    font-size: 8rem;
-    line-height: 6.5rem;
-  }
-
+@media (min-width:2561px) {
   .c0 .definition-container {
     font-size: 6.5rem;
-    line-height: 5.5rem;
+    line-height: 4.8rem;
     margin-bottom: 300px;
   }
 
   .c0 .definition {
-    font-size: 6rem;
-  }
-
-  .c0 .OR {
-    font-size: 4.5rem;
-    width: 150px;
-    height: 150px;
-    margin-left: 120px;
-    margin-right: 120px;
+    font-size: 5rem;
   }
 
   .c0 .button {
-    width: 600px;
-    height: 150px;
-    border: solid black 4px;
-    font-size: 5rem;
+    width: 490px;
+    height: 126px;
+    font-size: 5.2rem;
+  }
+
+  .c0 .OR {
+    width: 126px;
+    height: 126px;
+    margin-left: 93px;
+    margin-right: 93px;
+    font-size: 3.8rem;
   }
 }
 
@@ -2405,22 +2421,20 @@ exports[`App snapshots should show the welcome screen after user has clicked ele
     class="c0 primary-background"
   >
     <header
-      class="c1 header"
+      class="c1"
+      data-testid="header"
     >
-      <div
-        class="header-text"
+      <p
+        class="welcome-to"
+        data-testid="welcome-text"
       >
-        <p
-          class="welcome-to"
-        >
-          WELCOME TO
-        </p>
-        <h1
-          class="CoC"
-        >
-          CARDS OF CAROUSAL
-        </h1>
-      </div>
+        WELCOME TO
+      </p>
+      <h1
+        class="CoC"
+      >
+        CARDS OF CAROUSAL
+      </h1>
     </header>
     <main>
       <div
@@ -2470,6 +2484,7 @@ exports[`App snapshots should show the welcome screen after user has clicked ele
     </main>
     <footer
       class="c3"
+      data-testid="footer"
     >
       <p>
         Card content thanks to: 

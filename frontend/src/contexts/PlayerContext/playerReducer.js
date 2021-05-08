@@ -1,5 +1,3 @@
-import socketInstance from '../../socket/socket';
-
 function joinLobby(state) {
   return {
     ...state,
@@ -38,27 +36,16 @@ function update(state, payload) {
 function errorDisconnect(state) {
   return {
     ...state,
-    gameState: 'disconnected-error',
+    gameState: 'error',
     message: {
       big: 'AN ERROR OCCURRED',
-      small: 'Refresh to try again',
     },
-  };
-}
-
-function submitWinner(state) {
-  socketInstance.sendMessage({
-    event: 'select-winner',
-    payload: {},
-  });
-
-  return {
-    ...state,
   };
 }
 
 function receiveWhiteCards(state, payload) {
   const { cards, selectCardCount } = payload;
+
   return {
     ...state,
     gameState: 'player-select',
@@ -78,11 +65,22 @@ function lobbyClosed(state) {
   };
 }
 
+function noLobby(state) {
+  return {
+    ...state,
+    gameState: 'error',
+    message: {
+      big: 'Lobby does not exist',
+      small: 'We understand, spelling is pretty hard.',
+    },
+    loading: [],
+  };
+}
+
 function reducer(state, action) {
   const { type, payload } = action;
   switch (type) {
     case 'JOIN_LOBBY':
-      socketInstance.joinLobby(payload.lobbyId, payload.playerName);
       return joinLobby(state);
 
     case 'UPDATE':
@@ -94,14 +92,14 @@ function reducer(state, action) {
     case 'SUBMIT_CARDS':
       return submitCards(state);
 
-    case 'SUBMIT_WINNER':
-      return submitWinner(state, payload);
-
     case 'RECEIVE_WHITE_CARDS':
       return receiveWhiteCards(state, payload);
 
     case 'LOBBY_CLOSED':
       return lobbyClosed(state);
+
+    case 'NO_LOBBY':
+      return noLobby(state);
 
     default:
       return { ...state };

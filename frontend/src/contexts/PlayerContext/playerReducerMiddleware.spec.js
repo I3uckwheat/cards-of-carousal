@@ -2,6 +2,7 @@ import playerReducerMiddleware from './playerReducerMiddleware';
 import socketInstance from '../../socket/socket';
 
 jest.mock('../../socket/socket', () => ({
+  joinLobby: jest.fn(),
   sendMessage: jest.fn(),
 }));
 
@@ -17,42 +18,77 @@ describe('playerReducerMiddleware', () => {
     expect(dispatch).toBeCalledWith({ type: 'FOO', payload: { bar: 'bash' } });
   });
 
-  describe('SUBMIT_CARDS', () => {
-    it('sends a message to the host with the submitted card indexes', () => {
-      const dispatch = jest.fn();
+  describe('Action types', () => {
+    describe('JOIN_LOBBY', () => {
+      it('calls the joinLobby method on the socket with the lobbyId and playerName from the payload', () => {
+        const dispatch = jest.fn();
 
-      const result = playerReducerMiddleware(
-        {
-          type: 'SUBMIT_CARDS',
-          payload: { selectedCards: [1, 2, 3] },
-        },
-        dispatch,
-      );
+        playerReducerMiddleware(
+          {
+            type: 'JOIN_LOBBY',
+            payload: { lobbyId: 'ABCD', playerName: 'foo' },
+          },
+          dispatch,
+        );
 
-      expect(result).not.toBe({});
-      expect(socketInstance.sendMessage).toHaveBeenCalledWith({
-        event: 'player-submit',
-        payload: { selectedCards: [1, 2, 3] },
+        expect(socketInstance.joinLobby).toHaveBeenCalledWith('ABCD', 'foo');
       });
     });
-  });
 
-  describe('PREVIEW_WINNER', () => {
-    it('sends a message to the host with the index of the selected group of cards', () => {
-      const dispatch = jest.fn();
+    describe('SUBMIT_CARDS', () => {
+      it("calls the sendMessage method on the socket with 'player-submit' event and the payload it receives", () => {
+        const dispatch = jest.fn();
 
-      const result = playerReducerMiddleware(
-        {
-          type: 'PREVIEW_WINNER',
-          payload: { selectedGroupIndex: [1] },
-        },
-        dispatch,
-      );
+        playerReducerMiddleware(
+          {
+            type: 'SUBMIT_CARDS',
+            payload: { selectedCards: [1, 2, 3] },
+          },
+          dispatch,
+        );
 
-      expect(result).not.toBe({});
-      expect(socketInstance.sendMessage).toHaveBeenCalledWith({
-        event: 'preview-winner',
-        payload: { selectedGroupIndex: [1] },
+        expect(socketInstance.sendMessage).toHaveBeenCalledWith({
+          event: 'player-submit',
+          payload: { selectedCards: [1, 2, 3] },
+        });
+      });
+    });
+
+    describe('PREVIEW_WINNER', () => {
+      it("calls the sendMessage method on the socket with 'preview-winner' event and the payload it receives", () => {
+        const dispatch = jest.fn();
+
+        playerReducerMiddleware(
+          {
+            type: 'PREVIEW_WINNER',
+            payload: { highlightedPlayerID: 'foo' },
+          },
+          dispatch,
+        );
+
+        expect(socketInstance.sendMessage).toHaveBeenCalledWith({
+          event: 'preview-winner',
+          payload: { highlightedPlayerID: 'foo' },
+        });
+      });
+    });
+
+    describe('SUBMIT_WINNER', () => {
+      it("calls the sendMessage method on the socket with 'select-winner' event and the payload it receives", () => {
+        const dispatch = jest.fn();
+
+        playerReducerMiddleware(
+          {
+            type: 'SUBMIT_WINNER',
+            payload: {},
+          },
+          dispatch,
+        );
+
+        expect(socketInstance.sendMessage).toHaveBeenCalledWith({
+          event: 'select-winner',
+          payload: {},
+        });
       });
     });
   });
