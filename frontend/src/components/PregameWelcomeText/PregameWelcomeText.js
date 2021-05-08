@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import Carousel from '../Carousel/Carousel';
+import config from '../../config';
 
 const StyledPregameWelcomeText = styled.div`
   display: flex;
@@ -217,7 +218,7 @@ export default function PregameWelcomeText() {
     <StyledPregameWelcomeText>
       <Carousel
         slides={[<Welcome />, <Setup />, <Rules1 />, <Rules2 />]}
-        interval={2000}
+        interval={config.carouselRotationInterval}
       />
     </StyledPregameWelcomeText>
   );
