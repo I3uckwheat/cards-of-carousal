@@ -11,12 +11,6 @@ exports[`WinnerSelectScreen rendering renders normally for typical state values 
   cursor: pointer;
 }
 
-.c2 {
-  width: 100%;
-  background-color: var(--secondary-background-color);
-  color: var(--secondary-text-color);
-}
-
 .c0 {
   position: absolute;
   top: 0;
@@ -91,6 +85,12 @@ exports[`WinnerSelectScreen rendering renders normally for typical state values 
   -ms-flex-positive: 1;
   flex-grow: 1;
   position: relative;
+}
+
+.c2 {
+  width: 100%;
+  background-color: var(--secondary-background-color);
+  color: var(--secondary-text-color);
 }
 
 .c6 {
