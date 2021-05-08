@@ -5,9 +5,14 @@ import GameSettings from './GameSettings';
 import { HostContext } from '../../contexts/HostContext/HostContext';
 import config from '../../config';
 
+// Need to mock the Modal or createPortal errors are thrown: [Error: Target container is not a DOM element.]
+// eslint-disable-next-line react/prop-types
+jest.mock('../Modal/Modal', () => ({ children }) => <div>{children}</div>);
+
 function setupFetchMock(jsonValue = ['hello', 'world']) {
   jest.spyOn(window, 'fetch').mockImplementation(async () => ({
     json: async () => jsonValue,
+    ok: true,
   }));
 }
 
@@ -132,6 +137,37 @@ describe('GameSettings', () => {
         type: 'PACKS_RECEIVED',
         payload: {},
       });
+    });
+
+    it('dispatches an error if the fetch fails', async () => {
+      const fetchSpy = jest
+        .spyOn(window, 'fetch')
+        .mockImplementation(async () => ({
+          json: async () => new Error('Failed to fetch'),
+          ok: false,
+        }));
+
+      const dispatch = jest.fn();
+      const onChange = () => {};
+      const options = {
+        maxPlayers: 5,
+        winningScore: 6,
+        selectedPacks: [],
+      };
+
+      render(
+        <HostContext.Provider value={{ state, dispatch }}>
+          <GameSettings onChange={onChange} options={options} />
+        </HostContext.Provider>,
+      );
+
+      await waitFor(() => expect(fetchSpy).toHaveBeenCalledTimes(1));
+
+      expect(screen.getByText('FAILED TO GET CARD PACKS')).toBeInTheDocument();
+      expect(screen.getByText('Please try again later')).toBeInTheDocument();
+      expect(screen.getByText('Click anywhere to restart')).toBeInTheDocument();
+
+      fetchSpy.mockRestore();
     });
   });
 

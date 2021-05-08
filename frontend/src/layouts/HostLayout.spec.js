@@ -9,6 +9,7 @@ describe('HostLayout', () => {
   const leftComponent = <p>Im a left component</p>;
   const rightComponent = <p>Im a right component</p>;
   const modalComponent = <p>Im a modal component</p>;
+
   // --------------------------------------------------------------------------
   // Rendering Tests
   it('renders the header text', () => {

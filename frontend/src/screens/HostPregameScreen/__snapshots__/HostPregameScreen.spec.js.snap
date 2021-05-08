@@ -1,6 +1,23 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Host Pregame Screen rendering renders 1`] = `
+.c5 {
+  display: block;
+  border: 2px solid var(--primary-text-color);
+  font-size: 12px;
+  font-weight: bold;
+  padding: 0.7em;
+  background: var(--secondary-background-color);
+  color: var(--secondary-text-color);
+}
+
+.c5:hover,
+.c5:active,
+.c5:focus {
+  background: var(--accent-background-color);
+  cursor: pointer;
+}
+
 .c1 {
   background-image: url(inactiveHamburger.svg);
   background-size: cover;
@@ -185,23 +202,6 @@ exports[`Host Pregame Screen rendering renders 1`] = `
   background-color: var(--secondary-background-color);
   width: 305px;
   height: 70px;
-}
-
-.c5 {
-  display: block;
-  border: 2px solid var(--primary-text-color);
-  font-size: 12px;
-  font-weight: bold;
-  padding: 0.7em;
-  background: var(--secondary-background-color);
-  color: var(--secondary-text-color);
-}
-
-.c5:hover,
-.c5:active,
-.c5:focus {
-  background: var(--accent-background-color);
-  cursor: pointer;
 }
 
 .c10 {
