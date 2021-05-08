@@ -100,6 +100,16 @@ describe('HostGameOverScreen', () => {
 
       expect(screen.queryByText('START NEW GAME')).toBeInTheDocument();
     });
+
+    it('renders "Close game" button', () => {
+      render(
+        <HostContext.Provider value={{ state, dispatch }}>
+          <HostGameOverScreen />
+        </HostContext.Provider>,
+      );
+
+      expect(screen.queryByText('CLOSE GAME')).toBeInTheDocument();
+    });
   });
 
   describe('functionality', () => {
