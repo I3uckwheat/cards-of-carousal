@@ -155,7 +155,7 @@ function LeftPanel() {
   const handleClickStart = async () => {
     // check if there are any players and if packs are selected
     if (
-      newPlayerStaging.length > config.maxPlayers.min &&
+      newPlayerStaging.length >= config.maxPlayers.min &&
       state.gameSettings.selectedPacks.length
     ) {
       const { selectedPacks } = state.gameSettings;
@@ -189,7 +189,7 @@ function LeftPanel() {
       // The only failure cases here are:
       //  a) not enough players, or b) card packs aren't selected
       const errorString =
-        newPlayerStaging.length > config.maxPlayers.min
+        newPlayerStaging.length >= config.maxPlayers.min
           ? 'no-card-packs-selected'
           : 'not-enough-players';
 
