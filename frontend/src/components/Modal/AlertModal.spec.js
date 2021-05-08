@@ -3,6 +3,12 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import AlertModal from './AlertModal';
 
+// Need to mock the Modal or createPortal errors are thrown: [Error: Target container is not a DOM element.]
+// eslint-disable-next-line react/prop-types
+jest.mock('../../components/Modal/Modal', () => ({ children }) => (
+  <div>{children}</div>
+));
+
 describe('Alert Modal', () => {
   describe('rendering', () => {
     it('renders with default props', () => {

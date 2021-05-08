@@ -73,7 +73,7 @@ describe('hostReducerMiddleware', () => {
   });
 
   describe('PLAYER_CONNECTED', () => {
-    it("calls socketInstance's sendMessage with a default welcome message object", () => {
+    it("calls socketInstance's sendMessage with a loading message", () => {
       const dispatch = jest.fn();
 
       hostReducerMiddleware(
@@ -90,8 +90,40 @@ describe('hostReducerMiddleware', () => {
         payload: {
           gameState: 'connected',
           message: {
-            big: "You've joined the lobby",
-            small: 'Please wait for the host to start the game',
+            big: 'Attempting to join lobby',
+            small: 'Please wait',
+          },
+        },
+      });
+    });
+  });
+
+  describe('SEND_PLAYER_CONNECTED_MESSAGES', () => {
+    it("calls socketInstance's sendMessage with a custom welcome message", () => {
+      const dispatch = jest.fn();
+
+      hostReducerMiddleware(
+        {
+          type: 'SEND_PLAYER_CONNECTED_MESSAGES',
+          payload: {
+            players: ['foo', 'bar'],
+            message: {
+              big: 'Some big message',
+              small: 'Some small message',
+            },
+          },
+        },
+        dispatch,
+      );
+
+      expect(socketInstance.sendMessage).toHaveBeenCalledWith({
+        event: 'update',
+        recipients: ['foo', 'bar'],
+        payload: {
+          gameState: 'connected',
+          message: {
+            big: 'Some big message',
+            small: 'Some small message',
           },
           removeLoading: 'joining-lobby',
         },
@@ -115,7 +147,10 @@ describe('hostReducerMiddleware', () => {
 
       const fetchSpy = jest
         .spyOn(window, 'fetch')
-        .mockImplementation(async () => ({ json: async () => testCardDeck }));
+        .mockImplementation(async () => ({
+          json: async () => testCardDeck,
+          ok: true,
+        }));
 
       await hostReducerMiddleware(
         {
@@ -137,9 +172,10 @@ describe('hostReducerMiddleware', () => {
         white: ['boo', 'far', 'faz'],
       };
 
-      jest
-        .spyOn(window, 'fetch')
-        .mockImplementation(async () => ({ json: async () => testCardDeck }));
+      jest.spyOn(window, 'fetch').mockImplementation(async () => ({
+        json: async () => testCardDeck,
+        ok: true,
+      }));
 
       await hostReducerMiddleware(
         {
@@ -156,6 +192,9 @@ describe('hostReducerMiddleware', () => {
     });
 
     it('sends an error message with the query if the fetch fails', async () => {
+      const consoleSpy = jest
+        .spyOn(console, 'error')
+        .mockImplementation(() => {});
       const dispatch = jest.fn();
       const testPacks = [0, 1, 2, 3, 4, 5];
       const testQuery = '/deck/cards?packs=0,1,2,3,4,5';
@@ -166,7 +205,7 @@ describe('hostReducerMiddleware', () => {
 
       jest
         .spyOn(window, 'fetch')
-        .mockImplementation(async () => new TypeError());
+        .mockImplementation(async () => new Error('Failed to fetch'));
 
       await expect(() =>
         hostReducerMiddleware(
@@ -186,6 +225,8 @@ describe('hostReducerMiddleware', () => {
         type: 'SET_DECK',
         payload: { deck: testCardDeck },
       });
+
+      consoleSpy.mockRestore();
     });
   });
 
@@ -319,6 +360,65 @@ describe('hostReducerMiddleware', () => {
           selectCardCount: 2,
         },
         recipients: ['baz'],
+      });
+    });
+
+    it('only insists the new player updates game state if a new player joins in the middle of a round', () => {
+      const state = {
+        players: {
+          foo: {
+            cards: [{ text: 'test 1' }, { text: 'test 2' }],
+            isCzar: true,
+          },
+          bar: {
+            cards: [{ text: 'test 3' }, { text: 'test 4' }],
+            isCzar: false,
+          },
+          baz: {
+            cards: [{ text: 'test 5' }, { text: 'test 6' }],
+            isCzar: false,
+          },
+          test: {
+            cards: [],
+            isCzar: false,
+          },
+        },
+        selectedBlackCard: { pick: 2 },
+        playerIDs: ['foo', 'bar', 'baz', 'test'],
+      };
+
+      const dispatch = jest.fn();
+      const { players, selectedBlackCard, playerIDs } = state;
+      const payload = {
+        selectedBlackCard,
+        players,
+        playerIDs,
+      };
+
+      hostReducerMiddleware(
+        {
+          type: 'SEND_CARDS_TO_PLAYERS',
+          payload,
+        },
+        dispatch,
+      );
+
+      expect(socketInstance.sendMessage).toHaveBeenNthCalledWith(1, {
+        event: 'deal-white-cards',
+        payload: {
+          cards: players.bar.cards.map((card) => card.text),
+          selectCardCount: selectedBlackCard.pick,
+        },
+        recipients: ['bar'],
+      });
+
+      expect(socketInstance.sendMessage).toHaveBeenNthCalledWith(3, {
+        event: 'deal-white-cards',
+        payload: {
+          cards: players.test.cards.map((card) => card.text),
+          selectCardCount: selectedBlackCard.pick,
+        },
+        recipients: ['test'],
       });
     });
   });

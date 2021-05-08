@@ -215,14 +215,30 @@ describe('socketInstance', () => {
     });
 
     describe('close', () => {
-      it('emits a message event with the proper payload', () => {
+      it('emits a message event when the error code represents a normal socket close', () => {
         const message = { event: 'socket-close', payload: {} };
         const { eventCallbacks } = setupMockSocket();
         const spy = jest.spyOn(socketInstance.emitter, 'emit');
 
         socketInstance.createLobby();
 
-        eventCallbacks.close.forEach((cb) => cb());
+        const mockEvent = { code: 1000 };
+
+        eventCallbacks.close.forEach((cb) => cb(mockEvent));
+        expect(spy.mock.calls.length).toBe(eventCallbacks.message.length);
+        expect(spy).toBeCalledWith('message', message);
+      });
+
+      it('emits a socket connection error message when the code indicates a server error', () => {
+        const message = { event: 'socket-connection-error', payload: {} };
+        const { eventCallbacks } = setupMockSocket();
+        const spy = jest.spyOn(socketInstance.emitter, 'emit');
+
+        socketInstance.createLobby();
+
+        const mockEvent = { code: 1006 };
+
+        eventCallbacks.close.forEach((cb) => cb(mockEvent));
         expect(spy.mock.calls.length).toBe(eventCallbacks.message.length);
         expect(spy).toBeCalledWith('message', message);
       });

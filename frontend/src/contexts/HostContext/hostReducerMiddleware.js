@@ -9,17 +9,28 @@ function createLobby() {
   socketInstance.createLobby();
 }
 
-function sendPlayerConnectedMessage(payload) {
+function sendPlayerConnectedMessages(payload) {
+  socketInstance.sendMessage({
+    event: 'update',
+    recipients: payload.players,
+    payload: {
+      gameState: 'connected',
+      message: payload.message,
+      removeLoading: 'joining-lobby',
+    },
+  });
+}
+
+function playerConnected(payload) {
   socketInstance.sendMessage({
     event: 'update',
     recipients: [payload.playerId],
     payload: {
       gameState: 'connected',
       message: {
-        big: "You've joined the lobby",
-        small: 'Please wait for the host to start the game',
+        big: 'Attempting to join lobby',
+        small: 'Please wait',
       },
-      removeLoading: 'joining-lobby',
     },
   });
 }
@@ -93,13 +104,15 @@ async function getDeck({ selectedPacks }) {
   const apiURL = process.env.REACT_APP_API_URL;
   const queryString = selectedPacks.join(',');
   const query = `${apiURL}/deck/cards?packs=${queryString}`;
-  try {
-    const cardsRequest = await fetch(query);
+  const errorMessage = `Error fetching cards. Query: ${query}`;
+  const cardsRequest = await fetch(query);
+  if (cardsRequest.ok) {
     const cards = await cardsRequest.json();
-    return cards;
-  } catch {
-    throw new Error(`Error fetching cards. Query: ${query}`);
+    if (cards.white.length) {
+      return cards;
+    }
   }
+  throw new Error(errorMessage);
 }
 
 function sendCardsToPlayers({ selectedBlackCard, players, playerIDs }) {
@@ -225,8 +238,11 @@ export default async function hostReducerMiddleware(
       break;
 
     case 'PLAYER_CONNECTED':
-      sendPlayerConnectedMessage(payload);
+      playerConnected(payload);
       break;
+
+    case 'SEND_PLAYER_CONNECTED_MESSAGES':
+      return sendPlayerConnectedMessages(payload);
 
     case 'PLAYER_SUBMIT':
       sendCardsSubmittedMessage(payload);
@@ -237,11 +253,15 @@ export default async function hostReducerMiddleware(
       break;
 
     case 'SET_DECK': {
-      const deck = await getDeck(payload);
-      return dispatch({
-        type: 'SET_DECK',
-        payload: { deck },
-      });
+      try {
+        const deck = await getDeck(payload);
+        return dispatch({
+          type: 'SET_DECK',
+          payload: { deck },
+        });
+      } catch (err) {
+        throw new Error(err);
+      }
     }
 
     case 'SEND_CARDS_TO_PLAYERS':

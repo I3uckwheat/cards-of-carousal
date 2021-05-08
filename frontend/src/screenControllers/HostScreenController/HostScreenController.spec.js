@@ -120,23 +120,6 @@ describe('Host screen controller', () => {
       });
     });
 
-    describe('waiting-for-player-card-submissions', () => {
-      it('renders HostPregameScreen', () => {
-        HostPregameScreen.mockImplementation(MockHostPregameScreen);
-
-        const dispatch = jest.fn();
-        const state = { gameState: 'waiting-for-player-card-submissions' };
-
-        render(
-          <HostContext.Provider value={{ state, dispatch }}>
-            <HostScreenController />
-          </HostContext.Provider>,
-        );
-
-        expect(screen.getByTestId('host-pregame-screen')).toBeInTheDocument();
-      });
-    });
-
     describe('selecting-winner', () => {
       it('renders WinnerSelectScreen', () => {
         WinnerSelectScreen.mockImplementation(MockWinnerSelectScreen);

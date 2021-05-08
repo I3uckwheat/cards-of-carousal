@@ -1,5 +1,7 @@
 import HostReducer from './HostReducer';
 
+jest.mock('./hostReducerMiddleware', () => jest.fn());
+
 describe('reducer', () => {
   beforeEach(() => {
     jest.spyOn(global.Math, 'random').mockReturnValue(0);
@@ -38,6 +40,7 @@ describe('reducer', () => {
         type: 'CREATE_LOBBY',
         payload: {},
       });
+
       expect(result).not.toBe(state);
       expect(result.gameState).toBe('waiting-for-players');
     });
@@ -88,10 +91,9 @@ describe('reducer', () => {
   });
 
   describe('PLAYER_CONNECTED', () => {
-    it('updates state.playerIDs with given id and add a default player entry in state.players', () => {
+    it('updates newPlayerStaging with player details when they connect', () => {
       const state = {
-        players: {},
-        playerIDs: [],
+        newPlayerStaging: [],
       };
 
       const result = HostReducer(state, {
@@ -102,22 +104,23 @@ describe('reducer', () => {
         },
       });
 
-      expect(result.playerIDs).toEqual(['example-player-id']);
-      expect(result.players).toMatchObject({
-        'example-player-id': {
+      expect(result.newPlayerStaging).toMatchObject([
+        {
+          playerId: 'example-player-id',
           name: 'example-player-name',
           score: 0,
           isCzar: false,
           submittedCards: [0],
           cards: [],
         },
-      });
+      ]);
     });
 
     it('gives the player a dummy submittedCard to show the icon in PlayerList', () => {
       const state = {
         players: {},
         playerIDs: [],
+        newPlayerStaging: [],
       };
 
       const result = HostReducer(state, {
@@ -125,8 +128,57 @@ describe('reducer', () => {
         payload: { playerId: 'example-player-id' },
       });
 
-      expect(result.players['example-player-id'].submittedCards.length).toBe(1);
-      expect(result.players['example-player-id'].submittedCards[0]).toBe(0);
+      expect(result.newPlayerStaging[0].submittedCards.length).toBe(1);
+      expect(result.newPlayerStaging[0].submittedCards[0]).toBe(0);
+    });
+
+    it('puts the player in a staging array when a game is in progress', () => {
+      const state = {
+        playerIDs: ['foo', 'bar', 'baz'],
+        players: {
+          foo: {
+            name: 'foo',
+            cards: [{ text: '1' }, { text: '2' }],
+            submittedCards: [0],
+            isCzar: false,
+          },
+          bar: {
+            name: 'bar',
+            cards: [{ text: '1' }, { text: '2' }],
+            submittedCards: [],
+            isCzar: false,
+          },
+          baz: {
+            name: 'baz',
+            cards: [{ text: '1' }, { text: '2' }],
+            submittedCards: [],
+            isCzar: true,
+          },
+        },
+        gameState: 'waiting-to-receive-cards',
+        deck: {
+          black: [],
+          white: [{ text: '3' }, { text: '4' }, { text: '5' }],
+        },
+        gameSettings: { handSize: 2 },
+        newPlayerStaging: [],
+      };
+
+      const result = HostReducer(state, {
+        type: 'PLAYER_CONNECTED',
+        payload: { playerId: 'test', playerName: 'test name' },
+      });
+
+      expect(result.newPlayerStaging).toEqual([
+        {
+          playerId: 'test',
+          name: 'test name',
+          cards: [],
+          submittedCards: [0],
+          isCzar: false,
+          score: 0,
+        },
+      ]);
     });
   });
 
@@ -1142,6 +1194,86 @@ describe('reducer', () => {
         gameState: 'showing-winners',
         playerIDs: ['ID1', 'ID2', 'ID3'],
         czarSelection: undefined,
+      });
+    });
+  });
+
+  describe('ADD_PLAYERS_FROM_STAGING', () => {
+    it('adds players from the staging array and clears the staging array', () => {
+      const state = {
+        players: {
+          ID1: {
+            name: 'foo',
+            score: 0,
+            isCzar: false,
+            submittedCards: [0, 1],
+            cards: ['aaaa', 'bbbb', 'cccc', 'dddd'],
+          },
+          ID2: {
+            name: 'bar',
+            score: 0,
+            isCzar: true,
+            submittedCards: [],
+            cards: [],
+          },
+          ID3: {
+            name: 'baz',
+            score: 0,
+            isCzar: false,
+            submittedCards: [1, 2],
+            cards: ['eeee', 'ffff', 'gggg', 'hhhh'],
+          },
+        },
+        gameState: 'showing-winners',
+        playerIDs: ['ID1', 'ID2', 'ID3'],
+        newPlayerStaging: [
+          {
+            playerId: 'test',
+            name: 'test name',
+            cards: [],
+            submittedCards: [],
+            isCzar: false,
+            score: 0,
+          },
+        ],
+      };
+
+      const result = HostReducer(state, {
+        type: 'ADD_PLAYERS_FROM_STAGING',
+        payload: {},
+      });
+
+      expect(result.newPlayerStaging).toEqual([]);
+      expect(result.playerIDs).toEqual(['ID1', 'ID2', 'ID3', 'test']);
+      expect(result.players).toEqual({
+        ID1: {
+          name: 'foo',
+          score: 0,
+          isCzar: false,
+          submittedCards: [0, 1],
+          cards: ['aaaa', 'bbbb', 'cccc', 'dddd'],
+        },
+        ID2: {
+          name: 'bar',
+          score: 0,
+          isCzar: true,
+          submittedCards: [],
+          cards: [],
+        },
+        ID3: {
+          name: 'baz',
+          score: 0,
+          isCzar: false,
+          submittedCards: [1, 2],
+          cards: ['eeee', 'ffff', 'gggg', 'hhhh'],
+        },
+        test: {
+          name: 'test name',
+          cards: [],
+          submittedCards: [],
+          isCzar: false,
+          score: 0,
+        },
       });
     });
   });

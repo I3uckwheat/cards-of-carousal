@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import HamburgerMenu from '../components/Buttons/HamburgerMenu/HamburgerMenu.js';
-import Header from '../components/Header/Header.js';
 import Modal from '../components/Modal/Modal.js';
 
 const propTypes = {
@@ -106,6 +105,12 @@ const HostLayoutContainer = styled.div`
       line-height: 7rem;
     }
   }
+`;
+
+const Header = styled.header`
+  width: 100%;
+  background-color: var(--secondary-background-color);
+  color: var(--secondary-text-color);
 `;
 
 function HostLayout({ left, right, modal }) {

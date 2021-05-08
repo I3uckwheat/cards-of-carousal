@@ -542,12 +542,6 @@ exports[`App snapshots should show the host screen after user has clicked the "h
   cursor: pointer;
 }
 
-.c2 {
-  width: 100%;
-  background-color: var(--secondary-background-color);
-  color: var(--secondary-text-color);
-}
-
 .c0 {
   position: absolute;
   top: 0;
@@ -624,6 +618,12 @@ exports[`App snapshots should show the host screen after user has clicked the "h
   position: relative;
 }
 
+.c2 {
+  width: 100%;
+  background-color: var(--secondary-background-color);
+  color: var(--secondary-text-color);
+}
+
 .c4 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -677,7 +677,7 @@ exports[`App snapshots should show the host screen after user has clicked the "h
   animation-delay: 0;
 }
 
-.c9 {
+.c11 {
   position: relative;
   display: -webkit-box;
   display: -webkit-flex;
@@ -692,7 +692,7 @@ exports[`App snapshots should show the host screen after user has clicked the "h
   overflow-y: auto;
 }
 
-.c9 h1 {
+.c11 h1 {
   margin-left: auto;
   font-size: 4rem;
   line-height: 4rem;
@@ -706,7 +706,7 @@ exports[`App snapshots should show the host screen after user has clicked the "h
   top: 0;
 }
 
-.c10 {
+.c12 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -721,7 +721,7 @@ exports[`App snapshots should show the host screen after user has clicked the "h
   padding: 24px 0 24px 60px;
 }
 
-.c10 .number-input-wrapper label {
+.c12 .number-input-wrapper label {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -734,25 +734,25 @@ exports[`App snapshots should show the host screen after user has clicked the "h
   font-weight: bold;
 }
 
-.c10 input[type='number'] {
+.c12 input[type='number'] {
   font-weight: bold;
   text-align: center;
   width: 80px;
 }
 
-.c10 .select-wrapper {
+.c12 .select-wrapper {
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
 }
 
-.c10 .select-wrapper h2 {
+.c12 .select-wrapper h2 {
   font-size: 1rem;
   font-weight: bold;
   height: 30px;
 }
 
-.c10 .select-wrapper .loader-wrapper {
+.c12 .select-wrapper .loader-wrapper {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -761,7 +761,7 @@ exports[`App snapshots should show the host screen after user has clicked the "h
   transform: translate(-50%,-50%);
 }
 
-.c10 .card-packs {
+.c12 .card-packs {
   display: grid;
   gap: 20px;
   grid-template-columns: repeat(auto-fill,minmax(420px,1fr));
@@ -771,7 +771,7 @@ exports[`App snapshots should show the host screen after user has clicked the "h
   padding: 0 0 16px 0;
 }
 
-.c10 .card-packs label {
+.c12 .card-packs label {
   margin-right: 12px;
   -webkit-align-items: center;
   -webkit-box-align: center;
@@ -784,7 +784,7 @@ exports[`App snapshots should show the host screen after user has clicked the "h
   margin-bottom: auto;
 }
 
-.c10 input[type='checkbox'] {
+.c12 input[type='checkbox'] {
   margin: 4px 11px auto 0;
 }
 
@@ -827,6 +827,91 @@ exports[`App snapshots should show the host screen after user has clicked the "h
   background-color: var(--secondary-background-color);
   width: 305px;
   height: 70px;
+}
+
+.c10 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.c10 .positionButton {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.c9 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  background-color: var(--primary-background-color);
+  -webkit-align-self: flex-start;
+  -ms-flex-item-align: start;
+  align-self: flex-start;
+  margin: 24px;
+  padding: 8px;
+  border-radius: 5px;
+  font-size: 1.8rem;
+  font-weight: 700;
+  box-shadow: 0px 4px 12px rgba(0,0,0,0.25);
+}
+
+.c9 h2 {
+  line-height: 2.4rem;
+}
+
+.c9 h3 {
+  font-size: 1.5rem;
+  line-height: 1.8rem;
+}
+
+.c9 p {
+  margin: 10px;
+  font-size: 1.1rem;
+}
+
+.c9 ol {
+  margin: 20px;
+}
+
+.c9 li {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.c9 .howToWin {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.c9 .snarkyText {
+  font-size: 0.8rem;
+  margin: 0;
+  padding: 0;
 }
 
 .c3 {
@@ -905,34 +990,6 @@ exports[`App snapshots should show the host screen after user has clicked the "h
   left: 0;
 }
 
-.c8 .game-description {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  background-color: var(--primary-background-color);
-  -webkit-align-self: center;
-  -ms-flex-item-align: center;
-  align-self: center;
-  margin: 24px;
-  padding: 8px;
-  border-radius: 5px;
-  font-size: 1.8rem;
-  font-weight: 700;
-  box-shadow: 0px 4px 12px rgba(0,0,0,0.25);
-}
-
-.c8 .game-description p {
-  margin: 16px 0;
-}
-
 .c8 .top {
   display: -webkit-box;
   display: -webkit-flex;
@@ -942,11 +999,8 @@ exports[`App snapshots should show the host screen after user has clicked the "h
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
   height: 60%;
+  overflow-y: auto;
 }
 
 .c8 .bottom {
@@ -1062,8 +1116,69 @@ exports[`App snapshots should show the host screen after user has clicked the "h
 }
 
 @media only screen and (max-width:980px) {
-  .c9 h1 {
+  .c11 h1 {
     position: static;
+  }
+}
+
+@media (min-width:1100px) {
+  .c9 {
+    -webkit-align-self: center;
+    -ms-flex-item-align: center;
+    align-self: center;
+  }
+}
+
+@media (min-width:1600px) {
+  .c9 h3 {
+    font-size: 1.8rem;
+  }
+}
+
+@media (min-width:3200px) {
+  .c9 h2 {
+    font-size: 4rem;
+    line-height: 4.4rem;
+  }
+
+  .c9 h3 {
+    font-size: 3rem;
+    line-height: 3rem;
+  }
+
+  .c9 p {
+    margin: 20px;
+    font-size: 2rem;
+  }
+
+  .c9 ol {
+    margin: 40px;
+  }
+
+  .c9 li {
+    margin: 10px;
+    font-size: 2rem;
+  }
+
+  .c9 .howToWin {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    margin: 20px 0;
+  }
+
+  .c9 .snarkyText {
+    font-size: 1.5rem;
+    margin: 0;
+    padding: 0;
   }
 }
 
@@ -1170,30 +1285,75 @@ exports[`App snapshots should show the host screen after user has clicked the "h
             class="top"
           >
             <div
-              class="game-description"
+              class="c9"
             >
-              <p>
-                Cards of Carousal is a game for lorem ipsum dolor.
-              </p>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse, doloribus quaerat incidunt excepturi odit eos!
-              </p>
-              <p>
-                Qui delectus laboriosam aperiam maxime optio, architecto asperiores, at ullam.
-              </p>
+              <div>
+                <h2>
+                  Welcome! ¡Bienvenidos! Добро пожаловать!
+                </h2>
+                <p>
+                  Cards of Carousal is your grandma's favorite online card game!
+                </p>
+                <p>
+                  Imagine if your indecency and crude taste in jokes was an advantage in life. It isn't, but in Cards of Carousal it can be!
+                </p>
+                <p>
+                  Long and short of this deal; one person (the Czar of the round) reads the black card on this screen. Everyone else submits a white card trying to be the Czar's favorite jester. More directions on the following pages if you're still confused.
+                </p>
+                <div
+                  class="c10"
+                >
+                  <button
+                    class="positionButton"
+                    type="button"
+                  >
+                    <img
+                      alt="active position indicator"
+                      src="blackCard.svg"
+                    />
+                  </button>
+                  <button
+                    class="positionButton"
+                    type="button"
+                  >
+                    <img
+                      alt="inactive position indicator"
+                      src="whiteCard.svg"
+                    />
+                  </button>
+                  <button
+                    class="positionButton"
+                    type="button"
+                  >
+                    <img
+                      alt="inactive position indicator"
+                      src="whiteCard.svg"
+                    />
+                  </button>
+                  <button
+                    class="positionButton"
+                    type="button"
+                  >
+                    <img
+                      alt="inactive position indicator"
+                      src="whiteCard.svg"
+                    />
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
           <div
             class="bottom"
           >
             <div
-              class="c9"
+              class="c11"
             >
               <h1>
                 GAME SETTINGS
               </h1>
               <form
-                class="c10"
+                class="c12"
               >
                 <div
                   class="number-input-wrapper"

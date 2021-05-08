@@ -1,4 +1,4 @@
-import React, { createContext, useEffect } from 'react';
+import React, { createContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import useReducerMiddleware from '../useReducerMiddleware';
@@ -6,6 +6,7 @@ import HostReducer from './HostReducer';
 import socketInstance from '../../socket/socket';
 import hostReducerMiddleware from './hostReducerMiddleware';
 import config from '../../config';
+import AlertModal from '../../components/Modal/AlertModal';
 
 const propTypes = {
   children: PropTypes.node.isRequired,
@@ -28,6 +29,7 @@ const initialState = {
   },
   deck: { black: [], white: [] },
   loading: [],
+  newPlayerStaging: [],
 };
 
 export const HostContext = createContext();
@@ -38,6 +40,8 @@ function HostProvider({ children }) {
     HostReducer,
     initialState,
   );
+
+  const [socketHasError, setSocketHasError] = useState(false);
 
   function handleMessage({ event, payload, sender }) {
     switch (event) {
@@ -68,6 +72,10 @@ function HostProvider({ children }) {
           payload: { ...payload, playerId: sender },
         });
 
+      case 'socket-connection-error':
+        dispatch({ type: 'UPDATE_JOIN_CODE', payload: { lobbyID: 'ERROR' } });
+        return setSocketHasError(true);
+
       default:
         return undefined;
     }
@@ -80,9 +88,44 @@ function HostProvider({ children }) {
     };
   }, []);
 
+  useEffect(() => {
+    if (state.newPlayerStaging.length) {
+      const newPlayerIDs = state.newPlayerStaging.map(
+        (player) => player.playerId,
+      );
+
+      const message =
+        state.gameState === 'waiting-for-players'
+          ? {
+              big: "You've joined the lobby",
+              small: 'Please wait for the host to start the game',
+            }
+          : {
+              big: 'A round is in progress',
+              small: 'You will join the next round automatically',
+            };
+
+      dispatch({
+        type: 'SEND_PLAYER_CONNECTED_MESSAGES',
+        payload: {
+          players: newPlayerIDs,
+          message,
+        },
+      });
+    }
+  }, [state.newPlayerStaging]);
+
   return (
     <HostContext.Provider value={{ state, dispatch }}>
       {children}
+      {socketHasError && (
+        <AlertModal
+          bigText="SOCKET ERROR"
+          smallText="Please try again later"
+          buttonText="Click anywhere to restart"
+          onClick={() => window.location.reload()}
+        />
+      )}
     </HostContext.Provider>
   );
 }

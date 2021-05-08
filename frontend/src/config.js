@@ -16,6 +16,8 @@ const config = {
   handSize: 10,
 
   winnerScreenDisplayTime: 3000,
+
+  carouselRotationInterval: 60000,
 };
 
 export default config;

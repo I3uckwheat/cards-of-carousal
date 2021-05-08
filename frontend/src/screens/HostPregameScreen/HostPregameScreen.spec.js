@@ -5,6 +5,12 @@ import renderer from 'react-test-renderer';
 import { HostContext } from '../../contexts/HostContext/HostContext';
 import HostPregameScreen from './HostPregameScreen';
 
+// Need to mock the Modal or createPortal errors are thrown: [Error: Target container is not a DOM element.]
+// eslint-disable-next-line react/prop-types
+jest.mock('../../components/Modal/Modal', () => ({ children }) => (
+  <div>{children}</div>
+));
+
 jest.mock('../../components/GameSettings/GameSettings', () => () => (
   <div data-testid="game-settings" />
 ));
@@ -28,6 +34,7 @@ describe('Host Pregame Screen', () => {
     playerIDs: [],
     gameSettings: { maxPlayers: 8, winningScore: 7, selectedPacks: [] },
     loading: [],
+    newPlayerStaging: [],
   };
 
   afterEach(() => {
@@ -39,6 +46,7 @@ describe('Host Pregame Screen', () => {
       playerIDs: [],
       gameSettings: { maxPlayers: 8, winningScore: 7, selectedPacks: [] },
       loading: [],
+      newPlayerStaging: [],
     };
     setupFetchMock();
   });
@@ -182,30 +190,8 @@ describe('Host Pregame Screen', () => {
       state = {
         gameState: 'waiting-for-lobby',
         lobbyID: '',
-        players: {
-          foo: {
-            name: 'Bender',
-            score: 0,
-            isCzar: false,
-            submittedCards: [],
-            cards: [],
-          },
-          bar: {
-            name: 'Briggs',
-            score: 0,
-            isCzar: false,
-            submittedCards: [],
-            cards: [],
-          },
-          baz: {
-            name: 'Pedro',
-            score: 0,
-            isCzar: false,
-            submittedCards: [],
-            cards: [],
-          },
-        },
-        playerIDs: ['foo', 'bar', 'baz'],
+        players: {},
+        playerIDs: [],
         gameSettings: {
           maxPlayers: 8,
           winningScore: 7,
@@ -214,6 +200,32 @@ describe('Host Pregame Screen', () => {
         deck: { black: [], white: [] },
         selectedBlackCard: { text: 'test', pick: 1 },
         loading: [],
+        newPlayerStaging: [
+          {
+            playerId: 'foo',
+            name: 'Bender',
+            score: 0,
+            isCzar: false,
+            submittedCards: [],
+            cards: [],
+          },
+          {
+            playerId: 'bar',
+            name: 'Briggs',
+            score: 0,
+            isCzar: false,
+            submittedCards: [],
+            cards: [],
+          },
+          {
+            playerId: 'baz',
+            name: 'Pedro',
+            score: 0,
+            isCzar: false,
+            submittedCards: [],
+            cards: [],
+          },
+        ],
       };
 
       render(
@@ -227,7 +239,7 @@ describe('Host Pregame Screen', () => {
       );
 
       // create lobby, get deck, set game state, set new czar, select black card, deal white cards
-      expect(dispatch).toHaveBeenCalledTimes(7);
+      expect(dispatch).toHaveBeenCalledTimes(8);
       expect(dispatch).toHaveBeenNthCalledWith(2, {
         type: 'GET_DECK',
         payload: {},
@@ -237,25 +249,32 @@ describe('Host Pregame Screen', () => {
         payload: { selectedPacks: state.gameSettings.selectedPacks },
       });
       expect(dispatch).toHaveBeenNthCalledWith(4, {
-        type: 'START_GAME',
+        type: 'ADD_PLAYERS_FROM_STAGING',
         payload: {},
       });
       expect(dispatch).toHaveBeenNthCalledWith(5, {
-        type: 'SET_NEXT_CZAR',
+        type: 'START_GAME',
         payload: {},
       });
       expect(dispatch).toHaveBeenNthCalledWith(6, {
-        type: 'SELECT_BLACK_CARD',
+        type: 'SET_NEXT_CZAR',
         payload: {},
       });
       expect(dispatch).toHaveBeenNthCalledWith(7, {
+        type: 'SELECT_BLACK_CARD',
+        payload: {},
+      });
+      expect(dispatch).toHaveBeenNthCalledWith(8, {
         type: 'DEAL_WHITE_CARDS',
         payload: {},
       });
     });
 
-    it('does not call dispatch if no players are in the lobby when the start button is clicked', () => {
+    it('alerts the host if fewer than the minimum number of players are in the lobby when the start button is clicked', () => {
       const dispatch = jest.fn();
+
+      state.playerIDs = [];
+      state.players = {};
 
       render(
         <HostContext.Provider value={{ state, dispatch }}>
@@ -265,43 +284,66 @@ describe('Host Pregame Screen', () => {
 
       userEvent.click(screen.getByText('START CAROUSING'));
 
-      // only create lobby called
+      // once for create lobby
       expect(dispatch).toHaveBeenCalledTimes(1);
+      expect(dispatch).not.toHaveBeenCalledWith({
+        type: 'SET_DECK',
+        payload: { selectedPacks: state.gameSettings.selectedPacks },
+      });
+      expect(dispatch).not.toHaveBeenCalledWith({
+        type: 'START_GAME',
+        payload: {},
+      });
+      expect(dispatch).not.toHaveBeenCalledWith({
+        type: 'SET_NEXT_CZAR',
+        payload: {},
+      });
+      expect(screen.getByText('UNABLE TO START GAME')).toBeInTheDocument();
+      expect(
+        screen.getByText('No offense, but this game requires friends to play.'),
+      ).toBeInTheDocument();
+      expect(
+        screen.getByText('Click anywhere to continue'),
+      ).toBeInTheDocument();
     });
 
-    it('does not call dispatch if no packs are selected when the start button is clicked', async () => {
+    it('alerts the host if no packs are selected when the start button is clicked', async () => {
       const dispatch = jest.fn();
 
       state = {
         gameState: 'waiting-for-lobby',
         lobbyID: '',
-        players: {
-          foo: {
+        players: {},
+        playerIDs: [],
+        gameSettings: { maxPlayers: 8, winningScore: 7, selectedPacks: [] },
+        deck: { black: [], white: [] },
+        loading: [],
+        newPlayerStaging: [
+          {
+            playerId: 'foo',
             name: 'Bender',
             score: 0,
             isCzar: false,
             submittedCards: [],
             cards: [],
           },
-          bar: {
+          {
+            playerId: 'bar',
             name: 'Briggs',
             score: 0,
             isCzar: false,
             submittedCards: [],
             cards: [],
           },
-          baz: {
+          {
+            playerId: 'baz',
             name: 'Pedro',
             score: 0,
             isCzar: false,
             submittedCards: [],
             cards: [],
           },
-        },
-        playerIDs: ['foo', 'bar', 'baz'],
-        gameSettings: { maxPlayers: 8, winningScore: 7, selectedPacks: [] },
-        deck: { black: [], white: [] },
-        loading: [],
+        ],
       };
 
       render(
@@ -314,7 +356,7 @@ describe('Host Pregame Screen', () => {
         userEvent.click(screen.getByText('START CAROUSING')),
       );
 
-      // only create lobby called
+      // once for create lobby
       expect(dispatch).toHaveBeenCalledTimes(1);
       expect(dispatch).not.toHaveBeenCalledWith({
         type: 'SET_DECK',
@@ -328,6 +370,82 @@ describe('Host Pregame Screen', () => {
         type: 'SET_NEXT_CZAR',
         payload: {},
       });
+      expect(screen.getByText('UNABLE TO START GAME')).toBeInTheDocument();
+      expect(
+        screen.getByText('Please pick at least one card pack.'),
+      ).toBeInTheDocument();
+      expect(
+        screen.getByText('Click anywhere to continue'),
+      ).toBeInTheDocument();
+    });
+
+    it('alerts the host if fetching cards has failed', async () => {
+      // we need to mock the console.error or else jest will error out
+      // https://github.com/facebook/react/issues/11098#issuecomment-523977830
+      const errorSpy = jest
+        .spyOn(console, 'error')
+        .mockImplementation(() => {});
+
+      const dispatch = jest.fn(({ type }) => {
+        // simulating a failed fetch
+        if (type === 'SET_DECK') throw new Error('Failed to fetch');
+      });
+
+      state = {
+        gameState: 'waiting-for-lobby',
+        lobbyID: '',
+        players: {},
+        playerIDs: [],
+        gameSettings: {
+          maxPlayers: 8,
+          winningScore: 7,
+          selectedPacks: [0, 1, 2],
+        },
+        deck: { black: [], white: [] },
+        loading: [],
+        newPlayerStaging: [
+          {
+            playerId: 'foo',
+            name: 'Bender',
+            score: 0,
+            isCzar: false,
+            submittedCards: [],
+            cards: [],
+          },
+          {
+            playerId: 'bar',
+            name: 'Briggs',
+            score: 0,
+            isCzar: false,
+            submittedCards: [],
+            cards: [],
+          },
+          {
+            playerId: 'baz',
+            name: 'Pedro',
+            score: 0,
+            isCzar: false,
+            submittedCards: [],
+            cards: [],
+          },
+        ],
+      };
+
+      render(
+        <HostContext.Provider value={{ state, dispatch }}>
+          <HostPregameScreen />
+        </HostContext.Provider>,
+      );
+
+      await act(async () => {
+        userEvent.click(screen.getByText('START CAROUSING'));
+      });
+
+      expect(screen.getByText('FAILED TO RETRIEVE CARDS')).toBeInTheDocument();
+      expect(screen.getByText('Please try again later')).toBeInTheDocument();
+      expect(screen.getByText('Click to restart')).toBeInTheDocument();
+
+      errorSpy.mockRestore();
     });
   });
 });
