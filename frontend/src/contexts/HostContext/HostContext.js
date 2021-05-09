@@ -30,6 +30,7 @@ const initialState = {
   deck: { black: [], white: [] },
   loading: [],
   newPlayerStaging: [],
+  czarSelection: '',
 };
 
 export const HostContext = createContext();
