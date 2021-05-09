@@ -78,6 +78,7 @@ function dealWhiteCards(state) {
     },
     players: newPlayers,
     gameState: 'waiting-to-receive-cards',
+    czarSelection: '',
   };
 }
 

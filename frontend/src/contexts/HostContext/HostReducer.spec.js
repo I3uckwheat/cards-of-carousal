@@ -912,6 +912,45 @@ describe('reducer', () => {
         ),
       ).toBe(true);
     });
+
+    it('resets the czar selection', () => {
+      const state = {
+        gameSettings: {
+          handSize: 5,
+        },
+        deck: {
+          white: [
+            { pack: 0, text: 'zero' },
+            { pack: 0, text: 'one' },
+            { pack: 0, text: 'two' },
+            { pack: 0, text: 'three' },
+            { pack: 0, text: 'four' },
+          ],
+          black: [{ pick: 1, pack: 0, text: 'zero' }],
+        },
+        selectedBlackCard: {
+          pick: 1,
+        },
+        playerIDs: ['foo'],
+        players: {
+          foo: {
+            cards: [
+              { pack: 0, text: 'test' },
+              { pack: 0, text: 'test' },
+              { pack: 0, text: 'test' },
+            ],
+          },
+        },
+        czarSelection: 'old-czar-selection',
+      };
+
+      const result = HostReducer(state, {
+        type: 'DEAL_WHITE_CARDS',
+        payload: {},
+      });
+
+      expect(result.czarSelection).toBe('');
+    });
   });
 
   describe('REMOVE_SUBMITTED_CARDS_FROM_PLAYER', () => {
