@@ -838,6 +838,10 @@ exports[`App snapshots should show the host screen after user has clicked the "h
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
+  position: absolute;
+  bottom: 24px;
+  left: 0;
+  right: 0;
 }
 
 .c10 .positionButton {
@@ -851,6 +855,9 @@ exports[`App snapshots should show the host screen after user has clicked the "h
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  position: absolute;
+  top: 0;
+  bottom: 0;
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
@@ -859,10 +866,7 @@ exports[`App snapshots should show the host screen after user has clicked the "h
   -ms-flex-pack: justify;
   justify-content: space-between;
   background-color: var(--primary-background-color);
-  -webkit-align-self: flex-start;
-  -ms-flex-item-align: start;
-  align-self: flex-start;
-  margin: 24px;
+  margin: 24px 48px;
   padding: 8px;
   border-radius: 5px;
   font-size: 1.8rem;
@@ -991,6 +995,7 @@ exports[`App snapshots should show the host screen after user has clicked the "h
 }
 
 .c8 .top {
+  position: relative;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
