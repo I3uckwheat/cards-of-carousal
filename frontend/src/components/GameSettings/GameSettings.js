@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { HostContext } from '../../contexts/HostContext/HostContext';
 import LoadingIndicator from '../LoadingIndicator/LoadingIndicator';
 import config from '../../config';
+import AlertModal from '../Modal/AlertModal';
 
 const propTypes = {
   onChange: PropTypes.func.isRequired,
@@ -104,18 +105,26 @@ function GameSettings({ options, onChange }) {
   const [minimumPlayerLimit, setMinimumPlayerLimit] = useState(
     config.maxPlayers.min,
   );
+  const [error, setError] = useState('');
   const { state, dispatch } = useContext(HostContext);
 
   async function getPackNames() {
     const response = await fetch(`${process.env.REACT_APP_API_URL}/deck`);
-    const data = await response.json();
-    dispatch({ type: 'PACKS_RECEIVED', payload: {} });
-    return data;
+    if (response.ok) {
+      const data = await response.json();
+      dispatch({ type: 'PACKS_RECEIVED', payload: {} });
+      return data;
+    }
+    throw new Error('Failed to fetch packs');
   }
   useEffect(async () => {
     dispatch({ type: 'GET_PACKS', payload: {} });
-    const packNames = await getPackNames();
-    setCardPacks(packNames);
+    try {
+      const packNames = await getPackNames();
+      return setCardPacks(packNames);
+    } catch {
+      return setError('failed-to-fetch-packs');
+    }
   }, []);
 
   useEffect(() => {
@@ -219,6 +228,14 @@ function GameSettings({ options, onChange }) {
           )}
         </div>
       </StyledForm>
+      {error && (
+        <AlertModal
+          bigText="Failed to get card packs"
+          smallText="Please try again later"
+          buttonText="Click anywhere to restart"
+          onClick={() => window.location.reload()}
+        />
+      )}
     </StyledGameSettings>
   );
 }

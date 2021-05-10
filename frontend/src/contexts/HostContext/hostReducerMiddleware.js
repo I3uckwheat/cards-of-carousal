@@ -104,13 +104,15 @@ async function getDeck({ selectedPacks }) {
   const apiURL = process.env.REACT_APP_API_URL;
   const queryString = selectedPacks.join(',');
   const query = `${apiURL}/deck/cards?packs=${queryString}`;
-  try {
-    const cardsRequest = await fetch(query);
+  const errorMessage = `Error fetching cards. Query: ${query}`;
+  const cardsRequest = await fetch(query);
+  if (cardsRequest.ok) {
     const cards = await cardsRequest.json();
-    return cards;
-  } catch {
-    throw new Error(`Error fetching cards. Query: ${query}`);
+    if (cards.white.length) {
+      return cards;
+    }
   }
+  throw new Error(errorMessage);
 }
 
 function sendCardsToPlayers({ selectedBlackCard, players, playerIDs }) {
@@ -208,6 +210,34 @@ function sendTooManyPlayersMessage(payload) {
   });
 }
 
+function sendEndOfGameMessages({ gameWinner, playerIDs }) {
+  const losers = playerIDs.filter((playerID) => playerID !== gameWinner);
+
+  socketInstance.sendMessage({
+    event: 'update',
+    payload: {
+      gameState: 'end-game',
+      message: {
+        big: 'Congrats! You won it all!!1!',
+        small: 'Not necessarily something to be proud of',
+      },
+    },
+    recipients: [gameWinner],
+  });
+
+  socketInstance.sendMessage({
+    event: 'update',
+    payload: {
+      gameState: 'end-game',
+      message: {
+        big: 'Loser 👎︎',
+        small: `Better to lose the game than your integrity`,
+      },
+    },
+    recipients: losers,
+  });
+}
+
 export default async function hostReducerMiddleware(
   { type, payload },
   dispatch,
@@ -237,11 +267,15 @@ export default async function hostReducerMiddleware(
       break;
 
     case 'SET_DECK': {
-      const deck = await getDeck(payload);
-      return dispatch({
-        type: 'SET_DECK',
-        payload: { deck },
-      });
+      try {
+        const deck = await getDeck(payload);
+        return dispatch({
+          type: 'SET_DECK',
+          payload: { deck },
+        });
+      } catch (err) {
+        throw new Error(err);
+      }
     }
 
     case 'SEND_CARDS_TO_PLAYERS':
@@ -266,6 +300,10 @@ export default async function hostReducerMiddleware(
 
     case 'TOO_MANY_PLAYERS':
       sendTooManyPlayersMessage(payload);
+      break;
+
+    case 'GAME_OVER':
+      sendEndOfGameMessages(payload);
       break;
 
     default:

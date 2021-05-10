@@ -1,4 +1,4 @@
-import React, { createContext, useEffect } from 'react';
+import React, { createContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import useReducerMiddleware from '../useReducerMiddleware';
@@ -6,6 +6,7 @@ import HostReducer from './HostReducer';
 import socketInstance from '../../socket/socket';
 import hostReducerMiddleware from './hostReducerMiddleware';
 import config from '../../config';
+import AlertModal from '../../components/Modal/AlertModal';
 
 const propTypes = {
   children: PropTypes.node.isRequired,
@@ -29,6 +30,7 @@ const initialState = {
   deck: { black: [], white: [] },
   loading: [],
   newPlayerStaging: [],
+  czarSelection: '',
 };
 
 export const HostContext = createContext();
@@ -39,6 +41,8 @@ function HostProvider({ children }) {
     HostReducer,
     initialState,
   );
+
+  const [socketHasError, setSocketHasError] = useState(false);
 
   function handleMessage({ event, payload, sender }) {
     switch (event) {
@@ -51,8 +55,8 @@ function HostProvider({ children }) {
       case 'preview-winner':
         return dispatch({ type: 'PREVIEW_WINNER', payload });
 
-      case 'select-winner':
-        return dispatch({ type: 'SELECT_WINNER', payload });
+      case 'winner-selected':
+        return dispatch({ type: 'WINNER_SELECTED', payload });
 
       case 'lobby-created':
         return dispatch({ type: 'SET_LOBBY_ID', payload });
@@ -68,6 +72,10 @@ function HostProvider({ children }) {
           type: 'PLAYER_SUBMIT',
           payload: { ...payload, playerId: sender },
         });
+
+      case 'socket-connection-error':
+        dispatch({ type: 'UPDATE_JOIN_CODE', payload: { lobbyID: 'ERROR' } });
+        return setSocketHasError(true);
 
       default:
         return undefined;
@@ -131,6 +139,14 @@ function HostProvider({ children }) {
   return (
     <HostContext.Provider value={{ state, dispatch }}>
       {children}
+      {socketHasError && (
+        <AlertModal
+          bigText="SOCKET ERROR"
+          smallText="Please try again later"
+          buttonText="Click anywhere to restart"
+          onClick={() => window.location.reload()}
+        />
+      )}
     </HostContext.Provider>
   );
 }

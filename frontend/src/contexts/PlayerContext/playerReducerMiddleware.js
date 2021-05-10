@@ -13,7 +13,7 @@ function previewWinner(payload) {
 }
 
 function submitWinner(payload) {
-  socketInstance.sendMessage({ event: 'select-winner', payload });
+  socketInstance.sendMessage({ event: 'winner-selected', payload });
 }
 
 export default async function playerReducerMiddleware(

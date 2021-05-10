@@ -910,6 +910,45 @@ describe('reducer', () => {
         ),
       ).toBe(true);
     });
+
+    it('resets the czar selection', () => {
+      const state = {
+        gameSettings: {
+          handSize: 5,
+        },
+        deck: {
+          white: [
+            { pack: 0, text: 'zero' },
+            { pack: 0, text: 'one' },
+            { pack: 0, text: 'two' },
+            { pack: 0, text: 'three' },
+            { pack: 0, text: 'four' },
+          ],
+          black: [{ pick: 1, pack: 0, text: 'zero' }],
+        },
+        selectedBlackCard: {
+          pick: 1,
+        },
+        playerIDs: ['foo'],
+        players: {
+          foo: {
+            cards: [
+              { pack: 0, text: 'test' },
+              { pack: 0, text: 'test' },
+              { pack: 0, text: 'test' },
+            ],
+          },
+        },
+        czarSelection: 'old-czar-selection',
+      };
+
+      const result = HostReducer(state, {
+        type: 'DEAL_WHITE_CARDS',
+        payload: {},
+      });
+
+      expect(result.czarSelection).toBe('');
+    });
   });
 
   describe('REMOVE_SUBMITTED_CARDS_FROM_PLAYER', () => {
@@ -1273,6 +1312,105 @@ describe('reducer', () => {
           score: 0,
         },
       });
+    });
+  });
+
+  describe('WINNER_SELECTED', () => {
+    it('Updates gameState to showing-winning-cards', () => {
+      const state = {
+        players: {
+          ID1: {
+            name: 'foo',
+            score: 0,
+            isCzar: false,
+          },
+          ID2: {
+            name: 'bar',
+            score: 0,
+            isCzar: true,
+          },
+          ID3: {
+            name: 'baz',
+            score: 0,
+            isCzar: false,
+          },
+        },
+        gameState: 'example-game-state',
+        playerIDs: ['ID1', 'ID2', 'ID3'],
+        czarSelection: 'ID2',
+      };
+
+      const result = HostReducer(state, {
+        type: 'WINNER_SELECTED',
+        payload: {},
+      });
+
+      expect(result).not.toBe(state);
+      expect(result.gameState).toBe('showing-winning-cards');
+    });
+
+    it('Adds one point to roundWinner s score, determined by the current state.czarSelection', () => {
+      const state = {
+        players: {
+          ID1: {
+            name: 'foo',
+            score: 0,
+            isCzar: false,
+          },
+          ID2: {
+            name: 'bar',
+            score: 0,
+            isCzar: true,
+          },
+          ID3: {
+            name: 'baz',
+            score: 0,
+            isCzar: false,
+          },
+        },
+        gameState: 'example-game-state',
+        playerIDs: ['ID1', 'ID2', 'ID3'],
+        czarSelection: 'ID2',
+      };
+
+      const result = HostReducer(state, {
+        type: 'WINNER_SELECTED',
+        payload: {},
+      });
+
+      expect(result).not.toBe(state);
+      expect(result.players.ID2.score).toBe(1);
+    });
+  });
+
+  describe('GAME_OVER', () => {
+    it(`updates gameState to 'game-over'`, () => {
+      const state = {
+        gameState: 'example-game-state',
+      };
+
+      const result = HostReducer(state, {
+        type: 'GAME_OVER',
+        payload: { gameWinner: 'foo' },
+      });
+
+      expect(result).not.toBe(state);
+      expect(result.gameState).toBe('game-over');
+    });
+
+    it('sets top-level gameWinner to the string that comes in the payload', () => {
+      const state = {
+        gameState: 'example-game-state',
+        gameWinner: undefined,
+      };
+
+      const result = HostReducer(state, {
+        type: 'GAME_OVER',
+        payload: { gameWinner: 'foo' },
+      });
+
+      expect(result).not.toBe(state);
+      expect(result.gameWinner).toBe('foo');
     });
   });
 });

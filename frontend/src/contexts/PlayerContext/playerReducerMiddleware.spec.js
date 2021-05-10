@@ -74,7 +74,7 @@ describe('playerReducerMiddleware', () => {
     });
 
     describe('SUBMIT_WINNER', () => {
-      it("calls the sendMessage method on the socket with 'select-winner' event and the payload it receives", () => {
+      it("calls the sendMessage method on the socket with 'winner-selected' event and the payload it receives", () => {
         const dispatch = jest.fn();
 
         playerReducerMiddleware(
@@ -86,7 +86,7 @@ describe('playerReducerMiddleware', () => {
         );
 
         expect(socketInstance.sendMessage).toHaveBeenCalledWith({
-          event: 'select-winner',
+          event: 'winner-selected',
           payload: {},
         });
       });

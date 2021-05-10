@@ -78,6 +78,7 @@ function dealWhiteCards(state) {
     },
     players: newPlayers,
     gameState: 'waiting-to-receive-cards',
+    czarSelection: '',
   };
 }
 
@@ -183,10 +184,19 @@ function previewWinner(state, { highlightedPlayerID }) {
   };
 }
 
-function selectWinner(state) {
+function winnerSelected(state) {
+  const roundWinner = state.players[state.czarSelection];
+
   return {
     ...state,
     gameState: 'showing-winning-cards',
+    players: {
+      ...state.players,
+      [state.czarSelection]: {
+        ...roundWinner,
+        score: roundWinner.score + 1,
+      },
+    },
   };
 }
 
@@ -355,6 +365,14 @@ function removeLastPlayerFromStaging(state) {
   };
 }
 
+function gameOver(state, { gameWinner }) {
+  return {
+    ...state,
+    gameState: 'game-over',
+    gameWinner,
+  };
+}
+
 function HostReducer(state, action) {
   const { type, payload } = action;
   switch (type) {
@@ -386,8 +404,8 @@ function HostReducer(state, action) {
     case 'PREVIEW_WINNER':
       return previewWinner(state, payload);
 
-    case 'SELECT_WINNER':
-      return selectWinner(state, payload);
+    case 'WINNER_SELECTED':
+      return winnerSelected(state);
 
     case 'SET_LOBBY_ID':
       return setLobbyId(state, payload);
@@ -430,6 +448,9 @@ function HostReducer(state, action) {
 
     case 'TOO_MANY_PLAYERS':
       return removeLastPlayerFromStaging(state);
+
+    case 'GAME_OVER':
+      return gameOver(state, payload);
 
     default:
       return { ...state };

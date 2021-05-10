@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`WinnerSelectScreen rendering renders normally for typical state values 1`] = `
+exports[`Host Winner Screen rendering renders 1`] = `
 .c1 {
   background-image: url(inactiveHamburger.svg);
   background-size: cover;
@@ -378,22 +378,45 @@ exports[`WinnerSelectScreen rendering renders normally for typical state values 
   -ms-flex-direction: column;
   flex-direction: column;
   height: 100%;
-  -webkit-flex-shrink: 1 0;
-  -ms-flex-negative: 1 0;
-  flex-shrink: 1 0;
 }
 
 .c3 .player-list-wrapper {
   overflow-x: auto;
-  border-bottom: 1px solid var(--primary-text-color);
   -webkit-box-flex: 1;
   -webkit-flex-grow: 1;
   -ms-flex-positive: 1;
   flex-grow: 1;
 }
 
-.c3 .join-code-wrapper {
+.c3 .buttons-wrapper {
+  display: block;
+  margin-bottom: 20px;
+}
+
+.c3 .bottom-left-wrapper {
   margin: 20px auto 32px;
+  position: relative;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.c3 .join-code-wrapper {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.c3 .host-pregame-button {
+  padding: 0;
+  background-color: var(--primary-background-color);
+  color: var(--primary-text-color);
+  margin: auto auto 12px;
 }
 
 .c9 {
@@ -413,7 +436,7 @@ exports[`WinnerSelectScreen rendering renders normally for typical state values 
   align-items: center;
 }
 
-.c9 .czar-title {
+.c9 .winner-display {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -428,7 +451,7 @@ exports[`WinnerSelectScreen rendering renders normally for typical state values 
   text-transform: uppercase;
 }
 
-.c9 .czar-title span {
+.c9 .winner-display span {
   font-size: 24px;
   text-indent: -20px;
   margin-bottom: -8px;
@@ -437,7 +460,7 @@ exports[`WinnerSelectScreen rendering renders normally for typical state values 
 
 .c12 {
   display: grid;
-  grid-template-columns: repeat(2,auto);
+  grid-template-columns: repeat(1,auto);
   gap: 20px;
   place-items: center;
   -webkit-box-pack: center;
@@ -657,23 +680,27 @@ exports[`WinnerSelectScreen rendering renders normally for typical state values 
           </div>
         </div>
         <div
-          className="join-code-wrapper"
+          className="bottom-left-wrapper"
         >
           <div
-            className="c8"
+            className="join-code-wrapper"
           >
-            <p
-              className="join-code-title"
-            >
-              JOIN CODE:
-            </p>
             <div
-              className="join-code"
-              data-testid="join-code"
+              className="c8"
             >
-              <p>
-                ABCD
+              <p
+                className="join-code-title"
+              >
+                JOIN CODE:
               </p>
+              <div
+                className="join-code"
+                data-testid="join-code"
+              >
+                <p>
+                  ABCD
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -686,19 +713,20 @@ exports[`WinnerSelectScreen rendering renders normally for typical state values 
         className="c9"
       >
         <h1
-          className="czar-title"
+          className="winner-display"
+          data-testid="winner-display"
         >
           <span>
-            Czar:
+            WINNER:
           </span>
-          bar
+          FOO
         </h1>
         <div
           className="c10"
           data-testid="black-card"
         >
           <span>
-            He alone, who owns the ________(s), gains the ________(s).
+            Test Black Card
           </span>
           <div
             className="layeredCards"
@@ -728,7 +756,7 @@ exports[`WinnerSelectScreen rendering renders normally for typical state values 
             <div
               className="c11"
             >
-              2
+              1
             </div>
           </div>
         </div>
@@ -744,27 +772,6 @@ exports[`WinnerSelectScreen rendering renders normally for typical state values 
             >
               <div>
                 aaaa
-              </div>
-            </div>
-            <div
-              className="stackedCards"
-              data-testid="stacked-cards"
-            >
-              <img
-                alt="stacked cards"
-                src="cards-stack-offset-light-icon.svg"
-              />
-            </div>
-          </div>
-          <div
-            className="c13"
-            data-testid="white-card"
-          >
-            <div
-              className="whiteCardText"
-            >
-              <div>
-                bbbb
               </div>
             </div>
             <div

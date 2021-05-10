@@ -230,5 +230,25 @@ describe('Player screen controller', () => {
         expect(screen.getByTestId('player-message-screen')).toBeInTheDocument();
       });
     });
+
+    describe('end-game', () => {
+      it('renders PlayerErrorScreen', () => {
+        PlayerErrorScreen.mockImplementation(MockPlayerErrorScreen);
+
+        const dispatch = jest.fn();
+        const state = {
+          gameState: 'end-game',
+          message: { big: '', small: '' },
+        };
+
+        render(
+          <PlayerContext.Provider value={{ state, dispatch }}>
+            <PlayerScreenController />
+          </PlayerContext.Provider>,
+        );
+
+        expect(screen.getByTestId('player-error-screen')).toBeInTheDocument();
+      });
+    });
   });
 });
