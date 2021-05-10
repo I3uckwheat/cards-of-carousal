@@ -14,6 +14,10 @@ const propTypes = {
 const StyledPositionIndicators = styled.div`
   display: flex;
   justify-content: center;
+  position: absolute;
+  bottom: 24px;
+  left: 0;
+  right: 0;
 
   .positionButton {
     border: none;

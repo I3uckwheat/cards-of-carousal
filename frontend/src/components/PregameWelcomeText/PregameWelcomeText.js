@@ -6,11 +6,13 @@ import config from '../../config';
 
 const StyledPregameWelcomeText = styled.div`
   display: flex;
+  position: absolute;
+  top: 0;
+  bottom: 0;
   flex-direction: column;
   justify-content: space-between;
   background-color: var(--primary-background-color);
-  align-self: flex-start;
-  margin: 24px;
+  margin: 24px 48px;
   padding: 8px;
   border-radius: 5px;
   font-size: 1.8rem;

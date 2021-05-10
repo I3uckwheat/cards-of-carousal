@@ -75,6 +75,7 @@ const RightPanelWrapper = styled.div`
   left: 0;
 
   .top {
+    position: relative;
     display: flex;
     justify-content: center;
     height: 60%;
