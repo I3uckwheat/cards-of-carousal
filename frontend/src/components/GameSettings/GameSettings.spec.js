@@ -20,12 +20,16 @@ describe('GameSettings', () => {
   let state = {
     loading: [],
     players: {},
+    playerIDs: [],
+    newPlayerStaging: [],
   };
 
   beforeEach(() => {
     state = {
       loading: [],
       players: {},
+      playerIDs: [],
+      newPlayerStaging: [],
     };
     setupFetchMock();
   });
@@ -88,6 +92,8 @@ describe('GameSettings', () => {
       state = {
         loading: ['getting-packs'],
         players: {},
+        playerIDs: [],
+        newPlayerStaging: [],
       };
 
       render(
