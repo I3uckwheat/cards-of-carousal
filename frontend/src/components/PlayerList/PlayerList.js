@@ -82,10 +82,12 @@ function PlayerList() {
       {playersArray.map((player) => {
         const showIcon = player.submittedCards.length > 0 || player.isCzar;
         const playerIcon = player.isCzar ? BlackCard : OffsetWhiteCardStack;
+        const playerKey =
+          playerIDs.find((id) => players[id] === player) || player.playerId;
 
         return (
           <PlayerRow
-            key={player.name}
+            key={playerKey}
             isCzar={player.isCzar}
             isInStaging={player.playerId}
             data-testid={`row-${player.name}`}
