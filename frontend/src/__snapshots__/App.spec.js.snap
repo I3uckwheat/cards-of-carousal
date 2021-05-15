@@ -616,6 +616,7 @@ exports[`App snapshots should show the host screen after user has clicked the "h
   -ms-flex-positive: 1;
   flex-grow: 1;
   position: relative;
+  min-width: 440px;
 }
 
 .c2 {
@@ -839,7 +840,7 @@ exports[`App snapshots should show the host screen after user has clicked the "h
   -ms-flex-pack: center;
   justify-content: center;
   position: absolute;
-  bottom: 24px;
+  bottom: 8px;
   left: 0;
   right: 0;
 }
@@ -866,8 +867,8 @@ exports[`App snapshots should show the host screen after user has clicked the "h
   -ms-flex-pack: justify;
   justify-content: space-between;
   background-color: var(--primary-background-color);
-  margin: 24px 48px;
-  padding: 8px;
+  margin: 4px;
+  padding: 8px 42px 8px 8px;
   border-radius: 5px;
   font-size: 1.8rem;
   font-weight: 700;
@@ -876,11 +877,12 @@ exports[`App snapshots should show the host screen after user has clicked the "h
 
 .c9 h2 {
   line-height: 2.4rem;
+  font-size: 2rem;
 }
 
 .c9 h3 {
-  font-size: 1.5rem;
-  line-height: 1.8rem;
+  font-size: 1.2rem;
+  line-height: 1.2rem;
 }
 
 .c9 p {
@@ -894,7 +896,7 @@ exports[`App snapshots should show the host screen after user has clicked the "h
 
 .c9 li {
   margin: 0;
-  font-size: 1.1rem;
+  font-size: 1rem;
 }
 
 .c9 .howToWin {
@@ -913,8 +915,8 @@ exports[`App snapshots should show the host screen after user has clicked the "h
 }
 
 .c9 .snarkyText {
-  font-size: 0.8rem;
-  margin: 0;
+  font-size: 0.6rem;
+  margin: 0 2px;
   padding: 0;
 }
 
@@ -1082,7 +1084,7 @@ exports[`App snapshots should show the host screen after user has clicked the "h
   }
 
   .c0 .components .left {
-    min-width: 450px;
+    min-width: 420px;
   }
 
   .c0 .components .host-layout-header h2 {
@@ -1126,6 +1128,16 @@ exports[`App snapshots should show the host screen after user has clicked the "h
   }
 }
 
+@media (min-width:1600px) {
+  .c10 .positionButton {
+    margin: 0 4px;
+  }
+
+  .c10 img {
+    height: 72px;
+  }
+}
+
 @media (min-width:1100px) {
   .c9 {
     -webkit-align-self: center;
@@ -1135,8 +1147,29 @@ exports[`App snapshots should show the host screen after user has clicked the "h
 }
 
 @media (min-width:1600px) {
+  .c9 h2 {
+    font-size: 5rem;
+    line-height: 5rem;
+  }
+
   .c9 h3 {
+    font-size: 2.5rem;
+    line-height: 2.5rem;
+  }
+
+  .c9 p {
+    margin: 14px;
+  }
+
+  .c9 p,
+  .c9 li {
     font-size: 1.8rem;
+  }
+
+  .c9 .snarkyText {
+    font-size: 1rem;
+    margin: 0 4px;
+    padding: 0;
   }
 }
 
