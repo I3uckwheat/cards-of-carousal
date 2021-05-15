@@ -15,7 +15,7 @@ const StyledPositionIndicators = styled.div`
   display: flex;
   justify-content: center;
   position: absolute;
-  bottom: 24px;
+  bottom: 8px;
   left: 0;
   right: 0;
 
@@ -23,6 +23,15 @@ const StyledPositionIndicators = styled.div`
     border: none;
     background-color: transparent;
     cursor: pointer;
+  }
+
+  @media (min-width: 1600px) {
+    .positionButton {
+      margin: 0 4px;
+    }
+    img {
+      height: 72px;
+    }
   }
 `;
 
