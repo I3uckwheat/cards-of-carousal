@@ -112,7 +112,7 @@ function RightPanel() {
         <div className="czar-display">
           <p>CZAR:</p>
           <p data-testid="czar-name" className="czar-name">
-            {czar.name.toUpperCase()}
+            {czar?.name.toUpperCase()}
           </p>
         </div>
 

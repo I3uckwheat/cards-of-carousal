@@ -1,3 +1,4 @@
+/* eslint-disable no-use-before-define */
 function createLobby(state) {
   return {
     ...state,
@@ -148,6 +149,8 @@ function removeSubmittedCards(state) {
 }
 
 function removePlayer(state, { playerId }) {
+  const removingCzar = state.players[playerId]?.isCzar;
+
   // Removes the value playerId from the original playerIDs array
   const newPlayerIds = state.playerIDs.filter(
     (playerID) => playerID !== playerId,
@@ -158,11 +161,22 @@ function removePlayer(state, { playerId }) {
     ...state.players,
   };
 
-  return {
+  const newState = {
     ...state,
     players: newPlayers,
     playerIDs: newPlayerIds,
   };
+
+  if (removingCzar && newPlayerIds.length !== 1) {
+    return dealWhiteCards(
+      clearSubmittedCards(
+        addPlayersFromStaging(
+          removeSubmittedCards(setNextCzar(setBlackCard(newState))),
+        ),
+      ),
+    );
+  }
+  return newState;
 }
 
 function czarSelectWinner(state) {
