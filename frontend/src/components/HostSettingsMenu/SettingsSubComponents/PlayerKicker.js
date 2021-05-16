@@ -22,17 +22,16 @@ function PlayerKicker({ accordionState, onClickActions }) {
   // this variable is needed for the OptionList API; it needs the player names
   // in an array of strings
   const playerList = playerIDs
-    .map((playerId) => players[playerId].name.toUpperCase())
+    .map((playerId) => ({
+      text: players[playerId].name.toUpperCase(),
+      value: playerId,
+    }))
     .sort((a, b) => b > a);
 
-  function kickPlayer(playerName) {
-    const targetPlayer = playerIDs.find(
-      (playerId) => players[playerId].name.toUpperCase() === playerName,
-    );
-
+  function kickPlayer(targetId) {
     dispatch({
       type: 'KICK_PLAYER',
-      payload: { playerId: targetPlayer },
+      payload: { playerId: targetId },
     });
   }
 

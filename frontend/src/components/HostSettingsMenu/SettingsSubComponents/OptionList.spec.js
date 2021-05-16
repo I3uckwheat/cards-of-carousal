@@ -10,7 +10,11 @@ describe('OptionList', () => {
     it('renders a button with the given open text when open', () => {
       render(
         <OptionList
-          listContent={['foo', 'bar', 'bash']}
+          listContent={[
+            { text: 'foo', value: 'fooID' },
+            { text: 'bar', value: 'barID' },
+            { text: 'baz', value: 'bazID' },
+          ]}
           state="open"
           onClick={() => {}}
           onItemClick={() => {}}
@@ -27,7 +31,11 @@ describe('OptionList', () => {
     it('renders a button with the given closed text when enabled', () => {
       render(
         <OptionList
-          listContent={['foo', 'bar', 'bash']}
+          listContent={[
+            { text: 'foo', value: 'fooID' },
+            { text: 'bar', value: 'barID' },
+            { text: 'baz', value: 'bazID' },
+          ]}
           state="enabled"
           onClick={() => {}}
           onItemClick={() => {}}
@@ -44,7 +52,11 @@ describe('OptionList', () => {
     it('does not render the contents of the list when enabled', () => {
       render(
         <OptionList
-          listContent={['foo', 'bar', 'bash']}
+          listContent={[
+            { text: 'foo', value: 'fooID' },
+            { text: 'bar', value: 'barID' },
+            { text: 'baz', value: 'bazID' },
+          ]}
           state="enabled"
           onClick={() => {}}
           onItemClick={() => {}}
@@ -60,14 +72,18 @@ describe('OptionList', () => {
         screen.queryByRole('button', { name: 'bar' }),
       ).not.toBeInTheDocument();
       expect(
-        screen.queryByRole('button', { name: 'bash' }),
+        screen.queryByRole('button', { name: 'baz' }),
       ).not.toBeInTheDocument();
     });
 
     it('renders a button with the given closed text when disabled', () => {
       render(
         <OptionList
-          listContent={['foo', 'bar', 'bash']}
+          listContent={[
+            { text: 'foo', value: 'fooID' },
+            { text: 'bar', value: 'barID' },
+            { text: 'baz', value: 'bazID' },
+          ]}
           state="disabled"
           onClick={() => {}}
           onItemClick={() => {}}
@@ -84,7 +100,11 @@ describe('OptionList', () => {
     it('does not render the contents of the list when disabled', () => {
       render(
         <OptionList
-          listContent={['foo', 'bar', 'bash']}
+          listContent={[
+            { text: 'foo', value: 'fooID' },
+            { text: 'bar', value: 'barID' },
+            { text: 'baz', value: 'bazID' },
+          ]}
           state="disabled"
           onClick={() => {}}
           onItemClick={() => {}}
@@ -100,14 +120,18 @@ describe('OptionList', () => {
         screen.queryByRole('button', { name: 'bar' }),
       ).not.toBeInTheDocument();
       expect(
-        screen.queryByRole('button', { name: 'bash' }),
+        screen.queryByRole('button', { name: 'baz' }),
       ).not.toBeInTheDocument();
     });
 
     it('renders the content of the list when open', () => {
       render(
         <OptionList
-          listContent={['foo', 'bar', 'bash']}
+          listContent={[
+            { text: 'foo', value: 'fooID' },
+            { text: 'bar', value: 'barID' },
+            { text: 'baz', value: 'bazID' },
+          ]}
           state="open"
           onClick={() => {}}
           onItemClick={() => {}}
@@ -118,14 +142,18 @@ describe('OptionList', () => {
 
       expect(screen.getByRole('button', { name: 'foo' })).toBeInTheDocument();
       expect(screen.getByRole('button', { name: 'bar' })).toBeInTheDocument();
-      expect(screen.getByRole('button', { name: 'bash' })).toBeInTheDocument();
+      expect(screen.getByRole('button', { name: 'baz' })).toBeInTheDocument();
     });
 
     it('matches the expected snapshot when open', () => {
       const tree = renderer
         .create(
           <OptionList
-            listContent={['foo', 'bar', 'bash']}
+            listContent={[
+              { text: 'foo', value: 'fooID' },
+              { text: 'bar', value: 'barID' },
+              { text: 'baz', value: 'bazID' },
+            ]}
             state="open"
             onClick={() => {}}
             onItemClick={() => {}}
@@ -141,7 +169,11 @@ describe('OptionList', () => {
       const tree = renderer
         .create(
           <OptionList
-            listContent={['foo', 'bar', 'bash']}
+            listContent={[
+              { text: 'foo', value: 'fooID' },
+              { text: 'bar', value: 'barID' },
+              { text: 'baz', value: 'bazID' },
+            ]}
             state="enabled"
             onClick={() => {}}
             onItemClick={() => {}}
@@ -157,7 +189,11 @@ describe('OptionList', () => {
       const tree = renderer
         .create(
           <OptionList
-            listContent={['foo', 'bar', 'bash']}
+            listContent={[
+              { text: 'foo', value: 'fooID' },
+              { text: 'bar', value: 'barID' },
+              { text: 'baz', value: 'bazID' },
+            ]}
             state="disabled"
             onClick={() => {}}
             onItemClick={() => {}}
@@ -178,7 +214,11 @@ describe('OptionList', () => {
 
       render(
         <OptionList
-          listContent={['foo', 'bar', 'bash']}
+          listContent={[
+            { text: 'foo', value: 'fooID' },
+            { text: 'bar', value: 'barID' },
+            { text: 'baz', value: 'bazID' },
+          ]}
           state="open"
           onClick={consoleSpy}
           onItemClick={() => {}}
@@ -197,7 +237,11 @@ describe('OptionList', () => {
 
       render(
         <OptionList
-          listContent={['foo', 'bar', 'bash']}
+          listContent={[
+            { text: 'foo', value: 'fooID' },
+            { text: 'bar', value: 'barID' },
+            { text: 'baz', value: 'bazID' },
+          ]}
           state="open"
           onClick={consoleSpy}
           onItemClick={() => {}}
@@ -217,7 +261,11 @@ describe('OptionList', () => {
 
       render(
         <OptionList
-          listContent={['foo', 'bar', 'bash']}
+          listContent={[
+            { text: 'foo', value: 'fooID' },
+            { text: 'bar', value: 'barID' },
+            { text: 'baz', value: 'bazID' },
+          ]}
           state="enabled"
           onClick={consoleSpy}
           onItemClick={() => {}}
@@ -237,7 +285,11 @@ describe('OptionList', () => {
 
       render(
         <OptionList
-          listContent={['foo', 'bar', 'bash']}
+          listContent={[
+            { text: 'foo', value: 'fooID' },
+            { text: 'bar', value: 'barID' },
+            { text: 'baz', value: 'bazID' },
+          ]}
           state="open"
           onClick={() => {}}
           onItemClick={consoleSpy}
@@ -256,7 +308,11 @@ describe('OptionList', () => {
 
       render(
         <OptionList
-          listContent={['foo', 'bar', 'bash']}
+          listContent={[
+            { text: 'foo', value: 'fooID' },
+            { text: 'bar', value: 'barID' },
+            { text: 'baz', value: 'bazID' },
+          ]}
           state="open"
           onClick={() => {}}
           onItemClick={consoleSpy}
@@ -276,7 +332,11 @@ describe('OptionList', () => {
 
       render(
         <OptionList
-          listContent={['foo', 'bar', 'bash']}
+          listContent={[
+            { text: 'foo', value: 'fooID' },
+            { text: 'bar', value: 'barID' },
+            { text: 'baz', value: 'bazID' },
+          ]}
           state="open"
           onClick={() => {}}
           onItemClick={consoleSpy}
@@ -286,7 +346,7 @@ describe('OptionList', () => {
       );
 
       userEvent.click(screen.getByRole('button', { name: 'foo' }));
-      userEvent.click(screen.getByRole('button', { name: 'bash' }));
+      userEvent.click(screen.getByRole('button', { name: 'baz' }));
       expect(consoleSpy).toHaveBeenCalledTimes(2);
     });
 
@@ -297,7 +357,11 @@ describe('OptionList', () => {
 
       render(
         <OptionList
-          listContent={['foo', 'bar', 'bash']}
+          listContent={[
+            { text: 'foo', value: 'fooID' },
+            { text: 'bar', value: 'barID' },
+            { text: 'baz', value: 'bazID' },
+          ]}
           state="open"
           onClick={() => {}}
           onItemClick={consoleSpy}
@@ -308,8 +372,30 @@ describe('OptionList', () => {
 
       userEvent.click(screen.getByRole('button', { name: 'foo' }));
       userEvent.click(screen.getByRole('button', { name: 'foo' }));
-      userEvent.click(screen.getByRole('button', { name: 'bash' }));
+      userEvent.click(screen.getByRole('button', { name: 'baz' }));
       expect(consoleSpy).toHaveBeenCalledTimes(3);
+    });
+
+    it('calls the onItemClick callback with that respective value', () => {
+      const mockOnItemClick = jest.fn();
+
+      render(
+        <OptionList
+          listContent={[
+            { text: 'foo', value: 'fooID' },
+            { text: 'bar', value: 'barID' },
+            { text: 'baz', value: 'bazID' },
+          ]}
+          state="open"
+          onClick={() => {}}
+          onItemClick={mockOnItemClick}
+          openText="LIST IS OPEN"
+          closedText="LIST IS CLOSED"
+        />,
+      );
+
+      userEvent.click(screen.getByRole('button', { name: 'foo' }));
+      expect(mockOnItemClick).toHaveBeenCalledWith('fooID');
     });
   });
 
@@ -353,7 +439,7 @@ describe('OptionList', () => {
       expect(consoleSpy).toHaveBeenCalled();
     });
 
-    it('logs an error when attempting to render the listContent prop as an array of non strings', () => {
+    it('logs an error when attempting to render the listContent prop as an array of non objects', () => {
       const consoleSpy = jest
         .spyOn(console, 'error')
         .mockImplementation(() => {});
@@ -372,6 +458,90 @@ describe('OptionList', () => {
       expect(consoleSpy).toHaveBeenCalled();
     });
 
+    it('logs an error when the listContent prop objects lack a text property', () => {
+      const consoleSpy = jest
+        .spyOn(console, 'error')
+        .mockImplementation(() => {});
+
+      render(
+        <OptionList
+          listContent={[{ value: 'foo' }, { value: 'bar' }, { value: 'baz' }]}
+          state="open"
+          onClick={() => {}}
+          onItemClick={() => {}}
+          openText="LIST IS OPEN"
+          closedText="LIST IS CLOSED"
+        />,
+      );
+
+      expect(consoleSpy).toHaveBeenCalled();
+    });
+
+    it('logs an error when the listContent prop objects text property is not a string', () => {
+      const consoleSpy = jest
+        .spyOn(console, 'error')
+        .mockImplementation(() => {});
+
+      render(
+        <OptionList
+          listContent={[
+            { text: true, value: 'foo' },
+            { text: true, value: 'bar' },
+            { text: true, value: 'baz' },
+          ]}
+          state="open"
+          onClick={() => {}}
+          onItemClick={() => {}}
+          openText="LIST IS OPEN"
+          closedText="LIST IS CLOSED"
+        />,
+      );
+
+      expect(consoleSpy).toHaveBeenCalled();
+    });
+
+    it('logs an error when the listContent prop objects lack a value property', () => {
+      const consoleSpy = jest
+        .spyOn(console, 'error')
+        .mockImplementation(() => {});
+
+      render(
+        <OptionList
+          listContent={[{ text: 'foo' }, { text: 'bar' }, { text: 'baz' }]}
+          state="open"
+          onClick={() => {}}
+          onItemClick={() => {}}
+          openText="LIST IS OPEN"
+          closedText="LIST IS CLOSED"
+        />,
+      );
+
+      expect(consoleSpy).toHaveBeenCalled();
+    });
+
+    it('logs an error when the listContent prop objects value property is not a string', () => {
+      const consoleSpy = jest
+        .spyOn(console, 'error')
+        .mockImplementation(() => {});
+
+      render(
+        <OptionList
+          listContent={[
+            { text: 'foo', value: true },
+            { text: 'bar', value: true },
+            { text: 'baz', value: true },
+          ]}
+          state="open"
+          onClick={() => {}}
+          onItemClick={() => {}}
+          openText="LIST IS OPEN"
+          closedText="LIST IS CLOSED"
+        />,
+      );
+
+      expect(consoleSpy).toHaveBeenCalled();
+    });
+
     it('logs an error when attempting to render without the state prop', () => {
       const consoleSpy = jest
         .spyOn(console, 'error')
@@ -379,7 +549,11 @@ describe('OptionList', () => {
 
       render(
         <OptionList
-          listContent={['foo', 'bar', 'bash']}
+          listContent={[
+            { text: 'foo', value: 'fooID' },
+            { text: 'bar', value: 'barID' },
+            { text: 'baz', value: 'bazID' },
+          ]}
           onClick={() => {}}
           onItemClick={() => {}}
           openText="LIST IS OPEN"
@@ -397,7 +571,11 @@ describe('OptionList', () => {
 
       render(
         <OptionList
-          listContent={['foo', 'bar', 'bash']}
+          listContent={[
+            { text: 'foo', value: 'fooID' },
+            { text: 'bar', value: 'barID' },
+            { text: 'baz', value: 'bazID' },
+          ]}
           state={false}
           onClick={() => {}}
           onItemClick={() => {}}
@@ -416,7 +594,11 @@ describe('OptionList', () => {
 
       render(
         <OptionList
-          listContent={['foo', 'bar', 'bash']}
+          listContent={[
+            { text: 'foo', value: 'fooID' },
+            { text: 'bar', value: 'barID' },
+            { text: 'baz', value: 'bazID' },
+          ]}
           state="open"
           onItemClick={() => {}}
           openText="LIST IS OPEN"
@@ -434,7 +616,11 @@ describe('OptionList', () => {
 
       render(
         <OptionList
-          listContent={['foo', 'bar', 'bash']}
+          listContent={[
+            { text: 'foo', value: 'fooID' },
+            { text: 'bar', value: 'barID' },
+            { text: 'baz', value: 'bazID' },
+          ]}
           state="open"
           onClick={false}
           onItemClick={() => {}}
@@ -453,7 +639,11 @@ describe('OptionList', () => {
 
       render(
         <OptionList
-          listContent={['foo', 'bar', 'bash']}
+          listContent={[
+            { text: 'foo', value: 'fooID' },
+            { text: 'bar', value: 'barID' },
+            { text: 'baz', value: 'bazID' },
+          ]}
           state="open"
           onClick={() => {}}
           openText="LIST IS OPEN"
@@ -471,7 +661,11 @@ describe('OptionList', () => {
 
       render(
         <OptionList
-          listContent={['foo', 'bar', 'bash']}
+          listContent={[
+            { text: 'foo', value: 'fooID' },
+            { text: 'bar', value: 'barID' },
+            { text: 'baz', value: 'bazID' },
+          ]}
           state="open"
           onClick={() => {}}
           onItemClick={false}
@@ -490,7 +684,11 @@ describe('OptionList', () => {
 
       render(
         <OptionList
-          listContent={['foo', 'bar', 'bash']}
+          listContent={[
+            { text: 'foo', value: 'fooID' },
+            { text: 'bar', value: 'barID' },
+            { text: 'baz', value: 'bazID' },
+          ]}
           state="open"
           onItemClick={() => {}}
           onClick={() => {}}
@@ -508,7 +706,11 @@ describe('OptionList', () => {
 
       render(
         <OptionList
-          listContent={['foo', 'bar', 'bash']}
+          listContent={[
+            { text: 'foo', value: 'fooID' },
+            { text: 'bar', value: 'barID' },
+            { text: 'baz', value: 'bazID' },
+          ]}
           state="open"
           onClick={() => {}}
           onItemClick={() => {}}
@@ -527,7 +729,11 @@ describe('OptionList', () => {
 
       render(
         <OptionList
-          listContent={['foo', 'bar', 'bash']}
+          listContent={[
+            { text: 'foo', value: 'fooID' },
+            { text: 'bar', value: 'barID' },
+            { text: 'baz', value: 'bazID' },
+          ]}
           state="open"
           onItemClick={() => {}}
           onClick={() => {}}
@@ -545,7 +751,11 @@ describe('OptionList', () => {
 
       render(
         <OptionList
-          listContent={['foo', 'bar', 'bash']}
+          listContent={[
+            { text: 'foo', value: 'fooID' },
+            { text: 'bar', value: 'barID' },
+            { text: 'baz', value: 'bazID' },
+          ]}
           state="open"
           onClick={() => {}}
           onItemClick={() => {}}
@@ -564,7 +774,11 @@ describe('OptionList', () => {
 
       render(
         <OptionList
-          listContent={['foo', 'bar', 'bash']}
+          listContent={[
+            { text: 'foo', value: 'fooID' },
+            { text: 'bar', value: 'barID' },
+            { text: 'baz', value: 'bazID' },
+          ]}
           state="open"
           onClick={() => {}}
           onItemClick={() => {}}
