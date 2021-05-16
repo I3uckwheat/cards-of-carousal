@@ -9,10 +9,11 @@ const StyledPregameWelcomeText = styled.div`
   position: absolute;
   top: 0;
   bottom: 0;
+  left: 4px;
+  right: 4px;
   flex-direction: column;
   justify-content: space-between;
   background-color: var(--primary-background-color);
-  margin: 4px;
   padding: 8px 42px 8px 8px;
   border-radius: 5px;
   font-size: 1.8rem;
@@ -30,17 +31,19 @@ const StyledPregameWelcomeText = styled.div`
   }
 
   p {
-    margin: 10px;
+    margin: 8px;
     font-size: 1.1rem;
   }
 
   ol {
-    margin: 20px;
+    margin: 8px;
+    line-height: 1.3rem;
   }
 
   li {
     margin: 0;
     font-size: 1rem;
+    line-height: 1.3rem;
   }
 
   .howToWin {
@@ -57,18 +60,24 @@ const StyledPregameWelcomeText = styled.div`
   }
 
   @media (min-width: 1100px) {
+    left: 8px;
+    right: 8px;
     align-self: center;
+    ol,
+    li {
+      line-height: 1.7rem;
+    }
   }
 
   @media (min-width: 1600px) {
     h2 {
-      font-size: 5rem;
-      line-height: 5rem;
+      font-size: 3.2rem;
+      line-height: 3.2rem;
     }
 
     h3 {
       font-size: 2.5rem;
-      line-height: 2.5rem;
+      line-height: 2.3rem;
     }
 
     p {
@@ -77,7 +86,13 @@ const StyledPregameWelcomeText = styled.div`
 
     p,
     li {
-      font-size: 1.8rem;
+      font-size: 1.7rem;
+    }
+
+    ol,
+    li {
+      line-height: 2rem;
+      margin: 12px;
     }
 
     .snarkyText {

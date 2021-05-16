@@ -859,6 +859,8 @@ exports[`App snapshots should show the host screen after user has clicked the "h
   position: absolute;
   top: 0;
   bottom: 0;
+  left: 4px;
+  right: 4px;
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
@@ -867,7 +869,6 @@ exports[`App snapshots should show the host screen after user has clicked the "h
   -ms-flex-pack: justify;
   justify-content: space-between;
   background-color: var(--primary-background-color);
-  margin: 4px;
   padding: 8px 42px 8px 8px;
   border-radius: 5px;
   font-size: 1.8rem;
@@ -886,17 +887,19 @@ exports[`App snapshots should show the host screen after user has clicked the "h
 }
 
 .c9 p {
-  margin: 10px;
+  margin: 8px;
   font-size: 1.1rem;
 }
 
 .c9 ol {
-  margin: 20px;
+  margin: 8px;
+  line-height: 1.3rem;
 }
 
 .c9 li {
   margin: 0;
   font-size: 1rem;
+  line-height: 1.3rem;
 }
 
 .c9 .howToWin {
@@ -1140,21 +1143,28 @@ exports[`App snapshots should show the host screen after user has clicked the "h
 
 @media (min-width:1100px) {
   .c9 {
+    left: 8px;
+    right: 8px;
     -webkit-align-self: center;
     -ms-flex-item-align: center;
     align-self: center;
+  }
+
+  .c9 ol,
+  .c9 li {
+    line-height: 1.7rem;
   }
 }
 
 @media (min-width:1600px) {
   .c9 h2 {
-    font-size: 5rem;
-    line-height: 5rem;
+    font-size: 3.2rem;
+    line-height: 3.2rem;
   }
 
   .c9 h3 {
     font-size: 2.5rem;
-    line-height: 2.5rem;
+    line-height: 2.3rem;
   }
 
   .c9 p {
@@ -1163,7 +1173,13 @@ exports[`App snapshots should show the host screen after user has clicked the "h
 
   .c9 p,
   .c9 li {
-    font-size: 1.8rem;
+    font-size: 1.7rem;
+  }
+
+  .c9 ol,
+  .c9 li {
+    line-height: 2rem;
+    margin: 12px;
   }
 
   .c9 .snarkyText {
