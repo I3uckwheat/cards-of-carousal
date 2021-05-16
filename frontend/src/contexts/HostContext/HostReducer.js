@@ -167,7 +167,11 @@ function removePlayer(state, { playerId }) {
     playerIDs: newPlayerIds,
   };
 
-  if (removingCzar && newPlayerIds.length !== 1) {
+  if (
+    removingCzar &&
+    newPlayerIds.length + newState.newPlayerStaging.length > 1 &&
+    !['game-over', 'showing-winning-cards'].includes(state.gameState)
+  ) {
     return dealWhiteCards(
       clearSubmittedCards(
         addPlayersFromStaging(
