@@ -116,6 +116,15 @@ function HostProvider({ children }) {
     }
   }, [state.newPlayerStaging]);
 
+  useEffect(() => {
+    if (state.playerIDs.length === 1 && state.newPlayerStaging.length === 0) {
+      dispatch({
+        type: 'GAME_OVER',
+        payload: { gameWinner: state.playerIDs[0], playerIDs: state.playerIDs },
+      });
+    }
+  }, [state.playerIDs]);
+
   return (
     <HostContext.Provider value={{ state, dispatch }}>
       {children}

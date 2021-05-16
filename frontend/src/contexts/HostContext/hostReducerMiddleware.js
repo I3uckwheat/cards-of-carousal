@@ -211,17 +211,19 @@ function sendEndOfGameMessages({ gameWinner, playerIDs }) {
     recipients: [gameWinner],
   });
 
-  socketInstance.sendMessage({
-    event: 'update',
-    payload: {
-      gameState: 'end-game',
-      message: {
-        big: 'Loser 👎︎',
-        small: `Better to lose the game than your integrity`,
+  if (losers.length) {
+    socketInstance.sendMessage({
+      event: 'update',
+      payload: {
+        gameState: 'end-game',
+        message: {
+          big: 'Loser 👎︎',
+          small: `Better to lose the game than your integrity`,
+        },
       },
-    },
-    recipients: losers,
-  });
+      recipients: losers,
+    });
+  }
 }
 
 export default async function hostReducerMiddleware(
