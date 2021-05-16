@@ -208,9 +208,7 @@ describe('OptionList', () => {
 
   describe('functionality', () => {
     it('does not call the onClick callback when the OptionList main button is not clicked', () => {
-      const consoleSpy = jest
-        .spyOn(console, 'error')
-        .mockImplementation(() => {});
+      const mockOnClick = jest.fn();
 
       render(
         <OptionList
@@ -220,20 +218,18 @@ describe('OptionList', () => {
             { text: 'baz', value: 'bazID' },
           ]}
           state="open"
-          onClick={consoleSpy}
+          onClick={mockOnClick}
           onItemClick={() => {}}
           openText="LIST IS OPEN"
           closedText="LIST IS CLOSED"
         />,
       );
 
-      expect(consoleSpy).not.toHaveBeenCalled();
+      expect(mockOnClick).not.toHaveBeenCalled();
     });
 
     it('calls the onClick callback when the OptionList main button is open and is clicked', () => {
-      const consoleSpy = jest
-        .spyOn(console, 'error')
-        .mockImplementation(() => {});
+      const mockOnClick = jest.fn();
 
       render(
         <OptionList
@@ -243,7 +239,7 @@ describe('OptionList', () => {
             { text: 'baz', value: 'bazID' },
           ]}
           state="open"
-          onClick={consoleSpy}
+          onClick={mockOnClick}
           onItemClick={() => {}}
           openText="LIST IS OPEN"
           closedText="LIST IS CLOSED"
@@ -251,13 +247,11 @@ describe('OptionList', () => {
       );
 
       userEvent.click(screen.getByRole('button', { name: 'LIST IS OPEN' }));
-      expect(consoleSpy).toHaveBeenCalled();
+      expect(mockOnClick).toHaveBeenCalled();
     });
 
     it('calls the onClick callback when the OptionList main button is closed and is clicked', () => {
-      const consoleSpy = jest
-        .spyOn(console, 'error')
-        .mockImplementation(() => {});
+      const mockOnClick = jest.fn();
 
       render(
         <OptionList
@@ -267,7 +261,7 @@ describe('OptionList', () => {
             { text: 'baz', value: 'bazID' },
           ]}
           state="enabled"
-          onClick={consoleSpy}
+          onClick={mockOnClick}
           onItemClick={() => {}}
           openText="LIST IS OPEN"
           closedText="LIST IS CLOSED"
@@ -275,13 +269,11 @@ describe('OptionList', () => {
       );
 
       userEvent.click(screen.getByRole('button', { name: 'LIST IS CLOSED' }));
-      expect(consoleSpy).toHaveBeenCalled();
+      expect(mockOnClick).toHaveBeenCalled();
     });
 
     it('does not call the onItemClick callback if none of the list item buttons are clicked', () => {
-      const consoleSpy = jest
-        .spyOn(console, 'error')
-        .mockImplementation(() => {});
+      const mockOnItemClick = jest.fn();
 
       render(
         <OptionList
@@ -292,19 +284,17 @@ describe('OptionList', () => {
           ]}
           state="open"
           onClick={() => {}}
-          onItemClick={consoleSpy}
+          onItemClick={mockOnItemClick}
           openText="LIST IS OPEN"
           closedText="LIST IS CLOSED"
         />,
       );
 
-      expect(consoleSpy).not.toHaveBeenCalled();
+      expect(mockOnItemClick).not.toHaveBeenCalled();
     });
 
     it('does not call the onItemClick callback if none of the list item buttons are clicked but the main button is', () => {
-      const consoleSpy = jest
-        .spyOn(console, 'error')
-        .mockImplementation(() => {});
+      const mockOnItemClick = jest.fn();
 
       render(
         <OptionList
@@ -315,20 +305,18 @@ describe('OptionList', () => {
           ]}
           state="open"
           onClick={() => {}}
-          onItemClick={consoleSpy}
+          onItemClick={mockOnItemClick}
           openText="LIST IS OPEN"
           closedText="LIST IS CLOSED"
         />,
       );
 
       userEvent.click(screen.getByRole('button', { name: 'LIST IS OPEN' }));
-      expect(consoleSpy).not.toHaveBeenCalled();
+      expect(mockOnItemClick).not.toHaveBeenCalled();
     });
 
     it('calls the onItemClick callback once each time any of the list item buttons are clicked', () => {
-      const consoleSpy = jest
-        .spyOn(console, 'error')
-        .mockImplementation(() => {});
+      const mockOnItemClick = jest.fn();
 
       render(
         <OptionList
@@ -339,7 +327,7 @@ describe('OptionList', () => {
           ]}
           state="open"
           onClick={() => {}}
-          onItemClick={consoleSpy}
+          onItemClick={mockOnItemClick}
           openText="LIST IS OPEN"
           closedText="LIST IS CLOSED"
         />,
@@ -347,13 +335,11 @@ describe('OptionList', () => {
 
       userEvent.click(screen.getByRole('button', { name: 'foo' }));
       userEvent.click(screen.getByRole('button', { name: 'baz' }));
-      expect(consoleSpy).toHaveBeenCalledTimes(2);
+      expect(mockOnItemClick).toHaveBeenCalledTimes(2);
     });
 
     it('calls the onItemClick callback multiple times if a list item is clicked multiple times', () => {
-      const consoleSpy = jest
-        .spyOn(console, 'error')
-        .mockImplementation(() => {});
+      const mockOnItemClick = jest.fn();
 
       render(
         <OptionList
@@ -364,7 +350,7 @@ describe('OptionList', () => {
           ]}
           state="open"
           onClick={() => {}}
-          onItemClick={consoleSpy}
+          onItemClick={mockOnItemClick}
           openText="LIST IS OPEN"
           closedText="LIST IS CLOSED"
         />,
@@ -373,7 +359,7 @@ describe('OptionList', () => {
       userEvent.click(screen.getByRole('button', { name: 'foo' }));
       userEvent.click(screen.getByRole('button', { name: 'foo' }));
       userEvent.click(screen.getByRole('button', { name: 'baz' }));
-      expect(consoleSpy).toHaveBeenCalledTimes(3);
+      expect(mockOnItemClick).toHaveBeenCalledTimes(3);
     });
 
     it('calls the onItemClick callback with that respective value', () => {
