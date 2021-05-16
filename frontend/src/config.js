@@ -18,6 +18,21 @@ const config = {
   winnerScreenDisplayTime: 3000,
 
   carouselRotationInterval: 60000,
+
+  breakpoint: {
+    playerBreakpoints: {
+      smallMobile: '312px',
+      largeMobile: '600px',
+      smallDesktop: '1600px',
+      largeDesktop: '3200px',
+    },
+
+    hostBreakpoints: {
+      smallDesktop: '680px',
+      largeDesktop: '1600px',
+      extraLargDesktop: '3200px',
+    },
+  },
 };
 
 export default config;
