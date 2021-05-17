@@ -35,6 +35,17 @@ const initialState = {
 
 export const HostContext = createContext();
 
+function allNamesUppercase(currentState) {
+  const playerNames = currentState.playerIDs.map(
+    (id) => currentState.players[id].name,
+  );
+  const stagingNames = currentState.newPlayerStaging.map(
+    (player) => player.name,
+  );
+  const allNames = playerNames.concat(stagingNames);
+  return allNames.map((name) => name.toUpperCase());
+}
+
 function HostProvider({ children }) {
   const [state, dispatch] = useReducerMiddleware(
     hostReducerMiddleware,
@@ -44,50 +55,61 @@ function HostProvider({ children }) {
 
   const [socketHasError, setSocketHasError] = useState(false);
 
-  function handleMessage({ event, payload, sender }) {
-    switch (event) {
-      case 'player-connected':
-        return dispatch({ type: 'PLAYER_CONNECTED', payload });
+  function createMessageHandler(currentState) {
+    return ({ event, payload, sender }) => {
+      switch (event) {
+        case 'player-connected': {
+          if (
+            allNamesUppercase(currentState).includes(
+              payload.playerName.toUpperCase(),
+            )
+          ) {
+            return dispatch({ type: 'SEND_NAME_TAKEN_MESSAGE', payload });
+          }
 
-      case 'player-disconnected':
-        return dispatch({ type: 'PLAYER_DISCONNECTED', payload });
+          return dispatch({ type: 'PLAYER_CONNECTED', payload });
+        }
+        case 'player-disconnected':
+          return dispatch({ type: 'PLAYER_DISCONNECTED', payload });
 
-      case 'preview-winner':
-        return dispatch({ type: 'PREVIEW_WINNER', payload });
+        case 'preview-winner':
+          return dispatch({ type: 'PREVIEW_WINNER', payload });
 
-      case 'winner-selected':
-        return dispatch({ type: 'WINNER_SELECTED', payload });
+        case 'winner-selected':
+          return dispatch({ type: 'WINNER_SELECTED', payload });
 
-      case 'lobby-created':
-        return dispatch({ type: 'SET_LOBBY_ID', payload });
+        case 'lobby-created':
+          return dispatch({ type: 'SET_LOBBY_ID', payload });
 
-      case 'black-card-selected':
-        return dispatch({ type: 'SELECT_BLACK_CARD', payload });
+        case 'black-card-selected':
+          return dispatch({ type: 'SELECT_BLACK_CARD', payload });
 
-      case 'join-code-shuffled':
-        return dispatch({ type: 'UPDATE_JOIN_CODE', payload });
+        case 'join-code-shuffled':
+          return dispatch({ type: 'UPDATE_JOIN_CODE', payload });
 
-      case 'player-submit':
-        return dispatch({
-          type: 'PLAYER_SUBMIT',
-          payload: { ...payload, playerId: sender },
-        });
+        case 'player-submit':
+          return dispatch({
+            type: 'PLAYER_SUBMIT',
+            payload: { ...payload, playerId: sender },
+          });
 
-      case 'socket-connection-error':
-        dispatch({ type: 'UPDATE_JOIN_CODE', payload: { lobbyID: 'ERROR' } });
-        return setSocketHasError(true);
+        case 'socket-connection-error':
+          dispatch({ type: 'UPDATE_JOIN_CODE', payload: { lobbyID: 'ERROR' } });
+          return setSocketHasError(true);
 
-      default:
-        return undefined;
-    }
+        default:
+          return undefined;
+      }
+    };
   }
 
   useEffect(() => {
+    const handleMessage = createMessageHandler(state);
     emitter.on('message', handleMessage);
     return () => {
       emitter.off('message', handleMessage);
     };
-  }, []);
+  }, [state]);
 
   useEffect(() => {
     if (state.newPlayerStaging.length) {

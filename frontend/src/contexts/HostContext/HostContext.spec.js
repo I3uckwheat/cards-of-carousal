@@ -172,7 +172,7 @@ describe('Context', () => {
       act(() => {
         eventHandlers.message({
           event: 'player-connected',
-          payload: { id: 'TEST' },
+          payload: { id: 'TEST', playerName: 'TESTER' },
         });
       });
 
@@ -217,7 +217,7 @@ describe('Context', () => {
       act(() => {
         eventHandlers.message({
           event: 'player-connected',
-          payload: { playerId: 'TEST' },
+          payload: { playerId: 'TEST', playerName: 'TESTER' },
         });
       });
 
@@ -256,7 +256,7 @@ describe('Context', () => {
       act(() => {
         eventHandlers.message({
           event: 'player-connected',
-          payload: { playerId: 'TEST' },
+          payload: { playerId: 'TEST', playerName: 'TESTER' },
         });
       });
 
@@ -315,7 +315,7 @@ describe('Context', () => {
       act(() => {
         eventHandlers.message({
           event: 'player-connected',
-          payload: { id: 'TEST' },
+          payload: { id: 'TEST', playerName: 'TESTER' },
         });
       });
 
