@@ -117,7 +117,11 @@ function HostProvider({ children }) {
   }, [state.newPlayerStaging]);
 
   useEffect(() => {
-    if (state.playerIDs.length === 1 && state.newPlayerStaging.length === 0) {
+    if (
+      state.playerIDs.length === 1 &&
+      state.newPlayerStaging.length === 0 &&
+      state.gameState !== 'game-over'
+    ) {
       dispatch({
         type: 'GAME_OVER',
         payload: { gameWinner: state.playerIDs[0], playerIDs: state.playerIDs },
