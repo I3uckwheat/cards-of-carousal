@@ -128,6 +128,7 @@ function HostBlackCardScreen() {
   const { state, dispatch } = useContext(HostContext);
 
   const { players, playerIDs, selectedBlackCard, gameState } = state;
+  const czar = playerIDs.find((id) => players[id].isCzar);
 
   useEffect(async () => {
     if (gameState === 'waiting-to-receive-cards') {
@@ -144,6 +145,18 @@ function HostBlackCardScreen() {
       });
     }
   }, [state.gameState]);
+
+  useEffect(async () => {
+    if (czar) {
+      await dispatch({
+        type: 'NOTIFY_CZAR',
+        payload: {
+          players,
+          playerIDs,
+        },
+      });
+    }
+  }, [czar]);
 
   useEffect(async () => {
     // game state will change when players have all submitted cards
