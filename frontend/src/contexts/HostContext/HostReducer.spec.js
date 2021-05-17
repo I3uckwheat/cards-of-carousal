@@ -204,7 +204,7 @@ describe('reducer', () => {
       });
     });
 
-    it('removes unaltered state if given player ID is invalid', () => {
+    it('returns unaltered state if given player ID is invalid', () => {
       const state = {
         players: { foo: { id: 'foo' }, bar: { id: 'bar' }, baz: { id: 'baz' } },
         playerIDs: ['foo', 'bar', 'baz'],
@@ -317,7 +317,7 @@ describe('reducer', () => {
       });
     });
 
-    it('removes unaltered state if given player ID is invalid', () => {
+    it('returns unaltered state if given player ID is invalid', () => {
       const state = {
         players: { foo: { id: 'foo' }, bar: { id: 'bar' }, baz: { id: 'baz' } },
         playerIDs: ['foo', 'bar', 'baz'],
