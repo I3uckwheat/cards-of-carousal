@@ -136,27 +136,17 @@ function HostBlackCardScreen() {
         type: 'SEND_CARDS_TO_PLAYERS',
         payload: { players, playerIDs, selectedBlackCard },
       });
-      await dispatch({
-        type: 'NOTIFY_CZAR',
-        payload: {
-          players,
-          playerIDs,
-        },
-      });
+      if (czar) {
+        await dispatch({
+          type: 'NOTIFY_CZAR',
+          payload: {
+            players,
+            playerIDs,
+          },
+        });
+      }
     }
-  }, [state.gameState]);
-
-  useEffect(async () => {
-    if (czar) {
-      await dispatch({
-        type: 'NOTIFY_CZAR',
-        payload: {
-          players,
-          playerIDs,
-        },
-      });
-    }
-  }, [czar]);
+  }, [state.gameState, czar]);
 
   useEffect(async () => {
     // game state will change when players have all submitted cards
