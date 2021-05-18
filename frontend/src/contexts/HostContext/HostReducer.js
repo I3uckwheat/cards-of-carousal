@@ -160,6 +160,8 @@ function removePlayer(state, { playerId }) {
 
   return {
     ...state,
+    gameState:
+      newPlayerIds.length >= 2 ? state.gameState : 'waiting-for-players',
     players: newPlayers,
     playerIDs: newPlayerIds,
   };
