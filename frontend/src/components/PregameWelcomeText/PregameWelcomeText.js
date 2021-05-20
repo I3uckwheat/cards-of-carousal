@@ -6,12 +6,15 @@ import config from '../../config';
 
 const StyledPregameWelcomeText = styled.div`
   display: flex;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 4px;
+  right: 4px;
   flex-direction: column;
   justify-content: space-between;
   background-color: var(--primary-background-color);
-  align-self: flex-start;
-  margin: 24px;
-  padding: 8px;
+  padding: 8px 42px 8px 8px;
   border-radius: 5px;
   font-size: 1.8rem;
   font-weight: 700;
@@ -19,25 +22,28 @@ const StyledPregameWelcomeText = styled.div`
 
   h2 {
     line-height: 2.4rem;
+    font-size: 2rem;
   }
 
   h3 {
-    font-size: 1.5rem;
-    line-height: 1.8rem;
+    font-size: 1.2rem;
+    line-height: 1.2rem;
   }
 
   p {
-    margin: 10px;
+    margin: 8px;
     font-size: 1.1rem;
   }
 
   ol {
-    margin: 20px;
+    margin: 8px;
+    line-height: 1.3rem;
   }
 
   li {
     margin: 0;
-    font-size: 1.1rem;
+    font-size: 1rem;
+    line-height: 1.3rem;
   }
 
   .howToWin {
@@ -48,18 +54,51 @@ const StyledPregameWelcomeText = styled.div`
   }
 
   .snarkyText {
-    font-size: 0.8rem;
-    margin: 0;
+    font-size: 0.6rem;
+    margin: 0 2px;
     padding: 0;
   }
 
   @media (min-width: 1100px) {
+    left: 8px;
+    right: 8px;
     align-self: center;
+    ol,
+    li {
+      line-height: 1.7rem;
+    }
   }
 
   @media (min-width: 1600px) {
+    h2 {
+      font-size: 3.2rem;
+      line-height: 3.2rem;
+    }
+
     h3 {
-      font-size: 1.8rem;
+      font-size: 2.5rem;
+      line-height: 2.3rem;
+    }
+
+    p {
+      margin: 14px;
+    }
+
+    p,
+    li {
+      font-size: 1.7rem;
+    }
+
+    ol,
+    li {
+      line-height: 2rem;
+      margin: 12px;
+    }
+
+    .snarkyText {
+      font-size: 1rem;
+      margin: 0 4px;
+      padding: 0;
     }
   }
 

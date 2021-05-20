@@ -60,6 +60,7 @@ const HostLayoutContainer = styled.div`
     display: flex;
     flex-grow: 1;
     position: relative;
+    min-width: 440px;
   }
 
   @media (min-width: 800px) {
@@ -68,7 +69,7 @@ const HostLayoutContainer = styled.div`
     }
 
     .components .left {
-      min-width: 450px;
+      min-width: 420px;
     }
 
     .components .host-layout-header h2 {

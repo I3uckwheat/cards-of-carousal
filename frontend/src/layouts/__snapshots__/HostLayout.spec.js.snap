@@ -85,6 +85,7 @@ exports[`HostLayout matches the snapshot when rendered 1`] = `
   -ms-flex-positive: 1;
   flex-grow: 1;
   position: relative;
+  min-width: 440px;
 }
 
 .c2 {
@@ -99,7 +100,7 @@ exports[`HostLayout matches the snapshot when rendered 1`] = `
   }
 
   .c0 .components .left {
-    min-width: 450px;
+    min-width: 420px;
   }
 
   .c0 .components .host-layout-header h2 {
