@@ -204,7 +204,7 @@ describe('reducer', () => {
       });
     });
 
-    it('removes unaltered state if given player ID is invalid', () => {
+    it('returns unaltered state if given player ID is invalid', () => {
       const state = {
         players: { foo: { id: 'foo' }, bar: { id: 'bar' }, baz: { id: 'baz' } },
         playerIDs: ['foo', 'bar', 'baz'],
@@ -216,6 +216,36 @@ describe('reducer', () => {
       });
 
       expect(result).toMatchObject(state);
+    });
+
+    it('sets a new czar if the current czar is removed', () => {
+      const state = {
+        players: {
+          foo: { id: 'foo', cards: [] },
+          bar: { id: 'bar', cards: [], isCzar: true },
+          baz: { id: 'baz', cards: [] },
+        },
+        playerIDs: ['foo', 'bar', 'baz'],
+        newPlayerStaging: [],
+        gameState: '',
+        deck: {
+          black: [],
+          white: [],
+        },
+        gameSettings: { handSize: 1 },
+      };
+
+      const result = HostReducer(state, {
+        type: 'PLAYER_DISCONNECTED',
+        payload: { playerId: 'bar' },
+      });
+
+      const newCzar = Object.keys(result.players).find(
+        (player) => result.players[player].isCzar,
+      );
+
+      expect(result.playerIDs).toMatchObject(['foo', 'baz']);
+      expect(newCzar).toBeTruthy();
     });
   });
 
@@ -317,7 +347,7 @@ describe('reducer', () => {
       });
     });
 
-    it('removes unaltered state if given player ID is invalid', () => {
+    it('returns unaltered state if given player ID is invalid', () => {
       const state = {
         players: { foo: { id: 'foo' }, bar: { id: 'bar' }, baz: { id: 'baz' } },
         playerIDs: ['foo', 'bar', 'baz'],

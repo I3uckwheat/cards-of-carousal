@@ -112,7 +112,7 @@ function RightPanel() {
         <div className="czar-display">
           <p>CZAR:</p>
           <p data-testid="czar-name" className="czar-name">
-            {czar.name.toUpperCase()}
+            {czar?.name.toUpperCase()}
           </p>
         </div>
 
@@ -128,6 +128,7 @@ function HostBlackCardScreen() {
   const { state, dispatch } = useContext(HostContext);
 
   const { players, playerIDs, selectedBlackCard, gameState } = state;
+  const czar = playerIDs.find((id) => players[id].isCzar);
 
   useEffect(async () => {
     if (gameState === 'waiting-to-receive-cards') {
@@ -135,15 +136,17 @@ function HostBlackCardScreen() {
         type: 'SEND_CARDS_TO_PLAYERS',
         payload: { players, playerIDs, selectedBlackCard },
       });
-      await dispatch({
-        type: 'NOTIFY_CZAR',
-        payload: {
-          players,
-          playerIDs,
-        },
-      });
+      if (czar) {
+        await dispatch({
+          type: 'NOTIFY_CZAR',
+          payload: {
+            players,
+            playerIDs,
+          },
+        });
+      }
     }
-  }, [state.gameState]);
+  }, [state.gameState, czar]);
 
   useEffect(async () => {
     // game state will change when players have all submitted cards

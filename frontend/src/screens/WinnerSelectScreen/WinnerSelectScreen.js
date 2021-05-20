@@ -95,7 +95,7 @@ function RightPanel() {
     <RightPanelWrapper columns={highlightedPlayer?.submittedCards.length}>
       <h1 className="czar-title">
         <span>Czar:</span>
-        {currentCzar.name}
+        {currentCzar?.name}
       </h1>
 
       <BlackCard pickCount={selectedBlackCard.pick} winnerScreen>
