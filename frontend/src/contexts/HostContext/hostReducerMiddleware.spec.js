@@ -98,6 +98,29 @@ describe('hostReducerMiddleware', () => {
     });
   });
 
+  describe('sendNameTakenMessage', () => {
+    it("calls socketInstance's sendMessage with a connection-refused-name-taken gameState and joining-lobby removeLoading", () => {
+      const dispatch = jest.fn();
+
+      hostReducerMiddleware(
+        {
+          type: 'SEND_NAME_TAKEN_MESSAGE',
+          payload: { playerId: 'example-player-id' },
+        },
+        dispatch,
+      );
+
+      expect(socketInstance.sendMessage).toHaveBeenCalledWith({
+        event: 'update',
+        recipients: ['example-player-id'],
+        payload: {
+          gameState: 'connection-refused-name-taken',
+          removeLoading: 'joining-lobby',
+        },
+      });
+    });
+  });
+
   describe('SEND_PLAYER_CONNECTED_MESSAGES', () => {
     it("calls socketInstance's sendMessage with a custom welcome message", () => {
       const dispatch = jest.fn();

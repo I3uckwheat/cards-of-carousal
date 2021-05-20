@@ -3,7 +3,12 @@ import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 
 const propTypes = {
-  listContent: PropTypes.arrayOf(PropTypes.string).isRequired,
+  listContent: PropTypes.arrayOf(
+    PropTypes.shape({
+      text: PropTypes.string.isRequired,
+      value: PropTypes.string.isRequired,
+    }),
+  ).isRequired,
   state: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired,
   onItemClick: PropTypes.func.isRequired,
@@ -91,13 +96,13 @@ function OptionList({
         {state === 'open' ? openText : closedText}
       </OptionListButton>
       {state === 'open' &&
-        listContent.map((listItem) => (
+        listContent.map(({ text, value }) => (
           <OptionListItemButton
             type="button"
-            key={listItem}
-            onClick={() => onItemClick(listItem)}
+            key={text + value}
+            onClick={() => onItemClick(value)}
           >
-            {listItem}
+            {text}
           </OptionListItemButton>
         ))}
     </div>

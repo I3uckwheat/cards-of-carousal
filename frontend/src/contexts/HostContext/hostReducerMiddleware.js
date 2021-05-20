@@ -21,6 +21,17 @@ function sendPlayerConnectedMessages(payload) {
   });
 }
 
+function sendNameTakenMessage(payload) {
+  socketInstance.sendMessage({
+    event: 'update',
+    recipients: [payload.playerId],
+    payload: {
+      gameState: 'connection-refused-name-taken',
+      removeLoading: 'joining-lobby',
+    },
+  });
+}
+
 function playerConnected(payload) {
   socketInstance.sendMessage({
     event: 'update',
@@ -245,6 +256,9 @@ export default async function hostReducerMiddleware(
 
     case 'SEND_PLAYER_CONNECTED_MESSAGES':
       return sendPlayerConnectedMessages(payload);
+
+    case 'SEND_NAME_TAKEN_MESSAGE':
+      return sendNameTakenMessage(payload);
 
     case 'PLAYER_SUBMIT':
       sendCardsSubmittedMessage(payload);
