@@ -616,6 +616,7 @@ exports[`App snapshots should show the host screen after user has clicked the "h
   -ms-flex-positive: 1;
   flex-grow: 1;
   position: relative;
+  min-width: 440px;
 }
 
 .c2 {
@@ -838,6 +839,10 @@ exports[`App snapshots should show the host screen after user has clicked the "h
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
+  position: absolute;
+  bottom: 8px;
+  left: 0;
+  right: 0;
 }
 
 .c10 .positionButton {
@@ -851,6 +856,11 @@ exports[`App snapshots should show the host screen after user has clicked the "h
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 4px;
+  right: 4px;
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
@@ -859,11 +869,7 @@ exports[`App snapshots should show the host screen after user has clicked the "h
   -ms-flex-pack: justify;
   justify-content: space-between;
   background-color: var(--primary-background-color);
-  -webkit-align-self: flex-start;
-  -ms-flex-item-align: start;
-  align-self: flex-start;
-  margin: 24px;
-  padding: 8px;
+  padding: 8px 42px 8px 8px;
   border-radius: 5px;
   font-size: 1.8rem;
   font-weight: 700;
@@ -872,25 +878,28 @@ exports[`App snapshots should show the host screen after user has clicked the "h
 
 .c9 h2 {
   line-height: 2.4rem;
+  font-size: 2rem;
 }
 
 .c9 h3 {
-  font-size: 1.5rem;
-  line-height: 1.8rem;
+  font-size: 1.2rem;
+  line-height: 1.2rem;
 }
 
 .c9 p {
-  margin: 10px;
+  margin: 8px;
   font-size: 1.1rem;
 }
 
 .c9 ol {
-  margin: 20px;
+  margin: 8px;
+  line-height: 1.3rem;
 }
 
 .c9 li {
   margin: 0;
-  font-size: 1.1rem;
+  font-size: 1rem;
+  line-height: 1.3rem;
 }
 
 .c9 .howToWin {
@@ -909,8 +918,8 @@ exports[`App snapshots should show the host screen after user has clicked the "h
 }
 
 .c9 .snarkyText {
-  font-size: 0.8rem;
-  margin: 0;
+  font-size: 0.6rem;
+  margin: 0 2px;
   padding: 0;
 }
 
@@ -991,6 +1000,7 @@ exports[`App snapshots should show the host screen after user has clicked the "h
 }
 
 .c8 .top {
+  position: relative;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -1077,7 +1087,7 @@ exports[`App snapshots should show the host screen after user has clicked the "h
   }
 
   .c0 .components .left {
-    min-width: 450px;
+    min-width: 420px;
   }
 
   .c0 .components .host-layout-header h2 {
@@ -1121,17 +1131,61 @@ exports[`App snapshots should show the host screen after user has clicked the "h
   }
 }
 
+@media (min-width:1600px) {
+  .c10 .positionButton {
+    margin: 0 4px;
+  }
+
+  .c10 img {
+    height: 72px;
+  }
+}
+
 @media (min-width:1100px) {
   .c9 {
+    left: 8px;
+    right: 8px;
     -webkit-align-self: center;
     -ms-flex-item-align: center;
     align-self: center;
   }
+
+  .c9 ol,
+  .c9 li {
+    line-height: 1.7rem;
+  }
 }
 
 @media (min-width:1600px) {
+  .c9 h2 {
+    font-size: 3.2rem;
+    line-height: 3.2rem;
+  }
+
   .c9 h3 {
-    font-size: 1.8rem;
+    font-size: 2.5rem;
+    line-height: 2.3rem;
+  }
+
+  .c9 p {
+    margin: 14px;
+  }
+
+  .c9 p,
+  .c9 li {
+    font-size: 1.7rem;
+  }
+
+  .c9 ol,
+  .c9 li {
+    line-height: 2rem;
+    margin: 12px;
+  }
+
+  .c9 .snarkyText {
+    font-size: 1rem;
+    margin: 0 4px;
+    padding: 0;
   }
 }
 
