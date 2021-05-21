@@ -19,7 +19,6 @@ function setupFetchMock(jsonValue = ['hello', 'world']) {
 describe('GameSettings', () => {
   let state = {
     loading: [],
-    players: {},
     playerIDs: [],
     newPlayerStaging: [],
   };
@@ -27,7 +26,6 @@ describe('GameSettings', () => {
   beforeEach(() => {
     state = {
       loading: [],
-      players: {},
       playerIDs: [],
       newPlayerStaging: [],
     };
@@ -91,7 +89,6 @@ describe('GameSettings', () => {
 
       state = {
         loading: ['getting-packs'],
-        players: {},
         playerIDs: [],
         newPlayerStaging: [],
       };
