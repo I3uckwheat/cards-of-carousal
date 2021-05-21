@@ -6,6 +6,7 @@ import PlayerList from '../../components/PlayerList/PlayerList';
 import InGameSettingsModal from '../../components/HostSettingsMenu/InGameSettingsModal.js';
 import JoinCode from '../../components/JoinCode/JoinCode';
 import BlackCard from '../../components/Cards/BlackCard';
+import Button from '../../components/Buttons/Button';
 
 const LeftPanelWrapper = styled.div`
   display: flex;
@@ -79,7 +80,7 @@ const RightPanelWrapper = styled.div`
 `;
 
 function LeftPanel() {
-  const { state } = useContext(HostContext);
+  const { state, dispatch } = useContext(HostContext);
   const { lobbyID } = state;
 
   return (
@@ -87,6 +88,12 @@ function LeftPanel() {
       <div className="player-list-wrapper">
         <PlayerList />
       </div>
+      <Button
+        isActive
+        onClick={() => dispatch({ type: 'SELECT_BLACK_CARD', payload: {} })}
+      >
+        Change black card
+      </Button>
       <div className="bottom-left-wrapper">
         <div className="join-code-wrapper">
           <JoinCode

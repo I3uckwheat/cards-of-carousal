@@ -82,9 +82,9 @@ function parseForMarkdown(string, blankLength) {
       // https://regexr.com/5td92
       // These regex find all underscores used for markdown purposes
       // Then it replaces them with their asterisk variant
-      .replace(/(___)([a-zA-Z0-9.]+)(___)/g, `***$2***`)
-      .replace(/(__)([a-zA-Z0-9.]+)(__)/g, `**$2**`)
-      .replace(/(_)([a-zA-Z0-9.]+)(_)/g, `*$2*`)
+      .replace(/(___)([^\s_]+)(___)/g, `***$2***`)
+      .replace(/(__)([^\s_]+)(__)/g, `**$2**`)
+      .replace(/(_)([^\s_]+)(_)/g, `*$2*`)
 
       // https://regexr.com/5ltng
       // This regex finds all remaining instances of underscores

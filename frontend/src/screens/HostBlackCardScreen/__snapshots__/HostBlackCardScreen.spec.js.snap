@@ -1,6 +1,25 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Host Black Card Screen rendering renders 1`] = `
+.c8 {
+  display: block;
+  border: 2px solid var(--primary-text-color);
+  font-size: 12px;
+  font-weight: bold;
+  padding: 0.7em;
+  background: var(--secondary-background-color);
+  color: var(--secondary-text-color);
+  background: var(--primary-background-color);
+  color: var(--primary-text-color);
+}
+
+.c8:hover,
+.c8:active,
+.c8:focus {
+  background: var(--accent-background-color);
+  cursor: pointer;
+}
+
 .c1 {
   background-image: url(inactiveHamburger.svg);
   background-size: cover;
@@ -225,7 +244,7 @@ exports[`Host Black Card Screen rendering renders 1`] = `
   font-weight: 900;
 }
 
-.c8 {
+.c9 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -236,7 +255,7 @@ exports[`Host Black Card Screen rendering renders 1`] = `
   line-height: 29px;
 }
 
-.c8 .join-code-title {
+.c9 .join-code-title {
   font-size: 18px;
   color: var(--primary-text-color);
   background-color: var(--primary-background-color);
@@ -245,7 +264,7 @@ exports[`Host Black Card Screen rendering renders 1`] = `
   height: 21px;
 }
 
-.c8 .join-code {
+.c9 .join-code {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -266,7 +285,7 @@ exports[`Host Black Card Screen rendering renders 1`] = `
   height: 70px;
 }
 
-.c10 {
+.c11 {
   position: relative;
   width: 390px;
   height: 540px;
@@ -279,18 +298,18 @@ exports[`Host Black Card Screen rendering renders 1`] = `
   box-shadow: 4px 4px 24px rgba(0,0,0,0.3);
 }
 
-.c10 .pickText {
+.c11 .pickText {
   font-size: 24px;
   margin-right: 7px;
 }
 
-.c10 .layeredCards {
+.c11 .layeredCards {
   position: absolute;
   bottom: 18px;
   left: 18px;
 }
 
-.c10 .pickCount {
+.c11 .pickCount {
   position: absolute;
   bottom: 8px;
   right: 21px;
@@ -308,7 +327,7 @@ exports[`Host Black Card Screen rendering renders 1`] = `
   align-items: center;
 }
 
-.c11 {
+.c12 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -380,7 +399,7 @@ exports[`Host Black Card Screen rendering renders 1`] = `
   margin: auto auto 12px;
 }
 
-.c9 {
+.c10 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -395,7 +414,7 @@ exports[`Host Black Card Screen rendering renders 1`] = `
   left: 0;
 }
 
-.c9 .card-display {
+.c10 .card-display {
   height: 100%;
   margin-top: 64px;
   display: -webkit-box;
@@ -411,13 +430,13 @@ exports[`Host Black Card Screen rendering renders 1`] = `
   align-items: center;
 }
 
-.c9 .czar-display {
+.c10 .czar-display {
   font-size: 24px;
   font-weight: 600;
   line-height: 24px;
 }
 
-.c9 .czar-display .czar-name {
+.c10 .czar-display .czar-name {
   margin-bottom: 48px;
   padding-left: 16px;
   font-size: 36px;
@@ -612,6 +631,12 @@ exports[`Host Black Card Screen rendering renders 1`] = `
             </div>
           </div>
         </div>
+        <button
+          className="c8"
+          onClick={[Function]}
+        >
+          Change black card
+        </button>
         <div
           className="bottom-left-wrapper"
         >
@@ -619,7 +644,7 @@ exports[`Host Black Card Screen rendering renders 1`] = `
             className="join-code-wrapper"
           >
             <div
-              className="c8"
+              className="c9"
             >
               <p
                 className="join-code-title"
@@ -643,7 +668,7 @@ exports[`Host Black Card Screen rendering renders 1`] = `
       className="right"
     >
       <div
-        className="c9"
+        className="c10"
       >
         <div
           className="card-display"
@@ -662,7 +687,7 @@ exports[`Host Black Card Screen rendering renders 1`] = `
             </p>
           </div>
           <div
-            className="c10"
+            className="c11"
             data-testid="black-card"
           >
             <span>
@@ -694,7 +719,7 @@ exports[`Host Black Card Screen rendering renders 1`] = `
                 PICK
               </span>
               <div
-                className="c11"
+                className="c12"
               >
                 1
               </div>
