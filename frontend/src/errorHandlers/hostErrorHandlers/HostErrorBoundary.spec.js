@@ -38,7 +38,6 @@ describe('error boundary', () => {
     );
 
     expect(screen.getByTestId('alert-modal')).toBeInTheDocument();
-    expect(screen.getByTestId('modal')).toBeInTheDocument();
   });
 
   it('renders children if an error is not thrown', async () => {
@@ -51,7 +50,6 @@ describe('error boundary', () => {
     );
 
     expect(screen.queryByTestId('alert-modal')).toBeNull();
-    expect(screen.queryByTestId('modal')).toBeNull();
     expect(screen.getByTestId('child')).toBeInTheDocument();
   });
 
