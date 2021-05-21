@@ -231,4 +231,34 @@ describe('reducer', () => {
       );
     });
   });
+
+  describe('REMOVE_DISCONNECTED_PLAYERS_CARD', () => {
+    it('removes disconnected players card', () => {
+      const state = {
+        gameState: 'test state',
+        submittedCards: [
+          { text: 'test1', playerID: 'player1' },
+          { text: 'test2', playerID: 'player2' },
+          { text: 'test3', playerID: 'player3' },
+        ],
+      };
+
+      const result = reducer(state, {
+        type: 'REMOVE_DISCONNECTED_PLAYERS_CARD',
+        payload: {
+          playerId: 'player2',
+        },
+      });
+
+      expect(result).not.toBe(state);
+      expect(result.gameState).toBe('test state');
+      expect(result).toStrictEqual({
+        gameState: 'test state',
+        submittedCards: [
+          { text: 'test1', playerID: 'player1' },
+          { text: 'test3', playerID: 'player3' },
+        ],
+      });
+    });
+  });
 });
