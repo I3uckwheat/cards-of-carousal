@@ -78,15 +78,18 @@ function parseForMarkdown(string, blankLength) {
       // This regex finds all instances of the newline character \n
       // Then it gets replaced with the markdown equivalent \n\n
       .replace(/\n/g, '\n\n')
+
+      // https://regexr.com/5td92
+      // These regex find all underscores used for markdown purposes
+      // Then it replaces them with their asterisk variant
+      .replace(/(___)([a-zA-Z0-9.]+)(___)/g, `***$2***`)
+      .replace(/(__)([a-zA-Z0-9.]+)(__)/g, `**$2**`)
+      .replace(/(_)([a-zA-Z0-9.]+)(_)/g, `*$2*`)
+
       // https://regexr.com/5ltng
-      // This regex finds all instances of underscores surrounded by white space
+      // This regex finds all remaining instances of underscores
       // Then it gets replaced with a long blank line (multiple escaped underscores)
-      .replace(/(^|(\s))_(\s)/g, `$1${'\\_'.repeat(blankLength)} `)
-      // https://regexr.com/5ltnm
-      // This regex either finds an underscore next to white space and punctuation, or an underscore
-      // that is next to whitespace and is the last character in the string (represented by $)
-      // Then it gets replaced with a long blank line (multiple escaped underscores)
-      .replace(/(\s)_(([.,'?!:;()+-])|$)/g, ` ${'\\_'.repeat(blankLength)}$2`)
+      .replaceAll('_', `${'\\_'.repeat(blankLength)}`)
   );
 }
 
