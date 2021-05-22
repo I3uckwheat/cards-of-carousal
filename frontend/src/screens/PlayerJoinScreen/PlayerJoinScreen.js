@@ -115,7 +115,7 @@ const PlayerJoinContainer = styled.div`
   }
 
   // mobile landscape orientation
-  @media screen and (max-height: ${largeMobile}) and (min-width: ${largeMobile}) {
+  @media screen and (max-height: 567px) and (min-width: ${largeMobile}) {
     .player-join-form-container {
       margin-top: 0;
     }
@@ -168,7 +168,7 @@ const PlayerJoinButton = styled(Button)`
     font-size: 3rem;
   }
 
-  @media screen and (max-height: ${largeMobile}) and (min-width: ${largeMobile}) {
+  @media screen and (max-height: 567px) and (min-width: ${largeMobile}) {
     margin-top: 30px;
   }
 `;
