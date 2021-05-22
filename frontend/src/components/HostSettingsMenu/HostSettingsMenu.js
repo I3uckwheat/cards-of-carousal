@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import config from '../../config';
+
+const { extraLargeDesktop } = config.breakpoint.hostBreakpoints;
 
 const propTypes = {
   settingsComponentList: PropTypes.arrayOf(
@@ -33,6 +36,7 @@ const SettingsMenu = styled.div`
     color: var(--secondary-text-color);
   }
 
+  // Looks too good to change
   @media (min-width: 800px) {
     width: 400px;
 
@@ -46,6 +50,7 @@ const SettingsMenu = styled.div`
     }
   }
 
+  // Looks too good to change
   @media (min-width: 2000px) {
     width: 600px;
 
@@ -55,7 +60,7 @@ const SettingsMenu = styled.div`
     }
   }
 
-  @media (min-width: 3500px) {
+  @media (min-width: ${extraLargeDesktop}) {
     width: 1100px;
 
     .host-settings-header {
