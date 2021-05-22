@@ -5,13 +5,13 @@ import { PlayerContext } from '../../contexts/PlayerContext/PlayerContext';
 import HeaderFooterLayout from '../../layouts/HeaderFooterLayout/HeaderFooterLayout';
 import config from '../../config';
 
+const propTypes = {};
+
 const {
   largeMobile,
   smallDesktop,
   largeDesktop,
 } = config.breakpoint.playerBreakpoints;
-
-const propTypes = {};
 
 const PlayerJoinContainer = styled.div`
   display: flex;

@@ -6,8 +6,6 @@ import PlayerMessageScreen from '../PlayerMessageScreen/PlayerMessageScreen';
 import Button from '../../components/Buttons/Button';
 import config from '../../config';
 
-const { largeMobile, smallDesktop } = config.breakpoint.playerBreakpoints;
-
 const propTypes = {
   bigText: PropTypes.string,
   smallText: PropTypes.string,
@@ -21,6 +19,8 @@ const defaultProps = {
   buttonText: 'Click to restart',
   onClickButton: () => window.location.reload(),
 };
+
+const { largeMobile, smallDesktop } = config.breakpoint.playerBreakpoints;
 
 const RestartButton = styled(Button)`
   background-color: var(--primary-background-color);

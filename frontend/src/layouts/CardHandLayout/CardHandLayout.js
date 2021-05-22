@@ -6,8 +6,6 @@ import { PlayerContext } from '../../contexts/PlayerContext/PlayerContext';
 import Button from '../../components/Buttons/Button';
 import config from '../../config';
 
-const { largeMobile } = config.breakpoint.playerBreakpoints;
-
 const propTypes = {
   title: PropTypes.shape({
     top: PropTypes.string.isRequired,
@@ -18,6 +16,8 @@ const propTypes = {
   onClear: PropTypes.func.isRequired,
   numberSelected: PropTypes.number.isRequired,
 };
+
+const { largeMobile } = config.breakpoint.playerBreakpoints;
 
 const LayoutContainer = styled.div`
   position: absolute;

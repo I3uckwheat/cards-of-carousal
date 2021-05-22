@@ -6,13 +6,13 @@ import Button from '../../components/Buttons/Button';
 import HeaderFooterLayout from '../../layouts/HeaderFooterLayout/HeaderFooterLayout';
 import config from '../../config';
 
-const { smallDesktop, largeDesktop } = config.breakpoint.playerBreakpoints;
-const smallHostBreakpoint = config.breakpoint.hostBreakpoints.smallDesktop;
-
 const propTypes = {
   handleJoinClick: PropTypes.func.isRequired,
   handleHostClick: PropTypes.func.isRequired,
 };
+
+const { smallDesktop, largeDesktop } = config.breakpoint.playerBreakpoints;
+const smallHostBreakpoint = config.breakpoint.hostBreakpoints.smallDesktop;
 
 const WelcomeScreenWrapper = styled.div`
   display: flex;

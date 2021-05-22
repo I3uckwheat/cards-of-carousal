@@ -7,8 +7,6 @@ import { PlayerContext } from '../../contexts/PlayerContext/PlayerContext';
 import LoadingIndicator from '../../components/LoadingIndicator/LoadingIndicator';
 import config from '../../config';
 
-const { largeMobile, smallDesktop } = config.breakpoint.playerBreakpoints;
-
 const propTypes = {
   bigText: PropTypes.string.isRequired,
   smallText: PropTypes.string.isRequired,
@@ -18,6 +16,8 @@ const propTypes = {
 const defaultProps = {
   children: null,
 };
+
+const { largeMobile, smallDesktop } = config.breakpoint.playerBreakpoints;
 
 const PlayerMessageScreenWrapper = styled.div`
   position: fixed;
