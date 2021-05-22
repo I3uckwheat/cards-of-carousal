@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-curly-brace-presence */
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { HostContext } from '../../contexts/HostContext/HostContext';
@@ -68,8 +69,8 @@ export default function HostScreenController() {
   return (
     <>
       <ScreenTooSmall>
-        <h1>Your screen size isn&apos;t big enough to host a lobby</h1>
-        <p>Sorry :(</p>
+        <h1>{`Your screen size isn't big enough to host a lobby`}</h1>
+        <p>{`Sorry :(`}</p>
       </ScreenTooSmall>
 
       {showScreen(gameState)}
