@@ -515,6 +515,145 @@ exports[`App snapshots should initially show the welcome screen 1`] = `
 
 exports[`App snapshots should show the host screen after user has clicked the "host" button 1`] = `
 <DocumentFragment>
+  .c0 {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 100%;
+  overflow: auto;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  z-index: 10200;
+  background-color: var(--primary-background-color);
+}
+
+@media (max-width:1920px) {
+
+}
+
+@media (max-width:1440px) {
+
+}
+
+@media (max-width:1300px) {
+
+}
+
+@media (max-width:970px) {
+
+}
+
+@media (max-width:570px) and (min-height:501px) {
+
+}
+
+@media (max-height:500px) {
+
+}
+
+@media (max-width:320px) {
+
+}
+
+@media (max-width:900px) {
+
+}
+
+@media (max-width:600px) {
+
+}
+
+@media (max-width:490px),(orientation:landscape) and (max-height:500px) {
+
+}
+
+@media (orientation:landscape) and (max-height:500px) {
+
+}
+
+@media (max-width:1920px) {
+
+}
+
+@media (max-width:1440px) {
+
+}
+
+@media (max-width:950px) {
+
+}
+
+@media (max-width:700px),(max-width:900px) and (max-height:500px) {
+
+}
+
+@media (min-width:2561px) {
+
+}
+
+@media (min-width:800px) {
+
+}
+
+@media (min-width:2000px) {
+
+}
+
+@media (min-width:3500px) {
+
+}
+
+@media only screen and (max-width:980px) {
+
+}
+
+@media (min-width:1600px) {
+
+}
+
+@media (min-width:1100px) {
+
+}
+
+@media (min-width:1600px) {
+
+}
+
+@media (min-width:3200px) {
+
+}
+
+@media (min-width:680px) and (min-height:768px) {
+  .c0 {
+    display: none;
+  }
+}
+
+<div
+    class="c0"
+  >
+    <h1>
+      Your screen size isn't big enough to host a lobby
+    </h1>
+    <p>
+      Sorry :(
+    </p>
+  </div>
   .c5 {
   display: block;
   border: 2px solid var(--primary-text-color);
@@ -1234,6 +1373,10 @@ exports[`App snapshots should show the host screen after user has clicked the "h
     margin: 0;
     padding: 0;
   }
+}
+
+@media (min-width:680px) and (min-height:768px) {
+
 }
 
 <div
