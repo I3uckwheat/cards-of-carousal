@@ -1771,7 +1771,7 @@ exports[`App snapshots should show the player screen after user has clicked the 
 
 }
 
-@media screen and (min-width:646px) {
+@media screen and (min-width:600px) {
   .c0 .player-join-form-container {
     margin-top: 0;
   }
@@ -1788,36 +1788,6 @@ exports[`App snapshots should show the player screen after user has clicked the 
 }
 
 @media screen and (min-width:951px) {
-  .c0 input,
-  .c0 input::-webkit-input-placeholder {
-    font-size: 1.5rem;
-  }
-
-  .c0 input,
-  .c0 input::-moz-placeholder {
-    font-size: 1.5rem;
-  }
-
-  .c0 input,
-  .c0 input:-ms-input-placeholder {
-    font-size: 1.5rem;
-  }
-
-  .c0 input,
-  .c0 input::placeholder {
-    font-size: 1.5rem;
-  }
-
-  .c0 input {
-    width: 356px;
-  }
-
-  .c0 .player-join-name-input {
-    margin-right: 50px;
-  }
-}
-
-@media screen and (min-width:1441px) {
   .c0 input,
   .c0 input::-webkit-input-placeholder {
     font-size: 1.8rem;
@@ -1841,27 +1811,31 @@ exports[`App snapshots should show the player screen after user has clicked the 
   .c0 input {
     width: 400px;
   }
+
+  .c0 .player-join-name-input {
+    margin-right: 50px;
+  }
 }
 
-@media screen and (min-width:1921px) {
+@media screen and (min-width:1600px) {
   .c0 input,
   .c0 input::-webkit-input-placeholder {
-    font-size: 2rem;
+    font-size: 2.5rem;
   }
 
   .c0 input,
   .c0 input::-moz-placeholder {
-    font-size: 2rem;
+    font-size: 2.5rem;
   }
 
   .c0 input,
   .c0 input:-ms-input-placeholder {
-    font-size: 2rem;
+    font-size: 2.5rem;
   }
 
   .c0 input,
   .c0 input::placeholder {
-    font-size: 2rem;
+    font-size: 2.5rem;
   }
 
   .c0 input {
@@ -1869,7 +1843,7 @@ exports[`App snapshots should show the player screen after user has clicked the 
   }
 }
 
-@media (min-width:2561px) {
+@media (min-width:3200px) {
   .c0 input,
   .c0 input::-webkit-input-placeholder {
     font-size: 3rem;
@@ -1895,7 +1869,7 @@ exports[`App snapshots should show the player screen after user has clicked the 
   }
 }
 
-@media screen and (max-height:567px) and (min-width:568px) {
+@media screen and (max-height:600px) and (min-width:600px) {
   .c0 .player-join-form-container {
     margin-top: 0;
   }
@@ -1915,7 +1889,7 @@ exports[`App snapshots should show the player screen after user has clicked the 
   }
 }
 
-@media screen and (min-width:951px) {
+@media screen and (min-width:600px) {
   .c3 {
     font-size: 1.5rem;
     width: 256px;
@@ -1924,23 +1898,15 @@ exports[`App snapshots should show the player screen after user has clicked the 
   }
 }
 
-@media screen and (min-width:1441px) {
+@media screen and (min-width:1600px) {
   .c3 {
-    font-size: 1.8rem;
-    width: 290px;
-    height: 74px;
-  }
-}
-
-@media screen and (min-width:1921px) {
-  .c3 {
-    font-size: 2rem;
-    width: 317px;
+    font-size: 2.25rem;
+    width: 350px;
     height: 82px;
   }
 }
 
-@media (min-width:2561px) {
+@media (min-width:3200px) {
   .c3 {
     width: 490px;
     height: 126px;
@@ -1948,7 +1914,7 @@ exports[`App snapshots should show the player screen after user has clicked the 
   }
 }
 
-@media screen and (max-height:567px) and (min-width:568px) {
+@media screen and (max-height:600px) and (min-width:600px) {
   .c3 {
     margin-top: 30px;
   }

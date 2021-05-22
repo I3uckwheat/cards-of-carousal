@@ -3,6 +3,13 @@ import styled from 'styled-components';
 import Button from '../../components/Buttons/Button';
 import { PlayerContext } from '../../contexts/PlayerContext/PlayerContext';
 import HeaderFooterLayout from '../../layouts/HeaderFooterLayout/HeaderFooterLayout';
+import config from '../../config';
+
+const {
+  largeMobile,
+  smallDesktop,
+  largeDesktop,
+} = config.breakpoint.playerBreakpoints;
 
 const propTypes = {};
 
@@ -62,7 +69,7 @@ const PlayerJoinContainer = styled.div`
     font-size: 1.5rem;
   }
 
-  @media screen and (min-width: 646px) {
+  @media screen and (min-width: ${largeMobile}) {
     .player-join-form-container {
       margin-top: 0;
     }
@@ -77,37 +84,27 @@ const PlayerJoinContainer = styled.div`
   @media screen and (min-width: 951px) {
     input,
     input::placeholder {
-      font-size: 1.5rem;
+      font-size: 1.8rem;
     }
     input {
-      width: 356px;
+      width: 400px;
     }
     .player-join-name-input {
       margin-right: 50px;
     }
   }
 
-  @media screen and (min-width: 1441px) {
+  @media screen and (min-width: ${smallDesktop}) {
     input,
     input::placeholder {
-      font-size: 1.8rem;
-    }
-    input {
-      width: 400px;
-    }
-  }
-
-  @media screen and (min-width: 1921px) {
-    input,
-    input::placeholder {
-      font-size: 2rem;
+      font-size: 2.5rem;
     }
     input {
       width: 500px;
     }
   }
 
-  @media (min-width: 2561px) {
+  @media (min-width: ${largeDesktop}) {
     input,
     input::placeholder {
       font-size: 3rem;
@@ -118,7 +115,7 @@ const PlayerJoinContainer = styled.div`
   }
 
   // mobile landscape orientation
-  @media screen and (max-height: 567px) and (min-width: 568px) {
+  @media screen and (max-height: ${largeMobile}) and (min-width: ${largeMobile}) {
     .player-join-form-container {
       margin-top: 0;
     }
@@ -151,33 +148,27 @@ const PlayerJoinButton = styled(Button)`
   text-transform: uppercase;
   margin-top: 50px;
 
-  @media screen and (min-width: 951px) {
+  @media screen and (min-width: ${largeMobile}) {
     font-size: 1.5rem;
     width: 256px;
     height: 66px;
     margin-top: 100px;
   }
 
-  @media screen and (min-width: 1441px) {
-    font-size: 1.8rem;
-    width: 290px;
-    height: 74px;
-  }
-
-  @media screen and (min-width: 1921px) {
-    font-size: 2rem;
-    width: 317px;
+  @media screen and (min-width: ${smallDesktop}) {
+    font-size: 2.25rem;
+    width: 350px;
     height: 82px;
   }
 
-  @media (min-width: 2561px) {
+  @media (min-width: ${largeDesktop}) {
     width: 490px;
     height: 126px;
 
     font-size: 3rem;
   }
 
-  @media screen and (max-height: 567px) and (min-width: 568px) {
+  @media screen and (max-height: ${largeMobile}) and (min-width: ${largeMobile}) {
     margin-top: 30px;
   }
 `;
