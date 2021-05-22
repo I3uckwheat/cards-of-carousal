@@ -16,7 +16,7 @@ const propTypes = {
 };
 
 const StyledGameSettings = styled.div`
-  position: static;
+  position: relative;
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -25,19 +25,25 @@ const StyledGameSettings = styled.div`
   overflow-y: auto;
 
   h1 {
-    margin-left: auto;
-    font-size: 4rem;
-    line-height: 4rem;
-    margin-top: -0.5rem;
-    justify-content: center;
-    position: absolute;
-    right: 0;
-    top: 0;
+    position: static;
+  }
+
+  @media only screen and (min-width: 1460px) {
+    h1 {
+      position: absolute;
+      right: 0;
+      top: 0;
+      margin-left: auto;
+    }
   }
 
   @media only screen and (min-width: 980px) {
     h1 {
-      position: relative;
+      margin-left: auto;
+      font-size: 4rem;
+      line-height: 4rem;
+      margin-top: -0.5rem;
+      justify-content: center;
     }
   }
 `;

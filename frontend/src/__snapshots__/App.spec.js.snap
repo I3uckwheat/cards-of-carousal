@@ -679,7 +679,7 @@ exports[`App snapshots should show the host screen after user has clicked the "h
 }
 
 .c11 {
-  position: static;
+  position: relative;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -694,17 +694,7 @@ exports[`App snapshots should show the host screen after user has clicked the "h
 }
 
 .c11 h1 {
-  margin-left: auto;
-  font-size: 4rem;
-  line-height: 4rem;
-  margin-top: -0.5rem;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  position: absolute;
-  right: 0;
-  top: 0;
+  position: static;
 }
 
 .c12 {
@@ -1125,9 +1115,25 @@ exports[`App snapshots should show the host screen after user has clicked the "h
   }
 }
 
+@media only screen and (min-width:1460px) {
+  .c11 h1 {
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin-left: auto;
+  }
+}
+
 @media only screen and (min-width:980px) {
   .c11 h1 {
-    position: relative;
+    margin-left: auto;
+    font-size: 4rem;
+    line-height: 4rem;
+    margin-top: -0.5rem;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
   }
 }
 
