@@ -106,7 +106,7 @@ Array [
   border: none;
 }
 
-@media (min-height:640px) and (min-width:650px) {
+@media (min-height:640px) and (min-width:600px) {
   .c0 .card-container {
     -webkit-flex-wrap: wrap;
     -ms-flex-wrap: wrap;
@@ -123,7 +123,7 @@ Array [
   }
 }
 
-@media (min-height:640px) and (min-width:650px) {
+@media (min-height:640px) and (min-width:600px) {
   .c1 {
     min-height: 100px;
   }
