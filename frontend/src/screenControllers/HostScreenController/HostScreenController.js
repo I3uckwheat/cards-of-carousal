@@ -8,8 +8,9 @@ import HostRoundWinnerScreen from '../../screens/HostRoundWinnerScreen/HostRound
 import HostGameOverScreen from '../../screens/HostGameOverScreen/HostGameOverScreen';
 import config from '../../config';
 
-const { smallDesktop } = config.breakpoint.hostBreakpoints;
 const propTypes = {};
+
+const { smallDesktop } = config.breakpoint.hostBreakpoints;
 
 const ScreenTooSmall = styled.div`
   position: absolute;
