@@ -820,17 +820,7 @@ exports[`App snapshots should show the host screen after user has clicked the "h
 }
 
 .c11 h1 {
-  margin-left: auto;
-  font-size: 4rem;
-  line-height: 4rem;
-  margin-top: -0.5rem;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  position: absolute;
-  right: 0;
-  top: 0;
+  position: static;
 }
 
 .c12 {
@@ -1203,7 +1193,7 @@ exports[`App snapshots should show the host screen after user has clicked the "h
 
 }
 
-@media (min-width:800px) {
+@media (min-width:680px) {
   .c0 .host-layout-header {
     height: 130px;
   }
@@ -1219,7 +1209,7 @@ exports[`App snapshots should show the host screen after user has clicked the "h
   }
 }
 
-@media (min-width:2000px) {
+@media (min-width:1600px) {
   .c0 .components .left {
     min-width: 700px;
   }
@@ -1231,7 +1221,7 @@ exports[`App snapshots should show the host screen after user has clicked the "h
   }
 }
 
-@media (min-width:3500px) {
+@media (min-width:3200px) {
   .c0 .host-layout-header {
     height: 200px;
   }
@@ -1247,9 +1237,25 @@ exports[`App snapshots should show the host screen after user has clicked the "h
   }
 }
 
-@media only screen and (max-width:980px) {
+@media only screen and (min-width:1460px) {
   .c11 h1 {
-    position: static;
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin-left: auto;
+  }
+}
+
+@media only screen and (min-width:980px) {
+  .c11 h1 {
+    margin-left: auto;
+    font-size: 4rem;
+    line-height: 4rem;
+    margin-top: -0.5rem;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
   }
 }
 
@@ -1311,7 +1317,7 @@ exports[`App snapshots should show the host screen after user has clicked the "h
   }
 }
 
-@media (min-width:3200px) {
+@media (min-width:) {
   .c9 h2 {
     font-size: 4rem;
     line-height: 4.4rem;
