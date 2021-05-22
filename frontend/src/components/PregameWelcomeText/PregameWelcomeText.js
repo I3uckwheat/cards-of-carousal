@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import Carousel from '../Carousel/Carousel';
 import config from '../../config';
 
+const { largeDesktop, extralargeDesktop } = config.breakpoint.hostBreakpoints;
+
 const StyledPregameWelcomeText = styled.div`
   display: flex;
   position: absolute;
@@ -59,6 +61,7 @@ const StyledPregameWelcomeText = styled.div`
     padding: 0;
   }
 
+  // Objectively looks better with this breakpoint that is non-standard
   @media (min-width: 1100px) {
     left: 8px;
     right: 8px;
@@ -69,7 +72,7 @@ const StyledPregameWelcomeText = styled.div`
     }
   }
 
-  @media (min-width: 1600px) {
+  @media (min-width: ${largeDesktop}) {
     h2 {
       font-size: 3.2rem;
       line-height: 3.2rem;
@@ -102,7 +105,7 @@ const StyledPregameWelcomeText = styled.div`
     }
   }
 
-  @media (min-width: 3200px) {
+  @media (min-width: ${extralargeDesktop}) {
     h2 {
       font-size: 4rem;
       line-height: 4.4rem;

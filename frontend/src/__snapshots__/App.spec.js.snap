@@ -1189,7 +1189,7 @@ exports[`App snapshots should show the host screen after user has clicked the "h
   }
 }
 
-@media (min-width:3200px) {
+@media (min-width:) {
   .c9 h2 {
     font-size: 4rem;
     line-height: 4.4rem;
