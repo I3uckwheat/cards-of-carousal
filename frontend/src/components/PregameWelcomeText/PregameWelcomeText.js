@@ -61,7 +61,6 @@ const StyledPregameWelcomeText = styled.div`
     padding: 0;
   }
 
-  // Objectively looks better with this breakpoint that is non-standard
   @media (min-width: 1100px) {
     left: 8px;
     right: 8px;
