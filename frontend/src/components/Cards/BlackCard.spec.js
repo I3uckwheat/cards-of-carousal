@@ -59,6 +59,32 @@ describe('BlackCard', () => {
       expect(screen.getByText(/________./)).toBeInTheDocument();
     });
 
+    it('properly converts single underscores between the beginning of text and punctuation to longer blanks', () => {
+      render(<BlackCard pickCount={0}>_! This is a test.</BlackCard>);
+
+      expect(screen.getByText(/________./)).toBeInTheDocument();
+    });
+
+    it('properly converts single underscores between quotes to longer blanks', () => {
+      render(
+        <BlackCard pickCount={0}> This is a &quot;_&quot; test.</BlackCard>,
+      );
+
+      expect(screen.getByText(/________./)).toBeInTheDocument();
+    });
+
+    it('properly converts underscores at the beginning of a word into longer blanks', () => {
+      render(<BlackCard pickCount={0}> This _is a test.</BlackCard>);
+
+      expect(screen.getByText(/________./)).toBeInTheDocument();
+    });
+
+    it('properly converts underscores at the end of a word into longer blanks', () => {
+      render(<BlackCard pickCount={0}> This is_ a test.</BlackCard>);
+
+      expect(screen.getByText(/________./)).toBeInTheDocument();
+    });
+
     it('does not display single underscores by themselves', () => {
       render(<BlackCard pickCount={0}>This _ should be long</BlackCard>);
 
