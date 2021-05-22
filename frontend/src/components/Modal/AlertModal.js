@@ -5,8 +5,6 @@ import Button from '../Buttons/Button';
 import Modal from './Modal';
 import config from '../../config';
 
-const { smallDesktop } = config.breakpoint.hostBreakpoints;
-
 const propTypes = {
   bigText: PropTypes.string,
   smallText: PropTypes.string,
@@ -20,6 +18,8 @@ const defaultProps = {
   buttonText: 'Click anywhere to restart',
   onClick: () => window.location.reload(),
 };
+
+const { smallDesktop } = config.breakpoint.hostBreakpoints;
 
 const AlertWrapper = styled.div`
   position: absolute;

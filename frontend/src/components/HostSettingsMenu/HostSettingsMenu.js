@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import config from '../../config';
 
-const { extraLargeDesktop } = config.breakpoint.hostBreakpoints;
-
 const propTypes = {
   settingsComponentList: PropTypes.arrayOf(
     PropTypes.shape({
@@ -13,6 +11,8 @@ const propTypes = {
     }),
   ).isRequired,
 };
+
+const { extraLargeDesktop } = config.breakpoint.hostBreakpoints;
 
 const SettingsMenu = styled.div`
   position: absolute;

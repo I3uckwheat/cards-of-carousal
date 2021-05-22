@@ -6,17 +6,17 @@ import HamburgerMenu from '../components/Buttons/HamburgerMenu/HamburgerMenu.js'
 import Modal from '../components/Modal/Modal.js';
 import config from '../config';
 
-const {
-  smallDesktop,
-  largeDesktop,
-  extraLargeDesktop,
-} = config.breakpoint.hostBreakpoints;
-
 const propTypes = {
   left: PropTypes.node.isRequired,
   right: PropTypes.node.isRequired,
   modal: PropTypes.node.isRequired,
 };
+
+const {
+  smallDesktop,
+  largeDesktop,
+  extraLargeDesktop,
+} = config.breakpoint.hostBreakpoints;
 
 const HostLayoutContainer = styled.div`
   position: absolute;
