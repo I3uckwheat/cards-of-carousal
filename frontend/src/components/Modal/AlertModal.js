@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Button from '../Buttons/Button';
 import Modal from './Modal';
+import config from '../../config';
+
+const { smallDesktop } = config.breakpoint.hostBreakpoints;
 
 const propTypes = {
   bigText: PropTypes.string,
@@ -24,8 +27,9 @@ const AlertWrapper = styled.div`
   bottom: 0;
   left: 0;
   right: 0;
-  max-height: 300px;
-  max-width: 600px;
+  max-height: 180px;
+  max-width: 360px;
+  width: 90%;
   margin: auto;
 
   .main-box {
@@ -56,7 +60,7 @@ const AlertWrapper = styled.div`
     justify-content: space-around;
     align-items: center;
     width: 100%;
-    padding: 12px;
+    padding: 10px;
   }
 
   .button {
@@ -71,39 +75,39 @@ const AlertWrapper = styled.div`
   }
 
   .big-text {
-    padding: 8px;
+    font-size: 1.2rem;
+    padding: 0;
   }
 
   .small-text {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
   }
 
   .button-text {
-    font-size: 1rem;
-    padding: 8px;
+    font-size: 0.8rem;
+    padding: 2px;
   }
 
-  @media (max-width: 620px) {
-    max-height: 180px;
-    max-width: 360px;
-    width: 90%;
+  @media (min-width: ${smallDesktop}) {
+    max-height: 300px;
+    max-width: 600px;
+    width: auto;
 
     .bottom {
-      padding: 10px;
+      padding: 12px;
     }
 
     .big-text {
-      font-size: 1.2rem;
-      padding: 0;
+      padding: 8px;
     }
 
     .small-text {
-      font-size: 1.2rem;
+      font-size: 1.5rem;
     }
 
     .button-text {
-      font-size: 0.8rem;
-      padding: 2px;
+      font-size: 1rem;
+      padding: 8px;
     }
   }
 `;
