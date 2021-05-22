@@ -1071,7 +1071,7 @@ exports[`App snapshots should show the host screen after user has clicked the "h
 
 }
 
-@media (min-width:800px) {
+@media (min-width:680px) {
   .c0 .host-layout-header {
     height: 130px;
   }
@@ -1087,7 +1087,7 @@ exports[`App snapshots should show the host screen after user has clicked the "h
   }
 }
 
-@media (min-width:2000px) {
+@media (min-width:1600px) {
   .c0 .components .left {
     min-width: 700px;
   }
@@ -1099,7 +1099,7 @@ exports[`App snapshots should show the host screen after user has clicked the "h
   }
 }
 
-@media (min-width:3500px) {
+@media (min-width:3200px) {
   .c0 .host-layout-header {
     height: 200px;
   }
