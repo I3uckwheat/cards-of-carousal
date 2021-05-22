@@ -36,14 +36,6 @@ const RestartButton = styled(Button)`
     margin: 40px auto 0 auto;
   }
 
-  @media screen and (min-width: 1151px) {
-    font-size: 1rem;
-    line-height: 1rem;
-    min-width: 144px;
-    height: 50px;
-    margin: 48px auto 0 auto;
-  }
-
   @media screen and (min-width: ${smallDesktop}) {
     font-size: 1.5rem;
     line-height: 1.5rem;
