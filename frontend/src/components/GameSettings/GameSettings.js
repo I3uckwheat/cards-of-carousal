@@ -16,7 +16,7 @@ const propTypes = {
 };
 
 const StyledGameSettings = styled.div`
-  position: relative;
+  position: static;
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -35,9 +35,9 @@ const StyledGameSettings = styled.div`
     top: 0;
   }
 
-  @media only screen and (max-width: 980px) {
+  @media only screen and (min-width: 980px) {
     h1 {
-      position: static;
+      position: relative;
     }
   }
 `;

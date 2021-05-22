@@ -679,7 +679,7 @@ exports[`App snapshots should show the host screen after user has clicked the "h
 }
 
 .c11 {
-  position: relative;
+  position: static;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -1125,9 +1125,9 @@ exports[`App snapshots should show the host screen after user has clicked the "h
   }
 }
 
-@media only screen and (max-width:980px) {
+@media only screen and (min-width:980px) {
   .c11 h1 {
-    position: static;
+    position: relative;
   }
 }
 
