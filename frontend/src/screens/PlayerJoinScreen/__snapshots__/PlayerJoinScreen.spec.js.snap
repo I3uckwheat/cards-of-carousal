@@ -396,7 +396,7 @@ exports[`PlayerJoin snapshot matches 1`] = `
   }
 }
 
-@media screen and (max-height:600px) and (min-width:600px) {
+@media screen and (max-height:567px) and (min-width:600px) {
   .c0 .player-join-form-container {
     margin-top: 0;
   }
@@ -441,7 +441,7 @@ exports[`PlayerJoin snapshot matches 1`] = `
   }
 }
 
-@media screen and (max-height:600px) and (min-width:600px) {
+@media screen and (max-height:567px) and (min-width:600px) {
   .c3 {
     margin-top: 30px;
   }
