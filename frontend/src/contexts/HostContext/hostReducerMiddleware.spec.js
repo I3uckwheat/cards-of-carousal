@@ -118,7 +118,7 @@ describe('hostReducerMiddleware', () => {
   });
 
   describe('PLAYER_DISCONNECTED', () => {
-    it("calls socketInstane's sendMessage with a remove disconnected players card message", () => {
+    it("calls socketInstance's sendMessage with a remove disconnected players card message", () => {
       const dispatch = jest.fn();
 
       hostReducerMiddleware(
