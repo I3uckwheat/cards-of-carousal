@@ -3,6 +3,7 @@
 exports[`HeaderFooterLayout render renders correctly 1`] = `
 Array [
   .c0 {
+  height: min(20vh,400px);
   width: 100%;
   background-color: var(--secondary-background-color);
   color: var(--secondary-text-color);
@@ -17,7 +18,6 @@ Array [
   -webkit-justify-content: flex-end;
   -ms-flex-pack: end;
   justify-content: flex-end;
-  height: 80px;
 }
 
 .c0 .welcome-to {
@@ -74,13 +74,15 @@ Array [
 }
 
 @media (min-width:600px) {
-  .c0 {
-    height: min(20vh,400px);
-  }
-
   .c0 .CoC {
     margin-bottom: -8px;
     margin-bottom: max(-0.8vw,-20px);
+  }
+}
+
+@media (orientation:landscape) and (max-height:500px) {
+  .c0 {
+    height: 80px;
   }
 }
 
@@ -202,6 +204,10 @@ Array [
 
 }
 
+@media (orientation:landscape) and (max-height:500px) {
+
+}
+
 <footer
     className="c0"
     data-testid="footer"
@@ -231,6 +237,7 @@ Array [
 exports[`HeaderFooterLayout render renders correctly with the isWelcoming prop 1`] = `
 Array [
   .c0 {
+  height: min(20vh,400px);
   width: 100%;
   background-color: var(--secondary-background-color);
   color: var(--secondary-text-color);
@@ -245,7 +252,6 @@ Array [
   -webkit-justify-content: flex-end;
   -ms-flex-pack: end;
   justify-content: flex-end;
-  height: 80px;
 }
 
 .c0 .welcome-to {
@@ -302,13 +308,15 @@ Array [
 }
 
 @media (min-width:600px) {
-  .c0 {
-    height: min(20vh,400px);
-  }
-
   .c0 .CoC {
     margin-bottom: -8px;
     margin-bottom: max(-0.8vw,-20px);
+  }
+}
+
+@media (orientation:landscape) and (max-height:500px) {
+  .c0 {
+    height: 80px;
   }
 }
 
@@ -433,6 +441,10 @@ Array [
 }
 
 @media (min-width:600px) {
+
+}
+
+@media (orientation:landscape) and (max-height:500px) {
 
 }
 

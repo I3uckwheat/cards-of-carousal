@@ -17,13 +17,13 @@ const defaultProps = {
 const { largeMobile } = config.breakpoint.playerBreakpoints;
 
 const Header = styled.header`
+  height: min(20vh, 400px);
   width: 100%;
   background-color: var(--secondary-background-color);
   color: var(--secondary-text-color);
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  height: 80px;
 
   .welcome-to {
     display: none;
@@ -48,12 +48,14 @@ const Header = styled.header`
   }
 
   @media (min-width: ${largeMobile}) {
-    height: min(20vh, 400px);
-
     .CoC {
       margin-bottom: -8px;
       margin-bottom: max(-0.8vw, -20px);
     }
+  }
+
+  @media (orientation: landscape) and (max-height: 500px) {
+    height: 80px;
   }
 `;
 

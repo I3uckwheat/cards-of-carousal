@@ -53,6 +53,7 @@ exports[`App snapshots should initially show the welcome screen 1`] = `
 }
 
 .c1 {
+  height: min(20vh,400px);
   width: 100%;
   background-color: var(--secondary-background-color);
   color: var(--secondary-text-color);
@@ -67,7 +68,6 @@ exports[`App snapshots should initially show the welcome screen 1`] = `
   -webkit-justify-content: flex-end;
   -ms-flex-pack: end;
   justify-content: flex-end;
-  height: 80px;
 }
 
 .c1 .welcome-to {
@@ -270,13 +270,15 @@ exports[`App snapshots should initially show the welcome screen 1`] = `
 }
 
 @media (min-width:600px) {
-  .c1 {
-    height: min(20vh,400px);
-  }
-
   .c1 .CoC {
     margin-bottom: -8px;
     margin-bottom: max(-0.8vw,-20px);
+  }
+}
+
+@media (orientation:landscape) and (max-height:500px) {
+  .c1 {
+    height: 80px;
   }
 }
 
@@ -559,6 +561,10 @@ exports[`App snapshots should show the host screen after user has clicked the "h
 }
 
 @media (min-width:600px) {
+
+}
+
+@media (orientation:landscape) and (max-height:500px) {
 
 }
 
@@ -1164,6 +1170,10 @@ exports[`App snapshots should show the host screen after user has clicked the "h
 
 }
 
+@media (orientation:landscape) and (max-height:500px) {
+
+}
+
 @media (min-width:680px) {
 
 }
@@ -1628,6 +1638,7 @@ exports[`App snapshots should show the player screen after user has clicked the 
 }
 
 .c1 {
+  height: min(20vh,400px);
   width: 100%;
   background-color: var(--secondary-background-color);
   color: var(--secondary-text-color);
@@ -1642,7 +1653,6 @@ exports[`App snapshots should show the player screen after user has clicked the 
   -webkit-justify-content: flex-end;
   -ms-flex-pack: end;
   justify-content: flex-end;
-  height: 80px;
 }
 
 .c1 .welcome-to {
@@ -1862,13 +1872,15 @@ exports[`App snapshots should show the player screen after user has clicked the 
 }
 
 @media (min-width:600px) {
-  .c1 {
-    height: min(20vh,400px);
-  }
-
   .c1 .CoC {
     margin-bottom: -8px;
     margin-bottom: max(-0.8vw,-20px);
+  }
+}
+
+@media (orientation:landscape) and (max-height:500px) {
+  .c1 {
+    height: 80px;
   }
 }
 
@@ -2167,6 +2179,7 @@ exports[`App snapshots should show the welcome screen after user has clicked ele
 }
 
 .c1 {
+  height: min(20vh,400px);
   width: 100%;
   background-color: var(--secondary-background-color);
   color: var(--secondary-text-color);
@@ -2181,7 +2194,6 @@ exports[`App snapshots should show the welcome screen after user has clicked ele
   -webkit-justify-content: flex-end;
   -ms-flex-pack: end;
   justify-content: flex-end;
-  height: 80px;
 }
 
 .c1 .welcome-to {
@@ -2384,13 +2396,15 @@ exports[`App snapshots should show the welcome screen after user has clicked ele
 }
 
 @media (min-width:600px) {
-  .c1 {
-    height: min(20vh,400px);
-  }
-
   .c1 .CoC {
     margin-bottom: -8px;
     margin-bottom: max(-0.8vw,-20px);
+  }
+}
+
+@media (orientation:landscape) and (max-height:500px) {
+  .c1 {
+    height: 80px;
   }
 }
 
