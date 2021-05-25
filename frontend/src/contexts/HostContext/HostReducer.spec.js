@@ -360,20 +360,6 @@ describe('reducer', () => {
 
       expect(result).toMatchObject(state);
     });
-
-    it('displays the pregame screen if too many players have been kicked or disconnected', () => {
-      const state = {
-        players: { foo: { id: 'foo' }, bar: { id: 'bar' } },
-        playerIDs: ['foo', 'bar'],
-      };
-
-      const result = HostReducer(state, {
-        type: 'KICK_PLAYER',
-        payload: { playerId: 'foo' },
-      });
-
-      expect(result.gameState).toBe('waiting-for-players');
-    });
   });
 
   describe('START_GAME', () => {
