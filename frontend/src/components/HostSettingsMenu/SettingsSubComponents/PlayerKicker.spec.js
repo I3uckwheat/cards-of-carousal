@@ -11,10 +11,15 @@ import HostProvider, {
 jest.mock(
   './OptionList', // eslint-disable-next-line react/prop-types
   () => ({ listContent, onClick, onItemClick }) => {
-    function MakeListItemButton(item) {
+    // eslint-disable-next-line react/prop-types
+    function MakeListItemButton({ text, value }) {
       return (
-        <button type="button" key={item} onClick={() => onItemClick(item)}>
-          {item}
+        <button
+          type="button"
+          key={text + value}
+          onClick={() => onItemClick(value)}
+        >
+          {text}
         </button>
       );
     }

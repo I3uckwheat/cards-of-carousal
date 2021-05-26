@@ -246,7 +246,7 @@ exports[`OptionList rendering matches the expected snapshot when open 1`] = `
     onClick={[Function]}
     type="button"
   >
-    bash
+    baz
   </button>
 </div>
 `;

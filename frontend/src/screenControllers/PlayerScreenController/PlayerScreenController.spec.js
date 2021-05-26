@@ -211,6 +211,25 @@ describe('Player screen controller', () => {
       });
     });
 
+    describe('connection-refused-name-taken', () => {
+      it('renders PlayerErrorScreen', () => {
+        PlayerErrorScreen.mockImplementation(MockPlayerErrorScreen);
+
+        const dispatch = jest.fn();
+        const state = {
+          gameState: 'connection-refused-name-taken',
+        };
+
+        render(
+          <PlayerContext.Provider value={{ state, dispatch }}>
+            <PlayerScreenController />
+          </PlayerContext.Provider>,
+        );
+
+        expect(screen.getByTestId('player-error-screen')).toBeInTheDocument();
+      });
+    });
+
     describe('showing-end-round-messages', () => {
       it('renders PlayerMessageScreen', () => {
         PlayerMessageScreen.mockImplementation(MockPlayerMessageScreen);

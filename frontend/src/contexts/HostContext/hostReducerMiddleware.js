@@ -21,6 +21,17 @@ function sendPlayerConnectedMessages(payload) {
   });
 }
 
+function sendNameTakenMessage(payload) {
+  socketInstance.sendMessage({
+    event: 'update',
+    recipients: [payload.playerId],
+    payload: {
+      gameState: 'connection-refused-name-taken',
+      removeLoading: 'joining-lobby',
+    },
+  });
+}
+
 function playerConnected(payload) {
   socketInstance.sendMessage({
     event: 'update',
@@ -226,17 +237,19 @@ function sendEndOfGameMessages({ gameWinner, playerIDs }) {
     recipients: [gameWinner],
   });
 
-  socketInstance.sendMessage({
-    event: 'update',
-    payload: {
-      gameState: 'end-game',
-      message: {
-        big: 'Loser 👎︎',
-        small: `Better to lose the game than your integrity`,
+  if (losers.length) {
+    socketInstance.sendMessage({
+      event: 'update',
+      payload: {
+        gameState: 'end-game',
+        message: {
+          big: 'Loser 👎︎',
+          small: `Better to lose the game than your integrity`,
+        },
       },
-    },
-    recipients: losers,
-  });
+      recipients: losers,
+    });
+  }
 }
 
 export default async function hostReducerMiddleware(
@@ -258,6 +271,9 @@ export default async function hostReducerMiddleware(
 
     case 'SEND_PLAYER_CONNECTED_MESSAGES':
       return sendPlayerConnectedMessages(payload);
+
+    case 'SEND_NAME_TAKEN_MESSAGE':
+      return sendNameTakenMessage(payload);
 
     case 'PLAYER_SUBMIT':
       sendCardsSubmittedMessage(payload);

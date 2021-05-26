@@ -85,6 +85,7 @@ exports[`HostLayout matches the snapshot when rendered 1`] = `
   -ms-flex-positive: 1;
   flex-grow: 1;
   position: relative;
+  min-width: 440px;
 }
 
 .c2 {
@@ -93,13 +94,13 @@ exports[`HostLayout matches the snapshot when rendered 1`] = `
   color: var(--secondary-text-color);
 }
 
-@media (min-width:800px) {
+@media (min-width:680px) {
   .c0 .host-layout-header {
     height: 130px;
   }
 
   .c0 .components .left {
-    min-width: 450px;
+    min-width: 420px;
   }
 
   .c0 .components .host-layout-header h2 {
@@ -109,7 +110,7 @@ exports[`HostLayout matches the snapshot when rendered 1`] = `
   }
 }
 
-@media (min-width:2000px) {
+@media (min-width:1600px) {
   .c0 .components .left {
     min-width: 700px;
   }
@@ -121,7 +122,7 @@ exports[`HostLayout matches the snapshot when rendered 1`] = `
   }
 }
 
-@media (min-width:3500px) {
+@media (min-width:3200px) {
   .c0 .host-layout-header {
     height: 200px;
   }

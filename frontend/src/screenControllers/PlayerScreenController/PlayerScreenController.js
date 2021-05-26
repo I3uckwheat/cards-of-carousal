@@ -42,6 +42,14 @@ export default function PlayerScreenController() {
         />
       );
 
+    case 'connection-refused-name-taken':
+      return (
+        <PlayerErrorScreen
+          bigText="That name is already taken"
+          smallText="Try and be creative next time"
+        />
+      );
+
     case 'lobby-closed':
     case 'error':
     case 'end-game':
