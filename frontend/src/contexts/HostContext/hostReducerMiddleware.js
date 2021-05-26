@@ -206,6 +206,7 @@ function sendTooManyPlayersMessage(payload) {
         big: 'Player limit has been reached',
         small: '',
       },
+      removeLoading: 'joining-lobby',
     },
   });
 }
