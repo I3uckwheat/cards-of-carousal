@@ -516,7 +516,7 @@ describe('Context', () => {
         act(() => {
           eventHandlers.message({
             event: 'player-connected',
-            payload: { playerId: `TEST${i}` },
+            payload: { playerId: `TEST${i}`, playerName: `TEST${i}` },
           });
         });
       }
