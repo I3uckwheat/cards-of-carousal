@@ -148,10 +148,11 @@ function GameSettings({ options, onChange }) {
 
   function numberOptionHandler(event) {
     const { name, value: newValue } = event.target;
+    const min = name === 'maxPlayers' ? minimumPlayerLimit : config[name].min;
 
     onChange({
       ...options,
-      [name]: numInRange(Number(newValue), config[name].min, config[name].max),
+      [name]: numInRange(Number(newValue), min, config[name].max),
     });
   }
 
