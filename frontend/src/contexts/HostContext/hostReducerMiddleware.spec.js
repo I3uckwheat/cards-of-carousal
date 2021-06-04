@@ -663,6 +663,33 @@ describe('hostReducerMiddleware', () => {
       });
     });
 
+    describe('TOO_MANY_PLAYERS', () => {
+      it('sends message to players notifying them the player limit has been reached', () => {
+        const dispatch = jest.fn();
+
+        hostReducerMiddleware(
+          {
+            type: 'TOO_MANY_PLAYERS',
+            payload: { players: ['bar', 'baz'] },
+          },
+          dispatch,
+        );
+
+        expect(socketInstance.sendMessage).toHaveBeenCalledWith({
+          recipients: ['bar', 'baz'],
+          event: 'update',
+          payload: {
+            gameState: 'error',
+            message: {
+              big: 'Player limit has been reached',
+              small: '',
+            },
+            removeLoading: 'joining-lobby',
+          },
+        });
+      });
+    });
+
     describe('GAME_OVER', () => {
       it('sends a message to winner to announce his/her victory', () => {
         const state = {

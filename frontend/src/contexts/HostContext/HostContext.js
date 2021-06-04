@@ -118,13 +118,15 @@ function HostProvider({ children }) {
           -numberOfPlayersExceedingLimit,
         );
 
-        playersExceedingLimit.forEach((player) => {
-          dispatch({
-            type: 'TOO_MANY_PLAYERS',
-            payload: {
-              player: player.playerId,
-            },
-          });
+        const playerIDsExceedingLimit = playersExceedingLimit.map(
+          (player) => player.playerId,
+        );
+
+        dispatch({
+          type: 'TOO_MANY_PLAYERS',
+          payload: {
+            players: playerIDsExceedingLimit,
+          },
         });
       } else {
         const newPlayerIDs = state.newPlayerStaging.map(

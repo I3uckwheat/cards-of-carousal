@@ -373,12 +373,17 @@ function toggleJoinCode(state) {
   };
 }
 
-function removeLastPlayerFromStaging(state) {
+function removePlayersFromStaging(state) {
+  const amountOfPlayersToRemove =
+    state.playerIDs.length +
+    state.newPlayerStaging.length -
+    state.gameSettings.maxPlayers;
+
   return {
     ...state,
     newPlayerStaging: state.newPlayerStaging.slice(
       0,
-      state.newPlayerStaging.length - 1,
+      state.newPlayerStaging.length - amountOfPlayersToRemove,
     ),
   };
 }
@@ -465,7 +470,7 @@ function HostReducer(state, action) {
       return toggleJoinCode(state);
 
     case 'TOO_MANY_PLAYERS':
-      return removeLastPlayerFromStaging(state);
+      return removePlayersFromStaging(state);
 
     case 'GAME_OVER':
       return gameOver(state, payload);

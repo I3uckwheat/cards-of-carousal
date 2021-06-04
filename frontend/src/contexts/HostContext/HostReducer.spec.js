@@ -1443,4 +1443,83 @@ describe('reducer', () => {
       expect(result.gameWinner).toBe('foo');
     });
   });
+
+  describe('TOO_MANY_PLAYERS', () => {
+    it('removes player exceeding the maxPlayer limit', () => {
+      const state = {
+        gameSettings: {
+          maxPlayers: 3,
+        },
+        playerIDs: ['ID1', 'ID2'],
+        newPlayerStaging: [
+          {
+            playerId: 'test',
+            name: 'test name',
+            cards: [],
+            submittedCards: [0],
+            isCzar: false,
+            score: 0,
+          },
+          {
+            playerId: 'test2',
+            name: 'test2 name',
+            cards: [],
+            submittedCards: [0],
+            isCzar: false,
+            score: 0,
+          },
+        ],
+      };
+
+      const result = HostReducer(state, {
+        type: 'TOO_MANY_PLAYERS',
+      });
+
+      expect(result).not.toBe(state);
+      expect(result.newPlayerStaging).toStrictEqual([
+        {
+          playerId: 'test',
+          name: 'test name',
+          cards: [],
+          submittedCards: [0],
+          isCzar: false,
+          score: 0,
+        },
+      ]);
+    });
+
+    it('removes multiple players exceeding the maxPlayer limit', () => {
+      const state = {
+        gameSettings: {
+          maxPlayers: 3,
+        },
+        playerIDs: ['ID1', 'ID2', 'ID3'],
+        newPlayerStaging: [
+          {
+            playerId: 'test',
+            name: 'test name',
+            cards: [],
+            submittedCards: [0],
+            isCzar: false,
+            score: 0,
+          },
+          {
+            playerId: 'test2',
+            name: 'test2 name',
+            cards: [],
+            submittedCards: [0],
+            isCzar: false,
+            score: 0,
+          },
+        ],
+      };
+
+      const result = HostReducer(state, {
+        type: 'TOO_MANY_PLAYERS',
+      });
+
+      expect(result).not.toBe(state);
+      expect(result.newPlayerStaging).toStrictEqual([]);
+    });
+  });
 });
