@@ -1473,6 +1473,7 @@ describe('reducer', () => {
 
       const result = HostReducer(state, {
         type: 'TOO_MANY_PLAYERS',
+        payload: { players: ['test2'] },
       });
 
       expect(result).not.toBe(state);
@@ -1516,6 +1517,7 @@ describe('reducer', () => {
 
       const result = HostReducer(state, {
         type: 'TOO_MANY_PLAYERS',
+        payload: { players: ['test', 'test2'] },
       });
 
       expect(result).not.toBe(state);

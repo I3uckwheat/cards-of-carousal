@@ -373,17 +373,11 @@ function toggleJoinCode(state) {
   };
 }
 
-function removePlayersFromStaging(state) {
-  const amountOfPlayersToRemove =
-    state.playerIDs.length +
-    state.newPlayerStaging.length -
-    state.gameSettings.maxPlayers;
-
+function removePlayersFromStaging(state, payload) {
   return {
     ...state,
-    newPlayerStaging: state.newPlayerStaging.slice(
-      0,
-      state.newPlayerStaging.length - amountOfPlayersToRemove,
+    newPlayerStaging: state.newPlayerStaging.filter(
+      (player) => !payload.players.includes(player.playerId),
     ),
   };
 }
@@ -470,7 +464,7 @@ function HostReducer(state, action) {
       return toggleJoinCode(state);
 
     case 'TOO_MANY_PLAYERS':
-      return removePlayersFromStaging(state);
+      return removePlayersFromStaging(state, payload);
 
     case 'GAME_OVER':
       return gameOver(state, payload);
