@@ -15,6 +15,13 @@ import HostErrorBoundary from './errorHandlers/hostErrorHandlers/HostErrorBounda
 function App() {
   const [screenControllerType, setScreenControllerType] = useState('welcome');
 
+  const docEl = document.documentElement;
+  const requestFullscreen =
+    docEl.requestFullscreen ||
+    docEl.mozRequestFullScreen ||
+    docEl.webkitRequestFullScreen ||
+    docEl.msRequestFullscreen;
+
   switch (screenControllerType) {
     case 'player':
       return (
@@ -39,9 +46,11 @@ function App() {
             // prevent devices from sleeping
             const noSleep = new NoSleep();
             noSleep.enable();
+            if (requestFullscreen) requestFullscreen.call(docEl);
             setScreenControllerType('player');
           }}
           handleHostClick={() => {
+            if (requestFullscreen) requestFullscreen.call(docEl);
             setScreenControllerType('host');
           }}
         />
