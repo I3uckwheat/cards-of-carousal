@@ -4,6 +4,8 @@ import { fireEvent, render } from '@testing-library/react';
 
 import App from './App';
 
+jest.mock('nosleep.js');
+
 describe('App', () => {
   describe('snapshots', () => {
     it('should initially show the welcome screen', () => {
@@ -14,6 +16,7 @@ describe('App', () => {
 
     it('should show the player screen after user has clicked the "join" button', () => {
       const { getByText, asFragment } = render(<App />);
+
       fireEvent.click(getByText('JOIN'));
 
       expect(asFragment()).toMatchSnapshot();
