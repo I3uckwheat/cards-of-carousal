@@ -573,39 +573,39 @@ exports[`App snapshots should show the host screen after user has clicked the "h
 
 }
 
-@media (max-width:1920px) {
+@media (min-width:680px) {
 
 }
 
-@media (max-width:1440px) {
+@media (min-width:950px) {
 
 }
 
-@media (max-width:950px) {
+@media (min-width:1600px) {
 
 }
 
-@media (max-width:700px),(max-width:900px) and (max-height:500px) {
+@media (min-width:3200px) {
 
 }
 
-@media (min-width:2561px) {
+@media (min-width:680px) {
 
 }
 
-@media (min-width:800px) {
+@media (min-width:1600px) {
 
 }
 
-@media (min-width:2000px) {
+@media (min-width:3200px) {
 
 }
 
-@media (min-width:3500px) {
+@media only screen and (min-width:1460px) {
 
 }
 
-@media only screen and (max-width:980px) {
+@media only screen and (min-width:980px) {
 
 }
 
@@ -621,7 +621,7 @@ exports[`App snapshots should show the host screen after user has clicked the "h
 
 }
 
-@media (min-width:3200px) {
+@media (min-width:) {
 
 }
 
