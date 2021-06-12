@@ -181,6 +181,16 @@ export default function PlayerJoinScreen() {
 
   function handleSubmit(e) {
     e.preventDefault();
+
+    const docEl = document.documentElement;
+    const requestFullscreen =
+      docEl.requestFullscreen ||
+      docEl.mozRequestFullScreen ||
+      docEl.webkitRequestFullScreen ||
+      docEl.msRequestFullscreen;
+
+    if (requestFullscreen) requestFullscreen.call(docEl);
+
     dispatch({
       type: 'JOIN_LOBBY',
       payload: { lobbyId: joinCode, playerName: name },
