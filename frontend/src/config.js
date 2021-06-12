@@ -30,7 +30,7 @@ const config = {
     hostBreakpoints: {
       smallDesktop: '680px',
       largeDesktop: '1600px',
-      extraLargDesktop: '3200px',
+      extraLargeDesktop: '3200px',
     },
   },
 };

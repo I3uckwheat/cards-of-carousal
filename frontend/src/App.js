@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import NoSleep from 'nosleep.js';
 
 import './reset.css';
 import './App.css';
@@ -34,8 +35,15 @@ function App() {
     case 'welcome':
       return (
         <WelcomeScreen
-          handleJoinClick={() => setScreenControllerType('player')}
-          handleHostClick={() => setScreenControllerType('host')}
+          handleJoinClick={() => {
+            // prevent devices from sleeping
+            const noSleep = new NoSleep();
+            noSleep.enable();
+            setScreenControllerType('player');
+          }}
+          handleHostClick={() => {
+            setScreenControllerType('host');
+          }}
         />
       );
     default:
