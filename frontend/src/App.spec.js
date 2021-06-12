@@ -39,4 +39,24 @@ describe('App', () => {
       expect(asFragment()).toMatchSnapshot();
     });
   });
+
+  describe('fullscreen api', () => {
+    it('requests to go fullscreen when the host button is clicked', () => {
+      // tests don't include this browser function, but we are going to manually mock/restore it anyway
+      const { requestFullscreen } = document.documentElement;
+
+      // mock the requestFullscreen API
+      document.documentElement.requestFullscreen = jest.fn();
+
+      const { getByText } = render(<App />);
+      fireEvent.click(getByText('HOST'));
+
+      expect(document.documentElement.requestFullscreen).toHaveBeenCalledTimes(
+        1,
+      );
+
+      // restore mocked browser document method
+      document.documentElement.requestFullscreen = requestFullscreen;
+    });
+  });
 });

@@ -169,5 +169,33 @@ describe('PlayerJoin', () => {
         },
       });
     });
+
+    it('requests to go fullscreen when the JOIN button is clicked', () => {
+      const dispatch = jest.fn();
+      const state = {};
+
+      // tests don't include this browser function, but we are going to manually mock/restore it anyway
+      const { requestFullscreen } = document.documentElement;
+
+      // mock the requestFullscreen API
+      document.documentElement.requestFullscreen = jest.fn();
+
+      render(
+        <PlayerContext.Provider value={{ state, dispatch }}>
+          <PlayerJoinScreen />
+        </PlayerContext.Provider>,
+      );
+
+      userEvent.type(screen.getByPlaceholderText('name'), 'PLAYER_NAME');
+      userEvent.type(screen.getByPlaceholderText('join code'), 'ABCD');
+      userEvent.click(screen.getByTestId('player-join-submit-button'));
+
+      expect(document.documentElement.requestFullscreen).toHaveBeenCalledTimes(
+        1,
+      );
+
+      // restore mocked browser document method
+      document.documentElement.requestFullscreen = requestFullscreen;
+    });
   });
 });
