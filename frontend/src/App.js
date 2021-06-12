@@ -46,7 +46,6 @@ function App() {
             // prevent devices from sleeping
             const noSleep = new NoSleep();
             noSleep.enable();
-            if (requestFullscreen) requestFullscreen.call(docEl);
             setScreenControllerType('player');
           }}
           handleHostClick={() => {
