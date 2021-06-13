@@ -5,6 +5,9 @@ import renderer from 'react-test-renderer';
 
 import ToggleFullscreen from './ToggleFullscreen';
 import { HostContext } from '../../../contexts/HostContext/HostContext';
+import requestFullscreen from '../../../helpers/requestFullscreen';
+
+jest.mock('../../../helpers/requestFullscreen');
 
 // mock the OptionButton component that is imported into ToggleFullscreen
 jest.mock(
@@ -113,14 +116,6 @@ describe('ToggleFullscreen', () => {
       const state = {};
       const dispatch = jest.fn();
 
-      // tests don't include this browser function, but we are going to manually mock/restore it anyway
-      const { requestFullscreen } = document.documentElement;
-      const { fullscreenElement } = document;
-
-      // mock the requestFullscreen API
-      document.documentElement.requestFullscreen = jest.fn();
-      document.fullscreenElement = null;
-
       render(
         <HostContext.Provider value={{ state, dispatch }}>
           <ToggleFullscreen isEnabled onDisabledClick={() => {}} />
@@ -130,25 +125,15 @@ describe('ToggleFullscreen', () => {
         screen.getByRole('button', { name: 'TOGGLE FULLSCREEN' }),
       );
 
-      expect(document.documentElement.requestFullscreen).toHaveBeenCalledTimes(
-        1,
-      );
-
-      // restore mocked browser document method
-      document.documentElement.requestFullscreen = requestFullscreen;
-      document.fullscreenElement = fullscreenElement;
+      expect(requestFullscreen).toHaveBeenCalledTimes(1);
     });
 
     it('exits fullscreen when button is enabled and clicked, and the screen is already maximized', () => {
       const state = {};
       const dispatch = jest.fn();
 
-      // tests don't include this browser function, but we are going to manually mock/restore it anyway
-      const { requestFullscreen } = document.documentElement;
       const { fullscreenElement, exitFullscreen } = document;
 
-      // mock the requestFullscreen API
-      document.documentElement.requestFullscreen = jest.fn();
       document.exitFullscreen = jest.fn();
       document.fullscreenElement = true;
 
@@ -161,11 +146,10 @@ describe('ToggleFullscreen', () => {
         screen.getByRole('button', { name: 'TOGGLE FULLSCREEN' }),
       );
 
-      expect(document.documentElement.requestFullscreen).not.toHaveBeenCalled();
+      expect(requestFullscreen).not.toHaveBeenCalled();
       expect(document.exitFullscreen).toHaveBeenCalledTimes(1);
 
       // restore mocked browser document method
-      document.documentElement.requestFullscreen = requestFullscreen;
       document.exitFullscreen = exitFullscreen;
       document.fullscreenElement = fullscreenElement;
     });

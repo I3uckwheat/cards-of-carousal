@@ -11,16 +11,10 @@ import { PlayerProvider } from './contexts/PlayerContext/PlayerContext';
 import HostProvider from './contexts/HostContext/HostContext';
 import PlayerErrorBoundary from './errorHandlers/playerErrorHandlers/PlayerErrorBoundary';
 import HostErrorBoundary from './errorHandlers/hostErrorHandlers/HostErrorBoundary';
+import requestFullscreen from './helpers/requestFullscreen';
 
 function App() {
   const [screenControllerType, setScreenControllerType] = useState('welcome');
-
-  const docEl = document.documentElement;
-  const requestFullscreen =
-    docEl.requestFullscreen ||
-    docEl.mozRequestFullScreen ||
-    docEl.webkitRequestFullScreen ||
-    docEl.msRequestFullscreen;
 
   switch (screenControllerType) {
     case 'player':
@@ -49,7 +43,7 @@ function App() {
             setScreenControllerType('player');
           }}
           handleHostClick={() => {
-            if (requestFullscreen) requestFullscreen.call(docEl);
+            requestFullscreen();
             setScreenControllerType('host');
           }}
         />

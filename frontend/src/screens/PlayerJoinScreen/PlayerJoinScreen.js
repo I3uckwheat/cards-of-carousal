@@ -4,6 +4,7 @@ import Button from '../../components/Buttons/Button';
 import { PlayerContext } from '../../contexts/PlayerContext/PlayerContext';
 import HeaderFooterLayout from '../../layouts/HeaderFooterLayout/HeaderFooterLayout';
 import config from '../../config';
+import requestFullscreen from '../../helpers/requestFullscreen';
 
 const propTypes = {};
 
@@ -181,15 +182,7 @@ export default function PlayerJoinScreen() {
 
   function handleSubmit(e) {
     e.preventDefault();
-
-    const docEl = document.documentElement;
-    const requestFullscreen =
-      docEl.requestFullscreen ||
-      docEl.mozRequestFullScreen ||
-      docEl.webkitRequestFullScreen ||
-      docEl.msRequestFullscreen;
-
-    if (requestFullscreen) requestFullscreen.call(docEl);
+    requestFullscreen();
 
     dispatch({
       type: 'JOIN_LOBBY',

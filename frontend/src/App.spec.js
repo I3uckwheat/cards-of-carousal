@@ -3,8 +3,10 @@ import renderer from 'react-test-renderer';
 import { fireEvent, render } from '@testing-library/react';
 
 import App from './App';
+import requestFullscreen from './helpers/requestFullscreen';
 
 jest.mock('nosleep.js');
+jest.mock('./helpers/requestFullscreen');
 
 describe('App', () => {
   describe('snapshots', () => {
@@ -42,21 +44,10 @@ describe('App', () => {
 
   describe('fullscreen api', () => {
     it('requests to go fullscreen when the host button is clicked', () => {
-      // tests don't include this browser function, but we are going to manually mock/restore it anyway
-      const { requestFullscreen } = document.documentElement;
-
-      // mock the requestFullscreen API
-      document.documentElement.requestFullscreen = jest.fn();
-
       const { getByText } = render(<App />);
       fireEvent.click(getByText('HOST'));
 
-      expect(document.documentElement.requestFullscreen).toHaveBeenCalledTimes(
-        1,
-      );
-
-      // restore mocked browser document method
-      document.documentElement.requestFullscreen = requestFullscreen;
+      expect(requestFullscreen).toHaveBeenCalledTimes(1);
     });
   });
 });
