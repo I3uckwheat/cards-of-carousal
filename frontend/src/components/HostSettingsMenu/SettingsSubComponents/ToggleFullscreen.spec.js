@@ -173,15 +173,6 @@ describe('ToggleFullscreen', () => {
     it('does not call the onDisabledClick callback when disabled but not clicked', () => {
       const state = {};
       const dispatch = jest.fn();
-
-      // tests don't include this browser function, but we are going to manually mock/restore it anyway
-      const { requestFullscreen } = document.documentElement;
-      const { fullscreenElement } = document;
-
-      // mock the requestFullscreen API
-      document.documentElement.requestFullscreen = jest.fn();
-      document.fullscreenElement = null;
-
       const mockOnDisabledClick = jest.fn();
 
       render(
@@ -195,25 +186,12 @@ describe('ToggleFullscreen', () => {
       );
 
       expect(mockOnDisabledClick).not.toHaveBeenCalled();
-
-      // restore mocked browser document method
-      document.documentElement.requestFullscreen = requestFullscreen;
-      document.fullscreenElement = fullscreenElement;
     });
 
     it('calls the onDisabledClick callback when disabled and clicked', () => {
       const state = {};
       const dispatch = jest.fn();
-
       const mockOnDisabledClick = jest.fn();
-
-      // tests don't include this browser function, but we are going to manually mock/restore it anyway
-      const { requestFullscreen } = document.documentElement;
-      const { fullscreenElement } = document;
-
-      // mock the requestFullscreen API
-      document.documentElement.requestFullscreen = jest.fn();
-      document.fullscreenElement = null;
 
       render(
         <HostContext.Provider value={{ state, dispatch }}>
@@ -224,15 +202,12 @@ describe('ToggleFullscreen', () => {
           ,
         </HostContext.Provider>,
       );
+
       userEvent.click(
         screen.getByRole('button', { name: 'TOGGLE FULLSCREEN' }),
       );
 
       expect(mockOnDisabledClick).toHaveBeenCalled();
-
-      // restore mocked browser document method
-      document.documentElement.requestFullscreen = requestFullscreen;
-      document.fullscreenElement = fullscreenElement;
     });
   });
 
@@ -245,26 +220,15 @@ describe('ToggleFullscreen', () => {
         .spyOn(console, 'error')
         .mockImplementation(() => {});
 
-      // tests don't include this browser function, but we are going to manually mock/restore it anyway
-      const { requestFullscreen } = document.documentElement;
-      const { fullscreenElement } = document;
-
-      // mock the requestFullscreen API
-      document.documentElement.requestFullscreen = jest.fn();
-      document.fullscreenElement = null;
-
       render(
         <HostContext.Provider value={{ state, dispatch }}>
           <ToggleFullscreen onDisabledClick={() => {}} />
         </HostContext.Provider>,
       );
+
       userEvent.click(screen.getByTestId('option-button'));
 
       expect(consoleSpy).toHaveBeenCalled();
-
-      // restore mocked browser document method
-      document.documentElement.requestFullscreen = requestFullscreen;
-      document.fullscreenElement = fullscreenElement;
     });
 
     it('logs an error when attempting to render the isEnabled Prop as a non bool', () => {
@@ -275,14 +239,6 @@ describe('ToggleFullscreen', () => {
         .spyOn(console, 'error')
         .mockImplementation(() => {});
 
-      // tests don't include this browser function, but we are going to manually mock/restore it anyway
-      const { requestFullscreen } = document.documentElement;
-      const { fullscreenElement } = document;
-
-      // mock the requestFullscreen API
-      document.documentElement.requestFullscreen = jest.fn();
-      document.fullscreenElement = null;
-
       render(
         <HostContext.Provider value={{ state, dispatch }}>
           <ToggleFullscreen isEnabled="foo" onDisabledClick={() => {}} />
@@ -290,10 +246,6 @@ describe('ToggleFullscreen', () => {
       );
 
       expect(consoleSpy).toHaveBeenCalled();
-
-      // restore mocked browser document method
-      document.documentElement.requestFullscreen = requestFullscreen;
-      document.fullscreenElement = fullscreenElement;
     });
 
     it('logs an error when attempting to render without the onDisabledClick Prop', () => {
@@ -304,14 +256,6 @@ describe('ToggleFullscreen', () => {
         .spyOn(console, 'error')
         .mockImplementation(() => {});
 
-      // tests don't include this browser function, but we are going to manually mock/restore it anyway
-      const { requestFullscreen } = document.documentElement;
-      const { fullscreenElement } = document;
-
-      // mock the requestFullscreen API
-      document.documentElement.requestFullscreen = jest.fn();
-      document.fullscreenElement = null;
-
       render(
         <HostContext.Provider value={{ state, dispatch }}>
           <ToggleFullscreen isEnabled />
@@ -319,10 +263,6 @@ describe('ToggleFullscreen', () => {
       );
 
       expect(consoleSpy).toHaveBeenCalled();
-
-      // restore mocked browser document method
-      document.documentElement.requestFullscreen = requestFullscreen;
-      document.fullscreenElement = fullscreenElement;
     });
 
     it('logs an error when attempting to render the onDisabledClick Prop as a non function', () => {
@@ -333,14 +273,6 @@ describe('ToggleFullscreen', () => {
         .spyOn(console, 'error')
         .mockImplementation(() => {});
 
-      // tests don't include this browser function, but we are going to manually mock/restore it anyway
-      const { requestFullscreen } = document.documentElement;
-      const { fullscreenElement } = document;
-
-      // mock the requestFullscreen API
-      document.documentElement.requestFullscreen = jest.fn();
-      document.fullscreenElement = null;
-
       render(
         <HostContext.Provider value={{ state, dispatch }}>
           <ToggleFullscreen isEnabled onDisabledClick="foo" />
@@ -348,10 +280,6 @@ describe('ToggleFullscreen', () => {
       );
 
       expect(consoleSpy).toHaveBeenCalled();
-
-      // restore mocked browser document method
-      document.documentElement.requestFullscreen = requestFullscreen;
-      document.fullscreenElement = fullscreenElement;
     });
 
     it('does not log an error when all required props are given correctly', () => {
@@ -362,14 +290,6 @@ describe('ToggleFullscreen', () => {
         .spyOn(console, 'error')
         .mockImplementation(() => {});
 
-      // tests don't include this browser function, but we are going to manually mock/restore it anyway
-      const { requestFullscreen } = document.documentElement;
-      const { fullscreenElement } = document;
-
-      // mock the requestFullscreen API
-      document.documentElement.requestFullscreen = jest.fn();
-      document.fullscreenElement = null;
-
       render(
         <HostContext.Provider value={{ state, dispatch }}>
           <ToggleFullscreen isEnabled onDisabledClick={() => {}} />
@@ -377,10 +297,6 @@ describe('ToggleFullscreen', () => {
       );
 
       expect(consoleSpy).not.toHaveBeenCalled();
-
-      // restore mocked browser document method
-      document.documentElement.requestFullscreen = requestFullscreen;
-      document.fullscreenElement = fullscreenElement;
     });
   });
 });
