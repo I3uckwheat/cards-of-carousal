@@ -45,4 +45,8 @@ describe('requestFullscreen', () => {
 
     expect(document.documentElement.msRequestFullscreen).toHaveBeenCalled();
   });
+
+  it('calls a noop if none of the fullscreen methods exist on the documentElement object', () => {
+    expect(() => requestFullscreen()).not.toThrow();
+  });
 });
