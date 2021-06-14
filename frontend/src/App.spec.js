@@ -3,8 +3,10 @@ import renderer from 'react-test-renderer';
 import { fireEvent, render } from '@testing-library/react';
 
 import App from './App';
+import requestFullscreen from './helpers/requestFullscreen';
 
 jest.mock('nosleep.js');
+jest.mock('./helpers/requestFullscreen');
 
 describe('App', () => {
   describe('snapshots', () => {
@@ -37,6 +39,15 @@ describe('App', () => {
       fireEvent.click(getByText('Card content thanks to:'));
 
       expect(asFragment()).toMatchSnapshot();
+    });
+  });
+
+  describe('fullscreen api', () => {
+    it('requests to go fullscreen when the host button is clicked', () => {
+      const { getByText } = render(<App />);
+      fireEvent.click(getByText('HOST'));
+
+      expect(requestFullscreen).toHaveBeenCalledTimes(1);
     });
   });
 });

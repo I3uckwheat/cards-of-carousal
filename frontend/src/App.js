@@ -11,6 +11,7 @@ import { PlayerProvider } from './contexts/PlayerContext/PlayerContext';
 import HostProvider from './contexts/HostContext/HostContext';
 import PlayerErrorBoundary from './errorHandlers/playerErrorHandlers/PlayerErrorBoundary';
 import HostErrorBoundary from './errorHandlers/hostErrorHandlers/HostErrorBoundary';
+import requestFullscreen from './helpers/requestFullscreen';
 
 function App() {
   const [screenControllerType, setScreenControllerType] = useState('welcome');
@@ -42,6 +43,7 @@ function App() {
             setScreenControllerType('player');
           }}
           handleHostClick={() => {
+            requestFullscreen();
             setScreenControllerType('host');
           }}
         />

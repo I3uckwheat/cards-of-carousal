@@ -4,6 +4,7 @@ import Button from '../../components/Buttons/Button';
 import { PlayerContext } from '../../contexts/PlayerContext/PlayerContext';
 import HeaderFooterLayout from '../../layouts/HeaderFooterLayout/HeaderFooterLayout';
 import config from '../../config';
+import requestFullscreen from '../../helpers/requestFullscreen';
 
 const propTypes = {};
 
@@ -181,6 +182,8 @@ export default function PlayerJoinScreen() {
 
   function handleSubmit(e) {
     e.preventDefault();
+    requestFullscreen();
+
     dispatch({
       type: 'JOIN_LOBBY',
       payload: { lobbyId: joinCode, playerName: name },
