@@ -70,6 +70,25 @@ describe('hostReducerMiddleware', () => {
         },
       });
     });
+
+    it("calls socketInstance's sendMessage with a kick-player event and the playerId", () => {
+      const dispatch = jest.fn();
+
+      hostReducerMiddleware(
+        {
+          type: 'KICK_PLAYER',
+          payload: { playerId: 'example-player-id' },
+        },
+        dispatch,
+      );
+
+      expect(socketInstance.sendMessage).toHaveBeenCalledWith({
+        event: 'kick-player',
+        payload: {
+          playerId: 'example-player-id',
+        },
+      });
+    });
   });
 
   describe('PLAYER_CONNECTED', () => {
