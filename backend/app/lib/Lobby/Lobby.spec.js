@@ -185,4 +185,144 @@ describe('Lobby', () => {
       });
     });
   });
+
+  describe('when a kick-player message is received', () => {
+    it("stops sending messages to the kicked player's socket", () => {
+      // set up host and player socket mocks
+      const hostMethods = [];
+
+      const hostSocketOn = (event, callback) => {
+        hostMethods.push({ event, callback });
+      };
+
+      const hostSocketSend = jest.fn();
+
+      const hostTestSocket = (id) => ({
+        id,
+        on: hostSocketOn,
+        send: hostSocketSend,
+      });
+
+      const playerMethods = [];
+
+      const playerSocketOn = (event, callback) => {
+        playerMethods.push({ event, callback });
+      };
+
+      const playerSocketSend = jest.fn();
+      const playerSocketClose = jest.fn();
+
+      const playerTestSocket = (id) => ({
+        id,
+        on: playerSocketOn,
+        send: playerSocketSend,
+        close: playerSocketClose,
+      });
+
+      // set up lobby
+      const lobbyId = 'AAAA';
+      const hostSocket = hostTestSocket('socketId');
+      const onCloseCallBack = jest.fn();
+      const shuffleIdCallback = jest.fn();
+      const lobby = new Lobby(
+        lobbyId,
+        hostSocket,
+        onCloseCallBack,
+        shuffleIdCallback,
+      );
+
+      lobby.addPlayer(playerTestSocket('foo'), 'Tester');
+
+      // send a message to the lobby and verify that messages are sending to
+      // players as expected
+      const testMessageToHost = {
+        event: 'test',
+        payload: { test: 'TEST' },
+      };
+
+      hostMethods[0].callback(testMessageToHost);
+
+      const testMessageToPlayer = {
+        event: 'test',
+        payload: { test: 'TEST' },
+        sender: 'host',
+      };
+
+      expect(playerSocketSend).toHaveBeenNthCalledWith(
+        1,
+        JSON.stringify(testMessageToPlayer),
+      );
+
+      // remove the player
+      const removePlayerMessage = {
+        event: 'kick-player',
+        payload: { playerId: 'foo' },
+      };
+
+      hostMethods[0].callback(removePlayerMessage);
+
+      // send a message to the lobby and verify that the removed player does not
+      // receive this second message
+      hostMethods[0].callback(testMessageToHost);
+
+      expect(playerSocketSend).toHaveBeenCalledTimes(1);
+    });
+
+    it("closes the kicked player's socket", () => {
+      // set up host and player socket mocks
+      const hostMethods = [];
+
+      const hostSocketOn = (event, callback) => {
+        hostMethods.push({ event, callback });
+      };
+
+      const hostSocketSend = jest.fn();
+
+      const hostTestSocket = (id) => ({
+        id,
+        on: hostSocketOn,
+        send: hostSocketSend,
+      });
+
+      const playerMethods = [];
+
+      const playerSocketOn = (event, callback) => {
+        playerMethods.push({ event, callback });
+      };
+
+      const playerSocketSend = jest.fn();
+      const playerSocketClose = jest.fn();
+
+      const playerTestSocket = (id) => ({
+        id,
+        on: playerSocketOn,
+        send: playerSocketSend,
+        close: playerSocketClose,
+      });
+
+      // set up lobby
+      const lobbyId = 'AAAA';
+      const hostSocket = hostTestSocket('socketId');
+      const onCloseCallBack = jest.fn();
+      const shuffleIdCallback = jest.fn();
+      const lobby = new Lobby(
+        lobbyId,
+        hostSocket,
+        onCloseCallBack,
+        shuffleIdCallback,
+      );
+
+      lobby.addPlayer(playerTestSocket('foo'), 'Tester');
+
+      // remove the player
+      const removePlayerMessage = {
+        event: 'kick-player',
+        payload: { playerId: 'foo' },
+      };
+
+      hostMethods[0].callback(removePlayerMessage);
+
+      expect(playerSocketClose).toHaveBeenCalledTimes(1);
+    });
+  });
 });
