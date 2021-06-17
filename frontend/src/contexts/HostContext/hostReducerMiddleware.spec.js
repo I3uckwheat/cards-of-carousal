@@ -688,6 +688,25 @@ describe('hostReducerMiddleware', () => {
           },
         });
       });
+
+      it("calls socketInstance's sendMessage with a kick-player event and the playerId", () => {
+        const dispatch = jest.fn();
+
+        hostReducerMiddleware(
+          {
+            type: 'TOO_MANY_PLAYERS',
+            payload: { players: ['example-player-id'] },
+          },
+          dispatch,
+        );
+
+        expect(socketInstance.sendMessage).toHaveBeenCalledWith({
+          event: 'kick-player',
+          payload: {
+            playerId: 'example-player-id',
+          },
+        });
+      });
     });
 
     describe('GAME_OVER', () => {

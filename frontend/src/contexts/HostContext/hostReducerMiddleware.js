@@ -220,6 +220,13 @@ function sendTooManyPlayersMessage(payload) {
       removeLoading: 'joining-lobby',
     },
   });
+
+  payload.players.forEach((playerId) => {
+    socketInstance.sendMessage({
+      event: 'kick-player',
+      payload: { playerId },
+    });
+  });
 }
 
 function sendEndOfGameMessages({ gameWinner, playerIDs }) {
