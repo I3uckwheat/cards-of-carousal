@@ -60,7 +60,7 @@ exports[`Footer renders correctly 1`] = `
 
   .c0 p,
   .c0 a {
-    font-size: 26px;
+    font-size: 20px;
   }
 }
 

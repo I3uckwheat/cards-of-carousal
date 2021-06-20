@@ -231,7 +231,7 @@ exports[`PlayerJoin snapshot matches 1`] = `
 
   .c4 p,
   .c4 a {
-    font-size: 26px;
+    font-size: 20px;
   }
 }
 

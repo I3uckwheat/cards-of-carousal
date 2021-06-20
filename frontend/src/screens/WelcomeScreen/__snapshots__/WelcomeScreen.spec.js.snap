@@ -216,7 +216,7 @@ exports[`WelcomeScreen render renders correctly 1`] = `
 
   .c3 p,
   .c3 a {
-    font-size: 26px;
+    font-size: 20px;
   }
 }
 

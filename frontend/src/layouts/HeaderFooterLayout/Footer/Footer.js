@@ -56,7 +56,7 @@ const FooterWrapper = styled.footer`
 
     p,
     a {
-      font-size: 26px;
+      font-size: 20px;
     }
   }
 
