@@ -1,47 +1,43 @@
 ---
-name: QA Bug Report
+name: Bug Report General 
 about: Create a report to help us improve
-title: '[BUG]: '
+title: "[BUG]: "
 labels: bug
-assignees: CatQueenCodes
+
 ---
 
-**Link Test Case #:**
+**Linked User Story:** (if applicable)
 
-**Device used:**
+**Device Used:**
 
 **Browser(s) Used:**
-
 - [ ] Chrome
 - [ ] Safari
 - [ ] FireFox
-- [ ] Other: **\_\_**
+- [ ] Other: ______
+
+**Environment:** 
+- [ ] Production
+- [ ] Staging
+- [ ] Localhost
 
 # Description
 
 ### Expected Behavior
-
 -Type your description here-
 
 ### Actual Behavior
-
 -Type your description here-
 
-# Replication Steps & Data
+# Screen Shot/Screen Video Capture 
+(if applicable)
 
+# Replication Steps & Data
 Include step by step directions on how you found this bug. Include the specific data inputs you used.
 
 # User Story
+As a ____ (type of user, such as player), I want to _____ (have an ability to do something, such as login), so that ____ (benefit to the user, such as so that one can play the game)
 
-As a player, I want to **\_** (have an ability to do something, such as login), so that \_\_\_\_ (benefit to the user, such as so that one can play the game)
-
-# Acceptance Criteria:
-
-- Copy over the "Completion Criteria" check boxes for the device/browser you are using from the test case and paste it in place of this bullet (or accessibility checkboxes if this is an accessibility bug).
-- [ ] Add the "Bug" tag (and the "Accessibility Bug" tag if necessary)
-- [ ] On the right hand side click `Projects` and add it to `Bugs/Refactor`
-- [ ] Link this issue to your pull request.
-
-# Important
-
-- [ ] Please ping CatQueen/Grace in the #QA channel in discord once you make a PR for this bug so I can open another test case ticket for it, so it can be retested to ensure it works post fix.
+# Acceptance Criteria
+Criteria needed for this to work as intended in the user story.
+- [ ] this should be formatted as checkboxes
