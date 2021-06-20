@@ -9,9 +9,9 @@ import requestFullscreen from '../../helpers/requestFullscreen';
 const propTypes = {};
 
 const {
-  largeMobile,
-  smallDesktop,
-  largeDesktop,
+  largeMobileWidth,
+  smallDesktopWidth,
+  largeDesktopWidth,
 } = config.breakpoint.playerBreakpoints;
 
 const PlayerJoinContainer = styled.div`
@@ -70,7 +70,7 @@ const PlayerJoinContainer = styled.div`
     font-size: 1.5rem;
   }
 
-  @media screen and (min-width: ${largeMobile}) {
+  @media screen and (min-width: ${largeMobileWidth}) {
     .player-join-form-container {
       margin-top: 0;
     }
@@ -95,7 +95,7 @@ const PlayerJoinContainer = styled.div`
     }
   }
 
-  @media screen and (min-width: ${smallDesktop}) {
+  @media screen and (min-width: ${smallDesktopWidth}) {
     input,
     input::placeholder {
       font-size: 2.5rem;
@@ -105,7 +105,7 @@ const PlayerJoinContainer = styled.div`
     }
   }
 
-  @media (min-width: ${largeDesktop}) {
+  @media (min-width: ${largeDesktopWidth}) {
     input,
     input::placeholder {
       font-size: 3rem;
@@ -116,7 +116,7 @@ const PlayerJoinContainer = styled.div`
   }
 
   // mobile landscape orientation
-  @media screen and (max-height: 567px) and (min-width: ${largeMobile}) {
+  @media screen and (max-height: 567px) and (min-width: ${largeMobileWidth}) {
     .player-join-form-container {
       margin-top: 0;
     }
@@ -149,27 +149,27 @@ const PlayerJoinButton = styled(Button)`
   text-transform: uppercase;
   margin-top: 50px;
 
-  @media screen and (min-width: ${largeMobile}) {
+  @media screen and (min-width: ${largeMobileWidth}) {
     font-size: 1.5rem;
     width: 256px;
     height: 66px;
     margin-top: 100px;
   }
 
-  @media screen and (min-width: ${smallDesktop}) {
+  @media screen and (min-width: ${smallDesktopWidth}) {
     font-size: 2.25rem;
     width: 350px;
     height: 82px;
   }
 
-  @media (min-width: ${largeDesktop}) {
+  @media (min-width: ${largeDesktopWidth}) {
     width: 490px;
     height: 126px;
 
     font-size: 3rem;
   }
 
-  @media screen and (max-height: 567px) and (min-width: ${largeMobile}) {
+  @media screen and (max-height: 567px) and (min-width: ${largeMobileWidth}) {
     margin-top: 30px;
   }
 `;

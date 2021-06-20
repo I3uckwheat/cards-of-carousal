@@ -17,7 +17,10 @@ const defaultProps = {
   children: null,
 };
 
-const { largeMobile, smallDesktop } = config.breakpoint.playerBreakpoints;
+const {
+  largeMobileWidth,
+  smallDesktopWidth,
+} = config.breakpoint.playerBreakpoints;
 
 const PlayerMessageScreenWrapper = styled.div`
   position: fixed;
@@ -42,22 +45,22 @@ const PlayerMessageScreenWrapper = styled.div`
   .big-text {
     font-weight: 900;
     font-size: 2rem;
-    @media (min-width: ${largeMobile}) {
+    @media (min-width: ${largeMobileWidth}) {
       font-size: 3rem;
     }
 
-    @media (min-width: ${smallDesktop}) {
+    @media (min-width: ${smallDesktopWidth}) {
       font-size: 5rem;
     }
   }
 
   .small-text {
     font-size: 1rem;
-    @media (min-width: ${largeMobile}) {
+    @media (min-width: ${largeMobileWidth}) {
       font-size: 1.5rem;
     }
 
-    @media (min-width: ${smallDesktop}) {
+    @media (min-width: ${smallDesktopWidth}) {
       font-size: 2rem;
     }
   }

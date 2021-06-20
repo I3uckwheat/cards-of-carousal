@@ -20,7 +20,10 @@ const defaultProps = {
   onClickButton: () => window.location.reload(),
 };
 
-const { largeMobile, smallDesktop } = config.breakpoint.playerBreakpoints;
+const {
+  largeMobileWidth,
+  smallDesktopWidth,
+} = config.breakpoint.playerBreakpoints;
 
 const RestartButton = styled(Button)`
   background-color: var(--primary-background-color);
@@ -30,13 +33,13 @@ const RestartButton = styled(Button)`
   border-radius: 2px;
   text-transform: uppercase;
 
-  @media screen and (min-width: ${largeMobile}) {
+  @media screen and (min-width: ${largeMobileWidth}) {
     min-width: 116px;
     height: 40px;
     margin: 40px auto 0 auto;
   }
 
-  @media screen and (min-width: ${smallDesktop}) {
+  @media screen and (min-width: ${smallDesktopWidth}) {
     font-size: 1.5rem;
     line-height: 1.5rem;
     min-width: 164px;
