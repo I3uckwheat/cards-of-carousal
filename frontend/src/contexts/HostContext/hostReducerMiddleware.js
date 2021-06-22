@@ -212,6 +212,28 @@ function czarSelectWinner({ players, playerIDs }) {
   });
 }
 
+function sendTooManyPlayersMessage(payload) {
+  socketInstance.sendMessage({
+    recipients: payload.players,
+    event: 'update',
+    payload: {
+      gameState: 'error',
+      message: {
+        big: 'Player limit has been reached',
+        small: '',
+      },
+      removeLoading: 'joining-lobby',
+    },
+  });
+
+  payload.players.forEach((playerId) => {
+    socketInstance.sendMessage({
+      event: 'kick-player',
+      payload: { playerId },
+    });
+  });
+}
+
 function sendEndOfGameMessages({ gameWinner, playerIDs }) {
   const losers = playerIDs.filter((playerID) => playerID !== gameWinner);
 
@@ -303,6 +325,10 @@ export default async function hostReducerMiddleware(
 
     case 'SEND_END_OF_ROUND_MESSAGES':
       sendEndOfRoundMessages(payload);
+      break;
+
+    case 'TOO_MANY_PLAYERS':
+      sendTooManyPlayersMessage(payload);
       break;
 
     case 'GAME_OVER':

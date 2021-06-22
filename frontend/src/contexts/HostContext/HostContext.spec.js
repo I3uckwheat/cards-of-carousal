@@ -480,6 +480,61 @@ describe('Context', () => {
       });
     });
 
+    it('kicks the player if the maxPlayer limit has been reached', () => {
+      const TestComponent = () => {
+        const { state, dispatch } = useContext(HostContext);
+
+        useEffect(() => {
+          dispatch({
+            type: 'CREATE_LOBBY',
+            payload: {},
+          });
+
+          dispatch({
+            type: 'SET_GAME_SETTINGS',
+            payload: {
+              gameSettings: {
+                ...state.gameSettings,
+                maxPlayers: 2,
+              },
+            },
+          });
+        }, []);
+
+        return <div />;
+      };
+
+      const { eventHandlers } = setupEmitterMocks();
+
+      render(
+        <HostProvider>
+          <TestComponent />
+        </HostProvider>,
+      );
+
+      for (let i = 1; i <= 3; i += 1) {
+        act(() => {
+          eventHandlers.message({
+            event: 'player-connected',
+            payload: { playerId: `TEST${i}`, playerName: `TEST${i}` },
+          });
+        });
+      }
+
+      expect(socketInstance.sendMessage).toHaveBeenCalledWith({
+        event: 'update',
+        recipients: ['TEST3'],
+        payload: {
+          gameState: 'error',
+          message: {
+            big: 'Player limit has been reached',
+            small: '',
+          },
+          removeLoading: 'joining-lobby',
+        },
+      });
+    });
+
     it('catches player-disconnected events and dispatches its respective action', () => {
       const TestComponent = () => {
         const { state, dispatch } = useContext(HostContext);
