@@ -14,7 +14,7 @@ const defaultProps = {
   children: '',
 };
 
-const { largeMobile } = config.breakpoint.playerBreakpoints;
+const { largeMobileWidth } = config.breakpoint.playerBreakpoints;
 
 const Header = styled.header`
   height: min(20vh, 400px);
@@ -47,7 +47,7 @@ const Header = styled.header`
     }
   }
 
-  @media (min-width: ${largeMobile}) {
+  @media (min-width: ${largeMobileWidth}) {
     .CoC {
       margin-bottom: -8px;
       margin-bottom: max(-0.8vw, -20px);

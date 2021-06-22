@@ -19,7 +19,7 @@ const defaultProps = {
   onClick: () => window.location.reload(),
 };
 
-const { smallDesktop } = config.breakpoint.hostBreakpoints;
+const { smallDesktopWidth } = config.breakpoint.hostBreakpoints;
 
 const AlertWrapper = styled.div`
   position: absolute;
@@ -88,7 +88,7 @@ const AlertWrapper = styled.div`
     padding: 2px;
   }
 
-  @media (min-width: ${smallDesktop}) {
+  @media (min-width: ${smallDesktopWidth}) {
     max-height: 300px;
     max-width: 600px;
     width: auto;

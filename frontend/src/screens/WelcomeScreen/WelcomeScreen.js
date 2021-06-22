@@ -11,8 +11,11 @@ const propTypes = {
   handleHostClick: PropTypes.func.isRequired,
 };
 
-const { smallDesktop, largeDesktop } = config.breakpoint.playerBreakpoints;
-const smallHostBreakpoint = config.breakpoint.hostBreakpoints.smallDesktop;
+const {
+  smallDesktopWidth,
+  largeDesktopWidth,
+} = config.breakpoint.playerBreakpoints;
+const smallHostBreakpoint = config.breakpoint.hostBreakpoints.smallDesktopWidth;
 
 const WelcomeScreenWrapper = styled.div`
   display: flex;
@@ -155,7 +158,7 @@ const WelcomeScreenWrapper = styled.div`
     }
   }
 
-  @media (min-width: ${smallDesktop}) {
+  @media (min-width: ${smallDesktopWidth}) {
     .definition-container {
       font-size: 5.2rem;
       font-weight: 700;
@@ -186,7 +189,7 @@ const WelcomeScreenWrapper = styled.div`
   }
 
   /* Screens above 1440p */
-  @media (min-width: ${largeDesktop}) {
+  @media (min-width: ${largeDesktopWidth}) {
     .definition-container {
       font-size: 6.5rem;
       line-height: 4.8rem;

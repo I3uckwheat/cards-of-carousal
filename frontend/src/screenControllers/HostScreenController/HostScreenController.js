@@ -11,7 +11,10 @@ import config from '../../config';
 
 const propTypes = {};
 
-const { smallDesktop } = config.breakpoint.hostBreakpoints;
+const {
+  smallDesktopWidth,
+  smallDesktopHeight,
+} = config.breakpoint.hostBreakpoints;
 
 const ScreenTooSmall = styled.div`
   position: absolute;
@@ -31,7 +34,7 @@ const ScreenTooSmall = styled.div`
 
   background-color: var(--primary-background-color);
 
-  @media (min-width: ${smallDesktop}) and (min-height: 768px) {
+  @media (min-width: ${smallDesktopWidth}) and (min-height: ${smallDesktopHeight}) {
     display: none;
   }
 `;

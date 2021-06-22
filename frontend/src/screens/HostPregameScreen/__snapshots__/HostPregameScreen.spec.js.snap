@@ -494,7 +494,7 @@ exports[`Host Pregame Screen rendering renders 1`] = `
   }
 }
 
-@media (min-width:) {
+@media (min-width:3200px) {
   .c9 h2 {
     font-size: 4rem;
     line-height: 4.4rem;

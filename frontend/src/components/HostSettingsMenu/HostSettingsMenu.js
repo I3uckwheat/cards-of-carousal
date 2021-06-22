@@ -12,7 +12,7 @@ const propTypes = {
   ).isRequired,
 };
 
-const { extraLargeDesktop } = config.breakpoint.hostBreakpoints;
+const { extraLargeDesktopWidth } = config.breakpoint.hostBreakpoints;
 
 const SettingsMenu = styled.div`
   position: absolute;
@@ -58,7 +58,7 @@ const SettingsMenu = styled.div`
     }
   }
 
-  @media (min-width: ${extraLargeDesktop}) {
+  @media (min-width: ${extraLargeDesktopWidth}) {
     width: 1100px;
 
     .host-settings-header {

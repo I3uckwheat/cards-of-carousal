@@ -13,9 +13,9 @@ const propTypes = {
 };
 
 const {
-  smallDesktop,
-  largeDesktop,
-  extraLargeDesktop,
+  smallDesktopWidth,
+  largeDesktopWidth,
+  extraLargeDesktopWidth,
 } = config.breakpoint.hostBreakpoints;
 
 const HostLayoutContainer = styled.div`
@@ -70,7 +70,7 @@ const HostLayoutContainer = styled.div`
     min-width: 440px;
   }
 
-  @media (min-width: ${smallDesktop}) {
+  @media (min-width: ${smallDesktopWidth}) {
     .host-layout-header {
       height: 130px;
     }
@@ -86,7 +86,7 @@ const HostLayoutContainer = styled.div`
     }
   }
 
-  @media (min-width: ${largeDesktop}) {
+  @media (min-width: ${largeDesktopWidth}) {
     .components .left {
       min-width: 700px;
     }
@@ -98,7 +98,7 @@ const HostLayoutContainer = styled.div`
     }
   }
 
-  @media (min-width: ${extraLargeDesktop}) {
+  @media (min-width: ${extraLargeDesktopWidth}) {
     .host-layout-header {
       height: 200px;
     }
