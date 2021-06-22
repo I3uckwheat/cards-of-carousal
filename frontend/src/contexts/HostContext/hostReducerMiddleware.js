@@ -101,13 +101,18 @@ function sendEndOfRoundMessages(payload) {
   });
 }
 
-function sendKickPlayerMessage(payload) {
+function sendKickPlayerMessage({ playerId }) {
   socketInstance.sendMessage({
-    recipients: [payload.playerId],
+    recipients: [playerId],
     event: 'update',
     payload: {
       gameState: 'player-kicked',
     },
+  });
+
+  socketInstance.sendMessage({
+    event: 'kick-player',
+    payload: { playerId },
   });
 }
 
