@@ -1970,26 +1970,6 @@ exports[`App snapshots should show the player screen after user has clicked the 
   }
 }
 
-@media screen and (max-width:568px) and (max-height:320px) {
-  .c0 .player-join-form-container {
-    margin-top: 0;
-  }
-
-  .c0 .player-join-form-input-container {
-    -webkit-flex-direction: row;
-    -ms-flex-direction: row;
-    flex-direction: row;
-  }
-
-  .c0 .player-join-name-input {
-    margin-right: 20px;
-  }
-
-  .c0 input {
-    width: 45%;
-  }
-}
-
 @media screen and (min-width:600px) {
   .c3 {
     font-size: 1.5rem;

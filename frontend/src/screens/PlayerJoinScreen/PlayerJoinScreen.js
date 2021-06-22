@@ -129,21 +129,6 @@ const PlayerJoinContainer = styled.div`
       margin-right: 20px;
     }
   }
-  // Fix Name and Join Code input overflow
-  @media screen and (max-width: 568px) and (max-height: 320px) {
-    .player-join-form-container {
-      margin-top: 0;
-    }
-    .player-join-form-input-container {
-      flex-direction: row;
-    }
-    .player-join-name-input {
-      margin-right: 20px;
-    }
-    input {
-      width: 45%;
-    }
-  }
 `;
 
 const PlayerJoinButton = styled(Button)`
