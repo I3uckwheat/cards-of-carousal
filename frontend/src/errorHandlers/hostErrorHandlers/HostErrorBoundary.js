@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import AlertModal from '../../components/Modal/AlertModal';
-import Modal from '../../components/Modal/Modal';
 
 const propTypes = {
   children: PropTypes.element,
@@ -37,9 +36,7 @@ export default class ErrorBoundary extends Component {
 
     return hasError ? (
       // render the error screen
-      <Modal onClickOutside={() => window.location.reload()}>
-        <AlertModal />
-      </Modal>
+      <AlertModal onClick={() => window.location.reload()} />
     ) : (
       // everything is okay
       children

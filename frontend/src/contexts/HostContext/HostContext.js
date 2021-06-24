@@ -120,28 +120,50 @@ function HostProvider({ children }) {
 
   useEffect(() => {
     if (state.newPlayerStaging.length) {
-      const newPlayerIDs = state.newPlayerStaging.map(
-        (player) => player.playerId,
-      );
+      const numberOfPlayersExceedingLimit =
+        state.playerIDs.length +
+        state.newPlayerStaging.length -
+        state.gameSettings.maxPlayers;
 
-      const message =
-        state.gameState === 'waiting-for-players'
-          ? {
-              big: "You've joined the lobby",
-              small: 'Please wait for the host to start the game',
-            }
-          : {
-              big: 'A round is in progress',
-              small: 'You will join the next round automatically',
-            };
+      if (numberOfPlayersExceedingLimit > 0) {
+        const playersExceedingLimit = state.newPlayerStaging.slice(
+          -numberOfPlayersExceedingLimit,
+        );
 
-      dispatch({
-        type: 'SEND_PLAYER_CONNECTED_MESSAGES',
-        payload: {
-          players: newPlayerIDs,
-          message,
-        },
-      });
+        const playerIDsExceedingLimit = playersExceedingLimit.map(
+          (player) => player.playerId,
+        );
+
+        dispatch({
+          type: 'TOO_MANY_PLAYERS',
+          payload: {
+            players: playerIDsExceedingLimit,
+          },
+        });
+      } else {
+        const newPlayerIDs = state.newPlayerStaging.map(
+          (player) => player.playerId,
+        );
+
+        const message =
+          state.gameState === 'waiting-for-players'
+            ? {
+                big: "You've joined the lobby",
+                small: 'Please wait for the host to start the game',
+              }
+            : {
+                big: 'A round is in progress',
+                small: 'You will join the next round automatically',
+              };
+
+        dispatch({
+          type: 'SEND_PLAYER_CONNECTED_MESSAGES',
+          payload: {
+            players: newPlayerIDs,
+            message,
+          },
+        });
+      }
     }
   }, [state.newPlayerStaging]);
 

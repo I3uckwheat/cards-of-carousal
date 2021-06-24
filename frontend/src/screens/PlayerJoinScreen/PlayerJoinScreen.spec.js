@@ -7,6 +7,9 @@ import {
   PlayerContext,
   PlayerProvider,
 } from '../../contexts/PlayerContext/PlayerContext';
+import requestFullscreen from '../../helpers/requestFullscreen';
+
+jest.mock('../../helpers/requestFullscreen');
 
 describe('PlayerJoin', () => {
   describe('render', () => {
@@ -168,6 +171,23 @@ describe('PlayerJoin', () => {
           playerName: 'PLAYER_NAME',
         },
       });
+    });
+
+    it('requests to go fullscreen when the JOIN button is clicked', () => {
+      const dispatch = jest.fn();
+      const state = {};
+
+      render(
+        <PlayerContext.Provider value={{ state, dispatch }}>
+          <PlayerJoinScreen />
+        </PlayerContext.Provider>,
+      );
+
+      userEvent.type(screen.getByPlaceholderText('name'), 'PLAYER_NAME');
+      userEvent.type(screen.getByPlaceholderText('join code'), 'ABCD');
+      userEvent.click(screen.getByTestId('player-join-submit-button'));
+
+      expect(requestFullscreen).toHaveBeenCalledTimes(1);
     });
   });
 });

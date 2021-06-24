@@ -19,10 +19,15 @@ function setupFetchMock(jsonValue = ['hello', 'world']) {
 describe('GameSettings', () => {
   let state = {
     loading: [],
+    playerIDs: [],
+    newPlayerStaging: [],
   };
+
   beforeEach(() => {
     state = {
       loading: [],
+      playerIDs: [],
+      newPlayerStaging: [],
     };
     setupFetchMock();
   });
@@ -84,6 +89,8 @@ describe('GameSettings', () => {
 
       state = {
         loading: ['getting-packs'],
+        playerIDs: [],
+        newPlayerStaging: [],
       };
 
       render(
@@ -351,6 +358,35 @@ describe('GameSettings', () => {
       expect(onChange).toHaveBeenCalledTimes(1);
       expect(onChange).toHaveBeenCalledWith({
         maxPlayers: config.maxPlayers.min,
+        winningScore: 5,
+        selectedPacks: [],
+      });
+    });
+
+    it('prevents a value smaller than minimumPlayerLimit to be set in MAX PLAYERS', async () => {
+      const dispatch = jest.fn();
+      const onChange = jest.fn();
+      const options = {
+        maxPlayers: -1,
+        winningScore: 5,
+        selectedPacks: [],
+      };
+
+      state.newPlayerStaging = [1, 2, 3];
+
+      render(
+        <HostContext.Provider value={{ state, dispatch }}>
+          <GameSettings onChange={onChange} options={options} />
+        </HostContext.Provider>,
+      );
+
+      await waitFor(() => expect(window.fetch).toHaveBeenCalledTimes(1));
+
+      // Simulate user appending "2"
+      userEvent.type(screen.getByLabelText('MAX PLAYERS'), '2');
+      expect(onChange).toHaveBeenCalledTimes(1);
+      expect(onChange).toHaveBeenCalledWith({
+        maxPlayers: 3,
         winningScore: 5,
         selectedPacks: [],
       });

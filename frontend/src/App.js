@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import NoSleep from 'nosleep.js';
 
 import './reset.css';
 import './App.css';
@@ -10,6 +11,7 @@ import { PlayerProvider } from './contexts/PlayerContext/PlayerContext';
 import HostProvider from './contexts/HostContext/HostContext';
 import PlayerErrorBoundary from './errorHandlers/playerErrorHandlers/PlayerErrorBoundary';
 import HostErrorBoundary from './errorHandlers/hostErrorHandlers/HostErrorBoundary';
+import requestFullscreen from './helpers/requestFullscreen';
 
 function App() {
   const [screenControllerType, setScreenControllerType] = useState('welcome');
@@ -34,8 +36,16 @@ function App() {
     case 'welcome':
       return (
         <WelcomeScreen
-          handleJoinClick={() => setScreenControllerType('player')}
-          handleHostClick={() => setScreenControllerType('host')}
+          handleJoinClick={() => {
+            // prevent devices from sleeping
+            const noSleep = new NoSleep();
+            noSleep.enable();
+            setScreenControllerType('player');
+          }}
+          handleHostClick={() => {
+            requestFullscreen();
+            setScreenControllerType('host');
+          }}
         />
       );
     default:

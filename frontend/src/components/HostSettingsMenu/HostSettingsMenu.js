@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import config from '../../config';
 
 const propTypes = {
   settingsComponentList: PropTypes.arrayOf(
@@ -10,6 +11,8 @@ const propTypes = {
     }),
   ).isRequired,
 };
+
+const { extraLargeDesktopWidth } = config.breakpoint.hostBreakpoints;
 
 const SettingsMenu = styled.div`
   position: absolute;
@@ -55,7 +58,7 @@ const SettingsMenu = styled.div`
     }
   }
 
-  @media (min-width: 3500px) {
+  @media (min-width: ${extraLargeDesktopWidth}) {
     width: 1100px;
 
     .host-settings-header {

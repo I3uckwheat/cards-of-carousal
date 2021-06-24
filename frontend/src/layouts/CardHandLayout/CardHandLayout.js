@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { PlayerContext } from '../../contexts/PlayerContext/PlayerContext';
 
 import Button from '../../components/Buttons/Button';
+import config from '../../config';
 
 const propTypes = {
   title: PropTypes.shape({
@@ -15,6 +16,8 @@ const propTypes = {
   onClear: PropTypes.func.isRequired,
   numberSelected: PropTypes.number.isRequired,
 };
+
+const { largeMobileWidth } = config.breakpoint.playerBreakpoints;
 
 const LayoutContainer = styled.div`
   position: absolute;
@@ -40,7 +43,7 @@ const LayoutContainer = styled.div`
     flex-shrink: 0;
   }
 
-  @media (min-height: 640px) and (min-width: 650px) {
+  @media (min-height: 640px) and (min-width: ${largeMobileWidth}) {
     .card-container {
       flex-wrap: wrap;
       justify-content: center;
@@ -88,7 +91,7 @@ const Header = styled.header`
     border: none;
   }
 
-  @media (min-height: 640px) and (min-width: 650px) {
+  @media (min-height: 640px) and (min-width: ${largeMobileWidth}) {
     min-height: 100px;
 
     .header-txt {

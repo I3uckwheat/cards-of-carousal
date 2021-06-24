@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Footer from './Footer/Footer';
+import config from '../../config';
 
 const propTypes = {
   isWelcoming: PropTypes.bool,
@@ -13,44 +14,43 @@ const defaultProps = {
   children: '',
 };
 
+const { largeMobileWidth } = config.breakpoint.playerBreakpoints;
+
 const Header = styled.header`
+  height: min(20vh, 400px);
   width: 100%;
   background-color: var(--secondary-background-color);
   color: var(--secondary-text-color);
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  height: min(20vh, 400px);
 
   .welcome-to {
-    font-size: clamp(18px, 1.7vw, 42px);
-    font-weight: 500;
-    line-height: 100%;
-    margin-bottom: max(-0.7vw, -10px);
+    display: none;
   }
+
   .CoC {
     font-size: clamp(48px, 4.5vw, 110px);
     font-weight: 700;
     line-height: 100%;
-    margin-bottom: max(-0.8vw, -20px);
     padding-right: 5px;
+    margin-bottom: -7px;
   }
 
-  @media (max-width: 900px) {
+  @media (min-width: 491px) {
+    .welcome-to {
+      display: flex;
+      font-size: clamp(18px, 1.7vw, 42px);
+      margin-bottom: max(-0.7vw, -10px);
+      font-weight: 500;
+      line-height: 100%;
+    }
+  }
+
+  @media (min-width: ${largeMobileWidth}) {
     .CoC {
       margin-bottom: -8px;
-    }
-  }
-
-  @media (max-width: 600px) {
-    .CoC {
-      margin-bottom: -7px;
-    }
-  }
-
-  @media (max-width: 490px), (orientation: landscape) and (max-height: 500px) {
-    .welcome-to {
-      display: none;
+      margin-bottom: max(-0.8vw, -20px);
     }
   }
 

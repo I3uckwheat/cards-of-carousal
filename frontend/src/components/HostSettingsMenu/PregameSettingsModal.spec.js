@@ -39,4 +39,12 @@ describe('PregameSettingsModal', () => {
       screen.getByText('component: JoinCodeShuffler, type: button'),
     ).toBeInTheDocument();
   });
+
+  it('passes the ToggleFullscreen in settingsComponentList as a button', () => {
+    render(<PregameSettingsModal />);
+
+    expect(
+      screen.getByText('component: ToggleFullscreen, type: button'),
+    ).toBeInTheDocument();
+  });
 });

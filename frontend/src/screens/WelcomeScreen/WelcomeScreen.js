@@ -4,11 +4,18 @@ import styled from 'styled-components';
 
 import Button from '../../components/Buttons/Button';
 import HeaderFooterLayout from '../../layouts/HeaderFooterLayout/HeaderFooterLayout';
+import config from '../../config';
 
 const propTypes = {
   handleJoinClick: PropTypes.func.isRequired,
   handleHostClick: PropTypes.func.isRequired,
 };
+
+const {
+  smallDesktopWidth,
+  largeDesktopWidth,
+} = config.breakpoint.playerBreakpoints;
+const smallHostBreakpoint = config.breakpoint.hostBreakpoints.smallDesktopWidth;
 
 const WelcomeScreenWrapper = styled.div`
   display: flex;
@@ -31,15 +38,10 @@ const WelcomeScreenWrapper = styled.div`
   }
 
   .definition-container {
-    display: flex;
-    flex-direction: column;
-
-    font-size: 5.2rem;
-    font-weight: 700;
-    line-height: 4.2rem;
+    display: none;
 
     transform: rotate(-5deg);
-    margin-bottom: 190px;
+    font-weight: 700;
   }
 
   .definition {
@@ -71,8 +73,13 @@ const WelcomeScreenWrapper = styled.div`
     font-size: 3.6rem;
   }
 
+  .host-button {
+    display: none;
+  }
+
   .OR {
-    display: flex;
+    display: none;
+
     align-items: center;
     justify-content: center;
 
@@ -81,46 +88,48 @@ const WelcomeScreenWrapper = styled.div`
 
     border-radius: 50%;
     padding: 16px;
-
-    font-size: 2.3rem;
-    font-weight: 700;
-
-    width: 82px;
-    height: 82px;
-    margin-left: 93px;
-    margin-right: 93px;
   }
 
-  @media (max-width: 1920px) {
-    .definition-container {
-      font-size: 4.5rem;
-      line-height: 3.7rem;
+  /* disables host button below small desktop size */
+  @media (min-width: ${smallHostBreakpoint}) {
+    .OR {
+      display: flex;
 
-      margin-bottom: 150px;
+      width: 51px;
+      height: 51px;
+      margin-left: 70px;
+      margin-right: 70px;
+
+      font-size: 1.4rem;
+      font-weight: 700;
+    }
+
+    .host-button {
+      display: flex;
+    }
+
+    .definition-container {
+      display: flex;
+      flex-direction: column;
+
+      font-size: 2.4rem;
+      line-height: 1.8rem;
+      margin-bottom: 70px;
     }
 
     .definition {
-      font-size: 3.5rem;
+      font-size: 1.5rem;
     }
 
     .button {
-      width: 290px;
-      height: 74px;
-
-      font-size: 3.2rem;
-    }
-
-    .OR {
-      width: 74px;
-      height: 74px;
-      margin-left: 93px;
-      margin-right: 93px;
+      width: 200px;
+      height: 51px;
 
       font-size: 2rem;
     }
   }
 
-  @media (max-width: 1440px) {
+  @media (min-width: 950px) {
     .definition-container {
       font-size: 3.2rem;
       line-height: 2.6rem;
@@ -149,57 +158,38 @@ const WelcomeScreenWrapper = styled.div`
     }
   }
 
-  @media (max-width: 950px) {
+  @media (min-width: ${smallDesktopWidth}) {
     .definition-container {
-      font-size: 2.4rem;
-      line-height: 1.8rem;
+      font-size: 5.2rem;
+      font-weight: 700;
+      line-height: 4.2rem;
+
+      margin-bottom: 190px;
     }
 
     .definition {
-      font-size: 1.85rem;
+      font-size: 3.5rem;
     }
 
     .button {
-      width: 200px;
-      height: 51px;
+      width: 290px;
+      height: 74px;
 
-      font-size: 2rem;
+      font-size: 3.2rem;
     }
 
     .OR {
-      width: 51px;
-      height: 51px;
-      margin-left: 70px;
-      margin-right: 70px;
-
-      font-size: 1.4rem;
-    }
-  }
-
-  /*if less than 700px, or on mobile landscape, do this.... */
-  @media (max-width: 700px), (max-width: 900px) and (max-height: 500px) {
-    .definition-container {
-      display: none;
-    }
-
-    .button {
-      width: 268px;
-      height: 69px;
+      width: 74px;
+      height: 74px;
+      margin-left: 93px;
+      margin-right: 93px;
 
       font-size: 2rem;
-    }
-
-    .host-button {
-      display: none;
-    }
-
-    .OR {
-      display: none;
     }
   }
 
   /* Screens above 1440p */
-  @media (min-width: 2561px) {
+  @media (min-width: ${largeDesktopWidth}) {
     .definition-container {
       font-size: 6.5rem;
       line-height: 4.8rem;

@@ -3,8 +3,16 @@ import styled from 'styled-components';
 import Button from '../../components/Buttons/Button';
 import { PlayerContext } from '../../contexts/PlayerContext/PlayerContext';
 import HeaderFooterLayout from '../../layouts/HeaderFooterLayout/HeaderFooterLayout';
+import config from '../../config';
+import requestFullscreen from '../../helpers/requestFullscreen';
 
 const propTypes = {};
+
+const {
+  largeMobileWidth,
+  smallDesktopWidth,
+  largeDesktopWidth,
+} = config.breakpoint.playerBreakpoints;
 
 const PlayerJoinContainer = styled.div`
   display: flex;
@@ -62,7 +70,7 @@ const PlayerJoinContainer = styled.div`
     font-size: 1.5rem;
   }
 
-  @media screen and (min-width: 646px) {
+  @media screen and (min-width: ${largeMobileWidth}) {
     .player-join-form-container {
       margin-top: 0;
     }
@@ -77,37 +85,27 @@ const PlayerJoinContainer = styled.div`
   @media screen and (min-width: 951px) {
     input,
     input::placeholder {
-      font-size: 1.5rem;
+      font-size: 1.8rem;
     }
     input {
-      width: 356px;
+      width: 400px;
     }
     .player-join-name-input {
       margin-right: 50px;
     }
   }
 
-  @media screen and (min-width: 1441px) {
+  @media screen and (min-width: ${smallDesktopWidth}) {
     input,
     input::placeholder {
-      font-size: 1.8rem;
-    }
-    input {
-      width: 400px;
-    }
-  }
-
-  @media screen and (min-width: 1921px) {
-    input,
-    input::placeholder {
-      font-size: 2rem;
+      font-size: 2.5rem;
     }
     input {
       width: 500px;
     }
   }
 
-  @media (min-width: 2561px) {
+  @media (min-width: ${largeDesktopWidth}) {
     input,
     input::placeholder {
       font-size: 3rem;
@@ -118,7 +116,7 @@ const PlayerJoinContainer = styled.div`
   }
 
   // mobile landscape orientation
-  @media screen and (max-height: 567px) and (min-width: 568px) {
+  @media screen and (max-height: 567px) and (min-width: ${largeMobileWidth}) {
     .player-join-form-container {
       margin-top: 0;
     }
@@ -151,33 +149,27 @@ const PlayerJoinButton = styled(Button)`
   text-transform: uppercase;
   margin-top: 50px;
 
-  @media screen and (min-width: 951px) {
+  @media screen and (min-width: ${largeMobileWidth}) {
     font-size: 1.5rem;
     width: 256px;
     height: 66px;
     margin-top: 100px;
   }
 
-  @media screen and (min-width: 1441px) {
-    font-size: 1.8rem;
-    width: 290px;
-    height: 74px;
-  }
-
-  @media screen and (min-width: 1921px) {
-    font-size: 2rem;
-    width: 317px;
+  @media screen and (min-width: ${smallDesktopWidth}) {
+    font-size: 2.25rem;
+    width: 350px;
     height: 82px;
   }
 
-  @media (min-width: 2561px) {
+  @media (min-width: ${largeDesktopWidth}) {
     width: 490px;
     height: 126px;
 
     font-size: 3rem;
   }
 
-  @media screen and (max-height: 567px) and (min-width: 568px) {
+  @media screen and (max-height: 567px) and (min-width: ${largeMobileWidth}) {
     margin-top: 30px;
   }
 `;
@@ -190,6 +182,8 @@ export default function PlayerJoinScreen() {
 
   function handleSubmit(e) {
     e.preventDefault();
+    requestFullscreen();
+
     dispatch({
       type: 'JOIN_LOBBY',
       payload: { lobbyId: joinCode, playerName: name },

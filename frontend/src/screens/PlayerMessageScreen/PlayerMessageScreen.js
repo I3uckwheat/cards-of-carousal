@@ -5,6 +5,7 @@ import cardTrioDiagonal from '../../assets/card-trio-diagonal.svg';
 import blackCardDiagonal from '../../assets/black-card-diagonal.svg';
 import { PlayerContext } from '../../contexts/PlayerContext/PlayerContext';
 import LoadingIndicator from '../../components/LoadingIndicator/LoadingIndicator';
+import config from '../../config';
 
 const propTypes = {
   bigText: PropTypes.string.isRequired,
@@ -15,6 +16,11 @@ const propTypes = {
 const defaultProps = {
   children: null,
 };
+
+const {
+  largeMobileWidth,
+  smallDesktopWidth,
+} = config.breakpoint.playerBreakpoints;
 
 const PlayerMessageScreenWrapper = styled.div`
   position: fixed;
@@ -38,22 +44,24 @@ const PlayerMessageScreenWrapper = styled.div`
 
   .big-text {
     font-weight: 900;
-    font-size: 4.5rem;
-    @media (max-width: 1150px) {
-      font-size: 3.5rem;
+    font-size: 2rem;
+    @media (min-width: ${largeMobileWidth}) {
+      font-size: 3rem;
     }
-    @media (max-width: 800px) {
-      font-size: 2.5rem;
+
+    @media (min-width: ${smallDesktopWidth}) {
+      font-size: 5rem;
     }
   }
 
   .small-text {
-    font-size: 2rem;
-    @media (max-width: 1150px) {
+    font-size: 1rem;
+    @media (min-width: ${largeMobileWidth}) {
       font-size: 1.5rem;
     }
-    @media (max-width: 800px) {
-      font-size: 1rem;
+
+    @media (min-width: ${smallDesktopWidth}) {
+      font-size: 2rem;
     }
   }
 

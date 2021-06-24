@@ -21,16 +21,18 @@ const config = {
 
   breakpoint: {
     playerBreakpoints: {
-      smallMobile: '312px',
-      largeMobile: '600px',
-      smallDesktop: '1600px',
-      largeDesktop: '3200px',
+      smallMobileWidth: '312px',
+      largeMobileWidth: '600px',
+      smallDesktopWidth: '1600px',
+      largeDesktopWidth: '3200px',
     },
 
     hostBreakpoints: {
-      smallDesktop: '680px',
-      largeDesktop: '1600px',
-      extraLargDesktop: '3200px',
+      smallDesktopWidth: '680px',
+      largeDesktopWidth: '1600px',
+      extraLargeDesktopWidth: '3200px',
+
+      smallDesktopHeight: '550px',
     },
   },
 };

@@ -373,6 +373,15 @@ function toggleJoinCode(state) {
   };
 }
 
+function removePlayersFromStaging(state, payload) {
+  return {
+    ...state,
+    newPlayerStaging: state.newPlayerStaging.filter(
+      (player) => !payload.players.includes(player.playerId),
+    ),
+  };
+}
+
 function gameOver(state, { gameWinner }) {
   return {
     ...state,
@@ -453,6 +462,9 @@ function HostReducer(state, action) {
 
     case 'TOGGLE_JOIN_CODE_VISIBILITY':
       return toggleJoinCode(state);
+
+    case 'TOO_MANY_PLAYERS':
+      return removePlayersFromStaging(state, payload);
 
     case 'GAME_OVER':
       return gameOver(state, payload);

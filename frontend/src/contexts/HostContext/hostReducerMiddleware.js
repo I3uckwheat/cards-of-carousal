@@ -101,13 +101,18 @@ function sendEndOfRoundMessages(payload) {
   });
 }
 
-function sendKickPlayerMessage(payload) {
+function sendKickPlayerMessage({ playerId }) {
   socketInstance.sendMessage({
-    recipients: [payload.playerId],
+    recipients: [playerId],
     event: 'update',
     payload: {
       gameState: 'player-kicked',
     },
+  });
+
+  socketInstance.sendMessage({
+    event: 'kick-player',
+    payload: { playerId },
   });
 }
 
@@ -204,6 +209,28 @@ function czarSelectWinner({ players, playerIDs }) {
       },
     },
     recipients: notCzars,
+  });
+}
+
+function sendTooManyPlayersMessage(payload) {
+  socketInstance.sendMessage({
+    recipients: payload.players,
+    event: 'update',
+    payload: {
+      gameState: 'error',
+      message: {
+        big: 'Player limit has been reached',
+        small: '',
+      },
+      removeLoading: 'joining-lobby',
+    },
+  });
+
+  payload.players.forEach((playerId) => {
+    socketInstance.sendMessage({
+      event: 'kick-player',
+      payload: { playerId },
+    });
   });
 }
 
@@ -309,6 +336,10 @@ export default async function hostReducerMiddleware(
 
     case 'SEND_END_OF_ROUND_MESSAGES':
       sendEndOfRoundMessages(payload);
+      break;
+
+    case 'TOO_MANY_PLAYERS':
+      sendTooManyPlayersMessage(payload);
       break;
 
     case 'GAME_OVER':

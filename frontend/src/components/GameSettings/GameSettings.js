@@ -25,19 +25,25 @@ const StyledGameSettings = styled.div`
   overflow-y: auto;
 
   h1 {
-    margin-left: auto;
-    font-size: 4rem;
-    line-height: 4rem;
-    margin-top: -0.5rem;
-    justify-content: center;
-    position: absolute;
-    right: 0;
-    top: 0;
+    position: static;
   }
 
-  @media only screen and (max-width: 980px) {
+  @media only screen and (min-width: 1460px) {
     h1 {
-      position: static;
+      position: absolute;
+      right: 0;
+      top: 0;
+      margin-left: auto;
+    }
+  }
+
+  @media only screen and (min-width: 980px) {
+    h1 {
+      margin-left: auto;
+      font-size: 4rem;
+      line-height: 4rem;
+      margin-top: -0.5rem;
+      justify-content: center;
     }
   }
 `;
@@ -102,6 +108,9 @@ const StyledForm = styled.form`
 
 function GameSettings({ options, onChange }) {
   const [cardPacks, setCardPacks] = useState([]);
+  const [minimumPlayerLimit, setMinimumPlayerLimit] = useState(
+    config.maxPlayers.min,
+  );
   const [error, setError] = useState('');
   const { state, dispatch } = useContext(HostContext);
 
@@ -124,6 +133,14 @@ function GameSettings({ options, onChange }) {
     }
   }, []);
 
+  useEffect(() => {
+    setMinimumPlayerLimit(() =>
+      state.newPlayerStaging.length > config.maxPlayers.min
+        ? state.newPlayerStaging.length
+        : config.maxPlayers.min,
+    );
+  }, [state.newPlayerStaging]);
+
   function numInRange(n, min, max) {
     if (Math.min(n, min) !== min) return min;
     if (Math.max(n, max) !== max) return max;
@@ -132,10 +149,11 @@ function GameSettings({ options, onChange }) {
 
   function numberOptionHandler(event) {
     const { name, value: newValue } = event.target;
+    const min = name === 'maxPlayers' ? minimumPlayerLimit : config[name].min;
 
     onChange({
       ...options,
-      [name]: numInRange(Number(newValue), config[name].min, config[name].max),
+      [name]: numInRange(Number(newValue), min, config[name].max),
     });
   }
 
@@ -174,7 +192,7 @@ function GameSettings({ options, onChange }) {
               id="maxPlayers"
               name="maxPlayers"
               value={options.maxPlayers}
-              min={config.maxPlayers.min}
+              min={minimumPlayerLimit}
               max={config.maxPlayers.max}
             />
           </label>

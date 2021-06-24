@@ -4,12 +4,19 @@ import styled from 'styled-components';
 
 import HamburgerMenu from '../components/Buttons/HamburgerMenu/HamburgerMenu.js';
 import Modal from '../components/Modal/Modal.js';
+import config from '../config';
 
 const propTypes = {
   left: PropTypes.node.isRequired,
   right: PropTypes.node.isRequired,
   modal: PropTypes.node.isRequired,
 };
+
+const {
+  smallDesktopWidth,
+  largeDesktopWidth,
+  extraLargeDesktopWidth,
+} = config.breakpoint.hostBreakpoints;
 
 const HostLayoutContainer = styled.div`
   position: absolute;
@@ -63,7 +70,7 @@ const HostLayoutContainer = styled.div`
     min-width: 440px;
   }
 
-  @media (min-width: 800px) {
+  @media (min-width: ${smallDesktopWidth}) {
     .host-layout-header {
       height: 130px;
     }
@@ -79,7 +86,7 @@ const HostLayoutContainer = styled.div`
     }
   }
 
-  @media (min-width: 2000px) {
+  @media (min-width: ${largeDesktopWidth}) {
     .components .left {
       min-width: 700px;
     }
@@ -91,7 +98,7 @@ const HostLayoutContainer = styled.div`
     }
   }
 
-  @media (min-width: 3500px) {
+  @media (min-width: ${extraLargeDesktopWidth}) {
     .host-layout-header {
       height: 200px;
     }
