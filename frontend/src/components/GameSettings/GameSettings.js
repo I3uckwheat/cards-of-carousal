@@ -5,6 +5,7 @@ import { HostContext } from '../../contexts/HostContext/HostContext';
 import LoadingIndicator from '../LoadingIndicator/LoadingIndicator';
 import config from '../../config';
 import AlertModal from '../Modal/AlertModal';
+import PackGroupSelectors from '../PackGroupSelectors/PackGroupSelectors';
 
 const propTypes = {
   onChange: PropTypes.func.isRequired,
@@ -213,6 +214,9 @@ function GameSettings({ options, onChange }) {
 
         <div className="select-wrapper">
           <h2>SELECT CARD PACKS</h2>
+
+          <PackGroupSelectors onChange={onChange} options={options} />
+
           {state.loading.includes('getting-packs') ? (
             <div className="loader-wrapper">
               <LoadingIndicator secondary />

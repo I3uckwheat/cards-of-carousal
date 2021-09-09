@@ -636,7 +636,26 @@ exports[`App snapshots should show the host screen after user has clicked the "h
       Sorry :(
     </p>
   </div>
-  .c5 {
+  .c14 {
+  display: block;
+  border: 2px solid var(--primary-text-color);
+  font-size: 12px;
+  font-weight: bold;
+  padding: 0.7em;
+  background: var(--secondary-background-color);
+  color: var(--secondary-text-color);
+  background: var(--primary-background-color);
+  color: var(--primary-text-color);
+}
+
+.c14:hover,
+.c14:active,
+.c14:focus {
+  background: var(--accent-background-color);
+  cursor: pointer;
+}
+
+.c5 {
   display: block;
   border: 2px solid var(--primary-text-color);
   font-size: 12px;
@@ -797,6 +816,21 @@ exports[`App snapshots should show the host screen after user has clicked the "h
   left: 56px;
   -webkit-animation-delay: 0;
   animation-delay: 0;
+}
+
+.c13 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.c13 Button {
+  margin-right: 5px;
+  width: 100px;
+  font-size: 16px;
+  padding: 5px;
 }
 
 .c11 {
@@ -1568,6 +1602,16 @@ exports[`App snapshots should show the host screen after user has clicked the "h
                   <h2>
                     SELECT CARD PACKS
                   </h2>
+                  <div
+                    class="c13"
+                  >
+                    <button
+                      class="c14"
+                      type="button"
+                    >
+                      SFW Only
+                    </button>
+                  </div>
                   <div
                     class="loader-wrapper"
                   >
