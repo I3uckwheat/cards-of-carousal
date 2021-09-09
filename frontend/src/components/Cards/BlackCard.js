@@ -89,7 +89,7 @@ function parseForMarkdown(string, blankLength) {
       // https://regexr.com/5ltng
       // This regex finds all remaining instances of underscores
       // Then it gets replaced with a long blank line (multiple escaped underscores)
-      .replaceAll('_', `${'\\_'.repeat(blankLength)}`)
+      .replace(/_/g, `${'\\_'.repeat(blankLength)}`)
   );
 }
 
