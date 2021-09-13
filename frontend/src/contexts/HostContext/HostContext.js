@@ -29,7 +29,6 @@ const initialState = {
   },
   deck: { black: [], white: [] },
   loading: [],
-  newPlayerStaging: [],
   czarSelection: '',
 };
 
@@ -48,10 +47,7 @@ function HostProvider({ children }) {
     return ({ event, payload, sender }) => {
       switch (event) {
         case 'player-connected': {
-          const allPlayers = [
-            ...Object.values(currentState.players),
-            ...currentState.newPlayerStaging,
-          ];
+          const allPlayers = [...Object.values(currentState.players)];
 
           const isPlayerNameTaken = allPlayers.some(
             (player) =>
@@ -107,14 +103,12 @@ function HostProvider({ children }) {
   }, [state]);
 
   useEffect(() => {
-    if (state.newPlayerStaging.length) {
+    if (state.playerIDs.length) {
       const numberOfPlayersExceedingLimit =
-        state.playerIDs.length +
-        state.newPlayerStaging.length -
-        state.gameSettings.maxPlayers;
+        state.playerIDs.length - state.gameSettings.maxPlayers;
 
       if (numberOfPlayersExceedingLimit > 0) {
-        const playersExceedingLimit = state.newPlayerStaging.slice(
+        const playersExceedingLimit = state.playerIDs.slice(
           -numberOfPlayersExceedingLimit,
         );
 
@@ -129,9 +123,7 @@ function HostProvider({ children }) {
           },
         });
       } else {
-        const newPlayerIDs = state.newPlayerStaging.map(
-          (player) => player.playerId,
-        );
+        const newPlayerIDs = state.playerIDs;
 
         const message =
           state.gameState === 'waiting-for-players'
@@ -156,11 +148,7 @@ function HostProvider({ children }) {
   }, [state.newPlayerStaging]);
 
   useEffect(() => {
-    if (
-      state.playerIDs.length === 1 &&
-      state.newPlayerStaging.length === 0 &&
-      state.gameState !== 'game-over'
-    ) {
+    if (state.playerIDs.length === 1 && state.gameState !== 'game-over') {
       dispatch({
         type: 'GAME_OVER',
         payload: { gameWinner: state.playerIDs[0], playerIDs: state.playerIDs },
