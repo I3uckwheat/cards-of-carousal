@@ -22,6 +22,21 @@ describe('PackGroupSelectors', () => {
         screen.getByRole('button', { name: 'SFW Only' }),
       ).toBeInTheDocument();
     });
+
+    it('renders the Reset packs selector button', () => {
+      const onChange = () => {};
+      const initialSettings = {
+        maxPlayers: 10,
+        winningScore: 10,
+        selectedPacks: [0],
+      };
+
+      render(
+        <PackGroupSelectors onChange={onChange} options={initialSettings} />,
+      );
+
+      expect(screen.getByRole('button', { name: 'Reset' })).toBeInTheDocument();
+    });
   });
 
   describe('functionality', () => {
@@ -43,6 +58,28 @@ describe('PackGroupSelectors', () => {
       );
 
       userEvent.click(screen.getByRole('button', { name: 'SFW Only' }));
+
+      expect(onChange).toHaveBeenCalledWith(finalSettings);
+    });
+
+    it('calls onChange callback with selectedPacks updated to include only pack 0 when "Reset" is clicked', () => {
+      const onChange = jest.fn();
+      const initialSettings = {
+        maxPlayers: 10,
+        winningScore: 10,
+        selectedPacks: [1, 2, 8],
+      };
+      const finalSettings = {
+        maxPlayers: 10,
+        winningScore: 10,
+        selectedPacks: [0],
+      };
+
+      render(
+        <PackGroupSelectors onChange={onChange} options={initialSettings} />,
+      );
+
+      userEvent.click(screen.getByRole('button', { name: 'Reset' }));
 
       expect(onChange).toHaveBeenCalledWith(finalSettings);
     });
