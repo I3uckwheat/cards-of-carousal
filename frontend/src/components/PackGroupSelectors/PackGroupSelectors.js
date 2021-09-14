@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import Button from '../Buttons/Button';
+import config from '../../config';
 
 const propTypes = {
   onChange: PropTypes.func.isRequired,
@@ -26,6 +27,14 @@ const SelectorContainer = styled.div`
 `;
 
 function PackGroupSelectors({ onChange, options }) {
+  function resetPacksOptionHandler() {
+    const { initialSelectedPack } = config;
+    onChange({
+      ...options,
+      selectedPacks: initialSelectedPack,
+    });
+  }
+
   function SFWPackOptionHandler() {
     onChange({
       ...options,
@@ -37,6 +46,9 @@ function PackGroupSelectors({ onChange, options }) {
     <SelectorContainer>
       <Button type="button" onClick={SFWPackOptionHandler} isActive>
         SFW Only
+      </Button>
+      <Button type="button" onClick={resetPacksOptionHandler} isActive>
+        Reset
       </Button>
     </SelectorContainer>
   );

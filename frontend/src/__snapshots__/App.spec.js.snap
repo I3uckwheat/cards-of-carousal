@@ -1611,6 +1611,12 @@ exports[`App snapshots should show the host screen after user has clicked the "h
                     >
                       SFW Only
                     </button>
+                    <button
+                      class="c14"
+                      type="button"
+                    >
+                      Reset
+                    </button>
                   </div>
                   <div
                     class="loader-wrapper"
