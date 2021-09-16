@@ -66,7 +66,6 @@ describe('HostGameOverScreen', () => {
         winnerScreenDisplayTime: 3000,
       },
       czarSelection: 'ID1',
-      newPlayerStaging: [],
       gameWinner: 'ID3',
     };
 
@@ -171,7 +170,6 @@ describe('HostGameOverScreen', () => {
         handSize: 10,
         winnerScreenDisplayTime: 3000,
       },
-      newPlayerStaging: [],
       czarSelection: 'ID1',
       gameWinner: 'ID3',
     };

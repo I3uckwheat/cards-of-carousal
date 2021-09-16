@@ -89,9 +89,15 @@ describe('reducer', () => {
   });
 
   describe('PLAYER_CONNECTED', () => {
-    it('updates newPlayerStaging with player details when they connect', () => {
+    it('updates the players object with player details when they connect', () => {
       const state = {
-        newPlayerStaging: [],
+        players: {
+          test: {
+            isConnected: true,
+            isPlaying: true,
+          },
+        },
+        playerIDs: ['test'],
       };
 
       const result = HostReducer(state, {
@@ -102,23 +108,21 @@ describe('reducer', () => {
         },
       });
 
-      expect(result.newPlayerStaging).toMatchObject([
-        {
-          playerId: 'example-player-id',
-          name: 'example-player-name',
-          score: 0,
-          isCzar: false,
-          submittedCards: [0],
-          cards: [],
-        },
-      ]);
+      expect(result.players['example-player-id']).toMatchObject({
+        name: 'example-player-name',
+        score: 0,
+        isCzar: false,
+        submittedCards: [0],
+        cards: [],
+        isConnected: true,
+        isPlaying: false,
+      });
     });
 
     it('gives the player a dummy submittedCard to show the icon in PlayerList', () => {
       const state = {
         players: {},
         playerIDs: [],
-        newPlayerStaging: [],
       };
 
       const result = HostReducer(state, {
@@ -126,11 +130,11 @@ describe('reducer', () => {
         payload: { playerId: 'example-player-id' },
       });
 
-      expect(result.newPlayerStaging[0].submittedCards.length).toBe(1);
-      expect(result.newPlayerStaging[0].submittedCards[0]).toBe(0);
+      expect(result.players['example-player-id'].submittedCards.length).toBe(1);
+      expect(result.players['example-player-id'].submittedCards[0]).toBe(0);
     });
 
-    it('puts the player in a staging array when a game is in progress', () => {
+    it('adds the player to the players object is property isPlaying set to false when a game is in progress', () => {
       const state = {
         playerIDs: ['foo', 'bar', 'baz'],
         players: {
@@ -159,7 +163,6 @@ describe('reducer', () => {
           white: [{ text: '3' }, { text: '4' }, { text: '5' }],
         },
         gameSettings: { handSize: 2 },
-        newPlayerStaging: [],
       };
 
       const result = HostReducer(state, {
@@ -167,21 +170,20 @@ describe('reducer', () => {
         payload: { playerId: 'test', playerName: 'test name' },
       });
 
-      expect(result.newPlayerStaging).toEqual([
-        {
-          playerId: 'test',
-          name: 'test name',
-          cards: [],
-          submittedCards: [0],
-          isCzar: false,
-          score: 0,
-        },
-      ]);
+      expect(result.players.test).toEqual({
+        name: 'test name',
+        cards: [],
+        submittedCards: [0],
+        isCzar: false,
+        score: 0,
+        isConnected: true,
+        isPlaying: false,
+      });
     });
   });
 
   describe('PLAYER_DISCONNECTED', () => {
-    it('removes given player from both state.playerIDs and state.players', () => {
+    it('does not remove given player from state.playerIDs or state.players', () => {
       const state = {
         players: { foo: { id: 'foo' }, bar: { id: 'bar' }, baz: { id: 'baz' } },
         playerIDs: ['foo', 'bar', 'baz'],
@@ -192,14 +194,27 @@ describe('reducer', () => {
         payload: { playerId: 'bar' },
       });
 
-      expect(result).toMatchObject({
-        players: {
-          foo: { id: 'foo' },
-          baz: { id: 'baz' },
-        },
+      expect(result.players.bar).not.toBeUndefined();
+      expect(result.playerIDs.length).toBe(3);
+    });
 
-        playerIDs: ['foo', 'baz'],
+    it("sets the disconnected player's isConnected and isPlaying attributes to false", () => {
+      const state = {
+        players: {
+          foo: { id: 'foo', isConnected: true, isPlaying: true },
+          bar: { id: 'bar', isConnected: true, isPlaying: true },
+          baz: { id: 'baz', isConnected: true, isPlaying: true },
+        },
+        playerIDs: ['foo', 'bar', 'baz'],
+      };
+
+      const result = HostReducer(state, {
+        type: 'PLAYER_DISCONNECTED',
+        payload: { playerId: 'bar' },
       });
+
+      expect(result.players.bar.isPlaying).toBe(false);
+      expect(result.players.bar.isConnected).toBe(false);
     });
 
     it('returns unaltered state if given player ID is invalid', () => {
@@ -224,7 +239,6 @@ describe('reducer', () => {
           baz: { id: 'baz', cards: [] },
         },
         playerIDs: ['foo', 'bar', 'baz'],
-        newPlayerStaging: [],
         gameState: '',
         deck: {
           black: [],
@@ -242,7 +256,7 @@ describe('reducer', () => {
         (player) => result.players[player].isCzar,
       );
 
-      expect(result.playerIDs).toMatchObject(['foo', 'baz']);
+      expect(result.playerIDs).toMatchObject(['foo', 'bar', 'baz']);
       expect(newCzar).toBeTruthy();
     });
   });
@@ -293,20 +307,26 @@ describe('reducer', () => {
       expect(result.gameState).toBe('czar-select-winner');
     });
 
-    it('does not change game state if all players have not submitted their cards', () => {
+    it('does not change game state if all in-play players have not submitted their cards', () => {
       const state = {
         players: {
           foo: {
             submittedCards: [],
             cards: [{ text: 'test' }, { text: 'test' }, { text: 'test' }],
+            isConnected: true,
+            isPlaying: true,
           },
           bar: {
             submittedCards: [],
             cards: [{ text: 'test' }, { text: 'test' }, { text: 'test' }],
+            isConnected: true,
+            isPlaying: true,
           },
           baz: {
             submittedCards: [0],
             cards: [{ text: 'test' }, { text: 'test' }, { text: 'test' }],
+            isConnected: true,
+            isPlaying: true,
           },
         },
         playerIDs: ['foo', 'bar', 'baz'],
@@ -424,6 +444,8 @@ describe('reducer', () => {
             isCzar: false,
             submittedCards: [],
             cards: [],
+            isConnected: true,
+            isPlaying: true,
           },
           bar: {
             name: 'player-name-2',
@@ -431,6 +453,8 @@ describe('reducer', () => {
             isCzar: false,
             submittedCards: [],
             cards: [],
+            isConnected: true,
+            isPlaying: true,
           },
           baz: {
             name: 'player-name-3',
@@ -438,6 +462,8 @@ describe('reducer', () => {
             isCzar: false,
             submittedCards: [],
             cards: [],
+            isConnected: true,
+            isPlaying: true,
           },
         },
         playerIDs: ['foo', 'bar', 'baz'],
@@ -461,6 +487,8 @@ describe('reducer', () => {
             isCzar: true,
             submittedCards: [],
             cards: [],
+            isConnected: true,
+            isPlaying: true,
           },
           bar: {
             name: 'player-name-2',
@@ -468,6 +496,8 @@ describe('reducer', () => {
             isCzar: false,
             submittedCards: [],
             cards: [],
+            isConnected: true,
+            isPlaying: true,
           },
           baz: {
             name: 'player-name-3',
@@ -475,6 +505,8 @@ describe('reducer', () => {
             isCzar: false,
             submittedCards: [],
             cards: [],
+            isConnected: true,
+            isPlaying: true,
           },
         },
         playerIDs: ['foo', 'bar', 'baz'],
@@ -586,6 +618,8 @@ describe('reducer', () => {
               { pack: 0, text: 'test' },
               { pack: 0, text: 'test' },
             ],
+            isConnected: true,
+            isPlaying: true,
           },
           bar: {
             cards: [
@@ -593,6 +627,8 @@ describe('reducer', () => {
               { pack: 0, text: 'test' },
               { pack: 0, text: 'test' },
             ],
+            isConnected: true,
+            isPlaying: true,
           },
           baz: {
             cards: [
@@ -600,6 +636,8 @@ describe('reducer', () => {
               { pack: 0, text: 'test' },
               { pack: 0, text: 'test' },
             ],
+            isConnected: true,
+            isPlaying: true,
           },
           bender: {
             cards: [
@@ -607,6 +645,8 @@ describe('reducer', () => {
               { pack: 0, text: 'test' },
               { pack: 0, text: 'test' },
             ],
+            isConnected: true,
+            isPlaying: true,
           },
         },
       };
@@ -626,6 +666,8 @@ describe('reducer', () => {
             { pack: 0, text: 'one' },
           ],
           submittedCards: [],
+          isConnected: true,
+          isPlaying: true,
         },
         bar: {
           cards: [
@@ -636,6 +678,8 @@ describe('reducer', () => {
             { pack: 0, text: 'three' },
           ],
           submittedCards: [],
+          isConnected: true,
+          isPlaying: true,
         },
         baz: {
           cards: [
@@ -646,6 +690,8 @@ describe('reducer', () => {
             { pack: 0, text: 'five' },
           ],
           submittedCards: [],
+          isConnected: true,
+          isPlaying: true,
         },
         bender: {
           cards: [
@@ -656,6 +702,8 @@ describe('reducer', () => {
             { pack: 0, text: 'seven' },
           ],
           submittedCards: [],
+          isConnected: true,
+          isPlaying: true,
         },
       });
     });
@@ -702,6 +750,8 @@ describe('reducer', () => {
               { pack: 0, text: 'test' },
               { pack: 0, text: 'test' },
             ],
+            isConnected: true,
+            isPlaying: true,
           },
           bar: {
             cards: [
@@ -709,6 +759,8 @@ describe('reducer', () => {
               { pack: 0, text: 'test' },
               { pack: 0, text: 'test' },
             ],
+            isConnected: true,
+            isPlaying: true,
           },
           baz: {
             cards: [
@@ -716,6 +768,8 @@ describe('reducer', () => {
               { pack: 0, text: 'test' },
               { pack: 0, text: 'test' },
             ],
+            isConnected: true,
+            isPlaying: true,
           },
           bender: {
             cards: [
@@ -723,6 +777,8 @@ describe('reducer', () => {
               { pack: 0, text: 'test' },
               { pack: 0, text: 'test' },
             ],
+            isConnected: true,
+            isPlaying: true,
           },
         },
       };
@@ -1266,7 +1322,7 @@ describe('reducer', () => {
   });
 
   describe('ADD_PLAYERS_FROM_STAGING', () => {
-    it('adds players from the staging array and clears the staging array', () => {
+    it('adds players who are not currently playing to the game', () => {
       const state = {
         players: {
           ID1: {
@@ -1275,6 +1331,8 @@ describe('reducer', () => {
             isCzar: false,
             submittedCards: [0, 1],
             cards: ['aaaa', 'bbbb', 'cccc', 'dddd'],
+            isConnected: true,
+            isPlaying: true,
           },
           ID2: {
             name: 'bar',
@@ -1282,6 +1340,8 @@ describe('reducer', () => {
             isCzar: true,
             submittedCards: [],
             cards: [],
+            isConnected: true,
+            isPlaying: true,
           },
           ID3: {
             name: 'baz',
@@ -1289,20 +1349,21 @@ describe('reducer', () => {
             isCzar: false,
             submittedCards: [1, 2],
             cards: ['eeee', 'ffff', 'gggg', 'hhhh'],
+            isConnected: true,
+            isPlaying: true,
           },
-        },
-        gameState: 'showing-winners',
-        playerIDs: ['ID1', 'ID2', 'ID3'],
-        newPlayerStaging: [
-          {
-            playerId: 'test',
+          test: {
             name: 'test name',
             cards: [],
             submittedCards: [],
             isCzar: false,
             score: 0,
+            isConnected: true,
+            isPlaying: false,
           },
-        ],
+        },
+        gameState: 'showing-winners',
+        playerIDs: ['ID1', 'ID2', 'ID3', 'test'],
       };
 
       const result = HostReducer(state, {
@@ -1310,7 +1371,6 @@ describe('reducer', () => {
         payload: {},
       });
 
-      expect(result.newPlayerStaging).toEqual([]);
       expect(result.playerIDs).toEqual(['ID1', 'ID2', 'ID3', 'test']);
       expect(result.players).toEqual({
         ID1: {
@@ -1319,6 +1379,8 @@ describe('reducer', () => {
           isCzar: false,
           submittedCards: [0, 1],
           cards: ['aaaa', 'bbbb', 'cccc', 'dddd'],
+          isConnected: true,
+          isPlaying: true,
         },
         ID2: {
           name: 'bar',
@@ -1326,6 +1388,8 @@ describe('reducer', () => {
           isCzar: true,
           submittedCards: [],
           cards: [],
+          isConnected: true,
+          isPlaying: true,
         },
         ID3: {
           name: 'baz',
@@ -1333,6 +1397,8 @@ describe('reducer', () => {
           isCzar: false,
           submittedCards: [1, 2],
           cards: ['eeee', 'ffff', 'gggg', 'hhhh'],
+          isConnected: true,
+          isPlaying: true,
         },
         test: {
           name: 'test name',
@@ -1340,6 +1406,8 @@ describe('reducer', () => {
           submittedCards: [],
           isCzar: false,
           score: 0,
+          isConnected: true,
+          isPlaying: true,
         },
       });
     });
@@ -1450,25 +1518,27 @@ describe('reducer', () => {
         gameSettings: {
           maxPlayers: 3,
         },
-        playerIDs: ['ID1', 'ID2'],
-        newPlayerStaging: [
-          {
-            playerId: 'test',
+        playerIDs: ['test', 'test2'],
+        players: {
+          test: {
             name: 'test name',
             cards: [],
             submittedCards: [0],
             isCzar: false,
             score: 0,
+            isConnected: true,
+            isPlaying: false,
           },
-          {
-            playerId: 'test2',
+          test2: {
             name: 'test2 name',
             cards: [],
             submittedCards: [0],
             isCzar: false,
             score: 0,
+            isConnected: true,
+            isPlaying: false,
           },
-        ],
+        },
       };
 
       const result = HostReducer(state, {
@@ -1477,16 +1547,17 @@ describe('reducer', () => {
       });
 
       expect(result).not.toBe(state);
-      expect(result.newPlayerStaging).toStrictEqual([
-        {
-          playerId: 'test',
+      expect(result.players).toStrictEqual({
+        test: {
           name: 'test name',
           cards: [],
           submittedCards: [0],
           isCzar: false,
           score: 0,
+          isConnected: true,
+          isPlaying: false,
         },
-      ]);
+      });
     });
 
     it('removes multiple players exceeding the maxPlayer limit', () => {
@@ -1494,25 +1565,27 @@ describe('reducer', () => {
         gameSettings: {
           maxPlayers: 3,
         },
-        playerIDs: ['ID1', 'ID2', 'ID3'],
-        newPlayerStaging: [
-          {
-            playerId: 'test',
+        playerIDs: ['test', 'test2'],
+        players: {
+          test: {
             name: 'test name',
             cards: [],
             submittedCards: [0],
             isCzar: false,
             score: 0,
+            isConnected: true,
+            isPlaying: false,
           },
-          {
-            playerId: 'test2',
+          test2: {
             name: 'test2 name',
             cards: [],
             submittedCards: [0],
             isCzar: false,
             score: 0,
+            isConnected: true,
+            isPlaying: false,
           },
-        ],
+        },
       };
 
       const result = HostReducer(state, {
@@ -1521,7 +1594,10 @@ describe('reducer', () => {
       });
 
       expect(result).not.toBe(state);
-      expect(result.newPlayerStaging).toStrictEqual([]);
+      const inactivePlayers = Object.keys(result.players).filter(
+        (playerId) => !result.players[playerId].isPlaying,
+      );
+      expect(inactivePlayers).toStrictEqual([]);
     });
   });
 });

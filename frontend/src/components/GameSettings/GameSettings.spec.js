@@ -20,14 +20,12 @@ describe('GameSettings', () => {
   let state = {
     loading: [],
     playerIDs: [],
-    newPlayerStaging: [],
   };
 
   beforeEach(() => {
     state = {
       loading: [],
       playerIDs: [],
-      newPlayerStaging: [],
     };
     setupFetchMock();
   });
@@ -90,7 +88,6 @@ describe('GameSettings', () => {
       state = {
         loading: ['getting-packs'],
         playerIDs: [],
-        newPlayerStaging: [],
       };
 
       render(
@@ -372,7 +369,7 @@ describe('GameSettings', () => {
         selectedPacks: [],
       };
 
-      state.newPlayerStaging = [1, 2, 3];
+      state.playerIDs = [1, 2, 3];
 
       render(
         <HostContext.Provider value={{ state, dispatch }}>

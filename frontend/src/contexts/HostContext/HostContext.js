@@ -48,7 +48,6 @@ function HostProvider({ children }) {
       switch (event) {
         case 'player-connected': {
           const allPlayers = [...Object.values(currentState.players)];
-
           const isPlayerNameTaken = allPlayers.some(
             (player) =>
               player.name.toUpperCase() === payload.playerName.toUpperCase(),
@@ -108,12 +107,8 @@ function HostProvider({ children }) {
         state.playerIDs.length - state.gameSettings.maxPlayers;
 
       if (numberOfPlayersExceedingLimit > 0) {
-        const playersExceedingLimit = state.playerIDs.slice(
+        const playerIDsExceedingLimit = state.playerIDs.slice(
           -numberOfPlayersExceedingLimit,
-        );
-
-        const playerIDsExceedingLimit = playersExceedingLimit.map(
-          (player) => player.playerId,
         );
 
         dispatch({
@@ -145,10 +140,15 @@ function HostProvider({ children }) {
         });
       }
     }
-  }, [state.newPlayerStaging]);
+  }, [state.playerIDs]);
 
   useEffect(() => {
-    if (state.playerIDs.length === 1 && state.gameState !== 'game-over') {
+    // if there is one player AND they are not waiting for the game to begin, end the game
+    if (
+      state.playerIDs.filter((playerID) => state.players[playerID].isPlaying)
+        .length === 1 &&
+      state.gameState !== 'game-over'
+    ) {
       dispatch({
         type: 'GAME_OVER',
         payload: { gameWinner: state.playerIDs[0], playerIDs: state.playerIDs },

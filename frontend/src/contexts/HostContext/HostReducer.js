@@ -91,7 +91,6 @@ function dealWhiteCards(state) {
 function playerConnected(state, { playerId, playerName }) {
   // push the new player to the players object, but do not put them in play yet
   const newPlayer = {
-    playerId,
     name: playerName,
     score: 0,
     isCzar: false,
@@ -104,8 +103,9 @@ function playerConnected(state, { playerId, playerName }) {
     ...state,
     players: {
       ...state.players,
-      newPlayer,
+      [playerId]: newPlayer,
     },
+    playerIDs: [...state.playerIDs, playerId],
   };
 }
 
@@ -160,6 +160,37 @@ function removeSubmittedCards(state) {
   };
 }
 
+function disconnectPlayer(state, { playerId }) {
+  const removingCzar = state.players[playerId]?.isCzar;
+
+  const newState = {
+    ...state,
+    players: {
+      ...state.players,
+      [playerId]: {
+        ...state.players[playerId],
+        isConnected: false,
+        isPlaying: false,
+      },
+    },
+  };
+
+  if (
+    removingCzar &&
+    state.playerIDs.filter((id) => state.players[id].isConnected).length > 1 &&
+    !['game-over', 'showing-winning-cards'].includes(state.gameState)
+  ) {
+    return dealWhiteCards(
+      clearSubmittedCards(
+        addPlayersFromStaging(
+          removeSubmittedCards(setNextCzar(setBlackCard(newState))),
+        ),
+      ),
+    );
+  }
+  return newState;
+}
+
 function kickPlayer(state, { playerId }) {
   const removingCzar = state.players[playerId]?.isCzar;
 
@@ -192,6 +223,14 @@ function kickPlayer(state, { playerId }) {
       ),
     );
   }
+  return newState;
+}
+
+function kickPlayers(state, { players }) {
+  let newState = { ...state };
+  players.forEach((playerId) => {
+    newState = kickPlayer(newState, { playerId });
+  });
   return newState;
 }
 
@@ -280,7 +319,9 @@ function setNextCzar(state) {
     // set the czar to the next one in order, or pick at random
     const newCzar = currentCzar
       ? connectedPlayerIDs[nextIndex]
-      : connectedPlayerIDs[Math.floor(Math.random() * playerIDs.length)];
+      : connectedPlayerIDs[
+          Math.floor(Math.random() * connectedPlayerIDs.length)
+        ];
 
     // set the new czar in the players object.
     const newPlayers = Object.entries(players).reduce((acc, [key, val]) => {
@@ -403,7 +444,7 @@ function HostReducer(state, action) {
       return playerConnected(state, payload);
 
     case 'PLAYER_DISCONNECTED':
-      return kickPlayer(state, payload);
+      return disconnectPlayer(state, payload);
 
     case 'PLAYER_SUBMIT':
       return playerSubmitCards(state, payload);
@@ -461,7 +502,7 @@ function HostReducer(state, action) {
       return toggleJoinCode(state);
 
     case 'TOO_MANY_PLAYERS':
-      return kickPlayer(state, payload);
+      return kickPlayers(state, payload);
 
     case 'GAME_OVER':
       return gameOver(state, payload);

@@ -114,7 +114,9 @@ module.exports = class Lobby {
       } else {
         message.recipients.forEach((recipient) => {
           const socket = this.#playerSockets[recipient];
-          socket.send(message.toJSON());
+          if (socket) {
+            socket.send(message.toJSON());
+          }
         });
       }
     } catch (error) {

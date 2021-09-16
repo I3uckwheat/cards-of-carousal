@@ -163,7 +163,7 @@ exports[`Host Black Card Screen rendering renders 1`] = `
   -ms-letter-spacing: 1px;
   letter-spacing: 1px;
   line-height: 1.5em;
-  color: var(--primary-text-color);
+  color: var(--accent-text-color);
 }
 
 .c5 .player-info span {

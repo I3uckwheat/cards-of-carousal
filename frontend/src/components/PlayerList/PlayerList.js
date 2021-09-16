@@ -70,12 +70,9 @@ const PlayerRow = styled.div`
 `;
 function PlayerList() {
   const { state } = useContext(HostContext);
-  const { playerIDs, players, newPlayerStaging } = state;
+  const { playerIDs, players } = state;
 
-  const playersArray = [
-    ...playerIDs.map((id) => players[id]),
-    ...newPlayerStaging,
-  ];
+  const playersArray = [...playerIDs.map((id) => players[id])];
 
   return (
     <PlayerTable data-testid="playerList-container">
@@ -89,7 +86,7 @@ function PlayerList() {
           <PlayerRow
             key={playerKey}
             isCzar={player.isCzar}
-            isInStaging={player.playerId}
+            isInStaging={!player.isPlaying}
             data-testid={`row-${player.name}`}
           >
             <img
