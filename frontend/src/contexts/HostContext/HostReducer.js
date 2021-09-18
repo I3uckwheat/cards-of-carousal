@@ -43,7 +43,7 @@ function dealWhiteCards(state) {
 
   // get all active players (not disconnected or waiting to join)
   const activePlayers = playerIDs.filter(
-    (playerID) => players[playerID].isConnected && players[playerID].isPlaying,
+    (playerID) => players[playerID].status === 'playing',
   );
 
   const neededCardsPerPlayer = activePlayers.map((playerID) => {
@@ -96,8 +96,7 @@ function playerConnected(state, { playerId, playerName }) {
     isCzar: false,
     submittedCards: [0],
     cards: [],
-    isConnected: true,
-    isPlaying: false,
+    status: 'staging',
   };
   return {
     ...state,
@@ -123,17 +122,16 @@ function playerSubmitCards(state, { selectedCards, playerId }) {
 
   const { players, playerIDs } = newState;
 
-  return {
-    ...newState,
-    gameState: playerIDs.every(
-      (playerID) =>
-        players[playerID].isCzar ||
-        players[playerID].submittedCards.length ||
-        !players[playerID].isPlaying,
-    )
-      ? 'czar-select-winner'
-      : newState.gameState,
-  };
+  newState.gameState = playerIDs.every(
+    (playerID) =>
+      players[playerID].isCzar ||
+      players[playerID].submittedCards.length ||
+      players[playerID].status !== 'playing',
+  )
+    ? 'czar-select-winner'
+    : newState.gameState;
+
+  return newState;
 }
 
 function removeSubmittedCards(state) {
@@ -163,21 +161,29 @@ function removeSubmittedCards(state) {
 function disconnectPlayer(state, { playerId }) {
   const removingCzar = state.players[playerId]?.isCzar;
 
+  // add conditional to check if the player is disconnecting due to duplicate name
+  if (!state.playerIDs.includes(playerId)) {
+    return state;
+  }
+
   const newState = {
     ...state,
     players: {
       ...state.players,
       [playerId]: {
         ...state.players[playerId],
-        isConnected: false,
-        isPlaying: false,
+        status: 'disconnected',
       },
     },
   };
 
   if (
     removingCzar &&
-    state.playerIDs.filter((id) => state.players[id].isConnected).length > 1 &&
+    state.playerIDs.filter(
+      (id) =>
+        state.players[id].status === 'playing' ||
+        state.players[id].status === 'staging',
+    ).length > 1 &&
     !['game-over', 'showing-winning-cards'].includes(state.gameState)
   ) {
     return dealWhiteCards(
@@ -212,7 +218,11 @@ function kickPlayer(state, { playerId }) {
 
   if (
     removingCzar &&
-    newPlayerIds.filter((id) => state.players[id].isConnected).length > 1 &&
+    newPlayerIds.filter(
+      (id) =>
+        state.players[id].status === 'playing' ||
+        state.players[id].status === 'staging',
+    ).length > 1 &&
     !['game-over', 'showing-winning-cards'].includes(state.gameState)
   ) {
     return dealWhiteCards(
@@ -307,7 +317,7 @@ function setNextCzar(state) {
     const currentCzar = playerIDs.find((player) => players[player].isCzar);
     // create a list of valid selections for next czar
     const connectedPlayerIDs = playerIDs.filter(
-      (id) => players[id].isConnected,
+      (id) => players[id].status === 'playing',
     );
 
     // set the new czar to the old one + 1 in the array, or zero if at the end
@@ -400,8 +410,8 @@ function addPlayersFromStaging(state) {
   const newState = { ...state };
 
   newState.playerIDs.forEach((player) => {
-    if (newState.players[player].isConnected) {
-      newState.players[player].isPlaying = true;
+    if (newState.players[player].status === 'staging') {
+      newState.players[player].status = 'playing';
     }
   });
 

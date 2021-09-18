@@ -17,8 +17,7 @@ describe('PlayerList', () => {
             { text: 'test', pack: 0 },
             { text: 'test', pack: 0 },
           ],
-          isConnected: true,
-          isPlaying: true,
+          status: 'playing',
         },
         playerID2: {
           name: 'Bar',
@@ -26,8 +25,7 @@ describe('PlayerList', () => {
           isCzar: true,
           submittedCards: [],
           cards: [],
-          isConnected: true,
-          isPlaying: true,
+          status: 'playing',
         },
       },
       playerIDs: ['playerID1', 'playerID2'],
@@ -55,8 +53,7 @@ describe('PlayerList', () => {
             { text: 'test', pack: 0 },
             { text: 'test', pack: 0 },
           ],
-          isConnected: true,
-          isPlaying: true,
+          status: 'playing',
         },
         playerID2: {
           name: 'Bar',
@@ -64,11 +61,18 @@ describe('PlayerList', () => {
           isCzar: true,
           submittedCards: [],
           cards: [],
-          isConnected: true,
-          isPlaying: false,
+          status: 'staging',
+        },
+        playerID3: {
+          name: 'Baz',
+          score: 5,
+          isCzar: true,
+          submittedCards: [],
+          cards: [],
+          status: 'disconnected',
         },
       },
-      playerIDs: ['playerID1', 'playerID2'],
+      playerIDs: ['playerID1', 'playerID2', 'playerID3'],
     };
 
     render(
@@ -82,6 +86,9 @@ describe('PlayerList', () => {
     ).toBeInTheDocument();
     expect(
       screen.getByText(state.players[state.playerIDs[1]].name),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(state.players[state.playerIDs[2]].name),
     ).toBeInTheDocument();
   });
 

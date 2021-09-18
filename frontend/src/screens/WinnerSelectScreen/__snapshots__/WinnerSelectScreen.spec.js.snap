@@ -163,7 +163,9 @@ exports[`WinnerSelectScreen rendering renders normally for typical state values 
   -ms-letter-spacing: 1px;
   letter-spacing: 1px;
   line-height: 1.5em;
-  color: var(--accent-text-color);
+  color: var(--primary-text-color);
+  -webkit-text-decoration: none;
+  text-decoration: none;
 }
 
 .c5 .player-info span {
@@ -217,6 +219,8 @@ exports[`WinnerSelectScreen rendering renders normally for typical state values 
   letter-spacing: 1px;
   line-height: 1.5em;
   color: var(--secondary-text-color);
+  -webkit-text-decoration: none;
+  text-decoration: none;
 }
 
 .c7 .player-info span {

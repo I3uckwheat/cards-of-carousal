@@ -102,7 +102,11 @@ function HostProvider({ children }) {
   }, [state]);
 
   useEffect(() => {
-    if (state.playerIDs.length) {
+    const stagedPlayers = state.playerIDs.filter(
+      (playerID) => state.players[playerID].status === 'staging',
+    );
+
+    if (stagedPlayers.length) {
       const numberOfPlayersExceedingLimit =
         state.playerIDs.length - state.gameSettings.maxPlayers;
 
@@ -118,8 +122,6 @@ function HostProvider({ children }) {
           },
         });
       } else {
-        const newPlayerIDs = state.playerIDs;
-
         const message =
           state.gameState === 'waiting-for-players'
             ? {
@@ -134,7 +136,7 @@ function HostProvider({ children }) {
         dispatch({
           type: 'SEND_PLAYER_CONNECTED_MESSAGES',
           payload: {
-            players: newPlayerIDs,
+            players: stagedPlayers,
             message,
           },
         });
@@ -145,8 +147,9 @@ function HostProvider({ children }) {
   useEffect(() => {
     // if there is one player AND they are not waiting for the game to begin, end the game
     if (
-      state.playerIDs.filter((playerID) => state.players[playerID].isPlaying)
-        .length === 1 &&
+      state.playerIDs.filter(
+        (playerID) => state.players[playerID].status === 'playing',
+      ).length === 1 &&
       state.gameState !== 'game-over'
     ) {
       dispatch({

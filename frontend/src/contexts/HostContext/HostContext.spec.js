@@ -180,7 +180,7 @@ describe('Context', () => {
         expect(screen.queryAllByTestId('players').length).toBe(1);
       });
 
-      it('assigns proper isPlaying and isConnected properties to new players', () => {
+      it('assigns proper status property to new players', () => {
         const TestComponent = () => {
           const { state } = useContext(HostContext);
 
@@ -192,11 +192,8 @@ describe('Context', () => {
               <div>
                 {Object.keys(state.players).map((player) => (
                   <>
-                    <span data-testid="player-is-playing">
-                      {state.players[player].isPlaying.toString()}
-                    </span>
-                    <span data-testid="player-is-connected">
-                      {state.players[player].isConnected.toString()}
+                    <span data-testid="player-status">
+                      {state.players[player].status}
                     </span>
                   </>
                 ))}
@@ -220,11 +217,8 @@ describe('Context', () => {
           });
         });
 
-        expect(screen.queryByTestId('player-is-playing')).toHaveTextContent(
-          false,
-        );
-        expect(screen.queryByTestId('player-is-connected')).toHaveTextContent(
-          true,
+        expect(screen.getByTestId('player-status')).toHaveTextContent(
+          'staging',
         );
       });
 
@@ -535,8 +529,8 @@ describe('Context', () => {
 
             <div>
               {Object.keys(state.players).map((player) => (
-                <span data-testid="player-is-connected">
-                  {state.players[player].isConnected.toString()}
+                <span data-testid="player-status">
+                  {state.players[player].status}
                 </span>
               ))}
             </div>
@@ -565,10 +559,7 @@ describe('Context', () => {
         });
       });
 
-      expect(screen.queryByTestId('player-is-connected')).toHaveTextContent(
-        'true',
-      );
-      expect(screen.queryAllByTestId('playerID').length).toBe(1);
+      expect(screen.getByTestId('player-status')).toHaveTextContent('playing');
 
       act(() => {
         eventHandlers.message({
@@ -577,8 +568,8 @@ describe('Context', () => {
         });
       });
 
-      expect(screen.queryByTestId('player-is-connected')).toHaveTextContent(
-        'false',
+      expect(screen.getByTestId('player-status')).toHaveTextContent(
+        'disconnected',
       );
       expect(screen.queryAllByTestId('playerID').length).toBe(1);
     });

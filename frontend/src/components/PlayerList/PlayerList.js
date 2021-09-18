@@ -51,11 +51,13 @@ const PlayerRow = styled.div`
         if (props.isCzar) {
           return 'var(--secondary-text-color)';
         }
-        if (props.isInStaging) {
+        if (props.faded) {
           return 'var(--accent-text-color)';
         }
         return 'var(--primary-text-color)';
       }};
+      text-decoration: ${(props) =>
+        props.isDisconnected ? 'line-through' : 'none'};
     }
 
     span {
@@ -86,7 +88,10 @@ function PlayerList() {
           <PlayerRow
             key={playerKey}
             isCzar={player.isCzar}
-            isInStaging={!player.isPlaying}
+            faded={
+              player.status === 'staging' || player.status === 'disconnected'
+            }
+            isDisconnected={player.status === 'disconnected'}
             data-testid={`row-${player.name}`}
           >
             <img

@@ -176,7 +176,10 @@ function notifyCzar({ players, playerIDs }) {
 function czarSelectWinner({ players, playerIDs }) {
   // identify czar/not czar
   const czar = playerIDs.find((playerID) => players[playerID].isCzar);
-  const notCzars = playerIDs.filter((playerID) => !players[playerID].isCzar);
+  const notCzars = playerIDs.filter(
+    (playerID) =>
+      !players[playerID].isCzar && players[playerID].status === 'playing',
+  );
 
   // gather all players submitted cards
   const submittedCardsOrdered = notCzars.map((playerID) => ({
