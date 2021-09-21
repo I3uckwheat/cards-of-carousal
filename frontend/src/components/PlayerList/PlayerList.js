@@ -106,6 +106,10 @@ function PlayerList() {
               <TallyCount
                 score={player.score}
                 color={player.isCzar ? 'secondary' : 'primary'}
+                faded={
+                  player.status === 'staging' ||
+                  player.status === 'disconnected'
+                }
               />
             </div>
           </PlayerRow>
