@@ -576,6 +576,67 @@ describe('hostReducerMiddleware', () => {
       });
     });
 
+    it('does not send a message to inactive players that the czar is selecting', async () => {
+      const state = {
+        players: {
+          foo: {
+            cards: [{ text: 'foo' }, { text: 'bar' }, { text: 'baz' }],
+            submittedCards: [0],
+            isCzar: true,
+            status: 'playing',
+          },
+          bar: {
+            cards: [{ text: 'foo' }, { text: 'bar' }, { text: 'baz' }],
+            submittedCards: [0],
+            isCzar: false,
+            status: 'playing',
+          },
+          baz: {
+            cards: [{ text: 'foo' }, { text: 'bar' }, { text: 'baz' }],
+            submittedCards: [0],
+            isCzar: false,
+            status: 'playing',
+          },
+          disconnected: {
+            cards: [{ text: 'foo' }, { text: 'bar' }, { text: 'baz' }],
+            submittedCards: [0],
+            isCzar: false,
+            status: 'disconnected',
+          },
+          staging: {
+            cards: [{ text: 'foo' }, { text: 'bar' }, { text: 'baz' }],
+            submittedCards: [0],
+            isCzar: false,
+            status: 'staging',
+          },
+        },
+        playerIDs: ['foo', 'bar', 'baz', 'disconnected', 'staging'],
+      };
+      const { players, playerIDs } = state;
+      const dispatch = jest.fn();
+
+      await hostReducerMiddleware(
+        {
+          type: 'CZAR_SELECT_WINNER',
+          payload: { players, playerIDs },
+        },
+        dispatch,
+      );
+
+      expect(socketInstance.sendMessage).toHaveBeenCalledTimes(2);
+      expect(socketInstance.sendMessage).toHaveBeenCalledWith({
+        event: 'update',
+        payload: {
+          gameState: 'waiting-for-czar',
+          message: {
+            big: 'the czar is selecting',
+            small: 'For best results, watch the host screen',
+          },
+        },
+        recipients: ['bar', 'baz'],
+      });
+    });
+
     it('sends a message to czar to select a winner with the submitted cards', async () => {
       const state = {
         players: {

@@ -521,6 +521,90 @@ describe('reducer', () => {
 
       expect(result).toEqual(state);
     });
+
+    it('does not set the next czar to be a disconnected player', () => {
+      const state = {
+        players: {
+          foo: {
+            name: 'player-name-1',
+            score: 0,
+            isCzar: true,
+            submittedCards: [],
+            cards: [],
+            status: 'playing',
+          },
+          bar: {
+            name: 'player-name-2',
+            score: 0,
+            isCzar: false,
+            submittedCards: [],
+            cards: [],
+            status: 'disconnected',
+          },
+          baz: {
+            name: 'player-name-3',
+            score: 0,
+            isCzar: false,
+            submittedCards: [],
+            cards: [],
+            status: 'playing',
+          },
+        },
+        playerIDs: ['foo', 'bar', 'baz'],
+      };
+
+      const result = HostReducer(state, { type: 'SET_NEXT_CZAR', payload: {} });
+
+      expect(
+        result.playerIDs.filter((player) => result.players[player].isCzar)[0],
+      ).not.toBe('bar');
+
+      expect(
+        result.playerIDs.filter((player) => result.players[player].isCzar)[0],
+      ).toBe('baz');
+    });
+
+    it('does not set the next czar to be a staged player', () => {
+      const state = {
+        players: {
+          foo: {
+            name: 'player-name-1',
+            score: 0,
+            isCzar: true,
+            submittedCards: [],
+            cards: [],
+            status: 'playing',
+          },
+          bar: {
+            name: 'player-name-2',
+            score: 0,
+            isCzar: false,
+            submittedCards: [],
+            cards: [],
+            status: 'staging',
+          },
+          baz: {
+            name: 'player-name-3',
+            score: 0,
+            isCzar: false,
+            submittedCards: [],
+            cards: [],
+            status: 'playing',
+          },
+        },
+        playerIDs: ['foo', 'bar', 'baz'],
+      };
+
+      const result = HostReducer(state, { type: 'SET_NEXT_CZAR', payload: {} });
+
+      expect(
+        result.playerIDs.filter((player) => result.players[player].isCzar)[0],
+      ).not.toBe('bar');
+
+      expect(
+        result.playerIDs.filter((player) => result.players[player].isCzar)[0],
+      ).toBe('baz');
+    });
   });
 
   describe('GET_DECK', () => {
@@ -1297,7 +1381,7 @@ describe('reducer', () => {
   });
 
   describe('ADD_PLAYERS_FROM_STAGING', () => {
-    it('adds players who are not currently playing to the game', () => {
+    it('adds players with status "staging" to the game', () => {
       const state = {
         players: {
           ID1: {
