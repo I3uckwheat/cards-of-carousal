@@ -195,6 +195,7 @@ describe('Host Pregame Screen', () => {
             isCzar: false,
             submittedCards: [],
             cards: [],
+            status: 'staging',
           },
           bar: {
             name: 'Briggs',
@@ -202,6 +203,7 @@ describe('Host Pregame Screen', () => {
             isCzar: false,
             submittedCards: [],
             cards: [],
+            status: 'staging',
           },
           baz: {
             name: 'Pedro',
@@ -209,6 +211,7 @@ describe('Host Pregame Screen', () => {
             isCzar: false,
             submittedCards: [],
             cards: [],
+            status: 'staging',
           },
         },
         playerIDs: ['foo', 'bar', 'baz'],
@@ -301,6 +304,72 @@ describe('Host Pregame Screen', () => {
       ).toBeInTheDocument();
     });
 
+    it('does not allow the game to start if the amount of connected players is lower than the minimum threshold', () => {
+      const dispatch = jest.fn();
+
+      state = {
+        gameState: 'waiting-for-lobby',
+        lobbyID: '',
+        players: {
+          foo: {
+            name: 'Bender',
+            score: 0,
+            isCzar: false,
+            submittedCards: [],
+            cards: [],
+            status: 'staging',
+          },
+          bar: {
+            name: 'Pedro',
+            score: 0,
+            isCzar: false,
+            submittedCards: [],
+            cards: [],
+            status: 'disconnected',
+          },
+        },
+        playerIDs: ['foo', 'bar'],
+        gameSettings: {
+          maxPlayers: 8,
+          winningScore: 7,
+          selectedPacks: [0, 1, 2],
+        },
+        deck: { black: [], white: [] },
+        selectedBlackCard: { text: 'test', pick: 1 },
+        loading: [],
+      };
+
+      render(
+        <HostContext.Provider value={{ state, dispatch }}>
+          <HostPregameScreen />
+        </HostContext.Provider>,
+      );
+
+      userEvent.click(screen.getByText('START CAROUSING'));
+
+      // once for create lobby
+      expect(dispatch).toHaveBeenCalledTimes(1);
+      expect(dispatch).not.toHaveBeenCalledWith({
+        type: 'SET_DECK',
+        payload: { selectedPacks: state.gameSettings.selectedPacks },
+      });
+      expect(dispatch).not.toHaveBeenCalledWith({
+        type: 'START_GAME',
+        payload: {},
+      });
+      expect(dispatch).not.toHaveBeenCalledWith({
+        type: 'SET_NEXT_CZAR',
+        payload: {},
+      });
+      expect(screen.getByText('UNABLE TO START GAME')).toBeInTheDocument();
+      expect(
+        screen.getByText('No offense, but this game requires friends to play.'),
+      ).toBeInTheDocument();
+      expect(
+        screen.getByText('Click anywhere to continue'),
+      ).toBeInTheDocument();
+    });
+
     it('alerts the host if no packs are selected when the start button is clicked', async () => {
       const dispatch = jest.fn();
 
@@ -314,6 +383,7 @@ describe('Host Pregame Screen', () => {
             isCzar: false,
             submittedCards: [],
             cards: [],
+            status: 'staging',
           },
           bar: {
             name: 'Briggs',
@@ -321,6 +391,7 @@ describe('Host Pregame Screen', () => {
             isCzar: false,
             submittedCards: [],
             cards: [],
+            status: 'staging',
           },
           baz: {
             name: 'Pedro',
@@ -328,6 +399,7 @@ describe('Host Pregame Screen', () => {
             isCzar: false,
             submittedCards: [],
             cards: [],
+            status: 'staging',
           },
         },
         playerIDs: ['foo', 'bar', 'baz'],
@@ -391,6 +463,7 @@ describe('Host Pregame Screen', () => {
             isCzar: false,
             submittedCards: [],
             cards: [],
+            status: 'staging',
           },
           bar: {
             name: 'Briggs',
@@ -398,6 +471,7 @@ describe('Host Pregame Screen', () => {
             isCzar: false,
             submittedCards: [],
             cards: [],
+            status: 'staging',
           },
           baz: {
             name: 'Pedro',
@@ -405,6 +479,7 @@ describe('Host Pregame Screen', () => {
             isCzar: false,
             submittedCards: [],
             cards: [],
+            status: 'staging',
           },
         },
         playerIDs: ['foo', 'bar', 'baz'],

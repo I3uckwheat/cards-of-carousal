@@ -132,14 +132,18 @@ ErrorHandler.propTypes = errorHandlerPropTypes;
 
 function LeftPanel() {
   const { state, dispatch } = useContext(HostContext);
-  const { lobbyID, playerIDs } = state;
+  const { lobbyID, playerIDs, players } = state;
 
   const [error, setError] = useState('');
 
   const handleClickStart = async () => {
-    // check if there are any players and if packs are selected
+    // check if there are enough connected players and if packs are selected
+    const connectedPlayers = playerIDs.filter(
+      (playerID) => players[playerID].status === 'staging',
+    );
+
     if (
-      playerIDs.length >= config.maxPlayers.min &&
+      connectedPlayers.length >= config.maxPlayers.min &&
       state.gameSettings.selectedPacks.length
     ) {
       const { selectedPacks } = state.gameSettings;
@@ -173,7 +177,7 @@ function LeftPanel() {
       // The only failure cases here are:
       //  a) not enough players, or b) card packs aren't selected
       const errorString =
-        playerIDs.length >= config.maxPlayers.min
+        connectedPlayers.length >= config.maxPlayers.min
           ? 'no-card-packs-selected'
           : 'not-enough-players';
 
