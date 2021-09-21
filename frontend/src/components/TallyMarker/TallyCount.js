@@ -7,7 +7,7 @@ import TallyGroup from './TallyGroup';
 const propTypes = {
   score: PropTypes.number.isRequired,
   color: PropTypes.oneOf(['primary', 'secondary']).isRequired,
-  faded: PropTypes.bool.isRequired,
+  faded: PropTypes.bool,
 };
 
 const Container = styled.div`
@@ -49,5 +49,6 @@ function TallyCount({ score, color, faded }) {
 }
 
 TallyCount.propTypes = propTypes;
+TallyCount.defaultProps = { faded: false };
 
 export default TallyCount;

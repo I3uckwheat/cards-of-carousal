@@ -5,7 +5,7 @@ import styled from 'styled-components';
 const propTypes = {
   color: PropTypes.oneOf(['primary', 'secondary']).isRequired,
   tallyCount: PropTypes.number.isRequired,
-  faded: PropTypes.bool.isRequired,
+  faded: PropTypes.bool,
 };
 
 const StyledPath = styled.path`
@@ -54,5 +54,6 @@ function TallyGroup({ color, tallyCount, faded }) {
 }
 
 TallyGroup.propTypes = propTypes;
+TallyGroup.defaultProps = { faded: false };
 
 export default TallyGroup;

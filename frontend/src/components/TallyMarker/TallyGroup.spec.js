@@ -39,5 +39,10 @@ describe('TallyGroup', () => {
       render(<TallyGroup color="secondary" tallyCount={2} />);
       expect(screen.queryByTestId('tally-svg')).toMatchSnapshot();
     });
+
+    it('sets the color of the tallies to the faded color', () => {
+      render(<TallyGroup color="secondary" tallyCount={2} faded />);
+      expect(screen.queryByTestId('tally-svg')).toMatchSnapshot();
+    });
   });
 });

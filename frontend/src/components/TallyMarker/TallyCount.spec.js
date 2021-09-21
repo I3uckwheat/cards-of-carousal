@@ -5,11 +5,12 @@ import { render, screen } from '@testing-library/react';
 import TallyCount from './TallyCount';
 
 // https://jestjs.io/docs/en/tutorial-react#snapshot-testing-with-mocks-enzyme-and-react-16
-jest.mock('./TallyGroup', () => ({ tallyCount, color }) => (
+jest.mock('./TallyGroup', () => ({ tallyCount, color, faded }) => (
   <tally-group-mock
     data-testid="tally-group"
     data-tallycount={tallyCount}
     data-color={color}
+    data-faded={faded}
   />
 ));
 
@@ -76,6 +77,12 @@ describe('TallyCount', () => {
       render(<TallyCount color="secondary" score={5} />);
       const tallyGroup = screen.queryByTestId('tally-group');
       expect(tallyGroup.dataset.color).toBe('secondary');
+    });
+
+    it('passes faded attribute to tallyGroup', () => {
+      render(<TallyCount color="secondary" score={5} faded />);
+      const tallyGroup = screen.queryByTestId('tally-group');
+      expect(tallyGroup.dataset.faded).toBe('true');
     });
 
     it('passes proper color to all tallyGroups', () => {
