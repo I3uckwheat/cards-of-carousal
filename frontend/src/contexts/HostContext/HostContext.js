@@ -102,11 +102,11 @@ function HostProvider({ children }) {
   }, [state]);
 
   useEffect(() => {
-    const stagedPlayers = state.playerIDs.filter(
+    const stagedPlayerIDs = state.playerIDs.filter(
       (playerID) => state.players[playerID].status === 'staging',
     );
 
-    if (stagedPlayers.length) {
+    if (stagedPlayerIDs.length) {
       const numberOfPlayersExceedingLimit =
         state.playerIDs.length - state.gameSettings.maxPlayers;
 
@@ -136,7 +136,7 @@ function HostProvider({ children }) {
         dispatch({
           type: 'SEND_PLAYER_CONNECTED_MESSAGES',
           payload: {
-            players: stagedPlayers,
+            players: stagedPlayerIDs,
             message,
           },
         });

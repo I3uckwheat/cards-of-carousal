@@ -71,12 +71,6 @@ describe('Context', () => {
           <div data-testid="lobby-id">{state.lobbyID}</div>
 
           <div>
-            {Object.keys(state.players).map((player) => (
-              <span data-testid="player">{player}</span>
-            ))}
-          </div>
-
-          <div>
             {state.playerIDs.map((playerID) => (
               <span data-testid="playerID">{playerID}</span>
             ))}
@@ -95,7 +89,6 @@ describe('Context', () => {
       'waiting-for-lobby',
     );
     expect(screen.getByTestId('lobby-id')).toHaveTextContent('');
-    expect(screen.queryAllByTestId('player').length).toBe(0);
     expect(screen.queryAllByTestId('playerID').length).toBe(0);
   });
 
@@ -115,8 +108,8 @@ describe('Context', () => {
             <div data-testid="lobby-id">{state.lobbyID}</div>
 
             <div>
-              {Object.keys(state.players).map((player) => (
-                <span data-testid="player">{player.name}</span>
+              {state.playerIDs.map((playerID) => (
+                <span data-testid="player">{state.players[playerID].name}</span>
               ))}
             </div>
 
@@ -152,7 +145,7 @@ describe('Context', () => {
               <div data-testid="lobby-id">{state.lobbyID}</div>
 
               <div>
-                {Object.keys(state.players).map(() => (
+                {state.playerIDs.map(() => (
                   <span data-testid="players" />
                 ))}
               </div>
@@ -190,10 +183,10 @@ describe('Context', () => {
               <div data-testid="lobby-id">{state.lobbyID}</div>
 
               <div>
-                {Object.keys(state.players).map((player) => (
+                {state.playerIDs.map((playerID) => (
                   <>
                     <span data-testid="player-status">
-                      {state.players[player].status}
+                      {state.players[playerID].status}
                     </span>
                   </>
                 ))}
@@ -232,7 +225,7 @@ describe('Context', () => {
               <div data-testid="lobby-id">{state.lobbyID}</div>
 
               <div>
-                {Object.keys(state.players).map(() => (
+                {state.playerIDs.map(() => (
                   <span data-testid="players" />
                 ))}
               </div>
@@ -277,7 +270,7 @@ describe('Context', () => {
               <div data-testid="lobby-id">{state.lobbyID}</div>
 
               <div>
-                {Object.keys(state.players).map(() => (
+                {state.playerIDs.map(() => (
                   <span data-testid="players" />
                 ))}
               </div>
@@ -322,7 +315,7 @@ describe('Context', () => {
               <div data-testid="lobby-id">{state.lobbyID}</div>
 
               <div>
-                {Object.keys(state.players).map(() => (
+                {state.playerIDs.map(() => (
                   <span data-testid="player-staging" />
                 ))}
               </div>
@@ -379,8 +372,8 @@ describe('Context', () => {
               <div data-testid="lobby-id">{state.lobbyID}</div>
 
               <div>
-                {Object.keys(state.players).map((player) => (
-                  <span key={player} data-testid="player-staging" />
+                {state.playerIDs.map((playerID) => (
+                  <span key={playerID} data-testid="player-staging" />
                 ))}
               </div>
             </>
@@ -528,9 +521,9 @@ describe('Context', () => {
             <div data-testid="lobby-id">{state.lobbyID}</div>
 
             <div>
-              {Object.keys(state.players).map((player) => (
+              {state.playerIDs.map((playerID) => (
                 <span data-testid="player-status">
-                  {state.players[player].status}
+                  {state.players[playerID].status}
                 </span>
               ))}
             </div>
