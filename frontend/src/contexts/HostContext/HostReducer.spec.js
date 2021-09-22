@@ -991,6 +991,15 @@ describe('reducer', () => {
             submittedCards: [],
             status: 'disconnected',
           },
+          sully: {
+            cards: [
+              { pack: 0, text: 'test' },
+              { pack: 0, text: 'test' },
+              { pack: 0, text: 'test' },
+            ],
+            submittedCards: [],
+            status: 'staging',
+          },
         },
       };
 
@@ -1001,6 +1010,8 @@ describe('reducer', () => {
 
       expect(result.players.bender.cards.length).not.toEqual(5);
       expect(result.players.bender).toEqual(state.players.bender);
+      expect(result.players.sully.cards.length).not.toEqual(5);
+      expect(result.players.sully).toEqual(state.players.sully);
     });
 
     it('updates the game state', () => {
