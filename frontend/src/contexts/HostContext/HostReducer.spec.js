@@ -930,6 +930,79 @@ describe('reducer', () => {
       expect(result.players.foo).toEqual(state.players.foo);
     });
 
+    it('does not deal more cards to players who are disconnected', () => {
+      // setup dummy state
+      const state = {
+        gameSettings: {
+          handSize: 5,
+        },
+        deck: {
+          white: [
+            { pack: 0, text: 'zero' },
+            { pack: 0, text: 'one' },
+            { pack: 0, text: 'two' },
+            { pack: 0, text: 'three' },
+            { pack: 0, text: 'four' },
+            { pack: 0, text: 'five' },
+            { pack: 0, text: 'six' },
+          ],
+          black: [{ pick: 1, pack: 0, text: 'zero' }],
+        },
+        selectedBlackCard: {
+          pick: 1,
+        },
+        playerIDs: ['foo', 'bar', 'baz', 'bender'],
+        players: {
+          foo: {
+            cards: [
+              { pack: 0, text: 'test' },
+              { pack: 0, text: 'test' },
+              { pack: 0, text: 'test' },
+              { pack: 0, text: 'test' },
+              { pack: 0, text: 'test' },
+            ],
+            submittedCards: [],
+            status: 'playing',
+          },
+          bar: {
+            cards: [
+              { pack: 0, text: 'test' },
+              { pack: 0, text: 'test' },
+              { pack: 0, text: 'test' },
+            ],
+            submittedCards: [],
+            status: 'playing',
+          },
+          baz: {
+            cards: [
+              { pack: 0, text: 'test' },
+              { pack: 0, text: 'test' },
+              { pack: 0, text: 'test' },
+            ],
+            submittedCards: [],
+            status: 'playing',
+          },
+          bender: {
+            cards: [
+              { pack: 0, text: 'test' },
+              { pack: 0, text: 'test' },
+              { pack: 0, text: 'test' },
+            ],
+            submittedCards: [],
+            status: 'disconnected',
+          },
+        },
+      };
+
+      const result = HostReducer(state, {
+        type: 'DEAL_WHITE_CARDS',
+        payload: {},
+      });
+
+      expect(result.players.bender.cards.length).not.toEqual(5);
+      expect(result.players.bender).toEqual(state.players.bender);
+    });
+
     it('updates the game state', () => {
       // setup dummy state
       const state = {
