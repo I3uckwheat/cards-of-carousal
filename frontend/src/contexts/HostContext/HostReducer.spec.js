@@ -303,6 +303,48 @@ describe('reducer', () => {
       expect(result.gameState).toBe('czar-select-winner');
     });
 
+    it('changes game state if non-playing players have not submitted their cards', () => {
+      const state = {
+        players: {
+          foo: {
+            submittedCards: [],
+            cards: [{ text: 'test' }, { text: 'test' }, { text: 'test' }],
+            status: 'playing',
+          },
+          bar: {
+            submittedCards: [0],
+            cards: [{ text: 'test' }, { text: 'test' }, { text: 'test' }],
+            status: 'playing',
+          },
+          baz: {
+            submittedCards: [0],
+            cards: [{ text: 'test' }, { text: 'test' }, { text: 'test' }],
+            status: 'playing',
+          },
+          bender: {
+            submittedCards: [],
+            cards: [{ text: 'test' }, { text: 'test' }, { text: 'test' }],
+            status: 'disconnected',
+          },
+          sully: {
+            submittedCards: [],
+            cards: [],
+            status: 'staging',
+          },
+        },
+        playerIDs: ['foo', 'bar', 'baz', 'bender', 'sully'],
+        gameState: 'waiting-to-receive-cards',
+        selectedBlackCard: { pick: 1 },
+      };
+
+      const result = HostReducer(state, {
+        type: 'PLAYER_SUBMIT',
+        payload: { selectedCards: [0], playerId: 'foo' },
+      });
+
+      expect(result.gameState).toBe('czar-select-winner');
+    });
+
     it('does not change game state if all in-play players have not submitted their cards', () => {
       const state = {
         players: {
