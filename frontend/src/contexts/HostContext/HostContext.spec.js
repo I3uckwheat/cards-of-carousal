@@ -452,7 +452,6 @@ describe('Context', () => {
     });
 
     it('kicks the player if the maxPlayer limit has been reached', () => {
-      // call stack!
       const TestComponent = () => {
         const { state, dispatch } = useContext(HostContext);
 
