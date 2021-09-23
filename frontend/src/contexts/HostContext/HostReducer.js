@@ -42,11 +42,11 @@ function dealWhiteCards(state) {
   const newWhiteCards = [...deck.white];
 
   // get all active players (not disconnected or waiting to join)
-  const activePlayers = playerIDs.filter(
+  const activePlayerIDs = playerIDs.filter(
     (playerID) => players[playerID].status === 'playing',
   );
 
-  const neededCardsPerPlayer = activePlayers.map((playerID) => {
+  const neededCardsPerPlayer = activePlayerIDs.map((playerID) => {
     const player = players[playerID];
     return {
       playerID,
