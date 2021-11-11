@@ -13,11 +13,12 @@ exports[`Footer renders correctly 1`] = `
   -webkit-justify-content: flex-end;
   -ms-flex-pack: end;
   justify-content: flex-end;
-  height: 122px;
-  font-size: 36px;
+  text-align: center;
+  height: 50px;
+  font-size: 1rem;
   font-weight: 400;
-  padding-right: 16px;
-  padding-bottom: 2px;
+  padding-right: 10px;
+  padding-bottom: 4px;
   background-color: var(--secondary-background-color);
   color: var(--secondary-text-color);
 }
@@ -25,6 +26,7 @@ exports[`Footer renders correctly 1`] = `
 .c0 p {
   text-align: right;
   position: relative;
+  font-size: 13px;
 }
 
 .c0 a {
@@ -33,46 +35,16 @@ exports[`Footer renders correctly 1`] = `
   text-decoration: none;
 }
 
-@media (max-width:1920px) {
-  .c0 {
-    height: 110px;
-    font-size: 30px;
-  }
-}
-
-@media (max-width:1440px) {
-  .c0 {
-    height: 90px;
-    font-size: 26px;
-  }
-}
-
-@media (max-width:1300px) {
-  .c0 {
-    height: 80px;
-    font-size: 23px;
-  }
-}
-
-@media (max-width:970px) {
-  .c0 {
-    text-align: center;
-    height: 70px;
-    font-size: 18px;
-  }
-}
-
-@media (max-width:570px) and (min-height:501px) {
+@media (orientation:portrait) {
   .c0 {
     height: 120px;
     background-color: transparent;
+    color: var(--accent-text-color);
   }
 
   .c0 p {
     text-align: center;
-    font-size: 13px;
     padding-bottom: 32px;
-    color: var(--accent-text-color);
   }
 
   .c0 a {
@@ -81,22 +53,38 @@ exports[`Footer renders correctly 1`] = `
   }
 }
 
-@media (max-height:500px) {
+@media (min-width:600px) {
   .c0 {
-    height: 50px;
-    padding-bottom: 4px;
-    padding-right: 10px;
+    height: 90px;
   }
 
-  .c0 p {
-    font-size: 13px;
+  .c0 p,
+  .c0 a {
+    font-size: 20px;
   }
 }
 
-@media (max-width:320px) {
+@media (min-width:1600px) {
   .c0 {
-    font-size: 1rem;
-    padding-right: 0px;
+    height: 110px;
+  }
+
+  .c0 p,
+  .c0 a {
+    font-size: 30px;
+  }
+}
+
+@media (min-width:3200px) {
+  .c0 {
+    height: 122px;
+    padding-right: 16px;
+    padding-bottom: 2px;
+  }
+
+  .c0 p,
+  .c0 a {
+    font-size: 36px;
   }
 }
 

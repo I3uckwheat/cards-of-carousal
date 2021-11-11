@@ -32,11 +32,12 @@ exports[`App snapshots should initially show the welcome screen 1`] = `
   -webkit-justify-content: flex-end;
   -ms-flex-pack: end;
   justify-content: flex-end;
-  height: 122px;
-  font-size: 36px;
+  text-align: center;
+  height: 50px;
+  font-size: 1rem;
   font-weight: 400;
-  padding-right: 16px;
-  padding-bottom: 2px;
+  padding-right: 10px;
+  padding-bottom: 4px;
   background-color: var(--secondary-background-color);
   color: var(--secondary-text-color);
 }
@@ -44,6 +45,7 @@ exports[`App snapshots should initially show the welcome screen 1`] = `
 .c3 p {
   text-align: right;
   position: relative;
+  font-size: 13px;
 }
 
 .c3 a {
@@ -189,46 +191,16 @@ exports[`App snapshots should initially show the welcome screen 1`] = `
   padding: 16px;
 }
 
-@media (max-width:1920px) {
-  .c3 {
-    height: 110px;
-    font-size: 30px;
-  }
-}
-
-@media (max-width:1440px) {
-  .c3 {
-    height: 90px;
-    font-size: 26px;
-  }
-}
-
-@media (max-width:1300px) {
-  .c3 {
-    height: 80px;
-    font-size: 23px;
-  }
-}
-
-@media (max-width:970px) {
-  .c3 {
-    text-align: center;
-    height: 70px;
-    font-size: 18px;
-  }
-}
-
-@media (max-width:570px) and (min-height:501px) {
+@media (orientation:portrait) {
   .c3 {
     height: 120px;
     background-color: transparent;
+    color: var(--accent-text-color);
   }
 
   .c3 p {
     text-align: center;
-    font-size: 13px;
     padding-bottom: 32px;
-    color: var(--accent-text-color);
   }
 
   .c3 a {
@@ -237,22 +209,38 @@ exports[`App snapshots should initially show the welcome screen 1`] = `
   }
 }
 
-@media (max-height:500px) {
+@media (min-width:600px) {
   .c3 {
-    height: 50px;
-    padding-bottom: 4px;
-    padding-right: 10px;
+    height: 90px;
   }
 
-  .c3 p {
-    font-size: 13px;
+  .c3 p,
+  .c3 a {
+    font-size: 20px;
   }
 }
 
-@media (max-width:320px) {
+@media (min-width:1600px) {
   .c3 {
-    font-size: 1rem;
-    padding-right: 0px;
+    height: 110px;
+  }
+
+  .c3 p,
+  .c3 a {
+    font-size: 30px;
+  }
+}
+
+@media (min-width:3200px) {
+  .c3 {
+    height: 122px;
+    padding-right: 16px;
+    padding-bottom: 2px;
+  }
+
+  .c3 p,
+  .c3 a {
+    font-size: 36px;
   }
 }
 
@@ -528,31 +516,19 @@ exports[`App snapshots should show the host screen after user has clicked the "h
   background-color: var(--primary-background-color);
 }
 
-@media (max-width:1920px) {
+@media (orientation:portrait) {
 
 }
 
-@media (max-width:1440px) {
+@media (min-width:600px) {
 
 }
 
-@media (max-width:1300px) {
+@media (min-width:1600px) {
 
 }
 
-@media (max-width:970px) {
-
-}
-
-@media (max-width:570px) and (min-height:501px) {
-
-}
-
-@media (max-height:500px) {
-
-}
-
-@media (max-width:320px) {
+@media (min-width:3200px) {
 
 }
 
@@ -1128,31 +1104,19 @@ exports[`App snapshots should show the host screen after user has clicked the "h
   height: 40%;
 }
 
-@media (max-width:1920px) {
+@media (orientation:portrait) {
 
 }
 
-@media (max-width:1440px) {
+@media (min-width:600px) {
 
 }
 
-@media (max-width:1300px) {
+@media (min-width:1600px) {
 
 }
 
-@media (max-width:970px) {
-
-}
-
-@media (max-width:570px) and (min-height:501px) {
-
-}
-
-@media (max-height:500px) {
-
-}
-
-@media (max-width:320px) {
+@media (min-width:3200px) {
 
 }
 
@@ -1627,11 +1591,12 @@ exports[`App snapshots should show the player screen after user has clicked the 
   -webkit-justify-content: flex-end;
   -ms-flex-pack: end;
   justify-content: flex-end;
-  height: 122px;
-  font-size: 36px;
+  text-align: center;
+  height: 50px;
+  font-size: 1rem;
   font-weight: 400;
-  padding-right: 16px;
-  padding-bottom: 2px;
+  padding-right: 10px;
+  padding-bottom: 4px;
   background-color: var(--secondary-background-color);
   color: var(--secondary-text-color);
 }
@@ -1639,6 +1604,7 @@ exports[`App snapshots should show the player screen after user has clicked the 
 .c4 p {
   text-align: right;
   position: relative;
+  font-size: 13px;
 }
 
 .c4 a {
@@ -1801,46 +1767,16 @@ exports[`App snapshots should show the player screen after user has clicked the 
   margin-top: 50px;
 }
 
-@media (max-width:1920px) {
-  .c4 {
-    height: 110px;
-    font-size: 30px;
-  }
-}
-
-@media (max-width:1440px) {
-  .c4 {
-    height: 90px;
-    font-size: 26px;
-  }
-}
-
-@media (max-width:1300px) {
-  .c4 {
-    height: 80px;
-    font-size: 23px;
-  }
-}
-
-@media (max-width:970px) {
-  .c4 {
-    text-align: center;
-    height: 70px;
-    font-size: 18px;
-  }
-}
-
-@media (max-width:570px) and (min-height:501px) {
+@media (orientation:portrait) {
   .c4 {
     height: 120px;
     background-color: transparent;
+    color: var(--accent-text-color);
   }
 
   .c4 p {
     text-align: center;
-    font-size: 13px;
     padding-bottom: 32px;
-    color: var(--accent-text-color);
   }
 
   .c4 a {
@@ -1849,22 +1785,38 @@ exports[`App snapshots should show the player screen after user has clicked the 
   }
 }
 
-@media (max-height:500px) {
+@media (min-width:600px) {
   .c4 {
-    height: 50px;
-    padding-bottom: 4px;
-    padding-right: 10px;
+    height: 90px;
   }
 
-  .c4 p {
-    font-size: 13px;
+  .c4 p,
+  .c4 a {
+    font-size: 20px;
   }
 }
 
-@media (max-width:320px) {
+@media (min-width:1600px) {
   .c4 {
-    font-size: 1rem;
-    padding-right: 0px;
+    height: 110px;
+  }
+
+  .c4 p,
+  .c4 a {
+    font-size: 30px;
+  }
+}
+
+@media (min-width:3200px) {
+  .c4 {
+    height: 122px;
+    padding-right: 16px;
+    padding-bottom: 2px;
+  }
+
+  .c4 p,
+  .c4 a {
+    font-size: 36px;
   }
 }
 
@@ -2168,11 +2120,12 @@ exports[`App snapshots should show the welcome screen after user has clicked ele
   -webkit-justify-content: flex-end;
   -ms-flex-pack: end;
   justify-content: flex-end;
-  height: 122px;
-  font-size: 36px;
+  text-align: center;
+  height: 50px;
+  font-size: 1rem;
   font-weight: 400;
-  padding-right: 16px;
-  padding-bottom: 2px;
+  padding-right: 10px;
+  padding-bottom: 4px;
   background-color: var(--secondary-background-color);
   color: var(--secondary-text-color);
 }
@@ -2180,6 +2133,7 @@ exports[`App snapshots should show the welcome screen after user has clicked ele
 .c3 p {
   text-align: right;
   position: relative;
+  font-size: 13px;
 }
 
 .c3 a {
@@ -2325,46 +2279,16 @@ exports[`App snapshots should show the welcome screen after user has clicked ele
   padding: 16px;
 }
 
-@media (max-width:1920px) {
-  .c3 {
-    height: 110px;
-    font-size: 30px;
-  }
-}
-
-@media (max-width:1440px) {
-  .c3 {
-    height: 90px;
-    font-size: 26px;
-  }
-}
-
-@media (max-width:1300px) {
-  .c3 {
-    height: 80px;
-    font-size: 23px;
-  }
-}
-
-@media (max-width:970px) {
-  .c3 {
-    text-align: center;
-    height: 70px;
-    font-size: 18px;
-  }
-}
-
-@media (max-width:570px) and (min-height:501px) {
+@media (orientation:portrait) {
   .c3 {
     height: 120px;
     background-color: transparent;
+    color: var(--accent-text-color);
   }
 
   .c3 p {
     text-align: center;
-    font-size: 13px;
     padding-bottom: 32px;
-    color: var(--accent-text-color);
   }
 
   .c3 a {
@@ -2373,22 +2297,38 @@ exports[`App snapshots should show the welcome screen after user has clicked ele
   }
 }
 
-@media (max-height:500px) {
+@media (min-width:600px) {
   .c3 {
-    height: 50px;
-    padding-bottom: 4px;
-    padding-right: 10px;
+    height: 90px;
   }
 
-  .c3 p {
-    font-size: 13px;
+  .c3 p,
+  .c3 a {
+    font-size: 20px;
   }
 }
 
-@media (max-width:320px) {
+@media (min-width:1600px) {
   .c3 {
-    font-size: 1rem;
-    padding-right: 0px;
+    height: 110px;
+  }
+
+  .c3 p,
+  .c3 a {
+    font-size: 30px;
+  }
+}
+
+@media (min-width:3200px) {
+  .c3 {
+    height: 122px;
+    padding-right: 16px;
+    padding-bottom: 2px;
+  }
+
+  .c3 p,
+  .c3 a {
+    font-size: 36px;
   }
 }
 

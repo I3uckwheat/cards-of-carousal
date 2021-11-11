@@ -1,17 +1,25 @@
 import styled from 'styled-components';
 import React from 'react';
+import config from '../../../config';
+
+const {
+  largeMobile,
+  smallDesktop,
+  largeDesktop,
+} = config.breakpoint.playerBreakpoints;
 
 const FooterWrapper = styled.footer`
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  text-align: center;
 
-  height: 122px;
-  font-size: 36px;
+  height: 50px;
+  font-size: 1rem;
   font-weight: 400;
 
-  padding-right: 16px;
-  padding-bottom: 2px;
+  padding-right: 10px;
+  padding-bottom: 4px;
 
   background-color: var(--secondary-background-color);
   color: var(--secondary-text-color);
@@ -19,6 +27,7 @@ const FooterWrapper = styled.footer`
   p {
     text-align: right;
     position: relative;
+    font-size: 13px;
   }
 
   a {
@@ -26,40 +35,14 @@ const FooterWrapper = styled.footer`
     text-decoration: none;
   }
 
-  @media (max-width: 1920px) {
-    height: 110px;
-    font-size: 30px;
-  }
-
-  /*average size hosting screen*/
-  @media (max-width: 1440px) {
-    height: 90px;
-    font-size: 26px;
-  }
-
-  @media (max-width: 1300px) {
-    height: 80px;
-    font-size: 23px;
-  }
-
-  /*small size hosting screen */
-  @media (max-width: 970px) {
-    text-align: center;
-    height: 70px;
-    font-size: 18px;
-  }
-
-  /*largest desktop player mode */
-  @media (max-width: 570px) and (min-height: 501px) {
+  @media (orientation: portrait) {
     height: 120px;
     background-color: transparent;
+    color: var(--accent-text-color);
 
     p {
       text-align: center;
-      font-size: 13px;
-
       padding-bottom: 32px;
-      color: var(--accent-text-color);
     }
 
     a {
@@ -68,19 +51,34 @@ const FooterWrapper = styled.footer`
     }
   }
 
-  @media (max-height: 500px) {
-    height: 50px;
-    padding-bottom: 4px;
-    padding-right: 10px;
-    p {
-      font-size: 13px;
+  @media (min-width: ${largeMobile}) {
+    height: 90px;
+
+    p,
+    a {
+      font-size: 20px;
     }
   }
 
-  /*iphone 5*/
-  @media (max-width: 320px) {
-    font-size: 1rem;
-    padding-right: 0px;
+  @media (min-width: ${smallDesktop}) {
+    height: 110px;
+
+    p,
+    a {
+      font-size: 30px;
+    }
+  }
+
+  @media (min-width: ${largeDesktop}) {
+    height: 122px;
+
+    padding-right: 16px;
+    padding-bottom: 2px;
+
+    p,
+    a {
+      font-size: 36px;
+    }
   }
 `;
 
