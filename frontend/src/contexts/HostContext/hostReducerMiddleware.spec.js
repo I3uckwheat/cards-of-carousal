@@ -71,6 +71,25 @@ describe('hostReducerMiddleware', () => {
       });
     });
 
+    it("calls socketInstane's sendMessage with a remove disconnected players card message", () => {
+      const dispatch = jest.fn();
+
+      hostReducerMiddleware(
+        {
+          type: 'KICK_PLAYER',
+          payload: { playerId: 'example-player-id', czarId: 'example-czar-id' },
+        },
+        dispatch,
+      );
+      expect(socketInstance.sendMessage).toHaveBeenCalledWith({
+        event: 'remove-disconnected-players-card',
+        recipients: ['example-czar-id'],
+        payload: {
+          playerId: 'example-player-id',
+        },
+      });
+    });
+
     it("calls socketInstance's sendMessage with a kick-player event and the playerId", () => {
       const dispatch = jest.fn();
 
@@ -112,6 +131,27 @@ describe('hostReducerMiddleware', () => {
             big: 'Attempting to join lobby',
             small: 'Please wait',
           },
+        },
+      });
+    });
+  });
+
+  describe('PLAYER_DISCONNECTED', () => {
+    it("calls socketInstance's sendMessage with a remove disconnected players card message", () => {
+      const dispatch = jest.fn();
+
+      hostReducerMiddleware(
+        {
+          type: 'PLAYER_DISCONNECTED',
+          payload: { playerId: 'example-player-id', czarId: 'example-czar-id' },
+        },
+        dispatch,
+      );
+      expect(socketInstance.sendMessage).toHaveBeenCalledWith({
+        event: 'remove-disconnected-players-card',
+        recipients: ['example-czar-id'],
+        payload: {
+          playerId: 'example-player-id',
         },
       });
     });

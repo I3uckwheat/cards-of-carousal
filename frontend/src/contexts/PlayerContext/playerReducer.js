@@ -77,6 +77,20 @@ function noLobby(state) {
   };
 }
 
+function removeDisconnectedPlayersCard(state, { playerId }) {
+  if (state.submittedCards && state.submittedCards.length > 0) {
+    const cardRemoved = state.submittedCards.filter(
+      (card) => card.playerID !== playerId,
+    );
+
+    return {
+      ...state,
+      submittedCards: cardRemoved || state.submittedCards,
+    };
+  }
+  return state;
+}
+
 function reducer(state, action) {
   const { type, payload } = action;
   switch (type) {
@@ -100,6 +114,9 @@ function reducer(state, action) {
 
     case 'NO_LOBBY':
       return noLobby(state);
+
+    case 'REMOVE_DISCONNECTED_PLAYERS_CARD':
+      return removeDisconnectedPlayersCard(state, payload);
 
     default:
       return { ...state };

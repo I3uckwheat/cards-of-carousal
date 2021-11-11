@@ -55,6 +55,9 @@ export function PlayerProvider({ children }) {
       case 'no-lobby':
         return dispatch({ type: 'NO_LOBBY', payload });
 
+      case 'remove-disconnected-players-card':
+        return dispatch({ type: 'REMOVE_DISCONNECTED_PLAYERS_CARD', payload });
+
       default:
         return undefined;
     }

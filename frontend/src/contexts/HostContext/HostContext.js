@@ -45,6 +45,12 @@ function HostProvider({ children }) {
   const [socketHasError, setSocketHasError] = useState(false);
 
   function createMessageHandler(currentState) {
+    const czarId =
+      currentState.playerIDs.length > 0 &&
+      currentState.playerIDs.find(
+        (playerId) => currentState.players[playerId].isCzar,
+      );
+
     return ({ event, payload, sender }) => {
       switch (event) {
         case 'player-connected': {
@@ -65,7 +71,13 @@ function HostProvider({ children }) {
           return dispatch({ type: 'PLAYER_CONNECTED', payload });
         }
         case 'player-disconnected':
-          return dispatch({ type: 'PLAYER_DISCONNECTED', payload });
+          return dispatch({
+            type: 'PLAYER_DISCONNECTED',
+            payload: {
+              ...payload,
+              czarId,
+            },
+          });
 
         case 'preview-winner':
           return dispatch({ type: 'PREVIEW_WINNER', payload });

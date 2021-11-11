@@ -29,9 +29,13 @@ function PlayerKicker({ accordionState, onClickActions }) {
     .sort((a, b) => b > a);
 
   function kickPlayer(targetId) {
+    const czarId =
+      playerIDs.length > 0 &&
+      playerIDs.find((playerId) => players[playerId].isCzar);
+
     dispatch({
       type: 'KICK_PLAYER',
-      payload: { playerId: targetId },
+      payload: { playerId: targetId, czarId },
     });
   }
 

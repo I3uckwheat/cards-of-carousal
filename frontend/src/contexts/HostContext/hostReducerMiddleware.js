@@ -264,6 +264,16 @@ function sendEndOfGameMessages({ gameWinner, playerIDs }) {
   }
 }
 
+function removeDisconnectedPlayersCard({ czarId, playerId }) {
+  socketInstance.sendMessage({
+    event: 'remove-disconnected-players-card',
+    payload: {
+      playerId,
+    },
+    recipients: [czarId],
+  });
+}
+
 export default async function hostReducerMiddleware(
   { type, payload },
   dispatch,
@@ -292,6 +302,7 @@ export default async function hostReducerMiddleware(
       break;
 
     case 'KICK_PLAYER':
+      removeDisconnectedPlayersCard(payload);
       sendKickPlayerMessage(payload);
       break;
 
@@ -333,6 +344,10 @@ export default async function hostReducerMiddleware(
 
     case 'GAME_OVER':
       sendEndOfGameMessages(payload);
+      break;
+
+    case 'PLAYER_DISCONNECTED':
+      removeDisconnectedPlayersCard(payload);
       break;
 
     default:

@@ -48,7 +48,7 @@
     }
   },
   "lint-staged": {
-    "*.{js,css,md}": "prettier -c",
+    "*.{js,css}": "prettier -c",
     "*.js": "eslint"
   },
   "dependencies": {
