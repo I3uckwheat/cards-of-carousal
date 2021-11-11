@@ -179,10 +179,8 @@ function disconnectPlayer(state, { playerId }) {
 
   if (
     removingCzar &&
-    state.playerIDs.filter(
-      (id) =>
-        state.players[id].status === 'playing' ||
-        state.players[id].status === 'staging',
+    state.playerIDs.filter((id) =>
+      ['playing', 'staging'].includes(state.players[id].status),
     ).length > 1 &&
     !['game-over', 'showing-winning-cards'].includes(state.gameState)
   ) {
@@ -218,10 +216,8 @@ function kickPlayer(state, { playerId }) {
 
   if (
     removingCzar &&
-    newPlayerIds.filter(
-      (id) =>
-        state.players[id].status === 'playing' ||
-        state.players[id].status === 'staging',
+    newPlayerIds.filter((id) =>
+      ['playing', 'staging'].includes(state.players[id].status),
     ).length > 1 &&
     !['game-over', 'showing-winning-cards'].includes(state.gameState)
   ) {
