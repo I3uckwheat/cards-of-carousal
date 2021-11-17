@@ -1,0 +1,409 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PlayerList renders players with all possible statuses with correct stylings 1`] = `
+.c3 {
+  stroke: var(--primary-text-color);
+}
+
+.c5 {
+  stroke: var(--accent-text-color);
+}
+
+.c2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 486px;
+  padding: 40px;
+  background-color: var(--primary-background-color);
+  position: relative;
+}
+
+.c0 > div:not(:last-child) {
+  margin-bottom: 24px;
+}
+
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 100%;
+}
+
+.c1 .player-info {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  margin: 0 24px 0 26px;
+  padding: 7px 0;
+  border-bottom: 1px solid #ccc;
+  border-radius: 0;
+  background-color: var(--primary-background-color);
+}
+
+.c1 .player-info h1 {
+  text-transform: uppercase;
+  font-size: 24px;
+  font-weight: 900;
+  -webkit-letter-spacing: 1px;
+  -moz-letter-spacing: 1px;
+  -ms-letter-spacing: 1px;
+  letter-spacing: 1px;
+  line-height: 1.5em;
+  color: var(--primary-text-color);
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.c1 .player-info span {
+  color: var(--primary-text-color);
+  font-size: 24px;
+  font-weight: 900;
+}
+
+.c4 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 100%;
+}
+
+.c4 .player-info {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  margin: 0 12px 0 26px;
+  padding: 7px 12px;
+  border-bottom: 0;
+  border-radius: 4px;
+  background-color: var(--secondary-background-color);
+}
+
+.c4 .player-info h1 {
+  text-transform: uppercase;
+  font-size: 24px;
+  font-weight: 900;
+  -webkit-letter-spacing: 1px;
+  -moz-letter-spacing: 1px;
+  -ms-letter-spacing: 1px;
+  letter-spacing: 1px;
+  line-height: 1.5em;
+  color: var(--secondary-text-color);
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.c4 .player-info span {
+  color: var(--secondary-text-color);
+  font-size: 24px;
+  font-weight: 900;
+}
+
+.c6 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 100%;
+}
+
+.c6 .player-info {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  margin: 0 12px 0 26px;
+  padding: 7px 12px;
+  border-bottom: 0;
+  border-radius: 4px;
+  background-color: var(--secondary-background-color);
+}
+
+.c6 .player-info h1 {
+  text-transform: uppercase;
+  font-size: 24px;
+  font-weight: 900;
+  -webkit-letter-spacing: 1px;
+  -moz-letter-spacing: 1px;
+  -ms-letter-spacing: 1px;
+  letter-spacing: 1px;
+  line-height: 1.5em;
+  color: var(--secondary-text-color);
+  -webkit-text-decoration: line-through;
+  text-decoration: line-through;
+}
+
+.c6 .player-info span {
+  color: var(--secondary-text-color);
+  font-size: 24px;
+  font-weight: 900;
+}
+
+<div
+  className="c0"
+  data-testid="playerList-container"
+>
+  <div
+    className="c1"
+    data-testid="row-Foo"
+  >
+    <img
+      alt="card icon"
+      data-testid="icon-Foo"
+      src="offset-white-card-stack-icon.svg"
+      style={
+        Object {
+          "visibility": "visible",
+        }
+      }
+    />
+    <div
+      className="player-info"
+    >
+      <h1>
+        Foo
+      </h1>
+      <div
+        className="c2"
+      >
+        <svg
+          data-testid="tally-svg"
+          fill="none"
+          height="30"
+          viewBox="0 0 42 30"
+          width="42"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <g>
+            <path
+              className="c3"
+              color="primary"
+              d="M32.4285 3.19775V29.5701"
+              data-testid="tally"
+              strokeWidth="2"
+            />
+            <path
+              className="c3"
+              color="primary"
+              d="M25.4439 3.51099L23.2217 29.5966"
+              data-testid="tally"
+              strokeWidth="2"
+            />
+            <path
+              className="c3"
+              color="primary"
+              d="M16.5548 3.51099L14.3326 29.5966"
+              data-testid="tally"
+              strokeWidth="2"
+            />
+          </g>
+        </svg>
+      </div>
+    </div>
+  </div>
+  <div
+    className="c4"
+    data-testid="row-Bar"
+  >
+    <img
+      alt="card icon"
+      data-testid="icon-Bar"
+      src="black-card-icon.svg"
+      style={
+        Object {
+          "visibility": "visible",
+        }
+      }
+    />
+    <div
+      className="player-info"
+    >
+      <h1>
+        Bar
+      </h1>
+      <div
+        className="c2"
+      >
+        <svg
+          data-testid="tally-svg"
+          fill="none"
+          height="30"
+          viewBox="0 0 42 30"
+          width="42"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <g>
+            <path
+              className="c5"
+              color="secondary"
+              d="M32.4285 3.19775V29.5701"
+              data-testid="tally"
+              strokeWidth="2"
+            />
+            <path
+              className="c5"
+              color="secondary"
+              d="M25.4439 3.51099L23.2217 29.5966"
+              data-testid="tally"
+              strokeWidth="2"
+            />
+            <path
+              className="c5"
+              color="secondary"
+              d="M16.5548 3.51099L14.3326 29.5966"
+              data-testid="tally"
+              strokeWidth="2"
+            />
+            <path
+              className="c5"
+              color="secondary"
+              d="M7.66589 3.51099L5.44367 29.5966"
+              data-testid="tally"
+              strokeWidth="2"
+            />
+            <path
+              className="c5"
+              color="secondary"
+              d="M0.916168 0.599211L40.9161 29.1692"
+              data-testid="tally"
+              strokeWidth="2"
+            />
+          </g>
+        </svg>
+      </div>
+    </div>
+  </div>
+  <div
+    className="c6"
+    data-testid="row-Baz"
+  >
+    <img
+      alt="card icon"
+      data-testid="icon-Baz"
+      src="black-card-icon.svg"
+      style={
+        Object {
+          "visibility": "visible",
+        }
+      }
+    />
+    <div
+      className="player-info"
+    >
+      <h1>
+        Baz
+      </h1>
+      <div
+        className="c2"
+      >
+        <svg
+          data-testid="tally-svg"
+          fill="none"
+          height="30"
+          viewBox="0 0 42 30"
+          width="42"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <g>
+            <path
+              className="c5"
+              color="secondary"
+              d="M32.4285 3.19775V29.5701"
+              data-testid="tally"
+              strokeWidth="2"
+            />
+            <path
+              className="c5"
+              color="secondary"
+              d="M25.4439 3.51099L23.2217 29.5966"
+              data-testid="tally"
+              strokeWidth="2"
+            />
+            <path
+              className="c5"
+              color="secondary"
+              d="M16.5548 3.51099L14.3326 29.5966"
+              data-testid="tally"
+              strokeWidth="2"
+            />
+            <path
+              className="c5"
+              color="secondary"
+              d="M7.66589 3.51099L5.44367 29.5966"
+              data-testid="tally"
+              strokeWidth="2"
+            />
+            <path
+              className="c5"
+              color="secondary"
+              d="M0.916168 0.599211L40.9161 29.1692"
+              data-testid="tally"
+              strokeWidth="2"
+            />
+          </g>
+        </svg>
+      </div>
+    </div>
+  </div>
+</div>
+`;

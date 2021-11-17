@@ -135,11 +135,11 @@ function GameSettings({ options, onChange }) {
 
   useEffect(() => {
     setMinimumPlayerLimit(() =>
-      state.newPlayerStaging.length > config.maxPlayers.min
-        ? state.newPlayerStaging.length
+      state.playerIDs.length > config.maxPlayers.min
+        ? state.playerIDs.length
         : config.maxPlayers.min,
     );
-  }, [state.newPlayerStaging]);
+  }, [state.playerIDs]);
 
   function numInRange(n, min, max) {
     if (Math.min(n, min) !== min) return min;

@@ -56,7 +56,6 @@ describe('Host Winner Screen', () => {
       playerIDs: ['ID1', 'ID2', 'ID3'],
       gameSettings: { maxPlayers: 8, winningScore: 7, selectedPacks: [] },
       czarSelection: 'ID1',
-      newPlayerStaging: [],
     };
 
     it('renders', () => {
@@ -162,7 +161,6 @@ describe('Host Winner Screen', () => {
         winnerScreenDisplayTime: 3000,
       },
       czarSelection: 'ID1',
-      newPlayerStaging: [],
     };
 
     it('calls setTimeout once with a function and three second timer', async () => {

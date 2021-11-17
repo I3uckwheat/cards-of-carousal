@@ -29,7 +29,6 @@ const initialState = {
   },
   deck: { black: [], white: [] },
   loading: [],
-  newPlayerStaging: [],
   czarSelection: '',
 };
 
@@ -54,11 +53,7 @@ function HostProvider({ children }) {
     return ({ event, payload, sender }) => {
       switch (event) {
         case 'player-connected': {
-          const allPlayers = [
-            ...Object.values(currentState.players),
-            ...currentState.newPlayerStaging,
-          ];
-
+          const allPlayers = [...Object.values(currentState.players)];
           const isPlayerNameTaken = allPlayers.some(
             (player) =>
               player.name.toUpperCase() === payload.playerName.toUpperCase(),
@@ -119,19 +114,17 @@ function HostProvider({ children }) {
   }, [state]);
 
   useEffect(() => {
-    if (state.newPlayerStaging.length) {
+    const stagedPlayerIDs = state.playerIDs.filter(
+      (playerID) => state.players[playerID].status === 'staging',
+    );
+
+    if (stagedPlayerIDs.length) {
       const numberOfPlayersExceedingLimit =
-        state.playerIDs.length +
-        state.newPlayerStaging.length -
-        state.gameSettings.maxPlayers;
+        state.playerIDs.length - state.gameSettings.maxPlayers;
 
       if (numberOfPlayersExceedingLimit > 0) {
-        const playersExceedingLimit = state.newPlayerStaging.slice(
+        const playerIDsExceedingLimit = state.playerIDs.slice(
           -numberOfPlayersExceedingLimit,
-        );
-
-        const playerIDsExceedingLimit = playersExceedingLimit.map(
-          (player) => player.playerId,
         );
 
         dispatch({
@@ -141,10 +134,6 @@ function HostProvider({ children }) {
           },
         });
       } else {
-        const newPlayerIDs = state.newPlayerStaging.map(
-          (player) => player.playerId,
-        );
-
         const message =
           state.gameState === 'waiting-for-players'
             ? {
@@ -159,18 +148,20 @@ function HostProvider({ children }) {
         dispatch({
           type: 'SEND_PLAYER_CONNECTED_MESSAGES',
           payload: {
-            players: newPlayerIDs,
+            players: stagedPlayerIDs,
             message,
           },
         });
       }
     }
-  }, [state.newPlayerStaging]);
+  }, [state.playerIDs]);
 
   useEffect(() => {
+    // if there is one player AND they are not waiting for the game to begin, end the game
     if (
-      state.playerIDs.length === 1 &&
-      state.newPlayerStaging.length === 0 &&
+      state.playerIDs.filter(
+        (playerID) => state.players[playerID].status === 'playing',
+      ).length === 1 &&
       state.gameState !== 'game-over'
     ) {
       dispatch({

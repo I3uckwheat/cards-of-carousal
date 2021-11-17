@@ -51,11 +51,13 @@ const PlayerRow = styled.div`
         if (props.isCzar) {
           return 'var(--secondary-text-color)';
         }
-        if (props.isInStaging) {
+        if (props.faded) {
           return 'var(--accent-text-color)';
         }
         return 'var(--primary-text-color)';
       }};
+      text-decoration: ${(props) =>
+        props.isDisconnected ? 'line-through' : 'none'};
     }
 
     span {
@@ -70,12 +72,9 @@ const PlayerRow = styled.div`
 `;
 function PlayerList() {
   const { state } = useContext(HostContext);
-  const { playerIDs, players, newPlayerStaging } = state;
+  const { playerIDs, players } = state;
 
-  const playersArray = [
-    ...playerIDs.map((id) => players[id]),
-    ...newPlayerStaging,
-  ];
+  const playersArray = [...playerIDs.map((id) => players[id])];
 
   return (
     <PlayerTable data-testid="playerList-container">
@@ -89,7 +88,10 @@ function PlayerList() {
           <PlayerRow
             key={playerKey}
             isCzar={player.isCzar}
-            isInStaging={player.playerId}
+            faded={
+              player.status === 'staging' || player.status === 'disconnected'
+            }
+            isDisconnected={player.status === 'disconnected'}
             data-testid={`row-${player.name}`}
           >
             <img
@@ -104,6 +106,10 @@ function PlayerList() {
               <TallyCount
                 score={player.score}
                 color={player.isCzar ? 'secondary' : 'primary'}
+                faded={
+                  player.status === 'staging' ||
+                  player.status === 'disconnected'
+                }
               />
             </div>
           </PlayerRow>

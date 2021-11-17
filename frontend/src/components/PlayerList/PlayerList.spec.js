@@ -1,5 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
+import renderer from 'react-test-renderer';
 import { HostContext } from '../../contexts/HostContext/HostContext';
 
 import PlayerList from './PlayerList';
@@ -17,6 +18,7 @@ describe('PlayerList', () => {
             { text: 'test', pack: 0 },
             { text: 'test', pack: 0 },
           ],
+          status: 'playing',
         },
         playerID2: {
           name: 'Bar',
@@ -24,10 +26,10 @@ describe('PlayerList', () => {
           isCzar: true,
           submittedCards: [],
           cards: [],
+          status: 'playing',
         },
       },
       playerIDs: ['playerID1', 'playerID2'],
-      newPlayerStaging: [],
     };
 
     render(
@@ -40,13 +42,10 @@ describe('PlayerList', () => {
     expect(screen.getByText(state.players.playerID2.name)).toBeInTheDocument();
   });
 
-  it('renders players from the newPlayerStaging array', () => {
+  it('renders players with status of "playing" and "disconnected"', () => {
     const state = {
-      players: {},
-      playerIDs: [],
-      newPlayerStaging: [
-        {
-          playerId: 'playerID1',
+      players: {
+        playerID1: {
           name: 'Foo',
           score: 3,
           isCzar: false,
@@ -55,16 +54,26 @@ describe('PlayerList', () => {
             { text: 'test', pack: 0 },
             { text: 'test', pack: 0 },
           ],
+          status: 'playing',
         },
-        {
-          playerId: 'playerID2',
+        playerID2: {
           name: 'Bar',
           score: 5,
           isCzar: true,
           submittedCards: [],
           cards: [],
+          status: 'staging',
         },
-      ],
+        playerID3: {
+          name: 'Baz',
+          score: 5,
+          isCzar: true,
+          submittedCards: [],
+          cards: [],
+          status: 'disconnected',
+        },
+      },
+      playerIDs: ['playerID1', 'playerID2', 'playerID3'],
     };
 
     render(
@@ -74,11 +83,59 @@ describe('PlayerList', () => {
     );
 
     expect(
-      screen.getByText(state.newPlayerStaging[0].name),
+      screen.getByText(state.players[state.playerIDs[0]].name),
     ).toBeInTheDocument();
     expect(
-      screen.getByText(state.newPlayerStaging[1].name),
+      screen.getByText(state.players[state.playerIDs[1]].name),
     ).toBeInTheDocument();
+    expect(
+      screen.getByText(state.players[state.playerIDs[2]].name),
+    ).toBeInTheDocument();
+  });
+
+  it('renders players with all possible statuses with correct stylings', () => {
+    const state = {
+      players: {
+        playerID1: {
+          name: 'Foo',
+          score: 3,
+          isCzar: false,
+          submittedCards: [1, 4],
+          cards: [
+            { text: 'test', pack: 0 },
+            { text: 'test', pack: 0 },
+          ],
+          status: 'playing',
+        },
+        playerID2: {
+          name: 'Bar',
+          score: 5,
+          isCzar: true,
+          submittedCards: [],
+          cards: [],
+          status: 'staging',
+        },
+        playerID3: {
+          name: 'Baz',
+          score: 5,
+          isCzar: true,
+          submittedCards: [],
+          cards: [],
+          status: 'disconnected',
+        },
+      },
+      playerIDs: ['playerID1', 'playerID2', 'playerID3'],
+    };
+
+    const tree = renderer
+      .create(
+        <HostContext.Provider value={{ state }}>
+          <PlayerList />
+        </HostContext.Provider>,
+      )
+      .toJSON();
+
+    expect(tree).toMatchSnapshot();
   });
 
   it('If player has submitted his cards or player is czar, render the icon fully visible', () => {
@@ -103,7 +160,6 @@ describe('PlayerList', () => {
         },
       },
       playerIDs: ['playerID1', 'playerID2'],
-      newPlayerStaging: [],
     };
 
     render(
@@ -132,7 +188,6 @@ describe('PlayerList', () => {
         },
       },
       playerIDs: ['playerID1'],
-      newPlayerStaging: [],
     };
 
     render(
@@ -146,11 +201,10 @@ describe('PlayerList', () => {
     ).not.toBeVisible();
   });
 
-  it('If playerIDs and newPlayerStaging is empty, PlayerList still renders as an empty container', () => {
+  it('If playerIDs is empty, PlayerList still renders as an empty container', () => {
     const state = {
       players: {},
       playerIDs: [],
-      newPlayerStaging: [],
     };
 
     render(
@@ -181,7 +235,6 @@ describe('PlayerList', () => {
         },
       },
       playerIDs: ['playerID2', 'playerID1'],
-      newPlayerStaging: [],
     };
 
     render(

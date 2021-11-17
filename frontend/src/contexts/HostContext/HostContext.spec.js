@@ -71,12 +71,6 @@ describe('Context', () => {
           <div data-testid="lobby-id">{state.lobbyID}</div>
 
           <div>
-            {Object.keys(state.players).map((player) => (
-              <span data-testid="player">{player}</span>
-            ))}
-          </div>
-
-          <div>
             {state.playerIDs.map((playerID) => (
               <span data-testid="playerID">{playerID}</span>
             ))}
@@ -95,7 +89,6 @@ describe('Context', () => {
       'waiting-for-lobby',
     );
     expect(screen.getByTestId('lobby-id')).toHaveTextContent('');
-    expect(screen.queryAllByTestId('player').length).toBe(0);
     expect(screen.queryAllByTestId('playerID').length).toBe(0);
   });
 
@@ -115,8 +108,8 @@ describe('Context', () => {
             <div data-testid="lobby-id">{state.lobbyID}</div>
 
             <div>
-              {Object.keys(state.players).map((player) => (
-                <span data-testid="player">{player.name}</span>
+              {state.playerIDs.map((playerID) => (
+                <span data-testid="player">{state.players[playerID].name}</span>
               ))}
             </div>
 
@@ -142,7 +135,7 @@ describe('Context', () => {
     });
 
     describe('when the host receives a player-connected event', () => {
-      it('adds the player to player staging if their name is not already in staging', () => {
+      it('adds the new player to the players object', () => {
         const TestComponent = () => {
           const { state } = useContext(HostContext);
 
@@ -152,8 +145,8 @@ describe('Context', () => {
               <div data-testid="lobby-id">{state.lobbyID}</div>
 
               <div>
-                {state.newPlayerStaging.map(() => (
-                  <span data-testid="player-staging" />
+                {state.playerIDs.map(() => (
+                  <span data-testid="players" />
                 ))}
               </div>
             </>
@@ -168,7 +161,7 @@ describe('Context', () => {
           </HostProvider>,
         );
 
-        expect(screen.queryAllByTestId('player-staging').length).toBe(0);
+        expect(screen.queryAllByTestId('players').length).toBe(0);
 
         act(() => {
           eventHandlers.message({
@@ -177,10 +170,10 @@ describe('Context', () => {
           });
         });
 
-        expect(screen.queryAllByTestId('player-staging').length).toBe(1);
+        expect(screen.queryAllByTestId('players').length).toBe(1);
       });
 
-      it('does not add the player to player staging if their name is already in staging', () => {
+      it('assigns proper status property to new players', () => {
         const TestComponent = () => {
           const { state } = useContext(HostContext);
 
@@ -190,8 +183,12 @@ describe('Context', () => {
               <div data-testid="lobby-id">{state.lobbyID}</div>
 
               <div>
-                {state.newPlayerStaging.map(() => (
-                  <span data-testid="player-staging" />
+                {state.playerIDs.map((playerID) => (
+                  <>
+                    <span data-testid="player-status">
+                      {state.players[playerID].status}
+                    </span>
+                  </>
                 ))}
               </div>
             </>
@@ -213,7 +210,45 @@ describe('Context', () => {
           });
         });
 
-        expect(screen.queryAllByTestId('player-staging').length).toBe(1);
+        expect(screen.getByTestId('player-status')).toHaveTextContent(
+          'staging',
+        );
+      });
+
+      it('does not add the player to players object if their name is already being used', () => {
+        const TestComponent = () => {
+          const { state } = useContext(HostContext);
+
+          return (
+            <>
+              <div data-testid="game-state">{state.gameState}</div>
+              <div data-testid="lobby-id">{state.lobbyID}</div>
+
+              <div>
+                {state.playerIDs.map(() => (
+                  <span data-testid="players" />
+                ))}
+              </div>
+            </>
+          );
+        };
+
+        const { eventHandlers } = setupEmitterMocks();
+
+        render(
+          <HostProvider>
+            <TestComponent />
+          </HostProvider>,
+        );
+
+        act(() => {
+          eventHandlers.message({
+            event: 'player-connected',
+            payload: { playerId: 'TEST', playerName: 'TESTER' },
+          });
+        });
+
+        expect(screen.queryAllByTestId('players').length).toBe(1);
 
         act(() => {
           eventHandlers.message({
@@ -222,10 +257,10 @@ describe('Context', () => {
           });
         });
 
-        expect(screen.queryAllByTestId('player-staging').length).toBe(1);
+        expect(screen.queryAllByTestId('players').length).toBe(1);
       });
 
-      it('does not add the player to player staging if their name is already in staging in a different case', () => {
+      it('does not add the player if their name is already being used in a different case', () => {
         const TestComponent = () => {
           const { state } = useContext(HostContext);
 
@@ -235,8 +270,8 @@ describe('Context', () => {
               <div data-testid="lobby-id">{state.lobbyID}</div>
 
               <div>
-                {state.newPlayerStaging.map(() => (
-                  <span data-testid="player-staging" />
+                {state.playerIDs.map(() => (
+                  <span data-testid="players" />
                 ))}
               </div>
             </>
@@ -258,7 +293,7 @@ describe('Context', () => {
           });
         });
 
-        expect(screen.queryAllByTestId('player-staging').length).toBe(1);
+        expect(screen.queryAllByTestId('players').length).toBe(1);
 
         act(() => {
           eventHandlers.message({
@@ -267,7 +302,7 @@ describe('Context', () => {
           });
         });
 
-        expect(screen.queryAllByTestId('player-staging').length).toBe(1);
+        expect(screen.queryAllByTestId('players').length).toBe(1);
       });
 
       it('sends a message informing the rejected player that they need to use a different name', () => {
@@ -280,7 +315,7 @@ describe('Context', () => {
               <div data-testid="lobby-id">{state.lobbyID}</div>
 
               <div>
-                {state.newPlayerStaging.map(() => (
+                {state.playerIDs.map(() => (
                   <span data-testid="player-staging" />
                 ))}
               </div>
@@ -320,70 +355,6 @@ describe('Context', () => {
         });
       });
 
-      it('does not add the player to player staging if their name is already in the game (not staging)', () => {
-        const TestComponent = () => {
-          const { state, dispatch } = useContext(HostContext);
-
-          useEffect(() => {
-            if (state.newPlayerStaging.length) {
-              dispatch({ type: 'ADD_PLAYERS_FROM_STAGING', payload: {} });
-            }
-          }, [state.newPlayerStaging]);
-
-          return (
-            <>
-              <div data-testid="game-state">{state.gameState}</div>
-              <div data-testid="lobby-id">{state.lobbyID}</div>
-
-              <div>
-                {state.newPlayerStaging.map(() => (
-                  <span data-testid="player-staging" />
-                ))}
-              </div>
-
-              <div>
-                {state.playerIDs.map(() => (
-                  <span data-testid="player-ids" />
-                ))}
-              </div>
-            </>
-          );
-        };
-
-        const { eventHandlers } = setupEmitterMocks();
-
-        render(
-          <HostProvider>
-            <TestComponent />
-          </HostProvider>,
-        );
-
-        act(() => {
-          eventHandlers.message({
-            event: 'player-connected',
-            payload: { playerId: 'TEST', playerName: 'TESTER' },
-          });
-
-          eventHandlers.message({
-            event: 'player-connected',
-            payload: { playerId: 'TEST3', playerName: 'TESTER2' },
-          });
-        });
-
-        expect(screen.queryAllByTestId('player-staging').length).toBe(0);
-        expect(screen.getAllByTestId('player-ids').length).toBe(2);
-
-        act(() => {
-          eventHandlers.message({
-            event: 'player-connected',
-            payload: { id: 'TEST2', playerName: 'TESTER2' },
-          });
-        });
-
-        expect(screen.queryAllByTestId('player-staging').length).toBe(0);
-        expect(screen.getAllByTestId('player-ids').length).toBe(2);
-      });
-
       it('tells the middleware to tell the player to wait while they join the lobby', () => {
         const TestComponent = () => {
           const { state, dispatch } = useContext(HostContext);
@@ -401,8 +372,8 @@ describe('Context', () => {
               <div data-testid="lobby-id">{state.lobbyID}</div>
 
               <div>
-                {state.newPlayerStaging.map((player) => (
-                  <span key={player} data-testid="player-staging" />
+                {state.playerIDs.map((playerID) => (
+                  <span key={playerID} data-testid="player-staging" />
                 ))}
               </div>
             </>
@@ -540,10 +511,8 @@ describe('Context', () => {
         const { state, dispatch } = useContext(HostContext);
 
         useEffect(() => {
-          if (state.newPlayerStaging.length) {
-            dispatch({ type: 'ADD_PLAYERS_FROM_STAGING', payload: {} });
-          }
-        }, [state.newPlayerStaging]);
+          dispatch({ type: 'ADD_PLAYERS_FROM_STAGING', payload: {} });
+        }, [state.players]);
 
         return (
           <>
@@ -551,8 +520,10 @@ describe('Context', () => {
             <div data-testid="lobby-id">{state.lobbyID}</div>
 
             <div>
-              {Object.keys(state.players).map(() => (
-                <span data-testid="player" />
+              {state.playerIDs.map((playerID) => (
+                <span data-testid="player-status">
+                  {state.players[playerID].status}
+                </span>
               ))}
             </div>
 
@@ -580,8 +551,7 @@ describe('Context', () => {
         });
       });
 
-      expect(screen.queryAllByTestId('player').length).toBe(1);
-      expect(screen.queryAllByTestId('playerID').length).toBe(1);
+      expect(screen.getByTestId('player-status')).toHaveTextContent('playing');
 
       act(() => {
         eventHandlers.message({
@@ -590,8 +560,10 @@ describe('Context', () => {
         });
       });
 
-      expect(screen.queryAllByTestId('player').length).toBe(0);
-      expect(screen.queryAllByTestId('playerID').length).toBe(0);
+      expect(screen.getByTestId('player-status')).toHaveTextContent(
+        'disconnected',
+      );
+      expect(screen.queryAllByTestId('playerID').length).toBe(1);
     });
 
     it('catches join-code-shuffled events and updates state with the new join code', () => {

@@ -5,13 +5,18 @@ import styled from 'styled-components';
 const propTypes = {
   color: PropTypes.oneOf(['primary', 'secondary']).isRequired,
   tallyCount: PropTypes.number.isRequired,
+  faded: PropTypes.bool,
 };
 
 const StyledPath = styled.path`
-  stroke: ${(props) =>
-    props.color === 'primary'
+  stroke: ${(props) => {
+    if (props.faded) {
+      return 'var(--accent-text-color)';
+    }
+    return props.color === 'primary'
       ? 'var(--primary-text-color)'
-      : 'var(--secondary-text-color)'};
+      : 'var(--secondary-text-color)';
+  }};
 `;
 
 const tallyPaths = [
@@ -22,7 +27,7 @@ const tallyPaths = [
   'M0.916168 0.599211L40.9161 29.1692',
 ];
 
-function TallyGroup({ color, tallyCount }) {
+function TallyGroup({ color, tallyCount, faded }) {
   return (
     <svg
       data-testid="tally-svg"
@@ -37,6 +42,7 @@ function TallyGroup({ color, tallyCount }) {
           <StyledPath
             key={tallyPath}
             color={color}
+            faded={faded}
             d={tallyPath}
             strokeWidth="2"
             data-testid="tally"
@@ -48,5 +54,6 @@ function TallyGroup({ color, tallyCount }) {
 }
 
 TallyGroup.propTypes = propTypes;
+TallyGroup.defaultProps = { faded: false };
 
 export default TallyGroup;
