@@ -209,7 +209,7 @@ exports[`App snapshots should initially show the welcome screen 1`] = `
   }
 }
 
-@media (min-width:600px) {
+@media (min-width:) {
   .c3 {
     height: 90px;
   }
@@ -220,7 +220,7 @@ exports[`App snapshots should initially show the welcome screen 1`] = `
   }
 }
 
-@media (min-width:1600px) {
+@media (min-width:) {
   .c3 {
     height: 110px;
   }
@@ -231,7 +231,7 @@ exports[`App snapshots should initially show the welcome screen 1`] = `
   }
 }
 
-@media (min-width:3200px) {
+@media (min-width:) {
   .c3 {
     height: 122px;
     padding-right: 16px;
@@ -520,15 +520,15 @@ exports[`App snapshots should show the host screen after user has clicked the "h
 
 }
 
-@media (min-width:600px) {
+@media (min-width:) {
 
 }
 
-@media (min-width:1600px) {
+@media (min-width:) {
 
 }
 
-@media (min-width:3200px) {
+@media (min-width:) {
 
 }
 
@@ -1108,15 +1108,15 @@ exports[`App snapshots should show the host screen after user has clicked the "h
 
 }
 
-@media (min-width:600px) {
+@media (min-width:) {
 
 }
 
-@media (min-width:1600px) {
+@media (min-width:) {
 
 }
 
-@media (min-width:3200px) {
+@media (min-width:) {
 
 }
 
@@ -1785,7 +1785,7 @@ exports[`App snapshots should show the player screen after user has clicked the 
   }
 }
 
-@media (min-width:600px) {
+@media (min-width:) {
   .c4 {
     height: 90px;
   }
@@ -1796,7 +1796,7 @@ exports[`App snapshots should show the player screen after user has clicked the 
   }
 }
 
-@media (min-width:1600px) {
+@media (min-width:) {
   .c4 {
     height: 110px;
   }
@@ -1807,7 +1807,7 @@ exports[`App snapshots should show the player screen after user has clicked the 
   }
 }
 
-@media (min-width:3200px) {
+@media (min-width:) {
   .c4 {
     height: 122px;
     padding-right: 16px;
@@ -2297,7 +2297,7 @@ exports[`App snapshots should show the welcome screen after user has clicked ele
   }
 }
 
-@media (min-width:600px) {
+@media (min-width:) {
   .c3 {
     height: 90px;
   }
@@ -2308,7 +2308,7 @@ exports[`App snapshots should show the welcome screen after user has clicked ele
   }
 }
 
-@media (min-width:1600px) {
+@media (min-width:) {
   .c3 {
     height: 110px;
   }
@@ -2319,7 +2319,7 @@ exports[`App snapshots should show the welcome screen after user has clicked ele
   }
 }
 
-@media (min-width:3200px) {
+@media (min-width:) {
   .c3 {
     height: 122px;
     padding-right: 16px;
