@@ -224,7 +224,7 @@ exports[`PlayerJoin snapshot matches 1`] = `
   }
 }
 
-@media (min-width:600px) {
+@media (min-width:) {
   .c4 {
     height: 90px;
   }
@@ -235,7 +235,7 @@ exports[`PlayerJoin snapshot matches 1`] = `
   }
 }
 
-@media (min-width:1600px) {
+@media (min-width:) {
   .c4 {
     height: 110px;
   }
@@ -246,7 +246,7 @@ exports[`PlayerJoin snapshot matches 1`] = `
   }
 }
 
-@media (min-width:3200px) {
+@media (min-width:) {
   .c4 {
     height: 122px;
     padding-right: 16px;

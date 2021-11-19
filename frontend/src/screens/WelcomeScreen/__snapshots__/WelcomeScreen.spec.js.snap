@@ -209,7 +209,7 @@ exports[`WelcomeScreen render renders correctly 1`] = `
   }
 }
 
-@media (min-width:600px) {
+@media (min-width:) {
   .c3 {
     height: 90px;
   }
@@ -220,7 +220,7 @@ exports[`WelcomeScreen render renders correctly 1`] = `
   }
 }
 
-@media (min-width:1600px) {
+@media (min-width:) {
   .c3 {
     height: 110px;
   }
@@ -231,7 +231,7 @@ exports[`WelcomeScreen render renders correctly 1`] = `
   }
 }
 
-@media (min-width:3200px) {
+@media (min-width:) {
   .c3 {
     height: 122px;
     padding-right: 16px;
