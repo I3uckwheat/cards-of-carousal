@@ -38,9 +38,10 @@ function App() {
         <WelcomeScreen
           handleJoinClick={() => {
             // prevent devices from sleeping
-            const noSleep = new NoSleep();
-            noSleep.enable();
-            setScreenControllerType('player');
+            // Uncomment below to unbreak
+            // const noSleep = new NoSleep();
+            // noSleep.enable();
+            // setScreenControllerType('player');
           }}
           handleHostClick={() => {
             requestFullscreen();
