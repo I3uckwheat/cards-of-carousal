@@ -1,7 +1,7 @@
 name: Tests and Linter
 on:
   pull_request:
-    branches: [ gh-actions-testing ]
+    branches: [ main ]
 jobs:
   Test-And-Lint:
     runs-on: ubuntu-latest
