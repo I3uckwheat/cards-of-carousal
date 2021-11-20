@@ -1,14 +1,10 @@
-name: Tests
+name: Tests and Linter
 on:
-  push:
-    branches: [ gh-actions-testing ]
   pull_request:
     branches: [ gh-actions-testing ]
 jobs:
-  Explore-GitHub-Actions:
-
+  Test-And-Lint:
     runs-on: ubuntu-latest
-
     strategy:
       matrix:
         node-version: [14.x]
