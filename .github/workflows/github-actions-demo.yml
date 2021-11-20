@@ -2,7 +2,7 @@ name: Tests
 on:
   push:
     branches: [ gh-actions-testing ]
-  pull_requests:
+  pull_request:
     branches: [ gh-actions-testing ]
 jobs:
   Explore-GitHub-Actions:
