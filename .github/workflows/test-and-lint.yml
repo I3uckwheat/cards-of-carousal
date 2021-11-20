@@ -1,0 +1,19 @@
+name: Tests and Linter
+on:
+  pull_request:
+    branches: [ main ]
+jobs:
+  Test-And-Lint:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14.x]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: npm run install-all
+      - run: npm run test
+      - run: npm run lint
