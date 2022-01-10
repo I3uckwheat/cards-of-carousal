@@ -88,6 +88,39 @@ function dealWhiteCards(state) {
   };
 }
 
+function playerReconnected(
+  state,
+  { playerId: reconnectingPlayerId, playerName },
+) {
+  const oldPlayerIdIndex = state.playerIDs.findIndex(
+    (playerId) => state.players[playerId].name === playerName,
+  );
+  const oldPlayerId = state.playerIDs[oldPlayerIdIndex];
+  const reconnectingPlayerData = {
+    ...state.players[oldPlayerId],
+    status: 'staging',
+  };
+  const nonReconnectingPlayerIds = state.playerIDs.filter(
+    (id) => id !== oldPlayerId,
+  );
+
+  const newPlayerIds = [...nonReconnectingPlayerIds];
+  newPlayerIds.splice(oldPlayerIdIndex, 0, reconnectingPlayerId);
+
+  const newPlayersData = newPlayerIds.reduce((acc, playerId) => {
+    // This is essentially how we are re-assigning the ID of the existing player reconnecting
+    if (reconnectingPlayerId === playerId)
+      return { ...acc, [playerId]: reconnectingPlayerData };
+    return { ...acc, [playerId]: state.players[playerId] };
+  }, {});
+
+  return {
+    ...state,
+    players: newPlayersData,
+    playerIDs: newPlayerIds,
+  };
+}
+
 function playerConnected(state, { playerId, playerName }) {
   // push the new player to the players object, but do not put them in play yet
   const newPlayer = {
@@ -448,6 +481,9 @@ function HostReducer(state, action) {
 
     case 'PLAYER_CONNECTED':
       return playerConnected(state, payload);
+
+    case 'PLAYER_RECONNECTED':
+      return playerReconnected(state, payload);
 
     case 'PLAYER_DISCONNECTED':
       return disconnectPlayer(state, payload);

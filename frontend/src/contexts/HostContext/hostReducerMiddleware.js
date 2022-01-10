@@ -290,6 +290,7 @@ export default async function hostReducerMiddleware(
       createLobby();
       break;
 
+    case 'PLAYER_RECONNECTED':
     case 'PLAYER_CONNECTED':
       playerConnected(payload);
       break;

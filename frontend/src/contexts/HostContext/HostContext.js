@@ -54,16 +54,20 @@ function HostProvider({ children }) {
       switch (event) {
         case 'player-connected': {
           const allPlayers = [...Object.values(currentState.players)];
-          const isPlayerNameTaken = allPlayers.some(
+          const existingPlayer = allPlayers.find(
             (player) =>
               player.name.toUpperCase() === payload.playerName.toUpperCase(),
           );
 
-          if (isPlayerNameTaken) {
-            return dispatch({ type: 'SEND_NAME_TAKEN_MESSAGE', payload });
+          if (!existingPlayer) {
+            return dispatch({ type: 'PLAYER_CONNECTED', payload });
           }
 
-          return dispatch({ type: 'PLAYER_CONNECTED', payload });
+          if (existingPlayer.status === 'disconnected') {
+            return dispatch({ type: 'PLAYER_RECONNECTED', payload });
+          }
+
+          return dispatch({ type: 'SEND_NAME_TAKEN_MESSAGE', payload });
         }
         case 'player-disconnected':
           return dispatch({
