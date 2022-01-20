@@ -95,11 +95,15 @@ function playerReconnected(
   const oldPlayerIdIndex = state.playerIDs.findIndex(
     (playerId) => state.players[playerId].name === playerName,
   );
+
   const oldPlayerId = state.playerIDs[oldPlayerIdIndex];
+
   const reconnectingPlayerData = {
     ...state.players[oldPlayerId],
+    oldIds: [...state.players[oldPlayerId].oldIds, oldPlayerId],
     status: 'staging',
   };
+
   const nonReconnectingPlayerIds = state.playerIDs.filter(
     (id) => id !== oldPlayerId,
   );
@@ -114,10 +118,18 @@ function playerReconnected(
     return { ...acc, [playerId]: state.players[playerId] };
   }, {});
 
+  // If the czar has selected a card to preview, we need to change this to the new Id to prevent
+  // the player from being undefined when the submit button is pressed
+  const czarSelection =
+    state.czarSelection === oldPlayerId
+      ? reconnectingPlayerId
+      : state.czarSelection;
+
   return {
     ...state,
     players: newPlayersData,
     playerIDs: newPlayerIds,
+    czarSelection,
   };
 }
 
@@ -130,7 +142,9 @@ function playerConnected(state, { playerId, playerName }) {
     submittedCards: [0],
     cards: [],
     status: 'staging',
+    oldIds: [],
   };
+
   return {
     ...state,
     players: {
@@ -281,10 +295,15 @@ function czarSelectWinner(state) {
 }
 
 function previewWinner(state, { highlightedPlayerID }) {
+  const selectedPlayerId = state.playerIDs.find((playerId) => {
+    if (highlightedPlayerID === playerId) return true;
+    return state.players[playerId].oldIds.includes(highlightedPlayerID);
+  });
+
   if (state.gameState === 'selecting-winner') {
     return {
       ...state,
-      czarSelection: highlightedPlayerID,
+      czarSelection: selectedPlayerId,
     };
   }
   return {
@@ -292,7 +311,7 @@ function previewWinner(state, { highlightedPlayerID }) {
   };
 }
 
-function winnerSelected(state) {
+function selectWinner(state) {
   const roundWinner = state.players[state.czarSelection];
 
   return {
@@ -502,7 +521,7 @@ function HostReducer(state, action) {
       return previewWinner(state, payload);
 
     case 'WINNER_SELECTED':
-      return winnerSelected(state);
+      return selectWinner(state);
 
     case 'SET_LOBBY_ID':
       return setLobbyId(state, payload);
