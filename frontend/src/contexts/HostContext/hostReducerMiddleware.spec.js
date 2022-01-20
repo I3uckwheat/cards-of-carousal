@@ -136,27 +136,6 @@ describe('hostReducerMiddleware', () => {
     });
   });
 
-  describe('PLAYER_DISCONNECTED', () => {
-    it("calls socketInstance's sendMessage with a remove disconnected players card message", () => {
-      const dispatch = jest.fn();
-
-      hostReducerMiddleware(
-        {
-          type: 'PLAYER_DISCONNECTED',
-          payload: { playerId: 'example-player-id', czarId: 'example-czar-id' },
-        },
-        dispatch,
-      );
-      expect(socketInstance.sendMessage).toHaveBeenCalledWith({
-        event: 'remove-disconnected-players-card',
-        recipients: ['example-czar-id'],
-        payload: {
-          playerId: 'example-player-id',
-        },
-      });
-    });
-  });
-
   describe('sendNameTakenMessage', () => {
     it("calls socketInstance's sendMessage with a connection-refused-name-taken gameState and joining-lobby removeLoading", () => {
       const dispatch = jest.fn();

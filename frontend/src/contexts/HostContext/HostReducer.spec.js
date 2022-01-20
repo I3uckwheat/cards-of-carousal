@@ -175,6 +175,7 @@ describe('reducer', () => {
         isCzar: false,
         score: 0,
         status: 'staging',
+        oldIds: [],
       });
     });
   });
@@ -1384,6 +1385,7 @@ describe('reducer', () => {
             isCzar: false,
             submittedCards: [0, 1],
             cards: ['aaaa', 'bbbb', 'cccc', 'dddd'],
+            oldIds: [],
           },
           ID2: {
             name: 'bar',
@@ -1391,6 +1393,7 @@ describe('reducer', () => {
             isCzar: true,
             submittedCards: [],
             cards: [],
+            oldIds: [],
           },
           ID3: {
             name: 'baz',
@@ -1398,6 +1401,7 @@ describe('reducer', () => {
             isCzar: false,
             submittedCards: [1, 2],
             cards: ['eeee', 'ffff', 'gggg', 'hhhh'],
+            oldIds: [],
           },
         },
 
@@ -1408,7 +1412,7 @@ describe('reducer', () => {
 
       const result = HostReducer(state, {
         type: 'PREVIEW_WINNER',
-        payload: { highlightedPlayerID: 'baz' },
+        payload: { highlightedPlayerID: 'ID1' },
       });
 
       expect(result).toMatchObject({
@@ -1435,7 +1439,7 @@ describe('reducer', () => {
             cards: ['eeee', 'ffff', 'gggg', 'hhhh'],
           },
         },
-        czarSelection: 'baz',
+        czarSelection: 'ID1',
         gameState: 'selecting-winner',
         playerIDs: ['ID1', 'ID2', 'ID3'],
       });
@@ -1449,6 +1453,7 @@ describe('reducer', () => {
             isCzar: false,
             submittedCards: [0, 1],
             cards: ['aaaa', 'bbbb', 'cccc', 'dddd'],
+            oldIds: [],
           },
           ID2: {
             name: 'bar',
@@ -1456,6 +1461,7 @@ describe('reducer', () => {
             isCzar: true,
             submittedCards: [],
             cards: [],
+            oldIds: [],
           },
           ID3: {
             name: 'baz',
@@ -1463,6 +1469,7 @@ describe('reducer', () => {
             isCzar: false,
             submittedCards: [1, 2],
             cards: ['eeee', 'ffff', 'gggg', 'hhhh'],
+            oldIds: [],
           },
         },
         gameState: 'showing-winners',
@@ -1483,6 +1490,7 @@ describe('reducer', () => {
             isCzar: false,
             submittedCards: [0, 1],
             cards: ['aaaa', 'bbbb', 'cccc', 'dddd'],
+            oldIds: [],
           },
           ID2: {
             name: 'bar',
@@ -1490,6 +1498,7 @@ describe('reducer', () => {
             isCzar: true,
             submittedCards: [],
             cards: [],
+            oldIds: [],
           },
           ID3: {
             name: 'baz',
@@ -1497,6 +1506,7 @@ describe('reducer', () => {
             isCzar: false,
             submittedCards: [1, 2],
             cards: ['eeee', 'ffff', 'gggg', 'hhhh'],
+            oldIds: [],
           },
         },
         gameState: 'showing-winners',
