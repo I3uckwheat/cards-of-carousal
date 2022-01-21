@@ -176,6 +176,7 @@ describe('reducer', () => {
         score: 0,
         status: 'staging',
         oldIds: [],
+        hasSubmittedCards: false,
       });
     });
   });

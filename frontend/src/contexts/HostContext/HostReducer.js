@@ -98,10 +98,14 @@ function playerReconnected(
 
   const oldPlayerId = state.playerIDs[oldPlayerIdIndex];
 
+  const playerStatus = state.players[oldPlayerId].hasSubmittedCards
+    ? 'staging'
+    : 're-connected';
+
   const reconnectingPlayerData = {
     ...state.players[oldPlayerId],
     oldIds: [...state.players[oldPlayerId].oldIds, oldPlayerId],
-    status: 're-connected',
+    status: playerStatus,
   };
 
   const nonReconnectingPlayerIds = state.playerIDs.filter(
@@ -140,6 +144,7 @@ function playerConnected(state, { playerId, playerName }) {
     score: 0,
     isCzar: false,
     submittedCards: [0],
+    hasSubmittedCards: false,
     cards: [],
     status: 'staging',
     oldIds: [],
@@ -163,6 +168,7 @@ function playerSubmitCards(state, { selectedCards, playerId }) {
       [playerId]: {
         ...state.players[playerId],
         submittedCards: selectedCards,
+        hasSubmittedCards: true,
       },
     },
   };
@@ -195,6 +201,7 @@ function removeSubmittedCards(state) {
       [playerId]: {
         ...player,
         cards: newCards,
+        hasSubmittedCards: false,
       },
     };
   }, {});

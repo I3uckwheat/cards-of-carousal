@@ -178,7 +178,10 @@ function czarSelectWinner({ players, playerIDs }) {
   const czar = playerIDs.find((playerID) => players[playerID].isCzar);
   const notCzars = playerIDs.filter(
     (playerID) =>
-      !players[playerID].isCzar && players[playerID].status === 'playing',
+      !players[playerID].isCzar &&
+      (players[playerID].status === 'playing' ||
+        (players[playerID].status === 'staging' &&
+          players[playerID].hasSubmittedCards)),
   );
 
   // gather all players submitted cards
