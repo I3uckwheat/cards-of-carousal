@@ -193,7 +193,7 @@ function HostProvider({ children }) {
         payload: { gameWinner: state.playerIDs[0], playerIDs: state.playerIDs },
       });
     }
-  }, [state.playerIDs]);
+  }, [state.playerIDs, state.players]);
 
   return (
     <HostContext.Provider value={{ state, dispatch }}>
