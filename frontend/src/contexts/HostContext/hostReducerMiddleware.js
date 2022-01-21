@@ -323,7 +323,8 @@ export default async function hostReducerMiddleware(
     }
 
     case 'SEND_CARDS_TO_PLAYERS':
-      return sendCardsToPlayers(payload);
+      sendCardsToPlayers(payload);
+      break;
 
     case 'SHUFFLE_JOIN_CODE':
       sendShuffleJoinCodeMessage();

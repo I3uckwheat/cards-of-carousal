@@ -122,6 +122,26 @@ function HostProvider({ children }) {
       (playerID) => state.players[playerID].status === 'staging',
     );
 
+    const reconnectingPlayersIds = state.playerIDs.filter(
+      (playerID) => state.players[playerID].status === 're-connected',
+    );
+
+    if (reconnectingPlayersIds.length > 0) {
+      const reConnectingPlayers = reconnectingPlayersIds.reduce(
+        (acc, id) => ({ ...acc, [id]: state.players[id] }),
+        {},
+      );
+
+      dispatch({
+        type: 'SEND_CARDS_TO_PLAYERS',
+        payload: {
+          selectedBlackCard: state.selectedBlackCard,
+          players: reConnectingPlayers,
+          playerIDs: reconnectingPlayersIds,
+        },
+      });
+    }
+
     if (stagedPlayerIDs.length) {
       const numberOfPlayersExceedingLimit =
         state.playerIDs.length - state.gameSettings.maxPlayers;

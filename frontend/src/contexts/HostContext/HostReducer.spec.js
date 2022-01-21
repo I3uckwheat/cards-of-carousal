@@ -298,7 +298,7 @@ describe('reducer', () => {
       expect(result.players['foo-reconnect'].oldIds).toContain('foo');
     });
 
-    it('sets the reconnected player\'s status to "staging"', () => {
+    it('sets the reconnected player\'s status to "re-connected"', () => {
       const state = {
         players: {
           foo: { id: 'foo', name: 'foo', status: 'disconnected', oldIds: [] },
@@ -313,7 +313,7 @@ describe('reducer', () => {
         payload: { playerId: 'foo-reconnect', playerName: 'foo' },
       });
 
-      expect(result.players['foo-reconnect'].status).toBe('staging');
+      expect(result.players['foo-reconnect'].status).toBe('re-connected');
     });
 
     it("updates the Czar's selection if it matches the reconnecting player's old id", () => {

@@ -101,7 +101,7 @@ function playerReconnected(
   const reconnectingPlayerData = {
     ...state.players[oldPlayerId],
     oldIds: [...state.players[oldPlayerId].oldIds, oldPlayerId],
-    status: 'staging',
+    status: 're-connected',
   };
 
   const nonReconnectingPlayerIds = state.playerIDs.filter(
@@ -233,7 +233,7 @@ function disconnectPlayer(state, { playerId }) {
   ) {
     return dealWhiteCards(
       clearSubmittedCards(
-        addPlayersFromStaging(
+        setPlayersToPlaying(
           removeSubmittedCards(setNextCzar(setBlackCard(newState))),
         ),
       ),
@@ -270,7 +270,7 @@ function kickPlayer(state, { playerId }) {
   ) {
     return dealWhiteCards(
       clearSubmittedCards(
-        addPlayersFromStaging(
+        setPlayersToPlaying(
           removeSubmittedCards(setNextCzar(setBlackCard(newState))),
         ),
       ),
@@ -454,11 +454,12 @@ function updateJoinCode(state, { lobbyID }) {
   };
 }
 
-function addPlayersFromStaging(state) {
+function setPlayersToPlaying(state) {
   const newState = { ...state };
 
   newState.playerIDs.forEach((player) => {
-    if (newState.players[player].status === 'staging') {
+    const playerStatus = newState.players[player].status;
+    if (playerStatus === 'staging' || playerStatus === 're-connected') {
       newState.players[player].status = 'playing';
     }
   });
@@ -547,6 +548,9 @@ function HostReducer(state, action) {
     case 'DEAL_WHITE_CARDS':
       return dealWhiteCards(clearSubmittedCards(state));
 
+    case 'SEND_CARDS_TO_PLAYERS':
+      return setPlayersToPlaying(state);
+
     case 'REMOVE_SUBMITTED_CARDS_FROM_PLAYER':
       return removeSubmittedCards(state);
 
@@ -557,7 +561,7 @@ function HostReducer(state, action) {
       return updateJoinCode(state, payload);
 
     case 'ADD_PLAYERS_FROM_STAGING':
-      return addPlayersFromStaging(state);
+      return setPlayersToPlaying(state);
 
     case 'TOGGLE_JOIN_CODE_VISIBILITY':
       return toggleJoinCode(state);
