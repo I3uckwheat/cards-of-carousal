@@ -258,6 +258,102 @@ describe('reducer', () => {
     });
   });
 
+  describe('PLAYER_RECONNECTED', () => {
+    it('Replaces the existing userId for the new player', () => {
+      const state = {
+        players: {
+          foo: { id: 'foo', name: 'foo', status: 'playing', oldIds: [] },
+          bar: { id: 'bar', name: 'bar', status: 'playing', oldIds: [] },
+          baz: { id: 'baz', name: 'baz', status: 'disconnected', oldIds: [] },
+        },
+        playerIDs: ['foo', 'bar', 'baz'],
+      };
+
+      const result = HostReducer(state, {
+        type: 'PLAYER_RECONNECTED',
+        payload: { playerId: 'baz-reconnect', playerName: 'baz' },
+      });
+
+      expect(result.players.baz).toBeUndefined();
+      expect(result.playerIDs.length).toBe(3);
+      expect(result.players['baz-reconnect'].name).toBe('baz');
+      expect(result.playerIDs).not.toContain('baz');
+    });
+
+    it('appends the old ID for the player in the oldIds array', () => {
+      const state = {
+        players: {
+          foo: { id: 'foo', name: 'foo', status: 'disconnected', oldIds: [] },
+          bar: { id: 'bar', name: 'bar', status: 'playing', oldIds: [] },
+          baz: { id: 'baz', name: 'baz', status: 'playing', oldIds: [] },
+        },
+        playerIDs: ['foo', 'bar', 'baz'],
+      };
+
+      const result = HostReducer(state, {
+        type: 'PLAYER_RECONNECTED',
+        payload: { playerId: 'foo-reconnect', playerName: 'foo' },
+      });
+
+      expect(result.players['foo-reconnect'].oldIds).toContain('foo');
+    });
+
+    it('sets the reconnected player\'s status to "staging"', () => {
+      const state = {
+        players: {
+          foo: { id: 'foo', name: 'foo', status: 'disconnected', oldIds: [] },
+          bar: { id: 'bar', name: 'bar', status: 'playing', oldIds: [] },
+          baz: { id: 'baz', name: 'baz', status: 'playing', oldIds: [] },
+        },
+        playerIDs: ['foo', 'bar', 'baz'],
+      };
+
+      const result = HostReducer(state, {
+        type: 'PLAYER_RECONNECTED',
+        payload: { playerId: 'foo-reconnect', playerName: 'foo' },
+      });
+
+      expect(result.players['foo-reconnect'].status).toBe('staging');
+    });
+
+    it("updates the Czar's selection if it matches the reconnecting player's old id", () => {
+      const state = {
+        players: {
+          foo: { id: 'foo', name: 'foo', status: 'playing', oldIds: [] },
+          bar: { id: 'bar', name: 'bar', status: 'disconnected', oldIds: [] },
+          baz: { id: 'baz', name: 'baz', status: 'playing', oldIds: [] },
+        },
+        playerIDs: ['foo', 'bar', 'baz'],
+        czarSelection: 'bar',
+      };
+
+      const result = HostReducer(state, {
+        type: 'PLAYER_RECONNECTED',
+        payload: { playerId: 'reconnect', playerName: 'bar' },
+      });
+
+      expect(result.czarSelection).toBe('reconnect');
+    });
+    it("does not update the Czar's selection if it does not match the reconnecting player's old id", () => {
+      const state = {
+        players: {
+          foo: { id: 'foo', name: 'foo', status: 'playing', oldIds: [] },
+          bar: { id: 'bar', name: 'bar', status: 'disconnected', oldIds: [] },
+          baz: { id: 'baz', name: 'baz', status: 'playing', oldIds: [] },
+        },
+        playerIDs: ['foo', 'bar', 'baz'],
+        czarSelection: 'baz',
+      };
+
+      const result = HostReducer(state, {
+        type: 'PLAYER_RECONNECTED',
+        payload: { playerId: 'reconnect', playerName: 'bar' },
+      });
+
+      expect(result.czarSelection).toBe('baz');
+    });
+  });
+
   describe('PLAYER_SUBMIT', () => {
     it("updates the specified player's submitted cards array with the provided indexes", () => {
       const state = {
