@@ -173,6 +173,63 @@ describe('Context', () => {
         expect(screen.queryAllByTestId('players').length).toBe(1);
       });
 
+      it('does not add a reconnecting player as a new player', () => {
+        const TestComponent = () => {
+          const { state } = useContext(HostContext);
+
+          return (
+            <>
+              <div data-testid="game-state">{state.gameState}</div>
+              <div data-testid="lobby-id">{state.lobbyID}</div>
+
+              <div>
+                {state.playerIDs.map((id) => (
+                  <p data-testid="players">
+                    {JSON.stringify(state.players[id])} | {id}
+                  </p>
+                ))}
+              </div>
+            </>
+          );
+        };
+
+        const { eventHandlers } = setupEmitterMocks();
+
+        render(
+          <HostProvider>
+            <TestComponent />
+          </HostProvider>,
+        );
+
+        act(() => {
+          eventHandlers.message({
+            event: 'player-connected',
+            payload: { playerId: 'TEST', playerName: 'TESTER' },
+          });
+          eventHandlers.message({
+            event: 'player-connected',
+            payload: { playerId: 'TEST2', playerName: 'TESTING' },
+          });
+          eventHandlers.message({
+            event: 'player-disconnected',
+            payload: { playerId: 'TEST2' },
+          });
+        });
+
+        act(() => {
+          eventHandlers.message({
+            event: 'player-connected',
+            payload: { playerId: 'TEST3', playerName: 'TESTING' },
+          });
+        });
+
+        expect(screen.getAllByTestId('players')[0]).toHaveTextContent(/TESTER/);
+        expect(screen.getAllByTestId('players')[1]).toHaveTextContent(
+          /TESTING/,
+        );
+        expect(screen.getAllByTestId('players')[1]).toHaveTextContent(/TEST3/);
+      });
+
       it('assigns proper status property to new players', () => {
         const TestComponent = () => {
           const { state } = useContext(HostContext);

@@ -54,16 +54,20 @@ function HostProvider({ children }) {
       switch (event) {
         case 'player-connected': {
           const allPlayers = [...Object.values(currentState.players)];
-          const isPlayerNameTaken = allPlayers.some(
+          const existingPlayer = allPlayers.find(
             (player) =>
               player.name.toUpperCase() === payload.playerName.toUpperCase(),
           );
 
-          if (isPlayerNameTaken) {
-            return dispatch({ type: 'SEND_NAME_TAKEN_MESSAGE', payload });
+          if (!existingPlayer) {
+            return dispatch({ type: 'PLAYER_CONNECTED', payload });
           }
 
-          return dispatch({ type: 'PLAYER_CONNECTED', payload });
+          if (existingPlayer.status === 'disconnected') {
+            return dispatch({ type: 'PLAYER_RECONNECTED', payload });
+          }
+
+          return dispatch({ type: 'SEND_NAME_TAKEN_MESSAGE', payload });
         }
         case 'player-disconnected':
           return dispatch({
@@ -118,6 +122,26 @@ function HostProvider({ children }) {
       (playerID) => state.players[playerID].status === 'staging',
     );
 
+    const reconnectingPlayersIds = state.playerIDs.filter(
+      (playerID) => state.players[playerID].status === 're-connected',
+    );
+
+    if (reconnectingPlayersIds.length > 0) {
+      const reConnectingPlayers = reconnectingPlayersIds.reduce(
+        (acc, id) => ({ ...acc, [id]: state.players[id] }),
+        {},
+      );
+
+      dispatch({
+        type: 'SEND_CARDS_TO_PLAYERS',
+        payload: {
+          selectedBlackCard: state.selectedBlackCard,
+          players: reConnectingPlayers,
+          playerIDs: reconnectingPlayersIds,
+        },
+      });
+    }
+
     if (stagedPlayerIDs.length) {
       const numberOfPlayersExceedingLimit =
         state.playerIDs.length - state.gameSettings.maxPlayers;
@@ -169,7 +193,7 @@ function HostProvider({ children }) {
         payload: { gameWinner: state.playerIDs[0], playerIDs: state.playerIDs },
       });
     }
-  }, [state.playerIDs]);
+  }, [state.playerIDs, state.players]);
 
   return (
     <HostContext.Provider value={{ state, dispatch }}>

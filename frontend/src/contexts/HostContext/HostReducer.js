@@ -88,6 +88,55 @@ function dealWhiteCards(state) {
   };
 }
 
+function playerReconnected(
+  state,
+  { playerId: reconnectingPlayerId, playerName },
+) {
+  const oldPlayerIdIndex = state.playerIDs.findIndex(
+    (playerId) => state.players[playerId].name === playerName,
+  );
+
+  const oldPlayerId = state.playerIDs[oldPlayerIdIndex];
+
+  const playerStatus = state.players[oldPlayerId].hasSubmittedCards
+    ? 'staging'
+    : 're-connected';
+
+  const reconnectingPlayerData = {
+    ...state.players[oldPlayerId],
+    oldIds: [...state.players[oldPlayerId].oldIds, oldPlayerId],
+    status: playerStatus,
+  };
+
+  const nonReconnectingPlayerIds = state.playerIDs.filter(
+    (id) => id !== oldPlayerId,
+  );
+
+  const newPlayerIds = [...nonReconnectingPlayerIds];
+  newPlayerIds.splice(oldPlayerIdIndex, 0, reconnectingPlayerId);
+
+  const newPlayersData = newPlayerIds.reduce((acc, playerId) => {
+    // This is essentially how we are re-assigning the ID of the existing player reconnecting
+    if (reconnectingPlayerId === playerId)
+      return { ...acc, [playerId]: reconnectingPlayerData };
+    return { ...acc, [playerId]: state.players[playerId] };
+  }, {});
+
+  // If the czar has selected a card to preview, we need to change this to the new Id to prevent
+  // the player from being undefined when the submit button is pressed
+  const czarSelection =
+    state.czarSelection === oldPlayerId
+      ? reconnectingPlayerId
+      : state.czarSelection;
+
+  return {
+    ...state,
+    players: newPlayersData,
+    playerIDs: newPlayerIds,
+    czarSelection,
+  };
+}
+
 function playerConnected(state, { playerId, playerName }) {
   // push the new player to the players object, but do not put them in play yet
   const newPlayer = {
@@ -95,9 +144,12 @@ function playerConnected(state, { playerId, playerName }) {
     score: 0,
     isCzar: false,
     submittedCards: [0],
+    hasSubmittedCards: false,
     cards: [],
     status: 'staging',
+    oldIds: [],
   };
+
   return {
     ...state,
     players: {
@@ -116,6 +168,7 @@ function playerSubmitCards(state, { selectedCards, playerId }) {
       [playerId]: {
         ...state.players[playerId],
         submittedCards: selectedCards,
+        hasSubmittedCards: true,
       },
     },
   };
@@ -148,6 +201,7 @@ function removeSubmittedCards(state) {
       [playerId]: {
         ...player,
         cards: newCards,
+        hasSubmittedCards: false,
       },
     };
   }, {});
@@ -186,7 +240,7 @@ function disconnectPlayer(state, { playerId }) {
   ) {
     return dealWhiteCards(
       clearSubmittedCards(
-        addPlayersFromStaging(
+        setPlayersToPlaying(
           removeSubmittedCards(setNextCzar(setBlackCard(newState))),
         ),
       ),
@@ -223,7 +277,7 @@ function kickPlayer(state, { playerId }) {
   ) {
     return dealWhiteCards(
       clearSubmittedCards(
-        addPlayersFromStaging(
+        setPlayersToPlaying(
           removeSubmittedCards(setNextCzar(setBlackCard(newState))),
         ),
       ),
@@ -248,10 +302,15 @@ function czarSelectWinner(state) {
 }
 
 function previewWinner(state, { highlightedPlayerID }) {
+  const selectedPlayerId = state.playerIDs.find((playerId) => {
+    if (highlightedPlayerID === playerId) return true;
+    return state.players[playerId].oldIds.includes(highlightedPlayerID);
+  });
+
   if (state.gameState === 'selecting-winner') {
     return {
       ...state,
-      czarSelection: highlightedPlayerID,
+      czarSelection: selectedPlayerId,
     };
   }
   return {
@@ -259,7 +318,7 @@ function previewWinner(state, { highlightedPlayerID }) {
   };
 }
 
-function winnerSelected(state) {
+function selectWinner(state) {
   const roundWinner = state.players[state.czarSelection];
 
   return {
@@ -402,11 +461,12 @@ function updateJoinCode(state, { lobbyID }) {
   };
 }
 
-function addPlayersFromStaging(state) {
+function setPlayersToPlaying(state) {
   const newState = { ...state };
 
   newState.playerIDs.forEach((player) => {
-    if (newState.players[player].status === 'staging') {
+    const playerStatus = newState.players[player].status;
+    if (playerStatus === 'staging' || playerStatus === 're-connected') {
       newState.players[player].status = 'playing';
     }
   });
@@ -449,6 +509,9 @@ function HostReducer(state, action) {
     case 'PLAYER_CONNECTED':
       return playerConnected(state, payload);
 
+    case 'PLAYER_RECONNECTED':
+      return playerReconnected(state, payload);
+
     case 'PLAYER_DISCONNECTED':
       return disconnectPlayer(state, payload);
 
@@ -466,7 +529,7 @@ function HostReducer(state, action) {
       return previewWinner(state, payload);
 
     case 'WINNER_SELECTED':
-      return winnerSelected(state);
+      return selectWinner(state);
 
     case 'SET_LOBBY_ID':
       return setLobbyId(state, payload);
@@ -492,6 +555,9 @@ function HostReducer(state, action) {
     case 'DEAL_WHITE_CARDS':
       return dealWhiteCards(clearSubmittedCards(state));
 
+    case 'SEND_CARDS_TO_PLAYERS':
+      return setPlayersToPlaying(state);
+
     case 'REMOVE_SUBMITTED_CARDS_FROM_PLAYER':
       return removeSubmittedCards(state);
 
@@ -502,7 +568,7 @@ function HostReducer(state, action) {
       return updateJoinCode(state, payload);
 
     case 'ADD_PLAYERS_FROM_STAGING':
-      return addPlayersFromStaging(state);
+      return setPlayersToPlaying(state);
 
     case 'TOGGLE_JOIN_CODE_VISIBILITY':
       return toggleJoinCode(state);

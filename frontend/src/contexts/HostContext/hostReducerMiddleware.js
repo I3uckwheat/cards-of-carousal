@@ -178,7 +178,10 @@ function czarSelectWinner({ players, playerIDs }) {
   const czar = playerIDs.find((playerID) => players[playerID].isCzar);
   const notCzars = playerIDs.filter(
     (playerID) =>
-      !players[playerID].isCzar && players[playerID].status === 'playing',
+      !players[playerID].isCzar &&
+      (players[playerID].status === 'playing' ||
+        (players[playerID].status === 'staging' &&
+          players[playerID].hasSubmittedCards)),
   );
 
   // gather all players submitted cards
@@ -267,7 +270,7 @@ function sendEndOfGameMessages({ gameWinner, playerIDs }) {
   }
 }
 
-function removeDisconnectedPlayersCard({ czarId, playerId }) {
+function removeKickedPlayersCard({ czarId, playerId }) {
   socketInstance.sendMessage({
     event: 'remove-disconnected-players-card',
     payload: {
@@ -290,6 +293,7 @@ export default async function hostReducerMiddleware(
       createLobby();
       break;
 
+    case 'PLAYER_RECONNECTED':
     case 'PLAYER_CONNECTED':
       playerConnected(payload);
       break;
@@ -305,7 +309,7 @@ export default async function hostReducerMiddleware(
       break;
 
     case 'KICK_PLAYER':
-      removeDisconnectedPlayersCard(payload);
+      removeKickedPlayersCard(payload);
       sendKickPlayerMessage(payload);
       break;
 
@@ -322,7 +326,8 @@ export default async function hostReducerMiddleware(
     }
 
     case 'SEND_CARDS_TO_PLAYERS':
-      return sendCardsToPlayers(payload);
+      sendCardsToPlayers(payload);
+      break;
 
     case 'SHUFFLE_JOIN_CODE':
       sendShuffleJoinCodeMessage();
@@ -347,10 +352,6 @@ export default async function hostReducerMiddleware(
 
     case 'GAME_OVER':
       sendEndOfGameMessages(payload);
-      break;
-
-    case 'PLAYER_DISCONNECTED':
-      removeDisconnectedPlayersCard(payload);
       break;
 
     default:

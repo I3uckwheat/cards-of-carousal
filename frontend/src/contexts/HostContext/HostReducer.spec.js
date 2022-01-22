@@ -175,6 +175,8 @@ describe('reducer', () => {
         isCzar: false,
         score: 0,
         status: 'staging',
+        oldIds: [],
+        hasSubmittedCards: false,
       });
     });
   });
@@ -254,6 +256,102 @@ describe('reducer', () => {
 
       expect(result.playerIDs).toMatchObject(['foo', 'bar', 'baz']);
       expect(newCzar).toBeTruthy();
+    });
+  });
+
+  describe('PLAYER_RECONNECTED', () => {
+    it('Replaces the existing userId for the new player', () => {
+      const state = {
+        players: {
+          foo: { id: 'foo', name: 'foo', status: 'playing', oldIds: [] },
+          bar: { id: 'bar', name: 'bar', status: 'playing', oldIds: [] },
+          baz: { id: 'baz', name: 'baz', status: 'disconnected', oldIds: [] },
+        },
+        playerIDs: ['foo', 'bar', 'baz'],
+      };
+
+      const result = HostReducer(state, {
+        type: 'PLAYER_RECONNECTED',
+        payload: { playerId: 'baz-reconnect', playerName: 'baz' },
+      });
+
+      expect(result.players.baz).toBeUndefined();
+      expect(result.playerIDs.length).toBe(3);
+      expect(result.players['baz-reconnect'].name).toBe('baz');
+      expect(result.playerIDs).not.toContain('baz');
+    });
+
+    it('appends the old ID for the player in the oldIds array', () => {
+      const state = {
+        players: {
+          foo: { id: 'foo', name: 'foo', status: 'disconnected', oldIds: [] },
+          bar: { id: 'bar', name: 'bar', status: 'playing', oldIds: [] },
+          baz: { id: 'baz', name: 'baz', status: 'playing', oldIds: [] },
+        },
+        playerIDs: ['foo', 'bar', 'baz'],
+      };
+
+      const result = HostReducer(state, {
+        type: 'PLAYER_RECONNECTED',
+        payload: { playerId: 'foo-reconnect', playerName: 'foo' },
+      });
+
+      expect(result.players['foo-reconnect'].oldIds).toContain('foo');
+    });
+
+    it('sets the reconnected player\'s status to "re-connected"', () => {
+      const state = {
+        players: {
+          foo: { id: 'foo', name: 'foo', status: 'disconnected', oldIds: [] },
+          bar: { id: 'bar', name: 'bar', status: 'playing', oldIds: [] },
+          baz: { id: 'baz', name: 'baz', status: 'playing', oldIds: [] },
+        },
+        playerIDs: ['foo', 'bar', 'baz'],
+      };
+
+      const result = HostReducer(state, {
+        type: 'PLAYER_RECONNECTED',
+        payload: { playerId: 'foo-reconnect', playerName: 'foo' },
+      });
+
+      expect(result.players['foo-reconnect'].status).toBe('re-connected');
+    });
+
+    it("updates the Czar's selection if it matches the reconnecting player's old id", () => {
+      const state = {
+        players: {
+          foo: { id: 'foo', name: 'foo', status: 'playing', oldIds: [] },
+          bar: { id: 'bar', name: 'bar', status: 'disconnected', oldIds: [] },
+          baz: { id: 'baz', name: 'baz', status: 'playing', oldIds: [] },
+        },
+        playerIDs: ['foo', 'bar', 'baz'],
+        czarSelection: 'bar',
+      };
+
+      const result = HostReducer(state, {
+        type: 'PLAYER_RECONNECTED',
+        payload: { playerId: 'reconnect', playerName: 'bar' },
+      });
+
+      expect(result.czarSelection).toBe('reconnect');
+    });
+    it("does not update the Czar's selection if it does not match the reconnecting player's old id", () => {
+      const state = {
+        players: {
+          foo: { id: 'foo', name: 'foo', status: 'playing', oldIds: [] },
+          bar: { id: 'bar', name: 'bar', status: 'disconnected', oldIds: [] },
+          baz: { id: 'baz', name: 'baz', status: 'playing', oldIds: [] },
+        },
+        playerIDs: ['foo', 'bar', 'baz'],
+        czarSelection: 'baz',
+      };
+
+      const result = HostReducer(state, {
+        type: 'PLAYER_RECONNECTED',
+        payload: { playerId: 'reconnect', playerName: 'bar' },
+      });
+
+      expect(result.czarSelection).toBe('baz');
     });
   });
 
@@ -1384,6 +1482,7 @@ describe('reducer', () => {
             isCzar: false,
             submittedCards: [0, 1],
             cards: ['aaaa', 'bbbb', 'cccc', 'dddd'],
+            oldIds: [],
           },
           ID2: {
             name: 'bar',
@@ -1391,6 +1490,7 @@ describe('reducer', () => {
             isCzar: true,
             submittedCards: [],
             cards: [],
+            oldIds: [],
           },
           ID3: {
             name: 'baz',
@@ -1398,6 +1498,7 @@ describe('reducer', () => {
             isCzar: false,
             submittedCards: [1, 2],
             cards: ['eeee', 'ffff', 'gggg', 'hhhh'],
+            oldIds: [],
           },
         },
 
@@ -1408,7 +1509,7 @@ describe('reducer', () => {
 
       const result = HostReducer(state, {
         type: 'PREVIEW_WINNER',
-        payload: { highlightedPlayerID: 'baz' },
+        payload: { highlightedPlayerID: 'ID1' },
       });
 
       expect(result).toMatchObject({
@@ -1435,7 +1536,7 @@ describe('reducer', () => {
             cards: ['eeee', 'ffff', 'gggg', 'hhhh'],
           },
         },
-        czarSelection: 'baz',
+        czarSelection: 'ID1',
         gameState: 'selecting-winner',
         playerIDs: ['ID1', 'ID2', 'ID3'],
       });
@@ -1449,6 +1550,7 @@ describe('reducer', () => {
             isCzar: false,
             submittedCards: [0, 1],
             cards: ['aaaa', 'bbbb', 'cccc', 'dddd'],
+            oldIds: [],
           },
           ID2: {
             name: 'bar',
@@ -1456,6 +1558,7 @@ describe('reducer', () => {
             isCzar: true,
             submittedCards: [],
             cards: [],
+            oldIds: [],
           },
           ID3: {
             name: 'baz',
@@ -1463,6 +1566,7 @@ describe('reducer', () => {
             isCzar: false,
             submittedCards: [1, 2],
             cards: ['eeee', 'ffff', 'gggg', 'hhhh'],
+            oldIds: [],
           },
         },
         gameState: 'showing-winners',
@@ -1483,6 +1587,7 @@ describe('reducer', () => {
             isCzar: false,
             submittedCards: [0, 1],
             cards: ['aaaa', 'bbbb', 'cccc', 'dddd'],
+            oldIds: [],
           },
           ID2: {
             name: 'bar',
@@ -1490,6 +1595,7 @@ describe('reducer', () => {
             isCzar: true,
             submittedCards: [],
             cards: [],
+            oldIds: [],
           },
           ID3: {
             name: 'baz',
@@ -1497,6 +1603,7 @@ describe('reducer', () => {
             isCzar: false,
             submittedCards: [1, 2],
             cards: ['eeee', 'ffff', 'gggg', 'hhhh'],
+            oldIds: [],
           },
         },
         gameState: 'showing-winners',
