@@ -2,6 +2,11 @@
 
 Be sure to check the package.json on the top level to see all commands.
 
+
+## Live link
+
+https://www.cardsofcarousal.com/
+
 ## **Getting Started**
 
 1. Be sure you are on Node version 14 LTS
